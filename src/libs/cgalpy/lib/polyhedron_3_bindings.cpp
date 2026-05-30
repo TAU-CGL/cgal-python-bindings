@@ -32,15 +32,15 @@
 #include <CGAL/draw_polyhedron.h>
 #endif
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/add_extraction.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/bgl_global.hpp"
-#include "CGALPY/generator_functions.hpp"
-#include "CGALPY/Internal_face_plane_3_map.hpp"
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/polyhedron_3_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/add_extraction.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/bgl_global.hpp"
+#include "cgalpy/generator_functions.hpp"
+#include "cgalpy/Internal_face_plane_3_map.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/make_iterator.hpp"
+#include "cgalpy/polyhedron_3_types.hpp"
 #include "cgalpy/Bgl_docstrings.hpp"
 #include "cgalpy/Pol3_docstrings.hpp"
 

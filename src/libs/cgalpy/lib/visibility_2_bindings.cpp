@@ -9,9 +9,9 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/visibility_2_types.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/visibility_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
 
 #include "cgalpy/Vis2_docstrings.hpp"
 

@@ -12,12 +12,12 @@
 #include <nanobind/stl/tuple.h>
 #include <nanobind/stl/pair.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/triangulation_d_types.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/stl_dereference_forward_iterator.hpp"
-#include "CGALPY/types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/make_iterator.hpp"
+#include "cgalpy/triangulation_d_types.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/stl_dereference_forward_iterator.hpp"
+#include "cgalpy/types.hpp"
 #include "cgalpy/Trid_docstrings.hpp"
 
 namespace trid_doc = cgalpy::trid::docstrings;

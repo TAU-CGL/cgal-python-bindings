@@ -15,12 +15,12 @@
 
 #include <CGAL/Polygon_mesh_processing/compute_normal.h>
 
-#include "CGALPY/Internal_face_plane_3_map.hpp"
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/Named_parameter_wrapper.hpp"
-#include "CGALPY/named_parameter_applicator.hpp"
-#include "CGALPY/Named_parameter_geom_traits.hpp"
-#include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Internal_face_plane_3_map.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
+#include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;

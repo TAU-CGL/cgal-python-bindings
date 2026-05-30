@@ -12,11 +12,11 @@
 
 #include <CGAL/Envelope_3/Envelope_base.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
-#include "CGALPY/export_circulator.hpp"
-#include "CGALPY/make_iterator.hpp"
+#include "cgalpy/export_circulator.hpp"
+#include "cgalpy/make_iterator.hpp"
 
 namespace py = nanobind;
 namespace aos2_doc = cgalpy::aos2::docstrings;

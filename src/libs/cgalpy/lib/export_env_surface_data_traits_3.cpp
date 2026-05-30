@@ -10,8 +10,8 @@
 
 #include <CGAL/Env_surface_data_traits_3.h>
 
-#include "CGALPY/envelope_3_types.hpp"
-#include "CGALPY/add_attr.hpp"
+#include "cgalpy/envelope_3_types.hpp"
+#include "cgalpy/add_attr.hpp"
 
 namespace py = nanobind;
 

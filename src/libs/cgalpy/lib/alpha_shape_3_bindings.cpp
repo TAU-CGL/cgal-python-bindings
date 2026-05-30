@@ -10,12 +10,12 @@
 
 #include <CGAL/iterator.h>
 
-#include "CGALPY/config.hpp"
-#include "CGALPY/triangulation_3_types.hpp"
-#include "CGALPY/alpha_shape_3_types.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/make_iterator.hpp"
+#include "cgalpy/config.hpp"
+#include "cgalpy/triangulation_3_types.hpp"
+#include "cgalpy/alpha_shape_3_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/make_iterator.hpp"
 #include "cgalpy/As3_docstrings.hpp"
 
 namespace py = nanobind;

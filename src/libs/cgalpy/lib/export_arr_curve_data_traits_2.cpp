@@ -11,12 +11,12 @@
 
 #include <CGAL/Arr_curve_data_traits_2.h>
 
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/add_extraction.hpp"
-#include "CGALPY/Curve_data_merge.hpp"
-#include "CGALPY/has_istream_operator.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/add_extraction.hpp"
+#include "cgalpy/Curve_data_merge.hpp"
+#include "cgalpy/has_istream_operator.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;

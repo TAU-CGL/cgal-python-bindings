@@ -18,12 +18,12 @@
 #include <CGAL/Euclidean_distance.h>
 #include <CGAL/Fuzzy_sphere.h>
 
-#include "CGALPY/spatial_searching_config.hpp"
-#include "CGALPY/kernel_d_types.hpp"
-#include "CGALPY/General_distance_python.hpp"
-#include "CGALPY/append_iterator.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/spatial_searching_config.hpp"
+#include "cgalpy/kernel_d_types.hpp"
+#include "cgalpy/General_distance_python.hpp"
+#include "cgalpy/append_iterator.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 #include "cgalpy/Ss_docstrings.hpp"
 
 namespace py = nanobind;

@@ -11,11 +11,11 @@
 #include <CGAL/spatial_sort.h>
 
 #if defined(CGALPY_KERNEL_D_BINDINGS)
-#include "CGALPY/kernel_d_types.hpp"
+#include "cgalpy/kernel_d_types.hpp"
 #endif
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/spatial_sorting_types.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/spatial_sorting_types.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 #include "cgalpy/St_docstrings.hpp"
 
 namespace py = nanobind;

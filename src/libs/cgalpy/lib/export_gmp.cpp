@@ -18,7 +18,7 @@
 #include <CGAL/GMP/Gmpz_type.h>
 #include <CGAL/GMP/Gmpq_type.h>
 
-#include "CGALPY/to_string.hpp"
+#include "cgalpy/to_string.hpp"
 
 namespace py = nanobind;
 

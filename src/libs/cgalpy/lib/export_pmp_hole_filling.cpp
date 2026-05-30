@@ -20,8 +20,8 @@
 
 #include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
 
-#include "CGALPY/HFDefault_visitor.hpp"
-#include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/HFDefault_visitor.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;

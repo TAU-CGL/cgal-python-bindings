@@ -3,7 +3,7 @@
 #include <nanobind/stl/string.h>
 
 #include <CGAL/Bbox_3.h>
-#include "CGALPY/to_string.hpp"
+#include "cgalpy/to_string.hpp"
 
 namespace py = nanobind;
 

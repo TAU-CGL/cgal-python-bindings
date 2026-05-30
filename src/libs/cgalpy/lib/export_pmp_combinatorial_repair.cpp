@@ -21,8 +21,8 @@
 #include <CGAL/Polygon_mesh_processing/stitch_borders.h>
 #include <CGAL/Polygon_mesh_processing/polygon_mesh_to_polygon_soup.h>
 
-#include "CGALPY/pmp_helpers.hpp"
-#include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/pmp_helpers.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;

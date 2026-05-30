@@ -16,9 +16,9 @@
 
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/polygon_mesh_processing_types.hpp"
-#include "CGALPY/pmp_helpers.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
+#include "cgalpy/pmp_helpers.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;

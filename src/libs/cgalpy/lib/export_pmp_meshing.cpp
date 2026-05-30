@@ -28,11 +28,11 @@
 #include <CGAL/Polygon_mesh_processing/surface_Delaunay_remeshing.h>
 #include <CGAL/Polygon_mesh_processing/tangential_relaxation.h>
 
-#include "CGALPY/Adaptive_sizing_field.hpp"
-#include "CGALPY/Custom_sizing_field.hpp"
-#include "CGALPY/pmp_helpers.hpp"
-#include "CGALPY/polygon_mesh_processing_types.hpp"
-#include "CGALPY/Uniform_sizing_field.hpp"
+#include "cgalpy/Adaptive_sizing_field.hpp"
+#include "cgalpy/Custom_sizing_field.hpp"
+#include "cgalpy/pmp_helpers.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Uniform_sizing_field.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;

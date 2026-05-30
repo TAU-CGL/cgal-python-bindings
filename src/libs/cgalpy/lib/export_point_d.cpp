@@ -11,11 +11,11 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/Hash_rational_point.hpp"
-#include "CGALPY/kernel_d_types.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/Hash_rational_point.hpp"
+#include "cgalpy/kernel_d_types.hpp"
+#include "cgalpy/make_iterator.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 #include "cgalpy/Kerd_docstrings.hpp"
 
 namespace kerd_doc = cgalpy::kerd::docstrings;

@@ -33,9 +33,9 @@ std::istream& operator>>(std::istream& is, py::object& obj) {
 #include <CGAL/IO/Arr_iostream.h>
 #include <CGAL/IO/Arr_text_formatter.h>
 
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/add_extraction.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/add_extraction.hpp"
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
 void export_arrangement_2_io(py::class_<cgalpy::aos2::Arrangement_2,

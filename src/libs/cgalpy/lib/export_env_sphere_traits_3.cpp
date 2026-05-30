@@ -11,11 +11,11 @@
 #include <CGAL/Arr_conic_traits_2.h>
 #include <CGAL/Env_sphere_traits_3.h>
 
-#include "CGALPY/envelope_3_types.hpp"
-#include "CGALPY/add_attr.hpp"
+#include "cgalpy/envelope_3_types.hpp"
+#include "cgalpy/add_attr.hpp"
 
-#include "CGALPY/env_3_concepts/Env_traits_classes.hpp"
-#include "CGALPY/env_3_concepts/export_EnvelopeTraits_3.hpp"
+#include "cgalpy/env_3_concepts/Env_traits_classes.hpp"
+#include "cgalpy/env_3_concepts/export_EnvelopeTraits_3.hpp"
 
 void export_arr_conic_traits_2(py::module_&);
 

@@ -10,8 +10,8 @@
 
 #include <CGAL/Sweep_line_2_algorithms.h>
 
-#include "CGALPY/surface_sweep_2_types.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/surface_sweep_2_types.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 
 #include "cgalpy/Ss2_docstrings.hpp"
 

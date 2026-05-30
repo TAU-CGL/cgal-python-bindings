@@ -11,11 +11,11 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/types.hpp"
-#include "CGALPY/alpha_shape_2_types.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/make_iterator.hpp"
+#include "cgalpy/types.hpp"
+#include "cgalpy/alpha_shape_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/make_iterator.hpp"
 #include "cgalpy/As2_docstrings.hpp"
 
 namespace py = nanobind;

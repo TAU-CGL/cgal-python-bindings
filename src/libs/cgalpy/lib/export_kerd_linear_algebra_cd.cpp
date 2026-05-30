@@ -8,7 +8,7 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/add_attr.hpp"
+#include "cgalpy/add_attr.hpp"
 #include "cgalpy/Kerd_docstrings.hpp"
 
 namespace kerd_doc = cgalpy::kerd::docstrings;

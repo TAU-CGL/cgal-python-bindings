@@ -16,19 +16,19 @@
 
 #include <CGAL/Arr_linear_traits_2.h>
 
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
-#include "CGALPY/aos_2_concepts/export_AosLandmarkTraits_2.hpp"
-#include "CGALPY/aos_2_concepts/export_AosOpenBoundaryTraits_2.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos_2_concepts/export_AosTraits_2.hpp"
+#include "cgalpy/aos_2_concepts/export_AosLandmarkTraits_2.hpp"
+#include "cgalpy/aos_2_concepts/export_AosOpenBoundaryTraits_2.hpp"
 
-#include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_landmark_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_open_boundary_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_approximate_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
-#include "CGALPY/add_insertion.hpp"
+#include "cgalpy/aos_2_concepts/Aos_basic_traits_classes.hpp"
+#include "cgalpy/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
+#include "cgalpy/aos_2_concepts/Aos_traits_classes.hpp"
+#include "cgalpy/aos_2_concepts/Aos_landmark_traits_classes.hpp"
+#include "cgalpy/aos_2_concepts/Aos_open_boundary_traits_classes.hpp"
+#include "cgalpy/aos_2_concepts/Aos_approximate_traits_classes.hpp"
+#include "cgalpy/aos_2_concepts/Aos_construct_x_monotone_curve_traits_classes.hpp"
+#include "cgalpy/add_insertion.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;

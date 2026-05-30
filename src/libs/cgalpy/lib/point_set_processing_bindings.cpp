@@ -40,11 +40,11 @@
 // #include <CGAL/wlop_simplify_and_regularize_point_set.h>
 // #include <CGAL/IO/write_points.h>
 
-#include "CGALPY/kernel_type.hpp"
-#include "CGALPY/named_parameter_applicator.hpp"
-#include "CGALPY/Named_parameter_geom_traits.hpp"
-#include "CGALPY/Named_parameter_wrapper.hpp"
-#include "CGALPY/point_set_processing_type.hpp"
+#include "cgalpy/kernel_type.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
+#include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/point_set_processing_type.hpp"
 
 namespace py = nanobind;
 

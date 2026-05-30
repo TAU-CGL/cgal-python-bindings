@@ -17,14 +17,14 @@
 #include <CGAL/point_generators_3.h>
 #include <CGAL/point_generators_d.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/kernel_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/kernel_types.hpp"
 #include "cgalpy/Gog_docstrings.hpp"
 #if defined(CGALPY_KERNEL_BINDINGS)
-#include "CGALPY/kernel_d_types.hpp"
+#include "cgalpy/kernel_d_types.hpp"
 #endif
 
-// #include "CGALPY/geometric_object_generators_types.hpp"
+// #include "cgalpy/geometric_object_generators_types.hpp"
 
 namespace cgalpy {
 namespace gog {

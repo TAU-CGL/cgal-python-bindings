@@ -11,7 +11,7 @@
 #include <nanobind/stl/string.h>
 
 #include <CGAL/Bbox_2.h>
-#include "CGALPY/to_string.hpp"
+#include "cgalpy/to_string.hpp"
 
 namespace py = nanobind;
 

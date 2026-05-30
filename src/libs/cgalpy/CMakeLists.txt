@@ -768,7 +768,7 @@ endfunction()
 
 
 # export_approximate_kernel.cpp is always compiled and includes
-# CGALPY/Kernel/export_kernel.hpp, which depends on Ker_docstrings.hpp.
+# cgalpy/Kernel/export_kernel.hpp, which depends on Ker_docstrings.hpp.
 # Generate Ker docstrings even in Kerd-only builds, but do not add Ker to
 # CGALPY_MODULES, because that list also controls module stubs/packages.
 set(CGALPY_DOCSTRING_MODULES ${CGALPY_MODULES})

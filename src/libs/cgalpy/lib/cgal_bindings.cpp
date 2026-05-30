@@ -19,9 +19,9 @@
 #include <CGAL/boost/graph/properties.h>
 #include <CGAL/Random.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/add_extraction.hpp"
-#include "CGALPY/add_insertion.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/add_extraction.hpp"
+#include "cgalpy/add_insertion.hpp"
 
 namespace py = nanobind;
 

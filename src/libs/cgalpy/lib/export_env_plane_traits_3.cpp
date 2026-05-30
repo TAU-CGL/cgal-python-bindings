@@ -11,13 +11,13 @@
 #include <CGAL/Arr_linear_traits_2.h>
 #include <CGAL/Env_plane_traits_3.h>
 
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/envelope_3_types.hpp"
-#include "CGALPY/add_attr.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/envelope_3_types.hpp"
+#include "cgalpy/add_attr.hpp"
 
-#include "CGALPY/env_3_concepts/Env_traits_classes.hpp"
-#include "CGALPY/env_3_concepts/export_EnvelopeTraits_3.hpp"
-#include "CGALPY/add_insertion.hpp"
+#include "cgalpy/env_3_concepts/Env_traits_classes.hpp"
+#include "cgalpy/env_3_concepts/export_EnvelopeTraits_3.hpp"
+#include "cgalpy/add_insertion.hpp"
 
 void export_arr_linear_traits_2(py::module_&);
 

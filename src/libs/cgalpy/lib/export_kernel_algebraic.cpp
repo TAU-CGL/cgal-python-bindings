@@ -15,8 +15,8 @@
 #include <CGAL/Algebraic_kernel_d_1.h>
 #include <CGAL/Get_arithmetic_kernel.h>
 
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/add_attr.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/add_attr.hpp"
 
 namespace py = nanobind;
 

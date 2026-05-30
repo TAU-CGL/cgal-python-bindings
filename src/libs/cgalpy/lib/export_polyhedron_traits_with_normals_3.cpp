@@ -10,9 +10,9 @@
 
 #include <CGAL/Polyhedron_traits_with_normals_3.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/polyhedron_3_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/polyhedron_3_types.hpp"
 #include "cgalpy/Pol3_docstrings.hpp"
 
 namespace py = nanobind;

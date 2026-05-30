@@ -19,18 +19,18 @@
 #ifdef CGALPY_HAS_VISUAL
 #include <CGAL/draw_triangulation_2.h>
 #if defined(CGALPY_BASIC_VIEWER_BINDINGS)
-#include "CGALPY/basic_viewer_types.hpp"
+#include "cgalpy/basic_viewer_types.hpp"
 #endif
 #endif
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/export_circulator.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/stl_dereference_forward_iterator.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/triangulation_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/export_circulator.hpp"
+#include "cgalpy/make_iterator.hpp"
+#include "cgalpy/stl_dereference_forward_iterator.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/triangulation_2_types.hpp"
 #include "cgalpy/Tri2_docstrings.hpp"
-#include "CGALPY/types.hpp"
+#include "cgalpy/types.hpp"
 
 void export_tri2_vertex(py::class_<cgalpy::tri2::Triangulation_2, CGAL::Triangulation_cw_ccw_2>&);
 void export_tri2_face(py::class_<cgalpy::tri2::Triangulation_2, CGAL::Triangulation_cw_ccw_2>&);

@@ -8,8 +8,8 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/triangulation_3_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/triangulation_3_types.hpp"
 
 #include "cgalpy/Tri3_docstrings.hpp"
 

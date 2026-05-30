@@ -8,8 +8,8 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/kernel_d_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/kernel_d_types.hpp"
 
 //!
 void export_linear_algebra_cd(py::class_<Linear_algebra_cartesian_d>& lacd_c) {

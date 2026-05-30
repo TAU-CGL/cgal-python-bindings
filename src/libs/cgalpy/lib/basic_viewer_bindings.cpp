@@ -16,8 +16,8 @@
 #include <CGAL/Graphics_scene_options.h>
 #include <CGAL/IO/Color.h>
 
-#include "CGALPY/basic_viewer_types.hpp"
-#include "CGALPY/add_attr.hpp"
+#include "cgalpy/basic_viewer_types.hpp"
+#include "cgalpy/add_attr.hpp"
 #include "cgalpy/Bvr_docstrings.hpp"
 
 namespace py = nanobind;

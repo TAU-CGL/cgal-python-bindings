@@ -2,10 +2,10 @@
 
 #include <CGAL/Modifier_base.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/polyhedron_3_types.hpp"
-#include "CGALPY/Polyhedron_builder.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/polyhedron_3_types.hpp"
+#include "cgalpy/Polyhedron_builder.hpp"
 
 namespace py = nanobind;
 

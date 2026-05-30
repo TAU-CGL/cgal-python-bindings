@@ -12,12 +12,12 @@
 #include <CGAL/General_polygon_set_2.h>
 #include <CGAL/IO/Gps_iostream.h>
 
-#include "CGALPY/general_polygon_set_2_types.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/append_iterator.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/add_extraction.hpp"
+#include "cgalpy/general_polygon_set_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/append_iterator.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/add_extraction.hpp"
 
 #include "cgalpy/Bso2_docstrings.hpp"
 

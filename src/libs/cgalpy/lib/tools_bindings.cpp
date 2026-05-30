@@ -11,7 +11,7 @@
 
 #include <CGAL/Memory_sizer.h>
 
-#include "CGALPY/add_attr.hpp"
+#include "cgalpy/add_attr.hpp"
 
 namespace py = nanobind;
 

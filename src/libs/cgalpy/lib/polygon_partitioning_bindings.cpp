@@ -13,10 +13,10 @@
 
 #include <CGAL/partition_2.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/polygon_partitioning_types.hpp"
-#include "CGALPY/polygon_2_types.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/polygon_partitioning_types.hpp"
+#include "cgalpy/polygon_2_types.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 #include "cgalpy/Pp2_docstrings.hpp"
 
 namespace py = nanobind;

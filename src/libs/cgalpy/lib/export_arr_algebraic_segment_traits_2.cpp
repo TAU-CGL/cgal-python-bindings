@@ -15,10 +15,10 @@
 #include <CGAL/Polynomial_traits_d.h>
 #include <CGAL/Polynomial_type_generator.h>
 
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/bind_polynomial.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos_2_concepts/export_AosTraits_2.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/bind_polynomial.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;

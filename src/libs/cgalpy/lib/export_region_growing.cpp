@@ -12,7 +12,7 @@
 #include <CGAL/Point_set_3.h>
 #include <CGAL/Shape_detection/Region_growing.h>
 
-#include "CGALPY/kernel_type.hpp"
+#include "cgalpy/kernel_type.hpp"
 #include "cgalpy/Sd_docstrings.hpp"
 
 namespace py = nanobind;

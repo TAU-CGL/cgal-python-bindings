@@ -4,8 +4,8 @@
 
 #include <CGAL/mesh_segmentation.h>
 
-#include "CGALPY/polygon_mesh_processing_types.hpp"
-#include "CGALPY/kernel_types.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
+#include "cgalpy/kernel_types.hpp"
 
 namespace py = nanobind;
 

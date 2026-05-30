@@ -14,13 +14,13 @@
 #include <CGAL/connect_holes.h>
 #include <CGAL/Boolean_set_operations_2.h>
 
-#include "CGALPY/boolean_set_operations_2_config.hpp"
-#include "CGALPY/boolean_set_operations_2_types.hpp"
-#include "CGALPY/export_general_polygon_2.hpp"
-#include "CGALPY/export_general_polygon_with_holes_2.hpp"
-#include "CGALPY/append_iterator.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/boolean_set_operations_2_config.hpp"
+#include "cgalpy/boolean_set_operations_2_types.hpp"
+#include "cgalpy/export_general_polygon_2.hpp"
+#include "cgalpy/export_general_polygon_with_holes_2.hpp"
+#include "cgalpy/append_iterator.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 
 #include "cgalpy/Bso2_docstrings.hpp"
 

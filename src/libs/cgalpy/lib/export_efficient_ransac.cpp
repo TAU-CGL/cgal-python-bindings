@@ -7,7 +7,7 @@
 #include <CGAL/Point_with_normal_3.h>
 #include <CGAL/Shape_detection/Efficient_RANSAC.h>
 
-#include "CGALPY/kernel_type.hpp"
+#include "cgalpy/kernel_type.hpp"
 #include "cgalpy/Sd_docstrings.hpp"
 
 namespace py = nanobind;

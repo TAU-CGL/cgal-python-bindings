@@ -42,21 +42,21 @@
 #include <CGAL/draw_surface_mesh.h>
 #endif
 
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/bgl.hpp"
-#include "CGALPY/bgl_global.hpp"
-#include "CGALPY/export_bgl_iterators.hpp"
-#include "CGALPY/export_boost_mesh_utils.hpp"
-#include "CGALPY/export_mesh_selection_functions.hpp"
-#include "CGALPY/export_mesh_helpers.hpp"
-#include "CGALPY/export_mesh_partitioning_operations.hpp"
-#include "CGALPY/export_mesh_partitioning_operations.hpp"
-#include "CGALPY/export_property_map.hpp"
-#include "CGALPY/generator_functions.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/surface_mesh_types.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/bgl.hpp"
+#include "cgalpy/bgl_global.hpp"
+#include "cgalpy/export_bgl_iterators.hpp"
+#include "cgalpy/export_boost_mesh_utils.hpp"
+#include "cgalpy/export_mesh_selection_functions.hpp"
+#include "cgalpy/export_mesh_helpers.hpp"
+#include "cgalpy/export_mesh_partitioning_operations.hpp"
+#include "cgalpy/export_mesh_partitioning_operations.hpp"
+#include "cgalpy/export_property_map.hpp"
+#include "cgalpy/generator_functions.hpp"
+#include "cgalpy/make_iterator.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/surface_mesh_types.hpp"
 
 namespace py = nanobind;
 namespace bgl_doc = cgalpy::bgl::docstrings;

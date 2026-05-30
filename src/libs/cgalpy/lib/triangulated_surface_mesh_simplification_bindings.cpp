@@ -23,10 +23,10 @@
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_placement.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Constrained_placement.h>
 
-#include "CGALPY/Edge_collapse_visitor_base.hpp"
-#include "CGALPY/helpers.hpp"
-#include "CGALPY/pmp_helpers.hpp"
-#include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Edge_collapse_visitor_base.hpp"
+#include "cgalpy/helpers.hpp"
+#include "cgalpy/pmp_helpers.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Sms_docstrings.hpp"
 
 namespace py = nanobind;

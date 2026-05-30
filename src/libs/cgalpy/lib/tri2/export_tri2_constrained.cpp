@@ -9,8 +9,8 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/pair.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/triangulation_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/triangulation_2_types.hpp"
 #include "cgalpy/Tri2_docstrings.hpp"
 
 namespace py = nanobind;

@@ -9,14 +9,14 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 
-#include "CGALPY/nanobind_object_equality.hpp"
+#include "cgalpy/nanobind_object_equality.hpp"
 
 #include <CGAL/Arr_curve_data_traits_2.h>
 #include <CGAL/Arr_consolidated_curve_data_traits_2.h>
 
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/make_iterator.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/make_iterator.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;

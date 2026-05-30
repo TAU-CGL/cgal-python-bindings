@@ -11,10 +11,10 @@
 
 #include <CGAL/Arr_non_caching_segment_basic_traits_2.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/Kernel/export_point_2.hpp"
-#include "CGALPY/Kernel/export_segment_2.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/Kernel/export_point_2.hpp"
+#include "cgalpy/Kernel/export_segment_2.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;

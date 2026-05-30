@@ -18,7 +18,7 @@
 #include <CGAL/Kinetic_surface_reconstruction_3.h>
 #include <CGAL/KSR_3/Graphcut.h>
 
-#include "CGALPY/kernel_types.hpp"
+#include "cgalpy/kernel_types.hpp"
 
 namespace py = nanobind;
 

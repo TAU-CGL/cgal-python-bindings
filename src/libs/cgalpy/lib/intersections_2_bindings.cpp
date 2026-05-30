@@ -9,8 +9,8 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/cartesian_product.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/cartesian_product.hpp"
 
 #include "cgalpy/Ker_docstrings.hpp"
 

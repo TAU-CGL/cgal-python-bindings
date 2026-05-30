@@ -12,11 +12,11 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 
-#include "CGALPY/arrangement_on_surface_2_values.hpp"
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/triangulation_3_values.hpp"
-#include "CGALPY/triangulation_2_values.hpp"
-#include "CGALPY/config.hpp"
+#include "cgalpy/arrangement_on_surface_2_values.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/triangulation_3_values.hpp"
+#include "cgalpy/triangulation_2_values.hpp"
+#include "cgalpy/config.hpp"
 
 namespace py = nanobind;
 

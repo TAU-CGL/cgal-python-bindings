@@ -14,8 +14,8 @@
 
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 
-#include "CGALPY/pmp_helpers.hpp"
-#include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/pmp_helpers.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
 namespace PMP = CGAL::Polygon_mesh_processing;

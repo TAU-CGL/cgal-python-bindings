@@ -143,8 +143,8 @@ If you would like to build the Python documentation, type:
     make CGALPY_DOC
 
 The Python html manual pages are generated under
-`src/libs/cgalpy/CGALPY/build/html/`. The pdf single file is generated
-under `src/libs/cgalpy/CGALPY/build/latex/`.
+`src/libs/cgalpy/cgalpy/build/html/`. The pdf single file is generated
+under `src/libs/cgalpy/cgalpy/build/latex/`.
 
 Observe that the `CGALPY` prefix in the target of the above `make` is the binding library based name; 
 this name can be different then `CGALPY`, and depends on your selections; 

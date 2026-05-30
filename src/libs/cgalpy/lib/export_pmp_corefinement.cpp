@@ -38,12 +38,12 @@
 #undef CGALPY_RESTORE_CGAL_NO_DEPRECATED_CODE
 #endif
 
-#include "CGALPY/Autorefinement_visitor.hpp"
-#include "CGALPY/Corefine_visitor.hpp"
-#include "CGALPY/Default_visitor.hpp"
-#include "CGALPY/Non_manifold_output_visitor.hpp"
-#include "CGALPY/pmp_helpers.hpp"
-#include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Autorefinement_visitor.hpp"
+#include "cgalpy/Corefine_visitor.hpp"
+#include "cgalpy/Default_visitor.hpp"
+#include "cgalpy/Non_manifold_output_visitor.hpp"
+#include "cgalpy/pmp_helpers.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
 
 namespace py = nanobind;
 

@@ -16,15 +16,15 @@
 #include <nanobind/stl/array.h>
 #include <nanobind/stl/tuple.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/add_extraction.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/export_circulator.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/stl_dereference_forward_iterator.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/triangulation_3_types.hpp"
-#include "CGALPY/types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/add_extraction.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/export_circulator.hpp"
+#include "cgalpy/make_iterator.hpp"
+#include "cgalpy/stl_dereference_forward_iterator.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/triangulation_3_types.hpp"
+#include "cgalpy/types.hpp"
 
 namespace py = nanobind;
 

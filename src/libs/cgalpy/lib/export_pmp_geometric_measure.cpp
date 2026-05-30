@@ -18,7 +18,7 @@
 
 #include <CGAL/Polygon_mesh_processing/measure.h>
 
-#include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;

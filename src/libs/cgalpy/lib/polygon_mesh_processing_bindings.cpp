@@ -39,16 +39,16 @@
 #include <CGAL/Polygon_mesh_processing/triangle.h>
 #include <CGAL/Side_of_triangle_mesh.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/polygon_mesh_processing_types.hpp"
-#include "CGALPY/Internal_face_plane_3_map.hpp"
-#include "CGALPY/Named_parameter_wrapper.hpp"
-#include "CGALPY/named_parameter_applicator.hpp"
-#include "CGALPY/Named_parameter_geom_traits.hpp"
-#include "CGALPY/merge_coplanar_facets.hpp"
-#include "CGALPY/pmp_helpers.hpp"
-#include "CGALPY/Polyhedral_envelope.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Internal_face_plane_3_map.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
+#include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/merge_coplanar_facets.hpp"
+#include "cgalpy/pmp_helpers.hpp"
+#include "cgalpy/Polyhedral_envelope.hpp"
 
 namespace py = nanobind;
 namespace PMP = CGAL::Polygon_mesh_processing;

@@ -8,9 +8,9 @@
 
 #include <CGAL/convex_hull_3.h>
 
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/convex_hull_3_types.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/convex_hull_3_types.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 #include "cgalpy/Ch3_docstrings.hpp"
 
 namespace py = nanobind;

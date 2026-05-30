@@ -17,9 +17,9 @@
 #include <CGAL/Point_set_3.h>
 #include <CGAL/Origin.h>
 
-#include "CGALPY/add_extraction.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/kernel_type.hpp"
+#include "cgalpy/add_extraction.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/kernel_type.hpp"
 
 namespace py = nanobind;
 

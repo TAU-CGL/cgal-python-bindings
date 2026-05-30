@@ -28,17 +28,17 @@
 #define CGAL_USE_BASIC_VIEWER
 #include <CGAL/draw_straight_skeleton_2.h>
 #if defined(CGALPY_BASIC_VIEWER_BINDINGS)
-#include "CGALPY/basic_viewer_types.hpp"
+#include "cgalpy/basic_viewer_types.hpp"
 #endif
 #endif
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/straight_skeleton_2_types.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/stl_nested_forward_iterator.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/straight_skeleton_2_types.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/stl_nested_forward_iterator.hpp"
 #include "cgalpy/Sn2_docstrings.hpp"
 #if defined(CGALPY_POLYGON_2_BINDINGS)
-#include "CGALPY/polygon_2_types.hpp"
+#include "cgalpy/polygon_2_types.hpp"
 #endif
 
 namespace py = nanobind;

@@ -19,9 +19,9 @@
 #include <CGAL/ch_melkman.h>
 #include <CGAL/ch_akl_toussaint.h>
 
-#include "CGALPY/convex_hull_2_config.hpp"
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/convex_hull_2_config.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 #include "cgalpy/Ch2_docstrings.hpp"
 
 namespace py = nanobind;

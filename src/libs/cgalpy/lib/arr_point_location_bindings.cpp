@@ -17,11 +17,11 @@
 #include <CGAL/Arr_landmarks_point_location.h>
 #include <CGAL/Arr_observer.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/arr_point_location_config.hpp"
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/arr_point_location_config.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 
 namespace py = nanobind;
 namespace aos2_doc = cgalpy::aos2::docstrings;

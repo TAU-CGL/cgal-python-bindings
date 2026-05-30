@@ -13,12 +13,12 @@
 #include <CGAL/approximated_offset_2.h>
 #include <CGAL/offset_polygon_2.h>
 
-#include "CGALPY/minkowski_sum_2_types.hpp"
-#include "CGALPY/polygon_partitioning_types.hpp"
-#include "CGALPY/export_general_polygon_2.hpp"
-#include "CGALPY/export_general_polygon_with_holes_2.hpp"
-#include "CGALPY/append_iterator.hpp"
-#include "CGALPY/cartesian_product.hpp"
+#include "cgalpy/minkowski_sum_2_types.hpp"
+#include "cgalpy/polygon_partitioning_types.hpp"
+#include "cgalpy/export_general_polygon_2.hpp"
+#include "cgalpy/export_general_polygon_with_holes_2.hpp"
+#include "cgalpy/append_iterator.hpp"
+#include "cgalpy/cartesian_product.hpp"
 
 #include "cgalpy/Ms2_docstrings.hpp"
 

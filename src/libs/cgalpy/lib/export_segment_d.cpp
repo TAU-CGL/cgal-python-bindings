@@ -9,8 +9,8 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/kernel_d_types.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/kernel_d_types.hpp"
 #include "cgalpy/Kerd_docstrings.hpp"
 
 namespace kerd_doc = cgalpy::kerd::docstrings;

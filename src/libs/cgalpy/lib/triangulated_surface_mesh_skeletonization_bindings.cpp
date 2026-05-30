@@ -16,8 +16,8 @@
 #include <CGAL/extract_mean_curvature_flow_skeleton.h>
 #include <CGAL/boost/graph/split_graph_into_polylines.h>
 
-#include "CGALPY/polygon_mesh_processing_types.hpp"
-#include "CGALPY/Polyline_visitor.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
+#include "cgalpy/Polyline_visitor.hpp"
 #include "cgalpy/Smsk_docstrings.hpp"
 
 namespace py = nanobind;

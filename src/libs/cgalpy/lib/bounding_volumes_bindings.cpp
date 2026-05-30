@@ -12,11 +12,11 @@
 #include <CGAL/Min_circle_2.h>
 #include <CGAL/Min_circle_2_traits_2.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/bounding_volumes_config.hpp"
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/bounding_volumes_config.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 #include "cgalpy/Bv_docstrings.hpp"
 
 namespace py = nanobind;

@@ -12,8 +12,8 @@
 #include <CGAL/Cartesian.h>
 #include <CGAL/Simple_cartesian.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/Kernel/export_kernel.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/Kernel/export_kernel.hpp"
 
 namespace py = nanobind;
 

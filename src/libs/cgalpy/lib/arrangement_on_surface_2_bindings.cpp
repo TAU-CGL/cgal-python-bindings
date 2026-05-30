@@ -26,14 +26,14 @@
 #include <CGAL/Arr_trapezoid_ric_point_location.h>
 #include <CGAL/Arr_landmarks_point_location.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
-#include "CGALPY/Arr_observer.hpp"
-#include "CGALPY/Arr_overlay_traits.hpp"
-#include "CGALPY/Arr_overlay_function_traits.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/Arr_observer.hpp"
+#include "cgalpy/Arr_overlay_traits.hpp"
+#include "cgalpy/Arr_overlay_function_traits.hpp"
+#include "cgalpy/make_iterator.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 
 #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
@@ -44,7 +44,7 @@
 #define CGAL_USE_BASIC_VIEWER
 #include <CGAL/draw_arrangement_2.h>
 #if defined(CGALPY_BASIC_VIEWER_BINDINGS)
-#include "CGALPY/basic_viewer_types.hpp"
+#include "cgalpy/basic_viewer_types.hpp"
 #endif
 #endif
 #endif

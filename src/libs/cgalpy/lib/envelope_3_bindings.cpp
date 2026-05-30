@@ -8,9 +8,9 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/envelope_3_types.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/envelope_3_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 
 #include "cgalpy/Env3_docstrings.hpp"
 

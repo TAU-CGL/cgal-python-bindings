@@ -11,10 +11,10 @@
 
 #include <CGAL/Arr_non_caching_segment_traits_2.h>
 
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/aos_2_concepts/make_x_monotone_2_call_operator.hpp"
-#include "CGALPY/aos_2_concepts/intersect_2_call_operator.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/aos_2_concepts/make_x_monotone_2_call_operator.hpp"
+#include "cgalpy/aos_2_concepts/intersect_2_call_operator.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;

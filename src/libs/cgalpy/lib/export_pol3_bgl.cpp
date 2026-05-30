@@ -8,9 +8,9 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/export_circulator.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/polyhedron_3_types.hpp"
+#include "cgalpy/export_circulator.hpp"
+#include "cgalpy/make_iterator.hpp"
+#include "cgalpy/polyhedron_3_types.hpp"
 #include "cgalpy/Bgl_docstrings.hpp"
 
 namespace bgl_doc = cgalpy::bgl::docstrings;

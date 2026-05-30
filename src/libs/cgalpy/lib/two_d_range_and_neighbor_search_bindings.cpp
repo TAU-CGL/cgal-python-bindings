@@ -9,11 +9,11 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/kernel_type.hpp"
-#include "CGALPY/Triangulation_cw_ccw_2.hpp"
-#include "CGALPY/Triangulation_2.hpp"
-#include "CGALPY/triangulation_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/kernel_type.hpp"
+#include "cgalpy/Triangulation_cw_ccw_2.hpp"
+#include "cgalpy/Triangulation_2.hpp"
+#include "cgalpy/triangulation_2_types.hpp"
 
 namespace py = nanobind;
 

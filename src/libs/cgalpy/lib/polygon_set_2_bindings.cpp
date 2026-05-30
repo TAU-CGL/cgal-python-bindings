@@ -12,9 +12,9 @@
 #include <CGAL/Polygon_set_2.h>
 #include <CGAL/IO/Gps_iostream.h>
 
-#include "CGALPY/types.hpp"
-#include "CGALPY/polygon_set_2_types.hpp"
-#include "CGALPY/add_extraction.hpp"
+#include "cgalpy/types.hpp"
+#include "cgalpy/polygon_set_2_types.hpp"
+#include "cgalpy/add_extraction.hpp"
 
 #include "cgalpy/Bso2_docstrings.hpp"
 #ifdef CGALPY_HAS_VISUAL

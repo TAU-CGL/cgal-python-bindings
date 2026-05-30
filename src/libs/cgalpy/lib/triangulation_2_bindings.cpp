@@ -13,14 +13,14 @@
 #include <nanobind/stl/pair.h>
 #include <nanobind/stl/tuple.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/export_circulator.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/stl_dereference_forward_iterator.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/triangulation_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/export_circulator.hpp"
+#include "cgalpy/make_iterator.hpp"
+#include "cgalpy/stl_dereference_forward_iterator.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/triangulation_2_types.hpp"
 #include "cgalpy/Tri2_docstrings.hpp"
-#include "CGALPY/types.hpp"
+#include "cgalpy/types.hpp"
 
 namespace py = nanobind;
 namespace tri2_doc = cgalpy::tri2::docstrings;

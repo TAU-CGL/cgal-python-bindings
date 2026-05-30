@@ -13,13 +13,13 @@
 
 #include <CGAL/intersections_d.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/config.hpp"
-#include "CGALPY/Kernel/export_ft.hpp"
-#include "CGALPY/kernel_d_types.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/make_iterator.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/config.hpp"
+#include "cgalpy/Kernel/export_ft.hpp"
+#include "cgalpy/kernel_d_types.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/make_iterator.hpp"
 #include "cgalpy/Kerd_docstrings.hpp"
 
 namespace py = nanobind;

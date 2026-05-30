@@ -9,7 +9,7 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;

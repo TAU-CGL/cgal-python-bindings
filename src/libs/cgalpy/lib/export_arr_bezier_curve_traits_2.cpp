@@ -13,17 +13,17 @@
 #include <CGAL/Cartesian.h>
 #include <CGAL/CORE_algebraic_number_traits.h>
 
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
-#include "CGALPY/aos_2_concepts/export_AosDirectionalXMonotoneTraits_2.hpp"
-#include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/add_extraction.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/add_attr.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos_2_concepts/export_AosTraits_2.hpp"
+#include "cgalpy/aos_2_concepts/export_AosDirectionalXMonotoneTraits_2.hpp"
+#include "cgalpy/aos_2_concepts/Aos_basic_traits_classes.hpp"
+#include "cgalpy/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
+#include "cgalpy/aos_2_concepts/Aos_traits_classes.hpp"
+#include "cgalpy/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/add_extraction.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/add_attr.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;

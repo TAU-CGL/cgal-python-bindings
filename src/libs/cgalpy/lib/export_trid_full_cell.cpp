@@ -11,9 +11,9 @@
 
 namespace py = nanobind;
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/triangulation_d_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/make_iterator.hpp"
+#include "cgalpy/triangulation_d_types.hpp"
 #include "cgalpy/Trid_docstrings.hpp"
 
 namespace trid_doc = cgalpy::trid::docstrings;

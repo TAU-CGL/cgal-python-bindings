@@ -17,12 +17,12 @@
 #include <CGAL/draw_nef_3.h>
 #endif
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/add_extraction.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/nef_3_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/add_extraction.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/make_iterator.hpp"
+#include "cgalpy/nef_3_types.hpp"
 #include "cgalpy/Nef3_docstrings.hpp"
 
 namespace py = nanobind;

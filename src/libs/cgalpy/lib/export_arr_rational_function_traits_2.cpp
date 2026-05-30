@@ -9,14 +9,14 @@
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/arrangement_on_surface_2_types.hpp"
-#include "CGALPY/aos_2_concepts/Aos_basic_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
-#include "CGALPY/aos_2_concepts/export_AosTraits_2.hpp"
-#include "CGALPY/bind_polynomial.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos_2_concepts/Aos_basic_traits_classes.hpp"
+#include "cgalpy/aos_2_concepts/Aos_x_monotone_traits_classes.hpp"
+#include "cgalpy/aos_2_concepts/export_AosTraits_2.hpp"
+#include "cgalpy/bind_polynomial.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;

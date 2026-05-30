@@ -10,9 +10,9 @@
 
 #include <CGAL/Mesh_facet_topology.h>
 
-#include "CGALPY/helpers.hpp"
-#include "CGALPY/kernel_type.hpp"
-#include "CGALPY/parse_named_parameters.hpp"
+#include "cgalpy/helpers.hpp"
+#include "cgalpy/kernel_type.hpp"
+#include "cgalpy/parse_named_parameters.hpp"
 
 namespace py = nanobind;
 

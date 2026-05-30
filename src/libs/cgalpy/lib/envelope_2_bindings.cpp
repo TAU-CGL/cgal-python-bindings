@@ -10,10 +10,10 @@
 
 #include <CGAL/envelope_2.h>
 
-#include "CGALPY/envelope_2_types.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/make_iterator.hpp"
+#include "cgalpy/envelope_2_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/make_iterator.hpp"
 
 #include "cgalpy/Env2_docstrings.hpp"
 

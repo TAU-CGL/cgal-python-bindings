@@ -13,14 +13,14 @@
 
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/named_parameter_applicator.hpp"
-#include "CGALPY/Named_parameter_repair_polygon_soup.hpp"
-#include "CGALPY/Named_parameter_verbose.hpp"
-#include "CGALPY/Named_parameter_wrapper.hpp"
-#include "CGALPY/polygon_mesh_processing_types.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
+#include "cgalpy/Named_parameter_repair_polygon_soup.hpp"
+#include "cgalpy/Named_parameter_verbose.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/polygon_mesh_processing_types.hpp"
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
-#include "CGALPY/polyhedron_3_types.hpp"
+#include "cgalpy/polyhedron_3_types.hpp"
 #endif
 
 namespace py = nanobind;

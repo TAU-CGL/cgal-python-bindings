@@ -10,12 +10,12 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 
-#include "CGALPY/polygon_2_types.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/make_iterator.hpp"
-#include "CGALPY/add_extraction.hpp"
+#include "cgalpy/polygon_2_types.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/make_iterator.hpp"
+#include "cgalpy/add_extraction.hpp"
 
 #include "cgalpy/Pol2_docstrings.hpp"
 

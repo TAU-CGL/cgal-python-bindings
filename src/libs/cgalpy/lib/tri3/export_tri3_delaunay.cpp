@@ -14,9 +14,9 @@
 #include <nanobind/stl/tuple.h>
 #include <nanobind/stl/function.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
-#include "CGALPY/triangulation_3_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/triangulation_3_types.hpp"
 
 #include "cgalpy/Tri3_docstrings.hpp"
 
