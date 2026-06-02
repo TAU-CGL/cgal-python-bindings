@@ -24,12 +24,21 @@ jobs:
             module_name: CGALPY_kerEpecInt
             package_name: CGALPY_kerEpecInt
             wheel_pattern: cgalpy_kerepecint-*.whl
+            extra_submodule: ""
           - config: epic
             label: EPIC
             cmake_config: cmake/tests/epic.cmake
             module_name: CGALPY_kerEpic
             package_name: CGALPY_kerEpic
             wheel_pattern: cgalpy_kerepic-*.whl
+            extra_submodule: ""
+          - config: aos2_seg_epec
+            label: AOS2 segment EPEC
+            cmake_config: cmake/tests/aos2_seg_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2SegPl
+            package_name: CGALPY_kerEpecInt_aos2SegPl
+            wheel_pattern: cgalpy_kerepecint_aos2segpl-*.whl
+            extra_submodule: Aos2
 
     env:
       CGAL_BRANCH: gsoc2026-python_bindings
@@ -155,10 +164,19 @@ jobs:
           assert ker is not None
           assert hasattr(ker, "Point_2")
           assert hasattr(ker, "area")
+
+          extra_submodule = os.environ.get("EXTRA_SUBMODULE", "")
+          if extra_submodule:
+              submodule = getattr(mod, extra_submodule, None)
+              assert submodule is not None
+              if extra_submodule == "Aos2":
+                  assert hasattr(submodule, "Arrangement_2")
+
           print("build-tree import smoke: OK")
           PY
         env:
           MODULE_NAME: ${{ matrix.module_name }}
+          EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
       - name: Install generated wheel in clean venv
         run: |
@@ -185,12 +203,21 @@ jobs:
           assert ker is not None
           assert hasattr(ker, "Point_2")
           assert hasattr(ker, "area")
+
+          extra_submodule = os.environ.get("EXTRA_SUBMODULE", "")
+          if extra_submodule:
+              submodule = getattr(mod, extra_submodule, None)
+              assert submodule is not None
+              if extra_submodule == "Aos2":
+                  assert hasattr(submodule, "Arrangement_2")
+
           print("wheel import smoke: OK")
           PY
         env:
           MODULE_NAME: ${{ matrix.module_name }}
           PACKAGE_NAME: ${{ matrix.package_name }}
           WHEEL_PATTERN: ${{ matrix.wheel_pattern }}
+          EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
       - name: Upload package artifacts
         uses: actions/upload-artifact@v4
