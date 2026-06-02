@@ -10,14 +10,31 @@ on:
       - gsoc2026
 
 jobs:
-  epec-linux:
-    name: EPEC kernel smoke on Linux
+  kernel-linux:
+    name: ${{ matrix.label }} kernel smoke on Linux
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - config: epec
+            label: EPEC
+            cmake_config: cmake/tests/epec.cmake
+            module_name: CGALPY_kerEpecInt
+            package_name: CGALPY_kerEpecInt
+            wheel_pattern: cgalpy_kerepecint-*.whl
+          - config: epic
+            label: EPIC
+            cmake_config: cmake/tests/epic.cmake
+            module_name: CGALPY_kerEpic
+            package_name: CGALPY_kerEpic
+            wheel_pattern: cgalpy_kerepic-*.whl
 
     env:
       CGAL_BRANCH: gsoc2026-python_bindings
       CGAL_REPOSITORY: https://github.com/CGAL/cgal-public-dev.git
-      BUILD_DIR: ${{ github.workspace }}/build/cgalpy/epec
+      BUILD_DIR: ${{ github.workspace }}/build/cgalpy/${{ matrix.config }}
       CGAL_BUILD_DIR: ${{ github.workspace }}/build/cgal/dev_release
 
     steps:
@@ -97,7 +114,7 @@ jobs:
           test -f "${NANOBIND_DIR}/nanobind-config.cmake"
           echo "dir=${NANOBIND_DIR}" >> "${GITHUB_OUTPUT}"
 
-      - name: Configure cgal-python-bindings EPEC smoke
+      - name: Configure cgal-python-bindings kernel smoke
         run: |
           set -euxo pipefail
           cmake \
@@ -112,7 +129,7 @@ jobs:
             -DPython_EXECUTABLE="$(command -v python)" \
             -Dnanobind_DIR="${{ steps.nanobind.outputs.dir }}" \
             -DCGAL_DIR="${CGAL_BUILD_DIR}" \
-            -C "${{ github.workspace }}/cmake/tests/epec.cmake"
+            -C "${{ github.workspace }}/${{ matrix.cmake_config }}"
 
       - name: Build extension, stubs, and package
         run: |
@@ -124,11 +141,14 @@ jobs:
           set -euxo pipefail
           PYTHONPATH="${BUILD_DIR}/src/libs" python - <<'PY'
           import importlib
+          import os
+
+          module_name = os.environ["MODULE_NAME"]
 
           pkg = importlib.import_module("cgalpy")
           print("cgalpy:", pkg.__file__)
 
-          mod = importlib.import_module("cgalpy.CGALPY_kerEpecInt")
+          mod = importlib.import_module(f"cgalpy.{module_name}")
           print("extension:", mod.__file__)
 
           ker = getattr(mod, "Ker", None)
@@ -137,22 +157,28 @@ jobs:
           assert hasattr(ker, "area")
           print("build-tree import smoke: OK")
           PY
+        env:
+          MODULE_NAME: ${{ matrix.module_name }}
 
       - name: Install generated wheel in clean venv
         run: |
           set -euxo pipefail
-          WHEEL="$(find "${BUILD_DIR}/src/libs/cgalpy/dist" -maxdepth 1 -type f -name 'cgalpy_kerepecint-*.whl' | sort | tail -1)"
+          WHEEL="$(find "${BUILD_DIR}/src/libs/cgalpy/dist" -maxdepth 1 -type f -name "${WHEEL_PATTERN}" | sort | tail -1)"
           test -n "${WHEEL}"
           python -m venv /tmp/cgalpy-wheel-test
           /tmp/cgalpy-wheel-test/bin/python -m pip install --upgrade pip
           /tmp/cgalpy-wheel-test/bin/python -m pip install "${WHEEL}"
           /tmp/cgalpy-wheel-test/bin/python - <<'PY'
           import importlib
+          import os
 
-          pkg = importlib.import_module("CGALPY_kerEpecInt")
+          package_name = os.environ["PACKAGE_NAME"]
+          module_name = os.environ["MODULE_NAME"]
+
+          pkg = importlib.import_module(package_name)
           print("wheel package:", pkg.__file__)
 
-          mod = importlib.import_module("CGALPY_kerEpecInt.CGALPY_kerEpecInt")
+          mod = importlib.import_module(f"{package_name}.{module_name}")
           print("wheel extension:", mod.__file__)
 
           ker = getattr(mod, "Ker", None)
@@ -161,11 +187,15 @@ jobs:
           assert hasattr(ker, "area")
           print("wheel import smoke: OK")
           PY
+        env:
+          MODULE_NAME: ${{ matrix.module_name }}
+          PACKAGE_NAME: ${{ matrix.package_name }}
+          WHEEL_PATTERN: ${{ matrix.wheel_pattern }}
 
       - name: Upload package artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: cgalpy-epec-linux-artifacts
+          name: cgalpy-${{ matrix.config }}-linux-artifacts
           path: |
             ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.whl
             ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.tar.gz
