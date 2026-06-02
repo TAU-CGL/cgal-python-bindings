@@ -33,6 +33,7 @@ jobs:
             cmake \
             git \
             ninja-build \
+            clang \
             libboost-dev \
             libeigen3-dev \
             libgmp-dev \
@@ -50,6 +51,13 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install "nanobind>=2.3.0,<=2.10.2" build
 
+      - name: Select Clang compiler
+        run: |
+          set -euxo pipefail
+          echo "CC=clang" >> "${GITHUB_ENV}"
+          echo "CXX=clang++" >> "${GITHUB_ENV}"
+          clang++ --version
+
       - name: Check out CGAL development branch
         run: |
           set -euxo pipefail
@@ -62,6 +70,8 @@ jobs:
             -S "${{ github.workspace }}/cgal" \
             -B "${CGAL_BUILD_DIR}" \
             -G Ninja \
+            -DCMAKE_C_COMPILER=clang \
+            -DCMAKE_CXX_COMPILER=clang++ \
             -DCMAKE_BUILD_TYPE=Release \
             -DCGAL_WITH_tests=OFF \
             -DCGAL_WITH_examples=OFF \
@@ -94,6 +104,8 @@ jobs:
             -S "${{ github.workspace }}" \
             -B "${BUILD_DIR}" \
             -G Ninja \
+            -DCMAKE_C_COMPILER=clang \
+            -DCMAKE_CXX_COMPILER=clang++ \
             -DCMAKE_BUILD_TYPE=Release \
             -DCGALPY_WITH_VISUAL:BOOL=OFF \
             -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF \
