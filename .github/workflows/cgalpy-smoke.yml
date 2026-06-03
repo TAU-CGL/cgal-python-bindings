@@ -11,7 +11,7 @@ on:
 
 jobs:
   kernel-linux:
-    name: ${{ matrix.label }} kernel smoke on Linux
+    name: ${{ matrix.label }} kernel smoke on Linux (${{ matrix.compiler_label }})
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,6 +20,19 @@ jobs:
         include:
           - config: epec
             label: EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/epec.cmake
+            module_name: CGALPY_kerEpecInt
+            package_name: CGALPY_kerEpecInt
+            wheel_pattern: cgalpy_kerepecint-*.whl
+            extra_submodule: ""
+          - config: epec_gcc
+            label: EPEC
+            compiler_label: GCC
+            cc: gcc
+            cxx: g++
             cmake_config: cmake/tests/epec.cmake
             module_name: CGALPY_kerEpecInt
             package_name: CGALPY_kerEpecInt
@@ -27,6 +40,9 @@ jobs:
             extra_submodule: ""
           - config: epic
             label: EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
             cmake_config: cmake/tests/epic.cmake
             module_name: CGALPY_kerEpic
             package_name: CGALPY_kerEpic
@@ -34,6 +50,9 @@ jobs:
             extra_submodule: ""
           - config: aos2_seg_epec
             label: AOS2 segment EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
             cmake_config: cmake/tests/aos2_seg_epec.cmake
             module_name: CGALPY_kerEpecInt_aos2SegPl
             package_name: CGALPY_kerEpecInt_aos2SegPl
@@ -77,12 +96,12 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install "nanobind>=2.3.0,<=2.10.2" build
 
-      - name: Select Clang compiler
+      - name: Select compiler
         run: |
           set -euxo pipefail
-          echo "CC=clang" >> "${GITHUB_ENV}"
-          echo "CXX=clang++" >> "${GITHUB_ENV}"
-          clang++ --version
+          echo "CC=${{ matrix.cc }}" >> "${GITHUB_ENV}"
+          echo "CXX=${{ matrix.cxx }}" >> "${GITHUB_ENV}"
+          "${{ matrix.cxx }}" --version
 
       - name: Check out CGAL development branch
         run: |
@@ -96,8 +115,8 @@ jobs:
             -S "${{ github.workspace }}/cgal" \
             -B "${CGAL_BUILD_DIR}" \
             -G Ninja \
-            -DCMAKE_C_COMPILER=clang \
-            -DCMAKE_CXX_COMPILER=clang++ \
+            -DCMAKE_C_COMPILER="${{ matrix.cc }}" \
+            -DCMAKE_CXX_COMPILER="${{ matrix.cxx }}" \
             -DCMAKE_BUILD_TYPE=Release \
             -DCGAL_WITH_tests=OFF \
             -DCGAL_WITH_examples=OFF \
@@ -130,8 +149,8 @@ jobs:
             -S "${{ github.workspace }}" \
             -B "${BUILD_DIR}" \
             -G Ninja \
-            -DCMAKE_C_COMPILER=clang \
-            -DCMAKE_CXX_COMPILER=clang++ \
+            -DCMAKE_C_COMPILER="${{ matrix.cc }}" \
+            -DCMAKE_CXX_COMPILER="${{ matrix.cxx }}" \
             -DCMAKE_BUILD_TYPE=Release \
             -DCGALPY_WITH_VISUAL:BOOL=OFF \
             -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF \
