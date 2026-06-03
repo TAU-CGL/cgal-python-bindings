@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - gsoc2026
+      - gcc-ice-report
 
 jobs:
   epec-linux:
@@ -95,6 +96,7 @@ jobs:
             -B "${BUILD_DIR}" \
             -G Ninja \
             -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_CXX_FLAGS="-freport-bug" \
             -DCGALPY_WITH_VISUAL:BOOL=OFF \
             -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF \
             -DPython_EXECUTABLE="$(command -v python)" \
@@ -102,10 +104,35 @@ jobs:
             -DCGAL_DIR="${CGAL_BUILD_DIR}" \
             -C "${{ github.workspace }}/cmake/tests/epec.cmake"
 
-      - name: Build extension, stubs, and package
+      - name: Build extension, stubs, and package with GCC bug report
+        id: build
+        continue-on-error: true
         run: |
           set -euxo pipefail
           cmake --build "${BUILD_DIR}" --target BUILD --parallel 2
+
+      - name: Collect GCC bug report files
+        if: always()
+        run: |
+          set -euxo pipefail
+          mkdir -p "${{ github.workspace }}/gcc-bug-report-files"
+          find "${BUILD_DIR}" -type f \( -name "*.out" -o -name "*.ii" -o -name "*.s" \) -print -exec cp {} "${{ github.workspace }}/gcc-bug-report-files/" \; || true
+          find "${{ github.workspace }}/gcc-bug-report-files" -maxdepth 1 -type f -print
+          tar -czf "${{ github.workspace }}/gcc-bug-report-files.tar.gz" -C "${{ github.workspace }}" gcc-bug-report-files
+
+      - name: Upload GCC bug report files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gcc-ice-report-files
+          path: ${{ github.workspace }}/gcc-bug-report-files.tar.gz
+          if-no-files-found: warn
+
+      - name: Fail if repro build failed
+        if: steps.build.outcome != 'success'
+        run: |
+          echo "The build failed as expected while generating GCC -freport-bug files."
+          exit 1
 
       - name: Import from build tree
         run: |
