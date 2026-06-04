@@ -128,6 +128,16 @@ jobs:
             package_name: CGALPY_kerEpic_bgl_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOriIo
             wheel_pattern: cgalpy_kerepic_bgl_sm_pmpsmcrcccorcccdisfdgmgrhfintlocmesncoriio-*.whl
             extra_submodule: Sm
+          - config: pol2_bso2_seg_epec
+            label: POL2 via BSO2 segment EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/bso2_seg_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+            package_name: CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+            wheel_pattern: cgalpy_kerepecint_aos2seg_bso2_pol2-*.whl
+            extra_submodule: Pol2
 
     env:
       CGAL_BRANCH: gsoc2026-python_bindings
@@ -281,6 +291,9 @@ jobs:
               elif extra_submodule == "Sm":
                   assert hasattr(submodule, "Surface_mesh_3")
                   assert hasattr(submodule, "add_vertex")
+              elif extra_submodule == "Pol2":
+                  assert hasattr(submodule, "Polygon_2")
+                  assert hasattr(submodule, "Polygon_with_holes_2")
 
           print("build-tree import smoke: OK")
           PY
@@ -341,6 +354,9 @@ jobs:
               elif extra_submodule == "Sm":
                   assert hasattr(submodule, "Surface_mesh_3")
                   assert hasattr(submodule, "add_vertex")
+              elif extra_submodule == "Pol2":
+                  assert hasattr(submodule, "Polygon_2")
+                  assert hasattr(submodule, "Polygon_with_holes_2")
 
           print("wheel import smoke: OK")
           PY
