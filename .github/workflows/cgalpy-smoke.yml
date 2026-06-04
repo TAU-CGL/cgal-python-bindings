@@ -148,6 +148,16 @@ jobs:
             package_name: CGALPY_kerEpecInt_bgl_pol3Wn_pol2
             wheel_pattern: cgalpy_kerepecint_bgl_pol3wn_pol2-*.whl
             extra_submodule: Pol3
+          - config: pol3_pmp_epic
+            label: PMP POL3 EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/pol3_pmp_epic.cmake
+            module_name: CGALPY_kerEpic_bgl_pol3Ker_pmpPol3CrCcCorCccDisFdGmGrHfIntLocMesNcOriIo
+            package_name: CGALPY_kerEpic_bgl_pol3Ker_pmpPol3CrCcCorCccDisFdGmGrHfIntLocMesNcOriIo
+            wheel_pattern: cgalpy_kerepic_bgl_pol3ker_pmppol3crcccorcccdisfdgmgrhfintlocmesncoriio-*.whl
+            extra_submodule: Pmp
 
     env:
       CGAL_BRANCH: gsoc2026-python_bindings
@@ -307,6 +317,9 @@ jobs:
               elif extra_submodule == "Pol3":
                   assert hasattr(submodule, "Polyhedron_3")
                   assert hasattr(submodule, "make_tetrahedron")
+              elif extra_submodule == "Pmp":
+                  assert hasattr(submodule, "area")
+                  assert hasattr(submodule, "triangulate_faces")
 
           print("build-tree import smoke: OK")
           PY
@@ -373,6 +386,9 @@ jobs:
               elif extra_submodule == "Pol3":
                   assert hasattr(submodule, "Polyhedron_3")
                   assert hasattr(submodule, "make_tetrahedron")
+              elif extra_submodule == "Pmp":
+                  assert hasattr(submodule, "area")
+                  assert hasattr(submodule, "triangulate_faces")
 
           print("wheel import smoke: OK")
           PY
