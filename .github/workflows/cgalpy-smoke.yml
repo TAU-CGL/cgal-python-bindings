@@ -58,6 +58,16 @@ jobs:
             package_name: CGALPY_kerEpecInt_aos2SegPl
             wheel_pattern: cgalpy_kerepecint_aos2segpl-*.whl
             extra_submodule: Aos2
+          - config: bso2_seg_epec
+            label: BSO2 segment EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/bso2_seg_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+            package_name: CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+            wheel_pattern: cgalpy_kerepecint_aos2seg_bso2_pol2-*.whl
+            extra_submodule: Bso2
 
     env:
       CGAL_BRANCH: gsoc2026-python_bindings
@@ -190,6 +200,9 @@ jobs:
               assert submodule is not None
               if extra_submodule == "Aos2":
                   assert hasattr(submodule, "Arrangement_2")
+              elif extra_submodule == "Bso2":
+                  assert hasattr(submodule, "Polygon_set_2")
+                  assert hasattr(submodule, "join")
 
           print("build-tree import smoke: OK")
           PY
@@ -229,6 +242,9 @@ jobs:
               assert submodule is not None
               if extra_submodule == "Aos2":
                   assert hasattr(submodule, "Arrangement_2")
+              elif extra_submodule == "Bso2":
+                  assert hasattr(submodule, "Polygon_set_2")
+                  assert hasattr(submodule, "join")
 
           print("wheel import smoke: OK")
           PY
