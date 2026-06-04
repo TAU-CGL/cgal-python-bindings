@@ -5,7 +5,9 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
+#include <tuple>
 #include <vector>
 
 #include <boost/graph/graph_traits.hpp>
@@ -13,6 +15,7 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/pair.h>
+#include <nanobind/stl/tuple.h>
 
 #include <CGAL/Polygon_mesh_processing/manifoldness.h>
 #include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
