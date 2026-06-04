@@ -118,6 +118,16 @@ jobs:
             package_name: CGALPY_kerEpic_kerdEpicd4_tridDelDef4
             wheel_pattern: cgalpy_kerepic_kerdepicd4_triddeldef4-*.whl
             extra_submodule: Trid
+          - config: sm_pmp_epic
+            label: SM PMP EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/sm_pmp_epic.cmake
+            module_name: CGALPY_kerEpic_bgl_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOriIo
+            package_name: CGALPY_kerEpic_bgl_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOriIo
+            wheel_pattern: cgalpy_kerepic_bgl_sm_pmpsmcrcccorcccdisfdgmgrhfintlocmesncoriio-*.whl
+            extra_submodule: Sm
 
     env:
       CGAL_BRANCH: gsoc2026-python_bindings
@@ -268,6 +278,9 @@ jobs:
               elif extra_submodule == "Trid":
                   assert hasattr(submodule, "Delaunay_triangulation")
                   assert hasattr(submodule, "Triangulation_ds")
+              elif extra_submodule == "Sm":
+                  assert hasattr(submodule, "Surface_mesh_3")
+                  assert hasattr(submodule, "add_vertex")
 
           print("build-tree import smoke: OK")
           PY
@@ -325,6 +338,9 @@ jobs:
               elif extra_submodule == "Trid":
                   assert hasattr(submodule, "Delaunay_triangulation")
                   assert hasattr(submodule, "Triangulation_ds")
+              elif extra_submodule == "Sm":
+                  assert hasattr(submodule, "Surface_mesh_3")
+                  assert hasattr(submodule, "add_vertex")
 
           print("wheel import smoke: OK")
           PY
