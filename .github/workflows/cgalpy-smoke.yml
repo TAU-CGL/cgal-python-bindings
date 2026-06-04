@@ -88,6 +88,16 @@ jobs:
             package_name: CGALPY_kerEpecInt_aos2SegPl_bso2_ms2_pol2_pp
             wheel_pattern: cgalpy_kerepecint_aos2segpl_bso2_ms2_pol2_pp-*.whl
             extra_submodule: Ms2
+          - config: tri2_ct_wi_epic
+            label: TRI2 constrained-Delaunay EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/tri2_ct_wi_epic.cmake
+            module_name: CGALPY_kerEpic_tri2CdelNciWiWi
+            package_name: CGALPY_kerEpic_tri2CdelNciWiWi
+            wheel_pattern: cgalpy_kerepic_tri2cdelnciwiwi-*.whl
+            extra_submodule: Tri2
 
     env:
       CGAL_BRANCH: gsoc2026-python_bindings
@@ -229,6 +239,9 @@ jobs:
               elif extra_submodule == "Ms2":
                   assert hasattr(submodule, "minkowski_sum_2")
                   assert hasattr(submodule, "offset_polygon_2")
+              elif extra_submodule == "Tri2":
+                  assert hasattr(submodule, "Triangulation_2")
+                  assert hasattr(submodule, "draw")
 
           print("build-tree import smoke: OK")
           PY
@@ -277,6 +290,9 @@ jobs:
               elif extra_submodule == "Ms2":
                   assert hasattr(submodule, "minkowski_sum_2")
                   assert hasattr(submodule, "offset_polygon_2")
+              elif extra_submodule == "Tri2":
+                  assert hasattr(submodule, "Triangulation_2")
+                  assert hasattr(submodule, "draw")
 
           print("wheel import smoke: OK")
           PY
