@@ -6,6 +6,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
@@ -123,7 +124,7 @@ py::object left_vertex_2_1(const py::list& points, const Kernel& kernel) {
   auto end = stl_forward_iterator<Point_2>(points, false);
   auto result_it = CGAL::left_vertex_2(begin, end, kernel);
   if (result_it == end) {
-    throw std::invalid_argument("Cannot find bottom vertex of an empty list.");
+    throw std::invalid_argument("Cannot find left vertex of an empty list.");
   }
   // Re-create a fresh 'begin' iterator to calculate the index distance safely.
   // Note: This relies on stl_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
@@ -190,7 +191,7 @@ py::object right_vertex_2_1(const py::list& points, const Kernel& kernel) {
   auto end = stl_forward_iterator<Point_2>(points, false);
   auto result_it =  CGAL::right_vertex_2(begin, end, kernel);
   if (result_it == end) {
-    throw std::invalid_argument("Cannot find bottom vertex of an empty list.");
+    throw std::invalid_argument("Cannot find right vertex of an empty list.");
   }
   // Re-create a fresh 'begin' iterator to calculate the index distance safely.
   // Note: This relies on stl_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
@@ -212,7 +213,7 @@ py::object top_vertex_2_1(const py::list& points, const Kernel& kernel) {
   auto end = stl_forward_iterator<Point_2>(points, false);
   auto result_it = CGAL::top_vertex_2(begin, end, kernel);
   if (result_it == end) {
-    throw std::invalid_argument("Cannot find bottom vertex of an empty list.");
+    throw std::invalid_argument("Cannot find top vertex of an empty list.");
   }
   // Re-create a fresh 'begin' iterator to calculate the index distance safely.
   // Note: This relies on stl_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
