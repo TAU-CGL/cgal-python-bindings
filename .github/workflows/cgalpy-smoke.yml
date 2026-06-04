@@ -241,7 +241,7 @@ jobs:
                   assert hasattr(submodule, "offset_polygon_2")
               elif extra_submodule == "Tri2":
                   assert hasattr(submodule, "Triangulation_2")
-                  assert hasattr(submodule, "draw")
+                  assert hasattr(submodule, "Triangulation_data_structure_2")
 
           print("build-tree import smoke: OK")
           PY
@@ -292,7 +292,7 @@ jobs:
                   assert hasattr(submodule, "offset_polygon_2")
               elif extra_submodule == "Tri2":
                   assert hasattr(submodule, "Triangulation_2")
-                  assert hasattr(submodule, "draw")
+                  assert hasattr(submodule, "Triangulation_data_structure_2")
 
           print("wheel import smoke: OK")
           PY
