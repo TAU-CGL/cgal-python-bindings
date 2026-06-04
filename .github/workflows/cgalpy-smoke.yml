@@ -98,6 +98,16 @@ jobs:
             package_name: CGALPY_kerEpic_tri2CdelNciWiWi
             wheel_pattern: cgalpy_kerepic_tri2cdelnciwiwi-*.whl
             extra_submodule: Tri2
+          - config: tri3_del_epic
+            label: TRI3 Delaunay EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/tri3_del_epic.cmake
+            module_name: CGALPY_kerEpic_tri3DelComSeq
+            package_name: CGALPY_kerEpic_tri3DelComSeq
+            wheel_pattern: cgalpy_kerepic_tri3delcomseq-*.whl
+            extra_submodule: Tri3
 
     env:
       CGAL_BRANCH: gsoc2026-python_bindings
@@ -242,6 +252,9 @@ jobs:
               elif extra_submodule == "Tri2":
                   assert hasattr(submodule, "Triangulation_2")
                   assert hasattr(submodule, "Triangulation_data_structure_2")
+              elif extra_submodule == "Tri3":
+                  assert hasattr(submodule, "Delaunay_triangulation_3")
+                  assert hasattr(submodule, "Triangulation_data_structure_3")
 
           print("build-tree import smoke: OK")
           PY
@@ -293,6 +306,9 @@ jobs:
               elif extra_submodule == "Tri2":
                   assert hasattr(submodule, "Triangulation_2")
                   assert hasattr(submodule, "Triangulation_data_structure_2")
+              elif extra_submodule == "Tri3":
+                  assert hasattr(submodule, "Delaunay_triangulation_3")
+                  assert hasattr(submodule, "Triangulation_data_structure_3")
 
           print("wheel import smoke: OK")
           PY
