@@ -138,6 +138,16 @@ jobs:
             package_name: CGALPY_kerEpecInt_aos2Seg_bso2_pol2
             wheel_pattern: cgalpy_kerepecint_aos2seg_bso2_pol2-*.whl
             extra_submodule: Pol2
+          - config: pol3_bso2_epec
+            label: POL3 BSO2 EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/pol3_bso2_epec.cmake
+            module_name: CGALPY_kerEpecInt_bgl_pol3Wn_pol2
+            package_name: CGALPY_kerEpecInt_bgl_pol3Wn_pol2
+            wheel_pattern: cgalpy_kerepecint_bgl_pol3wn_pol2-*.whl
+            extra_submodule: Pol3
 
     env:
       CGAL_BRANCH: gsoc2026-python_bindings
@@ -294,6 +304,9 @@ jobs:
               elif extra_submodule == "Pol2":
                   assert hasattr(submodule, "Polygon_2")
                   assert hasattr(submodule, "Polygon_with_holes_2")
+              elif extra_submodule == "Pol3":
+                  assert hasattr(submodule, "Polyhedron_3")
+                  assert hasattr(submodule, "make_tetrahedron")
 
           print("build-tree import smoke: OK")
           PY
@@ -357,6 +370,9 @@ jobs:
               elif extra_submodule == "Pol2":
                   assert hasattr(submodule, "Polygon_2")
                   assert hasattr(submodule, "Polygon_with_holes_2")
+              elif extra_submodule == "Pol3":
+                  assert hasattr(submodule, "Polyhedron_3")
+                  assert hasattr(submodule, "make_tetrahedron")
 
           print("wheel import smoke: OK")
           PY
