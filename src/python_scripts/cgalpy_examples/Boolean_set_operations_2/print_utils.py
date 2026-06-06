@@ -1,6 +1,6 @@
 # Pretty-print a polygon
 def print_polygon(pgn):
-  print('[{}  vertices:'.format(pgn.size()), end='')
+  print('[ {} vertices:'.format(pgn.size()), end='')
   for v in pgn.vertices():
     print(' ({})'.format(v), end='')
   print(' ]')

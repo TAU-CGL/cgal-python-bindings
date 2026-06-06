@@ -19,11 +19,13 @@ Bso2 = CGALPY.Bso2
 # Construct the two input polygons.
 P = Polygon([Point(0, 0), Point(5, 0), Point(3.5, 1.5), Point(2.5, 0.5),
              Point(1.5, 1.5)])
-print("P = ", P)
+print("P = ", end='')
+print_polygon(P)
 
 Q = Polygon([Point(0, 2), Point(1.5, 0.5), Point(2.5, 1.5), Point(3.5, 0.5),
              Point(5, 2)])
-print("Q = ", Q)
+print("Q = ", end='')
+print_polygon(Q)
 
 # Compute the union of P and Q.
 unionR = Polygon_with_holes()
@@ -32,6 +34,8 @@ if Bso2.join(P, Q, unionR):
   print_polygon_with_holes(unionR)
 else:
   print("P and Q are disjoint and their union is trivial.")
+
+print()
 
 # Compute the intersection of P and Q.
 intR = Bso2.intersection(P, Q)
