@@ -38,6 +38,14 @@ PAIRS = {
         cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
         executable="symmetric_difference",
     ),
+    "bso2_sequence": ExamplePair(
+        name="bso2_sequence",
+        python_relpath="Boolean_set_operations_2/sequence.py",
+        cpp_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2/sequence.cpp",
+        python_workdir_relpath="Boolean_set_operations_2",
+        cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
+        executable="sequence",
+    ),
 }
 
 
