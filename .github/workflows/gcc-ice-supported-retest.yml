@@ -88,11 +88,13 @@ jobs:
 
               python3 -m venv "${RETEST_ROOT}/venv"
               "${RETEST_ROOT}/venv/bin/python" -m pip install --upgrade pip
-              "${RETEST_ROOT}/venv/bin/python" -m pip install "nanobind>=2.3.0,<=2.10.2" build
+              "${RETEST_ROOT}/venv/bin/python" -m pip install "nanobind>=2.3.0,<=2.10.2" build "cmake>=3.29.6"
+              CMAKE_BIN="${RETEST_ROOT}/venv/bin/cmake"
+              "${CMAKE_BIN}" --version
 
               git clone --depth 1 --branch "${CGAL_BRANCH}" "${CGAL_REPOSITORY}" "${RETEST_ROOT}/cgal"
 
-              cmake \
+              "${CMAKE_BIN}" \
                 -S "${RETEST_ROOT}/cgal" \
                 -B "${RETEST_ROOT}/cgal-build" \
                 -G Ninja \
@@ -105,13 +107,13 @@ jobs:
                 -DCGAL_WITH_benchmarks=OFF \
                 > "${RETEST_ROOT}/configure-cgal.log" 2>&1
 
-              cmake --build "${RETEST_ROOT}/cgal-build" --parallel 2 \
+              "${CMAKE_BIN}" --build "${RETEST_ROOT}/cgal-build" --parallel 2 \
                 > "${RETEST_ROOT}/build-cgal.log" 2>&1
 
               NANOBIND_DIR="$("${RETEST_ROOT}/venv/bin/python" -c "import pathlib, nanobind; print(pathlib.Path(nanobind.__file__).resolve().parent / \"cmake\")")"
               test -f "${NANOBIND_DIR}/nanobind-config.cmake"
 
-              cmake \
+              "${CMAKE_BIN}" \
                 -S /work \
                 -B "${RETEST_ROOT}/cgalpy-build" \
                 -G Ninja \
@@ -128,7 +130,7 @@ jobs:
                 > "${RETEST_ROOT}/configure-cgalpy.log" 2>&1
 
               set +e
-              cmake --build "${RETEST_ROOT}/cgalpy-build" --target BUILD --parallel 2 \
+              "${CMAKE_BIN}" --build "${RETEST_ROOT}/cgalpy-build" --target BUILD --parallel 2 \
                 > "${RETEST_ROOT}/build-cgalpy.log" 2>&1
               BUILD_RC=$?
               set -e
