@@ -1,0 +1,200 @@
+name: GCC ICE supported-version retest
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - gcc-ice-supported-retest
+
+jobs:
+  retest:
+    name: GCC ICE retest on ${{ matrix.label }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: GCC 13.4
+            slug: gcc-13-4
+            image: gcc:13.4
+          - label: GCC 14
+            slug: gcc-14
+            image: gcc:14
+          - label: GCC 15
+            slug: gcc-15
+            image: gcc:15
+
+    env:
+      CGAL_BRANCH: gsoc2026-python_bindings
+      CGAL_REPOSITORY: https://github.com/CGAL/cgal-public-dev.git
+      RETEST_ROOT: ${{ github.workspace }}/.gcc-ice-retest/${{ matrix.slug }}
+
+    steps:
+      - name: Check out old failing cgal-python-bindings source
+        uses: actions/checkout@v4
+
+      - name: Confirm failing source pattern
+        run: |
+          set -euxo pipefail
+          grep -n 'py::overload_cast<const Pnt&>(&Pnt::operator=)' \
+            src/libs/cgalpy/include/cgalpy/Kernel/export_point_3.hpp
+
+      - name: Retest inside official GCC Linux container
+        run: |
+          set -euxo pipefail
+
+          mkdir -p "${RETEST_ROOT}"
+
+          docker run --rm \
+            -v "${GITHUB_WORKSPACE}:/work" \
+            -w /work \
+            -e CGAL_BRANCH="${CGAL_BRANCH}" \
+            -e CGAL_REPOSITORY="${CGAL_REPOSITORY}" \
+            -e RETEST_ROOT="/work/.gcc-ice-retest/${{ matrix.slug }}" \
+            "${{ matrix.image }}" \
+            bash -lc '
+              set -euxo pipefail
+
+              mkdir -p "${RETEST_ROOT}"
+
+              apt-get update
+              DEBIAN_FRONTEND=noninteractive apt-get install -y \
+                cmake \
+                git \
+                ninja-build \
+                python3 \
+                python3-dev \
+                python3-pip \
+                python3-venv \
+                libboost-dev \
+                libeigen3-dev \
+                libgmp-dev \
+                libmpfr-dev \
+                libmetis-dev
+
+              {
+                echo "## uname"
+                uname -a
+
+                echo
+                echo "## gcc -v"
+                gcc -v
+
+                echo
+                echo "## g++ -v"
+                g++ -v
+              } > "${RETEST_ROOT}/compiler-version.log" 2>&1
+
+              python3 -m venv "${RETEST_ROOT}/venv"
+              "${RETEST_ROOT}/venv/bin/python" -m pip install --upgrade pip
+              "${RETEST_ROOT}/venv/bin/python" -m pip install "nanobind>=2.3.0,<=2.10.2" build
+
+              git clone --depth 1 --branch "${CGAL_BRANCH}" "${CGAL_REPOSITORY}" "${RETEST_ROOT}/cgal"
+
+              cmake \
+                -S "${RETEST_ROOT}/cgal" \
+                -B "${RETEST_ROOT}/cgal-build" \
+                -G Ninja \
+                -DCMAKE_BUILD_TYPE=Release \
+                -DCMAKE_C_COMPILER="$(command -v gcc)" \
+                -DCMAKE_CXX_COMPILER="$(command -v g++)" \
+                -DCGAL_WITH_tests=OFF \
+                -DCGAL_WITH_examples=OFF \
+                -DCGAL_WITH_demos=OFF \
+                -DCGAL_WITH_benchmarks=OFF \
+                > "${RETEST_ROOT}/configure-cgal.log" 2>&1
+
+              cmake --build "${RETEST_ROOT}/cgal-build" --parallel 2 \
+                > "${RETEST_ROOT}/build-cgal.log" 2>&1
+
+              NANOBIND_DIR="$("${RETEST_ROOT}/venv/bin/python" -c "import pathlib, nanobind; print(pathlib.Path(nanobind.__file__).resolve().parent / \"cmake\")")"
+              test -f "${NANOBIND_DIR}/nanobind-config.cmake"
+
+              cmake \
+                -S /work \
+                -B "${RETEST_ROOT}/cgalpy-build" \
+                -G Ninja \
+                -DCMAKE_BUILD_TYPE=Release \
+                -DCMAKE_C_COMPILER="$(command -v gcc)" \
+                -DCMAKE_CXX_COMPILER="$(command -v g++)" \
+                -DCMAKE_CXX_FLAGS="-freport-bug" \
+                -DCGALPY_WITH_VISUAL:BOOL=OFF \
+                -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF \
+                -DPython_EXECUTABLE="${RETEST_ROOT}/venv/bin/python" \
+                -Dnanobind_DIR="${NANOBIND_DIR}" \
+                -DCGAL_DIR="${RETEST_ROOT}/cgal-build" \
+                -C /work/cmake/tests/epec.cmake \
+                > "${RETEST_ROOT}/configure-cgalpy.log" 2>&1
+
+              set +e
+              cmake --build "${RETEST_ROOT}/cgalpy-build" --target BUILD --parallel 2 \
+                > "${RETEST_ROOT}/build-cgalpy.log" 2>&1
+              BUILD_RC=$?
+              set -e
+
+              echo "${BUILD_RC}" > "${RETEST_ROOT}/build.rc"
+
+              {
+                echo "## Build return code"
+                echo "${BUILD_RC}"
+
+                echo
+                echo "## Important diagnostics"
+                grep -nE "internal compiler error|nothrow_spec_p|export_point_3|error:|warning:" \
+                  "${RETEST_ROOT}/build-cgalpy.log" | sed -n "1,240p" || true
+
+                echo
+                echo "## Build log tail"
+                tail -n 120 "${RETEST_ROOT}/build-cgalpy.log"
+              } > "${RETEST_ROOT}/summary.log"
+
+              mkdir -p "${RETEST_ROOT}/gcc-report-files"
+              find "${RETEST_ROOT}/cgalpy-build" -type f \
+                \( -name "*.out" -o -name "*.ii" -o -name "*.i" \) \
+                -print -exec cp {} "${RETEST_ROOT}/gcc-report-files/" \; || true
+
+              tar -czf "${RETEST_ROOT}/gcc-report-files.tar.gz" \
+                -C "${RETEST_ROOT}" gcc-report-files
+            '
+
+      - name: Print retest summary
+        if: always()
+        run: |
+          set -euxo pipefail
+
+          echo "## Compiler version"
+          sed -n '1,220p' "${RETEST_ROOT}/compiler-version.log" || true
+
+          echo
+          echo "## Retest summary"
+          sed -n '1,260p' "${RETEST_ROOT}/summary.log" || true
+
+          echo
+          echo "## Report files"
+          find "${RETEST_ROOT}" -maxdepth 3 -type f \
+            \( -name "*.log" -o -name "*.rc" -o -name "*.tar.gz" -o -name "*.out" -o -name "*.ii" -o -name "*.i" \) \
+            -exec ls -lh {} \; | sort || true
+
+      - name: Upload retest logs and GCC report files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gcc-ice-supported-retest-${{ matrix.slug }}
+          path: |
+            ${{ env.RETEST_ROOT }}/*.log
+            ${{ env.RETEST_ROOT }}/*.rc
+            ${{ env.RETEST_ROOT }}/gcc-report-files.tar.gz
+          if-no-files-found: warn
+
+      - name: Mark job failed if retest build failed
+        run: |
+          set -euxo pipefail
+          RC="$(cat "${RETEST_ROOT}/build.rc")"
+          if [ "${RC}" != "0" ]; then
+            echo "Retest build failed with rc=${RC} on ${{ matrix.label }}."
+            echo "Inspect the uploaded logs to see whether this is the original ICE or another failure."
+            exit 1
+          fi
+
+          echo "Retest build succeeded on ${{ matrix.label }}."
