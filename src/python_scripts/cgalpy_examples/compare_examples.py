@@ -30,6 +30,14 @@ PAIRS = {
         cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
         executable="simple_join_intersect",
     ),
+    "bso2_symmetric_difference": ExamplePair(
+        name="bso2_symmetric_difference",
+        python_relpath="Boolean_set_operations_2/symmetric_difference.py",
+        cpp_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2/symmetric_difference.cpp",
+        python_workdir_relpath="Boolean_set_operations_2",
+        cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
+        executable="symmetric_difference",
+    ),
 }
 
 

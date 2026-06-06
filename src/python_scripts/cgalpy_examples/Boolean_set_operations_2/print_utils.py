@@ -19,4 +19,5 @@ def print_polygon_with_holes(pwh):
   for h in pwh.holes():
     print('    Hole #{} = '.format(k), end='')
     print_polygon(h)
+    k += 1
   print(' }')

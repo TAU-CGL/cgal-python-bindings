@@ -22,19 +22,19 @@ Pol2 = CGALPY.Pol2
 outP = Polygon([Point(-3, -5), Point(3, -5), Point(3, 5), Point(-3, 5)])
 holesP = Polygon([Point(-1, -3), Point(-1, 3), Point(1, 3), Point(1, -3)])
 P = Polygon_with_holes(outP, [holesP])
-print("P =", end='')
+print("P = ", end='')
 print_polygon_with_holes(P)
 
 # Construct Q, a bounded rectangle that contains a rectangular hole.
 outQ = Polygon([Point(-5, -3), Point(5, -3), Point(5, 3), Point(-5, 3)])
 holesQ = Polygon([Point(-3, -1), Point(-3, 1), Point(3, 1), Point(3, -1)])
 Q = Polygon_with_holes(outQ, [holesQ])
-print("Q =", end='')
+print("Q = ", end='')
 print_polygon_with_holes(Q)
 
 # Compute the symmetric difference of P and Q.
 symmR = Bso2.symmetric_difference(P, Q)
 print("The symmetric difference:")
 for pwh in symmR:
-  print("-->", end='')
+  print("--> ", end='')
   print_polygon_with_holes(pwh)
