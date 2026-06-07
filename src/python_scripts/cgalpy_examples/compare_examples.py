@@ -73,6 +73,14 @@ PAIRS = {
         cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
         executable="circle_segment",
     ),
+    "bso2_set_union": ExamplePair(
+        name="bso2_set_union",
+        python_relpath="Boolean_set_operations_2/set_union.py",
+        cpp_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2/set_union.cpp",
+        python_workdir_relpath="Boolean_set_operations_2",
+        cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
+        executable="set_union",
+    ),
     "bso2_conic_traits_adapter": ExamplePair(
         name="bso2_conic_traits_adapter",
         python_relpath="Boolean_set_operations_2/conic_traits_adapter.py",
