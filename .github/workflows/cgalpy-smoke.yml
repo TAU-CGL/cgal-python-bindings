@@ -790,6 +790,7 @@ jobs:
             -DCMAKE_BUILD_TYPE=Release `
             -DCGALPY_WITH_VISUAL:BOOL=OFF `
             -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF `
+            -DBoost_INCLUDE_DIR="$env:VCPKG_ROOT/installed/x64-windows/include" `
             -DPython_EXECUTABLE="$pythonExe" `
             -Dnanobind_DIR="${{ steps.nanobind.outputs.dir }}" `
             -DCGAL_DIR="$env:CGAL_BUILD_DIR" `
