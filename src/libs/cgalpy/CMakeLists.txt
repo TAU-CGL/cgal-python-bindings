@@ -786,6 +786,31 @@ target_include_directories(CGALPY PRIVATE ${Boost_INCLUDE_DIR} ${Boost_INCLUDE_D
 if (WIN32)
   find_package(Boost CONFIG REQUIRED COMPONENTS throw_exception)
   target_link_libraries(CGALPY PRIVATE Boost::throw_exception)
+
+  set(CGALPY_BOOST_THROW_EXCEPTION_GLOBS)
+  set(CGALPY_BOOST_INCLUDE_DIR "${Boost_INCLUDE_DIR}")
+  if (NOT CGALPY_BOOST_INCLUDE_DIR AND Boost_INCLUDE_DIRS)
+    list(GET Boost_INCLUDE_DIRS 0 CGALPY_BOOST_INCLUDE_DIR)
+  endif()
+  if (CGALPY_BOOST_INCLUDE_DIR)
+    get_filename_component(CGALPY_BOOST_ROOT "${CGALPY_BOOST_INCLUDE_DIR}" DIRECTORY)
+    list(APPEND CGALPY_BOOST_THROW_EXCEPTION_GLOBS
+      "${CGALPY_BOOST_ROOT}/lib/boost_throw_exception*.lib")
+  endif()
+  if (DEFINED ENV{VCPKG_ROOT})
+    list(APPEND CGALPY_BOOST_THROW_EXCEPTION_GLOBS
+      "$ENV{VCPKG_ROOT}/installed/x64-windows/lib/boost_throw_exception*.lib")
+  endif()
+
+  file(GLOB CGALPY_BOOST_THROW_EXCEPTION_LIBS
+    ${CGALPY_BOOST_THROW_EXCEPTION_GLOBS})
+  if (CGALPY_BOOST_THROW_EXCEPTION_LIBS)
+    list(GET CGALPY_BOOST_THROW_EXCEPTION_LIBS 0 CGALPY_BOOST_THROW_EXCEPTION_LIBRARY)
+    message(STATUS "Boost throw_exception library: ${CGALPY_BOOST_THROW_EXCEPTION_LIBRARY}")
+    target_link_libraries(CGALPY PRIVATE "${CGALPY_BOOST_THROW_EXCEPTION_LIBRARY}")
+  else()
+    message(WARNING "Boost throw_exception .lib not found; relying on Boost::throw_exception")
+  endif()
 endif()
 set(CGALPY_BUILD_DEPENDS CGALPY)
 

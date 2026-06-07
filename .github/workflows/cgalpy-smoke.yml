@@ -842,6 +842,16 @@ jobs:
               throw "Boost header not found at $path"
             }
           }
+
+          $boostLibDir = Join-Path $env:VCPKG_ROOT "installed/x64-windows/lib"
+          $boostThrowExceptionLibs = Get-ChildItem -Path $boostLibDir -Filter "boost_throw_exception*.lib" -ErrorAction SilentlyContinue
+          if (-not $boostThrowExceptionLibs) {
+            throw "Boost throw_exception library not found in $boostLibDir"
+          }
+          $boostThrowExceptionLibs | ForEach-Object {
+            Write-Host "Boost throw_exception lib: $($_.FullName)"
+          }
+
           $env:INCLUDE = "$boostInclude;$env:INCLUDE"
           Write-Host "MSVC INCLUDE begins with: $boostInclude"
           cmake --build "$env:BUILD_DIR" --target BUILD --config Release --parallel 2
