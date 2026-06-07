@@ -70,6 +70,14 @@ PAIRS = {
         cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
         executable="circle_segment",
     ),
+    "bso2_conic_traits_adapter": ExamplePair(
+        name="bso2_conic_traits_adapter",
+        python_relpath="Boolean_set_operations_2/conic_traits_adapter.py",
+        cpp_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2/conic_traits_adapter.cpp",
+        python_workdir_relpath="Boolean_set_operations_2",
+        cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
+        executable="conic_traits_adapter",
+    ),
 }
 
 

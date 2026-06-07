@@ -17,7 +17,7 @@ Point = Traits.Point_2
 Curve = Traits.Curve_2
 X_monotone_curve = Traits.X_monotone_curve_2
 Polygon = General_polygon_set.Polygon_2
-Result = Ker.Result
+Result = CGALPY.Result
 
 def append_conic_arc(polygon, arc):
   traits = Traits()
@@ -51,4 +51,6 @@ append_conic_arc(Q, ctr_cv(-1, -9, 0, 0, 0, 9))
 
 # Compute the intersection of the two polygons.
 res = Bso2.intersection(P, Q, traits)
-print(res)
+for pwh in res:
+  print(pwh)
+print()
