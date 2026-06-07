@@ -25,7 +25,8 @@ def ctr_circle_polygon(circle):
   cv = curve(circle)	# circle orientation is counterclockwise
   traits = Traits()
   make_x_monotone = traits.make_x_monotone_2_object()
-  objects = make_x_monotone(cv);
+  objects = make_x_monotone(cv)
+  print("size:", len(objects))
   assert(len(objects) == 2)
   return Polygon([objects[0], objects[1]])
 
@@ -49,7 +50,6 @@ S.join(ctr_quad_polygon(Point(4, 1), Point(6, 1), Point(6, 5), Point(4, 5)));
 
 assert(S.number_of_polygons_with_holes() == 1)
 pwhs = S.polygons_with_holes()
-print(pwhs)
-arr = S.arrangement()
-print("# Cells: ", arr.number_of_vertices(), arr.number_of_edges(),
-      arr.number_of_faces())
+for pwh in pwhs:
+  print(pwh)
+print()

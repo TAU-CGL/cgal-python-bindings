@@ -68,6 +68,16 @@ jobs:
             package_name: CGALPY_kerEpecInt_aos2Seg_bso2_pol2
             wheel_pattern: cgalpy_kerepecint_aos2seg_bso2_pol2-*.whl
             extra_submodule: Bso2
+          - config: bso2_cs_epec
+            label: BSO2 circle-segment EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/bso2_cs_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2Cs_bso2
+            package_name: CGALPY_kerEpecInt_aos2Cs_bso2
+            wheel_pattern: cgalpy_kerepecint_aos2cs_bso2-*.whl
+            extra_submodule: Bso2
           - config: ss2_seg_epec
             label: SS2 segment EPEC
             compiler_label: Clang
@@ -328,15 +338,34 @@ jobs:
           EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
       - name: Compare curated BSO2 examples with CGAL C++
-        if: matrix.config == 'bso2_seg_epec'
+        if: matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec'
         run: |
           set -euxo pipefail
           WORK_DIR="${{ github.workspace }}/build/cgalpy/example_compare/${{ matrix.config }}"
           rm -rf "${WORK_DIR}"
-          for pair in \
-            bso2_simple_join_intersect \
-            bso2_symmetric_difference \
-            bso2_sequence
+
+          case "${{ matrix.config }}" in
+            bso2_seg_epec)
+              pairs=(
+                bso2_simple_join_intersect
+                bso2_symmetric_difference
+                bso2_sequence
+                bso2_do_intersect
+                bso2_oriented_side
+              )
+              ;;
+            bso2_cs_epec)
+              pairs=(
+                bso2_circle_segment
+              )
+              ;;
+            *)
+              echo "No curated BSO2 comparisons for ${{ matrix.config }}"
+              exit 0
+              ;;
+          esac
+
+          for pair in "${pairs[@]}"
           do
             python src/python_scripts/cgalpy_examples/compare_examples.py \
               --pair "${pair}" \
