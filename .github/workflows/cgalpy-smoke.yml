@@ -803,7 +803,7 @@ jobs:
             -DCMAKE_TOOLCHAIN_FILE="$env:CMAKE_TOOLCHAIN_FILE" `
             -DCMAKE_BUILD_TYPE=Release `
             -DCMAKE_C_FLAGS="/I$env:VCPKG_ROOT/installed/x64-windows/include" `
-            -DCMAKE_CXX_FLAGS="/I$env:VCPKG_ROOT/installed/x64-windows/include" `
+            -DCMAKE_CXX_FLAGS="/EHsc /I$env:VCPKG_ROOT/installed/x64-windows/include" `
             -DCGALPY_WITH_VISUAL:BOOL=OFF `
             -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF `
             -DBoost_INCLUDE_DIR="$env:VCPKG_ROOT/installed/x64-windows/include" `
@@ -842,16 +842,6 @@ jobs:
               throw "Boost header not found at $path"
             }
           }
-
-          $boostLibDir = Join-Path $env:VCPKG_ROOT "installed/x64-windows/lib"
-          $boostThrowExceptionLibs = Get-ChildItem -Path $boostLibDir -Filter "boost_throw_exception*.lib" -ErrorAction SilentlyContinue
-          if (-not $boostThrowExceptionLibs) {
-            throw "Boost throw_exception library not found in $boostLibDir"
-          }
-          $boostThrowExceptionLibs | ForEach-Object {
-            Write-Host "Boost throw_exception lib: $($_.FullName)"
-          }
-
           $env:INCLUDE = "$boostInclude;$env:INCLUDE"
           Write-Host "MSVC INCLUDE begins with: $boostInclude"
           cmake --build "$env:BUILD_DIR" --target BUILD --config Release --parallel 2
