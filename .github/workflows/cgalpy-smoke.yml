@@ -895,6 +895,16 @@ jobs:
           & $venvPython -m pip install --upgrade pip
           & $venvPython -m pip install $wheel.FullName
 
+          $vcpkgRuntimeBin = Join-Path $env:VCPKG_ROOT "installed/x64-windows/bin"
+          if (-not (Test-Path $vcpkgRuntimeBin)) {
+            throw "vcpkg runtime DLL directory not found: $vcpkgRuntimeBin"
+          }
+          Write-Host "Adding vcpkg runtime DLL directory to PATH: $vcpkgRuntimeBin"
+          Get-ChildItem -Path $vcpkgRuntimeBin -Filter "*.dll" | Sort-Object Name | ForEach-Object {
+            Write-Host "vcpkg runtime DLL: $($_.Name)"
+          }
+          $env:PATH = "$vcpkgRuntimeBin;$env:PATH"
+
           $scriptPath = Join-Path $env:RUNNER_TEMP "wheel_smoke.py"
 
           @'
