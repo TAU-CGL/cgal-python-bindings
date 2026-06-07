@@ -788,9 +788,12 @@ jobs:
             -A x64 `
             -DCMAKE_TOOLCHAIN_FILE="$env:CMAKE_TOOLCHAIN_FILE" `
             -DCMAKE_BUILD_TYPE=Release `
+            -DCMAKE_C_FLAGS="/I$env:VCPKG_ROOT/installed/x64-windows/include" `
+            -DCMAKE_CXX_FLAGS="/I$env:VCPKG_ROOT/installed/x64-windows/include" `
             -DCGALPY_WITH_VISUAL:BOOL=OFF `
             -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF `
             -DBoost_INCLUDE_DIR="$env:VCPKG_ROOT/installed/x64-windows/include" `
+            -DBoost_INCLUDE_DIRS="$env:VCPKG_ROOT/installed/x64-windows/include" `
             -DPython_EXECUTABLE="$pythonExe" `
             -Dnanobind_DIR="${{ steps.nanobind.outputs.dir }}" `
             -DCGAL_DIR="$env:CGAL_BUILD_DIR" `
@@ -800,7 +803,6 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = "Stop"
-          $env:CL = "/I$env:VCPKG_ROOT\installed\x64-windows\include"
           cmake --build "$env:BUILD_DIR" --target BUILD --config Release --parallel 2
 
       - name: Import from build tree
