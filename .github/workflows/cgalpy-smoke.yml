@@ -380,6 +380,7 @@ jobs:
             bso2_cs_epec)
               pairs=(
                 bso2_circle_segment
+                bso2_set_union
               )
               ;;
             bso2_conic_epec)
