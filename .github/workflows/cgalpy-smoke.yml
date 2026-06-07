@@ -658,3 +658,228 @@ jobs:
             ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.whl
             ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.tar.gz
           if-no-files-found: error
+
+  kernel-windows-minimal:
+    name: EPEC kernel smoke on Windows (MSVC)
+    runs-on: windows-2022
+
+    env:
+      CGAL_BRANCH: gsoc2026-python_bindings
+      CGAL_REPOSITORY: https://github.com/CGAL/cgal-public-dev.git
+      BUILD_DIR: ${{ github.workspace }}/build/cgalpy/epec_windows
+      CGAL_BUILD_DIR: ${{ github.workspace }}/build/cgal/dev_release
+      MODULE_NAME: CGALPY_kerEpecInt
+      PACKAGE_NAME: CGALPY_kerEpecInt
+      WHEEL_PATTERN: cgalpy_kerepecint-*.whl
+      VCPKG_DEFAULT_TRIPLET: x64-windows
+
+    steps:
+      - name: Check out cgal-python-bindings
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Locate vcpkg
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          if (-not $env:VCPKG_INSTALLATION_ROOT) {
+            if (Test-Path "C:\vcpkg") {
+              $env:VCPKG_INSTALLATION_ROOT = "C:\vcpkg"
+            } elseif (Test-Path "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\vcpkg") {
+              $env:VCPKG_INSTALLATION_ROOT = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\vcpkg"
+            } else {
+              throw "Could not locate vcpkg installation root."
+            }
+          }
+
+          $toolchain = Join-Path $env:VCPKG_INSTALLATION_ROOT "scripts\buildsystems\vcpkg.cmake"
+          if (-not (Test-Path $toolchain)) {
+            throw "vcpkg CMake toolchain file not found: $toolchain"
+          }
+
+          "VCPKG_ROOT=$($env:VCPKG_INSTALLATION_ROOT)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "CMAKE_TOOLCHAIN_FILE=$toolchain" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+          Write-Host "VCPKG_ROOT=$($env:VCPKG_INSTALLATION_ROOT)"
+          Write-Host "CMAKE_TOOLCHAIN_FILE=$toolchain"
+
+      - name: Install system dependencies
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          & "$env:VCPKG_ROOT\vcpkg.exe" version
+          & "$env:VCPKG_ROOT\vcpkg.exe" install `
+            boost-headers:x64-windows `
+            eigen3:x64-windows `
+            gmp:x64-windows `
+            mpfr:x64-windows
+
+      - name: Install Python build dependencies
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          python -m pip install --upgrade pip
+          python -m pip install "nanobind>=2.3.0,<=2.10.2" build
+
+      - name: Check out CGAL development branch
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          git clone --depth 1 --branch "$env:CGAL_BRANCH" "$env:CGAL_REPOSITORY" "$env:GITHUB_WORKSPACE/cgal"
+
+      - name: Configure CGAL
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          cmake `
+            -S "$env:GITHUB_WORKSPACE/cgal" `
+            -B "$env:CGAL_BUILD_DIR" `
+            -G "Visual Studio 17 2022" `
+            -A x64 `
+            -DCMAKE_TOOLCHAIN_FILE="$env:CMAKE_TOOLCHAIN_FILE" `
+            -DCMAKE_BUILD_TYPE=Release `
+            -DCGAL_WITH_tests=OFF `
+            -DCGAL_WITH_examples=OFF `
+            -DCGAL_WITH_demos=OFF `
+            -DCGAL_WITH_benchmarks=OFF
+
+          Select-String -Path "$env:CGAL_BUILD_DIR/CMakeCache.txt" -Pattern "^CGAL_FULL_VERSION:INTERNAL=" -ErrorAction SilentlyContinue
+
+      - name: Build CGAL configure targets
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          cmake --build "$env:CGAL_BUILD_DIR" --config Release --parallel 2
+
+      - name: Locate nanobind CMake package
+        id: nanobind
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $nanobindDir = python -c "import pathlib, nanobind; print(pathlib.Path(nanobind.__file__).resolve().parent / 'cmake')"
+          $config = Join-Path $nanobindDir "nanobind-config.cmake"
+
+          if (-not (Test-Path $config)) {
+            throw "nanobind-config.cmake not found: $config"
+          }
+
+          "dir=$nanobindDir" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          Write-Host "nanobind_DIR=$nanobindDir"
+
+      - name: Configure cgal-python-bindings EPEC smoke
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $pythonExe = (Get-Command python).Source
+
+          cmake `
+            -S "$env:GITHUB_WORKSPACE" `
+            -B "$env:BUILD_DIR" `
+            -G "Visual Studio 17 2022" `
+            -A x64 `
+            -DCMAKE_TOOLCHAIN_FILE="$env:CMAKE_TOOLCHAIN_FILE" `
+            -DCMAKE_BUILD_TYPE=Release `
+            -DCGALPY_WITH_VISUAL:BOOL=OFF `
+            -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF `
+            -DPython_EXECUTABLE="$pythonExe" `
+            -Dnanobind_DIR="${{ steps.nanobind.outputs.dir }}" `
+            -DCGAL_DIR="$env:CGAL_BUILD_DIR" `
+            -C "$env:GITHUB_WORKSPACE/cmake/tests/epec.cmake"
+
+      - name: Build extension, stubs, and package
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          cmake --build "$env:BUILD_DIR" --target BUILD --config Release --parallel 2
+
+      - name: Import from build tree
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $env:PYTHONPATH = "$env:BUILD_DIR\src\libs"
+          $scriptPath = Join-Path $env:RUNNER_TEMP "build_tree_smoke.py"
+
+          @'
+          import importlib
+          import os
+
+          module_name = os.environ["MODULE_NAME"]
+
+          pkg = importlib.import_module("cgalpy")
+          print("cgalpy:", pkg.__file__)
+
+          mod = importlib.import_module(f"cgalpy.{module_name}")
+          print("extension:", mod.__file__)
+
+          ker = getattr(mod, "Ker", None)
+          assert ker is not None
+          assert hasattr(ker, "Point_2")
+          assert hasattr(ker, "area")
+
+          print("Windows build-tree import smoke: OK")
+          '@ | Set-Content -Path $scriptPath -Encoding UTF8
+
+          python $scriptPath
+
+      - name: Install generated wheel in clean venv
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $distDir = Join-Path $env:BUILD_DIR "src\libs\cgalpy\dist"
+          $wheel = Get-ChildItem -Path $distDir -Filter $env:WHEEL_PATTERN | Sort-Object Name | Select-Object -Last 1
+
+          if (-not $wheel) {
+            throw "No wheel matched pattern $env:WHEEL_PATTERN in $distDir"
+          }
+
+          $venv = Join-Path $env:RUNNER_TEMP "cgalpy-wheel-test"
+          python -m venv $venv
+          $venvPython = Join-Path $venv "Scripts\python.exe"
+
+          & $venvPython -m pip install --upgrade pip
+          & $venvPython -m pip install $wheel.FullName
+
+          $scriptPath = Join-Path $env:RUNNER_TEMP "wheel_smoke.py"
+
+          @'
+          import importlib
+          import os
+
+          package_name = os.environ["PACKAGE_NAME"]
+          module_name = os.environ["MODULE_NAME"]
+
+          pkg = importlib.import_module(package_name)
+          print("wheel package:", pkg.__file__)
+
+          mod = importlib.import_module(f"{package_name}.{module_name}")
+          print("wheel extension:", mod.__file__)
+
+          ker = getattr(mod, "Ker", None)
+          assert ker is not None
+          assert hasattr(ker, "Point_2")
+          assert hasattr(ker, "area")
+
+          print("Windows wheel import smoke: OK")
+          '@ | Set-Content -Path $scriptPath -Encoding UTF8
+
+          & $venvPython $scriptPath
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cgalpy-epec-windows-artifacts
+          path: |
+            ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.whl
+            ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.tar.gz
+          if-no-files-found: error
