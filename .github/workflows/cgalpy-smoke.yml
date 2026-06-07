@@ -716,6 +716,9 @@ jobs:
           & "$env:VCPKG_ROOT\vcpkg.exe" version
           & "$env:VCPKG_ROOT\vcpkg.exe" install `
             boost-headers:x64-windows `
+            boost-config:x64-windows `
+            boost-static-assert:x64-windows `
+            boost-multiprecision:x64-windows `
             eigen3:x64-windows `
             gmp:x64-windows `
             mpfr:x64-windows
