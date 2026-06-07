@@ -803,6 +803,13 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = "Stop"
+          $boostInclude = Join-Path $env:VCPKG_ROOT "installed\\x64-windows\\include"
+          $boostConfig = Join-Path $boostInclude "boost\\config.hpp"
+          if (-not (Test-Path $boostConfig)) {
+            throw "Boost header not found at $boostConfig"
+          }
+          $env:INCLUDE = "$boostInclude;$env:INCLUDE"
+          Write-Host "MSVC INCLUDE begins with: $boostInclude"
           cmake --build "$env:BUILD_DIR" --target BUILD --config Release --parallel 2
 
       - name: Import from build tree
