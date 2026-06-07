@@ -78,6 +78,16 @@ jobs:
             package_name: CGALPY_kerEpecInt_aos2Cs_bso2
             wheel_pattern: cgalpy_kerepecint_aos2cs_bso2-*.whl
             extra_submodule: Bso2
+          - config: bso2_conic_epec
+            label: BSO2 conic EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/bso2_conic_epec.cmake
+            module_name: CGALPY_kerEpec_aos2Conic_bso2
+            package_name: CGALPY_kerEpec_aos2Conic_bso2
+            wheel_pattern: cgalpy_kerepec_aos2conic_bso2-*.whl
+            extra_submodule: Bso2
           - config: ss2_seg_epec
             label: SS2 segment EPEC
             compiler_label: Clang
@@ -341,7 +351,7 @@ jobs:
           EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
       - name: Compare curated BSO2 examples with CGAL C++
-        if: matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec'
+        if: matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec'
         run: |
           set -euxo pipefail
           WORK_DIR="${{ github.workspace }}/build/cgalpy/example_compare/${{ matrix.config }}"
@@ -360,6 +370,11 @@ jobs:
             bso2_cs_epec)
               pairs=(
                 bso2_circle_segment
+              )
+              ;;
+            bso2_conic_epec)
+              pairs=(
+                bso2_conic_traits_adapter
               )
               ;;
             *)
