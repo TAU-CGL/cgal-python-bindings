@@ -414,8 +414,11 @@ jobs:
               if extra_submodule == "Aos2":
                   assert hasattr(submodule, "Arrangement_2")
               elif extra_submodule == "Bso2":
-                  assert hasattr(submodule, "Polygon_set_2")
                   assert hasattr(submodule, "join")
+                  assert (
+                      hasattr(submodule, "Polygon_set_2")
+                      or hasattr(submodule, "General_polygon_set_2")
+                  )
               elif extra_submodule == "Ss2":
                   assert hasattr(submodule, "compute_intersection_points")
                   assert hasattr(submodule, "do_intersect")
