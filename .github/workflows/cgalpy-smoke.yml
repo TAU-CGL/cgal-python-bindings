@@ -719,6 +719,12 @@ jobs:
             boost-config:x64-windows `
             boost-static-assert:x64-windows `
             boost-multiprecision:x64-windows `
+            boost-mpl:x64-windows `
+            boost-iterator:x64-windows `
+            boost-variant:x64-windows `
+            boost-bind:x64-windows `
+            boost-optional:x64-windows `
+            boost-tuple:x64-windows `
             eigen3:x64-windows `
             gmp:x64-windows `
             mpfr:x64-windows
@@ -807,9 +813,24 @@ jobs:
         run: |
           $ErrorActionPreference = "Stop"
           $boostInclude = Join-Path $env:VCPKG_ROOT "installed/x64-windows/include"
-          $boostConfig = Join-Path $boostInclude "boost/config.hpp"
-          if (-not (Test-Path $boostConfig)) {
-            throw "Boost header not found at $boostConfig"
+          $requiredBoostHeaders = @(
+            "boost/config.hpp",
+            "boost/static_assert.hpp",
+            "boost/multiprecision/cpp_int.hpp",
+            "boost/mpl/or.hpp",
+            "boost/iterator/transform_iterator.hpp",
+            "boost/iterator/iterator_facade.hpp",
+            "boost/variant/variant.hpp",
+            "boost/optional.hpp",
+            "boost/tuple/tuple.hpp",
+            "boost/bind/bind.hpp"
+          )
+
+          foreach ($header in $requiredBoostHeaders) {
+            $path = Join-Path $boostInclude $header
+            if (-not (Test-Path $path)) {
+              throw "Boost header not found at $path"
+            }
           }
           $env:INCLUDE = "$boostInclude;$env:INCLUDE"
           Write-Host "MSVC INCLUDE begins with: $boostInclude"
