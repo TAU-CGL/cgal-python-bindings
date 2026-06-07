@@ -46,6 +46,14 @@ PAIRS = {
         cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
         executable="sequence",
     ),
+    "bso2_do_intersect": ExamplePair(
+        name="bso2_do_intersect",
+        python_relpath="Boolean_set_operations_2/do_intersect.py",
+        cpp_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2/do_intersect.cpp",
+        python_workdir_relpath="Boolean_set_operations_2",
+        cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
+        executable="do_intersect",
+    ),
 }
 
 

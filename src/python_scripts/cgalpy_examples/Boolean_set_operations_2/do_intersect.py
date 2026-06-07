@@ -3,6 +3,7 @@
 import os
 import sys
 import importlib
+from print_utils import *
 
 if len(sys.argv) < 2: lib = 'CGALPY'
 else: lib = sys.argv[1]
@@ -14,14 +15,16 @@ Pol2 = CGALPY.Pol2
 Polygon = Pol2.Polygon_2
 Bso2 = CGALPY.Bso2
 
-# #include "pgn_print.h"
+# Construct two triangular polygons and check whether they intersect.
+P = Polygon([Point(-1, 1), Point(0, -1), Point(1, 1)])
+print("P = ", end='')
+print_polygon(P)
 
-# Constuct two triangular polygons and check whether they intersect.
-T1 = Polygon([Point(1, 1), Point(4, 1), Point(1, 3)])
-print("T1 = ", T1)
-T2 = Polygon([Point(2, 2), Point(5, 1), Point(4, 3)])
-print("T2 = ", T2)
-if Bso2.do_intersect(T1, T2):
+Q = Polygon([Point(-1, -1), Point(1, -1), Point(0, 1)])
+print("Q = ", end='')
+print_polygon(Q)
+
+if Bso2.do_intersect(P, Q):
   print("The two polygons intersect in their interior.")
 else:
   print("The two polygons do not intersect.")
