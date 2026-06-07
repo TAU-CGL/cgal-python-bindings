@@ -22,6 +22,7 @@ Bezier_x_monotone_curve = Traits.X_monotone_curve_2
 Bso2 = CGALPY.Bso2
 Polygon = Bso2.General_polygon_2;
 Polygon_with_holes = Bso2.General_polygon_with_holes_2;
+Result = CGALPY.Result
 
 # Read Bezier curves from a file
 def read_bezier_curves(filename):
@@ -78,7 +79,7 @@ def read_bezier_polygon(filename):
     pgn = Polygon(xcvs)
     orient = pgn.orientation()
 
-    if (not pgns and orient == Ker.Result.CLOCKWISE) or (pgns and orient == Ker.Result.COUNTERCLOCKWISE):
+    if (not pgns and orient == Result.CLOCKWISE) or (pgns and orient == Result.COUNTERCLOCKWISE):
       pgn.reverse_orientation()
 
     pgns.append(pgn)
@@ -98,7 +99,7 @@ def read_bezier_polygon(filename):
 try: filename1 = sys.argv[2]
 except: filename1 = 'char_g.dat'
 try: filename2 = sys.argv[3]
-except: filename1 = 'char_m.dat'
+except: filename2 = 'char_m.dat'
 
 # Read the general polygons from the input files.
 #   Polygon_with_holes P1, P2
@@ -114,7 +115,8 @@ if not rc: sys.exit("Failed to read {} ...".format(filename2))
 # print(P2)
 
 toc = time.perf_counter()
-print(f"Constructed the input polygons in {toc - tic:0.4f} seconds")
+print(f"Constructed the input polygons in {toc - tic:0.4f} seconds.")
+print()
 
 # Compute the intersection of the two polygons.
 tic = time.perf_counter()
@@ -122,6 +124,7 @@ R = Bso2.intersection(P1, P2)
 toc = time.perf_counter()
 
 print("The intersection polygons are of sizes: {", end='')
-for pgn in R: print(pgn.outer_boundary().size(), end=' ')
+for pgn in R:
+  print(" {}".format(pgn.outer_boundary().size()), end='')
 print(" }")
-print(f"The intersection computation took {toc - tic:0.4f} seconds")
+print(f"The intersection computation took {toc - tic:0.4f} seconds.")

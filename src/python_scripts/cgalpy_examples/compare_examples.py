@@ -4,6 +4,7 @@
 
 import argparse
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -19,6 +20,8 @@ class ExamplePair:
     python_workdir_relpath: str
     cpp_include_relpath: str
     executable: str
+    data_relpaths: tuple[str, ...] = ()
+    normalize_timing: bool = False
 
 
 PAIRS = {
@@ -78,6 +81,19 @@ PAIRS = {
         cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
         executable="conic_traits_adapter",
     ),
+    "bso2_bezier_traits_adapter": ExamplePair(
+        name="bso2_bezier_traits_adapter",
+        python_relpath="Boolean_set_operations_2/bezier_traits_adapter.py",
+        cpp_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2/bezier_traits_adapter.cpp",
+        python_workdir_relpath="Boolean_set_operations_2",
+        cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
+        executable="bezier_traits_adapter",
+        data_relpaths=(
+            "Boolean_set_operations_2/examples/Boolean_set_operations_2/char_g.dat",
+            "Boolean_set_operations_2/examples/Boolean_set_operations_2/char_m.dat",
+        ),
+        normalize_timing=True,
+    ),
 }
 
 
@@ -95,6 +111,22 @@ def run_command(cmd, *, cwd, env=None):
 def write_text(path, text):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text)
+
+
+def comparable_stdout(pair, text):
+    if not pair.normalize_timing:
+        return text
+    text = re.sub(
+        r"Constructed the input polygons in [0-9.]+ seconds\.",
+        "Constructed the input polygons in <TIME> seconds.",
+        text,
+    )
+    text = re.sub(
+        r"The intersection computation took [0-9.]+ seconds\.",
+        "The intersection computation took <TIME> seconds.",
+        text,
+    )
+    return text
 
 
 def build_cpp(pair, *, cgal_source, cgal_dir, work_dir, build_type, osx_architectures):
@@ -169,7 +201,12 @@ def run_pair(pair, args, examples_root):
         print(build_result.stderr)
         return False
 
-    cpp_run = run_command([str(cpp_exe)], cwd=cpp_exe.parent)
+    data_args = [str(args.cgal_source / relpath) for relpath in pair.data_relpaths]
+    for data_arg in data_args:
+        if not Path(data_arg).is_file():
+            raise FileNotFoundError(f"Example data file not found: {data_arg}")
+
+    cpp_run = run_command([str(cpp_exe), *data_args], cwd=cpp_exe.parent)
     write_text(pair_dir / "cpp.stdout", cpp_run.stdout)
     write_text(pair_dir / "cpp.stderr", cpp_run.stderr)
 
@@ -185,15 +222,17 @@ def run_pair(pair, args, examples_root):
         env["PYTHONPATH"] += os.pathsep + old_pythonpath
 
     py_run = run_command(
-        [str(args.python_executable), str(python_script.name), args.library],
+        [str(args.python_executable), str(python_script.name), args.library, *data_args],
         cwd=python_workdir,
         env=env,
     )
     write_text(pair_dir / "python.stdout", py_run.stdout)
     write_text(pair_dir / "python.stderr", py_run.stderr)
 
-    exact_match = cpp_run.stdout == py_run.stdout
-    normalized_match = " ".join(cpp_run.stdout.split()) == " ".join(py_run.stdout.split())
+    comparable_cpp_stdout = comparable_stdout(pair, cpp_run.stdout)
+    comparable_py_stdout = comparable_stdout(pair, py_run.stdout)
+    exact_match = comparable_cpp_stdout == comparable_py_stdout
+    normalized_match = " ".join(comparable_cpp_stdout.split()) == " ".join(comparable_py_stdout.split())
 
     print(f"PAIR: {pair.name}")
     print(f"CPP_RC: {cpp_run.returncode}")
