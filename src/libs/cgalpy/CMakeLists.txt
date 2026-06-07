@@ -782,6 +782,7 @@ endforeach()
 add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 # Add the library target
 nanobind_add_module(CGALPY STABLE_ABI NB_STATIC ${CGALPY_SRC_FILES})
+target_include_directories(CGALPY PRIVATE ${Boost_INCLUDE_DIR} ${Boost_INCLUDE_DIRS})
 set(CGALPY_BUILD_DEPENDS CGALPY)
 
 if (NOT SKBUILD)
