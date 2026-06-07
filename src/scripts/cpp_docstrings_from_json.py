@@ -273,7 +273,7 @@ def write_cpp(library: str, module: str, package: str, entries: list[tuple[str, 
     ]
 
     for ident, doc in entries:
-        lines.append(f"extern constexpr const char* {ident} = {cpp_string_literal(doc)};")
+        lines.append(f"extern const char* const {ident} = {cpp_string_literal(doc)};")
 
     lines += [
         "",

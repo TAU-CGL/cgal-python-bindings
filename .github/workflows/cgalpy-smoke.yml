@@ -800,6 +800,7 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = "Stop"
+          $env:CL = "/I$env:VCPKG_ROOT\installed\x64-windows\include"
           cmake --build "$env:BUILD_DIR" --target BUILD --config Release --parallel 2
 
       - name: Import from build tree
