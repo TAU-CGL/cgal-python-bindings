@@ -88,6 +88,16 @@ jobs:
             package_name: CGALPY_kerEpec_aos2Conic_bso2
             wheel_pattern: cgalpy_kerepec_aos2conic_bso2-*.whl
             extra_submodule: Bso2
+          - config: bso2_bezier_ccr
+            label: BSO2 Bezier CCR
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/bso2_bezier_ccr.cmake
+            module_name: CGALPY_kerCcrInt_aos2Bez_bso2
+            package_name: CGALPY_kerCcrInt_aos2Bez_bso2
+            wheel_pattern: cgalpy_kerccrint_aos2bez_bso2-*.whl
+            extra_submodule: Bso2
           - config: ss2_seg_epec
             label: SS2 segment EPEC
             compiler_label: Clang
@@ -351,7 +361,7 @@ jobs:
           EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
       - name: Compare curated BSO2 examples with CGAL C++
-        if: matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec'
+        if: matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr'
         run: |
           set -euxo pipefail
           WORK_DIR="${{ github.workspace }}/build/cgalpy/example_compare/${{ matrix.config }}"
@@ -375,6 +385,11 @@ jobs:
             bso2_conic_epec)
               pairs=(
                 bso2_conic_traits_adapter
+              )
+              ;;
+            bso2_bezier_ccr)
+              pairs=(
+                bso2_bezier_traits_adapter
               )
               ;;
             *)
