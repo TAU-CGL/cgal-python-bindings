@@ -494,3 +494,167 @@ jobs:
             ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.whl
             ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.tar.gz
           if-no-files-found: error
+
+  kernel-macos-minimal:
+    name: EPEC kernel smoke on macOS (AppleClang)
+    runs-on: macos-15
+
+    env:
+      CGAL_BRANCH: gsoc2026-python_bindings
+      CGAL_REPOSITORY: https://github.com/CGAL/cgal-public-dev.git
+      BUILD_DIR: ${{ github.workspace }}/build/cgalpy/epec_macos
+      CGAL_BUILD_DIR: ${{ github.workspace }}/build/cgal/dev_release
+      MODULE_NAME: CGALPY_kerEpecInt
+      PACKAGE_NAME: CGALPY_kerEpecInt
+      WHEEL_PATTERN: cgalpy_kerepecint-*.whl
+
+    steps:
+      - name: Check out cgal-python-bindings
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          set -euxo pipefail
+          brew update
+          brew install cmake ninja boost eigen gmp mpfr metis
+          echo "CMAKE_PREFIX_PATH=$(brew --prefix)" >> "${GITHUB_ENV}"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python build dependencies
+        run: |
+          set -euxo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install "nanobind>=2.3.0,<=2.10.2" build
+
+      - name: Select compiler
+        run: |
+          set -euxo pipefail
+          echo "CC=clang" >> "${GITHUB_ENV}"
+          echo "CXX=clang++" >> "${GITHUB_ENV}"
+          clang++ --version
+
+      - name: Check out CGAL development branch
+        run: |
+          set -euxo pipefail
+          git clone --depth 1 --branch "${CGAL_BRANCH}" "${CGAL_REPOSITORY}" "${{ github.workspace }}/cgal"
+
+      - name: Configure CGAL
+        run: |
+          set -euxo pipefail
+          cmake \
+            -S "${{ github.workspace }}/cgal" \
+            -B "${CGAL_BUILD_DIR}" \
+            -G Ninja \
+            -DCMAKE_C_COMPILER=clang \
+            -DCMAKE_CXX_COMPILER=clang++ \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCGAL_WITH_tests=OFF \
+            -DCGAL_WITH_examples=OFF \
+            -DCGAL_WITH_demos=OFF \
+            -DCGAL_WITH_benchmarks=OFF
+          grep -E '^CGAL_FULL_VERSION:INTERNAL=' "${CGAL_BUILD_DIR}/CMakeCache.txt" || true
+
+      - name: Build CGAL configure targets
+        run: |
+          set -euxo pipefail
+          cmake --build "${CGAL_BUILD_DIR}" --parallel 2
+
+      - name: Locate nanobind CMake package
+        id: nanobind
+        run: |
+          set -euxo pipefail
+          NANOBIND_DIR="$(python - <<'PY'
+          import pathlib
+          import nanobind
+          print(pathlib.Path(nanobind.__file__).resolve().parent / "cmake")
+          PY
+          )"
+          test -f "${NANOBIND_DIR}/nanobind-config.cmake"
+          echo "dir=${NANOBIND_DIR}" >> "${GITHUB_OUTPUT}"
+
+      - name: Configure cgal-python-bindings EPEC smoke
+        run: |
+          set -euxo pipefail
+          cmake \
+            -S "${{ github.workspace }}" \
+            -B "${BUILD_DIR}" \
+            -G Ninja \
+            -DCMAKE_C_COMPILER=clang \
+            -DCMAKE_CXX_COMPILER=clang++ \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCGALPY_WITH_VISUAL:BOOL=OFF \
+            -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF \
+            -DPython_EXECUTABLE="$(command -v python)" \
+            -Dnanobind_DIR="${{ steps.nanobind.outputs.dir }}" \
+            -DCGAL_DIR="${CGAL_BUILD_DIR}" \
+            -C "${{ github.workspace }}/cmake/tests/epec.cmake"
+
+      - name: Build extension, stubs, and package
+        run: |
+          set -euxo pipefail
+          cmake --build "${BUILD_DIR}" --target BUILD --parallel 2
+
+      - name: Import from build tree
+        run: |
+          set -euxo pipefail
+          PYTHONPATH="${BUILD_DIR}/src/libs" python - <<'PY'
+          import importlib
+          import os
+
+          module_name = os.environ["MODULE_NAME"]
+
+          pkg = importlib.import_module("cgalpy")
+          print("cgalpy:", pkg.__file__)
+
+          mod = importlib.import_module(f"cgalpy.{module_name}")
+          print("extension:", mod.__file__)
+
+          ker = getattr(mod, "Ker", None)
+          assert ker is not None
+          assert hasattr(ker, "Point_2")
+          assert hasattr(ker, "area")
+
+          print("macOS build-tree import smoke: OK")
+          PY
+
+      - name: Install generated wheel in clean venv
+        run: |
+          set -euxo pipefail
+          WHEEL="$(find "${BUILD_DIR}/src/libs/cgalpy/dist" -maxdepth 1 -type f -name "${WHEEL_PATTERN}" | sort | tail -1)"
+          test -n "${WHEEL}"
+          python -m venv "${RUNNER_TEMP}/cgalpy-wheel-test"
+          "${RUNNER_TEMP}/cgalpy-wheel-test/bin/python" -m pip install --upgrade pip
+          "${RUNNER_TEMP}/cgalpy-wheel-test/bin/python" -m pip install "${WHEEL}"
+          "${RUNNER_TEMP}/cgalpy-wheel-test/bin/python" - <<'PY'
+          import importlib
+          import os
+
+          package_name = os.environ["PACKAGE_NAME"]
+          module_name = os.environ["MODULE_NAME"]
+
+          pkg = importlib.import_module(package_name)
+          print("wheel package:", pkg.__file__)
+
+          mod = importlib.import_module(f"{package_name}.{module_name}")
+          print("wheel extension:", mod.__file__)
+
+          ker = getattr(mod, "Ker", None)
+          assert ker is not None
+          assert hasattr(ker, "Point_2")
+          assert hasattr(ker, "area")
+
+          print("macOS wheel import smoke: OK")
+          PY
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cgalpy-epec-macos-artifacts
+          path: |
+            ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.whl
+            ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.tar.gz
+          if-no-files-found: error
