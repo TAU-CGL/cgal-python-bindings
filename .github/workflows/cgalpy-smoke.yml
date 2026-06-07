@@ -919,6 +919,13 @@ jobs:
           import importlib
           import os
 
+          if os.name == "nt":
+              dll_dirs = os.environ.get("CGALPY_WINDOWS_DLL_DIRS", "")
+              for dll_dir in dll_dirs.split(os.pathsep):
+                  if dll_dir and os.path.isdir(dll_dir):
+                      os.add_dll_directory(dll_dir)
+                      print("added DLL directory:", dll_dir)
+
           package_name = os.environ["PACKAGE_NAME"]
           module_name = os.environ["MODULE_NAME"]
 
@@ -935,6 +942,9 @@ jobs:
 
           print("Windows wheel import smoke: OK")
           '@ | Set-Content -Path $scriptPath -Encoding UTF8
+
+          Write-Host "Windows wheel_smoke.py contents:"
+          Get-Content -Path $scriptPath | ForEach-Object { Write-Host $_ }
 
           & $venvPython $scriptPath
 
