@@ -803,8 +803,8 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = "Stop"
-          $boostInclude = Join-Path $env:VCPKG_ROOT "installed\\x64-windows\\include"
-          $boostConfig = Join-Path $boostInclude "boost\\config.hpp"
+          $boostInclude = Join-Path $env:VCPKG_ROOT "installed/x64-windows/include"
+          $boostConfig = Join-Path $boostInclude "boost/config.hpp"
           if (-not (Test-Path $boostConfig)) {
             throw "Boost header not found at $boostConfig"
           }
