@@ -54,6 +54,14 @@ PAIRS = {
         cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
         executable="do_intersect",
     ),
+    "bso2_oriented_side": ExamplePair(
+        name="bso2_oriented_side",
+        python_relpath="Boolean_set_operations_2/oriented_side.py",
+        cpp_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2/oriented_side.cpp",
+        python_workdir_relpath="Boolean_set_operations_2",
+        cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
+        executable="oriented_side",
+    ),
 }
 
 
