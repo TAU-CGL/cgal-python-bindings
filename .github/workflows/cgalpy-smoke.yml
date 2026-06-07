@@ -424,6 +424,13 @@ jobs:
           import importlib
           import os
 
+          if os.name == "nt":
+              dll_dirs = os.environ.get("CGALPY_WINDOWS_DLL_DIRS", "")
+              for dll_dir in dll_dirs.split(os.pathsep):
+                  if dll_dir and os.path.isdir(dll_dir):
+                      os.add_dll_directory(dll_dir)
+                      print("added DLL directory:", dll_dir)
+
           package_name = os.environ["PACKAGE_NAME"]
           module_name = os.environ["MODULE_NAME"]
 
@@ -904,6 +911,7 @@ jobs:
             Write-Host "vcpkg runtime DLL: $($_.Name)"
           }
           $env:PATH = "$vcpkgRuntimeBin;$env:PATH"
+          $env:CGALPY_WINDOWS_DLL_DIRS = $vcpkgRuntimeBin
 
           $scriptPath = Join-Path $env:RUNNER_TEMP "wheel_smoke.py"
 
