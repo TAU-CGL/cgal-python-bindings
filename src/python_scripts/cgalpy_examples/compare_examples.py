@@ -81,6 +81,17 @@ PAIRS = {
         cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
         executable="set_union",
     ),
+    "bso2_connect_polygon": ExamplePair(
+        name="bso2_connect_polygon",
+        python_relpath="Boolean_set_operations_2/connect_polygon.py",
+        cpp_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2/connect_polygon.cpp",
+        python_workdir_relpath="Boolean_set_operations_2",
+        cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
+        executable="connect_polygon",
+        data_relpaths=(
+            "Boolean_set_operations_2/examples/Boolean_set_operations_2/pgn_holes.dat",
+        ),
+    ),
     "bso2_conic_traits_adapter": ExamplePair(
         name="bso2_conic_traits_adapter",
         python_relpath="Boolean_set_operations_2/conic_traits_adapter.py",
