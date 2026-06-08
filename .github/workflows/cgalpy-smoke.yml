@@ -719,16 +719,7 @@ jobs:
             boost-config:x64-windows `
             boost-static-assert:x64-windows `
             boost-multiprecision:x64-windows `
-            boost-mpl:x64-windows `
             boost-iterator:x64-windows `
-            boost-variant:x64-windows `
-            boost-bind:x64-windows `
-            boost-optional:x64-windows `
-            boost-tuple:x64-windows `
-            boost-any:x64-windows `
-            boost-graph:x64-windows `
-            boost-range:x64-windows `
-            boost-property-map:x64-windows `
             boost-throw-exception:x64-windows `
             eigen3:x64-windows `
             gmp:x64-windows `
@@ -822,17 +813,8 @@ jobs:
             "boost/config.hpp",
             "boost/static_assert.hpp",
             "boost/multiprecision/cpp_int.hpp",
-            "boost/mpl/or.hpp",
             "boost/iterator/transform_iterator.hpp",
             "boost/iterator/iterator_facade.hpp",
-            "boost/variant/variant.hpp",
-            "boost/optional.hpp",
-            "boost/tuple/tuple.hpp",
-            "boost/bind/bind.hpp",
-            "boost/any.hpp",
-            "boost/graph/graph_traits.hpp",
-            "boost/property_map/property_map.hpp",
-            "boost/range/value_type.hpp",
             "boost/throw_exception.hpp"
           )
 
