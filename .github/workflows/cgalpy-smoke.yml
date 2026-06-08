@@ -424,13 +424,6 @@ jobs:
           import importlib
           import os
 
-          if os.name == "nt":
-              dll_dirs = os.environ.get("CGALPY_WINDOWS_DLL_DIRS", "")
-              for dll_dir in dll_dirs.split(os.pathsep):
-                  if dll_dir and os.path.isdir(dll_dir):
-                      os.add_dll_directory(dll_dir)
-                      print("added DLL directory:", dll_dir)
-
           package_name = os.environ["PACKAGE_NAME"]
           module_name = os.environ["MODULE_NAME"]
 
@@ -853,6 +846,32 @@ jobs:
           Write-Host "MSVC INCLUDE begins with: $boostInclude"
           cmake --build "$env:BUILD_DIR" --target BUILD --config Release --parallel 2
 
+          $pyd = Get-ChildItem -Path "$env:BUILD_DIR\src\libs\cgalpy" -Filter "$env:MODULE_NAME*.pyd" | Sort-Object Name | Select-Object -Last 1
+          if (-not $pyd) {
+            throw "No Windows extension matched $env:MODULE_NAME*.pyd"
+          }
+
+          $dumpbinCommand = Get-Command dumpbin.exe -ErrorAction SilentlyContinue
+          $dumpbinPath = if ($dumpbinCommand) { $dumpbinCommand.Source } else { "" }
+          if (-not $dumpbinPath) {
+            $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
+            if (Test-Path $vswhere) {
+              $vsPath = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+              if ($vsPath) {
+                $dumpbinPath = Get-ChildItem -Path (Join-Path $vsPath "VC\Tools\MSVC") -Recurse -Filter dumpbin.exe |
+                  Where-Object { $_.FullName -match "\\bin\\Hostx64\\x64\\dumpbin.exe$" } |
+                  Select-Object -First 1 -ExpandProperty FullName
+              }
+            }
+          }
+
+          if ($dumpbinPath) {
+            Write-Host "dumpbin /DEPENDENTS for $($pyd.FullName)"
+            & $dumpbinPath /DEPENDENTS $pyd.FullName
+          } else {
+            Write-Host "dumpbin.exe not found; skipping Windows dependency diagnostic."
+          }
+
       - name: Import from build tree
         shell: pwsh
         run: |
@@ -902,29 +921,11 @@ jobs:
           & $venvPython -m pip install --upgrade pip
           & $venvPython -m pip install $wheel.FullName
 
-          $vcpkgRuntimeBin = Join-Path $env:VCPKG_ROOT "installed/x64-windows/bin"
-          if (-not (Test-Path $vcpkgRuntimeBin)) {
-            throw "vcpkg runtime DLL directory not found: $vcpkgRuntimeBin"
-          }
-          Write-Host "Adding vcpkg runtime DLL directory to PATH: $vcpkgRuntimeBin"
-          Get-ChildItem -Path $vcpkgRuntimeBin -Filter "*.dll" | Sort-Object Name | ForEach-Object {
-            Write-Host "vcpkg runtime DLL: $($_.Name)"
-          }
-          $env:PATH = "$vcpkgRuntimeBin;$env:PATH"
-          $env:CGALPY_WINDOWS_DLL_DIRS = $vcpkgRuntimeBin
-
           $scriptPath = Join-Path $env:RUNNER_TEMP "wheel_smoke.py"
 
           @'
           import importlib
           import os
-
-          if os.name == "nt":
-              dll_dirs = os.environ.get("CGALPY_WINDOWS_DLL_DIRS", "")
-              for dll_dir in dll_dirs.split(os.pathsep):
-                  if dll_dir and os.path.isdir(dll_dir):
-                      os.add_dll_directory(dll_dir)
-                      print("added DLL directory:", dll_dir)
 
           package_name = os.environ["PACKAGE_NAME"]
           module_name = os.environ["MODULE_NAME"]
@@ -942,9 +943,6 @@ jobs:
 
           print("Windows wheel import smoke: OK")
           '@ | Set-Content -Path $scriptPath -Encoding UTF8
-
-          Write-Host "Windows wheel_smoke.py contents:"
-          Get-Content -Path $scriptPath | ForEach-Object { Write-Host $_ }
 
           & $venvPython $scriptPath
 
