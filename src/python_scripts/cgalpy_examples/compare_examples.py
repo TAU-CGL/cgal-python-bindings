@@ -25,6 +25,14 @@ class ExamplePair:
 
 
 PAIRS = {
+    "pol2_polygon": ExamplePair(
+        name="pol2_polygon",
+        python_relpath="Polygon/Polygon.py",
+        cpp_relpath="Polygon/examples/Polygon/Polygon.cpp",
+        python_workdir_relpath="Polygon",
+        cpp_include_relpath="Polygon/examples/Polygon",
+        executable="Polygon",
+    ),
     "bso2_simple_join_intersect": ExamplePair(
         name="bso2_simple_join_intersect",
         python_relpath="Boolean_set_operations_2/simple_join_intersect.py",
