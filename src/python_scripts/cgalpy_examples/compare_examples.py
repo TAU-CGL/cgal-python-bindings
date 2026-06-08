@@ -113,6 +113,19 @@ PAIRS = {
         ),
         normalize_timing=True,
     ),
+    "bso2_bezier_traits_adapter2": ExamplePair(
+        name="bso2_bezier_traits_adapter2",
+        python_relpath="Boolean_set_operations_2/bezier_traits_adapter2.py",
+        cpp_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2/bezier_traits_adapter2.cpp",
+        python_workdir_relpath="Boolean_set_operations_2",
+        cpp_include_relpath="Boolean_set_operations_2/examples/Boolean_set_operations_2",
+        executable="bezier_traits_adapter2",
+        data_relpaths=(
+            "Boolean_set_operations_2/examples/Boolean_set_operations_2/char_g.bps",
+            "Boolean_set_operations_2/examples/Boolean_set_operations_2/char_m.bps",
+        ),
+        normalize_timing=True,
+    ),
 }
 
 
