@@ -392,6 +392,7 @@ jobs:
             bso2_bezier_ccr)
               pairs=(
                 bso2_bezier_traits_adapter
+                bso2_bezier_traits_adapter2
               )
               ;;
             *)
