@@ -375,6 +375,7 @@ jobs:
                 bso2_sequence
                 bso2_do_intersect
                 bso2_oriented_side
+                bso2_connect_polygon
               )
               ;;
             bso2_cs_epec)
