@@ -411,7 +411,7 @@ jobs:
           EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
       - name: Compare curated examples with CGAL C++
-        if: matrix.config == 'epec' || matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec' || matrix.config == 'ms2_seg_epec' || matrix.config == 'ss2_seg_epec' || matrix.config == 'env2_seg_cd_epec' || matrix.config == 'env2_linear_cd_epec' || matrix.config == 'env3_sphere_ccr' || matrix.config == 'env3_tri_sd_epec' || matrix.config == 'vis2_rg_epec' || matrix.config == 'sm_pmp_epic'
+        if: matrix.config == 'epec' || matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec' || matrix.config == 'ms2_seg_epec' || matrix.config == 'ss2_seg_epec' || matrix.config == 'env2_seg_cd_epec' || matrix.config == 'env2_linear_cd_epec' || matrix.config == 'env3_sphere_ccr' || matrix.config == 'env3_tri_sd_epec' || matrix.config == 'vis2_rg_epec' || matrix.config == 'sm_pmp_epic' || matrix.config == 'pol3_pmp_epic' || matrix.config == 'tri2_ct_wi_epic'
         run: |
           set -euxo pipefail
           WORK_DIR="${{ github.workspace }}/build/cgalpy/example_compare/${{ matrix.config }}"
@@ -431,10 +431,22 @@ jobs:
                 vis2_general_polygon_example
               )
               ;;
+            pol3_pmp_epic)
+              pairs=(
+                pol3_polyhedron_prog_tetra
+                pol3_polyhedron_prog_vector
+              )
+              ;;
             sm_pmp_epic)
               pairs=(
                 sm_iterators
                 sm_circulators
+                pmp_sample_example
+              )
+              ;;
+            tri2_ct_wi_epic)
+              pairs=(
+                tri2_for_loop_2
               )
               ;;
             bso2_seg_epec)
