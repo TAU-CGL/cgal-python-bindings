@@ -25,4 +25,6 @@ points = [
 ]
 
 result = Ch2.convex_hull_2(points)
-print(f"{len(result)} points on the convex hull")
+print(f"{len(result)} points on the convex hull:")
+for point in result:
+    print(point)

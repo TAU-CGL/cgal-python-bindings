@@ -287,6 +287,33 @@ PAIRS = {
             "Data/data/meshes/cube_poly.off",
         ),
     ),
+    "ch2_vector_convex_hull_2": ExamplePair(
+        name="ch2_vector_convex_hull_2",
+        python_relpath="Convex_hull_2/vector_convex_hull_2.py",
+        cpp_relpath="Convex_hull_2/examples/Convex_hull_2/vector_convex_hull_2.cpp",
+        python_workdir_relpath="Convex_hull_2",
+        cpp_include_relpath="Convex_hull_2/examples/Convex_hull_2",
+        executable="vector_convex_hull_2",
+    ),
+    "ch2_array_convex_hull_2": ExamplePair(
+        name="ch2_array_convex_hull_2",
+        python_relpath="Convex_hull_2/array_convex_hull_2.py",
+        cpp_relpath="Convex_hull_2/examples/Convex_hull_2/array_convex_hull_2.cpp",
+        python_workdir_relpath="Convex_hull_2",
+        cpp_include_relpath="Convex_hull_2/examples/Convex_hull_2",
+        executable="array_convex_hull_2",
+    ),
+    "ch3_graph_hull_3": ExamplePair(
+        name="ch3_graph_hull_3",
+        python_relpath="Convex_hull_3/graph_hull_3.py",
+        cpp_relpath="Convex_hull_3/examples/Convex_hull_3/graph_hull_3.cpp",
+        python_workdir_relpath="Convex_hull_3",
+        cpp_include_relpath="Convex_hull_3/examples/Convex_hull_3",
+        executable="graph_hull_3",
+        data_relpaths=(
+            "Data/data/meshes/star.off",
+        ),
+    ),
     "bso2_simple_join_intersect": ExamplePair(
         name="bso2_simple_join_intersect",
         python_relpath="Boolean_set_operations_2/simple_join_intersect.py",

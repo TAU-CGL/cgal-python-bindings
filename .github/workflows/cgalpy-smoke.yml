@@ -168,6 +168,26 @@ jobs:
             package_name: CGALPY_kerEpec_aos2SegPl_vis2Rg
             wheel_pattern: cgalpy_kerepec_aos2segpl_vis2rg-*.whl
             extra_submodule: Vis2
+          - config: ch2_epec
+            label: CH2 EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/ch2_epec.cmake
+            module_name: CGALPY_kerEpecInt_ch2
+            package_name: CGALPY_kerEpecInt_ch2
+            wheel_pattern: cgalpy_kerepecint_ch2-*.whl
+            extra_submodule: Ch2
+          - config: sm_ch3_pmp_epec
+            label: SM CH3 PMP EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/sm_ch3_pmp_epec.cmake
+            module_name: CGALPY_kerEpecInt_bgl_ch3Sm_sm_pmpSmNcOriIo
+            package_name: CGALPY_kerEpecInt_bgl_ch3Sm_sm_pmpSmNcOriIo
+            wheel_pattern: cgalpy_kerepecint_bgl_ch3sm_sm_pmpsmncoriio-*.whl
+            extra_submodule: Ch3
           - config: tri2_ct_wi_epic
             label: TRI2 constrained-Delaunay EPIC
             compiler_label: Clang
@@ -421,7 +441,7 @@ jobs:
           EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
       - name: Compare curated examples with CGAL C++
-        if: matrix.config == 'epec' || matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec' || matrix.config == 'ms2_seg_epec' || matrix.config == 'ss2_seg_epec' || matrix.config == 'env2_seg_cd_epec' || matrix.config == 'env2_linear_cd_epec' || matrix.config == 'env3_sphere_ccr' || matrix.config == 'env3_tri_sd_epec' || matrix.config == 'vis2_rg_epec' || matrix.config == 'sm_pmp_epic' || matrix.config == 'pol3_pmp_epic' || matrix.config == 'tri2_ct_wi_epic' || matrix.config == 'tri3_del_epic' || matrix.config == 'as3_del_fast_epic'
+        if: matrix.config == 'epec' || matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec' || matrix.config == 'ms2_seg_epec' || matrix.config == 'ss2_seg_epec' || matrix.config == 'env2_seg_cd_epec' || matrix.config == 'env2_linear_cd_epec' || matrix.config == 'env3_sphere_ccr' || matrix.config == 'env3_tri_sd_epec' || matrix.config == 'vis2_rg_epec' || matrix.config == 'sm_pmp_epic' || matrix.config == 'pol3_pmp_epic' || matrix.config == 'tri2_ct_wi_epic' || matrix.config == 'tri3_del_epic' || matrix.config == 'as3_del_fast_epic' || matrix.config == 'ch2_epec' || matrix.config == 'sm_ch3_pmp_epec'
         run: |
           set -euxo pipefail
           WORK_DIR="${{ github.workspace }}/build/cgalpy/example_compare/${{ matrix.config }}"
@@ -439,6 +459,17 @@ jobs:
             vis2_rg_epec)
               pairs=(
                 vis2_general_polygon_example
+              )
+              ;;
+            ch2_epec)
+              pairs=(
+                ch2_vector_convex_hull_2
+                ch2_array_convex_hull_2
+              )
+              ;;
+            sm_ch3_pmp_epec)
+              pairs=(
+                ch3_graph_hull_3
               )
               ;;
             pol3_pmp_epic)
