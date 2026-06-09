@@ -360,8 +360,8 @@ jobs:
           MODULE_NAME: ${{ matrix.module_name }}
           EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
-      - name: Compare curated BSO2 examples with CGAL C++
-        if: matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr'
+      - name: Compare curated examples with CGAL C++
+        if: matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec'
         run: |
           set -euxo pipefail
           WORK_DIR="${{ github.workspace }}/build/cgalpy/example_compare/${{ matrix.config }}"
@@ -393,6 +393,11 @@ jobs:
               pairs=(
                 bso2_bezier_traits_adapter
                 bso2_bezier_traits_adapter2
+              )
+              ;;
+            pol2_bso2_seg_epec)
+              pairs=(
+                pol2_polygon
               )
               ;;
             *)
