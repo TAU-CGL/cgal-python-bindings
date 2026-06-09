@@ -260,6 +260,22 @@ PAIRS = {
         cpp_include_relpath="Triangulation_2/examples/Triangulation_2",
         executable="for_loop_2",
     ),
+    "tri3_for_loop": ExamplePair(
+        name="tri3_for_loop",
+        python_relpath="Triangulation_3/for_loop.py",
+        cpp_relpath="Triangulation_3/examples/Triangulation_3/for_loop.cpp",
+        python_workdir_relpath="Triangulation_3",
+        cpp_include_relpath="Triangulation_3/examples/Triangulation_3",
+        executable="for_loop",
+    ),
+    "as3_alpha_shapes_exact_alpha": ExamplePair(
+        name="as3_alpha_shapes_exact_alpha",
+        python_relpath="Alpha_shape_3/as3_alpha_shapes_exact_alpha.py",
+        cpp_relpath="Alpha_shapes_3/examples/Alpha_shapes_3/ex_alpha_shapes_exact_alpha.cpp",
+        python_workdir_relpath="Alpha_shape_3",
+        cpp_include_relpath="Alpha_shapes_3/examples/Alpha_shapes_3",
+        executable="ex_alpha_shapes_exact_alpha",
+    ),
     "bso2_simple_join_intersect": ExamplePair(
         name="bso2_simple_join_intersect",
         python_relpath="Boolean_set_operations_2/simple_join_intersect.py",

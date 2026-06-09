@@ -188,6 +188,16 @@ jobs:
             package_name: CGALPY_kerEpic_tri3DelComSeq
             wheel_pattern: cgalpy_kerepic_tri3delcomseq-*.whl
             extra_submodule: Tri3
+          - config: as3_del_fast_epic
+            label: AS3 fast-location Delaunay EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/as3_del_fast_epic.cmake
+            module_name: CGALPY_kerEpic_as3Plain_tri3DelFasSeq
+            package_name: CGALPY_kerEpic_as3Plain_tri3DelFasSeq
+            wheel_pattern: cgalpy_kerepic_as3plain_tri3delfasseq-*.whl
+            extra_submodule: As3
           - config: trid_del_epicd_4
             label: TRID Delaunay EPICD static-4
             compiler_label: Clang
@@ -411,7 +421,7 @@ jobs:
           EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
       - name: Compare curated examples with CGAL C++
-        if: matrix.config == 'epec' || matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec' || matrix.config == 'ms2_seg_epec' || matrix.config == 'ss2_seg_epec' || matrix.config == 'env2_seg_cd_epec' || matrix.config == 'env2_linear_cd_epec' || matrix.config == 'env3_sphere_ccr' || matrix.config == 'env3_tri_sd_epec' || matrix.config == 'vis2_rg_epec' || matrix.config == 'sm_pmp_epic' || matrix.config == 'pol3_pmp_epic' || matrix.config == 'tri2_ct_wi_epic'
+        if: matrix.config == 'epec' || matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec' || matrix.config == 'ms2_seg_epec' || matrix.config == 'ss2_seg_epec' || matrix.config == 'env2_seg_cd_epec' || matrix.config == 'env2_linear_cd_epec' || matrix.config == 'env3_sphere_ccr' || matrix.config == 'env3_tri_sd_epec' || matrix.config == 'vis2_rg_epec' || matrix.config == 'sm_pmp_epic' || matrix.config == 'pol3_pmp_epic' || matrix.config == 'tri2_ct_wi_epic' || matrix.config == 'tri3_del_epic' || matrix.config == 'as3_del_fast_epic'
         run: |
           set -euxo pipefail
           WORK_DIR="${{ github.workspace }}/build/cgalpy/example_compare/${{ matrix.config }}"
@@ -447,6 +457,16 @@ jobs:
             tri2_ct_wi_epic)
               pairs=(
                 tri2_for_loop_2
+              )
+              ;;
+            tri3_del_epic)
+              pairs=(
+                tri3_for_loop
+              )
+              ;;
+            as3_del_fast_epic)
+              pairs=(
+                as3_alpha_shapes_exact_alpha
               )
               ;;
             bso2_seg_epec)
