@@ -398,10 +398,13 @@ jobs:
             pol2_bso2_seg_epec)
               pairs=(
                 pol2_polygon
+                pol2_polygon_algorithms
+                pol2_ranges
+                pol2_example
               )
               ;;
             *)
-              echo "No curated BSO2 comparisons for ${{ matrix.config }}"
+              echo "No curated comparisons for ${{ matrix.config }}"
               exit 0
               ;;
           esac
