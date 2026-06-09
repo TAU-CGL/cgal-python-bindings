@@ -158,6 +158,16 @@ jobs:
             package_name: CGALPY_kerEpecInt_aos2SegPl_env3TriSd
             wheel_pattern: cgalpy_kerepecint_aos2segpl_env3trisd-*.whl
             extra_submodule: Env3
+          - config: vis2_rg_epec
+            label: VIS2 regularized EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/vis2_rg_epec.cmake
+            module_name: CGALPY_kerEpec_aos2SegPl_vis2Rg
+            package_name: CGALPY_kerEpec_aos2SegPl_vis2Rg
+            wheel_pattern: cgalpy_kerepec_aos2segpl_vis2rg-*.whl
+            extra_submodule: Vis2
           - config: tri2_ct_wi_epic
             label: TRI2 constrained-Delaunay EPIC
             compiler_label: Clang
@@ -401,13 +411,32 @@ jobs:
           EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
       - name: Compare curated examples with CGAL C++
-        if: matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec' || matrix.config == 'ms2_seg_epec' || matrix.config == 'ss2_seg_epec' || matrix.config == 'env2_seg_cd_epec' || matrix.config == 'env2_linear_cd_epec' || matrix.config == 'env3_sphere_ccr' || matrix.config == 'env3_tri_sd_epec'
+        if: matrix.config == 'epec' || matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec' || matrix.config == 'ms2_seg_epec' || matrix.config == 'ss2_seg_epec' || matrix.config == 'env2_seg_cd_epec' || matrix.config == 'env2_linear_cd_epec' || matrix.config == 'env3_sphere_ccr' || matrix.config == 'env3_tri_sd_epec' || matrix.config == 'vis2_rg_epec' || matrix.config == 'sm_pmp_epic'
         run: |
           set -euxo pipefail
           WORK_DIR="${{ github.workspace }}/build/cgalpy/example_compare/${{ matrix.config }}"
           rm -rf "${WORK_DIR}"
 
           case "${{ matrix.config }}" in
+            epec)
+              pairs=(
+                ker_exact
+                ker_points_and_segment
+                ker_intersection_get
+                ker_intersection_visitor
+              )
+              ;;
+            vis2_rg_epec)
+              pairs=(
+                vis2_general_polygon_example
+              )
+              ;;
+            sm_pmp_epic)
+              pairs=(
+                sm_iterators
+                sm_circulators
+              )
+              ;;
             bso2_seg_epec)
               pairs=(
                 bso2_simple_join_intersect
