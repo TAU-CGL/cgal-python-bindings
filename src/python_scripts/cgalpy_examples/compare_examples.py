@@ -130,6 +130,45 @@ PAIRS = {
         cpp_include_relpath="Surface_sweep_2/examples/Surface_sweep_2",
         executable="plane_sweep",
     ),
+    "env2_envelope_segments": ExamplePair(
+        name="env2_envelope_segments",
+        python_relpath="Envelope_2/envelope_segments.py",
+        cpp_relpath="Envelope_2/examples/Envelope_2/envelope_segments.cpp",
+        python_workdir_relpath="Envelope_2",
+        cpp_include_relpath="Envelope_2/examples/Envelope_2",
+        executable="envelope_segments",
+    ),
+    "env2_convex_hull_2": ExamplePair(
+        name="env2_convex_hull_2",
+        python_relpath="Envelope_2/convex_hull_2.py",
+        cpp_relpath="Envelope_2/examples/Envelope_2/convex_hull_2.cpp",
+        python_workdir_relpath="Envelope_2",
+        cpp_include_relpath="Envelope_2/examples/Envelope_2",
+        executable="convex_hull_2",
+        data_relpaths=(
+            "Envelope_2/examples/Envelope_2/ch_points.dat",
+        ),
+    ),
+    "env3_envelope_spheres": ExamplePair(
+        name="env3_envelope_spheres",
+        python_relpath="Envelope_3/envelope_spheres.py",
+        cpp_relpath="Envelope_3/examples/Envelope_3/envelope_spheres.cpp",
+        python_workdir_relpath="Envelope_3",
+        cpp_include_relpath="Envelope_3/examples/Envelope_3",
+        executable="envelope_spheres",
+        data_relpaths=(
+            "Envelope_3/examples/Envelope_3/spheres.dat",
+        ),
+        normalize_timing=True,
+    ),
+    "env3_envelope_triangles": ExamplePair(
+        name="env3_envelope_triangles",
+        python_relpath="Envelope_3/envelope_triangles.py",
+        cpp_relpath="Envelope_3/examples/Envelope_3/envelope_triangles.cpp",
+        python_workdir_relpath="Envelope_3",
+        cpp_include_relpath="Envelope_3/examples/Envelope_3",
+        executable="envelope_triangles",
+    ),
     "bso2_simple_join_intersect": ExamplePair(
         name="bso2_simple_join_intersect",
         python_relpath="Boolean_set_operations_2/simple_join_intersect.py",
@@ -271,6 +310,11 @@ def comparable_stdout(pair, text):
     text = re.sub(
         r"Inset computation took [0-9.]+ seconds\.",
         "Inset computation took <TIME> seconds.",
+        text,
+    )
+    text = re.sub(
+        r"Construction took [0-9.]+ seconds\.",
+        "Construction took <TIME> seconds.",
         text,
     )
     return text

@@ -118,6 +118,46 @@ jobs:
             package_name: CGALPY_kerEpecInt_aos2SegPl_bso2_ms2_pol2_pp
             wheel_pattern: cgalpy_kerepecint_aos2segpl_bso2_ms2_pol2_pp-*.whl
             extra_submodule: Ms2
+          - config: env2_seg_cd_epec
+            label: ENV2 segment-data EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/env2_seg_cd_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2SegCdPl_env2
+            package_name: CGALPY_kerEpecInt_aos2SegCdPl_env2
+            wheel_pattern: cgalpy_kerepecint_aos2segcdpl_env2-*.whl
+            extra_submodule: Env2
+          - config: env2_linear_cd_epec
+            label: ENV2 linear-data EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/env2_linear_cd_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2LinearCdPl_env2
+            package_name: CGALPY_kerEpecInt_aos2LinearCdPl_env2
+            wheel_pattern: cgalpy_kerepecint_aos2linearcdpl_env2-*.whl
+            extra_submodule: Env2
+          - config: env3_sphere_ccr
+            label: ENV3 sphere CCR
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/env3_sphere_ccr.cmake
+            module_name: CGALPY_kerCcrInt_aos2ConicPl_env3Sphere
+            package_name: CGALPY_kerCcrInt_aos2ConicPl_env3Sphere
+            wheel_pattern: cgalpy_kerccrint_aos2conicpl_env3sphere-*.whl
+            extra_submodule: Env3
+          - config: env3_tri_sd_epec
+            label: ENV3 triangle surface-data EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/env3_tri_sd_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2SegPl_env3TriSd
+            package_name: CGALPY_kerEpecInt_aos2SegPl_env3TriSd
+            wheel_pattern: cgalpy_kerepecint_aos2segpl_env3trisd-*.whl
+            extra_submodule: Env3
           - config: tri2_ct_wi_epic
             label: TRI2 constrained-Delaunay EPIC
             compiler_label: Clang
@@ -361,7 +401,7 @@ jobs:
           EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
       - name: Compare curated examples with CGAL C++
-        if: matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec' || matrix.config == 'ms2_seg_epec' || matrix.config == 'ss2_seg_epec'
+        if: matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec' || matrix.config == 'ms2_seg_epec' || matrix.config == 'ss2_seg_epec' || matrix.config == 'env2_seg_cd_epec' || matrix.config == 'env2_linear_cd_epec' || matrix.config == 'env3_sphere_ccr' || matrix.config == 'env3_tri_sd_epec'
         run: |
           set -euxo pipefail
           WORK_DIR="${{ github.workspace }}/build/cgalpy/example_compare/${{ matrix.config }}"
@@ -416,6 +456,26 @@ jobs:
             ss2_seg_epec)
               pairs=(
                 ss2_plane_sweep
+              )
+              ;;
+            env2_seg_cd_epec)
+              pairs=(
+                env2_envelope_segments
+              )
+              ;;
+            env2_linear_cd_epec)
+              pairs=(
+                env2_convex_hull_2
+              )
+              ;;
+            env3_sphere_ccr)
+              pairs=(
+                env3_envelope_spheres
+              )
+              ;;
+            env3_tri_sd_epec)
+              pairs=(
+                env3_envelope_triangles
               )
               ;;
             *)
