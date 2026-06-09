@@ -41,6 +41,14 @@ PAIRS = {
         cpp_include_relpath="Polygon/examples/Polygon",
         executable="polygon_algorithms",
     ),
+    "pol2_ranges": ExamplePair(
+        name="pol2_ranges",
+        python_relpath="Polygon/ranges.py",
+        cpp_relpath="Polygon/examples/Polygon/ranges.cpp",
+        python_workdir_relpath="Polygon",
+        cpp_include_relpath="Polygon/examples/Polygon",
+        executable="ranges",
+    ),
     "bso2_simple_join_intersect": ExamplePair(
         name="bso2_simple_join_intersect",
         python_relpath="Boolean_set_operations_2/simple_join_intersect.py",
