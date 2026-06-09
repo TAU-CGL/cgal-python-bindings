@@ -314,6 +314,17 @@ PAIRS = {
             "Data/data/meshes/star.off",
         ),
     ),
+    "smsk_simple_mcfskel_sm_example": ExamplePair(
+        name="smsk_simple_mcfskel_sm_example",
+        python_relpath="Surface_mesh_skeletonization/simple_mcfskel_sm_example.py",
+        cpp_relpath="Surface_mesh_skeletonization/examples/Surface_mesh_skeletonization/simple_mcfskel_sm_example.cpp",
+        python_workdir_relpath="Surface_mesh_skeletonization",
+        cpp_include_relpath="Surface_mesh_skeletonization/examples/Surface_mesh_skeletonization",
+        executable="simple_mcfskel_sm_example",
+        data_relpaths=(
+            "Data/data/meshes/elephant.off",
+        ),
+    ),
     "bso2_simple_join_intersect": ExamplePair(
         name="bso2_simple_join_intersect",
         python_relpath="Boolean_set_operations_2/simple_join_intersect.py",
@@ -482,12 +493,17 @@ def build_cpp(pair, *, cgal_source, cgal_dir, work_dir, build_type, osx_architec
 project({pair.name}_compare)
 
 find_package(CGAL REQUIRED)
+find_package(Eigen3 QUIET)
+include(CGAL_Eigen3_support)
 
 add_executable({pair.executable}
   "{cpp_source}"
 )
 target_include_directories({pair.executable} PRIVATE "{cpp_include}")
 target_link_libraries({pair.executable} PRIVATE CGAL::CGAL)
+if(TARGET CGAL::Eigen3_support)
+  target_link_libraries({pair.executable} PRIVATE CGAL::Eigen3_support)
+endif()
 """
     write_text(cmake_source_dir / "CMakeLists.txt", cmake_lists)
 

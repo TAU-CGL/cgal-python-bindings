@@ -11,11 +11,12 @@ if len(sys.argv) > 1:
 
 CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
+Pmp = CGALPY.Pmp
 Smsk = CGALPY.Smsk
 Skeletonization = Smsk.Mean_curvature_flow_skeletonization
 Skeleton = Skeletonization.Skeleton
 
-tmesh = Sm.read_polygon_mesh(CGALPY.data_file_path("meshes/elephant.off"))
+tmesh = Pmp.read_polygon_mesh(CGALPY.data_file_path("meshes/elephant.off"))
 
 if not Sm.is_triangle_mesh(tmesh):
   print("Input geometry is not triangulated.")
