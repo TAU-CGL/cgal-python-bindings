@@ -276,6 +276,17 @@ PAIRS = {
         cpp_include_relpath="Alpha_shapes_3/examples/Alpha_shapes_3",
         executable="ex_alpha_shapes_exact_alpha",
     ),
+    "bgl_normals": ExamplePair(
+        name="bgl_normals",
+        python_relpath="BGL/bgl_normals.py",
+        cpp_relpath="BGL/examples/BGL_polyhedron_3/normals.cpp",
+        python_workdir_relpath="BGL",
+        cpp_include_relpath="BGL/examples/BGL_polyhedron_3",
+        executable="normals",
+        data_relpaths=(
+            "Data/data/meshes/cube_poly.off",
+        ),
+    ),
     "bso2_simple_join_intersect": ExamplePair(
         name="bso2_simple_join_intersect",
         python_relpath="Boolean_set_operations_2/simple_join_intersect.py",

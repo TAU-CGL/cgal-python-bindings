@@ -452,6 +452,7 @@ jobs:
                 sm_iterators
                 sm_circulators
                 pmp_sample_example
+                bgl_normals
               )
               ;;
             tri2_ct_wi_epic)
