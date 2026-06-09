@@ -65,6 +65,71 @@ PAIRS = {
         cpp_include_relpath="Minkowski_sum_2/examples/Minkowski_sum_2",
         executable="sum_triangle_square",
     ),
+    "ms2_sum_with_holes": ExamplePair(
+        name="ms2_sum_with_holes",
+        python_relpath="Minkowski_sum_2/sum_with_holes.py",
+        cpp_relpath="Minkowski_sum_2/examples/Minkowski_sum_2/sum_with_holes.cpp",
+        python_workdir_relpath="Minkowski_sum_2",
+        cpp_include_relpath="Minkowski_sum_2/examples/Minkowski_sum_2",
+        executable="sum_with_holes",
+        data_relpaths=(
+            "Minkowski_sum_2/examples/Minkowski_sum_2/rooms_star.dat",
+        ),
+    ),
+    "ms2_sum_by_decomposition": ExamplePair(
+        name="ms2_sum_by_decomposition",
+        python_relpath="Minkowski_sum_2/sum_by_decomposition.py",
+        cpp_relpath="Minkowski_sum_2/examples/Minkowski_sum_2/sum_by_decomposition.cpp",
+        python_workdir_relpath="Minkowski_sum_2",
+        cpp_include_relpath="Minkowski_sum_2/examples/Minkowski_sum_2",
+        executable="sum_by_decomposition",
+        data_relpaths=(
+            "Minkowski_sum_2/examples/Minkowski_sum_2/rooms_star.dat",
+        ),
+    ),
+    "ms2_sum_of_holes": ExamplePair(
+        name="ms2_sum_of_holes",
+        python_relpath="Minkowski_sum_2/sum_of_holes.py",
+        cpp_relpath="Minkowski_sum_2/examples/Minkowski_sum_2/sum_of_holes.cpp",
+        python_workdir_relpath="Minkowski_sum_2",
+        cpp_include_relpath="Minkowski_sum_2/examples/Minkowski_sum_2",
+        executable="sum_of_holes",
+        data_relpaths=(
+            "Minkowski_sum_2/examples/Minkowski_sum_2/holes.dat",
+        ),
+    ),
+    "ms2_approx_offset": ExamplePair(
+        name="ms2_approx_offset",
+        python_relpath="Minkowski_sum_2/approx_offset.py",
+        cpp_relpath="Minkowski_sum_2/examples/Minkowski_sum_2/approx_offset.cpp",
+        python_workdir_relpath="Minkowski_sum_2",
+        cpp_include_relpath="Minkowski_sum_2/examples/Minkowski_sum_2",
+        executable="approx_offset",
+        data_relpaths=(
+            "Minkowski_sum_2/examples/Minkowski_sum_2/spiked.dat",
+        ),
+        normalize_timing=True,
+    ),
+    "ms2_approx_inset": ExamplePair(
+        name="ms2_approx_inset",
+        python_relpath="Minkowski_sum_2/approx_inset.py",
+        cpp_relpath="Minkowski_sum_2/examples/Minkowski_sum_2/approx_inset.cpp",
+        python_workdir_relpath="Minkowski_sum_2",
+        cpp_include_relpath="Minkowski_sum_2/examples/Minkowski_sum_2",
+        executable="approx_inset",
+        data_relpaths=(
+            "Minkowski_sum_2/examples/Minkowski_sum_2/tight.dat",
+        ),
+        normalize_timing=True,
+    ),
+    "ss2_plane_sweep": ExamplePair(
+        name="ss2_plane_sweep",
+        python_relpath="Surface_sweep_2/plane_sweep.py",
+        cpp_relpath="Surface_sweep_2/examples/Surface_sweep_2/plane_sweep.cpp",
+        python_workdir_relpath="Surface_sweep_2",
+        cpp_include_relpath="Surface_sweep_2/examples/Surface_sweep_2",
+        executable="plane_sweep",
+    ),
     "bso2_simple_join_intersect": ExamplePair(
         name="bso2_simple_join_intersect",
         python_relpath="Boolean_set_operations_2/simple_join_intersect.py",
@@ -198,6 +263,16 @@ def comparable_stdout(pair, text):
         "The intersection computation took <TIME> seconds.",
         text,
     )
+    text = re.sub(
+        r"Offset computation took [0-9.]+ seconds\.",
+        "Offset computation took <TIME> seconds.",
+        text,
+    )
+    text = re.sub(
+        r"Inset computation took [0-9.]+ seconds\.",
+        "Inset computation took <TIME> seconds.",
+        text,
+    )
     return text
 
 
@@ -277,6 +352,9 @@ def run_pair(pair, args, examples_root):
     for data_arg in data_args:
         if not Path(data_arg).is_file():
             raise FileNotFoundError(f"Example data file not found: {data_arg}")
+
+    for data_arg in data_args:
+        shutil.copy2(data_arg, cpp_exe.parent / Path(data_arg).name)
 
     cpp_run = run_command([str(cpp_exe), *data_args], cwd=cpp_exe.parent)
     write_text(pair_dir / "cpp.stdout", cpp_run.stdout)

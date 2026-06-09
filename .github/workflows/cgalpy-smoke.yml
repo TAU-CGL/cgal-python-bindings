@@ -361,7 +361,7 @@ jobs:
           EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
       - name: Compare curated examples with CGAL C++
-        if: matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec'
+        if: matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec' || matrix.config == 'ms2_seg_epec' || matrix.config == 'ss2_seg_epec'
         run: |
           set -euxo pipefail
           WORK_DIR="${{ github.workspace }}/build/cgalpy/example_compare/${{ matrix.config }}"
@@ -401,6 +401,21 @@ jobs:
                 pol2_polygon_algorithms
                 pol2_ranges
                 pol2_example
+              )
+              ;;
+            ms2_seg_epec)
+              pairs=(
+                ms2_sum_triangle_square
+                ms2_sum_with_holes
+                ms2_sum_by_decomposition
+                ms2_sum_of_holes
+                ms2_approx_offset
+                ms2_approx_inset
+              )
+              ;;
+            ss2_seg_epec)
+              pairs=(
+                ss2_plane_sweep
               )
               ;;
             *)

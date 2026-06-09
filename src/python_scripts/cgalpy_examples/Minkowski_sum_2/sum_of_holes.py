@@ -32,9 +32,24 @@ def read_polygon(CGALPY, inp):
     return pgn
 
 
+def read_polygon_with_holes(CGALPY, inp):
+    Pol2 = CGALPY.Pol2
+
+    outer = read_polygon(CGALPY, inp)
+
+    line = inp.readline()
+    while line and not line.strip():
+        line = inp.readline()
+
+    pwh = Pol2.Polygon_with_holes_2(outer)
+    for _ in range(int(line)):
+        pwh.add_hole(read_polygon(CGALPY, inp))
+    return pwh
+
+
 def format_polygon(pgn):
     points = [str(point) for point in pgn.vertices()]
-    return f"[ {pgn.size()} vertices: (" + "".join(f"({point})" for point in points) + ") ]"
+    return f"[ {pgn.size()} vertices:" + "".join(f" ({point})" for point in points) + " ]"
 
 
 def format_polygon_with_holes(pwh):
@@ -50,17 +65,17 @@ def format_polygon_with_holes(pwh):
 
 def main():
     lib = "CGALPY" if len(sys.argv) < 2 else sys.argv[1]
-    filename = sys.argv[2] if len(sys.argv) > 2 else "rooms_star.dat"
+    filename = sys.argv[2] if len(sys.argv) > 2 else "holes.dat"
 
     CGALPY = importlib.import_module(lib)
     Ms2 = CGALPY.Ms2
     Pp2 = CGALPY.Pp2
 
     with open(filename, "r") as inp:
-        P = read_polygon(CGALPY, inp)
-        Q = read_polygon(CGALPY, inp)
+        P = read_polygon_with_holes(CGALPY, inp)
+        Q = read_polygon_with_holes(CGALPY, inp)
 
-    decomp = Pp2.Small_side_angle_bisector_decomposition()
+    decomp = Pp2.Polygon_vertical_decomposition()
     sum_pwh = Ms2.minkowski_sum_2(P, Q, decomp)
     print("P (+) Q = " + format_polygon_with_holes(sum_pwh))
 

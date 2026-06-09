@@ -4,7 +4,6 @@
 
 import importlib
 import sys
-import time
 
 
 def read_polygon(CGALPY, inp):
@@ -33,25 +32,35 @@ def read_polygon(CGALPY, inp):
     return pgn
 
 
+def format_polygon(pgn):
+    points = [str(point) for point in pgn.vertices()]
+    return f"[ {pgn.size()} vertices: (" + "".join(f"({point})" for point in points) + ") ]"
+
+
+def format_polygon_with_holes(pwh):
+    lines = [
+        "{ Outer boundary = " + format_polygon(pwh.outer_boundary()),
+        f"  {pwh.number_of_holes()} holes:",
+    ]
+    for i, hole in enumerate(list(pwh.holes()), 1):
+        lines.append(f"    Hole #{i} = " + format_polygon(hole))
+    lines.append(" }")
+    return "\n".join(lines)
+
+
 def main():
     lib = "CGALPY" if len(sys.argv) < 2 else sys.argv[1]
-    filename = sys.argv[2] if len(sys.argv) > 2 else "spiked.dat"
+    filename = sys.argv[2] if len(sys.argv) > 2 else "rooms_star.dat"
 
     CGALPY = importlib.import_module(lib)
-    Ker = CGALPY.Ker
     Ms2 = CGALPY.Ms2
 
     with open(filename, "r") as inp:
         P = read_polygon(CGALPY, inp)
+        Q = read_polygon(CGALPY, inp)
 
-    print(f"Read an input polygon with {P.size()} vertices.")
-
-    tic = time.perf_counter()
-    offset = Ms2.approximated_offset_2(P, Ker.FT(5), 0.00001)
-    toc = time.perf_counter()
-
-    print(f"The offset polygon has {offset.outer_boundary().size()} vertices, {offset.number_of_holes()} holes.")
-    print(f"Offset computation took {toc - tic:.6f} seconds.")
+    sum_pwh = Ms2.minkowski_sum_2(P, Q)
+    print("P (+) Q = " + format_polygon_with_holes(sum_pwh))
 
 
 if __name__ == "__main__":
