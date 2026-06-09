@@ -57,6 +57,14 @@ PAIRS = {
         cpp_include_relpath="Polygon/examples/Polygon",
         executable="Example",
     ),
+    "ms2_sum_triangle_square": ExamplePair(
+        name="ms2_sum_triangle_square",
+        python_relpath="Minkowski_sum_2/sum_triangle_square.py",
+        cpp_relpath="Minkowski_sum_2/examples/Minkowski_sum_2/sum_triangle_square.cpp",
+        python_workdir_relpath="Minkowski_sum_2",
+        cpp_include_relpath="Minkowski_sum_2/examples/Minkowski_sum_2",
+        executable="sum_triangle_square",
+    ),
     "bso2_simple_join_intersect": ExamplePair(
         name="bso2_simple_join_intersect",
         python_relpath="Boolean_set_operations_2/simple_join_intersect.py",
