@@ -20,7 +20,7 @@
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/kernel_types.hpp"
 #include "cgalpy/Gog_docstrings.hpp"
-#if defined(CGALPY_KERNEL_BINDINGS)
+#if defined(CGALPY_KERNEL_D_BINDINGS)
 #include "cgalpy/kernel_d_types.hpp"
 #endif
 
@@ -39,7 +39,7 @@ using Creator_3 = CGAL::Creator_uniform_3<double, Point_3>;
 using Random_points_in_sphere_3 =
   CGAL::Random_points_in_sphere_3<Point_3, Creator_3>;
 
-#if defined(CGALPY_KERNEL_BINDINGS)
+#if defined(CGALPY_KERNEL_D_BINDINGS)
 
 //!
 using Random_points_in_cube_d = CGAL::Random_points_in_cube_d<Point_d>;
@@ -87,7 +87,7 @@ void export_geometric_object_generators(py::module_& m) {
       ;
   }
 
-#if defined(CGALPY_KERNEL_BINDINGS)
+#if defined(CGALPY_KERNEL_D_BINDINGS)
   using Rpicd = cgalpy::gog::Random_points_in_cube_d;
   if (! add_attr<Rpicd>(m, "Random_points_in_cube_d")) {
     py::class_<Rpicd>(m, "Random_points_in_cube_d",

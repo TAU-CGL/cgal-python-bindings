@@ -22,6 +22,7 @@ class ExamplePair:
     executable: str
     data_relpaths: tuple[str, ...] = ()
     normalize_timing: bool = False
+    normalize_gog_cube_d: bool = False
 
 
 PAIRS = {
@@ -349,6 +350,15 @@ PAIRS = {
         cpp_include_relpath="Spatial_searching/examples/Spatial_searching",
         executable="nearest_neighbor_searching",
     ),
+    "gog_cube_d": ExamplePair(
+        name="gog_cube_d",
+        python_relpath="Geometric_object_generators/cube_d.py",
+        cpp_relpath="Generator/examples/Generator/cube_d.cpp",
+        python_workdir_relpath="Geometric_object_generators",
+        cpp_include_relpath="Generator/examples/Generator",
+        executable="cube_d",
+        normalize_gog_cube_d=True,
+    ),
     "bso2_simple_join_intersect": ExamplePair(
         name="bso2_simple_join_intersect",
         python_relpath="Boolean_set_operations_2/simple_join_intersect.py",
@@ -470,6 +480,20 @@ def write_text(path, text):
 
 
 def comparable_stdout(pair, text):
+    if pair.normalize_gog_cube_d:
+        normalized_lines = []
+        point_line_re = re.compile(
+            r"^\s*5(?:\s+[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?){5}\s*$"
+        )
+        for line in text.splitlines():
+            if point_line_re.match(line):
+                normalized_lines.append(" <RANDOM_POINT_D_5>")
+            else:
+                normalized_lines.append(line)
+        text = "\n".join(normalized_lines)
+        if text:
+            text += "\n"
+
     if not pair.normalize_timing:
         return text
     text = re.sub(

@@ -553,6 +553,7 @@ jobs:
             carl)
               pairs=(
                 st_my_point
+                gog_cube_d
               )
               ;;
             sn2_epic)
