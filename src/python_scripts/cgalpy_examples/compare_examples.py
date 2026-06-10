@@ -269,6 +269,14 @@ PAIRS = {
         cpp_include_relpath="Triangulation_3/examples/Triangulation_3",
         executable="for_loop",
     ),
+    "trid_delaunay_triangulation": ExamplePair(
+        name="trid_delaunay_triangulation",
+        python_relpath="Triangulation_d/delaunay_triangulation.py",
+        cpp_relpath="Triangulation/examples/Triangulation/delaunay_triangulation.cpp",
+        python_workdir_relpath="Triangulation_d",
+        cpp_include_relpath="Triangulation/examples/Triangulation",
+        executable="delaunay_triangulation",
+    ),
     "as3_alpha_shapes_exact_alpha": ExamplePair(
         name="as3_alpha_shapes_exact_alpha",
         python_relpath="Alpha_shape_3/as3_alpha_shapes_exact_alpha.py",

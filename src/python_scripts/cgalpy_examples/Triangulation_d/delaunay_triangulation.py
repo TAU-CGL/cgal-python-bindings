@@ -29,14 +29,13 @@ dt = Delaunay_triangulation(7, epicd)
 
 points = []
 Point_d = Kerd.Point_d
-for idx, x in enumerate(pointsIn):
-  p = Point_d(x)
-  points.append(p)
+for x in pointsIn:
+  points.append(Point_d(7, x))
 
-i = 1
-hint = dt.insert(points[0])
-for p in points[1:]:
-  hint = dt.insert(p, hint)
+hint = None
+for i, p in enumerate(points, start=1):
+  if hint is None:
+    hint = dt.insert(p)
+  else:
+    hint = dt.insert(p, hint)
   print("Processing: {}/{}".format(i, len(points)))
-  i += 1
-print(dt.number_of_vertices(), dt.number_of_full_cells())
