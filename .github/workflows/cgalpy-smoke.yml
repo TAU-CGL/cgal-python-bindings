@@ -175,9 +175,9 @@ jobs:
             cc: clang
             cxx: clang++
             cmake_config: cmake/tests/ss_2_cdlg.cmake
-            module_name: CGALPY
-            package_name: CGALPY
-            wheel_pattern: cgalpy-*.whl
+            module_name: CGALPY_kerdCdlgDyn_ss2
+            package_name: CGALPY_kerdCdlgDyn_ss2
+            wheel_pattern: cgalpy_kerdcdlgdyn_ss2-*.whl
             extra_submodule: Ss
           - config: carl
             label: ST Cartesian dynamic
