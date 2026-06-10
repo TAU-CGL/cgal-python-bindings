@@ -172,7 +172,8 @@ jobs:
             label: SS 2D Cartesian dynamic linear-search
             compiler_label: Clang
             os: ubuntu-24.04
-            compiler: clang
+            cc: clang
+            cxx: clang++
             cmake_config: cmake/tests/ss_2_cdlg.cmake
             module_name: CGALPY
             package_name: CGALPY
@@ -182,7 +183,8 @@ jobs:
             label: ST Cartesian dynamic
             compiler_label: Clang
             os: ubuntu-24.04
-            compiler: clang
+            cc: clang
+            cxx: clang++
             cmake_config: cmake/tests/carl.cmake
             module_name: CGALPY_kerEpicInt_kerdEpicdDyn_ch2_ch3Sm_stSeqHsmed_tri2DelNciWiWi_tri3DelViCiComSeq_tridDelVdFcdDefDyn_gog
             package_name: CGALPY_kerEpicInt_kerdEpicdDyn_ch2_ch3Sm_stSeqHsmed_tri2DelNciWiWi_tri3DelViCiComSeq_tridDelVdFcdDefDyn_gog
@@ -192,7 +194,8 @@ jobs:
             label: SN2 EPIC
             compiler_label: Clang
             os: ubuntu-24.04
-            compiler: clang
+            cc: clang
+            cxx: clang++
             cmake_config: cmake/tests/sn2_epic.cmake
             module_name: CGALPY_kerEpic_pol2_sn2
             package_name: CGALPY_kerEpic_pol2_sn2
