@@ -9,6 +9,7 @@
 #define CGAL_USE_BASIC_VIEWER
 
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/vector.h>
 
 #include <CGAL/draw_arrangement_2.h>
 #include <CGAL/draw_polyhedron.h>
@@ -97,8 +98,36 @@ void export_basic_viewer(py::module_& m) {
                    bvr_doc::Graphics_scene_class)
       .def(py::init<>(),
            "Construct an empty graphics scene.")
+      .def("empty", &Gs::empty,
+           "Return whether the graphics scene has no buffered geometry.")
+      .def("clear", &Gs::clear,
+           "Clear all buffered geometry and reset the bounding box.")
+      .def("is_two_dimensional", &Gs::is_two_dimensional,
+           "Return whether the buffered scene is two-dimensional.")
+      .def("number_of_elements", &Gs::number_of_elements, py::arg("index"),
+           "Return the number of 3-float elements stored in the selected graphics buffer.")
+      .def("get_size_of_index", &Gs::get_size_of_index, py::arg("index"),
+           "Return the selected graphics buffer size in bytes.")
+      .def("buffer", [](const Gs& gs, int index) {
+          return gs.get_array_of_index(index);
+        }, py::arg("index"),
+        "Return a copy of the selected graphics buffer as a list of floats.")
       ;
   }
+
+  m.attr("POS_POINTS") = py::int_(static_cast<int>(Gs::POS_POINTS));
+  m.attr("POS_SEGMENTS") = py::int_(static_cast<int>(Gs::POS_SEGMENTS));
+  m.attr("POS_RAYS") = py::int_(static_cast<int>(Gs::POS_RAYS));
+  m.attr("POS_LINES") = py::int_(static_cast<int>(Gs::POS_LINES));
+  m.attr("POS_FACES") = py::int_(static_cast<int>(Gs::POS_FACES));
+  m.attr("COLOR_POINTS") = py::int_(static_cast<int>(Gs::COLOR_POINTS));
+  m.attr("COLOR_SEGMENTS") = py::int_(static_cast<int>(Gs::COLOR_SEGMENTS));
+  m.attr("COLOR_RAYS") = py::int_(static_cast<int>(Gs::COLOR_RAYS));
+  m.attr("COLOR_LINES") = py::int_(static_cast<int>(Gs::COLOR_LINES));
+  m.attr("COLOR_FACES") = py::int_(static_cast<int>(Gs::COLOR_FACES));
+  m.attr("SMOOTH_NORMAL_FACES") = py::int_(static_cast<int>(Gs::SMOOTH_NORMAL_FACES));
+  m.attr("FLAT_NORMAL_FACES") = py::int_(static_cast<int>(Gs::FLAT_NORMAL_FACES));
+  m.attr("LAST_INDEX") = py::int_(static_cast<int>(Gs::LAST_INDEX));
 
   m.def("add_to_graphics_scene",
         [](const cgalpy::bvr::Ds& ds, Gs& gs)

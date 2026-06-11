@@ -22,6 +22,8 @@ class ExamplePair:
     executable: str
     data_relpaths: tuple[str, ...] = ()
     cpp_extra_include_relpaths: tuple[str, ...] = ()
+    cpp_source_in_repo: bool = False
+    cpp_needs_qt: bool = False
     normalize_timing: bool = False
     normalize_gog_cube_d: bool = False
 
@@ -139,6 +141,16 @@ PAIRS = {
         python_workdir_relpath="Arrangement_on_surface_2",
         cpp_include_relpath="Arrangement_on_surface_2/examples/Arrangement_on_surface_2",
         executable="aggregated_insertion",
+    ),
+    "aos2_visual_buffer_summary": ExamplePair(
+        name="aos2_visual_buffer_summary",
+        python_relpath="Arrangement_on_surface_2/aos2_visual_buffer_summary.py",
+        cpp_relpath="src/python_scripts/cgalpy_examples/Arrangement_on_surface_2/aos2_visual_buffer_summary.cpp",
+        python_workdir_relpath="Arrangement_on_surface_2",
+        cpp_include_relpath="Arrangement_on_surface_2/examples/Arrangement_on_surface_2",
+        executable="aos2_visual_buffer_summary",
+        cpp_source_in_repo=True,
+        cpp_needs_qt=True,
     ),
     "env2_envelope_segments": ExamplePair(
         name="env2_envelope_segments",
@@ -550,8 +562,10 @@ def comparable_stdout(pair, text):
     return text
 
 
-def build_cpp(pair, *, cgal_source, cgal_dir, work_dir, build_type, osx_architectures):
-    cpp_source = cgal_source / pair.cpp_relpath
+def build_cpp(pair, *, cgal_source, cgal_dir, work_dir, build_type, osx_architectures, cmake_prefix_path):
+    repo_root = Path(__file__).resolve().parents[3]
+    cpp_source_root = repo_root if pair.cpp_source_in_repo else cgal_source
+    cpp_source = cpp_source_root / pair.cpp_relpath
     cpp_include = cgal_source / pair.cpp_include_relpath
     cpp_extra_includes = [cgal_source / relpath for relpath in pair.cpp_extra_include_relpaths]
 
@@ -568,6 +582,22 @@ def build_cpp(pair, *, cgal_source, cgal_dir, work_dir, build_type, osx_architec
     cmake_source_dir.mkdir(parents=True)
 
     extra_include_lines = "".join(f'  "{include_dir}"\n' for include_dir in cpp_extra_includes)
+    qt_find_lines = ""
+    qt_link_lines = ""
+    if pair.cpp_needs_qt:
+        qt_find_lines = """find_package(Qt6 REQUIRED COMPONENTS Widgets OpenGL OpenGLWidgets Svg)
+include(CGAL_SetupCGAL_Qt6Dependencies)
+"""
+        qt_link_lines = f"""
+target_compile_definitions({pair.executable} PRIVATE CGAL_USE_BASIC_VIEWER)
+target_link_libraries({pair.executable} PRIVATE
+  CGAL::Qt6_moc_and_resources
+  Qt6::Widgets
+  Qt6::OpenGL
+  Qt6::OpenGLWidgets
+  Qt6::Svg
+)
+"""
 
     cmake_lists = f"""cmake_minimum_required(VERSION 3.12)
 project({pair.name}_compare)
@@ -575,7 +605,7 @@ project({pair.name}_compare)
 find_package(CGAL REQUIRED)
 find_package(Eigen3 QUIET)
 include(CGAL_Eigen3_support)
-
+{qt_find_lines}
 add_executable({pair.executable}
   "{cpp_source}"
 )
@@ -586,6 +616,7 @@ target_link_libraries({pair.executable} PRIVATE CGAL::CGAL)
 if(TARGET CGAL::Eigen3_support)
   target_link_libraries({pair.executable} PRIVATE CGAL::Eigen3_support)
 endif()
+{qt_link_lines}
 """
     write_text(cmake_source_dir / "CMakeLists.txt", cmake_lists)
 
@@ -601,6 +632,9 @@ endif()
 
     if osx_architectures:
         configure_cmd.append(f"-DCMAKE_OSX_ARCHITECTURES={osx_architectures}")
+
+    if cmake_prefix_path:
+        configure_cmd.append(f"-DCMAKE_PREFIX_PATH={cmake_prefix_path}")
 
     configure = run_command(configure_cmd, cwd=cmake_source_dir)
     write_text(work_dir / pair.name / "cpp_configure.stdout", configure.stdout)
@@ -628,6 +662,7 @@ def run_pair(pair, args, examples_root):
         work_dir=args.work_dir,
         build_type=args.build_type,
         osx_architectures=args.osx_architectures,
+        cmake_prefix_path=args.cmake_prefix_path,
     )
 
     if cpp_exe is None:
@@ -704,6 +739,7 @@ def main():
     parser.add_argument("--work-dir", type=Path, default=Path.home() / "build/cgalpy/example_compare_curated")
     parser.add_argument("--build-type", default="Release")
     parser.add_argument("--osx-architectures", default="")
+    parser.add_argument("--cmake-prefix-path", default=os.environ.get("CMAKE_PREFIX_PATH", ""))
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parents[3]
