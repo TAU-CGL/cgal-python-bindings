@@ -13,3 +13,24 @@ The GitHub smoke workflow contains curated deterministic C++/Python example comp
 - `Pp2`: skipped for now because no usable Point_set_processing_2 config/example pair was found in the current checked tree.
 
 When adding a new pair to `compare_examples.py`, prefer deterministic stdout examples. For visual examples, use the future offscreen-rendering plus pixel-buffer comparison path instead of stdout comparison.
+
+## Stdout comparison coverage status
+
+The curated stdout comparison set accounts for all 32 binding modules currently tracked in the GSoC 2026 example-validation pass.
+
+Covered by deterministic C++/Python stdout comparisons:
+
+- `Aos2`, `Pol2`, `Bso2`, `Ms2`, `Ss2`, `Env2`, `Env3`, `Vis2`
+- `Ker`, `Sm`, `Pol3`, `Pmp`, `Tri2`, `Tri3`, `Trid`, `Kerd`
+- `As3`, `Bgl`, `Ch2`, `Ch3`, `Smsk`, `Ss`, `St`, `Sn2`, `Gog`
+
+Intentionally deferred from stdout comparison:
+
+- `As2`: deferred after `find_optimal_alpha` / iterator-conversion issues; mentor guidance was to move on.
+- `Bv` and `Bvr`: visual/Qt/OpenGL-oriented modules; validate with visual CI/offscreen pixel-buffer comparison instead of stdout.
+- `Nef3`: current Python API is too limited for a faithful direct C++ example translation.
+- `Sms`: `edge_collapse` / named-parameter support is not ready for the current bindings.
+- `Sd`: avoid RANSAC-based stdout checks because Efficient RANSAC output was observed to be nondeterministic.
+- `Pp2`: no usable Point_set_processing_2 config/example pair was found in the current checked tree.
+
+Audit result: no unaccounted modules remain for the stdout-comparison task.
