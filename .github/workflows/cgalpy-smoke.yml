@@ -58,6 +58,16 @@ jobs:
             package_name: CGALPY_kerEpecInt_aos2SegPl
             wheel_pattern: cgalpy_kerepecint_aos2segpl-*.whl
             extra_submodule: Aos2
+          - config: aos2_seg_bvr_epec
+            label: AOS2 segment BVR EPEC visual
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/aos2_seg_bvr_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2SegPl_bvAos2
+            package_name: CGALPY_kerEpecInt_aos2SegPl_bvAos2
+            wheel_pattern: cgalpy_kerepecint_aos2segpl_bvaos2-*.whl
+            extra_submodule: Bvr
           - config: bso2_seg_epec
             label: BSO2 segment EPEC
             compiler_label: Clang
@@ -348,6 +358,14 @@ jobs:
             libmpfr-dev \
             libmetis-dev
 
+          if [ "${{ matrix.config }}" = "aos2_seg_bvr_epec" ]; then
+            sudo apt-get install -y \
+              qt6-base-dev \
+              libqt6opengl6-dev \
+              libqt6svg6-dev \
+              libgl1-mesa-dev
+          fi
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -408,6 +426,11 @@ jobs:
       - name: Configure cgal-python-bindings kernel smoke
         run: |
           set -euxo pipefail
+          visual_flag=OFF
+          if [ "${{ matrix.config }}" = "aos2_seg_bvr_epec" ]; then
+            visual_flag=ON
+          fi
+
           cmake \
             -S "${{ github.workspace }}" \
             -B "${BUILD_DIR}" \
@@ -415,7 +438,7 @@ jobs:
             -DCMAKE_C_COMPILER="${{ matrix.cc }}" \
             -DCMAKE_CXX_COMPILER="${{ matrix.cxx }}" \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCGALPY_WITH_VISUAL:BOOL=OFF \
+            -DCGALPY_WITH_VISUAL:BOOL="${visual_flag}" \
             -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF \
             -DPython_EXECUTABLE="$(command -v python)" \
             -Dnanobind_DIR="${{ steps.nanobind.outputs.dir }}" \
@@ -459,6 +482,11 @@ jobs:
               assert submodule is not None
               if extra_submodule == "Aos2":
                   assert hasattr(submodule, "Arrangement_2")
+              elif extra_submodule == "Bvr":
+                  assert hasattr(submodule, "Graphics_scene")
+                  assert hasattr(submodule, "Graphics_scene_options")
+                  assert hasattr(submodule, "add_to_graphics_scene")
+                  assert hasattr(submodule, "draw_graphics_scene")
               elif extra_submodule == "Bso2":
                   assert hasattr(submodule, "join")
                   assert (
@@ -729,6 +757,11 @@ jobs:
               assert submodule is not None
               if extra_submodule == "Aos2":
                   assert hasattr(submodule, "Arrangement_2")
+              elif extra_submodule == "Bvr":
+                  assert hasattr(submodule, "Graphics_scene")
+                  assert hasattr(submodule, "Graphics_scene_options")
+                  assert hasattr(submodule, "add_to_graphics_scene")
+                  assert hasattr(submodule, "draw_graphics_scene")
               elif extra_submodule == "Bso2":
                   assert hasattr(submodule, "join")
                   assert (
