@@ -55,9 +55,9 @@ def print_arrangement(arr):
 # Print the number of cells of a given arrangement.
 def print_arrangement_size(arr):
   print('The arrangement size:')
-  print('   |V| =  {}, |E| = {}, |F| = {}'.format(arr.number_of_vertices(),
-                                                  arr.number_of_edges(),
-                                                  arr.number_of_faces()))
+  print('   |V| = {},  |E| = {},  |F| = {}'.format(arr.number_of_vertices(),
+                                                   arr.number_of_edges(),
+                                                   arr.number_of_faces()))
 
 def print_unbounded_arrangement_size(arr):
   print("The arrangement size:")

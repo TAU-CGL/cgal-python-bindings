@@ -132,6 +132,14 @@ PAIRS = {
         cpp_include_relpath="Surface_sweep_2/examples/Surface_sweep_2",
         executable="plane_sweep",
     ),
+    "aos2_aggregated_insertion": ExamplePair(
+        name="aos2_aggregated_insertion",
+        python_relpath="Arrangement_on_surface_2/aggregated_insertion.py",
+        cpp_relpath="Arrangement_on_surface_2/examples/Arrangement_on_surface_2/aggregated_insertion.cpp",
+        python_workdir_relpath="Arrangement_on_surface_2",
+        cpp_include_relpath="Arrangement_on_surface_2/examples/Arrangement_on_surface_2",
+        executable="aggregated_insertion",
+    ),
     "env2_envelope_segments": ExamplePair(
         name="env2_envelope_segments",
         python_relpath="Envelope_2/envelope_segments.py",
