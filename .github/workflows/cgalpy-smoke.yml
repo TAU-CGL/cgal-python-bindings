@@ -558,6 +558,7 @@ jobs:
             ss_2_cdlg)
               pairs=(
                 ss_nearest_neighbor_searching
+                kerd_intersection_test
               )
               ;;
             carl)

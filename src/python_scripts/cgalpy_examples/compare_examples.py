@@ -21,6 +21,7 @@ class ExamplePair:
     cpp_include_relpath: str
     executable: str
     data_relpaths: tuple[str, ...] = ()
+    cpp_extra_include_relpaths: tuple[str, ...] = ()
     normalize_timing: bool = False
     normalize_gog_cube_d: bool = False
 
@@ -358,6 +359,15 @@ PAIRS = {
         cpp_include_relpath="Spatial_searching/examples/Spatial_searching",
         executable="nearest_neighbor_searching",
     ),
+    "kerd_intersection_test": ExamplePair(
+        name="kerd_intersection_test",
+        python_relpath="Kernel_d/intersection_test.py",
+        cpp_relpath="Kernel_d/test/Kernel_d/intersection-test.cpp",
+        python_workdir_relpath="Kernel_d",
+        cpp_include_relpath="Kernel_d/test/Kernel_d",
+        cpp_extra_include_relpaths=("Kernel_d/test/Kernel_d/include",),
+        executable="intersection_test",
+    ),
     "gog_cube_d": ExamplePair(
         name="gog_cube_d",
         python_relpath="Geometric_object_generators/cube_d.py",
@@ -535,15 +545,21 @@ def comparable_stdout(pair, text):
 def build_cpp(pair, *, cgal_source, cgal_dir, work_dir, build_type, osx_architectures):
     cpp_source = cgal_source / pair.cpp_relpath
     cpp_include = cgal_source / pair.cpp_include_relpath
+    cpp_extra_includes = [cgal_source / relpath for relpath in pair.cpp_extra_include_relpaths]
 
     if not cpp_source.is_file():
         raise FileNotFoundError(f"C++ source not found: {cpp_source}")
+    for include_dir in cpp_extra_includes:
+        if not include_dir.is_dir():
+            raise FileNotFoundError(f"C++ extra include directory not found: {include_dir}")
 
     cmake_source_dir = work_dir / pair.name / "cpp_source"
     cmake_build_dir = work_dir / pair.name / "cpp_build"
     shutil.rmtree(cmake_source_dir, ignore_errors=True)
     shutil.rmtree(cmake_build_dir, ignore_errors=True)
     cmake_source_dir.mkdir(parents=True)
+
+    extra_include_lines = "".join(f'  "{include_dir}"\n' for include_dir in cpp_extra_includes)
 
     cmake_lists = f"""cmake_minimum_required(VERSION 3.12)
 project({pair.name}_compare)
@@ -555,7 +571,9 @@ include(CGAL_Eigen3_support)
 add_executable({pair.executable}
   "{cpp_source}"
 )
-target_include_directories({pair.executable} PRIVATE "{cpp_include}")
+target_include_directories({pair.executable} PRIVATE
+  "{cpp_include}"
+{extra_include_lines})
 target_link_libraries({pair.executable} PRIVATE CGAL::CGAL)
 if(TARGET CGAL::Eigen3_support)
   target_link_libraries({pair.executable} PRIVATE CGAL::Eigen3_support)
