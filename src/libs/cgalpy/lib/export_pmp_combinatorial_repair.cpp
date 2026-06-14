@@ -8,6 +8,7 @@
 //            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <tuple>
+#include <utility>
 #include <vector>
 
 #include <boost/graph/graph_traits.hpp>
@@ -24,6 +25,9 @@
 #include <CGAL/Polygon_mesh_processing/stitch_borders.h>
 #include <CGAL/Polygon_mesh_processing/polygon_mesh_to_polygon_soup.h>
 
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
+#include "cgalpy/Named_parameter_geom_traits.hpp"
 #include "cgalpy/pmp_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 
@@ -128,9 +132,23 @@ auto remove_isolated_points_in_polygon_soup(Point_3_vec& points,
                                             std::vector<Size_t_vec>& polygons)
 { return PMP::remove_isolated_points_in_polygon_soup(points, polygons); }
 
+/*! A class template that wraps the function template
+ * PMP::repair_polygon_soup()
+ */
+template <typename T, typename... Args>
+struct Repair_polygon_soup_wrapper {
+  static void call(T np, Args&&... args)
+  { PMP::repair_polygon_soup(std::forward<Args>(args)..., std::forward<T>(np)); }
+};
+
 //!
-auto repair_polygon_soup(Point_3_vec& points, std::vector<Size_t_vec>& polygons, const py::dict& np = py::dict()) {
-  PMP::repair_polygon_soup(points, polygons);
+auto repair_polygon_soup(Point_3_vec& points, std::vector<Size_t_vec>& polygons,
+                         const py::dict& params = py::dict()) {
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_wrapper<Repair_polygon_soup_wrapper, Point_3_vec&, std::vector<Size_t_vec>&>
+    wrapper(points, polygons);
+  cgalpy::named_parameter_applicator(wrapper, np, params, op);
   return std::make_tuple(points, polygons);
 }
 
