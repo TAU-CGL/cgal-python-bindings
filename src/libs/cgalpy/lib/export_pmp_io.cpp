@@ -16,6 +16,8 @@
 #include "cgalpy/kernel_types.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Named_parameter_repair_polygon_soup.hpp"
+#include "cgalpy/Named_parameter_stream_precision.hpp"
+#include "cgalpy/Named_parameter_use_binary_mode.hpp"
 #include "cgalpy/Named_parameter_verbose.hpp"
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
@@ -72,10 +74,28 @@ PolygonalMesh read_polygon_mesh_with_traits(const std::string& filename, const T
 }
 #endif
 
+/*! A class template that wraps the function template
+ * CGAL::IO::write_polygon_mesh()
+ */
+template <typename NamedParameter, typename... Args>
+struct Write_polygon_mesh_wrapper {
+  static auto call(NamedParameter& np, Args&&... args)
+  { return CGAL::IO::write_polygon_mesh(std::forward<Args>(args)..., np); }
+};
+
 //!
 template <typename PolygonalMesh>
-bool write_polygon_mesh(const std::string& filename, const PolygonalMesh& pm, const py::dict& params = py::dict()) {
-  return CGAL::IO::write_polygon_mesh(filename, pm);
+bool write_polygon_mesh(const std::string& filename, const PolygonalMesh& pm,
+                        const py::dict& params = py::dict()) {
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_verbose verbose_op;
+  cgalpy::Named_parameter_stream_precision stream_precision_op;
+  cgalpy::Named_parameter_use_binary_mode use_binary_mode_op;
+  cgalpy::Named_parameter_wrapper<Write_polygon_mesh_wrapper,
+                                  const std::string&, const PolygonalMesh&>
+    wrapper(filename, pm);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, verbose_op,
+                                           stream_precision_op, use_binary_mode_op);
 }
 
 }
