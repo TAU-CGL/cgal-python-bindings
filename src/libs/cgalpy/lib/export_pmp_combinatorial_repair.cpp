@@ -63,10 +63,24 @@ auto duplicate_non_manifold_vertices(PolygonMesh& pm, const py::dict& np = py::d
 auto is_polygon_soup_a_polygon_mesh(std::vector<Size_t_vec>& polygons)
 { return PMP::is_polygon_soup_a_polygon_mesh(polygons); }
 
+/*! A class template that wraps the function template
+ * PMP::merge_duplicate_points_in_polygon_soup()
+ */
+template <typename T, typename... Args>
+struct Merge_duplicate_points_in_polygon_soup_wrapper {
+  static auto call(T np, Args&&... args)
+  { return PMP::merge_duplicate_points_in_polygon_soup(std::forward<Args>(args)..., std::forward<T>(np)); }
+};
+
 //!
 auto merge_duplicate_points_in_polygon_soup(Point_3_vec& pointvec, std::vector<Size_t_vec >& polyvec,
-                                            const py::dict& np = py::dict()) {
-  return PMP::merge_duplicate_points_in_polygon_soup(pointvec, polyvec);
+                                            const py::dict& params = py::dict()) {
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_wrapper<Merge_duplicate_points_in_polygon_soup_wrapper,
+                                  Point_3_vec&, std::vector<Size_t_vec>&>
+    wrapper(pointvec, polyvec);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, op);
 }
 
 //!
