@@ -255,15 +255,27 @@ auto stitch_boundary_cycle(typename boost::graph_traits<PolygonMesh>::halfedge_d
   return PMP::stitch_boundary_cycle(h, pmesh);
 }
 
+/*! A class template that wraps the function template
+ * PMP::stitch_boundary_cycles()
+ */
+template <typename T, typename... Args>
+struct Stitch_boundary_cycles_wrapper {
+  static auto call(T np, Args&&... args)
+  { return PMP::stitch_boundary_cycles(std::forward<Args>(args)..., std::forward<T>(np)); }
+};
+
 //!
 template <typename PolygonMesh>
 auto stitch_boundary_cycles(const std::vector<typename boost::graph_traits<PolygonMesh>::halfedge_descriptor>& boundary_cycle_representatives,
                             PolygonMesh& pmesh,
-                            const py::dict& np = py::dict()) {
-  using Pm = PolygonMesh;
-  using Gt = boost::graph_traits<Pm>;
-  using Hd = typename Gt::halfedge_descriptor;
-  return PMP::stitch_boundary_cycles(boundary_cycle_representatives, pmesh);
+                            const py::dict& params = py::dict()) {
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_wrapper<Stitch_boundary_cycles_wrapper,
+                                  const std::vector<typename boost::graph_traits<PolygonMesh>::halfedge_descriptor>&,
+                                  PolygonMesh&>
+    wrapper(boundary_cycle_representatives, pmesh);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, geom_traits_op);
 }
 
 }
