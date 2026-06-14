@@ -186,22 +186,38 @@ auto repair_polygon_soup(Point_3_vec& points, std::vector<Size_t_vec>& polygons,
   return std::make_tuple(points, polygons);
 }
 
+/*! A class template that wraps the function template
+ * PMP::stitch_borders()
+ */
+template <typename T, typename... Args>
+struct Stitch_borders_bc_wrapper {
+  static auto call(T np, Args&&... args)
+  { return PMP::stitch_borders(std::forward<Args>(args)..., std::forward<T>(np)); }
+};
+
 //!
 template <typename PolygonMesh>
 auto stitch_borders_bc(const std::vector<typename boost::graph_traits<PolygonMesh>::halfedge_descriptor>& boundary_cycle_representatives,
-                       PolygonMesh& pmesh, const py::dict& np = py::dict()) {
+                       PolygonMesh& pmesh, const py::dict& params = py::dict()) {
   using Pm = PolygonMesh;
-  using Gt = boost::graph_traits<Pm>;
-  using Hd = typename Gt::halfedge_descriptor;
-  if (np.contains("face_index_map")) {
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_apply_per_connected_component apply_per_connected_component_op;
+  cgalpy::Named_parameter_wrapper<Stitch_borders_bc_wrapper,
+                                  const std::vector<typename boost::graph_traits<PolygonMesh>::halfedge_descriptor>&,
+                                  PolygonMesh&>
+    wrapper(boundary_cycle_representatives, pmesh);
+
+  if (params.contains("face_index_map")) {
     auto fim = get_face_prop_map<Pm, std::size_t>
       (pmesh, "INTERNAL_MAP0",
-       np.contains("face_index_map") ? np["face_index_map"] : py::none());
-    return PMP::stitch_borders(boundary_cycle_representatives, pmesh);
+       params.contains("face_index_map") ? params["face_index_map"] : py::none());
+    return cgalpy::named_parameter_applicator(wrapper, np, params, geom_traits_op,
+                                             apply_per_connected_component_op);
   }
-  else {
-    return PMP::stitch_borders(boundary_cycle_representatives, pmesh);
-  }
+
+  return cgalpy::named_parameter_applicator(wrapper, np, params, geom_traits_op,
+                                           apply_per_connected_component_op);
 }
 
 //!
