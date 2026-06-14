@@ -28,6 +28,7 @@
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_require_same_orientation.hpp"
 #include "cgalpy/pmp_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 
@@ -83,10 +84,26 @@ auto merge_duplicate_points_in_polygon_soup(Point_3_vec& pointvec, std::vector<S
   return cgalpy::named_parameter_applicator(wrapper, np, params, op);
 }
 
+/*! A class template that wraps the function template
+ * PMP::merge_duplicate_polygons_in_polygon_soup()
+ */
+template <typename T, typename... Args>
+struct Merge_duplicate_polygons_in_polygon_soup_wrapper {
+  static auto call(T np, Args&&... args)
+  { return PMP::merge_duplicate_polygons_in_polygon_soup(std::forward<Args>(args)..., std::forward<T>(np)); }
+};
+
 //!
 auto merge_duplicate_polygons_in_polygon_soup(Point_3_vec& points, std::vector<Size_t_vec >& polygons,
-                                              const py::dict& np = py::dict()) {
-  return PMP::merge_duplicate_polygons_in_polygon_soup(points, polygons);
+                                              const py::dict& params = py::dict()) {
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_require_same_orientation require_same_orientation_op;
+  cgalpy::Named_parameter_wrapper<Merge_duplicate_polygons_in_polygon_soup_wrapper,
+                                  Point_3_vec&, std::vector<Size_t_vec>&>
+    wrapper(points, polygons);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, geom_traits_op,
+                                           require_same_orientation_op);
 }
 
 //!
