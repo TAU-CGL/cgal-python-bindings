@@ -246,13 +246,27 @@ auto stitch_borders(PolygonMesh& pmesh,
                                            apply_per_connected_component_op);
 }
 
+/*! A class template that wraps the function template
+ * PMP::stitch_boundary_cycle()
+ */
+template <typename T, typename... Args>
+struct Stitch_boundary_cycle_wrapper {
+  static auto call(T np, Args&&... args)
+  { return PMP::stitch_boundary_cycle(std::forward<Args>(args)..., std::forward<T>(np)); }
+};
+
 //!
 template <typename PolygonMesh>
 auto stitch_boundary_cycle(typename boost::graph_traits<PolygonMesh>::halfedge_descriptor& h,
                            PolygonMesh& pmesh,
-                           const py::dict& np = py::dict()) {
-  using Pm = PolygonMesh;
-  return PMP::stitch_boundary_cycle(h, pmesh);
+                           const py::dict& params = py::dict()) {
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_wrapper<Stitch_boundary_cycle_wrapper,
+                                  typename boost::graph_traits<PolygonMesh>::halfedge_descriptor&,
+                                  PolygonMesh&>
+    wrapper(h, pmesh);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, geom_traits_op);
 }
 
 /*! A class template that wraps the function template
