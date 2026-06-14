@@ -29,6 +29,7 @@
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
 #include "cgalpy/Named_parameter_require_same_orientation.hpp"
+#include "cgalpy/Named_parameter_apply_per_connected_component.hpp"
 #include "cgalpy/pmp_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 
@@ -215,20 +216,34 @@ auto stitch_borders_he(PolygonMesh& pmesh,
   return PMP::stitch_borders(pmesh, hedge_pairs_to_stitch);
 }
 
+/*! A class template that wraps the function template
+ * PMP::stitch_borders()
+ */
+template <typename T, typename... Args>
+struct Stitch_borders_wrapper {
+  static auto call(T np, Args&&... args)
+  { return PMP::stitch_borders(std::forward<Args>(args)..., std::forward<T>(np)); }
+};
+
 //!
 template <typename PolygonMesh>
 auto stitch_borders(PolygonMesh& pmesh,
-                    const py::dict& np = py::dict()) {
+                    const py::dict& params = py::dict()) {
   using Pm = PolygonMesh;
-  // return PMP::stitch_borders(pmesh);
-  if (np.contains("face_index_map")) {
-    auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP0",
-                                                  np.contains("face_index_map") ? np["face_index_map"] : py::none());
-    return PMP::stitch_borders(pmesh);
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_apply_per_connected_component apply_per_connected_component_op;
+  cgalpy::Named_parameter_wrapper<Stitch_borders_wrapper, PolygonMesh&> wrapper(pmesh);
+
+  if (params.contains("face_index_map")) {
+    auto fim = get_face_prop_map<Pm, std::size_t>
+      (pmesh, "INTERNAL_MAP0",
+       params.contains("face_index_map") ? params["face_index_map"] : py::none());
+    return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                             apply_per_connected_component_op);
   }
-  else {
-    return PMP::stitch_borders(pmesh);
-  }
+
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                           apply_per_connected_component_op);
 }
 
 //!
