@@ -176,10 +176,12 @@ struct Repair_polygon_soup_wrapper {
 auto repair_polygon_soup(Point_3_vec& points, std::vector<Size_t_vec>& polygons,
                          const py::dict& params = py::dict()) {
   auto np = CGAL::parameters::default_values();
-  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_require_same_orientation require_same_orientation_op;
   cgalpy::Named_parameter_wrapper<Repair_polygon_soup_wrapper, Point_3_vec&, std::vector<Size_t_vec>&>
     wrapper(points, polygons);
-  cgalpy::named_parameter_applicator(wrapper, np, params, op);
+  cgalpy::named_parameter_applicator(wrapper, np, params, geom_traits_op,
+                                     require_same_orientation_op);
   return std::make_tuple(points, polygons);
 }
 
