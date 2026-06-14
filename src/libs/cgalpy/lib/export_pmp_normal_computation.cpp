@@ -30,12 +30,26 @@ namespace pmp_doc = cgalpy::pmp::docstrings;
 namespace cgalpy {
 namespace pmp {
 
+/*! A class template that wraps the function template
+ * PMP::compute_face_normal()
+ */
+template <typename T, typename... Args>
+struct Compute_face_normal_wrapper {
+  static auto call(T np, Args&&... args)
+  { return PMP::compute_face_normal(std::forward<Args>(args)..., std::forward<T>(np)); }
+};
+
 //!
 template <typename PolygonMesh>
 Vector_3 compute_face_normal(const typename boost::graph_traits<PolygonMesh>::face_descriptor& f,
                              const PolygonMesh& mesh, const py::dict& params = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::compute_face_normal(f, mesh);
+  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
+
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_wrapper<Compute_face_normal_wrapper, const Fd&, const Pm&> wrapper(f, mesh);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, op);
 }
 
 /*! A class template that wraps the function template
@@ -59,28 +73,74 @@ void compute_face_normals(const PolygonMesh& mesh, FaceNormalMap face_normals, c
   cgalpy::named_parameter_applicator(wrapper, np, params, op);
 }
 
+/*! A class template that wraps the function template
+ * PMP::compute_normals()
+ */
+template <typename T, typename... Args>
+struct Compute_normals_wrapper {
+  static void call(T np, Args&&... args)
+  { PMP::compute_normals(std::forward<Args>(args)..., std::forward<T>(np)); }
+};
+
 //!
 template<typename PolygonMesh, typename VertexNormalMap, typename FaceNormalMap>
 auto compute_normals(const PolygonMesh& pm, VertexNormalMap vnormals, FaceNormalMap fnormals,
-                     const py::dict& np = py::dict()) {
+                     const py::dict& params = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::compute_normals(pm, vnormals, fnormals);
+  using Vn_map = VertexNormalMap;
+  using Fn_map = FaceNormalMap;
+
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_wrapper<Compute_normals_wrapper, const Pm&, const Vn_map&, const Fn_map&>
+    wrapper(pm, vnormals, fnormals);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, op);
 }
+
+/*! A class template that wraps the function template
+ * PMP::compute_vertex_normal()
+ */
+template <typename T, typename... Args>
+struct Compute_vertex_normal_wrapper {
+  static auto call(T np, Args&&... args)
+  { return PMP::compute_vertex_normal(std::forward<Args>(args)..., std::forward<T>(np)); }
+};
 
 //!
 template <typename PolygonMesh>
 Vector_3 compute_vertex_normal(const typename boost::graph_traits<PolygonMesh>::vertex_descriptor& v,
-                               const PolygonMesh& mesh, const py::dict& np = py::dict()) {
+                               const PolygonMesh& mesh, const py::dict& params = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::compute_vertex_normal(v, mesh);
+  using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
+
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_wrapper<Compute_vertex_normal_wrapper, const Vd&, const Pm&> wrapper(v, mesh);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, op);
 }
+
+/*! A class template that wraps the function template
+ * PMP::compute_vertex_normals()
+ */
+template <typename T, typename... Args>
+struct Compute_vertex_normals_wrapper {
+  static void call(T np, Args&&... args)
+  { PMP::compute_vertex_normals(std::forward<Args>(args)..., std::forward<T>(np)); }
+};
 
 //!
 template <typename PolygonMesh, typename VertexNormalMap>
-auto compute_vertex_normals(const PolygonMesh& mesh, VertexNormalMap vertex_normals, const py::dict& np = py::dict()) {
+auto compute_vertex_normals(const PolygonMesh& mesh, VertexNormalMap vertex_normals,
+                            const py::dict& params = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::compute_vertex_normals(mesh, vertex_normals);
+  using Vn_map = VertexNormalMap;
+
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_wrapper<Compute_vertex_normals_wrapper, const Pm&, const Vn_map&> wrapper(mesh, vertex_normals);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, op);
 }
+
 
 }
 } // namespace cgalpy
