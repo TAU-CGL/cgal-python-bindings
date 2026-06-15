@@ -213,9 +213,6 @@ template <typename PolygonMesh>
 auto keep_largest_connected_components(PolygonMesh& pmesh, std::size_t nb_components_to_keep,
                                        const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
-                                          np.contains("edge_is_constrained_map") ?
-                                          np["edge_internal_map"] : py::none());
   auto fsm = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP1",
                                                 np.contains("face_size_map") ? np["face_size_map"] : py::none(), 1);
   bool vimap = np.contains("vertex_index_map");
@@ -223,11 +220,12 @@ auto keep_largest_connected_components(PolygonMesh& pmesh, std::size_t nb_compon
   auto call_pmp = [&]() {
     auto default_np = CGAL::parameters::default_values();
     cgalpy::Named_parameter_dry_run dry_run_op;
+    cgalpy::Named_parameter_edge_is_constrained_map<Pm> eicm_op;
     cgalpy::Named_parameter_wrapper<Keep_largest_connected_components_wrapper,
                                     Pm&, const std::size_t&>
       wrapper(pmesh, nb_components_to_keep);
     return cgalpy::named_parameter_applicator(wrapper, default_np, np,
-                                             dry_run_op);
+                                             dry_run_op, eicm_op);
   };
   std::size_t retv;
 
@@ -255,7 +253,6 @@ auto keep_largest_connected_components(PolygonMesh& pmesh, std::size_t nb_compon
   }
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (! np.contains("edge_is_constrained_map")) pmesh.remove_property_map(eicm);
   if (! np.contains("face_size_map")) pmesh.remove_property_map(fsm);
 #endif
 
