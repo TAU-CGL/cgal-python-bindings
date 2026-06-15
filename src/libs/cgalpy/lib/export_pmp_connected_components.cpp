@@ -78,6 +78,18 @@ struct Keep_largest_connected_components_wrapper {
 };
 
 //!
+/*! A class template that wraps the function template
+ * CGAL::Polygon_mesh_processing::remove_connected_components()
+ */
+template <typename NamedParameter, typename... Args>
+struct Remove_connected_components_wrapper {
+  static auto call(NamedParameter& np, Args&&... args)
+  {
+    return PMP::remove_connected_components(std::forward<Args>(args)..., np);
+  }
+};
+
+//!
 template <typename PolygonMesh>
 auto connected_component(typename boost::graph_traits<PolygonMesh>::face_descriptor seed_face, PolygonMesh& pm,
                          const py::dict& np) {
@@ -301,8 +313,15 @@ auto remove_connected_components(PolygonMesh& pm,
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
-  auto eicm = get_edge_prop_map<Pm, bool>(pm, "INTERNAL_MAP0",
-    np.contains("edge_is_constrained_map") ? np["edge_internal_map"] : py::none());
+  auto call_pmp = [&]() {
+    auto default_np = CGAL::parameters::default_values();
+    cgalpy::Named_parameter_edge_is_constrained_map<Pm> eicm_op;
+    cgalpy::Named_parameter_wrapper<Remove_connected_components_wrapper,
+                                    Pm&, const std::vector<Fd>&>
+      wrapper(pm, components_to_remove);
+    return cgalpy::named_parameter_applicator(wrapper, default_np, np, eicm_op);
+  };
+
   bool vimap = np.contains("vertex_index_map");
   bool fimap = np.contains("face_index_map");
   if (vimap && fimap) {
@@ -310,25 +329,21 @@ auto remove_connected_components(PolygonMesh& pm,
       np.contains("vertex_index_map") ? np["vertex_internal_map"] : py::none());
     auto fim = get_face_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP2",
       np.contains("face_index_map") ? np["face_internal_map"] : py::none());
-    PMP::remove_connected_components(pm, components_to_remove);
+    call_pmp();
   }
   else if (vimap) {
     auto vim = get_vertex_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP1",
       np.contains("vertex_index_map") ? np["vertex_internal_map"] : py::none());
-    PMP::remove_connected_components(pm, components_to_remove);
+    call_pmp();
   }
   else if (fimap) {
     auto fim = get_face_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP1",
       np.contains("face_index_map") ? np["face_internal_map"] : py::none());
-    PMP::remove_connected_components(pm, components_to_remove);
+    call_pmp();
   }
   else {
-    PMP::remove_connected_components(pm, components_to_remove);
+    call_pmp();
   }
-
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (! np.contains("edge_is_constrained_map")) pm.remove_property_map(eicm);
-#endif
 }
 
 //!
