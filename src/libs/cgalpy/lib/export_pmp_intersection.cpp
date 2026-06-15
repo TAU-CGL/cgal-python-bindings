@@ -5,9 +5,11 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <vector>
 #include <array>
+#include <utility>
 
 #include <boost/graph/graph_traits.hpp>
 
@@ -19,6 +21,10 @@
 #include <CGAL/Polygon_mesh_processing/intersection.h>
 #include <CGAL/Polygon_mesh_processing/self_intersections.h>
 
+#include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_maximum_number.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
@@ -31,11 +37,145 @@ namespace pmp {
 
 using Point_3_vec = std::vector<Point_3>;
 
+//! Apply simple intersection named parameters.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_intersection_geom_traits_named_parameters(const py::dict& params,
+                                                     Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op);
+}
+
+//! Apply simple self-intersection named parameters.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_self_intersections_named_parameters(const py::dict& params,
+                                               Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_maximum_number maximum_number_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op,
+                                            maximum_number_op);
+}
+
+//! Wrap CGAL::Polygon_mesh_processing::does_self_intersect(tmesh, np).
+template <typename NamedParameter, typename... Args>
+struct Does_self_intersect_wrapper;
+
+template <typename NamedParameter, typename PolygonMesh>
+struct Does_self_intersect_wrapper<NamedParameter, PolygonMesh> {
+  static auto call(NamedParameter& np, PolygonMesh&& pm)
+  {
+    return PMP::does_self_intersect(std::forward<PolygonMesh>(pm), np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::does_self_intersect(face_range, tmesh, np).
+template <typename NamedParameter, typename... Args>
+struct Does_self_intersect_faces_wrapper;
+
+template <typename NamedParameter, typename FaceRange, typename PolygonMesh>
+struct Does_self_intersect_faces_wrapper<NamedParameter, FaceRange, PolygonMesh> {
+  static auto call(NamedParameter& np, FaceRange&& face_range, PolygonMesh&& pm)
+  {
+    return PMP::does_self_intersect(std::forward<FaceRange>(face_range),
+                                    std::forward<PolygonMesh>(pm), np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::self_intersections(tmesh, out, np).
+template <typename NamedParameter, typename... Args>
+struct Self_intersections_wrapper;
+
+template <typename NamedParameter, typename PolygonMesh, typename OutputIterator>
+struct Self_intersections_wrapper<NamedParameter, PolygonMesh, OutputIterator> {
+  static auto call(NamedParameter& np, PolygonMesh&& pm, OutputIterator&& out)
+  {
+    return PMP::self_intersections(std::forward<PolygonMesh>(pm),
+                                   std::forward<OutputIterator>(out), np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::self_intersections(face_range, tmesh, out, np).
+template <typename NamedParameter, typename... Args>
+struct Self_intersections_faces_wrapper;
+
+template <typename NamedParameter, typename FaceRange, typename PolygonMesh,
+          typename OutputIterator>
+struct Self_intersections_faces_wrapper<NamedParameter, FaceRange, PolygonMesh,
+                                        OutputIterator> {
+  static auto call(NamedParameter& np, FaceRange&& face_range, PolygonMesh&& pm,
+                   OutputIterator&& out)
+  {
+    return PMP::self_intersections(std::forward<FaceRange>(face_range),
+                                   std::forward<PolygonMesh>(pm),
+                                   std::forward<OutputIterator>(out), np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::triangle_soup_self_intersections().
+template <typename NamedParameter, typename... Args>
+struct Triangle_soup_self_intersections_wrapper;
+
+template <typename NamedParameter, typename PointRange, typename TriangleRange,
+          typename OutputIterator>
+struct Triangle_soup_self_intersections_wrapper<NamedParameter, PointRange,
+                                                TriangleRange, OutputIterator> {
+  static auto call(NamedParameter& np, PointRange&& points,
+                   TriangleRange&& triangles, OutputIterator&& out)
+  {
+    return PMP::triangle_soup_self_intersections
+      (std::forward<PointRange>(points), std::forward<TriangleRange>(triangles),
+       std::forward<OutputIterator>(out), np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::does_triangle_soup_self_intersect().
+template <typename NamedParameter, typename... Args>
+struct Does_triangle_soup_self_intersect_wrapper;
+
+template <typename NamedParameter, typename PointRange, typename TriangleRange>
+struct Does_triangle_soup_self_intersect_wrapper<NamedParameter, PointRange,
+                                                 TriangleRange> {
+  static auto call(NamedParameter& np, PointRange&& points,
+                   TriangleRange&& triangles)
+  {
+    return PMP::does_triangle_soup_self_intersect
+      (std::forward<PointRange>(points), std::forward<TriangleRange>(triangles),
+       np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::do_intersect(tmesh, polyline/range, np).
+template <typename NamedParameter, typename... Args>
+struct Do_intersect_mesh_polyline_wrapper;
+
+template <typename NamedParameter, typename PolygonMesh, typename PolylineRange>
+struct Do_intersect_mesh_polyline_wrapper<NamedParameter, PolygonMesh,
+                                          PolylineRange> {
+  static auto call(NamedParameter& np, PolygonMesh&& pm,
+                   PolylineRange&& polyline_range)
+  {
+    return PMP::do_intersect(std::forward<PolygonMesh>(pm),
+                             std::forward<PolylineRange>(polyline_range), np);
+  }
+};
+
 //!
 template <typename PolygonMesh>
 bool does_self_intersect(const PolygonMesh& pm, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::does_self_intersect(pm);
+  return apply_intersection_geom_traits_named_parameters
+    <Does_self_intersect_wrapper>(np, pm);
 }
 
 //!
@@ -46,7 +186,8 @@ bool does_self_intersect_faces(const std::vector<typename boost::graph_traits<Po
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
 
-  return PMP::does_self_intersect(face_range, pm);
+  return apply_intersection_geom_traits_named_parameters
+    <Does_self_intersect_faces_wrapper>(np, face_range, pm);
 }
 
 //!
@@ -57,7 +198,8 @@ auto self_intersections(const PolygonMesh& pm, const py::dict& np = py::dict()) 
   using Fd = typename Gt::face_descriptor;
 
   std::vector<std::pair<Fd, Fd>> result;
-  PMP::self_intersections(pm, std::back_inserter(result));
+  apply_self_intersections_named_parameters
+    <Self_intersections_wrapper>(np, pm, std::back_inserter(result));
   return result;
 }
 
@@ -71,7 +213,9 @@ auto self_intersections_faces(const std::vector<
   using Fd = typename Gt::face_descriptor;
 
   std::vector<std::pair<Fd, Fd>> result;
-  PMP::self_intersections(face_range, pm, std::back_inserter(result));
+  apply_self_intersections_named_parameters
+    <Self_intersections_faces_wrapper>
+    (np, face_range, pm, std::back_inserter(result));
   return result;
 }
 
@@ -80,8 +224,9 @@ auto triangle_soup_self_intersections(const Point_3_vec& points,
                                       const std::vector<std::array<std::size_t, 3>>& triangles,
                                       const py::dict& np = py::dict()) {
   std::vector<std::pair<std::size_t, std::size_t>> result;
-  PMP::triangle_soup_self_intersections(points, triangles,
-                                        std::back_inserter(result));
+  apply_self_intersections_named_parameters
+    <Triangle_soup_self_intersections_wrapper>
+    (np, points, triangles, std::back_inserter(result));
   return result;
 }
 
@@ -89,7 +234,8 @@ auto triangle_soup_self_intersections(const Point_3_vec& points,
 auto does_triangle_soup_self_intersect(const Point_3_vec& points,
                                        const std::vector<std::array<std::size_t, 3>>& triangles,
                                        const py::dict& np = py::dict()) {
-  return PMP::does_triangle_soup_self_intersect(points, triangles);
+  return apply_intersection_geom_traits_named_parameters
+    <Does_triangle_soup_self_intersect_wrapper>(np, points, triangles);
 }
 
 /*! Determine whether two polylines intersect.
@@ -118,7 +264,8 @@ bool do_intersect_meshes(const PolygonMesh& pm1, const PolygonMesh& pm2,
 template <typename PolygonMesh>
 bool do_intersect_mesh_polyline(const PolygonMesh& pm, const Point_3_vec& polyline, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::do_intersect(pm, polyline);
+  return apply_intersection_geom_traits_named_parameters
+    <Do_intersect_mesh_polyline_wrapper>(np, pm, polyline);
 }
 
 //!
@@ -126,7 +273,8 @@ template <typename PolygonMesh>
 bool do_intersect_mesh_polyline_range(const PolygonMesh& pm, const std::vector<Point_3_vec>& range,
                                       const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  return PMP::do_intersect(pm, range);
+  return apply_intersection_geom_traits_named_parameters
+    <Do_intersect_mesh_polyline_wrapper>(np, pm, range);
 }
 
 //!
