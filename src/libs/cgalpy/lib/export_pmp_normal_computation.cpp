@@ -20,6 +20,7 @@
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_vertex_point_map.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
@@ -47,9 +48,10 @@ Vector_3 compute_face_normal(const typename boost::graph_traits<PolygonMesh>::fa
   using Fd = typename boost::graph_traits<Pm>::face_descriptor;
 
   auto np = CGAL::parameters::default_values();
-  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_vertex_point_map<Pm> vpm_op;
+  cgalpy::Named_parameter_geom_traits gt_op;
   cgalpy::Named_parameter_wrapper<Compute_face_normal_wrapper, const Fd&, const Pm&> wrapper(f, mesh);
-  return cgalpy::named_parameter_applicator(wrapper, np, params, op);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, vpm_op, gt_op);
 }
 
 /*! A class template that wraps the function template
@@ -68,9 +70,10 @@ void compute_face_normals(const PolygonMesh& mesh, FaceNormalMap face_normals, c
   using Fn_map = FaceNormalMap;
 
   auto np = CGAL::parameters::default_values();
-  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_vertex_point_map<Pm> vpm_op;
+  cgalpy::Named_parameter_geom_traits gt_op;
   cgalpy::Named_parameter_wrapper<Compute_face_normals_wrapper, const Pm&, const Fn_map&> wrapper(mesh, face_normals);
-  cgalpy::named_parameter_applicator(wrapper, np, params, op);
+  cgalpy::named_parameter_applicator(wrapper, np, params, vpm_op, gt_op);
 }
 
 /*! A class template that wraps the function template
@@ -91,10 +94,11 @@ auto compute_normals(const PolygonMesh& pm, VertexNormalMap vnormals, FaceNormal
   using Fn_map = FaceNormalMap;
 
   auto np = CGAL::parameters::default_values();
-  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_vertex_point_map<Pm> vpm_op;
+  cgalpy::Named_parameter_geom_traits gt_op;
   cgalpy::Named_parameter_wrapper<Compute_normals_wrapper, const Pm&, const Vn_map&, const Fn_map&>
     wrapper(pm, vnormals, fnormals);
-  return cgalpy::named_parameter_applicator(wrapper, np, params, op);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, vpm_op, gt_op);
 }
 
 /*! A class template that wraps the function template
@@ -114,9 +118,10 @@ Vector_3 compute_vertex_normal(const typename boost::graph_traits<PolygonMesh>::
   using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
 
   auto np = CGAL::parameters::default_values();
-  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_vertex_point_map<Pm> vpm_op;
+  cgalpy::Named_parameter_geom_traits gt_op;
   cgalpy::Named_parameter_wrapper<Compute_vertex_normal_wrapper, const Vd&, const Pm&> wrapper(v, mesh);
-  return cgalpy::named_parameter_applicator(wrapper, np, params, op);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, vpm_op, gt_op);
 }
 
 /*! A class template that wraps the function template
@@ -136,9 +141,10 @@ auto compute_vertex_normals(const PolygonMesh& mesh, VertexNormalMap vertex_norm
   using Vn_map = VertexNormalMap;
 
   auto np = CGAL::parameters::default_values();
-  cgalpy::Named_parameter_geom_traits op;
+  cgalpy::Named_parameter_vertex_point_map<Pm> vpm_op;
+  cgalpy::Named_parameter_geom_traits gt_op;
   cgalpy::Named_parameter_wrapper<Compute_vertex_normals_wrapper, const Pm&, const Vn_map&> wrapper(mesh, vertex_normals);
-  return cgalpy::named_parameter_applicator(wrapper, np, params, op);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, vpm_op, gt_op);
 }
 
 
