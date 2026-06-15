@@ -90,6 +90,18 @@ struct Remove_connected_components_wrapper {
 };
 
 //!
+/*! A class template that wraps the function template
+ * CGAL::Polygon_mesh_processing::split_connected_components()
+ */
+template <typename NamedParameter, typename... Args>
+struct Split_connected_components_wrapper {
+  static auto call(NamedParameter& np, Args&&... args)
+  {
+    return PMP::split_connected_components(std::forward<Args>(args)..., np);
+  }
+};
+
+//!
 template <typename PolygonMesh>
 auto connected_component(typename boost::graph_traits<PolygonMesh>::face_descriptor seed_face, PolygonMesh& pm,
                          const py::dict& np) {
@@ -352,15 +364,17 @@ auto split_connected_components(PolygonMesh& pmesh, std::vector<PolygonMesh>& cc
                                 const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
 
-  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
-    np.contains("edge_is_constrained_map") ? np["edge_internal_map"] : py::none());
   auto fpm = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP1",
     np.contains("face_patch_map") ? np["face_internal_map"] : py::none());
   // TODO: add index maps
-  PMP::split_connected_components(pmesh, cc_meshes);
+  auto default_np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_edge_is_constrained_map<Pm> eicm_op;
+  cgalpy::Named_parameter_wrapper<Split_connected_components_wrapper,
+                                  Pm&, std::vector<Pm>&>
+    wrapper(pmesh, cc_meshes);
+  cgalpy::named_parameter_applicator(wrapper, default_np, np, eicm_op);
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (! np.contains("edge_is_constrained_map")) pmesh.remove_property_map(eicm);
   if (! np.contains("face_patch_map")) pmesh.remove_property_map(fpm);
 #endif
 
