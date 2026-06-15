@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #include <vector>
+#include <utility>
 
 #include <boost/graph/graph_traits.hpp>
 
@@ -14,6 +15,9 @@
 
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 
+#include "cgalpy/named_parameter_applicator.hpp"
+#include "cgalpy/Named_parameter_dry_run.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/pmp_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
@@ -24,6 +28,30 @@ namespace pmp_doc = cgalpy::pmp::docstrings;
 
 namespace cgalpy {
 namespace pmp {
+
+/*! A class template that wraps the function template
+ * CGAL::Polygon_mesh_processing::keep_large_connected_components()
+ */
+template <typename NamedParameter, typename... Args>
+struct Keep_large_connected_components_wrapper {
+  static auto call(NamedParameter& np, Args&&... args)
+  {
+    return PMP::keep_large_connected_components(std::forward<Args>(args)...,
+                                                np);
+  }
+};
+
+/*! A class template that wraps the function template
+ * CGAL::Polygon_mesh_processing::keep_largest_connected_components()
+ */
+template <typename NamedParameter, typename... Args>
+struct Keep_largest_connected_components_wrapper {
+  static auto call(NamedParameter& np, Args&&... args)
+  {
+    return PMP::keep_largest_connected_components(std::forward<Args>(args)...,
+                                                  np);
+  }
+};
 
 //!
 template <typename PolygonMesh>
@@ -142,6 +170,15 @@ auto keep_large_connected_components(PolygonMesh& pmesh, const ThresholdValueTyp
     np.contains("face_size_map") ? np["face_size_map"] : py::none(), 1);
   bool vimap = np.contains("vertex_index_map");
   bool fimap = np.contains("face_index_map");
+  auto call_pmp = [&]() {
+    auto default_np = CGAL::parameters::default_values();
+    cgalpy::Named_parameter_dry_run dry_run_op;
+    cgalpy::Named_parameter_wrapper<Keep_large_connected_components_wrapper,
+                                    Pm&, const ThresholdValueType&>
+      wrapper(pmesh, threshold_value);
+    return cgalpy::named_parameter_applicator(wrapper, default_np, np,
+                                             dry_run_op);
+  };
   std::size_t retv;
 
   if (vimap && fimap) {
@@ -149,20 +186,20 @@ auto keep_large_connected_components(PolygonMesh& pmesh, const ThresholdValueTyp
       np.contains("vertex_index_map") ? np["vertex_internal_map"] : py::none());
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP3",
       np.contains("face_index_map") ? np["face_internal_map"] : py::none());
-    retv = PMP::keep_large_connected_components(pmesh, threshold_value);
+    retv = call_pmp();
   }
   else if (vimap) {
     auto vim = get_vertex_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
       np.contains("vertex_index_map") ? np["vertex_internal_map"] : py::none());
-    retv = PMP::keep_large_connected_components(pmesh, threshold_value);
+    retv = call_pmp();
   }
   else if (fimap) {
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
       np.contains("face_index_map") ? np["face_internal_map"] : py::none());
-    retv = PMP::keep_large_connected_components(pmesh, threshold_value);
+    retv = call_pmp();
   }
   else {
-    retv = PMP::keep_large_connected_components(pmesh, threshold_value);
+    retv = call_pmp();
   }
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
@@ -185,6 +222,15 @@ auto keep_largest_connected_components(PolygonMesh& pmesh, std::size_t nb_compon
                                                 np.contains("face_size_map") ? np["face_size_map"] : py::none(), 1);
   bool vimap = np.contains("vertex_index_map");
   bool fimap = np.contains("face_index_map");
+  auto call_pmp = [&]() {
+    auto default_np = CGAL::parameters::default_values();
+    cgalpy::Named_parameter_dry_run dry_run_op;
+    cgalpy::Named_parameter_wrapper<Keep_largest_connected_components_wrapper,
+                                    Pm&, const std::size_t&>
+      wrapper(pmesh, nb_components_to_keep);
+    return cgalpy::named_parameter_applicator(wrapper, default_np, np,
+                                             dry_run_op);
+  };
   std::size_t retv;
 
   if (vimap && fimap) {
@@ -193,21 +239,21 @@ auto keep_largest_connected_components(PolygonMesh& pmesh, std::size_t nb_compon
                                                     np["vertex_internal_map"] : py::none());
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP3",
                                                   np.contains("face_index_map") ? np["face_internal_map"] : py::none());
-    retv = PMP::keep_largest_connected_components(pmesh, nb_components_to_keep);
+    retv = call_pmp();
   }
   else if (vimap) {
     auto vim = get_vertex_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
                                                     np.contains("vertex_index_map") ?
                                                     np["vertex_internal_map"] : py::none());
-    retv = PMP::keep_largest_connected_components(pmesh, nb_components_to_keep);
+    retv = call_pmp();
   }
   else if (fimap) {
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
                                                   np.contains("face_index_map") ? np["face_internal_map"] : py::none());
-    retv = PMP::keep_largest_connected_components(pmesh, nb_components_to_keep);
+    retv = call_pmp();
   }
   else {
-    retv = PMP::keep_largest_connected_components(pmesh, nb_components_to_keep);
+    retv = call_pmp();
   }
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
