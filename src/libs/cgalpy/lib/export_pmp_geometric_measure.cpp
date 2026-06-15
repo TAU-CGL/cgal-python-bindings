@@ -8,6 +8,7 @@
 
 #include <tuple>
 #include <vector>
+#include <utility>
 
 #include <boost/graph/graph_traits.hpp>
 
@@ -18,6 +19,9 @@
 
 #include <CGAL/Polygon_mesh_processing/measure.h>
 
+#include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
@@ -28,11 +32,181 @@ namespace pmp_doc = cgalpy::pmp::docstrings;
 namespace cgalpy {
 namespace pmp {
 
+/*! Apply the geom_traits named parameter to a PMP measure wrapper. */
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_measure_geom_traits(const py::dict& params, Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op);
+}
+
+/*! A class template that wraps the full-mesh overload of
+ * CGAL::Polygon_mesh_processing::area()
+ */
+template <typename NamedParameter, typename... Args>
+struct Area_mesh_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh>
+struct Area_mesh_wrapper<NamedParameter, TriangleMesh> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm)
+  {
+    return PMP::area(faces(tm), std::forward<TriangleMesh>(tm), np);
+  }
+};
+
+/*! A class template that wraps the face-range overload of
+ * CGAL::Polygon_mesh_processing::area()
+ */
+template <typename NamedParameter, typename... Args>
+struct Area_range_wrapper;
+
+template <typename NamedParameter, typename FaceRange, typename TriangleMesh>
+struct Area_range_wrapper<NamedParameter, FaceRange, TriangleMesh> {
+  static auto call(NamedParameter& np, FaceRange&& face_range,
+                   TriangleMesh&& tm)
+  {
+    return PMP::area(std::forward<FaceRange>(face_range),
+                     std::forward<TriangleMesh>(tm), np);
+  }
+};
+
+/*! A class template that wraps CGAL::Polygon_mesh_processing::centroid(). */
+template <typename NamedParameter, typename... Args>
+struct Centroid_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh>
+struct Centroid_wrapper<NamedParameter, TriangleMesh> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm)
+  { return PMP::centroid(std::forward<TriangleMesh>(tm), np); }
+};
+
+/*! A class template that wraps CGAL::Polygon_mesh_processing::edge_length(). */
+template <typename NamedParameter, typename... Args>
+struct Edge_length_wrapper;
+
+template <typename NamedParameter, typename HalfedgeDescriptor,
+          typename TriangleMesh>
+struct Edge_length_wrapper<NamedParameter, HalfedgeDescriptor, TriangleMesh> {
+  static auto call(NamedParameter& np, HalfedgeDescriptor&& h,
+                   TriangleMesh&& tm)
+  {
+    return PMP::edge_length(std::forward<HalfedgeDescriptor>(h),
+                            std::forward<TriangleMesh>(tm), np);
+  }
+};
+
+/*! A class template that wraps CGAL::Polygon_mesh_processing::face_area(). */
+template <typename NamedParameter, typename... Args>
+struct Face_area_wrapper;
+
+template <typename NamedParameter, typename FaceDescriptor,
+          typename TriangleMesh>
+struct Face_area_wrapper<NamedParameter, FaceDescriptor, TriangleMesh> {
+  static auto call(NamedParameter& np, FaceDescriptor&& f, TriangleMesh&& tm)
+  {
+    return PMP::face_area(std::forward<FaceDescriptor>(f),
+                          std::forward<TriangleMesh>(tm), np);
+  }
+};
+
+/*! A class template that wraps
+ * CGAL::Polygon_mesh_processing::face_aspect_ratio().
+ */
+template <typename NamedParameter, typename... Args>
+struct Face_aspect_ratio_wrapper;
+
+template <typename NamedParameter, typename FaceDescriptor,
+          typename TriangleMesh>
+struct Face_aspect_ratio_wrapper<NamedParameter, FaceDescriptor,
+                                 TriangleMesh> {
+  static auto call(NamedParameter& np, FaceDescriptor&& f, TriangleMesh&& tm)
+  {
+    return PMP::face_aspect_ratio(std::forward<FaceDescriptor>(f),
+                                  std::forward<TriangleMesh>(tm), np);
+  }
+};
+
+/*! A class template that wraps
+ * CGAL::Polygon_mesh_processing::face_border_length().
+ */
+template <typename NamedParameter, typename... Args>
+struct Face_border_length_wrapper;
+
+template <typename NamedParameter, typename HalfedgeDescriptor,
+          typename TriangleMesh>
+struct Face_border_length_wrapper<NamedParameter, HalfedgeDescriptor,
+                                  TriangleMesh> {
+  static auto call(NamedParameter& np, HalfedgeDescriptor&& h,
+                   TriangleMesh&& tm)
+  {
+    return PMP::face_border_length(std::forward<HalfedgeDescriptor>(h),
+                                   std::forward<TriangleMesh>(tm), np);
+  }
+};
+
+/*! A class template that wraps CGAL::Polygon_mesh_processing::longest_border(). */
+template <typename NamedParameter, typename... Args>
+struct Longest_border_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh>
+struct Longest_border_wrapper<NamedParameter, TriangleMesh> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm)
+  { return PMP::longest_border(std::forward<TriangleMesh>(tm), np); }
+};
+
+/*! A class template that wraps
+ * CGAL::Polygon_mesh_processing::squared_edge_length().
+ */
+template <typename NamedParameter, typename... Args>
+struct Squared_edge_length_wrapper;
+
+template <typename NamedParameter, typename EdgeDescriptor,
+          typename TriangleMesh>
+struct Squared_edge_length_wrapper<NamedParameter, EdgeDescriptor,
+                                   TriangleMesh> {
+  static auto call(NamedParameter& np, EdgeDescriptor&& e, TriangleMesh&& tm)
+  {
+    return PMP::squared_edge_length(std::forward<EdgeDescriptor>(e),
+                                    std::forward<TriangleMesh>(tm), np);
+  }
+};
+
+/*! A class template that wraps
+ * CGAL::Polygon_mesh_processing::squared_face_area().
+ */
+template <typename NamedParameter, typename... Args>
+struct Squared_face_area_wrapper;
+
+template <typename NamedParameter, typename FaceDescriptor,
+          typename TriangleMesh>
+struct Squared_face_area_wrapper<NamedParameter, FaceDescriptor,
+                                 TriangleMesh> {
+  static auto call(NamedParameter& np, FaceDescriptor&& f, TriangleMesh&& tm)
+  {
+    return PMP::squared_face_area(std::forward<FaceDescriptor>(f),
+                                  std::forward<TriangleMesh>(tm), np);
+  }
+};
+
+/*! A class template that wraps CGAL::Polygon_mesh_processing::volume(). */
+template <typename NamedParameter, typename... Args>
+struct Volume_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh>
+struct Volume_wrapper<NamedParameter, TriangleMesh> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm)
+  { return PMP::volume(std::forward<TriangleMesh>(tm), np); }
+};
+
 //!
 template <typename TriangleMesh>
 auto area(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::area(tm);
+  return apply_measure_geom_traits<Area_mesh_wrapper>(np, tm);
 }
 
 //!
@@ -42,14 +216,14 @@ auto area_f(const std::vector<typename boost::graph_traits<TriangleMesh>::face_d
   using Tm = TriangleMesh;
   using Gt = boost::graph_traits<TriangleMesh>;
   using Fd = typename Gt::face_descriptor;
-  return PMP::area(face_range, tm);
+  return apply_measure_geom_traits<Area_range_wrapper>(np, face_range, tm);
 }
 
 //!
 template <typename TriangleMesh>
 auto centroid(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::centroid(tm);
+  return apply_measure_geom_traits<Centroid_wrapper>(np, tm);
 }
 
 //!
@@ -57,7 +231,7 @@ template <typename TriangleMesh>
 auto edge_length(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& e, const TriangleMesh& tm,
                  const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::edge_length(e, tm);
+  return apply_measure_geom_traits<Edge_length_wrapper>(np, e, tm);
 }
 
 //!
@@ -65,14 +239,14 @@ template <typename TriangleMesh>
 auto face_area(typename boost::graph_traits<TriangleMesh>::face_descriptor& f, const TriangleMesh& tm,
                const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::face_area(f, tm);
+  return apply_measure_geom_traits<Face_area_wrapper>(np, f, tm);
 }
 
 template <typename TriangleMesh>
 auto face_aspect_ratio(typename boost::graph_traits<TriangleMesh>::face_descriptor& f, const TriangleMesh& tm,
                        const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::face_aspect_ratio(f, tm);
+  return apply_measure_geom_traits<Face_aspect_ratio_wrapper>(np, f, tm);
 }
 
 //!
@@ -80,14 +254,14 @@ template <typename TriangleMesh>
 auto face_border_length(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& h, const TriangleMesh& tm,
                         const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::face_border_length(h, tm);
+  return apply_measure_geom_traits<Face_border_length_wrapper>(np, h, tm);
 }
 
 //!
 template <typename TriangleMesh>
 auto longest_border(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::longest_border(tm);
+  return apply_measure_geom_traits<Longest_border_wrapper>(np, tm);
 }
 
 //!
@@ -108,7 +282,7 @@ template <typename TriangleMesh>
 auto squared_edge_length(typename boost::graph_traits<TriangleMesh>::edge_descriptor& e,
                          const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::squared_edge_length(e, tm);
+  return apply_measure_geom_traits<Squared_edge_length_wrapper>(np, e, tm);
 }
 
 //!
@@ -116,13 +290,13 @@ template <typename TriangleMesh>
 auto squared_face_area(typename boost::graph_traits<TriangleMesh>::face_descriptor& f,
                        const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::squared_face_area(f, tm);
+  return apply_measure_geom_traits<Squared_face_area_wrapper>(np, f, tm);
 }
 
 template <typename TriangleMesh>
 auto volume(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return PMP::volume(tm);
+  return apply_measure_geom_traits<Volume_wrapper>(np, tm);
 }
 
 }
