@@ -164,8 +164,6 @@ template <typename PolygonMesh, typename ThresholdValueType>
 auto keep_large_connected_components(PolygonMesh& pmesh, const ThresholdValueType threshold_value,
                                      const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
-    np.contains("edge_is_constrained_map") ? np["edge_internal_map"] : py::none());
   auto fsm = get_face_prop_map<Pm, ThresholdValueType>(pmesh, "INTERNAL_MAP1",
     np.contains("face_size_map") ? np["face_size_map"] : py::none(), 1);
   bool vimap = np.contains("vertex_index_map");
@@ -173,11 +171,12 @@ auto keep_large_connected_components(PolygonMesh& pmesh, const ThresholdValueTyp
   auto call_pmp = [&]() {
     auto default_np = CGAL::parameters::default_values();
     cgalpy::Named_parameter_dry_run dry_run_op;
+    cgalpy::Named_parameter_edge_is_constrained_map<Pm> eicm_op;
     cgalpy::Named_parameter_wrapper<Keep_large_connected_components_wrapper,
                                     Pm&, const ThresholdValueType&>
       wrapper(pmesh, threshold_value);
     return cgalpy::named_parameter_applicator(wrapper, default_np, np,
-                                             dry_run_op);
+                                             dry_run_op, eicm_op);
   };
   std::size_t retv;
 
@@ -203,7 +202,6 @@ auto keep_large_connected_components(PolygonMesh& pmesh, const ThresholdValueTyp
   }
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (! np.contains("edge_is_constrained_map")) pmesh.remove_property_map(eicm);
   if (! np.contains("face_size_map")) pmesh.remove_property_map(fsm);
 #endif
 
