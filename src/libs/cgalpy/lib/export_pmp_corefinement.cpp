@@ -4,8 +4,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
-// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
 //            Efi Fogel          <efifogel@gmail.com>
+//            Utkarsh Khajuria   <utkarshkhajuria55@gmail.com>
 
 #include <array>
 #include <functional>
@@ -38,6 +39,14 @@
 #undef CGALPY_RESTORE_CGAL_NO_DEPRECATED_CODE
 #endif
 
+#include "cgalpy/Named_parameter_allow_self_intersections.hpp"
+#include "cgalpy/Named_parameter_clip_volume.hpp"
+#include "cgalpy/Named_parameter_do_not_triangulate_faces.hpp"
+#include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_throw_on_self_intersection.hpp"
+#include "cgalpy/Named_parameter_use_compact_clipper.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Autorefinement_visitor.hpp"
 #include "cgalpy/Corefine_visitor.hpp"
 #include "cgalpy/Default_visitor.hpp"
@@ -50,10 +59,191 @@ namespace py = nanobind;
 namespace cgalpy {
 namespace pmp {
 
+//! Apply autorefine named parameters.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_autorefine_named_parameters(const py::dict& params,
+                                       Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op);
+}
+
+//! Apply clip named parameters for plane clipping.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_clip_plane_named_parameters(const py::dict& params,
+                                       Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_clip_volume clip_volume_op;
+  cgalpy::Named_parameter_use_compact_clipper use_compact_clipper_op;
+  cgalpy::Named_parameter_throw_on_self_intersection
+    throw_on_self_intersection_op;
+  cgalpy::Named_parameter_allow_self_intersections
+    allow_self_intersections_op;
+  cgalpy::Named_parameter_do_not_triangulate_faces
+    do_not_triangulate_faces_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op,
+                                            clip_volume_op,
+                                            use_compact_clipper_op,
+                                            throw_on_self_intersection_op,
+                                            allow_self_intersections_op,
+                                            do_not_triangulate_faces_op);
+}
+
+//! Apply clip named parameters for cuboid clipping.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_clip_cuboid_named_parameters(const py::dict& params,
+                                        Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_clip_volume clip_volume_op;
+  cgalpy::Named_parameter_use_compact_clipper use_compact_clipper_op;
+  cgalpy::Named_parameter_throw_on_self_intersection
+    throw_on_self_intersection_op;
+  cgalpy::Named_parameter_allow_self_intersections
+    allow_self_intersections_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op,
+                                            clip_volume_op,
+                                            use_compact_clipper_op,
+                                            throw_on_self_intersection_op,
+                                            allow_self_intersections_op);
+}
+
+//! Apply split named parameters for plane splitting.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_split_plane_named_parameters(const py::dict& params,
+                                        Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_throw_on_self_intersection
+    throw_on_self_intersection_op;
+  cgalpy::Named_parameter_do_not_triangulate_faces
+    do_not_triangulate_faces_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op,
+                                            throw_on_self_intersection_op,
+                                            do_not_triangulate_faces_op);
+}
+
+//! Apply split named parameters for cuboid splitting.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_split_cuboid_named_parameters(const py::dict& params,
+                                         Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_clip_volume clip_volume_op;
+  cgalpy::Named_parameter_use_compact_clipper use_compact_clipper_op;
+  cgalpy::Named_parameter_throw_on_self_intersection
+    throw_on_self_intersection_op;
+  cgalpy::Named_parameter_allow_self_intersections
+    allow_self_intersections_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op,
+                                            clip_volume_op,
+                                            use_compact_clipper_op,
+                                            throw_on_self_intersection_op,
+                                            allow_self_intersections_op);
+}
+
+//! Wrap CGAL::Polygon_mesh_processing::autorefine(tm, np).
+template <typename NamedParameter, typename... Args>
+struct Autorefine_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh>
+struct Autorefine_wrapper<NamedParameter, TriangleMesh> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm)
+  { return PMP::autorefine(std::forward<TriangleMesh>(tm), np); }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::clip(tm, iso_cuboid, np).
+template <typename NamedParameter, typename... Args>
+struct Clip_cuboid_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh, typename IsoCuboid>
+struct Clip_cuboid_wrapper<NamedParameter, TriangleMesh, IsoCuboid> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm,
+                   IsoCuboid&& box)
+  {
+    return PMP::clip(std::forward<TriangleMesh>(tm),
+                     std::forward<IsoCuboid>(box),
+                     np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::clip(tm, plane, np).
+template <typename NamedParameter, typename... Args>
+struct Clip_plane_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh, typename Plane>
+struct Clip_plane_wrapper<NamedParameter, TriangleMesh, Plane> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm,
+                   Plane&& plane)
+  {
+    return PMP::clip(std::forward<TriangleMesh>(tm),
+                     std::forward<Plane>(plane),
+                     np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::split(tm, iso_cuboid, np).
+template <typename NamedParameter, typename... Args>
+struct Split_cuboid_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh, typename IsoCuboid>
+struct Split_cuboid_wrapper<NamedParameter, TriangleMesh, IsoCuboid> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm,
+                   IsoCuboid&& box)
+  {
+    return PMP::split(std::forward<TriangleMesh>(tm),
+                      std::forward<IsoCuboid>(box),
+                      np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::split(tm, plane, np).
+template <typename NamedParameter, typename... Args>
+struct Split_plane_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh, typename Plane>
+struct Split_plane_wrapper<NamedParameter, TriangleMesh, Plane> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm,
+                   Plane&& plane)
+  {
+    return PMP::split(std::forward<TriangleMesh>(tm),
+                      std::forward<Plane>(plane),
+                      np);
+  }
+};
+
 //!
 template <typename PolygonMesh>
 auto autorefine(PolygonMesh& tm, const py::dict& np = py::dict())
-{ PMP::autorefine(tm); }
+{
+  apply_autorefine_named_parameters<Autorefine_wrapper>(np, tm);
+}
 
 //!
 auto autorefine_triangle_soup(std::vector<Point_3>& points, std::vector<std::vector<std::size_t>>& polygons,
@@ -174,20 +364,20 @@ auto clip_c(TriangleMesh& tm, const Iso_cuboid_3& box, const py::dict& np = py::
   if (visitor) {
     try {
       auto v = py::cast<pmp::Corefine_visitor<Pm>>(np["visitor"]);
-      return PMP::clip(tm, box);
+      return apply_clip_cuboid_named_parameters<Clip_cuboid_wrapper>(np, tm, box);
     }
     catch (const py::cast_error&) {
     }
     try {
       auto v = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np["visitor"]);
-      return PMP::clip(tm, box);
+      return apply_clip_cuboid_named_parameters<Clip_cuboid_wrapper>(np, tm, box);
     }
     catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    return PMP::clip(tm, box);
+    return apply_clip_cuboid_named_parameters<Clip_cuboid_wrapper>(np, tm, box);
   }
 }
 
@@ -199,20 +389,20 @@ auto clip_p(TriangleMesh& tm, const Plane_3& plane, const py::dict& np = py::dic
   if (visitor) {
     try {
       auto v = py::cast<pmp::Corefine_visitor<Pm>>(np["visitor"]);
-      return PMP::clip(tm, plane);
+      return apply_clip_plane_named_parameters<Clip_plane_wrapper>(np, tm, plane);
     }
     catch (const py::cast_error&) {
     }
     try {
       auto v = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np["visitor"]);
-      return PMP::clip(tm, plane);
+      return apply_clip_plane_named_parameters<Clip_plane_wrapper>(np, tm, plane);
     }
     catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    return PMP::clip(tm, plane);
+    return apply_clip_plane_named_parameters<Clip_plane_wrapper>(np, tm, plane);
   }
 }
 
@@ -933,7 +1123,7 @@ void split(PolygonMesh& pm,
 template <typename TriangleMesh>
 auto split_c(TriangleMesh& tm, const Iso_cuboid_3& bbox, const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(tm, np);
-  return PMP::split(tm, bbox);
+  return apply_split_cuboid_named_parameters<Split_cuboid_wrapper>(np, tm, bbox);
 }
 
 template <typename TriangleMesh>
@@ -941,7 +1131,7 @@ auto split_p(TriangleMesh& tm,
              const Plane_3& plane,
              const py::dict& np = py::dict()) {
   // auto vpm = get_vertex_point_map(tm, np);
-  return PMP::split(tm, plane);
+  return apply_split_plane_named_parameters<Split_plane_wrapper>(np, tm, plane);
 }
 
 template <typename PolygonMesh>
