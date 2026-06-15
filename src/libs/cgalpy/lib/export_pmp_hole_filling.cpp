@@ -4,12 +4,14 @@
 // SPDX-License-Identifier: GPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
-// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
 //            Efi Fogel          <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <array>
 #include <functional>
 #include <vector>
+#include <utility>
 
 #include <boost/graph/graph_traits.hpp>
 
@@ -20,6 +22,15 @@
 
 #include <CGAL/Polygon_mesh_processing/triangulate_hole.h>
 
+#include "cgalpy/Named_parameter_density_control_factor.hpp"
+#include "cgalpy/Named_parameter_do_not_use_cubic_algorithm.hpp"
+#include "cgalpy/Named_parameter_fairing_continuity.hpp"
+#include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_threshold_distance.hpp"
+#include "cgalpy/Named_parameter_use_2d_constrained_delaunay_triangulation.hpp"
+#include "cgalpy/Named_parameter_use_delaunay_triangulation.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/HFDefault_visitor.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
@@ -32,6 +43,156 @@ namespace cgalpy {
 namespace pmp {
 
 using Point_3_vec = std::vector<Point_3>;
+
+//! Apply simple triangulation named parameters.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_hole_triangulation_named_parameters(const py::dict& params,
+                                               Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_use_delaunay_triangulation use_delaunay_op;
+  cgalpy::Named_parameter_use_2d_constrained_delaunay_triangulation
+    use_2d_cdt_op;
+  cgalpy::Named_parameter_threshold_distance threshold_distance_op;
+  cgalpy::Named_parameter_do_not_use_cubic_algorithm do_not_use_cubic_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator
+    (wrapper, np, params, geom_traits_op, use_delaunay_op, use_2d_cdt_op,
+     threshold_distance_op, do_not_use_cubic_op);
+}
+
+//! Apply simple triangulation/refinement named parameters.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_hole_refinement_named_parameters(const py::dict& params,
+                                            Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_use_delaunay_triangulation use_delaunay_op;
+  cgalpy::Named_parameter_use_2d_constrained_delaunay_triangulation
+    use_2d_cdt_op;
+  cgalpy::Named_parameter_threshold_distance threshold_distance_op;
+  cgalpy::Named_parameter_do_not_use_cubic_algorithm do_not_use_cubic_op;
+  cgalpy::Named_parameter_density_control_factor density_control_factor_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator
+    (wrapper, np, params, geom_traits_op, use_delaunay_op, use_2d_cdt_op,
+     threshold_distance_op, do_not_use_cubic_op, density_control_factor_op);
+}
+
+//! Apply simple triangulation/refinement/fairing named parameters.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_hole_fairing_named_parameters(const py::dict& params,
+                                         Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_use_delaunay_triangulation use_delaunay_op;
+  cgalpy::Named_parameter_use_2d_constrained_delaunay_triangulation
+    use_2d_cdt_op;
+  cgalpy::Named_parameter_threshold_distance threshold_distance_op;
+  cgalpy::Named_parameter_do_not_use_cubic_algorithm do_not_use_cubic_op;
+  cgalpy::Named_parameter_density_control_factor density_control_factor_op;
+  cgalpy::Named_parameter_fairing_continuity fairing_continuity_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator
+    (wrapper, np, params, geom_traits_op, use_delaunay_op, use_2d_cdt_op,
+     threshold_distance_op, do_not_use_cubic_op, density_control_factor_op,
+     fairing_continuity_op);
+}
+
+//! Wrap CGAL::Polygon_mesh_processing::triangulate_and_refine_hole().
+template <typename NamedParameter, typename... Args>
+struct Triangulate_and_refine_hole_wrapper;
+
+template <typename NamedParameter, typename PolygonMesh,
+          typename BorderHalfedge>
+struct Triangulate_and_refine_hole_wrapper<NamedParameter, PolygonMesh,
+                                           BorderHalfedge> {
+  static auto call(NamedParameter& np, PolygonMesh&& pmesh,
+                   BorderHalfedge&& border_halfedge)
+  {
+    return PMP::triangulate_and_refine_hole
+      (std::forward<PolygonMesh>(pmesh),
+       std::forward<BorderHalfedge>(border_halfedge), np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::triangulate_hole().
+template <typename NamedParameter, typename... Args>
+struct Triangulate_hole_wrapper;
+
+template <typename NamedParameter, typename PolygonMesh,
+          typename BorderHalfedge>
+struct Triangulate_hole_wrapper<NamedParameter, PolygonMesh,
+                                BorderHalfedge> {
+  static auto call(NamedParameter& np, PolygonMesh&& pmesh,
+                   BorderHalfedge&& border_halfedge)
+  {
+    return PMP::triangulate_hole(std::forward<PolygonMesh>(pmesh),
+                                 std::forward<BorderHalfedge>(border_halfedge),
+                                 np);
+  }
+};
+
+//! Wrap the one-polyline CGAL::Polygon_mesh_processing::triangulate_hole_polyline().
+template <typename NamedParameter, typename... Args>
+struct Triangulate_hole_polyline_wrapper;
+
+template <typename NamedParameter, typename PointRange,
+          typename OutputIterator>
+struct Triangulate_hole_polyline_wrapper<NamedParameter, PointRange,
+                                         OutputIterator> {
+  static auto call(NamedParameter& np, PointRange&& polyline,
+                   OutputIterator&& out)
+  {
+    return PMP::triangulate_hole_polyline
+      (std::forward<PointRange>(polyline), std::forward<OutputIterator>(out),
+       np);
+  }
+};
+
+//! Wrap the two-polyline CGAL::Polygon_mesh_processing::triangulate_hole_polyline().
+template <typename NamedParameter, typename... Args>
+struct Triangulate_hole_polyline_2_wrapper;
+
+template <typename NamedParameter, typename PointRange1,
+          typename PointRange2, typename OutputIterator>
+struct Triangulate_hole_polyline_2_wrapper<NamedParameter, PointRange1,
+                                           PointRange2, OutputIterator> {
+  static auto call(NamedParameter& np, PointRange1&& polyline1,
+                   PointRange2&& polyline2, OutputIterator&& out)
+  {
+    return PMP::triangulate_hole_polyline
+      (std::forward<PointRange1>(polyline1),
+       std::forward<PointRange2>(polyline2),
+       std::forward<OutputIterator>(out), np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::triangulate_refine_and_fair_hole().
+template <typename NamedParameter, typename... Args>
+struct Triangulate_refine_and_fair_hole_wrapper;
+
+template <typename NamedParameter, typename PolygonMesh,
+          typename BorderHalfedge>
+struct Triangulate_refine_and_fair_hole_wrapper<NamedParameter, PolygonMesh,
+                                                BorderHalfedge> {
+  static auto call(NamedParameter& np, PolygonMesh&& pmesh,
+                   BorderHalfedge&& border_halfedge)
+  {
+    return PMP::triangulate_refine_and_fair_hole
+      (std::forward<PolygonMesh>(pmesh),
+       std::forward<BorderHalfedge>(border_halfedge), np);
+  }
+};
 
 // HFDefault_visitor
 void set_start_planar_phase(HFDefault_visitor& v, const std::function<void()>& f)
@@ -94,13 +255,16 @@ auto triangulate_and_refine_hole(PolygonMesh& pmesh,
     // HFDefault_visitor
     try {
       auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
-      PMP::triangulate_and_refine_hole(pmesh, border_halfedge);
+      (void) visitor;
+      apply_hole_refinement_named_parameters
+        <Triangulate_and_refine_hole_wrapper>(np, pmesh, border_halfedge);
     } catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    PMP::triangulate_and_refine_hole(pmesh, border_halfedge);
+    apply_hole_refinement_named_parameters
+      <Triangulate_and_refine_hole_wrapper>(np, pmesh, border_halfedge);
   }
   return faces;
 }
@@ -115,13 +279,16 @@ auto triangulate_hole(PolygonMesh& pmesh,
     // HFDefault_visitor
     try {
       auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
-      PMP::triangulate_hole(pmesh, border_halfedge);
+      (void) visitor;
+      apply_hole_triangulation_named_parameters
+        <Triangulate_hole_wrapper>(np, pmesh, border_halfedge);
     } catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    PMP::triangulate_hole(pmesh, border_halfedge);
+    apply_hole_triangulation_named_parameters
+      <Triangulate_hole_wrapper>(np, pmesh, border_halfedge);
   }
 }
 
@@ -136,13 +303,18 @@ auto triangulate_hole_polyline_2(const Point_3_vec& polyline1, const Point_3_vec
     // HFDefault_visitor
     try {
       auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
-      PMP::triangulate_hole_polyline(polyline1, std::back_inserter(out));
+      (void) visitor;
+      apply_hole_triangulation_named_parameters
+        <Triangulate_hole_polyline_wrapper>(np, polyline1,
+                                            std::back_inserter(out));
     } catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    PMP::triangulate_hole_polyline(polyline1, polyline2, std::back_inserter(out));
+    apply_hole_triangulation_named_parameters
+      <Triangulate_hole_polyline_2_wrapper>(np, polyline1, polyline2,
+                                            std::back_inserter(out));
   }
   std::array<int, 3> out2 = {out[0].first, out[0].second, out[0].third};
   return out2;
@@ -158,13 +330,18 @@ auto triangulate_hole_polyline(const Point_3_vec& polyline, const py::dict& np =
     // HFDefault_visitor
     try {
       auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
-      PMP::triangulate_hole_polyline(polyline, std::back_inserter(out));
+      (void) visitor;
+      apply_hole_triangulation_named_parameters
+        <Triangulate_hole_polyline_wrapper>(np, polyline,
+                                            std::back_inserter(out));
     } catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    PMP::triangulate_hole_polyline(polyline, std::back_inserter(out));
+    apply_hole_triangulation_named_parameters
+      <Triangulate_hole_polyline_wrapper>(np, polyline,
+                                          std::back_inserter(out));
   }
   std::array<int, 3> out2 = {out[0].first, out[0].second, out[0].third};
   return out2;
@@ -193,11 +370,16 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
   auto it2 = std::back_inserter(vids);
   if (np.contains("visitor")) {
     My_visitor visitor = py::cast<My_visitor>(np["visitor"]);
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge);
+    (void) visitor;
+    auto res = apply_hole_fairing_named_parameters
+      <Triangulate_refine_and_fair_hole_wrapper>(np, pmesh,
+                                                 border_halfedge);
     return py::make_tuple(std::get<0>(res), fids, vids);
   }
   else {
-    auto res = PMP::triangulate_refine_and_fair_hole(pmesh, border_halfedge);
+    auto res = apply_hole_fairing_named_parameters
+      <Triangulate_refine_and_fair_hole_wrapper>(np, pmesh,
+                                                 border_halfedge);
     return py::make_tuple(std::get<0>(res), fids, vids);
   }
 }
