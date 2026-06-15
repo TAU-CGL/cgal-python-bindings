@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <array>
+#include <utility>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
@@ -15,6 +16,9 @@
 
 #include <CGAL/Polygon_mesh_processing/distance.h>
 
+#include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
@@ -26,6 +30,90 @@ namespace cgalpy {
 namespace pmp {
 
 using Point_3_vec = std::vector<Point_3>;
+
+/*! Apply geom_traits to a single-pack PMP distance wrapper. */
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_distance_geom_traits(const py::dict& params, Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op);
+}
+
+/*! A class template that wraps
+ * CGAL::Polygon_mesh_processing::approximate_max_distance_to_point_set().
+ */
+template <typename NamedParameter, typename... Args>
+struct Approximate_max_distance_to_point_set_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh, typename PointRange,
+          typename Precision>
+struct Approximate_max_distance_to_point_set_wrapper<NamedParameter,
+                                                     TriangleMesh,
+                                                     PointRange,
+                                                     Precision> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm,
+                   PointRange&& points, Precision&& precision)
+  {
+    return PMP::approximate_max_distance_to_point_set
+      (std::forward<TriangleMesh>(tm), std::forward<PointRange>(points),
+       std::forward<Precision>(precision), np);
+  }
+};
+
+/*! A class template that wraps
+ * CGAL::Polygon_mesh_processing::max_distance_to_triangle_mesh().
+ */
+template <typename NamedParameter, typename... Args>
+struct Max_distance_to_triangle_mesh_wrapper;
+
+template <typename NamedParameter, typename PointRange, typename TriangleMesh>
+struct Max_distance_to_triangle_mesh_wrapper<NamedParameter, PointRange,
+                                             TriangleMesh> {
+  static auto call(NamedParameter& np, PointRange&& points, TriangleMesh&& tm)
+  {
+    using TAG = CGAL::Sequential_tag;
+    return PMP::max_distance_to_triangle_mesh<TAG>
+      (std::forward<PointRange>(points), std::forward<TriangleMesh>(tm), np);
+  }
+};
+
+/*! A class template that wraps
+ * CGAL::Polygon_mesh_processing::sample_triangle_mesh().
+ */
+template <typename NamedParameter, typename... Args>
+struct Sample_triangle_mesh_wrapper;
+
+template <typename NamedParameter, typename PolygonMesh>
+struct Sample_triangle_mesh_wrapper<NamedParameter, PolygonMesh, PointRange&> {
+  static auto call(NamedParameter& np, PolygonMesh&& tm, PointRange& pts)
+  {
+    PMP::sample_triangle_mesh(std::forward<PolygonMesh>(tm),
+                              std::back_inserter(pts), np);
+  }
+};
+
+/*! A class template that wraps
+ * CGAL::Polygon_mesh_processing::sample_triangle_soup().
+ */
+template <typename NamedParameter, typename... Args>
+struct Sample_triangle_soup_wrapper;
+
+template <typename NamedParameter, typename PointRangeInput,
+          typename TriangleRange>
+struct Sample_triangle_soup_wrapper<NamedParameter, PointRangeInput,
+                                    TriangleRange, PointRange&> {
+  static auto call(NamedParameter& np, PointRangeInput&& points,
+                   TriangleRange&& triangles, PointRange& pts)
+  {
+    PMP::sample_triangle_soup(std::forward<PointRangeInput>(points),
+                              std::forward<TriangleRange>(triangles),
+                              std::back_inserter(pts), np);
+  }
+};
 
 //!
 template <typename PolygonMesh>
@@ -40,7 +128,7 @@ double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh&
 template <typename TriangleMesh>
 auto approximate_max_distance_to_point_set(const TriangleMesh& tm, const Point_3_vec& points,
                                            const double precision, const py::dict& np = py::dict()) {
-  return PMP::approximate_max_distance_to_point_set(tm, points, precision);
+  return apply_distance_geom_traits<Approximate_max_distance_to_point_set_wrapper>(np, tm, points, precision);
 }
 
 //!
@@ -75,8 +163,7 @@ auto is_Hausdorff_distance_larger(const PolygonMesh& tm1, const PolygonMesh& tm2
 template <typename TriangeMesh>
 auto max_distance_to_triangle_mesh(const Point_3_vec& points, const TriangeMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangeMesh;
-  using TAG = CGAL::Sequential_tag;
-  return PMP::max_distance_to_triangle_mesh<TAG>(points, tm);
+  return apply_distance_geom_traits<Max_distance_to_triangle_mesh_wrapper>(np, points, tm);
 }
 
 //!
@@ -84,7 +171,7 @@ template <typename PolygonMesh>
 auto sample_triangle_mesh(const PolygonMesh& tm, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   PointRange pts;
-  PMP::sample_triangle_mesh(tm, std::back_inserter(pts));
+  apply_distance_geom_traits<Sample_triangle_mesh_wrapper>(np, tm, pts);
   return pts;
 }
 
@@ -92,7 +179,7 @@ auto sample_triangle_mesh(const PolygonMesh& tm, const py::dict& np = py::dict()
 auto sample_triangle_soup(const Point_3_vec& points,
                           const std::vector<std::array<std::size_t, 3>>& triangles, const py::dict& np = py::dict()) {
   PointRange pts;
-  PMP::sample_triangle_soup(points, triangles, std::back_inserter(pts));
+  apply_distance_geom_traits<Sample_triangle_soup_wrapper>(np, points, triangles, pts);
   return pts;
 }
 
