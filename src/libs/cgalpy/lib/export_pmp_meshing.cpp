@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <vector>
 #include <tuple>
@@ -28,6 +29,12 @@
 #include <CGAL/Polygon_mesh_processing/surface_Delaunay_remeshing.h>
 #include <CGAL/Polygon_mesh_processing/tangential_relaxation.h>
 
+#include "cgalpy/Named_parameter_density_control_factor.hpp"
+#include "cgalpy/Named_parameter_do_project.hpp"
+#include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_random_seed.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Adaptive_sizing_field.hpp"
 #include "cgalpy/Custom_sizing_field.hpp"
 #include "cgalpy/pmp_helpers.hpp"
@@ -42,6 +49,131 @@ namespace pmp_doc = cgalpy::pmp::docstrings;
 
 namespace cgalpy {
 namespace pmp {
+
+//! Apply only geom_traits to meshing wrappers.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_meshing_geom_traits_named_parameters(const py::dict& params,
+                                                Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op);
+}
+
+//! Apply refine named parameters.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_refine_named_parameters(const py::dict& params, Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_density_control_factor density_control_factor_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            density_control_factor_op);
+}
+
+//! Apply random perturbation named parameters.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_random_perturbation_named_parameters(const py::dict& params,
+                                                Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_do_project do_project_op;
+  cgalpy::Named_parameter_random_seed random_seed_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op,
+                                            do_project_op,
+                                            random_seed_op);
+}
+
+//! Wrap CGAL::Polygon_mesh_processing::refine(..., np).
+template <typename NamedParameter, typename... Args>
+struct Refine_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh, typename FaceRange,
+          typename FaceOutputIterator, typename VertexOutputIterator>
+struct Refine_wrapper<NamedParameter, TriangleMesh, FaceRange,
+                      FaceOutputIterator, VertexOutputIterator> {
+  static auto call(NamedParameter& np, TriangleMesh&& tmesh,
+                   FaceRange&& face_range,
+                   FaceOutputIterator&& faces_out,
+                   VertexOutputIterator&& vertices_out)
+  {
+    return PMP::refine(std::forward<TriangleMesh>(tmesh),
+                       std::forward<FaceRange>(face_range),
+                       std::forward<FaceOutputIterator>(faces_out),
+                       std::forward<VertexOutputIterator>(vertices_out),
+                       np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::triangulate_faces(pm, np).
+template <typename NamedParameter, typename... Args>
+struct Triangulate_faces_wrapper;
+
+template <typename NamedParameter, typename PolygonMesh>
+struct Triangulate_faces_wrapper<NamedParameter, PolygonMesh> {
+  static auto call(NamedParameter& np, PolygonMesh&& pm)
+  {
+    return PMP::triangulate_faces(faces(pm), pm, np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::triangulate_faces(face_range, pm, np).
+template <typename NamedParameter, typename... Args>
+struct Triangulate_faces_range_wrapper;
+
+template <typename NamedParameter, typename FaceRange, typename PolygonMesh>
+struct Triangulate_faces_range_wrapper<NamedParameter, FaceRange, PolygonMesh> {
+  static auto call(NamedParameter& np, FaceRange&& face_range,
+                   PolygonMesh&& pm)
+  {
+    return PMP::triangulate_faces(std::forward<FaceRange>(face_range),
+                                  std::forward<PolygonMesh>(pm),
+                                  np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::random_perturbation(tmesh, size, np).
+template <typename NamedParameter, typename... Args>
+struct Random_perturbation_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh, typename Size>
+struct Random_perturbation_wrapper<NamedParameter, TriangleMesh, Size> {
+  static auto call(NamedParameter& np, TriangleMesh&& tmesh, Size&& size)
+  {
+    return PMP::random_perturbation(std::forward<TriangleMesh>(tmesh),
+                                    std::forward<Size>(size),
+                                    np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::random_perturbation(vertices, tmesh, size, np).
+template <typename NamedParameter, typename... Args>
+struct Random_perturbation_vertices_wrapper;
+
+template <typename NamedParameter, typename VertexRange,
+          typename TriangleMesh, typename Size>
+struct Random_perturbation_vertices_wrapper<NamedParameter, VertexRange,
+                                            TriangleMesh, Size> {
+  static auto call(NamedParameter& np, VertexRange&& vertices,
+                   TriangleMesh&& tmesh, Size&& size)
+  {
+    return PMP::random_perturbation(std::forward<VertexRange>(vertices),
+                                    std::forward<TriangleMesh>(tmesh),
+                                    std::forward<Size>(size),
+                                    np);
+  }
+};
 
 //!
 template <typename PolygonMesh>
@@ -133,7 +265,9 @@ auto refine(PolygonMesh& tmesh, const std::vector<typename boost::graph_traits<P
   using Vd = typename Gt::vertex_descriptor;
   std::vector<Fd> faces_out;
   std::vector<Vd> vertices_out;
-  PMP::refine(tmesh, faces, std::back_inserter(faces_out), std::back_inserter(vertices_out));
+  apply_refine_named_parameters<Refine_wrapper>
+    (np, tmesh, faces, std::back_inserter(faces_out),
+     std::back_inserter(vertices_out));
   return std::make_tuple(faces_out, vertices_out);
 }
 
@@ -151,7 +285,8 @@ auto triangulate_faces(PolygonMesh& pm, const py::dict& np) {
   using Pm = PolygonMesh;
   // TODO: visitor?
   // auto vpm = get_vertex_point_map(pm, np);
-  return PMP::triangulate_faces(pm);
+  return apply_meshing_geom_traits_named_parameters
+    <Triangulate_faces_wrapper>(np, pm);
 }
 
 //!
@@ -161,7 +296,8 @@ auto triangulate_faces_r(const std::vector<typename boost::graph_traits<PolygonM
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
-  return PMP::triangulate_faces(face_range, pm);
+  return apply_meshing_geom_traits_named_parameters
+    <Triangulate_faces_range_wrapper>(np, face_range, pm);
 }
 
 //!
@@ -309,14 +445,9 @@ auto smooth_shape(PolygonMesh& pmesh, const double time, const py::dict& np = py
 template <typename TriangleMesh>
 auto random_perturbation(TriangleMesh& tmesh, const double& perturbation_max_size, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  auto vicm = get_vertex_prop_map<Tm, Point_3>(tmesh, "INTERNAL_MAP0",
-                                               np.contains("vertex_point_map") ?
-                                               np["vertex_point_map"] : py::none());
-  PMP::random_perturbation(tmesh, perturbation_max_size);
-
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (! np.contains("vertex_point_map")) tmesh.remove_property_map(vicm);
-#endif
+  // TODO: vertex_point_map, vertex_is_constrained_map
+  apply_random_perturbation_named_parameters
+    <Random_perturbation_wrapper>(np, tmesh, perturbation_max_size);
 }
 
 //!
@@ -325,9 +456,10 @@ auto random_perturbation_v(const std::vector<typename boost::graph_traits<Polygo
                            PolygonMesh& pmesh, const double& perturbation_max_size, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
-  auto vicm = get_vertex_prop_map<Pm, Point_3>(pmesh, "INTERNAL_MAP0",
-                                               np.contains("vertex_point_map") ? np["vertex_point_map"] : py::none());
-  PMP::random_perturbation(vertices, pmesh, perturbation_max_size);
+  // TODO: vertex_point_map, vertex_is_constrained_map
+  apply_random_perturbation_named_parameters
+    <Random_perturbation_vertices_wrapper>(np, vertices, pmesh,
+                                           perturbation_max_size);
 }
 
 }
