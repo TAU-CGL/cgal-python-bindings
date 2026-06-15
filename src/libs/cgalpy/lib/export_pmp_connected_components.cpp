@@ -365,7 +365,7 @@ auto split_connected_components(PolygonMesh& pmesh, std::vector<PolygonMesh>& cc
   using Pm = PolygonMesh;
 
   auto fpm = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP1",
-    np.contains("face_patch_map") ? np["face_internal_map"] : py::none());
+    np.contains("face_patch_map") ? np["face_patch_map"] : py::none());
   // TODO: add index maps
   auto default_np = CGAL::parameters::default_values();
   cgalpy::Named_parameter_edge_is_constrained_map<Pm> eicm_op;
