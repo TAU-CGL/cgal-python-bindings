@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <vector>
 #include <utility>
@@ -338,19 +339,19 @@ auto remove_connected_components(PolygonMesh& pm,
   bool fimap = np.contains("face_index_map");
   if (vimap && fimap) {
     auto vim = get_vertex_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP1",
-      np.contains("vertex_index_map") ? np["vertex_internal_map"] : py::none());
+      np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
     auto fim = get_face_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP2",
-      np.contains("face_index_map") ? np["face_internal_map"] : py::none());
+      np.contains("face_index_map") ? np["face_index_map"] : py::none());
     call_pmp();
   }
   else if (vimap) {
     auto vim = get_vertex_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP1",
-      np.contains("vertex_index_map") ? np["vertex_internal_map"] : py::none());
+      np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
     call_pmp();
   }
   else if (fimap) {
     auto fim = get_face_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP1",
-      np.contains("face_index_map") ? np["face_internal_map"] : py::none());
+      np.contains("face_index_map") ? np["face_index_map"] : py::none());
     call_pmp();
   }
   else {
