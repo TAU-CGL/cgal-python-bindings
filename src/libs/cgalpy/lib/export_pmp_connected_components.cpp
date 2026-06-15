@@ -17,6 +17,7 @@
 
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Named_parameter_dry_run.hpp"
+#include "cgalpy/Named_parameter_edge_is_constrained_map.hpp"
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/pmp_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
@@ -28,6 +29,17 @@ namespace pmp_doc = cgalpy::pmp::docstrings;
 
 namespace cgalpy {
 namespace pmp {
+
+/*! A class template that wraps the function template
+ * CGAL::Polygon_mesh_processing::connected_components()
+ */
+template <typename NamedParameter, typename... Args>
+struct Connected_components_wrapper {
+  static auto call(NamedParameter& np, Args&&... args)
+  {
+    return PMP::connected_components(std::forward<Args>(args)..., np);
+  }
+};
 
 /*! A class template that wraps the function template
  * CGAL::Polygon_mesh_processing::keep_large_connected_components()
@@ -85,24 +97,12 @@ auto connected_components_map(PolygonMesh& pm,
                               const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   using Fcm = FaceComponentMap;
-  using value_type = typename boost::property_traits<Fcm>::value_type;
-  value_type retv;
-  auto eicm = get_edge_prop_map<Pm, bool>(pm, "INTERNAL_MAP0",
-    np.contains("edge_is_constrained_map") ? np["edge_internal_map"] : py::none());
-  if (np.contains("face_index_map")) {
-    auto fim = get_face_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP1",
-                                                  np.contains("face_index_map") ?
-                                                  np["face_internal_map"] : py::none());
-    retv = PMP::connected_components(pm, fccmap);
-  }
-  else {
-    retv = PMP::connected_components(pm, fccmap);
-  }
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (! np.contains("edge_is_constrained_map")) pm.remove_property_map(eicm);
-#endif
 
-  return retv;
+  auto default_np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_edge_is_constrained_map<Pm> eicm_op;
+  cgalpy::Named_parameter_wrapper<Connected_components_wrapper, Pm&, Fcm&>
+    wrapper(pm, fccmap);
+  return cgalpy::named_parameter_applicator(wrapper, default_np, np, eicm_op);
 }
 
 //!
