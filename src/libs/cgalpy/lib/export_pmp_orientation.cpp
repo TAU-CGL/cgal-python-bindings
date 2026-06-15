@@ -4,7 +4,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
-// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <functional>
 #include <vector>
@@ -22,6 +23,10 @@
 #include <CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h>
 #include <CGAL/Polygon_mesh_processing/orientation.h>
 
+#include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_outward_orientation.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Default_orientation_visitor.hpp"
 #include "cgalpy/pmp_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
@@ -33,6 +38,71 @@ namespace pmp_doc = cgalpy::pmp::docstrings;
 
 namespace cgalpy {
 namespace pmp {
+
+//! Apply simple orientation named parameters.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_orientation_named_parameters(const py::dict& params, Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_outward_orientation outward_orientation_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op,
+                                            outward_orientation_op);
+}
+
+//! Apply only geom_traits for orientation predicates.
+template <template <typename...> class Wrapper, typename... Args>
+auto apply_orientation_geom_traits_named_parameters(const py::dict& params,
+                                                    Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op);
+}
+
+//! Wrap CGAL::Polygon_mesh_processing::orient(tm, np).
+template <typename NamedParameter, typename... Args>
+struct Orient_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh>
+struct Orient_wrapper<NamedParameter, TriangleMesh> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm)
+  {
+    return PMP::orient(std::forward<TriangleMesh>(tm), np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::orient_to_bound_a_volume(tm, np).
+template <typename NamedParameter, typename... Args>
+struct Orient_to_bound_a_volume_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh>
+struct Orient_to_bound_a_volume_wrapper<NamedParameter, TriangleMesh> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm)
+  {
+    return PMP::orient_to_bound_a_volume(std::forward<TriangleMesh>(tm), np);
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::is_outward_oriented(tm, np).
+template <typename NamedParameter, typename... Args>
+struct Is_outward_oriented_wrapper;
+
+template <typename NamedParameter, typename TriangleMesh>
+struct Is_outward_oriented_wrapper<NamedParameter, TriangleMesh> {
+  static auto call(NamedParameter& np, TriangleMesh&& tm)
+  {
+    return PMP::is_outward_oriented(std::forward<TriangleMesh>(tm), np);
+  }
+};
 
 //!
 template <typename Point_3, typename Visitor>
@@ -46,19 +116,7 @@ auto orient_polygon_soup(std::vector<Point_3>& points, std::vector<std::vector<s
 //!
 template <typename TriangleMesh>
 auto orient(TriangleMesh& tm, const py::dict& np = py::dict()) {
-  // auto vpm = get_vertex_point_map(tm, np);
-  if (np.contains("face_index_map")) {
-    auto fim = get_face_prop_map<TriangleMesh, std::size_t>(tm, "INTERNAL_MAP0",
-                                                            np.contains("face_index_map") ?
-                                                            np["face_internal_map"] : py::none());
-    PMP::orient(tm);
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (! np.contains("face_index_map")) tm.remove_property_map(fim);
-#endif
-  }
-  else {
-    PMP::orient(tm);
-  }
+  apply_orientation_named_parameters<Orient_wrapper>(np, tm);
 }
 
 //!
@@ -81,15 +139,7 @@ auto does_bound_a_volume(TriangleMesh& tm,
 template <typename PolygonMesh>
 void orient_to_bound_a_volume(PolygonMesh& tm,
                               const py::dict& np = py::dict()) {
-  if(np.contains("face_index_map")) {
-    auto fim = get_face_prop_map<PolygonMesh, std::size_t>(tm, "INTERNAL_MAP0",
-                                                           np.contains("face_index_map") ?
-                                                           np["face_index_map"] : py::none());
-    PMP::orient_to_bound_a_volume(tm);
-  }
-  else {
-    PMP::orient_to_bound_a_volume(tm);
-  }
+  apply_orientation_named_parameters<Orient_to_bound_a_volume_wrapper>(np, tm);
 }
 
 //!
@@ -131,7 +181,8 @@ auto volume_connected_components(TriangleMesh& tm, VolumeFaceIndexMap volume_id_
 //!
 template <typename TriangleMesh>
 auto is_outward_oriented(TriangleMesh& tm, const py::dict& np = py::dict()) {
-  return PMP::is_outward_oriented(tm);
+  return apply_orientation_geom_traits_named_parameters
+    <Is_outward_oriented_wrapper>(np, tm);
 }
 
 //!
