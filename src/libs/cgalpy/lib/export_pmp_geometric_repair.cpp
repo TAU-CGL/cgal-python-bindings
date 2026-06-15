@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <functional>
+#include <utility>
 
 #include <boost/graph/graph_traits.hpp>
 
@@ -18,6 +19,16 @@
 #include <CGAL/Polygon_mesh_processing/repair_degeneracies.h>
 #include <CGAL/Polygon_mesh_processing/repair.h>
 
+#include "cgalpy/Named_parameter_area_threshold.hpp"
+#include "cgalpy/Named_parameter_cap_threshold.hpp"
+#include "cgalpy/Named_parameter_collapse_length_threshold.hpp"
+#include "cgalpy/Named_parameter_dry_run.hpp"
+#include "cgalpy/Named_parameter_flip_triangle_height_threshold.hpp"
+#include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_needle_threshold.hpp"
+#include "cgalpy/Named_parameter_volume_threshold.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/pmp_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 
@@ -26,6 +37,44 @@ namespace PMP = CGAL::Polygon_mesh_processing;
 
 namespace cgalpy {
 namespace pmp {
+
+/*! A class template that wraps the face-range overload of
+ * CGAL::Polygon_mesh_processing::remove_almost_degenerate_faces()
+ */
+template <typename NamedParameter, typename FaceRange, typename TriangleMesh>
+struct Remove_almost_degenerate_faces_range_wrapper {
+  static auto call(NamedParameter& np, FaceRange&& face_range,
+                   TriangleMesh&& tmesh)
+  {
+    return PMP::remove_almost_degenerate_faces
+      (std::forward<FaceRange>(face_range),
+       std::forward<TriangleMesh>(tmesh), np);
+  }
+};
+
+/*! A class template that wraps the full-mesh overload of
+ * CGAL::Polygon_mesh_processing::remove_almost_degenerate_faces()
+ */
+template <typename NamedParameter, typename TriangleMesh>
+struct Remove_almost_degenerate_faces_mesh_wrapper {
+  static auto call(NamedParameter& np, TriangleMesh&& tmesh)
+  {
+    return PMP::remove_almost_degenerate_faces
+      (faces(tmesh), std::forward<TriangleMesh>(tmesh), np);
+  }
+};
+
+/*! A class template that wraps the function template
+ * CGAL::Polygon_mesh_processing::remove_connected_components_of_negligible_size()
+ */
+template <typename NamedParameter, typename... Args>
+struct Remove_connected_components_of_negligible_size_wrapper {
+  static auto call(NamedParameter& np, Args&&... args)
+  {
+    return PMP::remove_connected_components_of_negligible_size
+      (std::forward<Args>(args)..., np);
+  }
+};
 
 //!
 template <typename PolygonMesh>
@@ -62,7 +111,21 @@ auto remove_almost_degenerate_faces_r(const std::vector<typename boost::graph_tr
 
   Filter f;
   f.filter = filter;
-  auto retv = PMP::remove_almost_degenerate_faces(face_range, pmesh);
+  auto default_np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_cap_threshold cap_threshold_op;
+  cgalpy::Named_parameter_needle_threshold needle_threshold_op;
+  cgalpy::Named_parameter_collapse_length_threshold collapse_length_threshold_op;
+  cgalpy::Named_parameter_flip_triangle_height_threshold
+    flip_triangle_height_threshold_op;
+  cgalpy::Named_parameter_wrapper
+    <Remove_almost_degenerate_faces_range_wrapper,
+     const std::vector<Fd>&, Pm&>
+    wrapper(face_range, pmesh);
+  auto retv = cgalpy::named_parameter_applicator
+    (wrapper, default_np, np, geom_traits_op, cap_threshold_op,
+     needle_threshold_op, collapse_length_threshold_op,
+     flip_triangle_height_threshold_op);
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   ! np.contains("edge_is_constrained_map") ?
@@ -100,7 +163,20 @@ auto remove_almost_degenerate_faces(TriangleMesh& tmesh, const py::dict& np = py
     { return filter(p0, p1, p2); }
   };
   Filter f; f.filter = filter;
-  auto retv = PMP::remove_almost_degenerate_faces(tmesh);
+  auto default_np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_cap_threshold cap_threshold_op;
+  cgalpy::Named_parameter_needle_threshold needle_threshold_op;
+  cgalpy::Named_parameter_collapse_length_threshold collapse_length_threshold_op;
+  cgalpy::Named_parameter_flip_triangle_height_threshold
+    flip_triangle_height_threshold_op;
+  cgalpy::Named_parameter_wrapper
+    <Remove_almost_degenerate_faces_mesh_wrapper, Tm&>
+    wrapper(tmesh);
+  auto retv = cgalpy::named_parameter_applicator
+    (wrapper, default_np, np, geom_traits_op, cap_threshold_op,
+     needle_threshold_op, collapse_length_threshold_op,
+     flip_triangle_height_threshold_op);
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   ! np.contains("edge_is_constrained_map") ? tmesh.remove_property_map(eicm) : void();
@@ -119,13 +195,26 @@ auto remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
                                           np.contains("edge_is_constrained_map") ?
                                           np["edge_is_constrained_map"] : py::none());
   bool fim_flag = np.contains("face_index_map");
+  auto call_pmp = [&]() {
+    auto default_np = CGAL::parameters::default_values();
+    cgalpy::Named_parameter_geom_traits geom_traits_op;
+    cgalpy::Named_parameter_area_threshold area_threshold_op;
+    cgalpy::Named_parameter_volume_threshold volume_threshold_op;
+    cgalpy::Named_parameter_dry_run dry_run_op;
+    cgalpy::Named_parameter_wrapper
+      <Remove_connected_components_of_negligible_size_wrapper, Tm&>
+      wrapper(tmesh);
+    return cgalpy::named_parameter_applicator
+      (wrapper, default_np, np, geom_traits_op, area_threshold_op,
+       volume_threshold_op, dry_run_op);
+  };
   std::size_t retv;
   if (fim_flag) {
     auto fim = get_face_prop_map<Tm, std::size_t>(tmesh, "INTERNAL_MAP1", np["face_index_map"]);
-    retv = PMP::remove_connected_components_of_negligible_size(tmesh);
+    retv = call_pmp();
   }
   else {
-    retv = PMP::remove_connected_components_of_negligible_size(tmesh);
+    retv = call_pmp();
   }
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
