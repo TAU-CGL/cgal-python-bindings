@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria7@gmail.com>
 
 #include <vector>
 #include <array>
@@ -17,6 +18,7 @@
 #include <CGAL/Polygon_mesh_processing/distance.h>
 
 #include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_vertex_point_map.hpp"
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
@@ -31,7 +33,26 @@ namespace pmp {
 
 using Point_3_vec = std::vector<Point_3>;
 
-/*! Apply geom_traits to a single-pack PMP distance wrapper. */
+/*! Apply vertex_point_map and geom_traits to a single-mesh PMP
+ * distance wrapper.
+ */
+template <typename PolygonMesh, template <typename...> class Wrapper,
+          typename... Args>
+auto apply_distance_named_parameters(const py::dict& params, Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            vertex_point_map_op,
+                                            geom_traits_op);
+}
+
+/*! Apply geom_traits to a PMP distance wrapper that has no mesh vertex point
+ * map, such as triangle soup sampling.
+ */
 template <template <typename...> class Wrapper, typename... Args>
 auto apply_distance_geom_traits(const py::dict& params, Args&&... args)
 {
@@ -128,7 +149,8 @@ double approximate_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh&
 template <typename TriangleMesh>
 auto approximate_max_distance_to_point_set(const TriangleMesh& tm, const Point_3_vec& points,
                                            const double precision, const py::dict& np = py::dict()) {
-  return apply_distance_geom_traits<Approximate_max_distance_to_point_set_wrapper>(np, tm, points, precision);
+  using Tm = TriangleMesh;
+  return apply_distance_named_parameters<Tm, Approximate_max_distance_to_point_set_wrapper>(np, tm, points, precision);
 }
 
 //!
@@ -163,7 +185,7 @@ auto is_Hausdorff_distance_larger(const PolygonMesh& tm1, const PolygonMesh& tm2
 template <typename TriangeMesh>
 auto max_distance_to_triangle_mesh(const Point_3_vec& points, const TriangeMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangeMesh;
-  return apply_distance_geom_traits<Max_distance_to_triangle_mesh_wrapper>(np, points, tm);
+  return apply_distance_named_parameters<Tm, Max_distance_to_triangle_mesh_wrapper>(np, points, tm);
 }
 
 //!
@@ -171,7 +193,7 @@ template <typename PolygonMesh>
 auto sample_triangle_mesh(const PolygonMesh& tm, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   PointRange pts;
-  apply_distance_geom_traits<Sample_triangle_mesh_wrapper>(np, tm, pts);
+  apply_distance_named_parameters<Pm, Sample_triangle_mesh_wrapper>(np, tm, pts);
   return pts;
 }
 
