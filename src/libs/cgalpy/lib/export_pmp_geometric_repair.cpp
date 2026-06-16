@@ -4,7 +4,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
-// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria7@gmail.com>
 
 #include <vector>
 #include <functional>
@@ -25,6 +26,7 @@
 #include "cgalpy/Named_parameter_dry_run.hpp"
 #include "cgalpy/Named_parameter_flip_triangle_height_threshold.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_vertex_point_map.hpp"
 #include "cgalpy/Named_parameter_needle_threshold.hpp"
 #include "cgalpy/Named_parameter_volume_threshold.hpp"
 #include "cgalpy/Named_parameter_wrapper.hpp"
@@ -113,6 +115,7 @@ auto remove_almost_degenerate_faces_r(const std::vector<typename boost::graph_tr
   f.filter = filter;
   auto default_np = CGAL::parameters::default_values();
   cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_vertex_point_map<Pm> vertex_point_map_op;
   cgalpy::Named_parameter_cap_threshold cap_threshold_op;
   cgalpy::Named_parameter_needle_threshold needle_threshold_op;
   cgalpy::Named_parameter_collapse_length_threshold collapse_length_threshold_op;
@@ -123,8 +126,8 @@ auto remove_almost_degenerate_faces_r(const std::vector<typename boost::graph_tr
      const std::vector<Fd>&, Pm&>
     wrapper(face_range, pmesh);
   auto retv = cgalpy::named_parameter_applicator
-    (wrapper, default_np, np, geom_traits_op, cap_threshold_op,
-     needle_threshold_op, collapse_length_threshold_op,
+    (wrapper, default_np, np, geom_traits_op, vertex_point_map_op,
+     cap_threshold_op, needle_threshold_op, collapse_length_threshold_op,
      flip_triangle_height_threshold_op);
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
@@ -165,6 +168,7 @@ auto remove_almost_degenerate_faces(TriangleMesh& tmesh, const py::dict& np = py
   Filter f; f.filter = filter;
   auto default_np = CGAL::parameters::default_values();
   cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_vertex_point_map<Tm> vertex_point_map_op;
   cgalpy::Named_parameter_cap_threshold cap_threshold_op;
   cgalpy::Named_parameter_needle_threshold needle_threshold_op;
   cgalpy::Named_parameter_collapse_length_threshold collapse_length_threshold_op;
@@ -174,8 +178,8 @@ auto remove_almost_degenerate_faces(TriangleMesh& tmesh, const py::dict& np = py
     <Remove_almost_degenerate_faces_mesh_wrapper, Tm&>
     wrapper(tmesh);
   auto retv = cgalpy::named_parameter_applicator
-    (wrapper, default_np, np, geom_traits_op, cap_threshold_op,
-     needle_threshold_op, collapse_length_threshold_op,
+    (wrapper, default_np, np, geom_traits_op, vertex_point_map_op,
+     cap_threshold_op, needle_threshold_op, collapse_length_threshold_op,
      flip_triangle_height_threshold_op);
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
