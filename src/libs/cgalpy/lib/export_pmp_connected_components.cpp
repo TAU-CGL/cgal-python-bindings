@@ -319,6 +319,32 @@ auto remove_connected_components_map(PolygonMesh& pm, const std::vector<std::siz
 }
 
 //!
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+template <typename PolygonMesh>
+auto polyhedron_face_iterable_to_descriptors(py::iterable faces) {
+  using Pm = PolygonMesh;
+  using Face = typename Pm::Face;
+  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
+
+  // Polyhedron_3 exposes faces to Python as Pm::Face objects, while the PMP
+  // descriptor-sequence overloads expect BGL face descriptors.
+  std::vector<Fd> descriptors;
+  for (py::handle item : faces) {
+    Face& face = py::cast<Face&>(item);
+    descriptors.emplace_back(&face);
+  }
+  return descriptors;
+}
+
+template <typename PolygonMesh>
+auto keep_connected_components_faces(PolygonMesh& pm, py::iterable components_to_keep,
+                                     const py::dict& np = py::dict()) {
+  auto descriptors =
+    polyhedron_face_iterable_to_descriptors<PolygonMesh>(components_to_keep);
+  return keep_connected_components(pm, descriptors, np);
+}
+#endif
+
 template <typename PolygonMesh>
 auto remove_connected_components(PolygonMesh& pm,
                                  const std::vector<typename boost::graph_traits<PolygonMesh>::face_descriptor>& components_to_remove,
@@ -360,6 +386,16 @@ auto remove_connected_components(PolygonMesh& pm,
 }
 
 //!
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+template <typename PolygonMesh>
+auto remove_connected_components_faces(PolygonMesh& pm, py::iterable components_to_remove,
+                                       const py::dict& np = py::dict()) {
+  auto descriptors =
+    polyhedron_face_iterable_to_descriptors<PolygonMesh>(components_to_remove);
+  return remove_connected_components(pm, descriptors, np);
+}
+#endif
+
 template <typename PolygonMesh>
 auto split_connected_components(PolygonMesh& pmesh, std::vector<PolygonMesh>& cc_meshes,
                                 const py::dict& np = py::dict()) {
@@ -425,9 +461,15 @@ void export_pmp_connected_components(py::module_& m) {
         py::arg("pmesh"), py::arg("components_to_keep"), py::arg("fcm"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_keep_connected_components);
 #endif
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  m.def("keep_connected_components", &cgalpy::pmp::keep_connected_components_faces<Pm>,
+        py::arg("pmesh"), py::arg("components_to_keep"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_keep_connected_components_1);
+#else
   m.def("keep_connected_components", &cgalpy::pmp::keep_connected_components<Pm>,
         py::arg("pmesh"), py::arg("components_to_keep"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_keep_connected_components_1);
+#endif
   m.def("keep_large_connected_components", &cgalpy::pmp::keep_large_connected_components<Pm, std::size_t>,
         py::arg("pmesh"), py::arg("threshold_value"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_keep_large_connected_components);
@@ -444,9 +486,15 @@ void export_pmp_connected_components(py::module_& m) {
         pmp_doc::Polygon_mesh_processing_remove_connected_components);
 #endif
 
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  m.def("remove_connected_components", &cgalpy::pmp::remove_connected_components_faces<Pm>,
+        py::arg("pmesh"), py::arg("components_to_remove"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_remove_connected_components_1);
+#else
   m.def("remove_connected_components", &cgalpy::pmp::remove_connected_components<Pm>,
         py::arg("pmesh"), py::arg("components_to_remove"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_remove_connected_components_1);
+#endif
   m.def("split_connected_components", &cgalpy::pmp::split_connected_components<Pm>,
         py::arg("pmesh"), py::arg("cc_meshes"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_split_connected_components);
