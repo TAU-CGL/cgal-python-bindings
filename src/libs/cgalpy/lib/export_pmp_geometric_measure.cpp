@@ -4,7 +4,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
-// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
+//            Utkarsh Khajuria <utkarshkhajuria7@gmail.com>
 
 #include <tuple>
 #include <vector>
@@ -20,6 +21,7 @@
 #include <CGAL/Polygon_mesh_processing/measure.h>
 
 #include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_vertex_point_map.hpp"
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
@@ -32,15 +34,20 @@ namespace pmp_doc = cgalpy::pmp::docstrings;
 namespace cgalpy {
 namespace pmp {
 
-/*! Apply the geom_traits named parameter to a PMP measure wrapper. */
-template <template <typename...> class Wrapper, typename... Args>
-auto apply_measure_geom_traits(const py::dict& params, Args&&... args)
+/*! Apply the vertex_point_map and geom_traits named parameters to a PMP
+ * measure wrapper.
+ */
+template <typename PolygonMesh, template <typename...> class Wrapper,
+          typename... Args>
+auto apply_measure_named_parameters(const py::dict& params, Args&&... args)
 {
   auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
   cgalpy::Named_parameter_geom_traits geom_traits_op;
   cgalpy::Named_parameter_wrapper<Wrapper, Args...>
     wrapper(std::forward<Args>(args)...);
   return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            vertex_point_map_op,
                                             geom_traits_op);
 }
 
@@ -206,7 +213,7 @@ struct Volume_wrapper<NamedParameter, TriangleMesh> {
 template <typename TriangleMesh>
 auto area(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return apply_measure_geom_traits<Area_mesh_wrapper>(np, tm);
+  return apply_measure_named_parameters<Tm, Area_mesh_wrapper>(np, tm);
 }
 
 //!
@@ -216,14 +223,14 @@ auto area_f(const std::vector<typename boost::graph_traits<TriangleMesh>::face_d
   using Tm = TriangleMesh;
   using Gt = boost::graph_traits<TriangleMesh>;
   using Fd = typename Gt::face_descriptor;
-  return apply_measure_geom_traits<Area_range_wrapper>(np, face_range, tm);
+  return apply_measure_named_parameters<Tm, Area_range_wrapper>(np, face_range, tm);
 }
 
 //!
 template <typename TriangleMesh>
 auto centroid(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return apply_measure_geom_traits<Centroid_wrapper>(np, tm);
+  return apply_measure_named_parameters<Tm, Centroid_wrapper>(np, tm);
 }
 
 //!
@@ -231,7 +238,7 @@ template <typename TriangleMesh>
 auto edge_length(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& e, const TriangleMesh& tm,
                  const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return apply_measure_geom_traits<Edge_length_wrapper>(np, e, tm);
+  return apply_measure_named_parameters<Tm, Edge_length_wrapper>(np, e, tm);
 }
 
 //!
@@ -239,14 +246,14 @@ template <typename TriangleMesh>
 auto face_area(typename boost::graph_traits<TriangleMesh>::face_descriptor& f, const TriangleMesh& tm,
                const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return apply_measure_geom_traits<Face_area_wrapper>(np, f, tm);
+  return apply_measure_named_parameters<Tm, Face_area_wrapper>(np, f, tm);
 }
 
 template <typename TriangleMesh>
 auto face_aspect_ratio(typename boost::graph_traits<TriangleMesh>::face_descriptor& f, const TriangleMesh& tm,
                        const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return apply_measure_geom_traits<Face_aspect_ratio_wrapper>(np, f, tm);
+  return apply_measure_named_parameters<Tm, Face_aspect_ratio_wrapper>(np, f, tm);
 }
 
 //!
@@ -254,14 +261,14 @@ template <typename TriangleMesh>
 auto face_border_length(typename boost::graph_traits<TriangleMesh>::halfedge_descriptor& h, const TriangleMesh& tm,
                         const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return apply_measure_geom_traits<Face_border_length_wrapper>(np, h, tm);
+  return apply_measure_named_parameters<Tm, Face_border_length_wrapper>(np, h, tm);
 }
 
 //!
 template <typename TriangleMesh>
 auto longest_border(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return apply_measure_geom_traits<Longest_border_wrapper>(np, tm);
+  return apply_measure_named_parameters<Tm, Longest_border_wrapper>(np, tm);
 }
 
 //!
@@ -282,7 +289,7 @@ template <typename TriangleMesh>
 auto squared_edge_length(typename boost::graph_traits<TriangleMesh>::edge_descriptor& e,
                          const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return apply_measure_geom_traits<Squared_edge_length_wrapper>(np, e, tm);
+  return apply_measure_named_parameters<Tm, Squared_edge_length_wrapper>(np, e, tm);
 }
 
 //!
@@ -290,14 +297,100 @@ template <typename TriangleMesh>
 auto squared_face_area(typename boost::graph_traits<TriangleMesh>::face_descriptor& f,
                        const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return apply_measure_geom_traits<Squared_face_area_wrapper>(np, f, tm);
+  return apply_measure_named_parameters<Tm, Squared_face_area_wrapper>(np, f, tm);
 }
 
 template <typename TriangleMesh>
 auto volume(const TriangleMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  return apply_measure_geom_traits<Volume_wrapper>(np, tm);
+  return apply_measure_named_parameters<Tm, Volume_wrapper>(np, tm);
 }
+
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+
+template <typename TriangleMesh>
+auto polyhedron_face_iterable_to_descriptors(py::iterable faces) {
+  using Tm = TriangleMesh;
+  using Face = typename Tm::Face;
+  using Fd = typename boost::graph_traits<Tm>::face_descriptor;
+
+  std::vector<Fd> descriptors;
+  for (py::handle item : faces) {
+    Face& face = py::cast<Face&>(item);
+    descriptors.emplace_back(&face);
+  }
+  return descriptors;
+}
+
+template <typename TriangleMesh>
+auto area_f_faces(py::iterable face_range, const TriangleMesh& tm,
+                  const py::dict& np = py::dict()) {
+  auto descriptors = polyhedron_face_iterable_to_descriptors<TriangleMesh>(face_range);
+  return area_f<TriangleMesh>(descriptors, tm, np);
+}
+
+template <typename TriangleMesh>
+auto edge_length_halfedge(typename TriangleMesh::Halfedge& h,
+                          const TriangleMesh& tm,
+                          const py::dict& np = py::dict()) {
+  using Tm = TriangleMesh;
+  using Hd = typename boost::graph_traits<Tm>::halfedge_descriptor;
+  auto descriptor = Hd(&h);
+  return edge_length<TriangleMesh>(descriptor, tm, np);
+}
+
+template <typename TriangleMesh>
+auto face_area_face(typename TriangleMesh::Face& f, const TriangleMesh& tm,
+                    const py::dict& np = py::dict()) {
+  using Tm = TriangleMesh;
+  using Fd = typename boost::graph_traits<Tm>::face_descriptor;
+  auto descriptor = Fd(&f);
+  return face_area<TriangleMesh>(descriptor, tm, np);
+}
+
+template <typename TriangleMesh>
+auto face_aspect_ratio_face(typename TriangleMesh::Face& f,
+                            const TriangleMesh& tm,
+                            const py::dict& np = py::dict()) {
+  using Tm = TriangleMesh;
+  using Fd = typename boost::graph_traits<Tm>::face_descriptor;
+  auto descriptor = Fd(&f);
+  return face_aspect_ratio<TriangleMesh>(descriptor, tm, np);
+}
+
+template <typename TriangleMesh>
+auto face_border_length_halfedge(typename TriangleMesh::Halfedge& h,
+                                 const TriangleMesh& tm,
+                                 const py::dict& np = py::dict()) {
+  using Tm = TriangleMesh;
+  using Hd = typename boost::graph_traits<Tm>::halfedge_descriptor;
+  auto descriptor = Hd(&h);
+  return face_border_length<TriangleMesh>(descriptor, tm, np);
+}
+
+template <typename TriangleMesh>
+auto squared_edge_length_halfedge(typename TriangleMesh::Halfedge& h,
+                                  const TriangleMesh& tm,
+                                  const py::dict& np = py::dict()) {
+  using Tm = TriangleMesh;
+  using Hd = typename boost::graph_traits<Tm>::halfedge_descriptor;
+  auto descriptor = Hd(&h);
+  return apply_measure_named_parameters<Tm, Squared_edge_length_wrapper>(np,
+                                                                         descriptor,
+                                                                         tm);
+}
+
+template <typename TriangleMesh>
+auto squared_face_area_face(typename TriangleMesh::Face& f,
+                            const TriangleMesh& tm,
+                            const py::dict& np = py::dict()) {
+  using Tm = TriangleMesh;
+  using Fd = typename boost::graph_traits<Tm>::face_descriptor;
+  auto descriptor = Fd(&f);
+  return squared_face_area<TriangleMesh>(descriptor, tm, np);
+}
+
+#endif
 
 }
 } // namespace cgalpy
@@ -309,29 +402,64 @@ void export_pmp_geometric_measure(py::module_& m) {
   m.def("area", &cgalpy::pmp::area<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_area_1);
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  m.def("area", &cgalpy::pmp::area_f_faces<Pm>,
+        py::arg("face_range"), py::arg("tmesh"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_area);
+#else
   m.def("area", &cgalpy::pmp::area_f<Pm>,
         py::arg("face_range"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_area);
+#endif
   m.def("centroid", &cgalpy::pmp::centroid<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_centroid);
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  m.def("edge_length", &cgalpy::pmp::edge_length_halfedge<Pm>,
+        py::arg("h"), py::arg("tmesh"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_edge_length);
+#else
   m.def("edge_length", &cgalpy::pmp::edge_length<Pm>,
         py::arg("h"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_edge_length);
+#endif
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  m.def("face_area", &cgalpy::pmp::face_area_face<Pm>,
+        py::arg("f"), py::arg("tmesh"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_face_area);
+#else
   m.def("face_area", &cgalpy::pmp::face_area<Pm>,
         py::arg("f"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_face_area);
+#endif
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  m.def("face_aspect_ratio", &cgalpy::pmp::face_aspect_ratio_face<Pm>,
+        py::arg("f"), py::arg("tmesh"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_face_aspect_ratio);
+#else
   m.def("face_aspect_ratio", &cgalpy::pmp::face_aspect_ratio<Pm>,
         py::arg("f"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_face_aspect_ratio);
+#endif
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  m.def("face_border_length", &cgalpy::pmp::face_border_length_halfedge<Pm>,
+        py::arg("h"), py::arg("tmesh"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_face_border_length);
+#else
   m.def("face_border_length", &cgalpy::pmp::face_border_length<Pm>,
         py::arg("h"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_face_border_length);
+#endif
   m.def("longest_border", &cgalpy::pmp::longest_border<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_longest_border);
@@ -339,14 +467,28 @@ void export_pmp_geometric_measure(py::module_& m) {
         py::arg("m1"), py::arg("m2"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         pmp_doc::Polygon_mesh_processing_match_faces);
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  m.def("squared_edge_length", &cgalpy::pmp::squared_edge_length_halfedge<Pm>,
+        py::arg("e"), py::arg("tmesh"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_squared_edge_length);
+#else
   m.def("squared_edge_length", &cgalpy::pmp::squared_edge_length<Pm>,
         py::arg("e"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_squared_edge_length);
+#endif
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  m.def("squared_face_area", &cgalpy::pmp::squared_face_area_face<Pm>,
+        py::arg("f"), py::arg("tmesh"),
+        py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_squared_face_area);
+#else
   m.def("squared_face_area", &cgalpy::pmp::squared_face_area<Pm>,
         py::arg("f"), py::arg("tmesh"),
         py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_squared_face_area);
+#endif
   m.def("volume", &cgalpy::pmp::volume<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_volume);
