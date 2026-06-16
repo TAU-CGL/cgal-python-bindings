@@ -20,6 +20,7 @@
 
 #include "cgalpy/Named_parameter_first_index.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_vertex_feature_degree_map.hpp"
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/pmp_helpers.hpp"
@@ -34,32 +35,39 @@ namespace cgalpy {
 namespace pmp {
 
 //! Apply simple named parameters for feature detection.
-template <template <typename...> class Wrapper, typename... Args>
+template <typename PolygonMesh, template <typename...> class Wrapper,
+          typename... Args>
 auto apply_feature_detection_named_parameters(const py::dict& params,
                                               Args&&... args)
 {
   auto np = CGAL::parameters::default_values();
   cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_vertex_feature_degree_map<PolygonMesh>
+    vertex_feature_degree_map_op;
 
   cgalpy::Named_parameter_wrapper<Wrapper, Args...>
     wrapper(std::forward<Args>(args)...);
-  return cgalpy::named_parameter_applicator(wrapper, np, params,
-                                            geom_traits_op);
+  return cgalpy::named_parameter_applicator
+    (wrapper, np, params, geom_traits_op, vertex_feature_degree_map_op);
 }
 
 //! Apply simple named parameters for sharp-edge segmentation.
-template <template <typename...> class Wrapper, typename... Args>
+template <typename PolygonMesh, template <typename...> class Wrapper,
+          typename... Args>
 auto apply_feature_segmentation_named_parameters(const py::dict& params,
                                                  Args&&... args)
 {
   auto np = CGAL::parameters::default_values();
   cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_vertex_feature_degree_map<PolygonMesh>
+    vertex_feature_degree_map_op;
   cgalpy::Named_parameter_first_index first_index_op;
 
   cgalpy::Named_parameter_wrapper<Wrapper, Args...>
     wrapper(std::forward<Args>(args)...);
-  return cgalpy::named_parameter_applicator(wrapper, np, params,
-                                            geom_traits_op, first_index_op);
+  return cgalpy::named_parameter_applicator
+    (wrapper, np, params, geom_traits_op, vertex_feature_degree_map_op,
+     first_index_op);
 }
 
 //! Wrap CGAL::Polygon_mesh_processing::detect_sharp_edges().
@@ -102,17 +110,8 @@ struct Sharp_edges_segmentation_wrapper<NamedParameter, PolygonMesh, Angle,
 template <typename PolygonMesh, typename EBMap>
 void detect_sharp_edges(PolygonMesh& pmesh, double angle_in_deg, EBMap ebmap, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  if (np.contains("vertex_face_degree_map")) {
-    auto vfdm = get_vertex_prop_map<Pm, int>(pmesh, "INTERNAL_MAP0",
-                                             np.contains("vertex_face_degree_map") ?
-                                             np["vertex_face_degree_map"] : py::none());
-    apply_feature_detection_named_parameters
-      <Detect_sharp_edges_wrapper>(np, pmesh, angle_in_deg, ebmap);
-  }
-  else {
-    apply_feature_detection_named_parameters
-      <Detect_sharp_edges_wrapper>(np, pmesh, angle_in_deg, ebmap);
-  }
+  apply_feature_detection_named_parameters
+    <Pm, Detect_sharp_edges_wrapper>(np, pmesh, angle_in_deg, ebmap);
 }
 
 //!
@@ -123,8 +122,7 @@ sharp_edges_segmentation(PolygonMesh& pmesh, FT angle_in_deg, EdgeIsFeatureMap e
   using Pm = PolygonMesh;
   using faces_size_type = typename boost::graph_traits<Pm>::faces_size_type;
 
-  auto vfdm = get_vertex_prop_map<Pm, int>(pmesh, "INTERNAL_MAP0",
-    np.contains("vertex_face_degree_map") ? np["vertex_face_degree_map"] : py::none());
+  auto vfdm = get_vertex_prop_map<Pm, int>(pmesh, "INTERNAL_MAP0", py::none());
   faces_size_type num_patches;
   bool fimap = np.contains("face_index_map");
   bool vimap = np.contains("vertex_index_map");
@@ -135,33 +133,31 @@ sharp_edges_segmentation(PolygonMesh& pmesh, FT angle_in_deg, EdgeIsFeatureMap e
     auto vipm = get_vertex_prop_map<Pm, std::set<int>>(pmesh, "INTERNAL_MAP2",
       np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
     num_patches = apply_feature_segmentation_named_parameters
-      <Sharp_edges_segmentation_wrapper>
+      <Pm, Sharp_edges_segmentation_wrapper>
       (np, pmesh, angle_in_deg, edge_is_feature_map, patch_id_map);
   }
   else if (fimap) {
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP1",
       np.contains("face_index_map") ? np["face_index_map"] : py::none());
     num_patches = apply_feature_segmentation_named_parameters
-      <Sharp_edges_segmentation_wrapper>
+      <Pm, Sharp_edges_segmentation_wrapper>
       (np, pmesh, angle_in_deg, edge_is_feature_map, patch_id_map);
   }
   else if (vimap) {
     auto vipm = get_vertex_prop_map<Pm, std::set<int>>(pmesh, "INTERNAL_MAP2",
       np.contains("vertex_index_map") ? np["vertex_index_map"] : py::none());
     num_patches = apply_feature_segmentation_named_parameters
-      <Sharp_edges_segmentation_wrapper>
+      <Pm, Sharp_edges_segmentation_wrapper>
       (np, pmesh, angle_in_deg, edge_is_feature_map, patch_id_map);
   }
   else {
     num_patches = apply_feature_segmentation_named_parameters
-      <Sharp_edges_segmentation_wrapper>
+      <Pm, Sharp_edges_segmentation_wrapper>
       (np, pmesh, angle_in_deg, edge_is_feature_map, patch_id_map);
   }
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (! np.contains("vertex_face_degree_map")) {
-    pmesh.remove_property_map(vfdm);
-  }
+  pmesh.remove_property_map(vfdm);
 #endif
   return num_patches;
 }
