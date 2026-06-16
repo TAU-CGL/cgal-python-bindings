@@ -310,7 +310,7 @@ auto remove_connected_components_map(PolygonMesh& pm, const std::vector<std::siz
   if (np.contains("vertex_index_map")) {
     auto vim = get_vertex_prop_map<Pm, std::size_t>(pm, "INTERNAL_MAP0",
                                                     np.contains("vertex_index_map") ?
-                                                    np["vertex_internal_map"] : py::none());
+                                                    np["vertex_index_map"] : py::none());
     return PMP::remove_connected_components(pm, components_to_remove, fccmap);
   }
   else {
