@@ -149,7 +149,7 @@ auto keep_connected_components_map(PolygonMesh& pm, std::vector<std::size_t> com
   if (np.contains("vertex_index_map")) {
     auto vim = get_vertex_prop_map<PolygonMesh, std::size_t>(pm, "INTERNAL_MAP0",
                                                              np.contains("vertex_index_map") ?
-                                                             np["vertex_internal_map"] : py::none());
+                                                             np["vertex_index_map"] : py::none());
     PMP::keep_connected_components(pm, components_to_keep, fccmap);
   }
   else {
@@ -396,7 +396,7 @@ void export_pmp_connected_components(py::module_& m) {
   using faces_size_type = boost::graph_traits<Pm>::faces_size_type;
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  using Face_component_map = Pm::Property_map<Fd, faces_size_type>;
+  using Face_component_map = Pm::Property_map<Fd, std::size_t>;
 #endif
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
