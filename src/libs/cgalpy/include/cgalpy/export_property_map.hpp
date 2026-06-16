@@ -74,9 +74,15 @@ auto export_property_map_bool(py::module_& m, const std::string& name) {
     .def("__setitem__", [](Mesh_property_map& self, Key key, bool value) { self[key] = value; },
          py::arg("key"), py::arg("value"),
          "Sets the boolean value associated with a key.")
-    // Do not expose __iter__ for bool maps: CGAL Surface_mesh<bool>
-    // property maps are backed by std::vector<bool>, whose iterator yields
-    // proxy references that nanobind cannot cast safely.
+    // CGAL Surface_mesh<bool> property maps are backed by std::vector<bool>.
+    // Their iterator dereferences to a proxy reference, which nanobind cannot
+    // expose safely. Force the iterator value type to bool so Python receives
+    // ordinary bool values instead of std::vector<bool> proxy objects.
+    .def("__iter__", [](Mesh_property_map& self) {
+      using Iterator = typename Mesh_property_map::iterator;
+      return py::make_iterator<py::rv_policy::copy, Iterator, Iterator, bool>(
+        py::type<Iterator>(), "Iterator", self.begin(), self.end());
+    })
     .def("transfer", [](Mesh_property_map& self, const Mesh_property_map& other) { return self.transfer(other); },
          py::arg("other"),
          "Transfers values from another boolean property map.")
