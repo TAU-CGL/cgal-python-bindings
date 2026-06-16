@@ -26,6 +26,7 @@
 #include "cgalpy/Named_parameter_do_not_use_cubic_algorithm.hpp"
 #include "cgalpy/Named_parameter_fairing_continuity.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_vertex_point_map.hpp"
 #include "cgalpy/Named_parameter_threshold_distance.hpp"
 #include "cgalpy/Named_parameter_use_2d_constrained_delaunay_triangulation.hpp"
 #include "cgalpy/Named_parameter_use_delaunay_triangulation.hpp"
@@ -105,6 +106,79 @@ auto apply_hole_fairing_named_parameters(const py::dict& params,
   return cgalpy::named_parameter_applicator
     (wrapper, np, params, geom_traits_op, use_delaunay_op, use_2d_cdt_op,
      threshold_distance_op, do_not_use_cubic_op, density_control_factor_op,
+     fairing_continuity_op);
+}
+
+//! Apply mesh triangulation named parameters.
+template <typename PolygonMesh, template <typename...> class Wrapper,
+          typename... Args>
+auto apply_hole_mesh_triangulation_named_parameters(const py::dict& params,
+                                                    Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_use_delaunay_triangulation use_delaunay_op;
+  cgalpy::Named_parameter_use_2d_constrained_delaunay_triangulation
+    use_2d_cdt_op;
+  cgalpy::Named_parameter_threshold_distance threshold_distance_op;
+  cgalpy::Named_parameter_do_not_use_cubic_algorithm do_not_use_cubic_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator
+    (wrapper, np, params, vertex_point_map_op, geom_traits_op,
+     use_delaunay_op, use_2d_cdt_op, threshold_distance_op,
+     do_not_use_cubic_op);
+}
+
+//! Apply mesh triangulation/refinement named parameters.
+template <typename PolygonMesh, template <typename...> class Wrapper,
+          typename... Args>
+auto apply_hole_mesh_refinement_named_parameters(const py::dict& params,
+                                                 Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_use_delaunay_triangulation use_delaunay_op;
+  cgalpy::Named_parameter_use_2d_constrained_delaunay_triangulation
+    use_2d_cdt_op;
+  cgalpy::Named_parameter_threshold_distance threshold_distance_op;
+  cgalpy::Named_parameter_do_not_use_cubic_algorithm do_not_use_cubic_op;
+  cgalpy::Named_parameter_density_control_factor density_control_factor_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator
+    (wrapper, np, params, vertex_point_map_op, geom_traits_op,
+     use_delaunay_op, use_2d_cdt_op, threshold_distance_op,
+     do_not_use_cubic_op, density_control_factor_op);
+}
+
+//! Apply mesh triangulation/refinement/fairing named parameters.
+template <typename PolygonMesh, template <typename...> class Wrapper,
+          typename... Args>
+auto apply_hole_mesh_fairing_named_parameters(const py::dict& params,
+                                              Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_use_delaunay_triangulation use_delaunay_op;
+  cgalpy::Named_parameter_use_2d_constrained_delaunay_triangulation
+    use_2d_cdt_op;
+  cgalpy::Named_parameter_threshold_distance threshold_distance_op;
+  cgalpy::Named_parameter_do_not_use_cubic_algorithm do_not_use_cubic_op;
+  cgalpy::Named_parameter_density_control_factor density_control_factor_op;
+  cgalpy::Named_parameter_fairing_continuity fairing_continuity_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator
+    (wrapper, np, params, vertex_point_map_op, geom_traits_op,
+     use_delaunay_op, use_2d_cdt_op, threshold_distance_op,
+     do_not_use_cubic_op, density_control_factor_op,
      fairing_continuity_op);
 }
 
@@ -256,15 +330,15 @@ auto triangulate_and_refine_hole(PolygonMesh& pmesh,
     try {
       auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
       (void) visitor;
-      apply_hole_refinement_named_parameters
-        <Triangulate_and_refine_hole_wrapper>(np, pmesh, border_halfedge);
+      apply_hole_mesh_refinement_named_parameters
+        <Pm, Triangulate_and_refine_hole_wrapper>(np, pmesh, border_halfedge);
     } catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    apply_hole_refinement_named_parameters
-      <Triangulate_and_refine_hole_wrapper>(np, pmesh, border_halfedge);
+    apply_hole_mesh_refinement_named_parameters
+      <Pm, Triangulate_and_refine_hole_wrapper>(np, pmesh, border_halfedge);
   }
   return faces;
 }
@@ -280,15 +354,15 @@ auto triangulate_hole(PolygonMesh& pmesh,
     try {
       auto visitor = py::cast<pmp::HFDefault_visitor>(np["visitor"]);
       (void) visitor;
-      apply_hole_triangulation_named_parameters
-        <Triangulate_hole_wrapper>(np, pmesh, border_halfedge);
+      apply_hole_mesh_triangulation_named_parameters
+        <Pm, Triangulate_hole_wrapper>(np, pmesh, border_halfedge);
     } catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    apply_hole_triangulation_named_parameters
-      <Triangulate_hole_wrapper>(np, pmesh, border_halfedge);
+    apply_hole_mesh_triangulation_named_parameters
+      <Pm, Triangulate_hole_wrapper>(np, pmesh, border_halfedge);
   }
 }
 
@@ -371,18 +445,58 @@ auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
   if (np.contains("visitor")) {
     My_visitor visitor = py::cast<My_visitor>(np["visitor"]);
     (void) visitor;
-    auto res = apply_hole_fairing_named_parameters
-      <Triangulate_refine_and_fair_hole_wrapper>(np, pmesh,
-                                                 border_halfedge);
+    auto res = apply_hole_mesh_fairing_named_parameters
+      <Pm, Triangulate_refine_and_fair_hole_wrapper>(np, pmesh,
+                                                     border_halfedge);
     return py::make_tuple(std::get<0>(res), fids, vids);
   }
   else {
-    auto res = apply_hole_fairing_named_parameters
-      <Triangulate_refine_and_fair_hole_wrapper>(np, pmesh,
-                                                 border_halfedge);
+    auto res = apply_hole_mesh_fairing_named_parameters
+      <Pm, Triangulate_refine_and_fair_hole_wrapper>(np, pmesh,
+                                                     border_halfedge);
     return py::make_tuple(std::get<0>(res), fids, vids);
   }
 }
+
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+
+//! Convert a Polyhedron halfedge object to a halfedge descriptor and
+//! triangulate a hole.
+template <typename PolygonMesh>
+auto triangulate_hole_halfedge(PolygonMesh& pmesh,
+                               typename PolygonMesh::Halfedge& border_halfedge,
+                               const py::dict& np = py::dict())
+{
+  using Hd = typename boost::graph_traits<PolygonMesh>::halfedge_descriptor;
+  auto descriptor = Hd(&border_halfedge);
+  return triangulate_hole<PolygonMesh>(pmesh, descriptor, np);
+}
+
+//! Convert a Polyhedron halfedge object to a halfedge descriptor and
+//! triangulate/refine a hole.
+template <typename PolygonMesh>
+auto triangulate_and_refine_hole_halfedge
+(PolygonMesh& pmesh, typename PolygonMesh::Halfedge& border_halfedge,
+ const py::dict& np = py::dict())
+{
+  using Hd = typename boost::graph_traits<PolygonMesh>::halfedge_descriptor;
+  auto descriptor = Hd(&border_halfedge);
+  return triangulate_and_refine_hole<PolygonMesh>(pmesh, descriptor, np);
+}
+
+//! Convert a Polyhedron halfedge object to a halfedge descriptor and
+//! triangulate/refine/fair a hole.
+template <typename PolygonMesh>
+auto triangulate_refine_and_fair_hole_halfedge
+(PolygonMesh& pmesh, typename PolygonMesh::Halfedge& border_halfedge,
+ const py::dict& np = py::dict())
+{
+  using Hd = typename boost::graph_traits<PolygonMesh>::halfedge_descriptor;
+  auto descriptor = Hd(&border_halfedge);
+  return triangulate_refine_and_fair_hole<PolygonMesh>(pmesh, descriptor, np);
+}
+
+#endif
 
 }
 } // namespace cgalpy
@@ -437,19 +551,36 @@ void export_pmp_hole_filling(py::module_& m) {
         pmp_doc::PMPHolefillingVisitor_end_fair_phase);
 
   // hole filling
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  m.def("triangulate_and_refine_hole",
+        &cgalpy::pmp::triangulate_and_refine_hole_halfedge<Pm>,
+        py::arg("pm"), py::arg("hole_boundary"), py::arg("np") = py::dict(),
+        "Triangulates and refines a hole of a polygon mesh.");
+  m.def("triangulate_hole", &cgalpy::pmp::triangulate_hole_halfedge<Pm>,
+        py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict(),
+        "Triangulates a hole of a polygon mesh.");
+#else
   m.def("triangulate_and_refine_hole", &cgalpy::pmp::triangulate_and_refine_hole<Pm>,
         py::arg("pm"), py::arg("hole_boundary"), py::arg("np") = py::dict(),
         "Triangulates and refines a hole of a polygon mesh.");
   m.def("triangulate_hole", &cgalpy::pmp::triangulate_hole<Pm>,
         py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict(),
         "Triangulates a hole of a polygon mesh.");
+#endif
   m.def("triangulate_hole_polyline", &cgalpy::pmp::triangulate_hole_polyline<Pm>,
         py::arg("points"), py::arg("np") = py::dict(),
         "Triangulates a hole bounded by a polyline.");
   m.def("triangulate_hole_polyline", &cgalpy::pmp::triangulate_hole_polyline_2<Pm>,
         py::arg("points"), py::arg("third_points"), py::arg("np") = py::dict(),
         "Triangulates a hole bounded by two polylines.");
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  m.def("triangulate_refine_and_fair_hole",
+        &cgalpy::pmp::triangulate_refine_and_fair_hole_halfedge<Pm>,
+        py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict(),
+        "Triangulates, refines, and fairs a hole of a polygon mesh.");
+#else
   m.def("triangulate_refine_and_fair_hole", &cgalpy::pmp::triangulate_refine_and_fair_hole<Pm>,
         py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict(),
         "Triangulates, refines, and fairs a hole of a polygon mesh.");
+#endif
 }
