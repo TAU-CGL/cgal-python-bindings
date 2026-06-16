@@ -272,20 +272,20 @@ auto keep_largest_connected_components(PolygonMesh& pmesh, std::size_t nb_compon
   if (vimap && fimap) {
     auto vim = get_vertex_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
                                                     np.contains("vertex_index_map") ?
-                                                    np["vertex_internal_map"] : py::none());
+                                                    np["vertex_index_map"] : py::none());
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP3",
-                                                  np.contains("face_index_map") ? np["face_internal_map"] : py::none());
+                                                  np.contains("face_index_map") ? np["face_index_map"] : py::none());
     retv = call_pmp();
   }
   else if (vimap) {
     auto vim = get_vertex_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
                                                     np.contains("vertex_index_map") ?
-                                                    np["vertex_internal_map"] : py::none());
+                                                    np["vertex_index_map"] : py::none());
     retv = call_pmp();
   }
   else if (fimap) {
     auto fim = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP2",
-                                                  np.contains("face_index_map") ? np["face_internal_map"] : py::none());
+                                                  np.contains("face_index_map") ? np["face_index_map"] : py::none());
     retv = call_pmp();
   }
   else {
