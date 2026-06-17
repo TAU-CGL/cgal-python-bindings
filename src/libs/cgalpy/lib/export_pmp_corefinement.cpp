@@ -425,32 +425,40 @@ auto clip_p(TriangleMesh& tm, const Plane_3& plane, const py::dict& np = py::dic
 //!
 template <typename PolygonMesh>
 void corefine(PolygonMesh& tm1, PolygonMesh& tm2, const py::dict& np1 = py::dict(), const py::dict& np2 = py::dict()) {
+  auto vpm1 = get_vertex_point_map(tm1, np1);
+  auto vpm2 = get_vertex_point_map(tm2, np2);
   auto eicm1 = get_edge_prop_map<PolygonMesh, bool>(tm1, "INTERNAL_MAP0",
                                                     np1.contains("edge_is_constrained_map") ?
-                                                    np1["edge_internal_map"] : py::none());
+                                                    np1["edge_is_constrained_map"] : py::none());
   auto eicm2 = get_edge_prop_map<PolygonMesh, bool>(tm2, "INTERNAL_MAP1",
                                                     np2.contains("edge_is_constrained_map") ?
-                                                    np2["edge_internal_map"] : py::none());
+                                                    np2["edge_is_constrained_map"] : py::none());
+
+  auto np_corefine1 = CGAL::parameters::vertex_point_map(vpm1)
+                                       .edge_is_constrained_map(eicm1);
+  auto np_corefine2 = CGAL::parameters::vertex_point_map(vpm2)
+                                       .edge_is_constrained_map(eicm2);
+
   // np1 can have a corefinement visitor
   bool visitor = np1.contains("visitor");
   if (visitor) {
     // try to cast to Non_manifold_output_visitor or Default_visitor
     try {
       auto visitor = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np1["visitor"]);
-      PMP::corefine(tm1, tm2);
+      PMP::corefine(tm1, tm2, np_corefine1, np_corefine2);
     }
     catch (const py::cast_error&) {
     }
     try {
       auto visitor = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np1["visitor"]);
-      PMP::corefine(tm1, tm2);
+      PMP::corefine(tm1, tm2, np_corefine1, np_corefine2);
     }
     catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
     }
   }
   else {
-    PMP::corefine(tm1, tm2);
+    PMP::corefine(tm1, tm2, np_corefine1, np_corefine2);
   }
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
