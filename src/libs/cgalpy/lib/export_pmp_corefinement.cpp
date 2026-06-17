@@ -634,128 +634,80 @@ TriangleMesh corefine_and_compute_difference(TriangleMesh& pm1, TriangleMesh& pm
   using Tm = TriangleMesh;
 
   Tm out;
-  bool valid;
 
-  // auto vpm1 = get_vertex_point_map(pm1, np1);
-  // auto vpm2 = get_vertex_point_map(pm2, np2);
-  // auto vpm3 = get_vertex_point_map(out, np_out);
+  auto vpm1 = get_vertex_point_map(pm1, np1);
+  auto vpm2 = get_vertex_point_map(pm2, np2);
+  auto vpm_out = get_vertex_point_map(out, np_out);
+
   auto eicm1 = get_edge_prop_map<Tm, bool>(pm1, "INTERNAL_MAP0",
                                            np1.contains("edge_is_constrained_map") ?
-                                           np1["edge_internal_map"] : py::none());
+                                           np1["edge_is_constrained_map"] : py::none());
   auto eicm2 = get_edge_prop_map<Tm, bool>(pm2, "INTERNAL_MAP1",
                                            np2.contains("edge_is_constrained_map") ?
-                                           np2["edge_internal_map"] : py::none());
+                                           np2["edge_is_constrained_map"] : py::none());
   auto eicm_out = get_edge_prop_map<Tm, bool>(out, "INTERNAL_MAP2",
                                               np_out.contains("edge_is_constrained_map") ?
-                                              np_out["edge_internal_map"] : py::none());
+                                              np_out["edge_is_constrained_map"] : py::none());
 
-  bool fimb1 = np1.contains("face_index_map");
-  bool fimb2 = np2.contains("face_index_map");
-  bool visitor_flag = np1.contains("visitor");
-  if (fimb1 && fimb2) {
-    if (visitor_flag) {
-      try {
-        auto visitor = py::cast<pmp::Corefine_visitor<Tm>>(np1["visitor"]);
-        auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
-                                                       np1.contains("face_index_map") ?
-                                                       np1["face_internal_map"] : py::none());
-        auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
-                                                       np2.contains("face_index_map") ?
-                                                       np2["face_internal_map"] : py::none());
-          valid = PMP::corefine_and_compute_difference(pm1, pm2, out);
-      }
-      catch (const py::cast_error&) {
-      }
+  auto np_diff1 = CGAL::parameters::vertex_point_map(vpm1)
+                                   .edge_is_constrained_map(eicm1);
+  auto np_diff2 = CGAL::parameters::vertex_point_map(vpm2)
+                                   .edge_is_constrained_map(eicm2);
+  auto np_diff_out = CGAL::parameters::vertex_point_map(vpm_out)
+                                      .edge_is_constrained_map(eicm_out);
+
+  if (np1.contains("visitor")) {
+    try {
+      auto visitor = py::cast<pmp::Corefine_visitor<Tm>>(np1["visitor"]);
+    }
+    catch (const py::cast_error&) {
       try {
         auto visitor = py::cast<pmp::Non_manifold_output_visitor<Tm>>(np1["visitor"]);
-        auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
-                                                       np1.contains("face_index_map") ?
-                                                       np1["face_internal_map"] : py::none());
-        auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
-                                                       np2.contains("face_index_map") ?
-                                                       np2["face_internal_map"] : py::none());
-        valid = PMP::corefine_and_compute_difference(pm1, pm2, out);
       }
       catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
-    }
-    else {
-      auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
-                                                     np1.contains("face_index_map") ?
-                                                     np1["face_internal_map"] : py::none());
-      auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
-                                                     np2.contains("face_index_map") ?
-                                                     np2["face_internal_map"] : py::none());
-      valid = PMP::corefine_and_compute_difference(pm1, pm2, out);
     }
   }
-  else if (fimb1) {
-    if (visitor_flag) {
-      try {
-        auto visitor = py::cast<pmp::Corefine_visitor<Tm>>(np1["visitor"]);
-        auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
-                                                       np1.contains("face_index_map") ?
-                                                       np1["face_internal_map"] : py::none());
-        valid = PMP::corefine_and_compute_difference(pm1, pm2, out);
-      }
-      catch (const py::cast_error&) {
-      }
-      try {
-        auto visitor = py::cast<pmp::Non_manifold_output_visitor<Tm>>(np1["visitor"]);
-        auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
-                                                       np1.contains("face_index_map") ?
-                                                       np1["face_internal_map"] : py::none());
-        valid = PMP::corefine_and_compute_difference(pm1, pm2, out);
-      }
-      catch (const py::cast_error&) {
-        throw std::runtime_error("Visitor type not recognized");
-      }
-    }
-    else {
-      auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
-                                                     np1.contains("face_index_map") ?
-                                                     np1["face_internal_map"] : py::none());
-      valid = PMP::corefine_and_compute_difference(pm1, pm2, out);
-    }
+
+  bool valid;
+  if (np1.contains("face_index_map") && np2.contains("face_index_map")) {
+    auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
+                                                   np1["face_index_map"]);
+    auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
+                                                   np2["face_index_map"]);
+    valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
+                                                 np_diff1.face_index_map(fim1),
+                                                 np_diff2.face_index_map(fim2),
+                                                 np_diff_out);
   }
-  else if (fimb2) {
-    if (visitor_flag) {
-      try {
-        auto visitor = py::cast<pmp::Corefine_visitor<Tm>>(np1["visitor"]);
-        auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP3",
-                                                       np2.contains("face_index_map") ?
-                                                       np2["face_internal_map"] : py::none());
-        valid = PMP::corefine_and_compute_difference(pm1, pm2, out);
-      }
-      catch (const py::cast_error&) {
-      }
-      try {
-        auto visitor = py::cast<pmp::Non_manifold_output_visitor<Tm>>(np1["visitor"]);
-        auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP3",
-                                                       np2.contains("face_index_map") ?
-                                                       np2["face_internal_map"] : py::none());
-        valid = PMP::corefine_and_compute_difference(pm1, pm2, out);
-      }
-      catch (const py::cast_error&) {
-        throw std::runtime_error("Visitor type not recognized");
-      }
-    }
-    else {
-      auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP3",
-                                                     np2.contains("face_index_map") ?
-                                                     np2["face_internal_map"] : py::none());
-      valid = PMP::corefine_and_compute_difference(pm1, pm2, out);
-    }
+  else if (np1.contains("face_index_map")) {
+    auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
+                                                   np1["face_index_map"]);
+    valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
+                                                 np_diff1.face_index_map(fim1),
+                                                 np_diff2,
+                                                 np_diff_out);
+  }
+  else if (np2.contains("face_index_map")) {
+    auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
+                                                   np2["face_index_map"]);
+    valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
+                                                 np_diff1,
+                                                 np_diff2.face_index_map(fim2),
+                                                 np_diff_out);
   }
   else {
-    valid = PMP::corefine_and_compute_difference(pm1, pm2, out);
+    valid = PMP::corefine_and_compute_difference(pm1, pm2, out,
+                                                 np_diff1, np_diff2, np_diff_out);
   }
+
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np1.contains("edge_is_constrained_map")) pm1.remove_property_map(eicm1);
   if (! np2.contains("edge_is_constrained_map")) pm2.remove_property_map(eicm2);
   if (! np_out.contains("edge_is_constrained_map")) out.remove_property_map(eicm_out);
-#endif // CGALPY_PMP_POLYGONAL_MESH == 1
+#endif
+
   if (! valid) throw std::runtime_error("Cannot compute difference!");
   return out;
 }
