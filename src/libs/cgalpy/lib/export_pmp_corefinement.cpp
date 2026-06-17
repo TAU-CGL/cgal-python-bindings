@@ -1151,12 +1151,14 @@ auto split_p(TriangleMesh& tm,
 }
 
 template <typename PolygonMesh>
-auto intersection_polylines(const PolygonMesh& tm1, const PolygonMesh& tm2,
+auto intersection_polylines(PolygonMesh& tm1, PolygonMesh& tm2,
                             const py::dict& np1 = py::dict(), const py::dict& np2 = py::dict()) {
   std::vector< std::vector<Point_3> > polylines;
-  // auto vpm1 = get_vertex_point_map(tm1, np1);
-  // auto vpm2 = get_vertex_point_map(tm2, np2);
-  PMP::intersection_polylines(tm1, tm2, std::back_inserter(polylines));
+  auto vpm1 = get_vertex_point_map(tm1, np1);
+  auto vpm2 = get_vertex_point_map(tm2, np2);
+  PMP::intersection_polylines(tm1, tm2, std::back_inserter(polylines),
+                              CGAL::parameters::vertex_point_map(vpm1),
+                              CGAL::parameters::vertex_point_map(vpm2));
   return polylines;
 }
 
