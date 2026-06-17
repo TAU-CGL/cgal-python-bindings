@@ -287,12 +287,15 @@ bool clip(PolygonMesh& tm, PolygonMesh& clipper, const py::dict& np_tm = py::dic
           const py::dict& np_c = py::dict()) {
   using Pm = PolygonMesh;
 
-  auto eicm1 = get_edge_prop_map<Pm, bool>(tm, "INTERNAL_MAP0",
-                                           np_tm.contains("edge_is_constrained_map") ?
-                                           np_tm["edge_internal_map"] : py::none());
-  auto eicm2 = get_edge_prop_map<Pm, bool>(clipper, "INTERNAL_MAP1",
-                                           np_c.contains("edge_is_constrained_map") ?
-                                           np_c["edge_internal_map"] : py::none());
+  auto vpm_tm = get_vertex_point_map(tm, np_tm);
+  auto vpm_c = get_vertex_point_map(clipper, np_c);
+  auto eicm_tm = get_edge_prop_map<Pm, bool>(tm, "INTERNAL_MAP0",
+                                             np_tm.contains("edge_is_constrained_map") ?
+                                             np_tm["edge_is_constrained_map"] : py::none());
+
+  auto np_clip_tm = CGAL::parameters::vertex_point_map(vpm_tm)
+                                     .edge_is_constrained_map(eicm_tm);
+  auto np_clip_c = CGAL::parameters::vertex_point_map(vpm_c);
 
   bool visitor1 = np_tm.contains("visitor");
   bool visitor2 = np_c.contains("visitor");
@@ -301,28 +304,28 @@ bool clip(PolygonMesh& tm, PolygonMesh& clipper, const py::dict& np_tm = py::dic
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<Pm>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Corefine_visitor<Pm>>(np_c["visitor"]);
-      res = PMP::clip(tm, clipper);
+      res = PMP::clip(tm, clipper, np_clip_tm, np_clip_c);
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<Pm>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_c["visitor"]);
-      res = PMP::clip(tm, clipper);
+      res = PMP::clip(tm, clipper, np_clip_tm, np_clip_c);
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Corefine_visitor<Pm>>(np_c["visitor"]);
-      res = PMP::clip(tm, clipper);
+      res = PMP::clip(tm, clipper, np_clip_tm, np_clip_c);
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_c["visitor"]);
-      res = PMP::clip(tm, clipper);
+      res = PMP::clip(tm, clipper, np_clip_tm, np_clip_c);
     }
     catch (const py::cast_error& e) {
       std::cerr << "Visitor type not recognized\n";
@@ -331,13 +334,13 @@ bool clip(PolygonMesh& tm, PolygonMesh& clipper, const py::dict& np_tm = py::dic
   else if (visitor1) {
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<Pm>>(np_tm["visitor"]);
-      res = PMP::clip(tm, clipper);
+      res = PMP::clip(tm, clipper, np_clip_tm, np_clip_c);
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_tm["visitor"]);
-      res = PMP::clip(tm, clipper);
+      res = PMP::clip(tm, clipper, np_clip_tm, np_clip_c);
     }
     catch (const py::cast_error& e) {
       std::cerr << "Visitor type not recognized\n";
@@ -346,27 +349,24 @@ bool clip(PolygonMesh& tm, PolygonMesh& clipper, const py::dict& np_tm = py::dic
   else if (visitor2) {
     try {
       auto v2 = py::cast<pmp::Corefine_visitor<Pm>>(np_c["visitor"]);
-      res = PMP::clip(tm, clipper);
+      res = PMP::clip(tm, clipper, np_clip_tm, np_clip_c);
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v2 = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np_c["visitor"]);
-      res = PMP::clip(tm, clipper);
+      res = PMP::clip(tm, clipper, np_clip_tm, np_clip_c);
     }
     catch (const py::cast_error& e) {
       std::cerr << "Visitor type not recognized\n";
     }
   }
   else {
-    res = PMP::clip(tm, clipper);
+    res = PMP::clip(tm, clipper, np_clip_tm, np_clip_c);
   }
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np_tm.contains("edge_is_constrained_map")) {
-    tm.remove_property_map(eicm1);
-  }
-  if (! np_c.contains("edge_is_constrained_map")) {
-    clipper.remove_property_map(eicm2);
+    tm.remove_property_map(eicm_tm);
   }
 #endif
   return res;
