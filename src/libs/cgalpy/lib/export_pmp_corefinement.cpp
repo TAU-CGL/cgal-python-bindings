@@ -476,138 +476,98 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
                                              const std::array<py::dict, 4>& np_out = std::array<py::dict, 4>()) {
 
   using Pm = PolygonMesh;
-  // auto vpm1 = get_vertex_point_map(pm1, np1);
-  // auto vpm2 = get_vertex_point_map(pm2, np2);
-  auto eicm1 = get_edge_prop_map<Pm, bool>(pm1, "INTERNAL_MAP0",
-                                           np1.contains("edge_is_constrained_map") ?
-                                           np1["edge_internal_map"] : py::none());
-  auto eicm2 = get_edge_prop_map<Pm, bool>(pm2, "INTERNAL_MAP1",
-                                           np2.contains("edge_is_constrained_map") ?
-                                           np2["edge_internal_map"] : py::none());
-
-  // auto vpm_out1 = get_vertex_point_map(pm_out1, np_out[0]);
-  // auto vpm_out2 = get_vertex_point_map(pm_out2, np_out[1]);
-  // auto vpm_out3 = get_vertex_point_map(pm_out3, np_out[2]);
-  // auto vpm_out4 = get_vertex_point_map(pm_out4, np_out[3]);
-  auto eicm_out1 = get_edge_prop_map<Pm, bool>(pm1, "INTERNAL_MAP2",
-                                               np_out[0].contains("edge_is_constrained_map") ?
-                                               np_out[0]["edge_internal_map"] : py::none());
-  auto eicm_out2 = get_edge_prop_map<Pm, bool>(pm2, "INTERNAL_MAP3",
-                                               np_out[1].contains("edge_is_constrained_map") ?
-                                               np_out[1]["edge_internal_map"] : py::none());
-  auto eicm_out3 = get_edge_prop_map<Pm, bool>(pm1, "INTERNAL_MAP4",
-                                               np_out[2].contains("edge_is_constrained_map") ?
-                                               np_out[2]["edge_internal_map"] : py::none());
-  auto eicm_out4 = get_edge_prop_map<Pm, bool>(pm2, "INTERNAL_MAP5",
-                                               np_out[3].contains("edge_is_constrained_map") ?
-                                               np_out[3]["edge_internal_map"] : py::none());
 
   Pm out_union, out_intersection, tm1_minus_tm2, tm2_minus_tm1;
 
-  std::array<bool, 4> res;
-  std::array<std::optional<Pm*>, 4> outputs = {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1};
+  std::array<std::optional<Pm*>, 4> outputs = {&out_union, &out_intersection,
+                                               &tm1_minus_tm2, &tm2_minus_tm1};
 
-  bool fimb1 = np1.contains("face_index_map");
-  bool fimb2 = np2.contains("face_index_map");
-  bool visitor_flag = np1.contains("visitor");
-  if (fimb1 && fimb2) {
-    if (visitor_flag) {
+  auto vpm1 = get_vertex_point_map(pm1, np1);
+  auto vpm2 = get_vertex_point_map(pm2, np2);
+  auto vpm_out_union = get_vertex_point_map(out_union, np_out[0]);
+  auto vpm_out_intersection = get_vertex_point_map(out_intersection, np_out[1]);
+  auto vpm_out_tm1_minus_tm2 = get_vertex_point_map(tm1_minus_tm2, np_out[2]);
+  auto vpm_out_tm2_minus_tm1 = get_vertex_point_map(tm2_minus_tm1, np_out[3]);
+
+  auto eicm1 = get_edge_prop_map<Pm, bool>(pm1, "INTERNAL_MAP0",
+                                           np1.contains("edge_is_constrained_map") ?
+                                           np1["edge_is_constrained_map"] : py::none());
+  auto eicm2 = get_edge_prop_map<Pm, bool>(pm2, "INTERNAL_MAP1",
+                                           np2.contains("edge_is_constrained_map") ?
+                                           np2["edge_is_constrained_map"] : py::none());
+  auto eicm_out_union = get_edge_prop_map<Pm, bool>(out_union, "INTERNAL_MAP2",
+                                                    np_out[0].contains("edge_is_constrained_map") ?
+                                                    np_out[0]["edge_is_constrained_map"] : py::none());
+  auto eicm_out_intersection = get_edge_prop_map<Pm, bool>(out_intersection, "INTERNAL_MAP3",
+                                                           np_out[1].contains("edge_is_constrained_map") ?
+                                                           np_out[1]["edge_is_constrained_map"] : py::none());
+  auto eicm_out_tm1_minus_tm2 = get_edge_prop_map<Pm, bool>(tm1_minus_tm2, "INTERNAL_MAP4",
+                                                            np_out[2].contains("edge_is_constrained_map") ?
+                                                            np_out[2]["edge_is_constrained_map"] : py::none());
+  auto eicm_out_tm2_minus_tm1 = get_edge_prop_map<Pm, bool>(tm2_minus_tm1, "INTERNAL_MAP5",
+                                                            np_out[3].contains("edge_is_constrained_map") ?
+                                                            np_out[3]["edge_is_constrained_map"] : py::none());
+
+  auto np_bool1 = CGAL::parameters::vertex_point_map(vpm1)
+                                   .edge_is_constrained_map(eicm1);
+  auto np_bool2 = CGAL::parameters::vertex_point_map(vpm2)
+                                   .edge_is_constrained_map(eicm2);
+  auto np_out_union = CGAL::parameters::vertex_point_map(vpm_out_union)
+                                       .edge_is_constrained_map(eicm_out_union);
+  auto np_out_intersection = CGAL::parameters::vertex_point_map(vpm_out_intersection)
+                                              .edge_is_constrained_map(eicm_out_intersection);
+  auto np_out_tm1_minus_tm2 = CGAL::parameters::vertex_point_map(vpm_out_tm1_minus_tm2)
+                                               .edge_is_constrained_map(eicm_out_tm1_minus_tm2);
+  auto np_out_tm2_minus_tm1 = CGAL::parameters::vertex_point_map(vpm_out_tm2_minus_tm1)
+                                               .edge_is_constrained_map(eicm_out_tm2_minus_tm1);
+
+  if (np1.contains("visitor")) {
+    try {
+      auto visitor = py::cast<pmp::Corefine_visitor<Pm>>(np1["visitor"]);
+    }
+    catch (const py::cast_error&) {
       try {
-        auto visit = py::cast<pmp::Corefine_visitor<Pm>>(np1["visitor"]);
-        auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6",
-                                                       np1.contains("face_index_map") ?
-                                                       np1["face_internal_map"] : py::none());
-        auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP7",
-                                                       np2.contains("face_index_map") ?
-                                                       np2["face_internal_map"] : py::none());
-        res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs);
-      }
-      catch (const py::cast_error&) {
-      }
-      try {
-        auto visit = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np1["visitor"]);
-        auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6",
-                                                       np1.contains("face_index_map") ?
-                                                       np1["face_internal_map"] : py::none());
-        auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP7",
-                                                       np2.contains("face_index_map") ?
-                                                       np2["face_internal_map"] : py::none());
-        res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs);
+        auto visitor = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np1["visitor"]);
       }
       catch (const py::cast_error&) {
         throw std::runtime_error("Visitor type not recognized");
       }
-    }
-    else {
-      auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6",
-                                                     np1.contains("face_index_map") ?
-                                                     np1["face_internal_map"] : py::none());
-      auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP7",
-                                                     np2.contains("face_index_map") ?
-                                                     np2["face_internal_map"] : py::none());
-      res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs);
     }
   }
-  else if (fimb1) {
-    if (visitor_flag) {
-      try {
-        auto visit = py::cast<pmp::Corefine_visitor<Pm>>(np1["visitor"]);
-        auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6",
-                                                       np1.contains("face_index_map") ?
-                                                       np1["face_internal_map"] : py::none());
-        res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs);
-      }
-      catch (const py::cast_error&) {
-      }
-      try {
-        auto visit = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np1["visitor"]);
-        auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6",
-                                                       np1.contains("face_index_map") ?
-                                                       np1["face_internal_map"] : py::none());
-        res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs);
-      }
-      catch (const py::cast_error&) {
-        throw std::runtime_error("Visitor type not recognized");
-      }
-    }
-    else {
-      auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6",
-                                                     np1.contains("face_index_map") ?
-                                                     np1["face_internal_map"] : py::none());
-      res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs);
-    }
+
+  std::array<bool, 4> res;
+  auto nps_out = std::make_tuple(np_out_union, np_out_intersection,
+                                 np_out_tm1_minus_tm2, np_out_tm2_minus_tm1);
+
+  if (np1.contains("face_index_map") && np2.contains("face_index_map")) {
+    auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6",
+                                                   np1["face_index_map"]);
+    auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP7",
+                                                   np2["face_index_map"]);
+    res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs,
+                                                       np_bool1.face_index_map(fim1),
+                                                       np_bool2.face_index_map(fim2),
+                                                       nps_out);
   }
-  else if (fimb2) {
-    if (visitor_flag) {
-      try {
-        auto visit = py::cast<pmp::Corefine_visitor<Pm>>(np1["visitor"]);
-        auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP6",
-                                                       np2.contains("face_index_map") ?
-                                                       np2["face_internal_map"] : py::none());
-        res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs);
-      }
-      catch (const py::cast_error&) {
-      }
-      try {
-        auto visit = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np1["visitor"]);
-        auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP6",
-                                                       np2.contains("face_index_map") ?
-                                                       np2["face_internal_map"] : py::none());
-        res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs);
-      }
-      catch (const py::cast_error&) {
-        throw std::runtime_error("Visitor type not recognized");
-      }
-    }
-    else {
-      auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP6",
-                                                     np2.contains("face_index_map") ?
-                                                     np2["face_internal_map"] : py::none());
-      res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs);
-    }
+  else if (np1.contains("face_index_map")) {
+    auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6",
+                                                   np1["face_index_map"]);
+    res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs,
+                                                       np_bool1.face_index_map(fim1),
+                                                       np_bool2,
+                                                       nps_out);
+  }
+  else if (np2.contains("face_index_map")) {
+    auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP7",
+                                                   np2["face_index_map"]);
+    res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs,
+                                                       np_bool1,
+                                                       np_bool2.face_index_map(fim2),
+                                                       nps_out);
   }
   else {
-    res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs);
+    res = PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs,
+                                                       np_bool1, np_bool2, nps_out);
   }
 
   auto retv = std::make_tuple(res[0] ? py::cast(out_union) : py::none(),
@@ -615,12 +575,12 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
                               res[2] ? py::cast(tm1_minus_tm2) : py::none(),
                               res[3] ? py::cast(tm2_minus_tm1) : py::none());
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (!np1.contains("edge_is_constrained_map")) pm1.remove_property_map(eicm1);
-  if (!np2.contains("edge_is_constrained_map")) pm2.remove_property_map(eicm2);
-  if (!np_out[0].contains("edge_is_constrained_map")) out_union.remove_property_map(eicm_out1);
-  if (!np_out[1].contains("edge_is_constrained_map")) out_intersection.remove_property_map(eicm_out2);
-  if (!np_out[2].contains("edge_is_constrained_map")) tm1_minus_tm2.remove_property_map(eicm_out3);
-  if (!np_out[3].contains("edge_is_constrained_map")) tm2_minus_tm1.remove_property_map(eicm_out4);
+  if (! np1.contains("edge_is_constrained_map")) pm1.remove_property_map(eicm1);
+  if (! np2.contains("edge_is_constrained_map")) pm2.remove_property_map(eicm2);
+  if (! np_out[0].contains("edge_is_constrained_map")) out_union.remove_property_map(eicm_out_union);
+  if (! np_out[1].contains("edge_is_constrained_map")) out_intersection.remove_property_map(eicm_out_intersection);
+  if (! np_out[2].contains("edge_is_constrained_map")) tm1_minus_tm2.remove_property_map(eicm_out_tm1_minus_tm2);
+  if (! np_out[3].contains("edge_is_constrained_map")) tm2_minus_tm1.remove_property_map(eicm_out_tm2_minus_tm1);
 #endif
   return retv;
 }
