@@ -114,9 +114,11 @@ auto connected_component(typename boost::graph_traits<PolygonMesh>::face_descrip
   auto it = std::back_inserter(lst);
 
   auto eicm = get_edge_prop_map<Pm, bool>(pm, "INTERNAL_MAP0",
-    np.contains("edge_is_constrained_map") ? np["edge_internal_map"] : py::none());
+    np.contains("edge_is_constrained_map") ?
+    np["edge_is_constrained_map"] : py::none());
 
-  PMP::connected_component(seed_face, pm, it);
+  PMP::connected_component(seed_face, pm, it,
+                           CGAL::parameters::edge_is_constrained_map(eicm));
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   if (! np.contains("edge_is_constrained_map")) {

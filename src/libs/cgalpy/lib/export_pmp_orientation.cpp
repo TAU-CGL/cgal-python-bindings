@@ -229,17 +229,16 @@ auto orient_triangle_soup_with_reference_triangle_soup(const std::vector<Point_3
 //!
 template <typename PolygonMesh>
 void merge_reversible_connected_components(PolygonMesh& pm, const py::dict& np = py::dict()) {
+  auto vpm = get_vertex_point_map(pm, np);
+  auto merge_np = CGAL::parameters::vertex_point_map(vpm);
+
   if (np.contains("face_index_map")) {
     auto fim = get_face_prop_map<PolygonMesh, std::size_t>(pm, "INTERNAL_MAP0",
-                                                           np.contains("face_index_map") ?
-                                                           np["face_internal_map"] : py::none());
-    PMP::merge_reversible_connected_components(pm);
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (! np.contains("face_index_map")) pm.remove_property_map(fim);
-#endif
+                                                           np["face_index_map"]);
+    PMP::merge_reversible_connected_components(pm, merge_np.face_index_map(fim));
   }
   else {
-    PMP::merge_reversible_connected_components(pm);
+    PMP::merge_reversible_connected_components(pm, merge_np);
   }
 }
 
