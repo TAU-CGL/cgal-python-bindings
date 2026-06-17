@@ -1032,115 +1032,88 @@ void split(PolygonMesh& pm,
            PolygonMesh& splitter,
            const py::dict& np_tm = py::dict(),
            const py::dict& np_s = py::dict()) {
-  // auto vpm1 = get_vertex_point_map(pm, np_tm);
-  // auto vpm2 = get_vertex_point_map(splitter, np_s);
-  // this can also have 2 visitors
+  auto vpm_tm = get_vertex_point_map(pm, np_tm);
+  auto vpm_s = get_vertex_point_map(splitter, np_s);
+  bool do_not_modify_splitter = false;
+  if (np_s.contains("do_not_modify")) {
+    try {
+      do_not_modify_splitter = py::cast<bool>(np_s["do_not_modify"]);
+    }
+    catch (const std::exception&) {
+      throw std::runtime_error("Named parameter 'do_not_modify' must be a bool.");
+    }
+  }
+
+  auto np_split_tm = CGAL::parameters::vertex_point_map(vpm_tm);
+  auto np_split_s = CGAL::parameters::vertex_point_map(vpm_s)
+                                     .do_not_modify(do_not_modify_splitter);
+
+  // np_tm can have a corefinement visitor, but it is not wired yet.
   bool visitor1 = np_tm.contains("visitor");
   bool visitor2 = np_s.contains("visitor");
   if (visitor1 && visitor2) {
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter);
+      PMP::split(pm, splitter, np_split_tm, np_split_s);
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter);
-    }
-    catch (const py::cast_error& e) {
-    }
-    try {
-      auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
-      auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter);
-    }
-    catch (const py::cast_error& e) {
-    }
-    try {
-      auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
-      auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter);
-    }
-    catch (const py::cast_error& e) {
-    }
-    try {
-      auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
-      auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter);
-    }
-    catch (const py::cast_error& e) {
-    }
-    try {
-      auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
-      auto v2 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter);
+      PMP::split(pm, splitter, np_split_tm, np_split_s);
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter);
-    }
-    catch (const py::cast_error& e) {
-    }
-    try {
-      auto v1 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_tm["visitor"]);
-      auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter);
+      PMP::split(pm, splitter, np_split_tm, np_split_s);
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_tm["visitor"]);
       auto v2 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter);
+      PMP::split(pm, splitter, np_split_tm, np_split_s);
     }
     catch (const py::cast_error& e) {
+      throw std::runtime_error("Visitor type not recognized");
     }
-  } else if (visitor1) {
+  }
+  else if (visitor1) {
     try {
       auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
-      PMP::split(pm, splitter);
-    }
-    catch (const py::cast_error& e) {
-    }
-    try {
-      auto v1 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_tm["visitor"]);
-      PMP::split(pm, splitter);
+      PMP::split(pm, splitter, np_split_tm, np_split_s);
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v1 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_tm["visitor"]);
-      PMP::split(pm, splitter);
+      PMP::split(pm, splitter, np_split_tm, np_split_s);
     }
     catch (const py::cast_error& e) {
+      throw std::runtime_error("Visitor type not recognized");
     }
-  } else if (visitor2) {
+  }
+  else if (visitor2) {
     try {
       auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter);
-    }
-    catch (const py::cast_error& e) {
-    }
-    try {
-      auto v2 = py::cast<pmp::Corefine_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter);
+      PMP::split(pm, splitter, np_split_tm, np_split_s);
     }
     catch (const py::cast_error& e) {
     }
     try {
       auto v2 = py::cast<pmp::Non_manifold_output_visitor<PolygonMesh>>(np_s["visitor"]);
-      PMP::split(pm, splitter);
+      PMP::split(pm, splitter, np_split_tm, np_split_s);
     }
     catch (const py::cast_error& e) {
+      throw std::runtime_error("Visitor type not recognized");
     }
-  } else {
-    PMP::split(pm, splitter);
+  }
+  else {
+    PMP::split(pm, splitter, np_split_tm, np_split_s);
   }
 }
 
