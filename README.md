@@ -46,7 +46,6 @@ There are two ways to build & install the bindings.
 Novice users who may only wish to quickly experiment with the bindings may
 exploit the simple self-compiling build & install mechanism to obtain a single
 library that supports bindings for a large set of instances.
-This binding library cannot be mutually used with other binding libraries though.
 
 All you need to do is:
 
@@ -110,8 +109,8 @@ Then, you should be able to execute the program
 where `<CGALPY_SRC_DIR>` is the root of your clone.
 
 The cmake script `<CGALPY_SRC_DIR>/cmake/tests/release/aos2_epec_fixed_release.cmake` sets the flags
-that are needed for the generation of bindings used in the Python script 
-`<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`. Additional python programs that exploit 
+that are needed for the generation of bindings used in the Python script
+`<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`. Additional python programs that exploit
 the bindings reside under `<CGALPY_SRC_DIR>/src/python_scripts`. Naturally, different bindings are
 needed for different Python scripts.
 
@@ -122,7 +121,7 @@ needed for different Python scripts.
 3. If you are not operating in a virtual environment, consider installing as user:
 
         pip install --user src/libs/cgalpy/dist/*.whl
-    
+
 4. If you repeat the installation, don't forget to force overidding the new bindings:
 
         pip install --user --force-reinstall src/libs/cgalpy/dist/*.whl
@@ -146,8 +145,8 @@ The Python html manual pages are generated under
 `src/libs/cgalpy/CGALPY/build/html/`. The pdf single file is generated
 under `src/libs/cgalpy/CGALPY/build/latex/`.
 
-Observe that the `CGALPY` prefix in the target of the above `make` is the binding library based name; 
-this name can be different then `CGALPY`, and depends on your selections; 
+Observe that the `CGALPY` prefix in the target of the above `make` is the binding library based name;
+this name can be different then `CGALPY`, and depends on your selections;
 see Section [**CGAL** Bindings](#markdown-header-cgal-bindings).
 
 If you would like to build the documentation for both, type:
