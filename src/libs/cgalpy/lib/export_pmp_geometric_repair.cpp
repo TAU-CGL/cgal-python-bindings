@@ -5,7 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
-//            Utkarsh Khajuria  <utkarshkhajuria7@gmail.com>
+//            Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
 
 #include <vector>
 #include <functional>
@@ -202,6 +202,7 @@ auto remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
   auto call_pmp = [&]() {
     auto default_np = CGAL::parameters::default_values();
     cgalpy::Named_parameter_geom_traits geom_traits_op;
+    cgalpy::Named_parameter_vertex_point_map<Tm> vertex_point_map_op;
     cgalpy::Named_parameter_area_threshold area_threshold_op;
     cgalpy::Named_parameter_volume_threshold volume_threshold_op;
     cgalpy::Named_parameter_dry_run dry_run_op;
@@ -209,8 +210,8 @@ auto remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
       <Remove_connected_components_of_negligible_size_wrapper, Tm&>
       wrapper(tmesh);
     return cgalpy::named_parameter_applicator
-      (wrapper, default_np, np, geom_traits_op, area_threshold_op,
-       volume_threshold_op, dry_run_op);
+      (wrapper, default_np, np, geom_traits_op, vertex_point_map_op,
+       area_threshold_op, volume_threshold_op, dry_run_op);
   };
   std::size_t retv;
   if (fim_flag) {
