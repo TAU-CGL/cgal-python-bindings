@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <cstddef>
 #include <stdexcept>
@@ -619,11 +620,10 @@ void export_polyhedron_3(py::module_& m) {
 
   //! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
-  // namespace PMP = CGAL::Polygon_mesh_processing;
-  // using pcad = PMP::Principal_curvatures_and_directions<Kernel>;
-  // cgalpy::pol3::vertex_map<Prn, pcad>
-  //   (m, "vertex_principal_curvatures_and_directions_map",
-  //    "dynamic_property_vertex_PC");
+  namespace PMP = CGAL::Polygon_mesh_processing;
+  using Pcad = PMP::Principal_curvatures_and_directions<Kernel>;
+  cgalpy::pol3::export_dynamic_vertex_map<Prn, Pcad>
+    (m, "vertex_Principal_curvatures_and_directions_map");
 #endif
 
   //! \todo add the following

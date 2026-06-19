@@ -13,17 +13,18 @@ if len(sys.argv) > 1:
     i = 2
 
 CGALPY = importlib.import_module(lib)
-Ker = CGALPY.Ker
 Pol3 = CGALPY.Pol3
 Pmp = CGALPY.Pmp
 
 filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/sphere.off")
-try: polyhedron = Pol3.read_polygon_mesh(filename)
-except: raise ValueError("Invalid input.")
+try:
+  polyhedron = Pmp.read_polygon_mesh(filename)
+except:
+  raise ValueError("Invalid input.")
 
-mean_curvature_map = Pol3.get(Pol3.dynamic_property_vertex_FT(), polyhedron)
-Gaussian_curvature_map = Pol3.get(Pol3.dynamic_property_vertex_FT(), polyhedron)
-principal_curvatures_and_directions_map = Pol3.get(Pol3.dynamic_property_vertex_PC(), polyhedron)
+mean_curvature_map = Pol3.get_dynamic_vertex_float_map(polyhedron)
+Gaussian_curvature_map = Pol3.get_dynamic_vertex_float_map(polyhedron)
+principal_curvatures_and_directions_map = Pol3.get_dynamic_vertex_Principal_curvatures_and_directions_map(polyhedron)
 
 Pmp.interpolated_corrected_curvatures(polyhedron,
                                       {"vertex_mean_curvature_map": mean_curvature_map,
@@ -36,7 +37,7 @@ Pmp.interpolated_corrected_curvatures(polyhedron,
 
 i = 0
 
-for v in Pol3.vertices(polyhedron):
+for v in polyhedron.vertices():
   PC = Pol3.get(principal_curvatures_and_directions_map, v)
   print(f"{i}: HC = {Pol3.get(mean_curvature_map, v)}, GC = {Pol3.get(Gaussian_curvature_map, v)}\n"
         f"PC = [ {PC.min_curvature} , {PC.max_curvature} ]")

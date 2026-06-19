@@ -1,4 +1,5 @@
 #!/usr/bin/python
+
 import os
 import sys
 import importlib
@@ -12,14 +13,16 @@ if len(sys.argv) > 1:
     i = 2
 
 CGALPY = importlib.import_module(lib)
-Ker = CGALPY.Ker
 Sm = CGALPY.Sm
 Pmp = CGALPY.Pmp
 
 filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/sphere.off")
+try:
+  mesh = Pmp.read_polygon_mesh(filename)
+except:
+  raise ValueError("Invalid input.")
 
-mesh = Sm.read_polygon_mesh(filename)
-
-for v in Sm.vertices(mesh):
+for i in range(Sm.num_vertices(mesh)):
+  v = Sm.Vertex_index(i)
   h, g, p = Pmp.interpolated_corrected_curvatures(v, mesh)
   print(f"{v.id()}: HC = {h}, GC = {g}, PC = [ {p.min_curvature} , {p.max_curvature} ]")
