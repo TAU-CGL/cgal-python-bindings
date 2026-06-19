@@ -9,6 +9,8 @@
 
 #include <vector>
 #include <functional>
+#include <iterator>
+#include <tuple>
 #include <utility>
 
 #include <boost/graph/graph_traits.hpp>
@@ -16,6 +18,7 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/function.h>
+#include <nanobind/stl/tuple.h>
 
 #include <CGAL/Polygon_mesh_processing/repair_degeneracies.h>
 #include <CGAL/Polygon_mesh_processing/repair.h>
@@ -24,6 +27,7 @@
 #include "cgalpy/Named_parameter_cap_threshold.hpp"
 #include "cgalpy/Named_parameter_collapse_length_threshold.hpp"
 #include "cgalpy/Named_parameter_dry_run.hpp"
+#include "cgalpy/Named_parameter_edge_is_constrained_map.hpp"
 #include "cgalpy/Named_parameter_flip_triangle_height_threshold.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
 #include "cgalpy/Named_parameter_vertex_point_map.hpp"
@@ -75,6 +79,21 @@ struct Remove_connected_components_of_negligible_size_wrapper {
   {
     return PMP::remove_connected_components_of_negligible_size
       (std::forward<Args>(args)..., np);
+  }
+};
+
+/*! A class template that wraps the function template
+ * CGAL::Polygon_mesh_processing::remove_connected_components_of_negligible_size()
+ * with an output iterator.
+ */
+template <typename NamedParameter, typename TriangleMesh, typename OutputIterator>
+struct Remove_connected_components_of_negligible_size_output_wrapper {
+  static auto call(NamedParameter& np, TriangleMesh&& tmesh,
+                   OutputIterator&& out)
+  {
+    return PMP::remove_connected_components_of_negligible_size
+      (std::forward<TriangleMesh>(tmesh),
+       np.output_iterator(std::forward<OutputIterator>(out)));
   }
 };
 
@@ -192,42 +211,72 @@ auto remove_almost_degenerate_faces(TriangleMesh& tmesh, const py::dict& np = py
 
 //!
 template <typename TriangleMesh>
-auto remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
-                                                    const py::dict& np = py::dict()) {
+py::object remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
+                                                          const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  auto eicm = get_edge_prop_map<Tm, bool>(tmesh, "INTERNAL_MAP0",
-                                          np.contains("edge_is_constrained_map") ?
-                                          np["edge_is_constrained_map"] : py::none());
-  bool fim_flag = np.contains("face_index_map");
-  auto call_pmp = [&]() {
-    auto default_np = CGAL::parameters::default_values();
+  using Fd = typename boost::graph_traits<Tm>::face_descriptor;
+
+  const bool dry_run = np.contains("dry_run") && py::cast<bool>(np["dry_run"]);
+
+  auto call_without_output = [&](auto& base_np) -> std::size_t {
     cgalpy::Named_parameter_geom_traits geom_traits_op;
     cgalpy::Named_parameter_vertex_point_map<Tm> vertex_point_map_op;
     cgalpy::Named_parameter_area_threshold area_threshold_op;
     cgalpy::Named_parameter_volume_threshold volume_threshold_op;
     cgalpy::Named_parameter_dry_run dry_run_op;
+    cgalpy::Named_parameter_edge_is_constrained_map<Tm>
+      edge_is_constrained_map_op;
     cgalpy::Named_parameter_wrapper
       <Remove_connected_components_of_negligible_size_wrapper, Tm&>
       wrapper(tmesh);
     return cgalpy::named_parameter_applicator
-      (wrapper, default_np, np, geom_traits_op, vertex_point_map_op,
-       area_threshold_op, volume_threshold_op, dry_run_op);
+      (wrapper, base_np, np, geom_traits_op, vertex_point_map_op,
+       area_threshold_op, volume_threshold_op, dry_run_op,
+       edge_is_constrained_map_op);
   };
-  std::size_t retv;
-  if (fim_flag) {
-    auto fim = get_face_prop_map<Tm, std::size_t>(tmesh, "INTERNAL_MAP1", np["face_index_map"]);
-    retv = call_pmp();
-  }
-  else {
-    retv = call_pmp();
-  }
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  ! np.contains("edge_is_constrained_map") ? tmesh.remove_property_map(eicm) : void();
+  auto call_with_output = [&](auto& base_np) -> py::object {
+    std::vector<Fd> removed_faces;
+    auto out = std::back_inserter(removed_faces);
+    cgalpy::Named_parameter_geom_traits geom_traits_op;
+    cgalpy::Named_parameter_vertex_point_map<Tm> vertex_point_map_op;
+    cgalpy::Named_parameter_area_threshold area_threshold_op;
+    cgalpy::Named_parameter_volume_threshold volume_threshold_op;
+    cgalpy::Named_parameter_dry_run dry_run_op;
+    cgalpy::Named_parameter_edge_is_constrained_map<Tm>
+      edge_is_constrained_map_op;
+    cgalpy::Named_parameter_wrapper
+      <Remove_connected_components_of_negligible_size_output_wrapper,
+       Tm&, decltype(out)&>
+      wrapper(tmesh, out);
+    const std::size_t retv = cgalpy::named_parameter_applicator
+      (wrapper, base_np, np, geom_traits_op, vertex_point_map_op,
+       area_threshold_op, volume_threshold_op, dry_run_op,
+       edge_is_constrained_map_op);
+
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+    py::list py_removed_faces;
+    for (Fd f : removed_faces)
+      py_removed_faces.append(py::cast(*f, py::rv_policy::reference));
+    return py::make_tuple(retv, py_removed_faces);
+#else
+    return py::cast(std::make_tuple(retv, removed_faces));
 #endif
+  };
 
-  return retv;
+  if (np.contains("face_index_map")) {
+    auto fim = get_face_prop_map<Tm, std::size_t>
+      (tmesh, "INTERNAL_MAP1", np["face_index_map"]);
+    auto base_np = CGAL::parameters::face_index_map(fim);
+    if (dry_run) return call_with_output(base_np);
+    return py::cast(call_without_output(base_np));
+  }
+
+  auto base_np = CGAL::parameters::default_values();
+  if (dry_run) return call_with_output(base_np);
+  return py::cast(call_without_output(base_np));
 }
+
 
 }
 } // namespace cgalpy
@@ -243,7 +292,7 @@ void export_pmp_geometric_repair(py::module_& m) {
         py::arg("tmesh"), py::arg("np") = py::dict(),
         "Removes almost degenerate faces from a triangle mesh.");
   m.def("remove_connected_components_of_negligible_size",
-        &cgalpy::pmp::remove_connected_components_of_negligible_size<Pm>, // TODO: output_iterator
+        &cgalpy::pmp::remove_connected_components_of_negligible_size<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
         "Removes connected components of negligible size from a triangle mesh.");
   m.def("remove_isolated_vertices", &PMP::remove_isolated_vertices<Pm>,
