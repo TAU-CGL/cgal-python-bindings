@@ -33,6 +33,8 @@
 #include "cgalpy/Named_parameter_do_project.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
 #include "cgalpy/Named_parameter_random_seed.hpp"
+#include "cgalpy/Named_parameter_vertex_is_constrained_map.hpp"
+#include "cgalpy/Named_parameter_vertex_point_map.hpp"
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Adaptive_sizing_field.hpp"
@@ -78,19 +80,25 @@ auto apply_refine_named_parameters(const py::dict& params, Args&&... args)
 }
 
 //! Apply random perturbation named parameters.
-template <template <typename...> class Wrapper, typename... Args>
+template <typename PolygonMesh, template <typename...> class Wrapper,
+          typename... Args>
 auto apply_random_perturbation_named_parameters(const py::dict& params,
                                                 Args&&... args)
 {
   auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
   cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_vertex_is_constrained_map<PolygonMesh>
+    vertex_is_constrained_map_op;
   cgalpy::Named_parameter_do_project do_project_op;
   cgalpy::Named_parameter_random_seed random_seed_op;
 
   cgalpy::Named_parameter_wrapper<Wrapper, Args...>
     wrapper(std::forward<Args>(args)...);
   return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            vertex_point_map_op,
                                             geom_traits_op,
+                                            vertex_is_constrained_map_op,
                                             do_project_op,
                                             random_seed_op);
 }
@@ -433,21 +441,33 @@ auto angle_and_area_smoothing_m(PolygonMesh& pmesh, const py::dict& np = py::dic
 template <typename PolygonMesh>
 auto smooth_shape(PolygonMesh& pmesh, const double time, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
   auto vpm = get_vertex_point_map(pmesh, np);
-  auto propmap = get_vertex_prop_map<Pm, bool>(pmesh, "vertex_is_constrained_map",
-                                               np.contains("vertex_is_constrained_map") ?
-                                               np["vertex_is_constrained_map"] : py::none());
-  return PMP::smooth_shape(pmesh, time);
+  auto vicm = get_vertex_prop_map<Pm, bool>
+    (pmesh, "INTERNAL_MAP0",
+     np.contains("vertex_is_constrained_map") ?
+     np["vertex_is_constrained_map"] : py::none());
+  auto smooth_np = CGAL::parameters::vertex_point_map(vpm).
+    vertex_is_constrained_map(vicm);
+
+  if (np.contains("geom_traits")) {
+    auto gt = py::cast<Kernel>(np["geom_traits"]);
+    PMP::smooth_shape(pmesh, time, smooth_np.geom_traits(gt));
+  }
+  else {
+    PMP::smooth_shape(pmesh, time, smooth_np);
+  }
+
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
+  if (! np.contains("vertex_is_constrained_map")) pmesh.remove_property_map(vicm);
+#endif
 }
 
 //!
 template <typename TriangleMesh>
 auto random_perturbation(TriangleMesh& tmesh, const double& perturbation_max_size, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  // TODO: vertex_point_map, vertex_is_constrained_map
   apply_random_perturbation_named_parameters
-    <Random_perturbation_wrapper>(np, tmesh, perturbation_max_size);
+    <Tm, Random_perturbation_wrapper>(np, tmesh, perturbation_max_size);
 }
 
 //!
@@ -455,12 +475,34 @@ template <typename PolygonMesh>
 auto random_perturbation_v(const std::vector<typename boost::graph_traits<PolygonMesh>::vertex_descriptor>& vertices,
                            PolygonMesh& pmesh, const double& perturbation_max_size, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
-  using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
-  // TODO: vertex_point_map, vertex_is_constrained_map
   apply_random_perturbation_named_parameters
-    <Random_perturbation_vertices_wrapper>(np, vertices, pmesh,
-                                           perturbation_max_size);
+    <Pm, Random_perturbation_vertices_wrapper>(np, vertices, pmesh,
+                                               perturbation_max_size);
 }
+
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+//!
+template <typename PolygonMesh>
+auto random_perturbation_v_pol3(const py::sequence& vertices,
+                                PolygonMesh& pmesh,
+                                const double& perturbation_max_size,
+                                const py::dict& np = py::dict()) {
+  using Pm = PolygonMesh;
+  using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
+
+  std::vector<Vd> vertex_descriptors;
+  vertex_descriptors.reserve(py::len(vertices));
+
+  for (size_t i = 0; i < py::len(vertices); ++i) {
+    auto& vertex = py::cast<typename Pm::Vertex&>(vertices[i]);
+    vertex_descriptors.emplace_back(Vd(&vertex));
+  }
+
+  apply_random_perturbation_named_parameters
+    <Pm, Random_perturbation_vertices_wrapper>(np, vertex_descriptors, pmesh,
+                                               perturbation_max_size);
+}
+#endif
 
 }
 } // namespace cgalpy // namespace pmp
@@ -583,9 +625,15 @@ void export_pmp_meshing(py::module_& m) {
   m.def("random_perturbation", &cgalpy::pmp::random_perturbation<Pm>,
         py::arg("tmesh"), py::arg("perturbation_max_size"), py::arg("np") = py::dict(),
         "Randomly perturbs vertices of a triangle mesh.");
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  m.def("random_perturbation", &cgalpy::pmp::random_perturbation_v_pol3<Pm>,
+        py::arg("vertices"), py::arg("tmesh"), py::arg("perturbation_max_size"), py::arg("np") = py::dict(),
+        "Randomly perturbs selected vertices of a triangle mesh.");
+#else
   m.def("random_perturbation", &cgalpy::pmp::random_perturbation_v<Pm>,
         py::arg("vertices"), py::arg("tmesh"), py::arg("perturbation_max_size"), py::arg("np") = py::dict(),
         "Randomly perturbs selected vertices of a triangle mesh.");
+#endif
 
   using Asf = cgalpy::pmp::Adaptive_sizing_field<Pm>;
   using Gt = boost::graph_traits<Pm>;
