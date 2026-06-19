@@ -403,18 +403,83 @@ auto split_connected_components(PolygonMesh& pmesh, std::vector<PolygonMesh>& cc
                                 const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
 
-  auto fpm = get_face_prop_map<Pm, std::size_t>(pmesh, "INTERNAL_MAP1",
-    np.contains("face_patch_map") ? np["face_patch_map"] : py::none());
-  // TODO: add index maps
-  auto default_np = CGAL::parameters::default_values();
-  cgalpy::Named_parameter_edge_is_constrained_map<Pm> eicm_op;
-  cgalpy::Named_parameter_wrapper<Split_connected_components_wrapper,
-                                  Pm&, std::vector<Pm>&>
-    wrapper(pmesh, cc_meshes);
-  cgalpy::named_parameter_applicator(wrapper, default_np, np, eicm_op);
+  auto eicm = get_edge_prop_map<Pm, bool>(pmesh, "INTERNAL_MAP0",
+    np.contains("edge_is_constrained_map") ?
+    np["edge_is_constrained_map"] : py::none());
+
+  auto split_np = CGAL::parameters::edge_is_constrained_map(eicm);
+
+  auto call_pmp = [&](const auto& final_np) {
+    PMP::split_connected_components(pmesh, cc_meshes, final_np);
+  };
+
+  const bool vimap = np.contains("vertex_index_map");
+  const bool himap = np.contains("halfedge_index_map");
+  const bool fimap = np.contains("face_index_map");
+
+  auto call_with_index_maps = [&](const auto& base_np) {
+    if (vimap && himap && fimap) {
+      auto vim = get_vertex_prop_map<Pm, std::size_t>
+        (pmesh, "INTERNAL_MAP2", np["vertex_index_map"]);
+      auto him = get_halfedge_prop_map<Pm, std::size_t>
+        (pmesh, "INTERNAL_MAP3", np["halfedge_index_map"]);
+      auto fim = get_face_prop_map<Pm, std::size_t>
+        (pmesh, "INTERNAL_MAP4", np["face_index_map"]);
+      call_pmp(base_np.vertex_index_map(vim).halfedge_index_map(him).
+               face_index_map(fim));
+    }
+    else if (vimap && himap) {
+      auto vim = get_vertex_prop_map<Pm, std::size_t>
+        (pmesh, "INTERNAL_MAP2", np["vertex_index_map"]);
+      auto him = get_halfedge_prop_map<Pm, std::size_t>
+        (pmesh, "INTERNAL_MAP3", np["halfedge_index_map"]);
+      call_pmp(base_np.vertex_index_map(vim).halfedge_index_map(him));
+    }
+    else if (vimap && fimap) {
+      auto vim = get_vertex_prop_map<Pm, std::size_t>
+        (pmesh, "INTERNAL_MAP2", np["vertex_index_map"]);
+      auto fim = get_face_prop_map<Pm, std::size_t>
+        (pmesh, "INTERNAL_MAP3", np["face_index_map"]);
+      call_pmp(base_np.vertex_index_map(vim).face_index_map(fim));
+    }
+    else if (himap && fimap) {
+      auto him = get_halfedge_prop_map<Pm, std::size_t>
+        (pmesh, "INTERNAL_MAP2", np["halfedge_index_map"]);
+      auto fim = get_face_prop_map<Pm, std::size_t>
+        (pmesh, "INTERNAL_MAP3", np["face_index_map"]);
+      call_pmp(base_np.halfedge_index_map(him).face_index_map(fim));
+    }
+    else if (vimap) {
+      auto vim = get_vertex_prop_map<Pm, std::size_t>
+        (pmesh, "INTERNAL_MAP2", np["vertex_index_map"]);
+      call_pmp(base_np.vertex_index_map(vim));
+    }
+    else if (himap) {
+      auto him = get_halfedge_prop_map<Pm, std::size_t>
+        (pmesh, "INTERNAL_MAP2", np["halfedge_index_map"]);
+      call_pmp(base_np.halfedge_index_map(him));
+    }
+    else if (fimap) {
+      auto fim = get_face_prop_map<Pm, std::size_t>
+        (pmesh, "INTERNAL_MAP2", np["face_index_map"]);
+      call_pmp(base_np.face_index_map(fim));
+    }
+    else {
+      call_pmp(base_np);
+    }
+  };
+
+  if (np.contains("face_patch_map")) {
+    auto fpm = get_face_prop_map<Pm, std::size_t>
+      (pmesh, "INTERNAL_MAP1", np["face_patch_map"]);
+    call_with_index_maps(split_np.face_patch_map(fpm));
+  }
+  else {
+    call_with_index_maps(split_np);
+  }
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
-  if (! np.contains("face_patch_map")) pmesh.remove_property_map(fpm);
+  if (! np.contains("edge_is_constrained_map")) pmesh.remove_property_map(eicm);
 #endif
 
   return cc_meshes;
