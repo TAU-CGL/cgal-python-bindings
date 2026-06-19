@@ -8,14 +8,15 @@ if len(sys.argv) > 1 and sys.argv[1].startswith("CGALPY"):
 
 CGALPY = importlib.import_module(lib)
 Ss = CGALPY.Ss
+Kerd = CGALPY.Kerd
 
-points = [Ss.Point_d(2, [0, 0])]
+Point_d = Kerd.Point_d
+
+points = [Point_d(2, [0, 0])]
 tree = Ss.Kd_tree(points)
 
-query = Ss.Point_d(2, [0, 0])
-distance = Ss.Euclidean_distance()
-
-search = Ss.K_neighbor_search(tree, query, 1, 0, True, distance, True)
+query = Point_d(2, [0, 0])
+search = Ss.K_neighbor_search(tree, query, 1)
 neighbors = search.k_neighbors()
 
 for point, squared_distance in neighbors:

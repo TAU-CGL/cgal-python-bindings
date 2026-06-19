@@ -873,6 +873,18 @@ if (NOT SKBUILD)
           message(FATAL_ERROR "Mpfr library not found")
         endif ()
 
+        set(GMP_RUNTIME_LIBRARY_DIR "${GMP_LIBRARY_DIR}")
+        get_filename_component(_gmp_library_parent "${GMP_LIBRARY_DIR}" DIRECTORY)
+        if (EXISTS "${_gmp_library_parent}/bin")
+          set(GMP_RUNTIME_LIBRARY_DIR "${_gmp_library_parent}/bin")
+        endif ()
+
+        set(MPFR_RUNTIME_LIBRARY_DIR "${MPFR_LIBRARY_DIR}")
+        get_filename_component(_mpfr_library_parent "${MPFR_LIBRARY_DIR}" DIRECTORY)
+        if (EXISTS "${_mpfr_library_parent}/bin")
+          set(MPFR_RUNTIME_LIBRARY_DIR "${_mpfr_library_parent}/bin")
+        endif ()
+
         if (CGAL_Qt6_FOUND)
           set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/gmp/Qt/__init__.py")
           # The directory that contains the Qt6 shared libraries seems not to be
@@ -910,6 +922,8 @@ if (NOT SKBUILD)
         "-DBoost_LIBRARY_DIRS=${Boost_LIBRARY_DIRS}"
         "-DGMP_LIBRARY_DIR=${GMP_LIBRARY_DIR}"
         "-DMPFR_LIBRARY_DIR=${MPFR_LIBRARY_DIR}"
+        "-DGMP_RUNTIME_LIBRARY_DIR=${GMP_RUNTIME_LIBRARY_DIR}"
+        "-DMPFR_RUNTIME_LIBRARY_DIR=${MPFR_RUNTIME_LIBRARY_DIR}"
         "-DQt6_LIBRARY_DIR=${Qt6_LIBRARY_DIR}"
         "-DCGALPY_LIB_NAME=${CGALPY_LIB_NAME}"
         -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"

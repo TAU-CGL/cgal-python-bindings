@@ -6,6 +6,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <nanobind/nanobind.h>
 
@@ -109,11 +110,9 @@ py::list k_neighbors(T& neighbor_search) {
 template <typename T>
 void bind_neighbor_search(py::module_& m, const char* python_name) {
   py::class_<T>(m, python_name, ss_doc::K_neighbor_search_class)
-    // .def(py::init<const typename T::Tree&, typename T::Query_item,
-    //      unsigned int, FT_d, bool, typename T::Distance, bool>(),
-    //      py::arg("tree"), py::arg("q"), py::arg("k"), py::arg("eps"),
-    //      py::arg("search_nearest"), py::arg("d"), py::arg("sorted"),
-    //      ss_doc::K_neighbor_search_K_neighbor_search)
+    .def(py::init<const typename T::Tree&, typename T::Query_item, unsigned int>(),
+         py::arg("tree"), py::arg("q"), py::arg("k"),
+         ss_doc::K_neighbor_search_K_neighbor_search)
     .def("k_neighbors", &k_neighbors<T>,
          "Return the neighbor-search result as a Python list of (point, distance) pairs.")
     ;
