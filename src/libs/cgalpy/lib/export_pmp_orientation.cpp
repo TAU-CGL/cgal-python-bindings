@@ -121,18 +121,45 @@ auto orient(TriangleMesh& tm, const py::dict& np = py::dict()) {
 
 //!
 template <typename TriangleMesh>
-auto does_bound_a_volume(TriangleMesh& tm,
-                         const py::dict& np = py::dict()) {
-  bool retv;
+py::object does_bound_a_volume(TriangleMesh& tm,
+                               const py::dict& np = py::dict()) {
+  const bool collect_cc_orientation =
+    np.contains("is_cc_outward_oriented") &&
+    py::cast<bool>(np["is_cc_outward_oriented"]);
+
+  std::vector<bool> is_cc_outward_oriented;
+  bool retv = false;
+
   if (np.contains("face_index_map")) {
-    auto fim = get_face_prop_map<TriangleMesh, bool>(tm, "INTERNAL_MAP0",
-                                                     np.contains("face_index_map") ? np["face_index_map"] : py::none());
-    retv = PMP::does_bound_a_volume(tm);
+    auto fim = get_face_prop_map<TriangleMesh, std::size_t>
+      (tm, "INTERNAL_MAP0", np["face_index_map"]);
+    if (collect_cc_orientation) {
+      retv = PMP::does_bound_a_volume
+        (tm, CGAL::parameters::face_index_map(fim)
+               .is_cc_outward_oriented(std::ref(is_cc_outward_oriented)));
+    }
+    else {
+      retv = PMP::does_bound_a_volume
+        (tm, CGAL::parameters::face_index_map(fim));
+    }
   }
   else {
-    retv = PMP::does_bound_a_volume(tm);
+    if (collect_cc_orientation) {
+      retv = PMP::does_bound_a_volume
+        (tm, CGAL::parameters::is_cc_outward_oriented
+             (std::ref(is_cc_outward_oriented)));
+    }
+    else {
+      retv = PMP::does_bound_a_volume(tm);
+    }
   }
-  return retv;
+
+  if (collect_cc_orientation) {
+    py::list orientations;
+    for (bool value : is_cc_outward_oriented) orientations.append(value);
+    return py::make_tuple(retv, orientations);
+  }
+  return py::cast(retv);
 }
 
 //!
@@ -239,7 +266,23 @@ auto orient_triangle_soup_with_reference_triangle_soup(const std::vector<Point_3
                                                        std::vector<std::vector<std::size_t>>& faces,
                                                        const py::dict& np1 = py::dict(),
                                                        const py::dict& np2 = py::dict()) {
-  PMP::orient_triangle_soup_with_reference_triangle_soup(ref_points, ref_faces, points, faces); // doesn't work for some reason
+  using TAG = CGAL::Sequential_tag;
+
+  // The Python API exposes both soups as std::vector<Point_3>, so the default
+  // identity point maps are the correct point maps for both named-parameter packs.
+  (void) np2;
+
+  if (np1.contains("geom_traits")) {
+    auto gt = py::cast<Kernel>(np1["geom_traits"]);
+    PMP::orient_triangle_soup_with_reference_triangle_soup<TAG>
+      (ref_points, ref_faces, points, faces, CGAL::parameters::geom_traits(gt));
+  }
+  else {
+    PMP::orient_triangle_soup_with_reference_triangle_soup<TAG>
+      (ref_points, ref_faces, points, faces);
+  }
+
+  return std::make_tuple(points, faces);
 }
 
 //!
@@ -341,7 +384,7 @@ void export_pmp_orientation(py::module_& m) {
   m.def("orient", &cgalpy::pmp::orient<Pm>,
         py::arg("tm"), py::arg("np") = py::dict(),
         "Orients a triangle mesh.");
-  m.def("does_bound_a_volume", &cgalpy::pmp::does_bound_a_volume<Pm>, // TODO: is_cc_outward_oriented
+  m.def("does_bound_a_volume", &cgalpy::pmp::does_bound_a_volume<Pm>,
         py::arg("tm"), py::arg("np") = py::dict(),
         "Returns whether the triangle mesh bounds a volume.");
   m.def("orient_to_bound_a_volume", &cgalpy::pmp::orient_to_bound_a_volume<Pm>,
@@ -369,8 +412,12 @@ void export_pmp_orientation(py::module_& m) {
         py::arg("tm_ref"), py::arg("points"), py::arg("triangles"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         "Orients a triangle soup using a reference triangle mesh.");
-  // m.def("orient_triangle_soup_with_reference_triangle_soup", &cgalpy::pmp::orient_triangle_soup_with_reference_triangle_soup, // TODO: point_map
-  //       py::arg("ref_points"), py::arg("ref_faces"), py::arg("points"), py::arg("faces"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict());
+  m.def("orient_triangle_soup_with_reference_triangle_soup",
+        &cgalpy::pmp::orient_triangle_soup_with_reference_triangle_soup,
+        py::arg("ref_points"), py::arg("ref_faces"),
+        py::arg("points"), py::arg("faces"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        "Orients a triangle soup using a reference triangle soup.");
   m.def("merge_reversible_connected_components", &cgalpy::pmp::merge_reversible_connected_components<Pm>,
          py::arg("pm"), py::arg("np") = py::dict(),
          "Merges connected components whose orientations can be made compatible.");

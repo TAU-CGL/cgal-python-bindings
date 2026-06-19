@@ -33,7 +33,31 @@ auto get_vertex_point_map(const PolygonMesh& pm, const py::dict& np = py::dict()
 #if CGALPY_PMP_POLYGONAL_MESH == 0 //polyhedron
 template <typename PolygonMesh>
 auto get_vertex_point_map(PolygonMesh& pm, const py::dict& np = py::dict()) {
-  // TODO: get the map from the dict
+  using vpmap =
+    typename boost::property_map<PolygonMesh, CGAL::vertex_point_t>::type;
+  if (np.contains("vertex_point_map")) {
+    try {
+      return py::cast<vpmap>(np["vertex_point_map"]);
+    }
+    catch (py::cast_error& e) {
+      throw std::runtime_error("Failed to cast vertex_point_map to desired type");
+    }
+  }
+  return get(CGAL::vertex_point, pm);
+}
+
+template <typename PolygonMesh>
+auto get_vertex_point_map(const PolygonMesh& pm, const py::dict& np = py::dict()) {
+  using vpmap =
+    typename boost::property_map<PolygonMesh, CGAL::vertex_point_t>::const_type;
+  if (np.contains("vertex_point_map")) {
+    try {
+      return py::cast<vpmap>(np["vertex_point_map"]);
+    }
+    catch (py::cast_error& e) {
+      throw std::runtime_error("Failed to cast vertex_point_map to desired type");
+    }
+  }
   return get(CGAL::vertex_point, pm);
 }
 #endif // CGALPY_PMP_POLYGONAL_MESH == 0
