@@ -378,7 +378,7 @@ void export_pmp_combinatorial_repair(py::module_& m) {
   m.def("polygon_mesh_to_polygon_soup", &cgalpy::pmp::polygon_mesh_to_polygon_soup<Pm>,
         py::arg("pm"), py::arg("np") = py::dict(),
         "Converts a polygon mesh to a polygon soup.");
-  m.def("polygon_soup_to_polygon_mesh", &cgalpy::pmp::polygon_soup_to_polygon_mesh<Pm>, // TODO: point_map, ptvm, ptfm
+  m.def("polygon_soup_to_polygon_mesh", &cgalpy::pmp::polygon_soup_to_polygon_mesh<Pm>,
         py::arg("points"), py::arg("polygons"), py::arg("np_ps") = py::dict(), py::arg("np_pm") = py::dict(),
         "Converts a polygon soup to a polygon mesh.");
   m.def("remove_isolated_points_in_polygon_soup", &cgalpy::pmp::remove_isolated_points_in_polygon_soup,
