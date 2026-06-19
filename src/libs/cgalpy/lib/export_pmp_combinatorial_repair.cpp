@@ -4,9 +4,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
-// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
 //            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
+#include <iterator>
+#include <stdexcept>
 #include <tuple>
 #include <utility>
 #include <vector>
@@ -145,18 +147,52 @@ auto polygon_mesh_to_polygon_soup(const PolygonMesh& pm, const py::dict& np = py
 }
 
 //!
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+template <typename Iterator, typename Descriptor>
+std::size_t descriptor_index(Iterator begin, Iterator end, Descriptor descriptor) {
+  std::size_t index = 0;
+  for (auto it = begin; it != end; ++it, ++index) {
+    if (it == descriptor) return index;
+  }
+  throw std::runtime_error("polygon_soup_to_polygon_mesh returned an unknown descriptor.");
+}
+#endif
+
+//!
 template <typename PolygonMesh>
 auto polygon_soup_to_polygon_mesh(const Point_3_vec& points, const std::vector<Size_t_vec>& polygons,
                                   const py::dict& np_ps = py::dict(), const py::dict& np_pm = py::dict()) {
   using Pm = PolygonMesh;
-  using vd = typename boost::graph_traits<Pm>::vertex_descriptor;
-  using fd = typename boost::graph_traits<Pm>::face_descriptor;
+  using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
+  using Fd = typename boost::graph_traits<Pm>::face_descriptor;
   Pm output;
 
-  std::vector<std::pair<int, vd>> pvvec;
-  std::vector<std::pair<int, fd>> pfvec;
-  PMP::polygon_soup_to_polygon_mesh(points, polygons, output);
+  std::vector<std::pair<int, Vd>> pvvec;
+  std::vector<std::pair<int, Fd>> pfvec;
+
+  auto soup_np = CGAL::parameters::point_to_vertex_output_iterator(std::back_inserter(pvvec)).
+    polygon_to_face_output_iterator(std::back_inserter(pfvec));
+
+  PMP::polygon_soup_to_polygon_mesh(points, polygons, output, soup_np);
+
+#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+  std::vector<std::pair<int, std::size_t>> point_to_vertex_indices;
+  std::vector<std::pair<int, std::size_t>> polygon_to_face_indices;
+
+  for (const auto& pair : pvvec) {
+    point_to_vertex_indices.emplace_back
+      (pair.first, descriptor_index(output.vertices_begin(), output.vertices_end(), pair.second));
+  }
+
+  for (const auto& pair : pfvec) {
+    polygon_to_face_indices.emplace_back
+      (pair.first, descriptor_index(output.facets_begin(), output.facets_end(), pair.second));
+  }
+
+  return std::make_tuple(output, point_to_vertex_indices, polygon_to_face_indices);
+#else
   return std::make_tuple(output, pvvec, pfvec);
+#endif
 }
 
 //!
