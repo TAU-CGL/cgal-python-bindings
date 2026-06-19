@@ -211,8 +211,24 @@ auto orient_triangle_soup_with_reference_triangle_mesh(const PolygonMesh& tm_ref
                                                        const py::dict& np1 = py::dict(),
                                                        const py::dict& np2 = py::dict()) {
   using TAG = CGAL::Sequential_tag;
-  // auto vpm = get_vertex_point_map(tm_ref, np1);
-  PMP::orient_triangle_soup_with_reference_triangle_mesh<TAG>(tm_ref, points, triangles);
+
+  // The Python API exposes the soup as std::vector<Point_3>, so the CGAL
+  // point_map named parameter in np2 is the default identity map.
+  (void)np2;
+
+  auto vpm = get_vertex_point_map(tm_ref, np1);
+  auto orient_np = CGAL::parameters::vertex_point_map(vpm);
+
+  if (np1.contains("geom_traits")) {
+    auto gt = py::cast<Kernel>(np1["geom_traits"]);
+    PMP::orient_triangle_soup_with_reference_triangle_mesh<TAG>
+      (tm_ref, points, triangles, orient_np.geom_traits(gt));
+  }
+  else {
+    PMP::orient_triangle_soup_with_reference_triangle_mesh<TAG>
+      (tm_ref, points, triangles, orient_np);
+  }
+
   return std::make_tuple(points, triangles);
 }
 
@@ -349,7 +365,7 @@ void export_pmp_orientation(py::module_& m) {
         py::arg("points"), py::arg("polygons"),
         "Duplicates non-manifold edges in a polygon soup.");
   m.def("orient_triangle_soup_with_reference_triangle_mesh",
-        &cgalpy::pmp::orient_triangle_soup_with_reference_triangle_mesh<Pm>, // TODO: point_map
+        &cgalpy::pmp::orient_triangle_soup_with_reference_triangle_mesh<Pm>,
         py::arg("tm_ref"), py::arg("points"), py::arg("triangles"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         "Orients a triangle soup using a reference triangle mesh.");
