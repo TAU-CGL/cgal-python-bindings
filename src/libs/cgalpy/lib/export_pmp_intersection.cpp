@@ -317,7 +317,7 @@ void export_pmp_intersection(py::module_& m) {
   m.def("does_self_intersect", &cgalpy::pmp::does_self_intersect<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_does_self_intersect_1);
-  m.def("does_triangle_soup_self_intersect", &cgalpy::pmp::does_triangle_soup_self_intersect, // TODO: point_map
+  m.def("does_triangle_soup_self_intersect", &cgalpy::pmp::does_triangle_soup_self_intersect,
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_does_triangle_soup_self_intersect);
   m.def("intersecting_meshes", &cgalpy::pmp::intersecting_meshes<Pm>, py::arg("range"),
@@ -329,7 +329,7 @@ void export_pmp_intersection(py::module_& m) {
   m.def("self_intersections", &cgalpy::pmp::self_intersections_faces<Pm>,
         py::arg("face_range"), py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_self_intersections);
-  m.def("triangle_soup_self_intersections", &cgalpy::pmp::triangle_soup_self_intersections, // TODO: point_map
+  m.def("triangle_soup_self_intersections", &cgalpy::pmp::triangle_soup_self_intersections,
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_triangle_soup_self_intersections);
 }
