@@ -358,10 +358,10 @@ PAIRS = {
     "sn2_create_offset_polygons_2": ExamplePair(
         name="sn2_create_offset_polygons_2",
         python_relpath="Straight_skeleton_2/create_offset_polygons_2.py",
-        cpp_relpath="Straight_skeleton_2/examples/Straight_skeleton_2/Create_offset_polygons_2.cpp",
+        cpp_relpath="Straight_skeleton_2/examples/Straight_skeleton_2/create_offset_polygons_2.cpp",
         python_workdir_relpath="Straight_skeleton_2",
         cpp_include_relpath="Straight_skeleton_2/examples/Straight_skeleton_2",
-        executable="Create_offset_polygons_2",
+        executable="create_offset_polygons_2",
     ),
     "st_my_point": ExamplePair(
         name="st_my_point",
