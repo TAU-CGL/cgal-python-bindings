@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <tuple>
+#include <functional>
 
 #include <boost/graph/graph_traits.hpp>
 
@@ -31,6 +32,7 @@
 
 #include "cgalpy/Named_parameter_density_control_factor.hpp"
 #include "cgalpy/Named_parameter_do_project.hpp"
+#include "cgalpy/Named_parameter_edge_is_constrained_map.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
 #include "cgalpy/Named_parameter_random_seed.hpp"
 #include "cgalpy/Named_parameter_vertex_is_constrained_map.hpp"
@@ -43,6 +45,10 @@
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Uniform_sizing_field.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
+
+#if CGAL_VERSION_NR <= 1060100900
+#include "cgalpy/pmp_np_parser.hpp"
+#endif
 
 namespace py = nanobind;
 
@@ -101,6 +107,76 @@ auto apply_random_perturbation_named_parameters(const py::dict& params,
                                             vertex_is_constrained_map_op,
                                             do_project_op,
                                             random_seed_op);
+}
+
+//! Apply tangential relaxation number-of-iterations parameter.
+struct Named_parameter_number_of_iterations {
+  const std::string m_name = "number_of_iterations";
+
+  template <typename NamedParameter>
+  auto operator()(NamedParameter& np, const py::handle& value) const
+  { return np.number_of_iterations(py::cast<unsigned int>(value)); }
+};
+
+//! Apply tangential relaxation constraint-relaxation flag.
+struct Named_parameter_relax_constraints {
+  const std::string m_name = "relax_constraints";
+
+  template <typename NamedParameter>
+  auto operator()(NamedParameter& np, const py::handle& value) const
+  { return np.relax_constraints(py::cast<bool>(value)); }
+};
+
+//! Apply tangential relaxation move filter.
+template <typename PolygonMesh>
+struct Named_parameter_allow_move_functor {
+  const std::string m_name = "allow_move_functor";
+
+  template <typename NamedParameter>
+  auto operator()(NamedParameter& np, const py::handle& value) const {
+    using Vd = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
+    using Point = Kernel::Point_3;
+    using Move_functor = std::function<bool(Vd, Point, Point)>;
+    return np.allow_move_functor(py::cast<Move_functor>(value));
+  }
+};
+
+//! Wrap CGAL::Polygon_mesh_processing::tangential_relaxation(tm, np).
+template <typename NamedParameter, typename TriangleMesh>
+struct Tangential_relaxation_wrapper {
+  static auto call(NamedParameter& np, TriangleMesh&& tmesh)
+  {
+    return PMP::tangential_relaxation(vertices(tmesh), tmesh, np);
+  }
+};
+
+//! Apply tangential relaxation named parameters.
+template <typename PolygonMesh, template <typename...> class Wrapper,
+          typename... Args>
+auto apply_tangential_relaxation_named_parameters(const py::dict& params,
+                                                  Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_edge_is_constrained_map<PolygonMesh>
+    edge_is_constrained_map_op;
+  cgalpy::Named_parameter_vertex_is_constrained_map<PolygonMesh>
+    vertex_is_constrained_map_op;
+  Named_parameter_number_of_iterations number_of_iterations_op;
+  Named_parameter_relax_constraints relax_constraints_op;
+  Named_parameter_allow_move_functor<PolygonMesh> allow_move_functor_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            vertex_point_map_op,
+                                            geom_traits_op,
+                                            edge_is_constrained_map_op,
+                                            vertex_is_constrained_map_op,
+                                            number_of_iterations_op,
+                                            relax_constraints_op,
+                                            allow_move_functor_op);
 }
 
 //! Wrap CGAL::Polygon_mesh_processing::refine(..., np).
@@ -437,6 +513,18 @@ auto angle_and_area_smoothing_m(PolygonMesh& pmesh, const py::dict& np = py::dic
 #endif
 }
 
+//! Wrap CGAL::Polygon_mesh_processing::tangential_relaxation(tm, np).
+template <typename PolygonMesh>
+auto tangential_relaxation(PolygonMesh& pmesh, const py::dict& np = py::dict()) {
+#if CGAL_VERSION_NR > 1060100900
+  return apply_tangential_relaxation_named_parameters
+    <PolygonMesh, Tangential_relaxation_wrapper>(np, pmesh);
+#else
+  auto cgal_parameters = internal::parse_pmp_np<PolygonMesh>(np);
+  return PMP::tangential_relaxation(vertices(pmesh), pmesh, cgal_parameters);
+#endif
+}
+
 //
 template <typename PolygonMesh>
 auto smooth_shape(PolygonMesh& pmesh, const double time, const py::dict& np = py::dict()) {
@@ -608,8 +696,9 @@ void export_pmp_meshing(py::module_& m) {
   m.def("angle_and_area_smoothing", &cgalpy::pmp::angle_and_area_smoothing_m<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict(),
         "Smooths a polygon mesh by angle and area optimization.");
-  // m.def("tangential_relaxation", &cgalpy::pmp::tangential_relaxation<Pm>, // changed in master
-  //       py::arg("pm"), py::arg("np") = py::dict());
+  m.def("tangential_relaxation", &cgalpy::pmp::tangential_relaxation<Pm>,
+        py::arg("pm"), py::arg("np") = py::dict(),
+        "Applies tangential relaxation to a polygon mesh.");
 
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
