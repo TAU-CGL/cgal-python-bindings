@@ -83,20 +83,6 @@ endif ()
 
 # Handle Gmp and Mpfr libraries
 if (NOT SKBUILD)
-
-# Get all defined variables in the current scope
-get_cmake_property(_variableNames VARIABLES)
-list(SORT _variableNames)
-
-message(STATUS "--- Printing variables containing 'GMP' ---")
-foreach(_variableName ${_variableNames})
-    # Check if the variable name contains "GMP" (case-insensitive)
-    if(_variableName MATCHES "GMP")
-        message(STATUS "${_variableName} = ${${_variableName}}")
-    endif()
-endforeach()
-
-
   # The following is needed for Windows. We extract the directory names
   # of the dlls that we depend on, and use them later on
   # \todo introduce a function and use it
