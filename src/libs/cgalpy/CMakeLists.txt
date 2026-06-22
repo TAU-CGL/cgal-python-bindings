@@ -742,22 +742,22 @@ if (NOT SKBUILD)
     # shared ibraries, when the binding library is loaded (upon "import").
 
     if (CGAL_USE_MPFR OR CGAL_USE_GMP)
-      if (NOT GMP_LIBRARY_DIR)
-        message(FATAL_ERROR "Gmp library not found")
+      if (NOT GMP_BINARY_DIR)
+        message(FATAL_ERROR "Gmp shared library not found")
       endif ()
-      if (NOT MPFR_LIBRARY_DIR)
-        message(FATAL_ERROR "Mpfr library not found")
+      if (NOT MPFR_BINARY_DIR)
+        message(FATAL_ERROR "Mpfr shared library not found")
       endif ()
       if (CGAL_Qt6_FOUND)
         set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/gmp/Qt/__init__.py")
         # The directory that contains the Qt6 shared libraries seems not to be
         # exported by the find_package(Qt6..) call; thus, we set it ourselves,
         # but let the users also explicitly set it.
-        if (NOT Qt6_LIBRARY_DIR)
-          set(Qt6_LIBRARY_DIR "${QT6_INSTALL_PREFIX}/bin")
+        if (NOT Qt6_BINARY_DIR)
+          set(Qt6_BINARY_DIR "${QT6_INSTALL_PREFIX}/bin")
         endif()
-        if (NOT Qt6_LIBRARY_DIR)
-          message(FATAL_ERROR "Qt6 library not found")
+        if (NOT Qt6_BINARY_DIR)
+          message(FATAL_ERROR "Qt6 shared library not found")
         endif ()
       else ()
         set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/gmp/__init__.py")
@@ -765,11 +765,11 @@ if (NOT SKBUILD)
     else ()
       if (CGAL_Qt6_FOUND)
         set(CGALPY_SRC_INIT "${CMAKE_CURRENT_LIST_DIR}/Windows/Qt/__init__.py")
-        if (NOT Qt6_LIBRARY_DIR)
-          set(Qt6_LIBRARY_DIR "${QT6_INSTALL_PREFIX}/bin")
+        if (NOT Qt6_BINARY_DIR)
+          set(Qt6_BINARY_DIR "${QT6_INSTALL_PREFIX}/bin")
         endif()
-        if (NOT Qt6_LIBRARY_DIR)
-          message(FATAL_ERROR "Qt6 library not found")
+        if (NOT Qt6_BINARY_DIR)
+          message(FATAL_ERROR "Qt6 shared library not found")
         endif ()
       endif ()
     endif ()
@@ -783,9 +783,9 @@ if (NOT SKBUILD)
       "-DFILE_IN=${CGALPY_SRC_INIT}"
       "-DFILE_OUT=${CGALPY_OUT_INIT}"
       "-DBoost_LIBRARY_DIRS=${Boost_LIBRARY_DIRS}"
-      "-DGMP_LIBRARY_DIR=${GMP_LIBRARY_DIR}"
-      "-DMPFR_LIBRARY_DIR=${MPFR_LIBRARY_DIR}"
-      "-DQt6_LIBRARY_DIR=${Qt6_LIBRARY_DIR}"
+      "-DGMP_BINARY_DIR=${GMP_BINARY_DIR}"
+      "-DMPFR_BINARY_DIR=${MPFR_BINARY_DIR}"
+      "-DQt6_BINARY_DIR=${Qt6_BINARY_DIR}"
       "-DCGALPY_LIB_NAME=${CGALPY_LIB_NAME}"
       -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
       DEPENDS ${CGALPY_SRC_INIT})
