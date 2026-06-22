@@ -44,6 +44,7 @@
 #include "cgalpy/pmp_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Uniform_sizing_field.hpp"
+#include "cgalpy/Triangulate_faces_visitor.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
 #if CGAL_VERSION_NR <= 1060100900
@@ -70,6 +71,35 @@ auto apply_meshing_geom_traits_named_parameters(const py::dict& params,
     wrapper(std::forward<Args>(args)...);
   return cgalpy::named_parameter_applicator(wrapper, np, params,
                                             geom_traits_op);
+}
+
+//! Apply triangulate_faces named parameters.
+template <typename PolygonMesh>
+struct Named_parameter_triangulate_faces_visitor {
+  const std::string m_name = "visitor";
+
+  template <typename NamedParameter>
+  auto operator()(NamedParameter& np, const py::handle& value) const
+  {
+    using Visitor = Triangulate_faces_visitor<PolygonMesh>;
+    return np.visitor(py::cast<Visitor>(value));
+  }
+};
+
+template <typename PolygonMesh, template <typename...> class Wrapper,
+          typename... Args>
+auto apply_triangulate_faces_named_parameters(const py::dict& params,
+                                              Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  Named_parameter_triangulate_faces_visitor<PolygonMesh> visitor_op;
+
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np, params,
+                                            geom_traits_op,
+                                            visitor_op);
 }
 
 //! Apply refine named parameters.
@@ -367,10 +397,9 @@ auto fair(TriangleMesh& tmesh, const std::vector<Point_3>& vertices, const py::d
 template <typename PolygonMesh>
 auto triangulate_faces(PolygonMesh& pm, const py::dict& np) {
   using Pm = PolygonMesh;
-  // TODO: visitor?
   // auto vpm = get_vertex_point_map(pm, np);
-  return apply_meshing_geom_traits_named_parameters
-    <Triangulate_faces_wrapper>(np, pm);
+  return apply_triangulate_faces_named_parameters
+    <Pm, Triangulate_faces_wrapper>(np, pm);
 }
 
 //!
@@ -380,8 +409,8 @@ auto triangulate_faces_r(const std::vector<typename boost::graph_traits<PolygonM
   using Pm = PolygonMesh;
   using Gt = boost::graph_traits<Pm>;
   using Fd = typename Gt::face_descriptor;
-  return apply_meshing_geom_traits_named_parameters
-    <Triangulate_faces_range_wrapper>(np, face_range, pm);
+  return apply_triangulate_faces_named_parameters
+    <Pm, Triangulate_faces_range_wrapper>(np, face_range, pm);
 }
 
 //!
@@ -651,6 +680,27 @@ void export_pmp_meshing(py::module_& m) {
   m.def("triangulate_polygons", &cgalpy::pmp::triangulate_polygons,
         py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
         "Triangulates polygon soup faces.");
+
+  using Tfv = cgalpy::pmp::Triangulate_faces_visitor<Pm>;
+  py::class_<Tfv>(m, "Triangulate_faces_visitor",
+                  "Visitor for triangulate_faces().")
+    .def(py::init<>(), "Constructs a triangulate faces visitor.")
+    .def("set_before_subface_creations",
+         &Tfv::set_before_subface_creations,
+         py::arg("callback"),
+         "Sets a callback called before a face is split into subfaces.")
+    .def("set_after_subface_creations",
+         &Tfv::set_after_subface_creations,
+         py::arg("callback"),
+         "Sets a callback called after a face has been split into subfaces.")
+    .def("set_after_subface_created",
+         &Tfv::set_after_subface_created,
+         py::arg("callback"),
+         "Sets a callback called after each new subface is created.")
+    .def("set_accept_face",
+         &Tfv::set_accept_face,
+         py::arg("callback"),
+         "Sets a callback deciding whether a candidate triangle is accepted.");
 
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) && \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) && \
