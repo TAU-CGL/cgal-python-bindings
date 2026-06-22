@@ -63,6 +63,20 @@ else ()
     set(CGALPY_PY_MAJOR_MINOR_VERSION "${Python_VERSION_MAJOR}${Python_VERSION_MINOR}")
 endif ()
 
+if (NOT SKBUILD)
+  execute_process(
+    COMMAND ${Python_EXECUTABLE} -c "import build"
+    RESULT_VARIABLE CGALPY_PYTHON_BUILD_MODULE_RESULT
+    OUTPUT_QUIET
+    ERROR_QUIET)
+  if (NOT CGALPY_PYTHON_BUILD_MODULE_RESULT EQUAL 0)
+    message(FATAL_ERROR
+      "The Python module 'build' is required for the non-SKBUILD wheel build. "
+      "Install it for the Python interpreter selected by CMake: "
+      "${Python_EXECUTABLE} -m pip install build")
+  endif ()
+endif ()
+
 # Find required Boost library
 if (SKBUILD)
     find_package(Boost REQUIRED)
