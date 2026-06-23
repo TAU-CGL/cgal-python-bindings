@@ -730,6 +730,12 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
     endif ()
 endif ()
 
+configure_file(
+    "${CMAKE_SOURCE_DIR}/GetMetadata.cmake.in"
+    "${CMAKE_SOURCE_DIR}/GetMetadata.cmake"
+    @ONLY
+)
+
 set(CGALPY_LIB_DIR "${CMAKE_BINARY_DIR}/src/libs/cgalpy")
 
 function(add_module name)
@@ -994,7 +1000,7 @@ if (NOT SKBUILD)
     ################################################################################
 
     # Setup generation
-    set(CGALPY_SRC_SETUP "${CMAKE_CURRENT_LIST_DIR}/setup.py")
+    set(CGALPY_SRC_SETUP "${CMAKE_CURRENT_LIST_DIR}/setup.py.in")
     set(CGALPY_OUT_SETUP "${CGALPY_LIB_DIR}/setup.py")
     set(CGALPY_TARGET_LINKER_FILE ${CGALPY_LIB_NAME}${CGALPY_LIBRARY_SUFFIX})
     set(CGALPY_SETUP_DATA "'${CGALPY_TARGET_LINKER_FILE}'")

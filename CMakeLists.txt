@@ -35,9 +35,9 @@ if (DEFINED ENV{CGAL_DATA_DIR})
 endif ()
 
 # General
-set(CGALPY_PROJECT_AUTHORS "Nir Goren and Efi Fogel")
-set(CGALPY_PROJECT_EMAILS "cgl@tau.ac.il")
-set(CGALPY_PROJECT_URL "http://acg.cs.tau.ac.il")
+set(CGALPY_PROJECT_AUTHORS "Efi Fogel, Nir Goren, and Radosław Dąbkowski")
+set(CGALPY_PROJECT_EMAILS "efifogel@gmail.com, nirgoren@mail.tau.ac.il, and radekaadek@gmail.com")
+set(CGALPY_PROJECT_URL "https://www.cgl.cs.tau.ac.il/projects/cgal-python-bindings/")
 set(CGALPY_MODULES_REL_DIR cmake/modules)
 set(CGALPY_MODULE_DIR ${CMAKE_SOURCE_DIR}/${CGALPY_MODULES_REL_DIR})
 set(CGALPY_PYTHOM_BUILD_CONFIG_SETTING CACHE STRING "")

@@ -8,11 +8,12 @@ requires = [
     "sphinx>=7.1.2",
     "typing-extensions"
 ]
-build-backend = "scikit_build_core.build"
+build-backend = "cgalpy_backend"
+backend-path = ["."]
 [project]
-name = "cgalpy"
-version = "1.0.10"
-description = "CGAL Bindings"
+name = "cgalpy"          # placeholder, always overridden by GetMetadata.cmake
+version = "0.0.0"        # placeholder, always overridden by GetMetadata.cmake
+description = "CGAL Python Bindings"
 readme = "README.md"
 requires-python = ">=3.8"
 authors = [
@@ -21,7 +22,7 @@ authors = [
     { name = "radekaadek", email = "radekaadek@gmail.com"}
 ]
 classifiers = [
-    "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
 ]
 # Optional: runtime dependency specification
@@ -119,6 +120,8 @@ minimum-version = "build-system.requires"
 
 # The build directory. Defaults to a temporary directory, but can be set.
 build-dir = "build/{wheel_tag}"
+
+experimental = true
 
 [tool.cibuildwheel]
 manylinux-x86_64-image = "manylinux_2_28"
