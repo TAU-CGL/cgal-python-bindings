@@ -26,6 +26,7 @@
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
+#include "cgalpy/ndarray_helpers.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;
@@ -238,6 +239,23 @@ auto does_triangle_soup_self_intersect(const Point_3_vec& points,
     <Does_triangle_soup_self_intersect_wrapper>(np, points, triangles);
 }
 
+
+//!
+auto triangle_soup_self_intersections_np(const py::ndarray<>& points_array,
+                                         const std::vector<std::array<std::size_t, 3>>& triangles,
+                                         const py::dict& np = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return triangle_soup_self_intersections(points, triangles, np);
+}
+
+//!
+auto does_triangle_soup_self_intersect_np(const py::ndarray<>& points_array,
+                                          const std::vector<std::array<std::size_t, 3>>& triangles,
+                                          const py::dict& np = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return does_triangle_soup_self_intersect(points, triangles, np);
+}
+
 /*! Determine whether two polylines intersect.
  * It's a shame that we cannot pass the begin1,end1,begin2,end2
  * directly to the CGAL do_intersect function.
@@ -320,6 +338,9 @@ void export_pmp_intersection(py::module_& m) {
   m.def("does_triangle_soup_self_intersect", &cgalpy::pmp::does_triangle_soup_self_intersect,
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_does_triangle_soup_self_intersect);
+  m.def("does_triangle_soup_self_intersect", &cgalpy::pmp::does_triangle_soup_self_intersect_np,
+        py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_does_triangle_soup_self_intersect);
   m.def("intersecting_meshes", &cgalpy::pmp::intersecting_meshes<Pm>, py::arg("range"),
         py::arg("np") = py::dict(), py::arg("nps") = std::vector<py::dict>(),
         pmp_doc::Polygon_mesh_processing_intersecting_meshes_2);
@@ -330,6 +351,9 @@ void export_pmp_intersection(py::module_& m) {
         py::arg("face_range"), py::arg("tmesh"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_self_intersections);
   m.def("triangle_soup_self_intersections", &cgalpy::pmp::triangle_soup_self_intersections,
+        py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_triangle_soup_self_intersections);
+  m.def("triangle_soup_self_intersections", &cgalpy::pmp::triangle_soup_self_intersections_np,
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_triangle_soup_self_intersections);
 }

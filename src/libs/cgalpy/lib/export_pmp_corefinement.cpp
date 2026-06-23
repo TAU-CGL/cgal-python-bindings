@@ -53,6 +53,7 @@
 #include "cgalpy/Default_visitor.hpp"
 #include "cgalpy/Non_manifold_output_visitor.hpp"
 #include "cgalpy/pmp_helpers.hpp"
+#include "cgalpy/ndarray_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 
 namespace py = nanobind;
@@ -279,6 +280,15 @@ auto autorefine_triangle_soup(std::vector<Point_3>& points, std::vector<std::vec
   }
 
   return std::make_tuple(points, polygons);
+}
+
+
+//!
+auto autorefine_triangle_soup_np(const py::ndarray<>& points_array,
+                                 std::vector<std::vector<std::size_t>>& polygons,
+                                 const py::dict& np = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "soup_points");
+  return autorefine_triangle_soup(points, polygons, np);
 }
 
 //!
@@ -1126,6 +1136,9 @@ void export_pmp_corefinement(py::module_& m) {
   m.def("autorefine_triangle_soup", &cgalpy::pmp::autorefine_triangle_soup,
         py::arg("soup_points"), py::arg("soup_triangles"), py::arg("np") = py::dict(),
         "Autorefines a triangle soup.");
+  m.def("autorefine_triangle_soup", &cgalpy::pmp::autorefine_triangle_soup_np,
+        py::arg("soup_points"), py::arg("soup_triangles"), py::arg("np") = py::dict(),
+        "Autorefines a triangle soup from a NumPy point array.");
   m.def("clip", &cgalpy::pmp::clip_c<Pm>,
         py::arg("tm"), py::arg("iso_cuboid"), py::arg("np") = py::dict(),
         "Clips a triangle mesh by an iso-cuboid.");

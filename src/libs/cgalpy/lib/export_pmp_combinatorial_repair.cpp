@@ -33,6 +33,7 @@
 #include "cgalpy/Named_parameter_require_same_orientation.hpp"
 #include "cgalpy/Named_parameter_apply_per_connected_component.hpp"
 #include "cgalpy/pmp_helpers.hpp"
+#include "cgalpy/ndarray_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 
 namespace py = nanobind;
@@ -222,6 +223,51 @@ auto repair_polygon_soup(Point_3_vec& points, std::vector<Size_t_vec>& polygons,
   return std::make_tuple(points, polygons);
 }
 
+//!
+auto merge_duplicate_points_in_polygon_soup_np(const py::ndarray<>& points_array,
+                                               std::vector<Size_t_vec>& polyvec,
+                                               const py::dict& params = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  const auto removed = merge_duplicate_points_in_polygon_soup(points, polyvec, params);
+  return std::make_tuple(points, polyvec, removed);
+}
+
+//!
+auto merge_duplicate_polygons_in_polygon_soup_np(const py::ndarray<>& points_array,
+                                                 std::vector<Size_t_vec>& polygons,
+                                                 const py::dict& params = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  const auto removed = merge_duplicate_polygons_in_polygon_soup(points, polygons, params);
+  return std::make_tuple(points, polygons, removed);
+}
+
+//!
+template <typename PolygonMesh>
+auto polygon_soup_to_polygon_mesh_np(const py::ndarray<>& points_array,
+                                     const std::vector<Size_t_vec>& polygons,
+                                     const py::dict& np_ps = py::dict(),
+                                     const py::dict& np_pm = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return polygon_soup_to_polygon_mesh<PolygonMesh>(points, polygons, np_ps, np_pm);
+}
+
+//!
+auto remove_isolated_points_in_polygon_soup_np(const py::ndarray<>& points_array,
+                                               std::vector<Size_t_vec>& polygons) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  const auto removed = remove_isolated_points_in_polygon_soup(points, polygons);
+  return std::make_tuple(points, polygons, removed);
+}
+
+//!
+auto repair_polygon_soup_np(const py::ndarray<>& points_array,
+                            std::vector<Size_t_vec>& polygons,
+                            const py::dict& params = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return repair_polygon_soup(points, polygons, params);
+}
+
+
 /*! A class template that wraps the function template
  * PMP::stitch_borders()
  */
@@ -363,9 +409,15 @@ void export_pmp_combinatorial_repair(py::module_& m) {
   m.def("merge_duplicate_points_in_polygon_soup", &cgalpy::pmp::merge_duplicate_points_in_polygon_soup,
         py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
         "Merges duplicate points in a polygon soup.");
+  m.def("merge_duplicate_points_in_polygon_soup", &cgalpy::pmp::merge_duplicate_points_in_polygon_soup_np,
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
+        "Merges duplicate points in a polygon soup from a NumPy point array.");
   m.def("merge_duplicate_polygons_in_polygon_soup", &cgalpy::pmp::merge_duplicate_polygons_in_polygon_soup,
         py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
         "Merges duplicate polygons in a polygon soup.");
+  m.def("merge_duplicate_polygons_in_polygon_soup", &cgalpy::pmp::merge_duplicate_polygons_in_polygon_soup_np,
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
+        "Merges duplicate polygons in a polygon soup from a NumPy point array.");
   m.def("merge_duplicated_vertices_in_boundary_cycle", &cgalpy::pmp::merge_duplicated_vertices_in_boundary_cycle<Pm>,
         py::arg("h"), py::arg("pm"), py::arg("np") = py::dict(),
         "Merges duplicated vertices in a boundary cycle.");
@@ -381,12 +433,21 @@ void export_pmp_combinatorial_repair(py::module_& m) {
   m.def("polygon_soup_to_polygon_mesh", &cgalpy::pmp::polygon_soup_to_polygon_mesh<Pm>,
         py::arg("points"), py::arg("polygons"), py::arg("np_ps") = py::dict(), py::arg("np_pm") = py::dict(),
         "Converts a polygon soup to a polygon mesh.");
+  m.def("polygon_soup_to_polygon_mesh", &cgalpy::pmp::polygon_soup_to_polygon_mesh_np<Pm>,
+        py::arg("points"), py::arg("polygons"), py::arg("np_ps") = py::dict(), py::arg("np_pm") = py::dict(),
+        "Converts a polygon soup from a NumPy point array to a polygon mesh.");
   m.def("remove_isolated_points_in_polygon_soup", &cgalpy::pmp::remove_isolated_points_in_polygon_soup,
         py::arg("points"), py::arg("polygons"),
         "Removes isolated points from a polygon soup.");
+  m.def("remove_isolated_points_in_polygon_soup", &cgalpy::pmp::remove_isolated_points_in_polygon_soup_np,
+        py::arg("points"), py::arg("polygons"),
+        "Removes isolated points from a polygon soup from a NumPy point array.");
   m.def("repair_polygon_soup", &cgalpy::pmp::repair_polygon_soup,
         py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
         "Repairs a polygon soup.");
+  m.def("repair_polygon_soup", &cgalpy::pmp::repair_polygon_soup_np,
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
+        "Repairs a polygon soup from a NumPy point array.");
   m.def("stitch_borders", &cgalpy::pmp::stitch_borders_bc<Pm>,
         py::arg("boundary_cycle_representatives"), py::arg("pmesh"), py::arg("np") = py::dict(),
         "Stitches borders using boundary cycle representatives.");

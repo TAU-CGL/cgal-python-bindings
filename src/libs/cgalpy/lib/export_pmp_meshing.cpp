@@ -42,6 +42,7 @@
 #include "cgalpy/Adaptive_sizing_field.hpp"
 #include "cgalpy/Custom_sizing_field.hpp"
 #include "cgalpy/pmp_helpers.hpp"
+#include "cgalpy/ndarray_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Uniform_sizing_field.hpp"
 #include "cgalpy/Triangulate_faces_visitor.hpp"
@@ -420,6 +421,15 @@ auto triangulate_polygons(std::vector<Point_3>& points, std::vector<std::vector<
   return std::make_tuple(points, polygons);
 }
 
+
+//!
+auto triangulate_polygons_np(const py::ndarray<>& points_array,
+                             std::vector<std::vector<std::size_t>>& polygons,
+                             const py::dict& np = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return triangulate_polygons(points, polygons, np);
+}
+
 //!
 template <typename PolygonMesh, typename SizingFunction>
 auto isotropic_remeshing_sf(const std::vector<typename boost::graph_traits<PolygonMesh>::face_descriptor>& face_range,
@@ -680,6 +690,9 @@ void export_pmp_meshing(py::module_& m) {
   m.def("triangulate_polygons", &cgalpy::pmp::triangulate_polygons,
         py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
         "Triangulates polygon soup faces.");
+  m.def("triangulate_polygons", &cgalpy::pmp::triangulate_polygons_np,
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
+        "Triangulates polygon soup faces from a NumPy point array.");
 
   using Tfv = cgalpy::pmp::Triangulate_faces_visitor<Pm>;
   py::class_<Tfv>(m, "Triangulate_faces_visitor",

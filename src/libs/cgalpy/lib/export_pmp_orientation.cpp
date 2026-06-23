@@ -29,6 +29,7 @@
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Default_orientation_visitor.hpp"
 #include "cgalpy/pmp_helpers.hpp"
+#include "cgalpy/ndarray_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
@@ -285,6 +286,68 @@ auto orient_triangle_soup_with_reference_triangle_soup(const std::vector<Point_3
   return std::make_tuple(points, faces);
 }
 
+
+//!
+template <typename Point_3, typename Visitor>
+auto orient_polygon_soup_np(const py::ndarray<>& points_array,
+                            std::vector<std::vector<std::size_t>>& polygons,
+                            const py::dict& np = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return orient_polygon_soup<Point_3, Visitor>(points, polygons, np);
+}
+
+//!
+auto duplicate_non_manifold_edges_in_polygon_soup_np(const py::ndarray<>& points_array,
+                                                     std::vector<std::vector<std::size_t>>& polygons) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return duplicate_non_manifold_edges_in_polygon_soup(points, polygons);
+}
+
+//!
+template <typename PolygonMesh>
+auto orient_triangle_soup_with_reference_triangle_mesh_np(const PolygonMesh& tm_ref,
+                                                          const py::ndarray<>& points_array,
+                                                          std::vector<std::vector<std::size_t>>& triangles,
+                                                          const py::dict& np1 = py::dict(),
+                                                          const py::dict& np2 = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return orient_triangle_soup_with_reference_triangle_mesh(tm_ref, points, triangles, np1, np2);
+}
+
+//!
+auto orient_triangle_soup_with_reference_triangle_soup_np_np(const py::ndarray<>& ref_points_array,
+                                                             const std::vector<std::vector<std::size_t>>& ref_faces,
+                                                             const py::ndarray<>& points_array,
+                                                             std::vector<std::vector<std::size_t>>& faces,
+                                                             const py::dict& np1 = py::dict(),
+                                                             const py::dict& np2 = py::dict()) {
+  auto ref_points = cgalpy::ndarray_to_point_3_vector<Point_3>(ref_points_array, "ref_points");
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return orient_triangle_soup_with_reference_triangle_soup(ref_points, ref_faces, points, faces, np1, np2);
+}
+
+//!
+auto orient_triangle_soup_with_reference_triangle_soup_ref_np(const py::ndarray<>& ref_points_array,
+                                                              const std::vector<std::vector<std::size_t>>& ref_faces,
+                                                              std::vector<Point_3>& points,
+                                                              std::vector<std::vector<std::size_t>>& faces,
+                                                              const py::dict& np1 = py::dict(),
+                                                              const py::dict& np2 = py::dict()) {
+  auto ref_points = cgalpy::ndarray_to_point_3_vector<Point_3>(ref_points_array, "ref_points");
+  return orient_triangle_soup_with_reference_triangle_soup(ref_points, ref_faces, points, faces, np1, np2);
+}
+
+//!
+auto orient_triangle_soup_with_reference_triangle_soup_points_np(const std::vector<Point_3>& ref_points,
+                                                                 const std::vector<std::vector<std::size_t>>& ref_faces,
+                                                                 const py::ndarray<>& points_array,
+                                                                 std::vector<std::vector<std::size_t>>& faces,
+                                                                 const py::dict& np1 = py::dict(),
+                                                                 const py::dict& np2 = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return orient_triangle_soup_with_reference_triangle_soup(ref_points, ref_faces, points, faces, np1, np2);
+}
+
 //!
 template <typename PolygonMesh>
 void merge_reversible_connected_components(PolygonMesh& pm, const py::dict& np = py::dict()) {
@@ -381,6 +444,9 @@ void export_pmp_orientation(py::module_& m) {
   m.def("orient_polygon_soup", &cgalpy::pmp::orient_polygon_soup<Point_3, Dov>,
         py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
         "Orients the polygons of a polygon soup.");
+  m.def("orient_polygon_soup", &cgalpy::pmp::orient_polygon_soup_np<Point_3, Dov>,
+        py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
+        "Orients the polygons of a polygon soup from a NumPy point array.");
   m.def("orient", &cgalpy::pmp::orient<Pm>,
         py::arg("tm"), py::arg("np") = py::dict(),
         "Orients a triangle mesh.");
@@ -407,17 +473,43 @@ void export_pmp_orientation(py::module_& m) {
   m.def("duplicate_non_manifold_edges_in_polygon_soup", &cgalpy::pmp::duplicate_non_manifold_edges_in_polygon_soup,
         py::arg("points"), py::arg("polygons"),
         "Duplicates non-manifold edges in a polygon soup.");
+  m.def("duplicate_non_manifold_edges_in_polygon_soup", &cgalpy::pmp::duplicate_non_manifold_edges_in_polygon_soup_np,
+        py::arg("points"), py::arg("polygons"),
+        "Duplicates non-manifold edges in a polygon soup from a NumPy point array.");
   m.def("orient_triangle_soup_with_reference_triangle_mesh",
         &cgalpy::pmp::orient_triangle_soup_with_reference_triangle_mesh<Pm>,
         py::arg("tm_ref"), py::arg("points"), py::arg("triangles"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         "Orients a triangle soup using a reference triangle mesh.");
+  m.def("orient_triangle_soup_with_reference_triangle_mesh",
+        &cgalpy::pmp::orient_triangle_soup_with_reference_triangle_mesh_np<Pm>,
+        py::arg("tm_ref"), py::arg("points"), py::arg("triangles"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        "Orients a NumPy triangle soup using a reference triangle mesh.");
   m.def("orient_triangle_soup_with_reference_triangle_soup",
         &cgalpy::pmp::orient_triangle_soup_with_reference_triangle_soup,
         py::arg("ref_points"), py::arg("ref_faces"),
         py::arg("points"), py::arg("faces"),
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         "Orients a triangle soup using a reference triangle soup.");
+  m.def("orient_triangle_soup_with_reference_triangle_soup",
+        &cgalpy::pmp::orient_triangle_soup_with_reference_triangle_soup_np_np,
+        py::arg("ref_points"), py::arg("ref_faces"),
+        py::arg("points"), py::arg("faces"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        "Orients a NumPy triangle soup using a NumPy reference triangle soup.");
+  m.def("orient_triangle_soup_with_reference_triangle_soup",
+        &cgalpy::pmp::orient_triangle_soup_with_reference_triangle_soup_ref_np,
+        py::arg("ref_points"), py::arg("ref_faces"),
+        py::arg("points"), py::arg("faces"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        "Orients a triangle soup using a NumPy reference triangle soup.");
+  m.def("orient_triangle_soup_with_reference_triangle_soup",
+        &cgalpy::pmp::orient_triangle_soup_with_reference_triangle_soup_points_np,
+        py::arg("ref_points"), py::arg("ref_faces"),
+        py::arg("points"), py::arg("faces"),
+        py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
+        "Orients a NumPy triangle soup using a reference triangle soup.");
   m.def("merge_reversible_connected_components", &cgalpy::pmp::merge_reversible_connected_components<Pm>,
          py::arg("pm"), py::arg("np") = py::dict(),
          "Merges connected components whose orientations can be made compatible.");

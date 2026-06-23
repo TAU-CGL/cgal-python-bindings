@@ -5,7 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
-//            Utkarsh Khajuria  <utkarshkhajuria7@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <vector>
 #include <array>
@@ -22,6 +22,7 @@
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
+#include "cgalpy/ndarray_helpers.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;
@@ -205,6 +206,15 @@ auto sample_triangle_soup(const Point_3_vec& points,
   return pts;
 }
 
+
+//!
+auto sample_triangle_soup_np(const py::ndarray<>& points_array,
+                             const std::vector<std::array<std::size_t, 3>>& triangles,
+                             const py::dict& np = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return sample_triangle_soup(points, triangles, np);
+}
+
 }
 } // namespace cgalpy
 
@@ -237,6 +247,9 @@ void export_pmp_distance(py::module_& m) {
         py::arg("tm"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_sample_triangle_mesh);
   m.def("sample_triangle_soup", &cgalpy::pmp::sample_triangle_soup,
+        py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_sample_triangle_soup);
+  m.def("sample_triangle_soup", &cgalpy::pmp::sample_triangle_soup_np,
         py::arg("points"), py::arg("triangles"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_sample_triangle_soup);
 }
