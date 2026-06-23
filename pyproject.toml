@@ -20,6 +20,7 @@ authors = [
     { name = "Efi Fogel", email = "efifogel@gmail.com"},
     { name = "Nir Goren", email = "nirgoren@mail.tau.ac.il"},
     { name = "Radosław Dąbkowski", email = "radekaadek@gmail.com"}
+    { name = "Utkarsh Khajuria", email = "utkarshkhajuria55@gmail.com"}
 ]
 classifiers = [
     "License :: OSI Approved :: MIT License",
