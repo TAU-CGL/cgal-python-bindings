@@ -1513,38 +1513,6 @@ void export_kernel_module(py::module_& m) {
         "Supported file formats are detected from the filename extension.\n")
     ;
 
-  m.def("read_polygon_soup",
-        [](const std::string& fname, Pnt_range& points, Png_range& polygons, const py::dict& np = py::dict()) {
-          (void) np;
-          return CGAL::IO::read_polygon_soup(fname, points, polygons);
-        },
-        py::arg("fname"), py::arg("points"), py::arg("polygons"),
-        py::arg("np") = py::dict(),
-        "reads a polygon soup from a file.\n"
-        "Supported file formats are the following:\n"
-        "\n"
-        "Object File Format (OFF) (.off)\n"
-        "Wavefront Advanced Visualizer Object Format (OBJ) (.obj)\n"
-        "STereoLithography (STL) File Format (.stl)\n"
-        "Polygon File Format (PLY) (.ply)\n"
-        "GOCAD (TS) File Format (.ts)\n"
-        "VTK (VTU / VTP / legacy) File Formats (.vtp)\n"
-        "\n"
-        "The format is detected from the filename extension (letter case is not important).\n"
-        "\n"
-        "Parameters\n"
-        "fname\tthe name of the file.\n"
-        "points\tpoints of the soup of polygons\n"
-        "polygons\teach element in the range describes a polygon using the indices of the vertices.\n"
-        "Optional Named Parameters\n"
-        "verbose\tindicates whether output warnings and error messages should be printed or not.\n"
-        "\tType: Boolean\n"
-        "\tDefault: false\n"
-        "\n"
-        "Returns\n"
-        "true if reading was successful, false otherwise. \n")
-    ;
-
 #if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) &&                                \
      (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) &&                      \
      (CGALPY_KERNEL != CGALPY_KERNEL_FILTERED_SIMPLE_CARTESIAN_LAZY_GMPQ) && \
