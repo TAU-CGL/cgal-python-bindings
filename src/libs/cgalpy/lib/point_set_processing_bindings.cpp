@@ -173,6 +173,31 @@ auto estimate_local_k_neighbor_scales_np(const py::ndarray<>& points_array,
   return estimate_local_k_neighbor_scales(points, queries);
 }
 
+//! Estimate local scales in the range sense for query points.
+template <typename Point_3>
+auto estimate_local_range_scales(const std::vector<Point_3>& points,
+                                 const std::vector<Point_3>& queries,
+                                 const py::dict& params = py::dict()) {
+  (void) params;
+  using FT = typename Kernel::FT;
+  std::vector<FT> output;
+  CGAL::estimate_local_range_scales(points, queries, std::back_inserter(output));
+  return output;
+}
+
+//! Estimate local scales in the range sense from NumPy-style point arrays.
+template <typename Point_3>
+auto estimate_local_range_scales_np(const py::ndarray<>& points_array,
+                                    const py::ndarray<>& queries_array,
+                                    const py::dict& params = py::dict()) {
+  (void) params;
+  const auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  const auto queries =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(queries_array, "queries");
+  return estimate_local_range_scales(points, queries);
+}
+
 }
 
 #if 0
@@ -1294,6 +1319,20 @@ void export_point_set_processing(py::module_& m) {
         py::arg("points"), py::arg("queries"), py::arg("params") = py::dict(),
         "Estimates local scales in a K nearest neighbors sense for NumPy-style "
         "float64 point arrays with shape (N, 3).");
+
+  m.def("estimate_local_range_scales",
+        &psp::estimate_local_range_scales<Point_3>,
+        py::arg("points"), py::arg("queries"), py::arg("params") = py::dict(),
+        "Estimates raw local range-scale values for query points. "
+        "These are the values used by CGAL before estimate_global_range_scale "
+        "returns sqrt(median(values)).");
+
+  m.def("estimate_local_range_scales",
+        &psp::estimate_local_range_scales_np<Point_3>,
+        py::arg("points"), py::arg("queries"), py::arg("params") = py::dict(),
+        "Estimates raw local range-scale values for NumPy-style float64 point arrays "
+        "with shape (N, 3). These are the values used by CGAL before "
+        "estimate_global_range_scale returns sqrt(median(values)).");
 #endif
 
 #if 0
