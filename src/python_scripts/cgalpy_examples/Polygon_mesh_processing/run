@@ -1,4 +1,4 @@
 ./connected_components.py CGALPY_kerEpic_sm_pmpSm
 ./intersection.py CGALPY_kerEpic_sm_pmpSm
-./orient_polygon_soup_example.py CGALPY_kerEpic_pol3KerFe_pmpPol3
+./orientation_pipeline_example.py CGALPY_kerEpic_bgl_pol3Ker_pmpPol3CrCcCorCccDisFdGmGrHfIntLocMesNcOriIo
 ./triangulate_faces.py CGALPY_kerEpic_sm_pmpSm
