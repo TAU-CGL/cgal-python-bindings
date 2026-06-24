@@ -30,14 +30,14 @@
 // #include <CGAL/estimate_scale.h>
 // #include <CGAL/vcm_estimate_normals.h>
 // #include <CGAL/Named_function_parameters.h>
-// #include <CGAL/grid_simplify_point_set.h>
-// #include <CGAL/hierarchy_simplify_point_set.h>
+#include <CGAL/grid_simplify_point_set.h>
+#include <CGAL/hierarchy_simplify_point_set.h>
 // #include <CGAL/jet_estimate_normals.h>
-// #include <CGAL/jet_smooth_point_set.h>
+#include <CGAL/jet_smooth_point_set.h>
 // #include <CGAL/mst_orient_normals.h>
 // #include <CGAL/pca_estimate_normals.h>
-// #include <CGAL/random_simplify_point_set.h>
-// #include <CGAL/remove_outliers.h>
+#include <CGAL/random_simplify_point_set.h>
+#include <CGAL/remove_outliers.h>
 // #include <CGAL/scanline_orient_normals.h>
 // #include <CGAL/vcm_estimate_normals.h>
 // #include <CGAL/vcm_estimate_edges.h>
@@ -196,6 +196,144 @@ auto estimate_local_range_scales_np(const py::ndarray<>& points_array,
   const auto queries =
     cgalpy::ndarray_to_point_3_vector<Point_3>(queries_array, "queries");
   return estimate_local_range_scales(points, queries);
+}
+
+
+//! Simplify points by grid clustering.
+template <typename Point_3>
+auto grid_simplify_point_set(std::vector<Point_3> points,
+                             const double epsilon,
+                             const py::dict& params = py::dict()) {
+  const unsigned int min_points_per_cell =
+    params.contains("min_points_per_cell") ?
+    py::cast<unsigned int>(params["min_points_per_cell"]) : 1;
+  auto it = CGAL::grid_simplify_point_set
+    (points, epsilon,
+     CGAL::parameters::min_points_per_cell(min_points_per_cell));
+  return std::make_pair(points, std::distance(points.begin(), it));
+}
+
+//! Simplify NumPy-style points by grid clustering.
+template <typename Point_3>
+auto grid_simplify_point_set_np(const py::ndarray<>& points_array,
+                                const double epsilon,
+                                const py::dict& params = py::dict()) {
+  auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return grid_simplify_point_set(points, epsilon, params);
+}
+
+//! Randomly simplify a point set.
+template <typename Point_3>
+auto random_simplify_point_set(std::vector<Point_3> points,
+                               const double removed_percentage,
+                               const py::dict& params = py::dict()) {
+  (void) params;
+  auto it = CGAL::random_simplify_point_set(points, removed_percentage);
+  return std::make_pair(points, std::distance(points.begin(), it));
+}
+
+//! Randomly simplify NumPy-style points.
+template <typename Point_3>
+auto random_simplify_point_set_np(const py::ndarray<>& points_array,
+                                  const double removed_percentage,
+                                  const py::dict& params = py::dict()) {
+  auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return random_simplify_point_set(points, removed_percentage, params);
+}
+
+//! Simplify points using hierarchy simplification.
+template <typename Point_3>
+auto hierarchy_simplify_point_set(std::vector<Point_3> points,
+                                  const py::dict& params = py::dict()) {
+  const unsigned int size =
+    params.contains("size") ? py::cast<unsigned int>(params["size"]) : 10;
+  const double maximum_variation =
+    params.contains("maximum_variation") ?
+    py::cast<double>(params["maximum_variation"]) : 1.0 / 3.0;
+  auto it = CGAL::hierarchy_simplify_point_set
+    (points,
+     CGAL::parameters::size(size)
+     .maximum_variation(maximum_variation));
+  return std::make_pair(points, std::distance(points.begin(), it));
+}
+
+//! Simplify NumPy-style points using hierarchy simplification.
+template <typename Point_3>
+auto hierarchy_simplify_point_set_np(const py::ndarray<>& points_array,
+                                     const py::dict& params = py::dict()) {
+  auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return hierarchy_simplify_point_set(points, params);
+}
+
+//! Smooth points using jet fitting.
+template <typename Point_3>
+auto jet_smooth_point_set(std::vector<Point_3> points,
+                          const unsigned int k,
+                          const py::dict& params = py::dict()) {
+  using FT = typename Kernel::FT;
+  const FT neighbor_radius =
+    params.contains("neighbor_radius") ?
+    FT(py::cast<double>(params["neighbor_radius"])) : FT(0);
+  const unsigned int degree_fitting =
+    params.contains("degree_fitting") ?
+    py::cast<unsigned int>(params["degree_fitting"]) : 2;
+  const unsigned int degree_monge =
+    params.contains("degree_monge") ?
+    py::cast<unsigned int>(params["degree_monge"]) : 2;
+
+  CGAL::jet_smooth_point_set<CGAL::Sequential_tag>
+    (points, k,
+     CGAL::parameters::neighbor_radius(neighbor_radius)
+     .degree_fitting(degree_fitting)
+     .degree_monge(degree_monge));
+  return points;
+}
+
+//! Smooth NumPy-style points using jet fitting.
+template <typename Point_3>
+auto jet_smooth_point_set_np(const py::ndarray<>& points_array,
+                             const unsigned int k,
+                             const py::dict& params = py::dict()) {
+  auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return jet_smooth_point_set(points, k, params);
+}
+
+//! Remove outliers from a point set.
+template <typename Point_3>
+auto remove_outliers(std::vector<Point_3> points,
+                     const unsigned int k,
+                     const py::dict& params = py::dict()) {
+  using FT = typename Kernel::FT;
+  const FT neighbor_radius =
+    params.contains("neighbor_radius") ?
+    FT(py::cast<double>(params["neighbor_radius"])) : FT(0);
+  const double threshold_percent =
+    params.contains("threshold_percent") ?
+    py::cast<double>(params["threshold_percent"]) : 10.0;
+  const FT threshold_distance =
+    params.contains("threshold_distance") ?
+    FT(py::cast<double>(params["threshold_distance"])) : FT(0);
+
+  auto it = CGAL::remove_outliers<CGAL::Sequential_tag>
+    (points, k,
+     CGAL::parameters::neighbor_radius(neighbor_radius)
+     .threshold_percent(threshold_percent)
+     .threshold_distance(threshold_distance));
+  return std::make_pair(points, std::distance(points.begin(), it));
+}
+
+//! Remove outliers from NumPy-style points.
+template <typename Point_3>
+auto remove_outliers_np(const py::ndarray<>& points_array,
+                        const unsigned int k,
+                        const py::dict& params = py::dict()) {
+  auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return remove_outliers(points, k, params);
 }
 
 }
@@ -1333,6 +1471,66 @@ void export_point_set_processing(py::module_& m) {
         "Estimates raw local range-scale values for NumPy-style float64 point arrays "
         "with shape (N, 3). These are the values used by CGAL before "
         "estimate_global_range_scale returns sqrt(median(values)).");
+
+  m.def("grid_simplify_point_set",
+        &psp::grid_simplify_point_set<Point_3>,
+        py::arg("points"), py::arg("epsilon"), py::arg("params") = py::dict(),
+        "Simplifies a point set by keeping one representative point per grid cell. "
+        "Returns (points, first_index_to_remove).");
+
+  m.def("grid_simplify_point_set",
+        &psp::grid_simplify_point_set_np<Point_3>,
+        py::arg("points"), py::arg("epsilon"), py::arg("params") = py::dict(),
+        "Simplifies a NumPy-style float64 point array with shape (N, 3) by grid clustering. "
+        "Returns (points, first_index_to_remove).");
+
+  m.def("random_simplify_point_set",
+        &psp::random_simplify_point_set<Point_3>,
+        py::arg("points"), py::arg("removed_percentage"),
+        py::arg("params") = py::dict(),
+        "Randomly removes a percentage of points. "
+        "Returns (points, first_index_to_remove).");
+
+  m.def("random_simplify_point_set",
+        &psp::random_simplify_point_set_np<Point_3>,
+        py::arg("points"), py::arg("removed_percentage"),
+        py::arg("params") = py::dict(),
+        "Randomly removes a percentage of points from a NumPy-style float64 point array "
+        "with shape (N, 3). Returns (points, first_index_to_remove).");
+
+  m.def("hierarchy_simplify_point_set",
+        &psp::hierarchy_simplify_point_set<Point_3>,
+        py::arg("points"), py::arg("params") = py::dict(),
+        "Simplifies a point set using hierarchy simplification. "
+        "Returns (points, first_index_to_remove).");
+
+  m.def("hierarchy_simplify_point_set",
+        &psp::hierarchy_simplify_point_set_np<Point_3>,
+        py::arg("points"), py::arg("params") = py::dict(),
+        "Simplifies a NumPy-style float64 point array with shape (N, 3) using hierarchy "
+        "simplification. Returns (points, first_index_to_remove).");
+
+  m.def("jet_smooth_point_set",
+        &psp::jet_smooth_point_set<Point_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Smooths a point set using jet fitting.");
+
+  m.def("jet_smooth_point_set",
+        &psp::jet_smooth_point_set_np<Point_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Smooths a NumPy-style float64 point array with shape (N, 3) using jet fitting.");
+
+  m.def("remove_outliers",
+        &psp::remove_outliers<Point_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Removes outliers from a point set. Returns (points, first_index_to_remove).");
+
+  m.def("remove_outliers",
+        &psp::remove_outliers_np<Point_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Removes outliers from a NumPy-style float64 point array with shape (N, 3). "
+        "Returns (points, first_index_to_remove).");
+
 #endif
 
 #if 0
