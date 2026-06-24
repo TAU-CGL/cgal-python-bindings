@@ -22,6 +22,7 @@
 #include <CGAL/Point_set_3.h>
 #include <CGAL/IO/read_points.h>
 #include <CGAL/compute_average_spacing.h>
+#include <CGAL/estimate_scale.h>
 // #include <CGAL/bilateral_smooth_point_set.h>
 // #include <CGAL/cluster_point_set.h>
 // #include <CGAL/compute_average_spacing.h>
@@ -110,6 +111,42 @@ auto compute_average_spacing_np(const py::ndarray<>& points_array,
   const auto points =
     cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
   return compute_average_spacing(points, k, params);
+}
+
+//! Estimate global scale in the K nearest neighbors sense from a point range.
+template <typename Point_3>
+auto estimate_global_k_neighbor_scale(const std::vector<Point_3>& points,
+                                      const py::dict& params = py::dict()) {
+  (void) params;
+  return CGAL::estimate_global_k_neighbor_scale(points);
+}
+
+//! Estimate global scale in the K nearest neighbors sense from a NumPy-style point array.
+template <typename Point_3>
+auto estimate_global_k_neighbor_scale_np(const py::ndarray<>& points_array,
+                                         const py::dict& params = py::dict()) {
+  (void) params;
+  const auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return estimate_global_k_neighbor_scale(points);
+}
+
+//! Estimate global scale in the range sense from a point range.
+template <typename Point_3>
+auto estimate_global_range_scale(const std::vector<Point_3>& points,
+                                 const py::dict& params = py::dict()) {
+  (void) params;
+  return CGAL::estimate_global_range_scale(points);
+}
+
+//! Estimate global scale in the range sense from a NumPy-style point array.
+template <typename Point_3>
+auto estimate_global_range_scale_np(const py::ndarray<>& points_array,
+                                    const py::dict& params = py::dict()) {
+  (void) params;
+  const auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return estimate_global_range_scale(points);
 }
 
 }
@@ -1197,6 +1234,32 @@ void export_point_set_processing(py::module_& m) {
         "float64 point array with shape (N, 3).\n"
         "The input array is copied into a CGAL point range.\n"
         "Precondition: k >= 2.");
+
+#if ((CGALPY_KERNEL != CGALPY_KERNEL_EPEC) &&                                \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EPEC_WITH_SQRT) &&                      \
+     (CGALPY_KERNEL != CGALPY_KERNEL_EXACT_CIRCULAR_KERNEL_2))
+  m.def("estimate_global_k_neighbor_scale",
+        &psp::estimate_global_k_neighbor_scale<Point_3>,
+        py::arg("points"), py::arg("params") = py::dict(),
+        "Estimates the global scale in a K nearest neighbors sense for a point range.");
+
+  m.def("estimate_global_k_neighbor_scale",
+        &psp::estimate_global_k_neighbor_scale_np<Point_3>,
+        py::arg("points"), py::arg("params") = py::dict(),
+        "Estimates the global scale in a K nearest neighbors sense for a NumPy-style "
+        "float64 point array with shape (N, 3).");
+
+  m.def("estimate_global_range_scale",
+        &psp::estimate_global_range_scale<Point_3>,
+        py::arg("points"), py::arg("params") = py::dict(),
+        "Estimates the global scale in a range sense for a point range.");
+
+  m.def("estimate_global_range_scale",
+        &psp::estimate_global_range_scale_np<Point_3>,
+        py::arg("points"), py::arg("params") = py::dict(),
+        "Estimates the global scale in a range sense for a NumPy-style "
+        "float64 point array with shape (N, 3).");
+#endif
 
 #if 0
   m.def("read_points_with_normals",
