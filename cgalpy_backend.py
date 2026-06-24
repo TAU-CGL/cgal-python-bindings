@@ -28,10 +28,13 @@ Typical usage (single command, no prior cmake run needed):
 
 import copy
 import os
+import shutil
 import subprocess
+import sys
 
 import scikit_build_core.build as _inner
 import scikit_build_core.build.metadata as _meta
+import scikit_build_core.build.wheel as _wheel
 
 # ---------------------------------------------------------------------------
 # Re-export all PEP 517 hooks that do not need interception.
@@ -62,13 +65,30 @@ def _cmake_args_from_config_settings(config_settings):
     We convert these to:
         ["-DFOO=BAR", ...]
     which are then forwarded to the cmake configure invocation.
+
+    For the metadata-only configure pass, also provide defaults for the Python
+    interpreter and nanobind CMake directory from the backend's Python process,
+    unless the frontend already supplied them explicitly.
     """
     cmake_args = []
+    supplied = set()
     if config_settings:
         for key, value in config_settings.items():
             if key.startswith("cmake.define."):
                 define = key[len("cmake.define."):]
+                supplied.add(define)
                 cmake_args.append(f"-D{define}={value}")
+
+    if "Python_EXECUTABLE" not in supplied:
+        cmake_args.append(f"-DPython_EXECUTABLE={sys.executable}")
+
+    if "nanobind_DIR" not in supplied:
+        try:
+            import nanobind
+            cmake_args.append(f"-Dnanobind_DIR={nanobind.cmake_dir()}")
+        except Exception as e:
+            print(f"[cgalpy_backend] Warning: failed to derive nanobind_DIR: {e}", flush=True)
+
     return cmake_args
 
 
@@ -89,6 +109,12 @@ def _run_cmake_configure(source_dir, config_settings):
     into the source root with METADATA_NAME and METADATA_VERSION baked in.
     """
     build_dir = os.path.join(source_dir, "build", "metadata")
+
+    # The metadata configure must be deterministic for the current config
+    # settings. Reusing a failed or differently-configured CMakeCache can keep
+    # stale FindPython/nanobind state and produce incorrect metadata.
+    if os.path.exists(build_dir):
+        shutil.rmtree(build_dir)
     os.makedirs(build_dir, exist_ok=True)
 
     cmake_args = _cmake_args_from_config_settings(config_settings)
@@ -164,8 +190,16 @@ def _get_cmake_metadata(config_settings=None):
     source_dir = os.path.dirname(os.path.abspath(__file__))
     metadata_cmake = os.path.join(source_dir, "GetMetadata.cmake")
 
-    if not os.path.exists(metadata_cmake):
-        print(f"[cgalpy_backend] GetMetadata.cmake not found, running cmake configure...", flush=True)
+    cmake_args_requested = any(
+        key.startswith("cmake.define.")
+        for key in (config_settings or {})
+    )
+
+    if cmake_args_requested or not os.path.exists(metadata_cmake):
+        if cmake_args_requested:
+            print(f"[cgalpy_backend] cmake.define settings supplied, running cmake configure...", flush=True)
+        else:
+            print(f"[cgalpy_backend] GetMetadata.cmake not found, running cmake configure...", flush=True)
         try:
             _run_cmake_configure(source_dir, config_settings)
         except Exception as e:
@@ -195,21 +229,24 @@ def _get_cmake_metadata(config_settings=None):
 
 def _patch_get_standard_metadata(name, version):
     """
-    Temporarily replace scikit_build_core.build.metadata.get_standard_metadata
+    Temporarily replace scikit-build-core's get_standard_metadata references
     with a version that injects our cmake-derived name and version into the
     pyproject_dict before the original function processes it.
 
     Why monkeypatch:
       - PEP 517 forbids 'name' in dynamic[], so we cannot use the hook mechanism.
-      - scikit_build_core reads pyproject.toml internally and calls
-        get_standard_metadata(pyproject_dict, settings) at line 234 of wheel.py,
-        before cmake runs. This is the only clean interception point.
+      - scikit_build_core.build.wheel imports get_standard_metadata directly from
+        scikit_build_core.build.metadata, so both references must be patched.
+        Otherwise, repeated hook calls in the same Python process can keep using
+        a stale closure from the first metadata override.
       - get_standard_metadata already does copy.deepcopy internally, so injecting
         into the dict we pass is safe.
 
-    Returns the original function so the caller can restore it in a finally block.
+    Returns the original functions so the caller can restore them in a finally
+    block.
     """
-    _original = _meta.get_standard_metadata
+    original_meta = _meta.get_standard_metadata
+    original_wheel = _wheel.get_standard_metadata
 
     def _patched(pyproject_dict, settings):
         d = copy.deepcopy(dict(pyproject_dict))
@@ -219,10 +256,11 @@ def _patch_get_standard_metadata(name, version):
             # Provide version statically; remove from dynamic[] if present
             d["project"]["version"] = version
             d["project"].pop("dynamic", None)
-        return _original(d, settings)
+        return original_meta(d, settings)
 
     _meta.get_standard_metadata = _patched
-    return _original
+    _wheel.get_standard_metadata = _patched
+    return original_meta, original_wheel
 
 
 # ---------------------------------------------------------------------------
@@ -248,7 +286,8 @@ def _with_metadata_override(func, *args, config_settings=None, **kwargs):
         return func(*args, config_settings=config_settings, **kwargs)
     finally:
         if original is not None:
-            _meta.get_standard_metadata = original
+            _meta.get_standard_metadata = original[0]
+            _wheel.get_standard_metadata = original[1]
 
 
 def prepare_metadata_for_build_wheel(metadata_directory, config_settings=None):
