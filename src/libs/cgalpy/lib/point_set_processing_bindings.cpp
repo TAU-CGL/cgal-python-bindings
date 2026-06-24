@@ -149,6 +149,30 @@ auto estimate_global_range_scale_np(const py::ndarray<>& points_array,
   return estimate_global_range_scale(points);
 }
 
+//! Estimate local scales in the K nearest neighbors sense for query points.
+template <typename Point_3>
+auto estimate_local_k_neighbor_scales(const std::vector<Point_3>& points,
+                                      const std::vector<Point_3>& queries,
+                                      const py::dict& params = py::dict()) {
+  (void) params;
+  std::vector<std::size_t> output;
+  CGAL::estimate_local_k_neighbor_scales(points, queries, std::back_inserter(output));
+  return output;
+}
+
+//! Estimate local scales in the K nearest neighbors sense from NumPy-style point arrays.
+template <typename Point_3>
+auto estimate_local_k_neighbor_scales_np(const py::ndarray<>& points_array,
+                                         const py::ndarray<>& queries_array,
+                                         const py::dict& params = py::dict()) {
+  (void) params;
+  const auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  const auto queries =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(queries_array, "queries");
+  return estimate_local_k_neighbor_scales(points, queries);
+}
+
 }
 
 #if 0
@@ -1259,6 +1283,17 @@ void export_point_set_processing(py::module_& m) {
         py::arg("points"), py::arg("params") = py::dict(),
         "Estimates the global scale in a range sense for a NumPy-style "
         "float64 point array with shape (N, 3).");
+
+  m.def("estimate_local_k_neighbor_scales",
+        &psp::estimate_local_k_neighbor_scales<Point_3>,
+        py::arg("points"), py::arg("queries"), py::arg("params") = py::dict(),
+        "Estimates local scales in a K nearest neighbors sense for query points.");
+
+  m.def("estimate_local_k_neighbor_scales",
+        &psp::estimate_local_k_neighbor_scales_np<Point_3>,
+        py::arg("points"), py::arg("queries"), py::arg("params") = py::dict(),
+        "Estimates local scales in a K nearest neighbors sense for NumPy-style "
+        "float64 point arrays with shape (N, 3).");
 #endif
 
 #if 0
