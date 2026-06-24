@@ -66,6 +66,17 @@ endif ()
 # Find required Boost library
 if (SKBUILD)
     find_package(Boost REQUIRED)
+
+  if (WIN32)
+    # Fix for Windows/Conan 2.0 lowercase target tracking mismatch
+    if(TARGET Boost::boost AND NOT TARGET boost::boost)
+      add_library(boost::boost ALIAS Boost::boost)
+    endif()
+    if(TARGET Boost::headers AND NOT TARGET boost::headers)
+      add_library(boost::headers ALIAS Boost::headers)
+    endif()
+  endif()
+
 else ()
     if (CGALPY_USE_SHARED_LIBS)
         set(Boost_USE_STATIC_LIBS OFF)
