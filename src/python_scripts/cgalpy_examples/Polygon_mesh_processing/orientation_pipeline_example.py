@@ -21,13 +21,13 @@ input_filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("me
 i += 1
 reference_filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/blobby.off")
 
-try: points, polygons = Pol3.read_polygon_soup(input_filename)
+try: points, polygons = Ker.read_polygon_soup(input_filename)
 except: raise ValueError("Error: cannot read input file.")
 
 if len(points) == 0 or len(polygons) == 0:
   print("Error: cannot read input file.")
 
-try: ref1 = Pol3.read_polygon_mesh(reference_filename)
+try: ref1 = Pmp.read_polygon_mesh(reference_filename)
 except: raise ValueError("Invalid input.")
 
 print(f"Is the soup a polygon mesh ? : {1 if Pmp.is_polygon_soup_a_polygon_mesh(polygons) else 0}")
@@ -36,13 +36,13 @@ points, polygons = Pmp.orient_triangle_soup_with_reference_triangle_mesh(ref1, p
 
 print(f"And now ? : {1 if Pmp.is_polygon_soup_a_polygon_mesh(polygons) else 0}")
 
-polygons, points, duplicated = Pmp.duplicate_non_manifold_edges_in_polygon_soup(points, polygons);
+points, polygons, duplicated = Pmp.duplicate_non_manifold_edges_in_polygon_soup(points, polygons);
 
 print(f"And now ? : {1 if Pmp.is_polygon_soup_a_polygon_mesh(polygons) else 0}")
 
 poly = Pmp.polygon_soup_to_polygon_mesh(points, polygons)[0]
 
-fccmap = Pol3.get(Pol3.dynamic_property_face_size_t(), poly)
+fccmap = Pol3.get_dynamic_face_size_t_map(poly)
 
 print(f"{Pmp.connected_components(poly, fccmap)} CCs before merge.")
 Pmp.merge_reversible_connected_components(poly)
