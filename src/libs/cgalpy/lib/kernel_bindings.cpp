@@ -18,6 +18,7 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
 #include <nanobind/stl/string.h>
+#include <nanobind/stl/tuple.h>
 #include <nanobind/stl/vector.h>
 
 #include <CGAL/IO/polygon_soup_io.h>
@@ -31,7 +32,7 @@
 #endif
 
 #include "cgalpy/add_attr.hpp"
-#include "cgalpy/ndarray_helpers.hpp"
+#include "cgalpy/ndarray_to_point_3_vector.hpp"
 #include "cgalpy/add_insertion.hpp"
 #include "cgalpy/add_extraction.hpp"
 #include "cgalpy/cartesian_product.hpp"
@@ -1499,7 +1500,22 @@ void export_kernel_module(py::module_& m) {
   using Png_range = typename std::vector<std::vector<std::size_t>>;
 
   m.def("read_polygon_soup",
+        [](const std::string& fname, const py::dict& np = py::dict()) {
+          (void) np;
+          Pnt_range points;
+          Png_range polygons;
+          if (! CGAL::IO::read_polygon_soup(fname, points, polygons))
+            throw std::runtime_error("Cannot read file!");
+          return std::make_tuple(points, polygons);
+        },
+        py::arg("fname"), py::arg("np") = py::dict(),
+        "reads a polygon soup from a file and returns (points, polygons).\n"
+        "Supported file formats are detected from the filename extension.\n")
+    ;
+
+  m.def("read_polygon_soup",
         [](const std::string& fname, Pnt_range& points, Png_range& polygons, const py::dict& np = py::dict()) {
+          (void) np;
           return CGAL::IO::read_polygon_soup(fname, points, polygons);
         },
         py::arg("fname"), py::arg("points"), py::arg("polygons"),

@@ -6,8 +6,8 @@
 //
 // Author(s): Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
-#ifndef CGALPY_NDARRAY_HELPERS_HPP
-#define CGALPY_NDARRAY_HELPERS_HPP
+#ifndef CGALPY_NDARRAY_TO_POINT_3_VECTOR_HPP
+#define CGALPY_NDARRAY_TO_POINT_3_VECTOR_HPP
 
 #include <stdexcept>
 #include <string>

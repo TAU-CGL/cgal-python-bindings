@@ -26,7 +26,7 @@
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
-#include "cgalpy/ndarray_helpers.hpp"
+#include "cgalpy/ndarray_to_point_3_vector.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;

@@ -33,7 +33,7 @@
 #include "cgalpy/Named_parameter_require_same_orientation.hpp"
 #include "cgalpy/Named_parameter_apply_per_connected_component.hpp"
 #include "cgalpy/pmp_helpers.hpp"
-#include "cgalpy/ndarray_helpers.hpp"
+#include "cgalpy/ndarray_to_point_3_vector.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 
 namespace py = nanobind;

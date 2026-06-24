@@ -42,7 +42,7 @@
 #include "cgalpy/Adaptive_sizing_field.hpp"
 #include "cgalpy/Custom_sizing_field.hpp"
 #include "cgalpy/pmp_helpers.hpp"
-#include "cgalpy/ndarray_helpers.hpp"
+#include "cgalpy/ndarray_to_point_3_vector.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/Uniform_sizing_field.hpp"
 #include "cgalpy/Triangulate_faces_visitor.hpp"

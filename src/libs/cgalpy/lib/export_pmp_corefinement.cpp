@@ -53,7 +53,7 @@
 #include "cgalpy/Default_visitor.hpp"
 #include "cgalpy/Non_manifold_output_visitor.hpp"
 #include "cgalpy/pmp_helpers.hpp"
-#include "cgalpy/ndarray_helpers.hpp"
+#include "cgalpy/ndarray_to_point_3_vector.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 
 namespace py = nanobind;

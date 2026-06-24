@@ -20,6 +20,7 @@
 #include <nanobind/stl/string.h>
 #include <nanobind/stl/optional.h>
 #include <nanobind/stl/tuple.h>
+#include <nanobind/stl/vector.h>
 #include <nanobind/stl/pair.h>
 
 #include "cgalpy/Bgl_docstrings.hpp"
@@ -937,6 +938,10 @@ void export_surface_mesh(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
 
   export_surface_mesh_impl<Sm_3>(m, "Surface_mesh_3");
+
+  m.def("read_polygon_soup", &cgalpy::sm::read_polygon_soup<Sm_3>,
+        py::arg("fname"), py::arg("np") = py::dict(),
+        "Reads a polygon soup from a file and returns (points, polygons).");
 
   // cgalpy::sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
 
