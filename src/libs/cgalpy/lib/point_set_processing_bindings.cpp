@@ -20,6 +20,7 @@
 #include <nanobind/stl/string.h>
 
 #include <CGAL/Point_set_3.h>
+#include <CGAL/property_map.h>
 #include <CGAL/IO/read_points.h>
 #include <CGAL/compute_average_spacing.h>
 #include <CGAL/estimate_scale.h>
@@ -32,10 +33,10 @@
 // #include <CGAL/Named_function_parameters.h>
 #include <CGAL/grid_simplify_point_set.h>
 #include <CGAL/hierarchy_simplify_point_set.h>
-// #include <CGAL/jet_estimate_normals.h>
+#include <CGAL/jet_estimate_normals.h>
 #include <CGAL/jet_smooth_point_set.h>
-// #include <CGAL/mst_orient_normals.h>
-// #include <CGAL/pca_estimate_normals.h>
+#include <CGAL/mst_orient_normals.h>
+#include <CGAL/pca_estimate_normals.h>
 #include <CGAL/random_simplify_point_set.h>
 #include <CGAL/remove_outliers.h>
 // #include <CGAL/scanline_orient_normals.h>
@@ -334,6 +335,180 @@ auto remove_outliers_np(const py::ndarray<>& points_array,
   auto points =
     cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
   return remove_outliers(points, k, params);
+}
+
+
+//! Convert NumPy-style point and normal arrays to point-normal pairs.
+template <typename Point_3, typename Vector_3>
+std::vector<std::pair<Point_3, Vector_3>>
+ndarray_to_point_normal_3_vector(const py::ndarray<>& points_array,
+                                 const py::ndarray<>& normals_array) {
+  const auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  const auto normals =
+    cgalpy::ndarray_to_point_3_vector<Vector_3>(normals_array, "normals");
+
+  if (points.size() != normals.size()) {
+    throw std::runtime_error("points and normals must have the same number of rows.");
+  }
+
+  std::vector<std::pair<Point_3, Vector_3>> output;
+  output.reserve(points.size());
+
+  for (std::size_t i = 0; i < points.size(); ++i) {
+    output.emplace_back(points[i], normals[i]);
+  }
+
+  return output;
+}
+
+//! Read points with normals from a file.
+template <typename Point_3, typename Vector_3>
+auto read_points_with_normals(const std::string& fname,
+                              const py::dict& params = py::dict()) {
+  (void) params;
+  using PointNormalPair = std::pair<Point_3, Vector_3>;
+  using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
+  using Normal_map = CGAL::Second_of_pair_property_map<PointNormalPair>;
+
+  std::vector<PointNormalPair> output;
+  const bool success =
+    CGAL::IO::read_points(fname, std::back_inserter(output),
+                          CGAL::parameters::point_map(Point_map())
+                          .normal_map(Normal_map()));
+  if (! success) output.clear();
+  return output;
+}
+
+//! Compute average spacing for points with normals.
+template <typename Point_3, typename Vector_3>
+auto compute_average_spacing_with_normals(
+  const std::vector<std::pair<Point_3, Vector_3>>& points,
+  const unsigned int k,
+  const py::dict& params = py::dict()) {
+  (void) params;
+  using PointNormalPair = std::pair<Point_3, Vector_3>;
+  using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
+
+  return CGAL::compute_average_spacing<CGAL::Sequential_tag>
+    (points, k, CGAL::parameters::point_map(Point_map()));
+}
+
+//! Estimate normals using PCA.
+template <typename Point_3, typename Vector_3>
+auto pca_estimate_normals(std::vector<std::pair<Point_3, Vector_3>> points,
+                          const unsigned int k,
+                          const py::dict& params = py::dict()) {
+  using FT = typename Kernel::FT;
+  using PointNormalPair = std::pair<Point_3, Vector_3>;
+  using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
+  using Normal_map = CGAL::Second_of_pair_property_map<PointNormalPair>;
+
+  const FT neighbor_radius =
+    params.contains("neighbor_radius") ?
+    FT(py::cast<double>(params["neighbor_radius"])) : FT(0);
+
+  CGAL::pca_estimate_normals<CGAL::Sequential_tag>
+    (points, k,
+     CGAL::parameters::point_map(Point_map())
+     .normal_map(Normal_map())
+     .neighbor_radius(neighbor_radius));
+  return points;
+}
+
+//! Estimate normals from NumPy-style points using PCA.
+template <typename Point_3, typename Vector_3>
+auto pca_estimate_normals_np(const py::ndarray<>& points_array,
+                             const unsigned int k,
+                             const py::dict& params = py::dict()) {
+  const auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+
+  std::vector<std::pair<Point_3, Vector_3>> point_normals;
+  point_normals.reserve(points.size());
+  for (const auto& point : points) {
+    point_normals.emplace_back(point, Vector_3(0, 0, 0));
+  }
+
+  return pca_estimate_normals(point_normals, k, params);
+}
+
+//! Estimate normals using jet fitting.
+template <typename Point_3, typename Vector_3>
+auto jet_estimate_normals(std::vector<std::pair<Point_3, Vector_3>> points,
+                          const unsigned int k,
+                          const py::dict& params = py::dict()) {
+  using FT = typename Kernel::FT;
+  using PointNormalPair = std::pair<Point_3, Vector_3>;
+  using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
+  using Normal_map = CGAL::Second_of_pair_property_map<PointNormalPair>;
+
+  const FT neighbor_radius =
+    params.contains("neighbor_radius") ?
+    FT(py::cast<double>(params["neighbor_radius"])) : FT(0);
+  const unsigned int degree_fitting =
+    params.contains("degree_fitting") ?
+    py::cast<unsigned int>(params["degree_fitting"]) : 2;
+
+  CGAL::jet_estimate_normals<CGAL::Sequential_tag>
+    (points, k,
+     CGAL::parameters::point_map(Point_map())
+     .normal_map(Normal_map())
+     .neighbor_radius(neighbor_radius)
+     .degree_fitting(degree_fitting));
+  return points;
+}
+
+//! Estimate normals from NumPy-style points using jet fitting.
+template <typename Point_3, typename Vector_3>
+auto jet_estimate_normals_np(const py::ndarray<>& points_array,
+                             const unsigned int k,
+                             const py::dict& params = py::dict()) {
+  const auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+
+  std::vector<std::pair<Point_3, Vector_3>> point_normals;
+  point_normals.reserve(points.size());
+  for (const auto& point : points) {
+    point_normals.emplace_back(point, Vector_3(0, 0, 0));
+  }
+
+  return jet_estimate_normals(point_normals, k, params);
+}
+
+//! Orient normals using MST propagation.
+template <typename Point_3, typename Vector_3>
+auto mst_orient_normals(std::vector<std::pair<Point_3, Vector_3>> points,
+                        const unsigned int k,
+                        const py::dict& params = py::dict()) {
+  using FT = typename Kernel::FT;
+  using PointNormalPair = std::pair<Point_3, Vector_3>;
+  using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
+  using Normal_map = CGAL::Second_of_pair_property_map<PointNormalPair>;
+
+  const FT neighbor_radius =
+    params.contains("neighbor_radius") ?
+    FT(py::cast<double>(params["neighbor_radius"])) : FT(0);
+
+  auto it = CGAL::mst_orient_normals
+    (points, k,
+     CGAL::parameters::point_map(Point_map())
+     .normal_map(Normal_map())
+     .neighbor_radius(neighbor_radius));
+
+  return std::make_pair(points, std::distance(points.begin(), it));
+}
+
+//! Orient normals from NumPy-style points and normals using MST propagation.
+template <typename Point_3, typename Vector_3>
+auto mst_orient_normals_np(const py::ndarray<>& points_array,
+                           const py::ndarray<>& normals_array,
+                           const unsigned int k,
+                           const py::dict& params = py::dict()) {
+  auto points =
+    ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
+                                                        normals_array);
+  return mst_orient_normals(points, k, params);
 }
 
 }
@@ -1530,6 +1705,51 @@ void export_point_set_processing(py::module_& m) {
         py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
         "Removes outliers from a NumPy-style float64 point array with shape (N, 3). "
         "Returns (points, first_index_to_remove).");
+
+
+  m.def("read_points_with_normals",
+        &psp::read_points_with_normals<Point_3, Vector_3>,
+        py::arg("fname"), py::arg("params") = py::dict(),
+        "Reads points with normals from a point-set file.");
+
+  m.def("compute_average_spacing_with_normals",
+        &psp::compute_average_spacing_with_normals<Point_3, Vector_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Computes average spacing from k nearest neighbors for points with normals.");
+
+  m.def("pca_estimate_normals",
+        &psp::pca_estimate_normals<Point_3, Vector_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Estimates normal directions using PCA for points with normals.");
+
+  m.def("pca_estimate_normals",
+        &psp::pca_estimate_normals_np<Point_3, Vector_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Estimates normal directions using PCA for NumPy-style float64 point arrays "
+        "with shape (N, 3).");
+
+  m.def("jet_estimate_normals",
+        &psp::jet_estimate_normals<Point_3, Vector_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Estimates normal directions using jet fitting for points with normals.");
+
+  m.def("jet_estimate_normals",
+        &psp::jet_estimate_normals_np<Point_3, Vector_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Estimates normal directions using jet fitting for NumPy-style float64 point arrays "
+        "with shape (N, 3).");
+
+  m.def("mst_orient_normals",
+        &psp::mst_orient_normals<Point_3, Vector_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Orients normals using MST propagation. Returns (points, first_unoriented_index).");
+
+  m.def("mst_orient_normals",
+        &psp::mst_orient_normals_np<Point_3, Vector_3>,
+        py::arg("points"), py::arg("normals"), py::arg("k"),
+        py::arg("params") = py::dict(),
+        "Orients normals using MST propagation for NumPy-style float64 point and normal "
+        "arrays with shape (N, 3). Returns (points, first_unoriented_index).");
 
 #endif
 
