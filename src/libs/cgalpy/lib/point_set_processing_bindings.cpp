@@ -4,12 +4,14 @@
 // SPDX-License-Identifier: GPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
-// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
 //            Efi Fogel          <efifogel@gmail.com>
+//            Utkarsh Khajuria   <utkarshkhajuria55@gmail.com>
 
 #include <boost/iterator/function_output_iterator.hpp>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/ndarray.h>
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/pair.h>
 #include <nanobind/stl/tuple.h>
@@ -19,6 +21,7 @@
 
 #include <CGAL/Point_set_3.h>
 #include <CGAL/IO/read_points.h>
+#include <CGAL/compute_average_spacing.h>
 // #include <CGAL/bilateral_smooth_point_set.h>
 // #include <CGAL/cluster_point_set.h>
 // #include <CGAL/compute_average_spacing.h>
@@ -44,6 +47,7 @@
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
 #include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/ndarray_to_point_3_vector.hpp"
 #include "cgalpy/point_set_processing_type.hpp"
 
 namespace py = nanobind;
@@ -87,6 +91,25 @@ auto read_points(const std::string& fname,
 #endif
   if (! res) throw std::runtime_error("Cannot read points!");
   return points;
+}
+
+//! Compute average spacing from a point range.
+template <typename Point_3>
+auto compute_average_spacing(const std::vector<Point_3>& points,
+                             const unsigned int k,
+                             const py::dict& params = py::dict()) {
+  (void) params;
+  return CGAL::compute_average_spacing<CGAL::Sequential_tag>(points, k);
+}
+
+//! Compute average spacing from a NumPy-style point array.
+template <typename Point_3>
+auto compute_average_spacing_np(const py::ndarray<>& points_array,
+                                const unsigned int k,
+                                const py::dict& params = py::dict()) {
+  const auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return compute_average_spacing(points, k, params);
 }
 
 }
@@ -1162,6 +1185,18 @@ void export_point_set_processing(py::module_& m) {
         "• LAS (Lidar) File Format (.las)\n"
         "• XYZ File Format (.xyz)\n"
     );
+
+  m.def("compute_average_spacing", &psp::compute_average_spacing<Point_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Computes average spacing from k nearest neighbors for a point range.\n"
+        "Precondition: k >= 2.");
+
+  m.def("compute_average_spacing", &psp::compute_average_spacing_np<Point_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Computes average spacing from k nearest neighbors for a NumPy-style "
+        "float64 point array with shape (N, 3).\n"
+        "The input array is copied into a CGAL point range.\n"
+        "Precondition: k >= 2.");
 
 #if 0
   m.def("read_points_with_normals",
