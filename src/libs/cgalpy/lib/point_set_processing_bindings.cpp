@@ -29,7 +29,7 @@
 // #include <CGAL/compute_average_spacing.h>
 // #include <CGAL/edge_aware_upsample_point_set.h>
 // #include <CGAL/estimate_scale.h>
-// #include <CGAL/vcm_estimate_normals.h>
+#include <CGAL/vcm_estimate_normals.h>
 // #include <CGAL/Named_function_parameters.h>
 #include <CGAL/grid_simplify_point_set.h>
 #include <CGAL/hierarchy_simplify_point_set.h>
@@ -41,7 +41,7 @@
 #include <CGAL/remove_outliers.h>
 // #include <CGAL/scanline_orient_normals.h>
 // #include <CGAL/vcm_estimate_normals.h>
-// #include <CGAL/vcm_estimate_edges.h>
+#include <CGAL/vcm_estimate_edges.h>
 // #include <CGAL/wlop_simplify_and_regularize_point_set.h>
 // #include <CGAL/IO/write_points.h>
 
@@ -509,6 +509,95 @@ auto mst_orient_normals_np(const py::ndarray<>& points_array,
     ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
                                                         normals_array);
   return mst_orient_normals(points, k, params);
+}
+
+//! Compute Voronoi covariance matrices for a point range.
+template <typename Point_3>
+auto compute_vcm(const std::vector<Point_3>& points,
+                 const double offset_radius,
+                 const double convolution_radius,
+                 const py::dict& params = py::dict()) {
+  (void) params;
+  using FT = typename Kernel::FT;
+  using Covariance = std::array<FT, 6>;
+
+  std::vector<Covariance> output(points.size());
+  CGAL::compute_vcm(points, output, offset_radius, convolution_radius);
+  return output;
+}
+
+//! Compute Voronoi covariance matrices for a NumPy-style point array.
+template <typename Point_3>
+auto compute_vcm_np(const py::ndarray<>& points_array,
+                    const double offset_radius,
+                    const double convolution_radius,
+                    const py::dict& params = py::dict()) {
+  const auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return compute_vcm(points, offset_radius, convolution_radius, params);
+}
+
+//! Compute Voronoi covariance matrices for points with normals.
+template <typename Point_3, typename Vector_3>
+auto compute_vcm_with_normals(
+  const std::vector<std::pair<Point_3, Vector_3>>& points,
+  const double offset_radius,
+  const double convolution_radius,
+  const py::dict& params = py::dict()) {
+  (void) params;
+  using FT = typename Kernel::FT;
+  using Covariance = std::array<FT, 6>;
+  using PointNormalPair = std::pair<Point_3, Vector_3>;
+  using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
+
+  std::vector<Covariance> output(points.size());
+  CGAL::compute_vcm(points, output, offset_radius, convolution_radius,
+                    CGAL::parameters::point_map(Point_map()));
+  return output;
+}
+
+//! Estimate normals using Voronoi covariance matrices.
+template <typename Point_3, typename Vector_3>
+auto vcm_estimate_normals(std::vector<std::pair<Point_3, Vector_3>> points,
+                          const double offset_radius,
+                          const double convolution_radius,
+                          const py::dict& params = py::dict()) {
+  (void) params;
+  using PointNormalPair = std::pair<Point_3, Vector_3>;
+  using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
+  using Normal_map = CGAL::Second_of_pair_property_map<PointNormalPair>;
+
+  CGAL::vcm_estimate_normals
+    (points, offset_radius, convolution_radius,
+     CGAL::parameters::point_map(Point_map())
+     .normal_map(Normal_map()));
+  return points;
+}
+
+//! Estimate normals using Voronoi covariance matrices and neighbor count.
+template <typename Point_3, typename Vector_3>
+auto vcm_estimate_normals_neighbors(
+  std::vector<std::pair<Point_3, Vector_3>> points,
+  const double offset_radius,
+  const unsigned int k,
+  const py::dict& params = py::dict()) {
+  (void) params;
+  using PointNormalPair = std::pair<Point_3, Vector_3>;
+  using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
+  using Normal_map = CGAL::Second_of_pair_property_map<PointNormalPair>;
+
+  CGAL::vcm_estimate_normals
+    (points, offset_radius, k,
+     CGAL::parameters::point_map(Point_map())
+     .normal_map(Normal_map()));
+  return points;
+}
+
+//! Test whether a Voronoi covariance matrix marks a feature edge.
+template <typename FT>
+bool vcm_is_on_feature_edge(std::array<FT, 6> cov,
+                            const double threshold) {
+  return CGAL::vcm_is_on_feature_edge(cov, threshold);
 }
 
 }
@@ -1750,6 +1839,43 @@ void export_point_set_processing(py::module_& m) {
         py::arg("params") = py::dict(),
         "Orients normals using MST propagation for NumPy-style float64 point and normal "
         "arrays with shape (N, 3). Returns (points, first_unoriented_index).");
+
+
+  m.def("compute_vcm",
+        &psp::compute_vcm<Point_3>,
+        py::arg("points"), py::arg("offset_radius"),
+        py::arg("convolution_radius"), py::arg("params") = py::dict(),
+        "Computes Voronoi covariance matrices for a point range.");
+
+  m.def("compute_vcm",
+        &psp::compute_vcm_np<Point_3>,
+        py::arg("points"), py::arg("offset_radius"),
+        py::arg("convolution_radius"), py::arg("params") = py::dict(),
+        "Computes Voronoi covariance matrices for a NumPy-style float64 point array "
+        "with shape (N, 3).");
+
+  m.def("compute_vcm_with_normals",
+        &psp::compute_vcm_with_normals<Point_3, Vector_3>,
+        py::arg("points"), py::arg("offset_radius"),
+        py::arg("convolution_radius"), py::arg("params") = py::dict(),
+        "Computes Voronoi covariance matrices for points with normals.");
+
+  m.def("vcm_estimate_normals",
+        &psp::vcm_estimate_normals<Point_3, Vector_3>,
+        py::arg("points"), py::arg("offset_radius"),
+        py::arg("convolution_radius"), py::arg("params") = py::dict(),
+        "Estimates normals using Voronoi covariance matrices.");
+
+  m.def("vcm_estimate_normals_neighbors",
+        &psp::vcm_estimate_normals_neighbors<Point_3, Vector_3>,
+        py::arg("points"), py::arg("offset_radius"), py::arg("k"),
+        py::arg("params") = py::dict(),
+        "Estimates normals using Voronoi covariance matrices and a neighbor count.");
+
+  m.def("vcm_is_on_feature_edge",
+        &psp::vcm_is_on_feature_edge<typename Kernel::FT>,
+        py::arg("cov"), py::arg("threshold"),
+        "Tests whether a Voronoi covariance matrix marks a feature edge.");
 
 #endif
 
