@@ -1,6 +1,6 @@
-import os
 import sys
 import importlib
+
 lib = 'CGALPY'
 i = 1
 if len(sys.argv) > 1:
@@ -10,36 +10,49 @@ if len(sys.argv) > 1:
     i = 2
 
 CGALPY = importlib.import_module(lib)
+Psp = CGALPY.Psp
 
-fname = sys.argv[i] if len(sys.argv)>i else CGALPY.data_file_path("points_3/sphere_1k.xyz")
-i += 1
+args = sys.argv[i:]
+use_radius = False
+fname = CGALPY.data_file_path("points_3/fin90_with_PCA_normals.xyz")
 
-# Reads a point set file in points[].
+if len(args) > 0 and args[0] == "-r":
+  use_radius = True
+  args = args[1:]
+
+if len(args) > 0:
+  fname = args[0]
+  args = args[1:]
+
+if len(args) > 0 and args[0] == "-r":
+  use_radius = True
+
+# Reads a point set file with normals.
 sys.stderr.write("Open " + fname + " for reading...\n")
 
-success, points = CGALPY.read_points_with_normals(fname)
+points = Psp.read_points_with_normals(fname)
 
-if not success:
-    sys.stderr.write("Error: cannot read file " + fname + "\n")
-    sys.exit(1)
+if len(points) == 0:
+  sys.stderr.write("Error: cannot read file " + fname + "\n")
+  sys.exit(1)
 
 # Estimates normals direction.
-# Note: pca_estimate_normals() requires a range of points
-# as well as property maps to access each point's position and normal.
-nb_neighbors = 18 # K-nearest neighbors = 3 rings
+nb_neighbors = 18
 
-if len(sys.argv) > i and sys.argv[i] == "-r": # Use a fixed neighborhood radius
-    # First compute a spacing using the K parameter
-    spacing = CGALPY.compute_average_spacing_with_normals(points, nb_neighbors)
-    # Then, estimate normals with a fixed radius
-    points = CGALPY.pca_estimate_normals(points,
-                                         0, # when using a neighborhood radius, K=0 means no limit on the number of neighbors returns
-                                         neighbor_radius=2. * spacing) # use 2*spacing as neighborhood radius
-else: # Use a fixed number of neighbors
-    points = CGALPY.pca_estimate_normals(points, nb_neighbors)
+if use_radius:
+  # First compute a spacing using the K parameter.
+  spacing = Psp.compute_average_spacing_with_normals(points, nb_neighbors)
+
+  # Then estimate normals with a fixed radius.
+  points = Psp.pca_estimate_normals(
+    points, 0, {"neighbor_radius": 2.0 * spacing})
+else:
+  # Use a fixed number of neighbors.
+  points = Psp.pca_estimate_normals(points, nb_neighbors)
 
 # Orients normals.
-# Note: mst_orient_normals() requires a range of points
-# as well as property maps to access each point's position and normal.
-points, unoriented_points_index = CGALPY.mst_orient_normals(points, nb_neighbors)
+points, unoriented_points_index = Psp.mst_orient_normals(points, nb_neighbors)
 points = points[:unoriented_points_index]
+
+print(f"Read {len(points)} oriented point(s)")
+print(f"First unoriented point index: {unoriented_points_index}")
