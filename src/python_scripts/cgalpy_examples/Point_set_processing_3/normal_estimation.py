@@ -21,6 +21,7 @@ if len(sys.argv) > 1:
     i = 2
 
 CGALPY = importlib.import_module(lib)
+Psp = CGALPY.Psp
 
 def run_pca_estimate_normals(points, nb_neighbors_pca_normals):
     task_timer = time.perf_counter()
@@ -30,10 +31,11 @@ def run_pca_estimate_normals(points, nb_neighbors_pca_normals):
     # Estimates normals direction.
     # Note: pca_estimate_normals() requires an iterator over points
     # as well as property maps to access each point's position and normal.
-    points = CGALPY.pca_estimate_normals(points, nb_neighbors_pca_normals)
+    points = Psp.pca_estimate_normals(points, nb_neighbors_pca_normals)
 
+    task_time = time.perf_counter() - task_timer
     memory = CGALPY.Memory_sizer().virtual_size()
-    sys.stderr.write(f"done: {task_timer:.2f} seconds, " +
+    sys.stderr.write(f"done: {task_time:.2f} seconds, " +
           f"{memory>>20} Mb allocated\n")
     return points
 
@@ -47,10 +49,11 @@ def run_jet_estimate_normals(points, # input points + output normals
     # Estimates normals direction.
     # Note: jet_estimate_normals() requires an iterator over points
     # + property maps to access each point's position and normal.
-    points = CGALPY.jet_estimate_normals(points, nb_neighbors_jet_fitting_normals)
+    points = Psp.jet_estimate_normals(points, nb_neighbors_jet_fitting_normals)
 
+    task_time = time.perf_counter() - task_timer
     memory = CGALPY.Memory_sizer().virtual_size()
-    sys.stderr.write(f"done: {task_timer:.2f} seconds, " +
+    sys.stderr.write(f"done: {task_time:.2f} seconds, " +
           f"{memory>>20} Mb allocated\n")
     return points
 
@@ -65,10 +68,11 @@ def run_vcm_estimate_normals(points, # input points + output normals
     # Estimates normals direction.
     # Note: vcm_estimate_normals() requires an iterator over points
     # + property maps to access each point's position and normal.
-    points = CGALPY.vcm_estimate_normals(points, R, r)
+    points = Psp.vcm_estimate_normals(points, R, r)
 
+    task_time = time.perf_counter() - task_timer
     memory = CGALPY.Memory_sizer().virtual_size()
-    sys.stderr.write(f"done: {task_timer:.2f} seconds, " +
+    sys.stderr.write(f"done: {task_time:.2f} seconds, " +
           f"{memory>>20} Mb allocated\n")
     return points
 
@@ -82,11 +86,12 @@ def run_mst_orient_normals(points, # input points + input/output normals
     # Orients normals.
     # Note: mst_orient_normals() requires an iterator over points
     # as well as property maps to access each point's position and normal.
-    points, unoriented_points_index = CGALPY.mst_orient_normals(points, nb_neighbors_mst)
+    points, unoriented_points_index = Psp.mst_orient_normals(points, nb_neighbors_mst)
     points = points[:unoriented_points_index]
 
+    task_time = time.perf_counter() - task_timer
     memory = CGALPY.Memory_sizer().virtual_size()
-    sys.stderr.write(f"done: {task_timer:.2f} seconds, " +
+    sys.stderr.write(f"done: {task_time:.2f} seconds, " +
           f"{memory>>20} Mb allocated\n")
     return points
 
@@ -142,27 +147,45 @@ if len(sys.argv)==2:
     nb_neighbors_jet_fitting_normals = 10
     nb_neighbors_mst = 10
 
-for i in range(i, len(sys.argv)):
-    if sys.argv[i]=="-estimate":
-        estimate = sys.argv[i+1]
+while i < len(sys.argv):
+    option = sys.argv[i]
+
+    if option == "-estimate":
+        i += 1
+        estimate = sys.argv[i]
         if estimate != "plane" and estimate != "quadric" and estimate != "vcm":
-            sys.stderr.write("invalid option " + sys.argv[i] + "\n")
-    elif sys.argv[i]=="-nb_neighbors_pca":
-        nb_neighbors_pca_normals = int(sys.argv[i+1])
-    elif sys.argv[i]=="-nb_neighbors_jet_fitting":
-        nb_neighbors_jet_fitting_normals = int(sys.argv[i+1])
-    elif sys.argv[i]=="-offset_radius_vcm":
-        offset_radius_vcm = float(sys.argv[i+1])
-    elif sys.argv[i]=="-convolve_radius_vcm":
-        convolve_radius_vcm = float(sys.argv[i+1])
-    elif sys.argv[i]=="-orient":
-        orient = sys.argv[i+1]
+            sys.stderr.write("invalid value for -estimate: " + estimate + "\n")
+
+    elif option == "-nb_neighbors_pca":
+        i += 1
+        nb_neighbors_pca_normals = int(sys.argv[i])
+
+    elif option == "-nb_neighbors_jet_fitting":
+        i += 1
+        nb_neighbors_jet_fitting_normals = int(sys.argv[i])
+
+    elif option == "-offset_radius_vcm":
+        i += 1
+        offset_radius_vcm = float(sys.argv[i])
+
+    elif option == "-convolve_radius_vcm":
+        i += 1
+        convolve_radius_vcm = float(sys.argv[i])
+
+    elif option == "-orient":
+        i += 1
+        orient = sys.argv[i]
         if orient != "MST":
-            sys.stderr.write("invalid option " + sys.argv[i] + "\n")
-    elif sys.argv[i]=="-nb_neighbors_mst":
-        nb_neighbors_mst = int(sys.argv[i+1])
+            sys.stderr.write("invalid value for -orient: " + orient + "\n")
+
+    elif option == "-nb_neighbors_mst":
+        i += 1
+        nb_neighbors_mst = int(sys.argv[i])
+
     else:
-        sys.stderr.write("invalid option " + sys.argv[i] + "\n")
+        sys.stderr.write("invalid option " + option + "\n")
+
+    i += 1
 
 accumulated_fatal_err = 0
 
@@ -176,16 +199,17 @@ task_timer = time.perf_counter()
 points = []
 sys.stderr.write("Open " + input_filename + " for reading...")
 
-success, points = CGALPY.read_points_with_normals(input_filename)
+points = Psp.read_points_with_normals(input_filename)
 
-if not success:
+if len(points) == 0:
     sys.stderr.write("Error: cannot read file " + input_filename + "\n")
     sys.exit(1)
 
 # Prints status
 nb_points = len(points)
+task_time = time.perf_counter() - task_timer
 sys.stderr.write(f"Reads file {input_filename}: {nb_points} points, " +
-                 f"{task_timer:.2f} seconds\n")
+                 f"{task_time:.2f} seconds\n")
 task_timer = time.perf_counter()
 
 #****************************************
@@ -218,7 +242,7 @@ if orient == "MST":
 
 sys.stderr.write("Write file " + output_filename + "\n")
 
-if not CGALPY.write_points(output_filename, points):
+if not Psp.write_points_with_normals(output_filename, points):
     sys.stderr.write("Error: cannot write file " + output_filename + "\n")
     sys.exit(1)
 
