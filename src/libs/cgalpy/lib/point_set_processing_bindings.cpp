@@ -43,7 +43,7 @@
 // #include <CGAL/vcm_estimate_normals.h>
 #include <CGAL/vcm_estimate_edges.h>
 // #include <CGAL/wlop_simplify_and_regularize_point_set.h>
-// #include <CGAL/IO/write_points.h>
+#include <CGAL/IO/write_points.h>
 
 #include "cgalpy/kernel_type.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
@@ -598,6 +598,34 @@ template <typename FT>
 bool vcm_is_on_feature_edge(std::array<FT, 6> cov,
                             const double threshold) {
   return CGAL::vcm_is_on_feature_edge(cov, threshold);
+}
+
+//! Write a point range to a file.
+template <typename Point_3>
+bool write_points(const std::string& fname,
+                  const std::vector<Point_3>& points,
+                  const py::dict& params = py::dict()) {
+  (void) params;
+  return CGAL::IO::write_points(fname, points,
+                                CGAL::parameters::stream_precision(17));
+}
+
+//! Write points with normals to a file.
+template <typename Point_3, typename Vector_3>
+bool write_points_with_normals(
+  const std::string& fname,
+  const std::vector<std::pair<Point_3, Vector_3>>& points,
+  const py::dict& params = py::dict()) {
+  (void) params;
+  using PointNormalPair = std::pair<Point_3, Vector_3>;
+  using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
+  using Normal_map = CGAL::Second_of_pair_property_map<PointNormalPair>;
+
+  return CGAL::IO::write_points
+    (fname, points,
+     CGAL::parameters::point_map(Point_map())
+     .normal_map(Normal_map())
+     .stream_precision(17));
 }
 
 }
@@ -1876,6 +1904,17 @@ void export_point_set_processing(py::module_& m) {
         &psp::vcm_is_on_feature_edge<typename Kernel::FT>,
         py::arg("cov"), py::arg("threshold"),
         "Tests whether a Voronoi covariance matrix marks a feature edge.");
+
+
+  m.def("write_points",
+        &psp::write_points<Point_3>,
+        py::arg("fname"), py::arg("points"), py::arg("params") = py::dict(),
+        "Writes a point range to a file.");
+
+  m.def("write_points_with_normals",
+        &psp::write_points_with_normals<Point_3, Vector_3>,
+        py::arg("fname"), py::arg("points"), py::arg("params") = py::dict(),
+        "Writes points with normals to a file.");
 
 #endif
 
