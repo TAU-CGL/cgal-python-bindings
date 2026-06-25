@@ -12,6 +12,7 @@ if len(sys.argv) > 1:
     i = 2
 
 CGALPY = importlib.import_module(lib)
+Psp = CGALPY.Psp
 
 input_filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("points_3/hippo1.ply")
 i += 1
@@ -24,13 +25,13 @@ CGALPY.read_point_set(input_filename, points)
 cluster_map = points.add_property_map_int("cluster", -1)[0]
 
 # Compute average spacing
-spacing = CGALPY.compute_average_spacing(points, 12)
+spacing = Psp.compute_average_spacing(points, 12)
 print(f"Spacing = {spacing}")
 
 # Adjacencies stored in vector
 # Compute clusters
 t = time.perf_counter_ns()
-nb_clusters, adjacencies = CGALPY.cluster_point_set(points, cluster_map, neighbor_radius=spacing)
+nb_clusters, adjacencies = Psp.cluster_point_set(points, cluster_map, {"neighbor_radius": spacing})
 t = time.perf_counter_ns() - t
 print(f"Found {nb_clusters} clusters with {len(adjacencies)} adjacencies in {t/1e9} seconds")
 

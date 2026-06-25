@@ -25,7 +25,7 @@
 #include <CGAL/compute_average_spacing.h>
 #include <CGAL/estimate_scale.h>
 #include <CGAL/bilateral_smooth_point_set.h>
-// #include <CGAL/cluster_point_set.h>
+#include <CGAL/cluster_point_set.h>
 // #include <CGAL/compute_average_spacing.h>
 #include <CGAL/edge_aware_upsample_point_set.h>
 // #include <CGAL/estimate_scale.h>
@@ -112,6 +112,15 @@ auto compute_average_spacing_np(const py::ndarray<>& points_array,
   const auto points =
     cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
   return compute_average_spacing(points, k, params);
+}
+
+//! Compute average spacing from a Point_set_3.
+template <typename PointSet_3>
+auto compute_average_spacing_point_set(const PointSet_3& points,
+                                       const unsigned int k,
+                                       const py::dict& params = py::dict()) {
+  (void) params;
+  return CGAL::compute_average_spacing<CGAL::Sequential_tag>(points, k);
 }
 
 //! Estimate global scale in the K nearest neighbors sense from a point range.
@@ -413,6 +422,36 @@ auto grid_simplify_point_set_with_normals(
      .point_map(Point_map()));
 
   return std::make_pair(points, std::distance(points.begin(), it));
+}
+
+//! Identify clusters in a Point_set_3 and collect cluster adjacencies.
+template <typename PointSet_3, typename ClusterMap_3>
+auto cluster_point_set(PointSet_3& points,
+                       ClusterMap_3& cluster_map,
+                       const py::dict& params = py::dict()) {
+  const double attraction_factor =
+    params.contains("attraction_factor") ?
+    py::cast<double>(params["attraction_factor"]) : 2.0;
+
+  std::vector<std::pair<std::size_t, std::size_t>> adjacencies;
+  std::size_t number_of_clusters = 0;
+
+  if (params.contains("neighbor_radius")) {
+    const double neighbor_radius = py::cast<double>(params["neighbor_radius"]);
+    number_of_clusters =
+      CGAL::cluster_point_set(points, cluster_map,
+                              CGAL::parameters::attraction_factor(attraction_factor)
+                              .adjacencies(std::back_inserter(adjacencies))
+                              .neighbor_radius(neighbor_radius));
+  }
+  else {
+    number_of_clusters =
+      CGAL::cluster_point_set(points, cluster_map,
+                              CGAL::parameters::attraction_factor(attraction_factor)
+                              .adjacencies(std::back_inserter(adjacencies)));
+  }
+
+  return std::make_pair(number_of_clusters, adjacencies);
 }
 
 //! Estimate normals using PCA.
@@ -1837,6 +1876,12 @@ void export_point_set_processing(py::module_& m) {
         "Computes average spacing from k nearest neighbors for a point range.\n"
         "Precondition: k >= 2.");
 
+  m.def("compute_average_spacing",
+        &psp::compute_average_spacing_point_set<PointSet_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Computes average spacing from k nearest neighbors for a Point_set_3.\n"
+        "Precondition: k >= 2.");
+
   m.def("compute_average_spacing", &psp::compute_average_spacing_np<Point_3>,
         py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
         "Computes average spacing from k nearest neighbors for a NumPy-style "
@@ -1958,6 +2003,12 @@ void export_point_set_processing(py::module_& m) {
         &psp::read_points_with_normals<Point_3, Vector_3>,
         py::arg("fname"), py::arg("params") = py::dict(),
         "Reads points with normals from a point-set file.");
+
+  m.def("cluster_point_set",
+        &psp::cluster_point_set<PointSet_3, ClusterMap_3>,
+        py::arg("points"), py::arg("cluster_map"), py::arg("params") = py::dict(),
+        "Identifies connected components on a nearest-neighbor graph. "
+        "Returns (number_of_clusters, adjacencies).");
 
   m.def("compute_average_spacing_with_normals",
         &psp::compute_average_spacing_with_normals<Point_3, Vector_3>,
