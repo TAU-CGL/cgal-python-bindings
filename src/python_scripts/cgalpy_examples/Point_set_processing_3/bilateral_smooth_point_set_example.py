@@ -1,38 +1,48 @@
-import os
 import sys
 import importlib
+
 lib = 'CGALPY'
 i = 1
-if len(sys.argv) > 1:
-  str = sys.argv[1]
-  if str.startswith('CGALPY'):
-    lib = str
-    i = 2
+if len(sys.argv) > 1 and sys.argv[1].startswith('CGALPY'):
+  lib = sys.argv[1]
+  i = 2
 
 CGALPY = importlib.import_module(lib)
+Psp = CGALPY.Psp
 
-input_filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("points_3/fin90_with_PCA_normals.xyz")
-i += 1
-output_filename = sys.argv[i] if len(sys.argv) > i else "data/fin90_with_PCA_normals_bilateral_smoothed.xyz"
+input_filename = (
+  sys.argv[i]
+  if len(sys.argv) > i
+  else CGALPY.data_file_path("points_3/fin90_with_PCA_normals.xyz")
+)
 i += 1
 
-# Reads a point set file in points[] * with normals *.
-result, points = CGALPY.read_points_with_normals(input_filename)
-if not result:
+output_filename = (
+  sys.argv[i]
+  if len(sys.argv) > i
+  else "fin90_with_PCA_normals_bilateral_smoothed.xyz"
+)
+
+points = Psp.read_points_with_normals(input_filename)
+if len(points) == 0:
   sys.stderr.write("Error: cannot read file " + input_filename + "\n")
   sys.exit(1)
 
-# Algorithm parameters
-k = 120 # size of neighborhood. The bigger the smoother the result will be.
-# This value should bigger than 1.
-sharpness_angle = 1 # control sharpness of the result.
-# The bigger the smoother the result will be
-iter_number = 3 # number of times the projection is applied
+# Algorithm parameters.
+k = 120
+sharpness_angle = 1.0
+iter_number = 3
 
-for i in range(iter_number):
-  # error =
-  CGALPY.bilateral_smooth_point_set(points, k, sharpness_angle=sharpness_angle)
+last_error = 0.0
+for _ in range(iter_number):
+  last_error, points = Psp.bilateral_smooth_point_set(
+    points, k, {"sharpness_angle": sharpness_angle})
 
-if not CGALPY.write_points(output_filename, points):
+if not Psp.write_points_with_normals(output_filename, points):
   sys.stderr.write("Error: cannot write file " + output_filename + "\n")
   sys.exit(1)
+
+print(f"Read {len(points)} point(s) with normals")
+print(f"Bilateral smoothing iterations: {iter_number}")
+print(f"Last average movement error: {last_error}")
+print(f"Wrote {output_filename}")
