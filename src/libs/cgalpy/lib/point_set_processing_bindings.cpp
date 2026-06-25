@@ -394,6 +394,27 @@ auto compute_average_spacing_with_normals(
     (points, k, CGAL::parameters::point_map(Point_map()));
 }
 
+//! Simplify points with normals by grid clustering.
+template <typename Point_3, typename Vector_3>
+auto grid_simplify_point_set_with_normals(
+  std::vector<std::pair<Point_3, Vector_3>> points,
+  const double epsilon,
+  const py::dict& params = py::dict()) {
+  using PointNormalPair = std::pair<Point_3, Vector_3>;
+  using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
+
+  const unsigned int min_points_per_cell =
+    params.contains("min_points_per_cell") ?
+    py::cast<unsigned int>(params["min_points_per_cell"]) : 1;
+
+  auto it = CGAL::grid_simplify_point_set
+    (points, epsilon,
+     CGAL::parameters::min_points_per_cell(min_points_per_cell)
+     .point_map(Point_map()));
+
+  return std::make_pair(points, std::distance(points.begin(), it));
+}
+
 //! Estimate normals using PCA.
 template <typename Point_3, typename Vector_3>
 auto pca_estimate_normals(std::vector<std::pair<Point_3, Vector_3>> points,
@@ -1942,6 +1963,12 @@ void export_point_set_processing(py::module_& m) {
         &psp::compute_average_spacing_with_normals<Point_3, Vector_3>,
         py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
         "Computes average spacing from k nearest neighbors for points with normals.");
+
+  m.def("grid_simplify_point_set_with_normals",
+        &psp::grid_simplify_point_set_with_normals<Point_3, Vector_3>,
+        py::arg("points"), py::arg("epsilon"), py::arg("params") = py::dict(),
+        "Simplifies points with normals by grid clustering. "
+        "Returns (points, first_index_to_remove).");
 
   m.def("pca_estimate_normals",
         &psp::pca_estimate_normals<Point_3, Vector_3>,

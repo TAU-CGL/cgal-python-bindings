@@ -11,13 +11,14 @@ if len(sys.argv) > 1:
     i = 2
 
 CGALPY = importlib.import_module(lib)
+Psp = CGALPY.Psp
 
 fname = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("points_3/fin90_with_PCA_normals.xyz")
 i += 1
 
 # Reads a .xyz point set file in points.
-success, points = CGALPY.read_points_with_normals(fname)
-if not success:
+points = Psp.read_points_with_normals(fname)
+if len(points) == 0:
   print("Error: cannot read file " + fname)
   sys.exit(1)
 
@@ -26,7 +27,7 @@ point_to_index = dict(zip(points, range(len(points))))
 
 # simplification by clustering using erase-remove idiom
 cell_size = 0.05
-points, k = CGALPY.grid_simplify_point_set_with_normals(points, cell_size)
+points, k = Psp.grid_simplify_point_set_with_normals(points, cell_size)
 
 print(f"Keep {k} of {len(points)} points")
 
