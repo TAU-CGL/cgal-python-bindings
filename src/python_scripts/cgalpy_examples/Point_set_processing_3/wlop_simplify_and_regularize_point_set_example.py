@@ -1,38 +1,54 @@
 import time
-import os
 import sys
 import importlib
+
 lib = 'CGALPY'
 i = 1
-if len(sys.argv) > 1:
-  str = sys.argv[1]
-  if str.startswith('CGALPY'):
-    lib = str
-    i = 2
+if len(sys.argv) > 1 and sys.argv[1].startswith('CGALPY'):
+  lib = sys.argv[1]
+  i = 2
 
 CGALPY = importlib.import_module(lib)
+Psp = CGALPY.Psp
 
-input_filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("points_3/sphere_20k.xyz")
+input_filename = (
+  sys.argv[i]
+  if len(sys.argv) > i
+  else CGALPY.data_file_path("points_3/sphere_20k.xyz")
+)
 i += 1
-output_filename = sys.argv[i] if len(sys.argv) > i else "data/sphere_20k_WLOPED.xyz"
 
-# Reads a .xyz point set file in points[]
-success, points = CGALPY.read_points(input_filename)
+output_filename = (
+  sys.argv[i]
+  if len(sys.argv) > i
+  else "sphere_20k_WLOPED.xyz"
+)
 
+points = Psp.read_points(input_filename)
+if len(points) == 0:
+  print("Error: cannot read file " + input_filename)
+  sys.exit(1)
 
-# parameters
-retain_percentage = 2   # percentage of points to retain.
-neighbor_radius = 0.5   # neighbors size.
+select_percentage = 2.0
+neighbor_radius = 0.5
 
 timer = time.perf_counter()
-points, output = CGALPY.wlop_simplify_and_regularize_point_set(points, retain_percentage=retain_percentage, neighbor_radius=neighbor_radius)
+output = Psp.wlop_simplify_and_regularize_point_set(
+  points,
+  {
+    "select_percentage": select_percentage,
+    "neighbor_radius": neighbor_radius,
+  },
+)
 task_time = time.perf_counter() - timer
 
-CGALPY.write_points(output_filename, output)
+if not Psp.write_points(output_filename, output):
+  print("Error: cannot write file " + output_filename)
+  sys.exit(1)
 
-memory = CGALPY.Memory_sizer().virtual_size()
-
-print(f"WLOP Simplification and Regularization computed in {task_time:.2f} seconds"
-      f"{memory>>20} MiB of memory:")
-print(f" * Retain percentage: {retain_percentage}")
+print(f"WLOP simplification and regularization computed in {task_time:.2f} seconds")
+print(f" * Input points: {len(points)}")
+print(f" * Output points: {len(output)}")
+print(f" * Select percentage: {select_percentage}")
 print(f" * Neighbor radius: {neighbor_radius}")
+print(f"Wrote {output_filename}")
