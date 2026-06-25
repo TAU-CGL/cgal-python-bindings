@@ -42,7 +42,7 @@
 // #include <CGAL/scanline_orient_normals.h>
 // #include <CGAL/vcm_estimate_normals.h>
 #include <CGAL/vcm_estimate_edges.h>
-// #include <CGAL/wlop_simplify_and_regularize_point_set.h>
+#include <CGAL/wlop_simplify_and_regularize_point_set.h>
 #include <CGAL/IO/write_points.h>
 
 #include "cgalpy/kernel_type.hpp"
@@ -693,6 +693,48 @@ std::vector<std::pair<Point_3, Vector_3>> edge_aware_upsample_point_set(
      .number_of_output_points(number_of_output_points));
 
   return points;
+}
+
+//! Simplify and regularize a point set using WLOP.
+template <typename Point_3>
+std::vector<Point_3> wlop_simplify_and_regularize_point_set(
+  std::vector<Point_3> points,
+  const py::dict& params = py::dict()) {
+  std::vector<Point_3> output;
+
+  const double select_percentage =
+    params.contains("select_percentage") ?
+    py::cast<double>(params["select_percentage"]) : 5.0;
+
+  const double neighbor_radius =
+    params.contains("neighbor_radius") ?
+    py::cast<double>(params["neighbor_radius"]) : -1.0;
+
+  const unsigned int number_of_iterations =
+    params.contains("number_of_iterations") ?
+    py::cast<unsigned int>(params["number_of_iterations"]) : 35;
+
+  const bool require_uniform_sampling =
+    params.contains("require_uniform_sampling") ?
+    py::cast<bool>(params["require_uniform_sampling"]) : false;
+
+  CGAL::wlop_simplify_and_regularize_point_set<CGAL::Sequential_tag>
+    (points, std::back_inserter(output),
+     CGAL::parameters::select_percentage(select_percentage)
+     .neighbor_radius(neighbor_radius)
+     .number_of_iterations(number_of_iterations)
+     .require_uniform_sampling(require_uniform_sampling));
+
+  return output;
+}
+
+//! Simplify and regularize a NumPy-style point array using WLOP.
+template <typename Point_3>
+std::vector<Point_3> wlop_simplify_and_regularize_point_set_np(
+  const py::ndarray<>& points,
+  const py::dict& params = py::dict()) {
+  return wlop_simplify_and_regularize_point_set<Point_3>
+    (cgalpy::ndarray_to_point_3_vector<Point_3>(points, "points"), params);
 }
 
 }
@@ -1995,6 +2037,18 @@ void export_point_set_processing(py::module_& m) {
         &psp::edge_aware_upsample_point_set<Point_3, Vector_3>,
         py::arg("points"), py::arg("params") = py::dict(),
         "Upsamples points with normals while preserving sharp features.");
+
+
+  m.def("wlop_simplify_and_regularize_point_set",
+        &psp::wlop_simplify_and_regularize_point_set<Point_3>,
+        py::arg("points"), py::arg("params") = py::dict(),
+        "Simplifies and regularizes a point set using WLOP.");
+
+  m.def("wlop_simplify_and_regularize_point_set",
+        &psp::wlop_simplify_and_regularize_point_set_np<Point_3>,
+        py::arg("points"), py::arg("params") = py::dict(),
+        "Simplifies and regularizes a NumPy-style float64 point array "
+        "with shape (N, 3) using WLOP.");
 
 #endif
 
