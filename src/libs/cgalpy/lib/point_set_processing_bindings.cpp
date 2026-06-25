@@ -24,7 +24,7 @@
 #include <CGAL/IO/read_points.h>
 #include <CGAL/compute_average_spacing.h>
 #include <CGAL/estimate_scale.h>
-// #include <CGAL/bilateral_smooth_point_set.h>
+#include <CGAL/bilateral_smooth_point_set.h>
 // #include <CGAL/cluster_point_set.h>
 // #include <CGAL/compute_average_spacing.h>
 // #include <CGAL/edge_aware_upsample_point_set.h>
@@ -626,6 +626,35 @@ bool write_points_with_normals(
      CGAL::parameters::point_map(Point_map())
      .normal_map(Normal_map())
      .stream_precision(17));
+}
+
+//! Smooth points with normals using bilateral projection.
+template <typename Point_3, typename Vector_3>
+auto bilateral_smooth_point_set(
+  std::vector<std::pair<Point_3, Vector_3>> points,
+  const unsigned int k,
+  const py::dict& params = py::dict()) {
+  using PointNormalPair = std::pair<Point_3, Vector_3>;
+  using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
+  using Normal_map = CGAL::Second_of_pair_property_map<PointNormalPair>;
+  using FT = typename Kernel::FT;
+
+  const double sharpness_angle =
+    params.contains("sharpness_angle") ?
+    py::cast<double>(params["sharpness_angle"]) : 30.0;
+
+  const FT neighbor_radius =
+    params.contains("neighbor_radius") ?
+    FT(py::cast<double>(params["neighbor_radius"])) : FT(0);
+
+  const double error = CGAL::bilateral_smooth_point_set<CGAL::Sequential_tag>
+    (points, k,
+     CGAL::parameters::point_map(Point_map())
+     .normal_map(Normal_map())
+     .sharpness_angle(sharpness_angle)
+     .neighbor_radius(neighbor_radius));
+
+  return std::make_pair(error, points);
 }
 
 }
@@ -1915,6 +1944,13 @@ void export_point_set_processing(py::module_& m) {
         &psp::write_points_with_normals<Point_3, Vector_3>,
         py::arg("fname"), py::arg("points"), py::arg("params") = py::dict(),
         "Writes points with normals to a file.");
+
+
+  m.def("bilateral_smooth_point_set",
+        &psp::bilateral_smooth_point_set<Point_3, Vector_3>,
+        py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
+        "Smooths points with normals using bilateral projection. "
+        "Returns (average_movement_error, points).");
 
 #endif
 
