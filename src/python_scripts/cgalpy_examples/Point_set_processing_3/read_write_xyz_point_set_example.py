@@ -1,29 +1,36 @@
-import os
 import sys
 import importlib
+
 lib = 'CGALPY'
 i = 1
-if len(sys.argv) > 1:
-  str = sys.argv[1]
-  if str.startswith('CGALPY'):
-    lib = str
-    i = 2
+if len(sys.argv) > 1 and sys.argv[1].startswith('CGALPY'):
+  lib = sys.argv[1]
+  i = 2
 
 CGALPY = importlib.import_module(lib)
+Psp = CGALPY.Psp
 
-fname = sys.argv[i] if len(sys.argv)>i else CGALPY.data_file_path("points_3/oni.pwn")
+input_filename = (
+  sys.argv[i]
+  if len(sys.argv) > i
+  else CGALPY.data_file_path("points_3/oni.pwn")
+)
 i += 1
 
-# Reads a .xyz point set file in points[].
-# Note: read_XYZ() requires an output iterator
-# over points and as well as property maps to access each
-# point position and normal.
-points = []
-success, points = CGALPY.read_points_with_normals(fname)
-if not success:
-    sys.stderr.write(f"Error: cannot read file {fname}\n")
-    sys.exit(1)
+output_filename = (
+  sys.argv[i]
+  if len(sys.argv) > i
+  else "oni_copy.xyz"
+)
 
-# Saves point set.
-if not CGALPY.write_points_with_normals("oni_copy.xyz", points, stream_precision=17):
-    sys.exit(1)
+points = Psp.read_points_with_normals(input_filename)
+if len(points) == 0:
+  sys.stderr.write(f"Error: cannot read file {input_filename}\n")
+  sys.exit(1)
+
+if not Psp.write_points_with_normals(output_filename, points):
+  sys.stderr.write(f"Error: cannot write file {output_filename}\n")
+  sys.exit(1)
+
+print(f"Read {len(points)} point(s) with normals")
+print(f"Wrote {output_filename}")
