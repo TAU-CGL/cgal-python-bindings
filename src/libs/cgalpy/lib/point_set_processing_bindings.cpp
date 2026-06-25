@@ -27,7 +27,7 @@
 #include <CGAL/bilateral_smooth_point_set.h>
 // #include <CGAL/cluster_point_set.h>
 // #include <CGAL/compute_average_spacing.h>
-// #include <CGAL/edge_aware_upsample_point_set.h>
+#include <CGAL/edge_aware_upsample_point_set.h>
 // #include <CGAL/estimate_scale.h>
 #include <CGAL/vcm_estimate_normals.h>
 // #include <CGAL/Named_function_parameters.h>
@@ -655,6 +655,44 @@ auto bilateral_smooth_point_set(
      .neighbor_radius(neighbor_radius));
 
   return std::make_pair(error, points);
+}
+
+//! Upsample points with normals while preserving sharp features.
+template <typename Point_3, typename Vector_3>
+std::vector<std::pair<Point_3, Vector_3>> edge_aware_upsample_point_set(
+  std::vector<std::pair<Point_3, Vector_3>> points,
+  const py::dict& params = py::dict()) {
+  using PointNormalPair = std::pair<Point_3, Vector_3>;
+  using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
+  using Normal_map = CGAL::Second_of_pair_property_map<PointNormalPair>;
+
+  const double sharpness_angle =
+    params.contains("sharpness_angle") ?
+    py::cast<double>(params["sharpness_angle"]) : 30.0;
+
+  const double edge_sensitivity =
+    params.contains("edge_sensitivity") ?
+    py::cast<double>(params["edge_sensitivity"]) : 1.0;
+
+  const double neighbor_radius =
+    params.contains("neighbor_radius") ?
+    py::cast<double>(params["neighbor_radius"]) : -1.0;
+
+  const std::size_t number_of_output_points =
+    params.contains("number_of_output_points") ?
+    py::cast<std::size_t>(params["number_of_output_points"]) :
+    points.size() * 4;
+
+  CGAL::edge_aware_upsample_point_set<CGAL::Sequential_tag>
+    (points, std::back_inserter(points),
+     CGAL::parameters::point_map(Point_map())
+     .normal_map(Normal_map())
+     .sharpness_angle(sharpness_angle)
+     .edge_sensitivity(edge_sensitivity)
+     .neighbor_radius(neighbor_radius)
+     .number_of_output_points(number_of_output_points));
+
+  return points;
 }
 
 }
@@ -1951,6 +1989,12 @@ void export_point_set_processing(py::module_& m) {
         py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
         "Smooths points with normals using bilateral projection. "
         "Returns (average_movement_error, points).");
+
+
+  m.def("edge_aware_upsample_point_set",
+        &psp::edge_aware_upsample_point_set<Point_3, Vector_3>,
+        py::arg("points"), py::arg("params") = py::dict(),
+        "Upsamples points with normals while preserving sharp features.");
 
 #endif
 
