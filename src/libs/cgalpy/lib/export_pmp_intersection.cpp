@@ -264,6 +264,16 @@ bool do_intersect_polylines(const Point_3_vec& polyline1,
                             const Point_3_vec& polyline2)
 { return PMP::do_intersect(polyline1, polyline2); }
 
+//!
+bool do_intersect_polylines_np(const py::ndarray<>& polyline1_array,
+                               const py::ndarray<>& polyline2_array) {
+  auto polyline1 =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(polyline1_array, "polyline1");
+  auto polyline2 =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(polyline2_array, "polyline2");
+  return do_intersect_polylines(polyline1, polyline2);
+}
+
 /*! Determine whether two ranges of polylines intersect.
  */
 bool do_intersect_polyline_ranges(const std::vector<Point_3_vec>& range1, const std::vector<Point_3_vec>& range2) {
@@ -284,6 +294,16 @@ bool do_intersect_mesh_polyline(const PolygonMesh& pm, const Point_3_vec& polyli
   using Pm = PolygonMesh;
   return apply_intersection_geom_traits_named_parameters
     <Do_intersect_mesh_polyline_wrapper>(np, pm, polyline);
+}
+
+//!
+template <typename PolygonMesh>
+bool do_intersect_mesh_polyline_np(const PolygonMesh& pm,
+                                   const py::ndarray<>& polyline_array,
+                                   const py::dict& np = py::dict()) {
+  auto polyline =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(polyline_array, "polyline");
+  return do_intersect_mesh_polyline(pm, polyline, np);
 }
 
 //!
@@ -316,6 +336,9 @@ void export_pmp_intersection(py::module_& m) {
   m.def("do_intersect", &cgalpy::pmp::do_intersect_polylines,
         py::arg("polyline1"), py::arg("polyline2"),
         pmp_doc::Polygon_mesh_processing_do_intersect_1);
+  m.def("do_intersect", &cgalpy::pmp::do_intersect_polylines_np,
+        py::arg("polyline1"), py::arg("polyline2"),
+        pmp_doc::Polygon_mesh_processing_do_intersect_1);
   m.def("do_intersect_polyline_ranges", &cgalpy::pmp::do_intersect_polyline_ranges,
         py::arg("polylines1"), py::arg("polylines2"),
         pmp_doc::Polygon_mesh_processing_do_intersect);
@@ -323,6 +346,9 @@ void export_pmp_intersection(py::module_& m) {
         py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         pmp_doc::Polygon_mesh_processing_do_intersect_2);
   m.def("do_intersect", &cgalpy::pmp::do_intersect_mesh_polyline<Pm>,
+        py::arg("tm"), py::arg("polyline"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_do_intersect_4);
+  m.def("do_intersect", &cgalpy::pmp::do_intersect_mesh_polyline_np<Pm>,
         py::arg("tm"), py::arg("polyline"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_do_intersect_4);
   m.def("do_intersect_polyline_range",
