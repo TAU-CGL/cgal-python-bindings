@@ -10,6 +10,7 @@
 #include <vector>
 #include <array>
 #include <utility>
+#include <string>
 
 #include <boost/graph/graph_traits.hpp>
 
@@ -281,6 +282,31 @@ bool do_intersect_polyline_ranges(const std::vector<Point_3_vec>& range1, const 
 }
 
 //!
+std::vector<Point_3_vec>
+ndarray_range_to_point_3_vectors(const std::vector<py::ndarray<>>& range_arrays,
+                                 const char* range_name) {
+  std::vector<Point_3_vec> range;
+  range.reserve(range_arrays.size());
+
+  for (std::size_t i = 0; i < range_arrays.size(); ++i) {
+    const auto polyline_name =
+      std::string(range_name) + "[" + std::to_string(i) + "]";
+    range.push_back(cgalpy::ndarray_to_point_3_vector<Point_3>
+                    (range_arrays[i], polyline_name.c_str()));
+  }
+
+  return range;
+}
+
+//!
+bool do_intersect_polyline_ranges_np(const std::vector<py::ndarray<>>& range1_arrays,
+                                     const std::vector<py::ndarray<>>& range2_arrays) {
+  auto range1 = ndarray_range_to_point_3_vectors(range1_arrays, "polylines1");
+  auto range2 = ndarray_range_to_point_3_vectors(range2_arrays, "polylines2");
+  return do_intersect_polyline_ranges(range1, range2);
+}
+
+//!
 template <typename PolygonMesh>
 bool do_intersect_meshes(const PolygonMesh& pm1, const PolygonMesh& pm2,
                          const py::dict& np1 = py::dict(), const py::dict& np2 = py::dict()) {
@@ -317,6 +343,15 @@ bool do_intersect_mesh_polyline_range(const PolygonMesh& pm, const std::vector<P
 
 //!
 template <typename PolygonMesh>
+bool do_intersect_mesh_polyline_range_np(const PolygonMesh& pm,
+                                         const std::vector<py::ndarray<>>& range_arrays,
+                                         const py::dict& np = py::dict()) {
+  auto range = ndarray_range_to_point_3_vectors(range_arrays, "polylines");
+  return do_intersect_mesh_polyline_range(pm, range, np);
+}
+
+//!
+template <typename PolygonMesh>
 auto intersecting_meshes(const std::vector<PolygonMesh>& range, const py::dict& np = py::dict(),
                          const std::vector<py::dict>& nps = std::vector<py::dict>()) {
   using Pm = PolygonMesh;
@@ -342,6 +377,9 @@ void export_pmp_intersection(py::module_& m) {
   m.def("do_intersect_polyline_ranges", &cgalpy::pmp::do_intersect_polyline_ranges,
         py::arg("polylines1"), py::arg("polylines2"),
         pmp_doc::Polygon_mesh_processing_do_intersect);
+  m.def("do_intersect_polyline_ranges", &cgalpy::pmp::do_intersect_polyline_ranges_np,
+        py::arg("polylines1"), py::arg("polylines2"),
+        pmp_doc::Polygon_mesh_processing_do_intersect);
   m.def("do_intersect", &cgalpy::pmp::do_intersect_meshes<Pm>,
         py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         pmp_doc::Polygon_mesh_processing_do_intersect_2);
@@ -353,6 +391,10 @@ void export_pmp_intersection(py::module_& m) {
         pmp_doc::Polygon_mesh_processing_do_intersect_4);
   m.def("do_intersect_polyline_range",
         &cgalpy::pmp::do_intersect_mesh_polyline_range<Pm>,
+        py::arg("tm"), py::arg("polylines"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_do_intersect_3);
+  m.def("do_intersect_polyline_range",
+        &cgalpy::pmp::do_intersect_mesh_polyline_range_np<Pm>,
         py::arg("tm"), py::arg("polylines"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_do_intersect_3);
   m.def("does_self_intersect", &cgalpy::pmp::does_self_intersect_faces<Pm>,
