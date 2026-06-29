@@ -745,6 +745,16 @@ bool write_points(const std::string& fname,
                                 CGAL::parameters::stream_precision(17));
 }
 
+//!
+template <typename Point_3>
+bool write_points_np(const std::string& fname,
+                     const py::ndarray<>& points_array,
+                     const py::dict& params = py::dict()) {
+  const auto points =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return write_points(fname, points, params);
+}
+
 //! Write points with normals to a file.
 template <typename Point_3, typename Vector_3>
 bool write_points_with_normals(
@@ -2244,6 +2254,12 @@ void export_point_set_processing(py::module_& m) {
         &psp::write_points<Point_3>,
         py::arg("fname"), py::arg("points"), py::arg("params") = py::dict(),
         "Writes a point range to a file.");
+
+  m.def("write_points",
+        &psp::write_points_np<Point_3>,
+        py::arg("fname"), py::arg("points"), py::arg("params") = py::dict(),
+        "Writes a NumPy-style float64 point array with shape (N, 3) "
+        "to a point-set file.");
 
   m.def("write_points_with_normals",
         &psp::write_points_with_normals<Point_3, Vector_3>,

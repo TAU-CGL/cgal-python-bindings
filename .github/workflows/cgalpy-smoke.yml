@@ -594,10 +594,15 @@ jobs:
           assert isinstance(Psp.edge_aware_upsample_point_set(points, normals, {"number_of_output_points": 8}), list)
 
           with tempfile.TemporaryDirectory() as td:
-              out = Path(td) / "points_with_normals.xyz"
-              assert Psp.write_points_with_normals(str(out), points, normals)
-              assert out.exists()
-              assert out.stat().st_size > 0
+              points_out = Path(td) / "points.xyz"
+              assert Psp.write_points(str(points_out), points)
+              assert points_out.exists()
+              assert points_out.stat().st_size > 0
+
+              normals_out = Path(td) / "points_with_normals.xyz"
+              assert Psp.write_points_with_normals(str(normals_out), points, normals)
+              assert normals_out.exists()
+              assert normals_out.stat().st_size > 0
 
           try:
               Psp.vcm_estimate_normals(points, normals[:-1], 1.0, 0.5)
