@@ -64,15 +64,26 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
   export_AosSphericalBoundaryTraits_2<Gt>(traits_c, concepts);
 
   using Ctr_pnt = Gt::Construct_point_2;
+
+#if CGAL_VERSION_NR > 1060300900
+  using Ctr_pnt_op1 = Pnt(Ctr_pnt::*)(const FT&, const FT&, const FT&) const;
+  using Ctr_pnt_op2 = Pnt(Ctr_pnt::*)(const Dir&) const;
+#else
   using Ctr_pnt_op1 = Pnt(Ctr_pnt::*)(const FT&, const FT&, const FT&);
   using Ctr_pnt_op2 = Pnt(Ctr_pnt::*)(const Dir&);
+#endif
+
   py::class_<Ctr_pnt>(traits_c, "Construct_point_2")
     .def("__call__", static_cast<Ctr_pnt_op1>(&Ctr_pnt::operator()))
     .def("__call__", static_cast<Ctr_pnt_op2>(&Ctr_pnt::operator()))
   ;
 
   using Ctr_cv = Gt::Construct_curve_2;
+#if CGAL_VERSION_NR > 1060300900
+  using Ctr_cv_op = Cv(Ctr_cv::*)(const Pnt&, const Pnt&) const;
+#else
   using Ctr_cv_op = Cv(Ctr_cv::*)(const Pnt&, const Pnt&);
+#endif
   py::class_<Ctr_cv>(traits_c, "Construct_curve_2")
     .def("__call__", static_cast<Ctr_cv_op>(&Ctr_cv::operator()));
   ;
