@@ -403,6 +403,20 @@ auto compute_average_spacing_with_normals(
     (points, k, CGAL::parameters::point_map(Point_map()));
 }
 
+//!
+template <typename Point_3, typename Vector_3>
+auto compute_average_spacing_with_normals_np(const py::ndarray<>& points_array,
+                                             const py::ndarray<>& normals_array,
+                                             const unsigned int k,
+                                             const py::dict& params = py::dict()) {
+  const auto points =
+    ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
+                                                        normals_array);
+  return compute_average_spacing_with_normals(points, k, params);
+}
+
+//!
+
 //! Simplify points with normals by grid clustering.
 template <typename Point_3, typename Vector_3>
 auto grid_simplify_point_set_with_normals(
@@ -423,6 +437,20 @@ auto grid_simplify_point_set_with_normals(
 
   return std::make_pair(points, std::distance(points.begin(), it));
 }
+
+//!
+template <typename Point_3, typename Vector_3>
+auto grid_simplify_point_set_with_normals_np(const py::ndarray<>& points_array,
+                                             const py::ndarray<>& normals_array,
+                                             const double epsilon,
+                                             const py::dict& params = py::dict()) {
+  auto points =
+    ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
+                                                        normals_array);
+  return grid_simplify_point_set_with_normals(points, epsilon, params);
+}
+
+//!
 
 //! Identify clusters in a Point_set_3 and collect cluster adjacencies.
 template <typename PointSet_3, typename ClusterMap_3>
@@ -616,6 +644,22 @@ auto compute_vcm_with_normals(
   return output;
 }
 
+//!
+template <typename Point_3, typename Vector_3>
+auto compute_vcm_with_normals_np(const py::ndarray<>& points_array,
+                                 const py::ndarray<>& normals_array,
+                                 const double offset_radius,
+                                 const double convolution_radius,
+                                 const py::dict& params = py::dict()) {
+  const auto points =
+    ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
+                                                        normals_array);
+  return compute_vcm_with_normals(points, offset_radius, convolution_radius,
+                                  params);
+}
+
+//!
+
 //! Estimate normals using Voronoi covariance matrices.
 template <typename Point_3, typename Vector_3>
 auto vcm_estimate_normals(std::vector<std::pair<Point_3, Vector_3>> points,
@@ -633,6 +677,22 @@ auto vcm_estimate_normals(std::vector<std::pair<Point_3, Vector_3>> points,
      .normal_map(Normal_map()));
   return points;
 }
+
+//!
+template <typename Point_3, typename Vector_3>
+auto vcm_estimate_normals_np(const py::ndarray<>& points_array,
+                             const py::ndarray<>& normals_array,
+                             const double offset_radius,
+                             const double convolution_radius,
+                             const py::dict& params = py::dict()) {
+  auto points =
+    ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
+                                                        normals_array);
+  return vcm_estimate_normals(points, offset_radius, convolution_radius,
+                              params);
+}
+
+//!
 
 //! Estimate normals using Voronoi covariance matrices and neighbor count.
 template <typename Point_3, typename Vector_3>
@@ -652,6 +712,21 @@ auto vcm_estimate_normals_neighbors(
      .normal_map(Normal_map()));
   return points;
 }
+
+//!
+template <typename Point_3, typename Vector_3>
+auto vcm_estimate_normals_neighbors_np(const py::ndarray<>& points_array,
+                                       const py::ndarray<>& normals_array,
+                                       const double offset_radius,
+                                       const unsigned int k,
+                                       const py::dict& params = py::dict()) {
+  auto points =
+    ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
+                                                        normals_array);
+  return vcm_estimate_normals_neighbors(points, offset_radius, k, params);
+}
+
+//!
 
 //! Test whether a Voronoi covariance matrix marks a feature edge.
 template <typename FT>
@@ -688,6 +763,20 @@ bool write_points_with_normals(
      .stream_precision(17));
 }
 
+//!
+template <typename Point_3, typename Vector_3>
+bool write_points_with_normals_np(const std::string& fname,
+                                  const py::ndarray<>& points_array,
+                                  const py::ndarray<>& normals_array,
+                                  const py::dict& params = py::dict()) {
+  const auto points =
+    ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
+                                                        normals_array);
+  return write_points_with_normals(fname, points, params);
+}
+
+//!
+
 //! Smooth points with normals using bilateral projection.
 template <typename Point_3, typename Vector_3>
 auto bilateral_smooth_point_set(
@@ -716,6 +805,20 @@ auto bilateral_smooth_point_set(
 
   return std::make_pair(error, points);
 }
+
+//!
+template <typename Point_3, typename Vector_3>
+auto bilateral_smooth_point_set_np(const py::ndarray<>& points_array,
+                                   const py::ndarray<>& normals_array,
+                                   const unsigned int k,
+                                   const py::dict& params = py::dict()) {
+  auto points =
+    ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
+                                                        normals_array);
+  return bilateral_smooth_point_set(points, k, params);
+}
+
+//!
 
 //! Upsample points with normals while preserving sharp features.
 template <typename Point_3, typename Vector_3>
@@ -754,6 +857,20 @@ std::vector<std::pair<Point_3, Vector_3>> edge_aware_upsample_point_set(
 
   return points;
 }
+
+//!
+template <typename Point_3, typename Vector_3>
+std::vector<std::pair<Point_3, Vector_3>>
+edge_aware_upsample_point_set_np(const py::ndarray<>& points_array,
+                                 const py::ndarray<>& normals_array,
+                                 const py::dict& params = py::dict()) {
+  auto points =
+    ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
+                                                        normals_array);
+  return edge_aware_upsample_point_set(points, params);
+}
+
+//!
 
 //! Simplify and regularize a point set using WLOP.
 template <typename Point_3>
@@ -2014,12 +2131,24 @@ void export_point_set_processing(py::module_& m) {
         &psp::compute_average_spacing_with_normals<Point_3, Vector_3>,
         py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
         "Computes average spacing from k nearest neighbors for points with normals.");
+  m.def("compute_average_spacing_with_normals",
+        &psp::compute_average_spacing_with_normals_np<Point_3, Vector_3>,
+        py::arg("points"), py::arg("normals"), py::arg("k"),
+        py::arg("params") = py::dict(),
+        "Computes average spacing from k nearest neighbors for NumPy-style "
+        "float64 point and normal arrays with shape (N, 3).");
 
   m.def("grid_simplify_point_set_with_normals",
         &psp::grid_simplify_point_set_with_normals<Point_3, Vector_3>,
         py::arg("points"), py::arg("epsilon"), py::arg("params") = py::dict(),
         "Simplifies points with normals by grid clustering. "
         "Returns (points, first_index_to_remove).");
+  m.def("grid_simplify_point_set_with_normals",
+        &psp::grid_simplify_point_set_with_normals_np<Point_3, Vector_3>,
+        py::arg("points"), py::arg("normals"), py::arg("epsilon"),
+        py::arg("params") = py::dict(),
+        "Simplifies NumPy-style float64 point and normal arrays with shape (N, 3) "
+        "by grid clustering. Returns (points, first_index_to_remove).");
 
   m.def("pca_estimate_normals",
         &psp::pca_estimate_normals<Point_3, Vector_3>,
@@ -2074,18 +2203,36 @@ void export_point_set_processing(py::module_& m) {
         py::arg("points"), py::arg("offset_radius"),
         py::arg("convolution_radius"), py::arg("params") = py::dict(),
         "Computes Voronoi covariance matrices for points with normals.");
+  m.def("compute_vcm_with_normals",
+        &psp::compute_vcm_with_normals_np<Point_3, Vector_3>,
+        py::arg("points"), py::arg("normals"), py::arg("offset_radius"),
+        py::arg("convolution_radius"), py::arg("params") = py::dict(),
+        "Computes Voronoi covariance matrices for NumPy-style float64 point "
+        "and normal arrays with shape (N, 3).");
 
   m.def("vcm_estimate_normals",
         &psp::vcm_estimate_normals<Point_3, Vector_3>,
         py::arg("points"), py::arg("offset_radius"),
         py::arg("convolution_radius"), py::arg("params") = py::dict(),
         "Estimates normals using Voronoi covariance matrices.");
+  m.def("vcm_estimate_normals",
+        &psp::vcm_estimate_normals_np<Point_3, Vector_3>,
+        py::arg("points"), py::arg("normals"), py::arg("offset_radius"),
+        py::arg("convolution_radius"), py::arg("params") = py::dict(),
+        "Estimates normals using Voronoi covariance matrices for NumPy-style "
+        "float64 point and normal arrays with shape (N, 3).");
 
   m.def("vcm_estimate_normals_neighbors",
         &psp::vcm_estimate_normals_neighbors<Point_3, Vector_3>,
         py::arg("points"), py::arg("offset_radius"), py::arg("k"),
         py::arg("params") = py::dict(),
         "Estimates normals using Voronoi covariance matrices and a neighbor count.");
+  m.def("vcm_estimate_normals_neighbors",
+        &psp::vcm_estimate_normals_neighbors_np<Point_3, Vector_3>,
+        py::arg("points"), py::arg("normals"), py::arg("offset_radius"),
+        py::arg("k"), py::arg("params") = py::dict(),
+        "Estimates normals using Voronoi covariance matrices and a neighbor count "
+        "for NumPy-style float64 point and normal arrays with shape (N, 3).");
 
   m.def("vcm_is_on_feature_edge",
         &psp::vcm_is_on_feature_edge<typename Kernel::FT>,
@@ -2102,6 +2249,12 @@ void export_point_set_processing(py::module_& m) {
         &psp::write_points_with_normals<Point_3, Vector_3>,
         py::arg("fname"), py::arg("points"), py::arg("params") = py::dict(),
         "Writes points with normals to a file.");
+  m.def("write_points_with_normals",
+        &psp::write_points_with_normals_np<Point_3, Vector_3>,
+        py::arg("fname"), py::arg("points"), py::arg("normals"),
+        py::arg("params") = py::dict(),
+        "Writes NumPy-style float64 point and normal arrays with shape (N, 3) "
+        "to a point-set file.");
 
 
   m.def("bilateral_smooth_point_set",
@@ -2109,12 +2262,23 @@ void export_point_set_processing(py::module_& m) {
         py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
         "Smooths points with normals using bilateral projection. "
         "Returns (average_movement_error, points).");
+  m.def("bilateral_smooth_point_set",
+        &psp::bilateral_smooth_point_set_np<Point_3, Vector_3>,
+        py::arg("points"), py::arg("normals"), py::arg("k"),
+        py::arg("params") = py::dict(),
+        "Smooths NumPy-style float64 point and normal arrays with shape (N, 3) "
+        "using bilateral projection. Returns (average_movement_error, points).");
 
 
   m.def("edge_aware_upsample_point_set",
         &psp::edge_aware_upsample_point_set<Point_3, Vector_3>,
         py::arg("points"), py::arg("params") = py::dict(),
         "Upsamples points with normals while preserving sharp features.");
+  m.def("edge_aware_upsample_point_set",
+        &psp::edge_aware_upsample_point_set_np<Point_3, Vector_3>,
+        py::arg("points"), py::arg("normals"), py::arg("params") = py::dict(),
+        "Upsamples NumPy-style float64 point and normal arrays with shape (N, 3) "
+        "while preserving sharp features.");
 
 
   m.def("wlop_simplify_and_regularize_point_set",
