@@ -155,6 +155,16 @@ auto approximate_max_distance_to_point_set(const TriangleMesh& tm, const Point_3
 }
 
 //!
+template <typename TriangleMesh>
+auto approximate_max_distance_to_point_set_np(const TriangleMesh& tm,
+                                              const py::ndarray<>& points_array,
+                                              const double precision,
+                                              const py::dict& np = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return approximate_max_distance_to_point_set(tm, points, precision, np);
+}
+
+//!
 template <typename PolygonMesh>
 auto approximate_symmetric_Hausdorff_distance(const PolygonMesh& tm1, const PolygonMesh& tm2,
                                               const py::dict& np1 = py::dict(), const py::dict& np2 = py::dict()) {
@@ -187,6 +197,15 @@ template <typename TriangeMesh>
 auto max_distance_to_triangle_mesh(const Point_3_vec& points, const TriangeMesh& tm, const py::dict& np = py::dict()) {
   using Tm = TriangeMesh;
   return apply_distance_named_parameters<Tm, Max_distance_to_triangle_mesh_wrapper>(np, points, tm);
+}
+
+//!
+template <typename TriangeMesh>
+auto max_distance_to_triangle_mesh_np(const py::ndarray<>& points_array,
+                                      const TriangeMesh& tm,
+                                      const py::dict& np = py::dict()) {
+  auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
+  return max_distance_to_triangle_mesh(points, tm, np);
 }
 
 //!
@@ -229,6 +248,9 @@ void export_pmp_distance(py::module_& m) {
   m.def("approximate_max_distance_to_point_set", &cgalpy::pmp::approximate_max_distance_to_point_set<Pm>,
         py::arg("tm"), py::arg("points"), py::arg("precision"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_approximate_max_distance_to_point_set);
+  m.def("approximate_max_distance_to_point_set", &cgalpy::pmp::approximate_max_distance_to_point_set_np<Pm>,
+        py::arg("tm"), py::arg("points"), py::arg("precision"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_approximate_max_distance_to_point_set);
   m.def("approximate_symmetric_Hausdorff_distance", &cgalpy::pmp::approximate_symmetric_Hausdorff_distance<Pm>,
         py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         pmp_doc::Polygon_mesh_processing_approximate_symmetric_Hausdorff_distance);
@@ -241,6 +263,9 @@ void export_pmp_distance(py::module_& m) {
         py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         pmp_doc::Polygon_mesh_processing_is_Hausdorff_distance_larger);
   m.def("max_distance_to_triangle_mesh", &cgalpy::pmp::max_distance_to_triangle_mesh<Pm>,
+        py::arg("points"), py::arg("tm"), py::arg("np") = py::dict(),
+        pmp_doc::Polygon_mesh_processing_max_distance_to_triangle_mesh);
+  m.def("max_distance_to_triangle_mesh", &cgalpy::pmp::max_distance_to_triangle_mesh_np<Pm>,
         py::arg("points"), py::arg("tm"), py::arg("np") = py::dict(),
         pmp_doc::Polygon_mesh_processing_max_distance_to_triangle_mesh);
   m.def("sample_triangle_mesh", &cgalpy::pmp::sample_triangle_mesh<Pm>,
