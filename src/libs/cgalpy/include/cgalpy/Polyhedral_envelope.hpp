@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #ifndef CGALPY_POLYHEDRAL_ENVELOPE_HPP
 #define CGALPY_POLYHEDRAL_ENVELOPE_HPP
@@ -12,6 +13,7 @@
 #include <nanobind/nanobind.h>
 
 #include "cgalpy/pmp_helpers.hpp"
+#include "cgalpy/ndarray_to_point_3_vector.hpp"
 
 #include <CGAL/Polyhedral_envelope.h>
 
@@ -41,6 +43,15 @@ struct Polyhedral_envelope : CGAL::Polyhedral_envelope<GeomTraits> {
   Polyhedral_envelope(const std::vector<Point_3> points, const std::vector<std::vector<size_t>>& polygons,
                       double epsilon, const py::dict& np = py::dict()) :
     CGAL::Polyhedral_envelope<GeomTraits>(points, polygons, epsilon)
+  {
+  }
+
+  Polyhedral_envelope(const py::ndarray<>& points_array,
+                      const std::vector<std::vector<size_t>>& polygons,
+                      double epsilon, const py::dict& np = py::dict()) :
+    CGAL::Polyhedral_envelope<GeomTraits>
+      (cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points"),
+       polygons, epsilon)
   {
   }
 };

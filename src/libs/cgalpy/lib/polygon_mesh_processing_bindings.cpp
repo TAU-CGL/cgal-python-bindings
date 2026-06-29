@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #define CGAL_USE_BASIC_VIEWER
 
@@ -503,6 +504,9 @@ void export_polygon_mesh_processing(py::module_& m) {
     .def(py::init<const cgalpy::pmp::Point_3_vec&, const std::vector<cgalpy::pmp::Size_t_vec>&, double, const py::dict&>(),
          py::arg("points"), py::arg("polygons"), py::arg("epsilon"),
          py::arg("np") = py::dict()) // TODO: handle face_epsilon_map
+    .def(py::init<const py::ndarray<>&, const std::vector<cgalpy::pmp::Size_t_vec>&, double, const py::dict&>(),
+         py::arg("points"), py::arg("polygons"), py::arg("epsilon"),
+         py::arg("np") = py::dict())
     .def("is_empty", &Pe::is_empty)
     .def("inside", [](const Pe& i, const Point_3& query) { return i(query); }, py::arg("query"))
     .def("inside", [](const Pe& i, const Point_3& source, const Point_3& target) { return i(source, target); },

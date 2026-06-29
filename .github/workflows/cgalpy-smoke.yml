@@ -683,6 +683,20 @@ jobs:
               points, triangles_i64, points, triangles_i64), tuple)
           assert isinstance(Pmp.orient_triangle_soup_with_reference_triangle_soup(
               points, triangles_u64, points, triangles_u64), tuple)
+
+          envelope_i64 = Pmp.Polyhedral_envelope(points, triangles_i64, 0.1)
+          envelope_u64 = Pmp.Polyhedral_envelope(points, triangles_u64, 0.1)
+          assert not envelope_i64.is_empty()
+          assert not envelope_u64.is_empty()
+
+          for bad_points in (points.astype(np.float32), points.reshape(2, 6)):
+              try:
+                  Pmp.Polyhedral_envelope(bad_points, triangles_i64, 0.1)
+              except RuntimeError:
+                  pass
+              else:
+                  raise AssertionError("invalid NumPy point array accepted")
+
           assert isinstance(Pmp.does_triangle_soup_self_intersect(points, triangles_i64), bool)
           assert isinstance(Pmp.does_triangle_soup_self_intersect(points, triangles_u64), bool)
           assert isinstance(Pmp.triangle_soup_self_intersections(points, triangles_i64), list)
