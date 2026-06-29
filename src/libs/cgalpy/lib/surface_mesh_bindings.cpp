@@ -644,7 +644,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
     // Dynamic bool property maps are backed by std::vector<bool>, whose proxy
     // reference/iterator types cannot be exposed safely through nanobind.
-    // Static bool property maps are exported below via export_property_map_bool().
+    // Static bool property maps are exported below via the generic exporter.
     // cgalpy::sm::export_dynamic_property_maps<Sm, bool>(m, "bool");
     cgalpy::sm::export_dynamic_property_maps<Sm, int>(m, "int");
     cgalpy::sm::export_dynamic_property_maps<Sm, double>(m, "float");
@@ -946,13 +946,13 @@ void export_surface_mesh(py::module_& m) {
   // cgalpy::sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
 
   using vbmap = typename Sm_3::template Property_map<Vi, bool>;
-  internal::export_property_map_bool<Sm_3, Vi>(m, "Vertex_bool_map");
+  internal::export_property_map<Sm_3, Vi, bool>(m, "Vertex_bool_map");
   using fbmap = typename Sm_3::template Property_map<Fi, bool>;
-  internal::export_property_map_bool<Sm_3, Fi>(m, "Face_bool_map");
+  internal::export_property_map<Sm_3, Fi, bool>(m, "Face_bool_map");
   using hbmap = typename Sm_3::template Property_map<Hi, bool>;
-  internal::export_property_map_bool<Sm_3, Hi>(m, "Halfedge_bool_map");
+  internal::export_property_map<Sm_3, Hi, bool>(m, "Halfedge_bool_map");
   using ebmap_type = typename Sm_3::template Property_map<Ei, bool>;
-  internal::export_property_map_bool<Sm_3, Ei>(m, "Edge_bool_map");
+  internal::export_property_map<Sm_3, Ei, bool>(m, "Edge_bool_map");
 
 //! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
