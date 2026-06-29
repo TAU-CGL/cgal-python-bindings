@@ -34,6 +34,7 @@
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/HFDefault_visitor.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
+#include "cgalpy/ndarray_to_point_3_vector.hpp"
 #include "cgalpy/Pmp_docstrings.hpp"
 
 namespace py = nanobind;
@@ -421,6 +422,47 @@ auto triangulate_hole_polyline(const Point_3_vec& polyline, const py::dict& np =
   return out2;
 }
 
+//!
+template <typename PolygonMesh>
+auto triangulate_hole_polyline_np(const py::ndarray<>& polyline_array,
+                                  const py::dict& np = py::dict()) {
+  auto polyline =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(polyline_array, "points");
+  return triangulate_hole_polyline<PolygonMesh>(polyline, np);
+}
+
+//!
+template <typename PolygonMesh>
+auto triangulate_hole_polyline_2_np_list(const py::ndarray<>& polyline1_array,
+                                         const Point_3_vec& polyline2,
+                                         const py::dict& np = py::dict()) {
+  auto polyline1 =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(polyline1_array, "points");
+  return triangulate_hole_polyline_2<PolygonMesh>(polyline1, polyline2, np);
+}
+
+//!
+template <typename PolygonMesh>
+auto triangulate_hole_polyline_2_list_np(const Point_3_vec& polyline1,
+                                         const py::ndarray<>& polyline2_array,
+                                         const py::dict& np = py::dict()) {
+  auto polyline2 =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(polyline2_array, "third_points");
+  return triangulate_hole_polyline_2<PolygonMesh>(polyline1, polyline2, np);
+}
+
+//!
+template <typename PolygonMesh>
+auto triangulate_hole_polyline_2_np_np(const py::ndarray<>& polyline1_array,
+                                       const py::ndarray<>& polyline2_array,
+                                       const py::dict& np = py::dict()) {
+  auto polyline1 =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(polyline1_array, "points");
+  auto polyline2 =
+    cgalpy::ndarray_to_point_3_vector<Point_3>(polyline2_array, "third_points");
+  return triangulate_hole_polyline_2<PolygonMesh>(polyline1, polyline2, np);
+}
+
 //
 template <typename PolygonMesh>
 auto triangulate_refine_and_fair_hole(PolygonMesh& pmesh,
@@ -570,7 +612,19 @@ void export_pmp_hole_filling(py::module_& m) {
   m.def("triangulate_hole_polyline", &cgalpy::pmp::triangulate_hole_polyline<Pm>,
         py::arg("points"), py::arg("np") = py::dict(),
         "Triangulates a hole bounded by a polyline.");
+  m.def("triangulate_hole_polyline", &cgalpy::pmp::triangulate_hole_polyline_np<Pm>,
+        py::arg("points"), py::arg("np") = py::dict(),
+        "Triangulates a hole bounded by a polyline.");
   m.def("triangulate_hole_polyline", &cgalpy::pmp::triangulate_hole_polyline_2<Pm>,
+        py::arg("points"), py::arg("third_points"), py::arg("np") = py::dict(),
+        "Triangulates a hole bounded by two polylines.");
+  m.def("triangulate_hole_polyline", &cgalpy::pmp::triangulate_hole_polyline_2_np_list<Pm>,
+        py::arg("points"), py::arg("third_points"), py::arg("np") = py::dict(),
+        "Triangulates a hole bounded by two polylines.");
+  m.def("triangulate_hole_polyline", &cgalpy::pmp::triangulate_hole_polyline_2_list_np<Pm>,
+        py::arg("points"), py::arg("third_points"), py::arg("np") = py::dict(),
+        "Triangulates a hole bounded by two polylines.");
+  m.def("triangulate_hole_polyline", &cgalpy::pmp::triangulate_hole_polyline_2_np_np<Pm>,
         py::arg("points"), py::arg("third_points"), py::arg("np") = py::dict(),
         "Triangulates a hole bounded by two polylines.");
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
