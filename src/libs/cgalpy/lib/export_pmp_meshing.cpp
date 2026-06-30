@@ -695,8 +695,14 @@ void export_pmp_meshing(py::module_& m) {
         "Triangulates polygon soup faces from a NumPy point array.");
 
   using Tfv = cgalpy::pmp::Triangulate_faces_visitor<Pm>;
+  static PyType_Slot triangulate_faces_visitor_slots[] = {
+    {Py_tp_traverse, (void*) Tfv::tp_traverse},
+    {Py_tp_clear, (void*) Tfv::tp_clear},
+    {0, nullptr}
+  };
   py::class_<Tfv>(m, "Triangulate_faces_visitor",
-                  "Visitor for triangulate_faces().")
+                  "Visitor for triangulate_faces().",
+                  py::type_slots(triangulate_faces_visitor_slots))
     .def(py::init<>(), "Constructs a triangulate faces visitor.")
     .def("set_before_subface_creations",
          &Tfv::set_before_subface_creations,

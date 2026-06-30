@@ -364,51 +364,51 @@ struct Triangulate_refine_and_fair_hole_wrapper<NamedParameter, PolygonMesh,
 };
 
 // HFDefault_visitor
-void set_start_planar_phase(HFDefault_visitor& v, const std::function<void()>& f)
+void set_start_planar_phase(HFDefault_visitor& v, const py::object& f)
 { v.set_start_planar_phase(f); }
 
 //!
-void set_end_planar_phase(HFDefault_visitor& v, const std::function<void(bool)>& f)
+void set_end_planar_phase(HFDefault_visitor& v, const py::object& f)
 { v.set_end_planar_phase(f); }
 
 //!
-void set_start_quadratic_phase(HFDefault_visitor& v, const std::function<void(std::size_t)>& f)
+void set_start_quadratic_phase(HFDefault_visitor& v, const py::object& f)
 { v.set_start_quadratic_phase(f); }
 
 //!
-void set_quadratic_step(HFDefault_visitor& v, const std::function<void()>& f)
+void set_quadratic_step(HFDefault_visitor& v, const py::object& f)
 { v.set_quadratic_step(f); }
 
 //!
-void set_end_quadratic_phase(HFDefault_visitor& v, const std::function<void(bool)>& f)
+void set_end_quadratic_phase(HFDefault_visitor& v, const py::object& f)
 { v.set_end_quadratic_phase(f); }
 
 //!
-void set_start_cubic_phase(HFDefault_visitor& v, const std::function<void(std::size_t)>& f)
+void set_start_cubic_phase(HFDefault_visitor& v, const py::object& f)
 { v.set_start_cubic_phase(f); }
 
 //!
-void set_cubic_step(HFDefault_visitor& v, const std::function<void()>& f)
+void set_cubic_step(HFDefault_visitor& v, const py::object& f)
 { v.set_cubic_step(f); }
 
 //!
-void set_end_cubic_phase(HFDefault_visitor& v, const std::function<void()>& f)
+void set_end_cubic_phase(HFDefault_visitor& v, const py::object& f)
 { v.set_end_cubic_phase(f); }
 
 //!
-void set_start_refine_phase(HFDefault_visitor& v, const std::function<void()>& f)
+void set_start_refine_phase(HFDefault_visitor& v, const py::object& f)
 { v.set_start_refine_phase(f); }
 
 //!
-void set_end_refine_phase(HFDefault_visitor& v, const std::function<void()>& f)
+void set_end_refine_phase(HFDefault_visitor& v, const py::object& f)
 { v.set_end_refine_phase(f); }
 
 //!
-void set_start_fair_phase(HFDefault_visitor& v, const std::function<void()>& f)
+void set_start_fair_phase(HFDefault_visitor& v, const py::object& f)
 { v.set_start_fair_phase(f); }
 
 //!
-void set_end_fair_phase(HFDefault_visitor& v, const std::function<void()>& f)
+void set_end_fair_phase(HFDefault_visitor& v, const py::object& f)
 { v.set_end_fair_phase(f); }
 
 //!
@@ -639,8 +639,14 @@ void export_pmp_hole_filling(py::module_& m) {
   using Pm = cgalpy::pmp::Polygonal_mesh;
 
   using Hfv = cgalpy::pmp::HFDefault_visitor;
+  static PyType_Slot hole_filling_visitor_slots[] = {
+    {Py_tp_traverse, (void*) Hfv::tp_traverse},
+    {Py_tp_clear, (void*) Hfv::tp_clear},
+    {0, nullptr}
+  };
   py::class_<Hfv>(m, "Hole_filling_default_visitor",
-                  pmp_doc::PMPHolefillingVisitor_class)
+                  pmp_doc::PMPHolefillingVisitor_class,
+                  py::type_slots(hole_filling_visitor_slots))
     .def(py::init<>(),
          "Constructs a default hole-filling visitor.")
     ;

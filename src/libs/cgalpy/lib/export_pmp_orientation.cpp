@@ -392,37 +392,37 @@ auto compatible_orientations(PolygonMesh& pm, FaceBitMap fbm, const py::dict& np
 // visitor stuff
 //!
 void set_polygon_orientation_reversed(Default_orientation_visitor& v,
-                                      const std::function<void(std::size_t)>& f) {
+                                      const py::object& f) {
   v.set_polygon_orientation_reversed(f);
 }
 
 //!
 void set_vertex_id_in_polygon_replaced(Default_orientation_visitor& v,
-                                       const std::function<void(std::size_t, std::size_t, std::size_t)>& f) {
+                                       const py::object& f) {
   v.set_vertex_id_in_polygon_replaced(f);
 }
 
 //!
 void set_duplicated_vertex(Default_orientation_visitor& v,
-                           const std::function<void(std::size_t, std::size_t)>& f) {
+                           const py::object& f) {
   v.set_duplicated_vertex(f);
 }
 
 //!
 void set_non_manifold_edge(Default_orientation_visitor& v,
-                           const std::function<void(std::size_t, std::size_t, std::size_t)>& f) {
+                           const py::object& f) {
   v.set_non_manifold_edge(f);
 }
 
 //!
 void set_non_manifold_vertex(Default_orientation_visitor& v,
-                             const std::function<void(std::size_t, std::size_t)>& f) {
+                             const py::object& f) {
   v.set_non_manifold_vertex(f);
 }
 
 //!
 void set_link_connected_polygons(Default_orientation_visitor& v,
-                                 const std::function<void(std::size_t, std::vector<std::size_t>)>& f) {
+                                 const py::object& f) {
   v.set_link_connected_polygons(f);
 }
 
@@ -546,8 +546,14 @@ void export_pmp_orientation(py::module_& m) {
         py::arg("visitor"), py::arg("callback"),
         pmp_doc::PMPPolygonSoupOrientationVisitor_link_connected_polygons);
 
+  static PyType_Slot orientation_visitor_slots[] = {
+    {Py_tp_traverse, (void*) Dov::tp_traverse},
+    {Py_tp_clear, (void*) Dov::tp_clear},
+    {0, nullptr}
+  };
   py::class_<Dov>(m, "Default_orientation_visitor",
-                  pmp_doc::PMPPolygonSoupOrientationVisitor_class)
+                  pmp_doc::PMPPolygonSoupOrientationVisitor_class,
+                  py::type_slots(orientation_visitor_slots))
     .def(py::init<>(),
          "Constructs a default orientation visitor.")
     ;

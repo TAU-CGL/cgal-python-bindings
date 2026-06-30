@@ -1128,142 +1128,142 @@ using Vd = boost::graph_traits<Pm>::vertex_descriptor;
 using Cv = Corefine_visitor<Pm>;
 
 //!
-void set_before_subface_creations_fn(Cv& v, const std::function<void(Fd, Pm&)>& f) { v.set_before_subface_creations(f); }
+void set_before_subface_creations_fn(Cv& v, const py::object& f) { v.set_before_subface_creations(f); }
 
 //!
-void set_after_subface_creations_fn(Cv& v, const std::function<void(Pm&)>& f) { v.set_after_subface_creations(f); }
+void set_after_subface_creations_fn(Cv& v, const py::object& f) { v.set_after_subface_creations(f); }
 
 //!
-void set_before_subface_created_fn(Cv& v, const std::function<void(Pm&)>& f) { v.set_before_subface_created(f); }
+void set_before_subface_created_fn(Cv& v, const py::object& f) { v.set_before_subface_created(f); }
 
 //!
-void set_after_subface_created_fn(Cv& v, const std::function<void(Fd, Pm&)>& f) { v.set_after_subface_created(f); }
+void set_after_subface_created_fn(Cv& v, const py::object& f) { v.set_after_subface_created(f); }
 
 //!
-void set_before_face_copy_fn(Cv& v, const std::function<void(Fd, const Pm&, Pm&)>& f) { v.set_before_face_copy(f); }
+void set_before_face_copy_fn(Cv& v, const py::object& f) { v.set_before_face_copy(f); }
 
 //!
-void set_after_face_copy_fn(Cv& v, const std::function<void(Fd, const Pm&, Fd, Pm&)>& f) { v.set_after_face_copy(f); }
+void set_after_face_copy_fn(Cv& v, const py::object& f) { v.set_after_face_copy(f); }
 
 //!
-void set_before_edge_split_fn(Cv& v, const std::function<void(Hd, Pm&)>& f) { v.set_before_edge_split(f); }
+void set_before_edge_split_fn(Cv& v, const py::object& f) { v.set_before_edge_split(f); }
 
 //!
-void set_edge_split_fn(Cv& v, const std::function<void(Hd, Pm&)>& f) { v.set_edge_split(f); }
+void set_edge_split_fn(Cv& v, const py::object& f) { v.set_edge_split(f); }
 
 //!
-void set_after_edge_split_fn(Cv& v, const std::function<void()>& f) { v.set_after_edge_split(f); }
+void set_after_edge_split_fn(Cv& v, const py::object& f) { v.set_after_edge_split(f); }
 
 //!
-void set_add_retriangulation_edge_fn(Cv& v, const std::function<void(Hd, Pm&)>& f) { v.set_add_retriangulation_edge(f); }
+void set_add_retriangulation_edge_fn(Cv& v, const py::object& f) { v.set_add_retriangulation_edge(f); }
 
 //!
-void set_before_edge_copy_fn(Cv& v, const std::function<void(Hd, const Pm&, Pm&)>& f) { v.set_before_edge_copy(f); }
+void set_before_edge_copy_fn(Cv& v, const py::object& f) { v.set_before_edge_copy(f); }
 
 //!
-void set_after_edge_copy_fn(Cv& v, const std::function<void(Hd, const Pm&, Hd, Pm&)>& f) { v.set_after_edge_copy(f); }
+void set_after_edge_copy_fn(Cv& v, const py::object& f) { v.set_after_edge_copy(f); }
 
 //!
-void set_before_edge_duplicated_fn(Cv& v, const std::function<void(Hd, Pm&)>& f) { v.set_before_edge_duplicated(f); }
+void set_before_edge_duplicated_fn(Cv& v, const py::object& f) { v.set_before_edge_duplicated(f); }
 
 //!
-void set_after_edge_duplicated_fn(Cv& v, const std::function<void(Hd, Hd, Pm&)>& f) { v.set_after_edge_duplicated(f); }
+void set_after_edge_duplicated_fn(Cv& v, const py::object& f) { v.set_after_edge_duplicated(f); }
 
 //!
-void set_intersection_edge_copy_fn(Cv& v, const std::function<void(Hd, const Pm&, Hd, const Pm&, Hd, Pm&)>& f)
+void set_intersection_edge_copy_fn(Cv& v, const py::object& f)
 { v.set_intersection_edge_copy(f); }
 
 //!
-void set_new_vertex_added_fn(Cv& v, const std::function<void(std::size_t, Vd, const Pm&)>& f)
+void set_new_vertex_added_fn(Cv& v, const py::object& f)
 { v.set_new_vertex_added(f); }
 
 //!
 void set_intersection_point_detected_fn(Cv& v,
-                                        const std::function<void(std::size_t, int, Hd, Hd, const Pm&, const Pm&, bool, bool)>& f)
+                                        const py::object& f)
 { v.set_intersection_point_detected(f); }
 
 //!
-void set_before_vertex_copy_fn(Cv& v, const std::function<void(Vd, const Pm&, Pm&)>& f) { v.set_before_vertex_copy(f); }
+void set_before_vertex_copy_fn(Cv& v, const py::object& f) { v.set_before_vertex_copy(f); }
 
 //!
-void set_after_vertex_copy_fn(Cv& v, const std::function<void(Vd, const Pm&, Vd, Pm&)>& f)
+void set_after_vertex_copy_fn(Cv& v, const py::object& f)
 { v.set_after_vertex_copy(f); }
 
 //!
-void set_start_filtering_intersections_fn(Cv& v, const std::function<void()>& f)
+void set_start_filtering_intersections_fn(Cv& v, const py::object& f)
 { v.set_start_filtering_intersections(f); }
 
 //!
-void set_progress_filtering_intersections_fn(Cv& v, const std::function<void(double)>& f)
+void set_progress_filtering_intersections_fn(Cv& v, const py::object& f)
 { v.set_progress_filtering_intersections(f); }
 
 //!
-void set_end_filtering_intersections_fn(Cv& v, const std::function<void()>& f)
+void set_end_filtering_intersections_fn(Cv& v, const py::object& f)
 { v.set_end_filtering_intersections(f); }
 
 //!
-void set_start_triangulating_faces_fn(Cv& v, const std::function<void(std::size_t)>& f)
+void set_start_triangulating_faces_fn(Cv& v, const py::object& f)
 { v.set_start_triangulating_faces(f); }
 
 //!
-void set_triangulating_faces_step_fn(Cv& v, const std::function<void()>& f) { v.set_triangulating_faces_step(f); }
+void set_triangulating_faces_step_fn(Cv& v, const py::object& f) { v.set_triangulating_faces_step(f); }
 
 //!
-void set_end_triangulating_faces_fn(Cv& v, const std::function<void()>& f) { v.set_end_triangulating_faces(f); }
+void set_end_triangulating_faces_fn(Cv& v, const py::object& f) { v.set_end_triangulating_faces(f); }
 
 //!
-void set_start_handling_intersection_of_coplanar_faces_fn(Cv& v, const std::function<void(std::size_t)>& f)
+void set_start_handling_intersection_of_coplanar_faces_fn(Cv& v, const py::object& f)
 { v.set_start_handling_intersection_of_coplanar_faces(f); }
 
 //!
-void set_intersection_of_coplanar_faces_step_fn(Cv& v, const std::function<void()>& f)
+void set_intersection_of_coplanar_faces_step_fn(Cv& v, const py::object& f)
 { v.set_intersection_of_coplanar_faces_step(f); }
 
 //!
-void set_end_handling_intersection_of_coplanar_faces_fn(Cv& v, const std::function<void()>& f)
+void set_end_handling_intersection_of_coplanar_faces_fn(Cv& v, const py::object& f)
 { v.set_end_handling_intersection_of_coplanar_faces(f); }
 
 //!
-void set_start_handling_edge_face_intersections_fn(Cv& v, const std::function<void(std::size_t)>& f)
+void set_start_handling_edge_face_intersections_fn(Cv& v, const py::object& f)
 { v.set_start_handling_edge_face_intersections(f); }
 
 //!
-void set_edge_face_intersections_step_fn(Cv& v, const std::function<void()>& f)
+void set_edge_face_intersections_step_fn(Cv& v, const py::object& f)
 { v.set_edge_face_intersections_step(f); }
 
 //!
-void set_end_handling_edge_face_intersections_fn(Cv& v, const std::function<void()>& f)
+void set_end_handling_edge_face_intersections_fn(Cv& v, const py::object& f)
 { v.set_end_handling_edge_face_intersections(f); }
 
 //!
-void set_start_building_output_fn(Cv& v, const std::function<void()>& f) { v.set_start_building_output(f); }
+void set_start_building_output_fn(Cv& v, const py::object& f) { v.set_start_building_output(f); }
 
 //!
-void set_end_building_output_fn(Cv& v, const std::function<void()>& f) { v.set_end_building_output(f); }
+void set_end_building_output_fn(Cv& v, const py::object& f) { v.set_end_building_output(f); }
 
 //!
-void set_filter_coplanar_edges_fn(Cv& v, const std::function<void()>& f) { v.set_filter_coplanar_edges(f); }
+void set_filter_coplanar_edges_fn(Cv& v, const py::object& f) { v.set_filter_coplanar_edges(f); }
 
 //!
-void set_detect_patches_fn(Cv& v, const std::function<void()>& f) { v.set_detect_patches(f); }
+void set_detect_patches_fn(Cv& v, const py::object& f) { v.set_detect_patches(f); }
 
 //!
-void set_classify_patches_fn(Cv& v, const std::function<void()>& f) { v.set_classify_patches(f); }
+void set_classify_patches_fn(Cv& v, const py::object& f) { v.set_classify_patches(f); }
 
 //!
-void set_classify_intersection_free_patches_fn(Cv& v, const std::function<void(const Pm&)>& f)
+void set_classify_intersection_free_patches_fn(Cv& v, const py::object& f)
 { v.set_classify_intersection_free_patches(f); }
 
 //!
-void set_out_of_place_operation_fn(Cv& v, const std::function<void(Boolean_operation_type)>& f)
+void set_out_of_place_operation_fn(Cv& v, const py::object& f)
 { v.set_out_of_place_operation(f); }
 
 //!
-void set_in_place_operation_fn(Cv& v, const std::function<void(Boolean_operation_type)>& f)
+void set_in_place_operation_fn(Cv& v, const py::object& f)
 { v.set_in_place_operation(f); }
 
 //!
-void set_in_place_operations_fn(Cv& v, const std::function<void(Boolean_operation_type, Boolean_operation_type)>& f)
+void set_in_place_operations_fn(Cv& v, const py::object& f)
 { v.set_in_place_operations(f); }
 
 }
@@ -1449,8 +1449,14 @@ void export_pmp_corefinement(py::module_& m) {
         "Sets the callback invoked for paired in-place Boolean operations.");
 
   using Av = cgalpy::pmp::Autorefinement_visitor;
+  static PyType_Slot autorefinement_visitor_slots[] = {
+    {Py_tp_traverse, (void*) Av::tp_traverse},
+    {Py_tp_clear, (void*) Av::tp_clear},
+    {0, nullptr}
+  };
   py::class_<Av>(m, "Autorefinement_visitor",
-                 "Visitor for autorefinement callbacks.")
+                 "Visitor for autorefinement callbacks.",
+                 py::type_slots(autorefinement_visitor_slots))
     .def(py::init<>(),
          "Constructs an autorefinement visitor.")
     .def("set_number_of_output_triangles", &Av::set_number_of_output_triangles,
@@ -1474,8 +1480,14 @@ void export_pmp_corefinement(py::module_& m) {
 
   // corefine
   using Cv = cgalpy::pmp::Corefine_visitor<Pm>;
+  static PyType_Slot corefine_visitor_slots[] = {
+    {Py_tp_traverse, (void*) Cv::tp_traverse},
+    {Py_tp_clear, (void*) Cv::tp_clear},
+    {0, nullptr}
+  };
   py::class_<Cv>(m, "Corefine_visitor",
-                 "Visitor for corefinement callbacks.")
+                 "Visitor for corefinement callbacks.",
+                 py::type_slots(corefine_visitor_slots))
     .def(py::init<>(),
          "Constructs a corefinement visitor.")
     ;
