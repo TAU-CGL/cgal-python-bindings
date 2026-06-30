@@ -1,6 +1,8 @@
 #ifndef CGALPY_AUTOREFINEMENT_VISITOR_HPP
 #define CGALPY_AUTOREFINEMENT_VISITOR_HPP
 
+#include <functional>
+
 #include <nanobind/nanobind.h>
 #include <CGAL/Polygon_mesh_processing/autorefinement.h>
 
@@ -14,9 +16,9 @@ namespace pmp {
 //
 struct Autorefinement_visitor : PMP::Autorefinement::Default_visitor {
     Autorefinement_visitor() :
-      noot(),
-      vtc(),
-      ns()
+      noot([](std::size_t) {}),
+      vtc([](std::size_t, std::size_t) {}),
+      ns([](std::size_t, std::size_t) {})
     {}
 
   inline void number_of_output_triangles(std::size_t nbt) {noot(nbt);}
