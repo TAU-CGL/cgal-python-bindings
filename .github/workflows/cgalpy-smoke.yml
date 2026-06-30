@@ -585,6 +585,30 @@ jobs:
               [1.0, 1.0, 1.0],
           ], dtype=np.float64)
 
+          queries = points[:3].copy()
+
+          assert isinstance(Psp.compute_average_spacing(points, 2), float)
+          assert isinstance(Psp.estimate_global_k_neighbor_scale(points), int)
+          assert isinstance(Psp.estimate_global_range_scale(points), float)
+          assert isinstance(Psp.estimate_local_k_neighbor_scales(points, queries), list)
+          assert isinstance(Psp.estimate_local_range_scales(points, queries), list)
+          assert isinstance(Psp.grid_simplify_point_set(points, 0.75), tuple)
+          assert isinstance(Psp.random_simplify_point_set(points, 25.0), tuple)
+          assert isinstance(Psp.hierarchy_simplify_point_set(points, {"size": 3}), tuple)
+          assert isinstance(Psp.jet_smooth_point_set(points, 3, {"degree_fitting": 1, "degree_monge": 1}), list)
+          assert isinstance(Psp.remove_outliers(points, 2, {"threshold_percent": 25.0}), tuple)
+          assert isinstance(Psp.compute_vcm(points, 1.0, 0.5), list)
+          assert isinstance(Psp.wlop_simplify_and_regularize_point_set(
+              points, {"select_percentage": 50.0, "number_of_iterations": 2, "neighbor_radius": 2.0}), list)
+
+          for bad_points in (points.astype(np.float32), points.reshape(3, 6)):
+              try:
+                  Psp.compute_average_spacing(bad_points, 2)
+              except RuntimeError:
+                  pass
+              else:
+                  raise AssertionError("invalid NumPy point array accepted")
+
           assert isinstance(Psp.compute_average_spacing_with_normals(points, normals, 2), float)
           assert isinstance(Psp.grid_simplify_point_set_with_normals(points, normals, 0.75), tuple)
           assert isinstance(Psp.compute_vcm_with_normals(points, normals, 1.0, 0.5), list)
@@ -611,7 +635,7 @@ jobs:
           else:
               raise AssertionError("mismatched point/normal rows were accepted")
 
-          print("PSP NumPy point-normal smoke: OK")
+          print("PSP point-only + point-normal NumPy smoke: OK")
           PY
         env:
           MODULE_NAME: ${{ matrix.module_name }}
