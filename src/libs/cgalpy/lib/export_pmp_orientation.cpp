@@ -109,9 +109,17 @@ struct Is_outward_oriented_wrapper<NamedParameter, TriangleMesh> {
 template <typename Point_3, typename Visitor>
 auto orient_polygon_soup(std::vector<Point_3>& points, std::vector<std::vector<std::size_t>>& polygons,
                          const py::dict& np = py::dict()) {
-  auto visitor = np.contains("visitor") ? py::cast<Visitor>(np["visitor"]) : Visitor();
-  if (PMP::orient_polygon_soup(points, polygons)) return std::make_pair(points, polygons);
-  else throw std::runtime_error("Could not orient the polygon soup");
+  if (np.contains("visitor")) {
+    auto visitor = py::cast<Visitor>(np["visitor"]);
+    if (PMP::orient_polygon_soup
+        (points, polygons, CGAL::parameters::visitor(visitor)))
+      return std::make_pair(points, polygons);
+  }
+  else {
+    if (PMP::orient_polygon_soup(points, polygons))
+      return std::make_pair(points, polygons);
+  }
+  throw std::runtime_error("Could not orient the polygon soup");
 }
 
 //!

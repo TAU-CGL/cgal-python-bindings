@@ -15,12 +15,12 @@ namespace pmp {
 struct Default_orientation_visitor : PMP::Default_orientation_visitor {
 
   Default_orientation_visitor() :
-    nme(),
-    nmv(),
-    dv(),
-    viipr(),
-    por(),
-    lcp()
+    nme([](std::size_t, std::size_t, std::size_t) {}),
+    nmv([](std::size_t, std::size_t) {}),
+    dv([](std::size_t, std::size_t) {}),
+    viipr([](std::size_t, std::size_t, std::size_t) {}),
+    por([](std::size_t) {}),
+    lcp([](std::size_t, std::vector<std::size_t>) {})
   {}
 
   void non_manifold_edge(std::size_t id1, std::size_t id2, std::size_t nb_poly){nme(id1, id2, nb_poly);}
