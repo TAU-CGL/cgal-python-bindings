@@ -551,7 +551,7 @@ jobs:
           MODULE_NAME: ${{ matrix.module_name }}
           EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
 
-      - name: Run PSP NumPy point-normal smoke
+      - name: Run PSP NumPy smoke
         if: matrix.config == 'psp_epic'
         run: |
           set -euxo pipefail
