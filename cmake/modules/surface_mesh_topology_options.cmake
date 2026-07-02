@@ -1,0 +1,10 @@
+if(NOT SURFACE_MESH_TOPOLOGY_OPTIONS_FILE_INCLUDED)
+set(SURFACE_MESH_TOPOLOGY_OPTIONS_FILE_INCLUDED)
+
+function(select_surface_mesh_topology)
+  if (CGALPY_SURFACE_MESH_TOPOLOGY_BINDINGS)
+    add_definitions(-DCGALPY_SURFACE_MESH_TOPOLOGY_BINDINGS=)
+  endif()
+endfunction()
+
+endif()
