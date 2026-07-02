@@ -3,6 +3,8 @@ set(SURFACE_MESH_OPTIONS_FILE_INCLUDED)
 
 function(select_surface_mesh)
   if (CGALPY_SURFACE_MESH_BINDINGS)
+    set(CGALPY_BGL_BINDINGS ON CACHE BOOL "" FORCE)
+    select_bgl()
     add_definitions(-DCGALPY_SURFACE_MESH_BINDINGS=)
   endif()
 endfunction()
