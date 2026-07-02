@@ -708,9 +708,19 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
         get_polygon_mesh_processing_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
+    # Triangulated Surface Mesh Segmentation
+    if (CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS)
+        get_triangulated_surface_mesh_segmentation_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
     # Triangulated Surface Mesh Simplification
-  if (CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
+    if (CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
         get_triangulated_surface_mesh_simplification_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Triangulated Surface Mesh Skeletonization
+    if (CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS)
+        get_triangulated_surface_mesh_skeletonization_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
     # 2D Visibility
