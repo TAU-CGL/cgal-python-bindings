@@ -237,9 +237,9 @@ jobs:
             cc: clang
             cxx: clang++
             cmake_config: cmake/tests/sm_smsk_epic.cmake
-            module_name: CGALPY_kerEpic_bgl_sm_pmpSmIo
-            package_name: CGALPY_kerEpic_bgl_sm_pmpSmIo
-            wheel_pattern: cgalpy_kerepic_bgl_sm_pmpsmio-*.whl
+            module_name: CGALPY_kerEpic_bgl_sm_pmpSmIo_smskSm
+            package_name: CGALPY_kerEpic_bgl_sm_pmpSmIo_smskSm
+            wheel_pattern: cgalpy_kerepic_bgl_sm_pmpsmio_smsksm-*.whl
             extra_submodule: Smsk
           - config: tri2_ct_wi_epic
             label: TRI2 constrained-Delaunay EPIC
