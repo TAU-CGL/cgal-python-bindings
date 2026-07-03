@@ -230,7 +230,7 @@ auto grid_simplify_point_set_np(const py::ndarray<>& points_array,
                                 const py::dict& params = py::dict()) {
   auto points =
     cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
-  return grid_simplify_point_set(points, epsilon, params);
+  return grid_simplify_point_set(std::move(points), epsilon, params);
 }
 
 //! Randomly simplify a point set.
@@ -250,7 +250,7 @@ auto random_simplify_point_set_np(const py::ndarray<>& points_array,
                                   const py::dict& params = py::dict()) {
   auto points =
     cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
-  return random_simplify_point_set(points, removed_percentage, params);
+  return random_simplify_point_set(std::move(points), removed_percentage, params);
 }
 
 //! Simplify points using hierarchy simplification.
@@ -275,7 +275,7 @@ auto hierarchy_simplify_point_set_np(const py::ndarray<>& points_array,
                                      const py::dict& params = py::dict()) {
   auto points =
     cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
-  return hierarchy_simplify_point_set(points, params);
+  return hierarchy_simplify_point_set(std::move(points), params);
 }
 
 //! Smooth points using jet fitting.
@@ -309,7 +309,7 @@ auto jet_smooth_point_set_np(const py::ndarray<>& points_array,
                              const py::dict& params = py::dict()) {
   auto points =
     cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
-  return jet_smooth_point_set(points, k, params);
+  return jet_smooth_point_set(std::move(points), k, params);
 }
 
 //! Remove outliers from a point set.
@@ -343,7 +343,7 @@ auto remove_outliers_np(const py::ndarray<>& points_array,
                         const py::dict& params = py::dict()) {
   auto points =
     cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
-  return remove_outliers(points, k, params);
+  return remove_outliers(std::move(points), k, params);
 }
 
 
@@ -352,9 +352,9 @@ template <typename Point_3, typename Vector_3>
 std::vector<std::pair<Point_3, Vector_3>>
 ndarray_to_point_normal_3_vector(const py::ndarray<>& points_array,
                                  const py::ndarray<>& normals_array) {
-  const auto points =
+  auto points =
     cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
-  const auto normals =
+  auto normals =
     cgalpy::ndarray_to_point_3_vector<Vector_3>(normals_array, "normals");
 
   if (points.size() != normals.size()) {
@@ -365,7 +365,7 @@ ndarray_to_point_normal_3_vector(const py::ndarray<>& points_array,
   output.reserve(points.size());
 
   for (std::size_t i = 0; i < points.size(); ++i) {
-    output.emplace_back(points[i], normals[i]);
+    output.emplace_back(std::move(points[i]), std::move(normals[i]));
   }
 
   return output;
@@ -447,7 +447,7 @@ auto grid_simplify_point_set_with_normals_np(const py::ndarray<>& points_array,
   auto points =
     ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
                                                         normals_array);
-  return grid_simplify_point_set_with_normals(points, epsilon, params);
+  return grid_simplify_point_set_with_normals(std::move(points), epsilon, params);
 }
 
 //!
@@ -509,16 +509,16 @@ template <typename Point_3, typename Vector_3>
 auto pca_estimate_normals_np(const py::ndarray<>& points_array,
                              const unsigned int k,
                              const py::dict& params = py::dict()) {
-  const auto points =
+  auto points =
     cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
 
   std::vector<std::pair<Point_3, Vector_3>> point_normals;
   point_normals.reserve(points.size());
-  for (const auto& point : points) {
-    point_normals.emplace_back(point, Vector_3(0, 0, 0));
+  for (auto& point : points) {
+    point_normals.emplace_back(std::move(point), Vector_3(0, 0, 0));
   }
 
-  return pca_estimate_normals(point_normals, k, params);
+  return pca_estimate_normals(std::move(point_normals), k, params);
 }
 
 //! Estimate normals using jet fitting.
@@ -552,16 +552,16 @@ template <typename Point_3, typename Vector_3>
 auto jet_estimate_normals_np(const py::ndarray<>& points_array,
                              const unsigned int k,
                              const py::dict& params = py::dict()) {
-  const auto points =
+  auto points =
     cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
 
   std::vector<std::pair<Point_3, Vector_3>> point_normals;
   point_normals.reserve(points.size());
-  for (const auto& point : points) {
-    point_normals.emplace_back(point, Vector_3(0, 0, 0));
+  for (auto& point : points) {
+    point_normals.emplace_back(std::move(point), Vector_3(0, 0, 0));
   }
 
-  return jet_estimate_normals(point_normals, k, params);
+  return jet_estimate_normals(std::move(point_normals), k, params);
 }
 
 //! Orient normals using MST propagation.
@@ -596,7 +596,7 @@ auto mst_orient_normals_np(const py::ndarray<>& points_array,
   auto points =
     ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
                                                         normals_array);
-  return mst_orient_normals(points, k, params);
+  return mst_orient_normals(std::move(points), k, params);
 }
 
 //! Compute Voronoi covariance matrices for a point range.
@@ -688,7 +688,7 @@ auto vcm_estimate_normals_np(const py::ndarray<>& points_array,
   auto points =
     ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
                                                         normals_array);
-  return vcm_estimate_normals(points, offset_radius, convolution_radius,
+  return vcm_estimate_normals(std::move(points), offset_radius, convolution_radius,
                               params);
 }
 
@@ -723,7 +723,7 @@ auto vcm_estimate_normals_neighbors_np(const py::ndarray<>& points_array,
   auto points =
     ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
                                                         normals_array);
-  return vcm_estimate_normals_neighbors(points, offset_radius, k, params);
+  return vcm_estimate_normals_neighbors(std::move(points), offset_radius, k, params);
 }
 
 //!
@@ -825,7 +825,7 @@ auto bilateral_smooth_point_set_np(const py::ndarray<>& points_array,
   auto points =
     ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
                                                         normals_array);
-  return bilateral_smooth_point_set(points, k, params);
+  return bilateral_smooth_point_set(std::move(points), k, params);
 }
 
 //!
@@ -877,7 +877,7 @@ edge_aware_upsample_point_set_np(const py::ndarray<>& points_array,
   auto points =
     ndarray_to_point_normal_3_vector<Point_3, Vector_3>(points_array,
                                                         normals_array);
-  return edge_aware_upsample_point_set(points, params);
+  return edge_aware_upsample_point_set(std::move(points), params);
 }
 
 //!
