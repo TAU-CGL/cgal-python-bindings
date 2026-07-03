@@ -13,7 +13,7 @@
 #include <nanobind/nanobind.h>
 
 #include "cgalpy/pmp_helpers.hpp"
-#include "cgalpy/ndarray_to_point_3_vector.hpp"
+#include "cgalpy/numpy/ndarray_to_point_3_vector.hpp"
 
 #include <CGAL/Polyhedral_envelope.h>
 

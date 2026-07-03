@@ -32,7 +32,7 @@
 #endif
 
 #include "cgalpy/add_attr.hpp"
-#include "cgalpy/ndarray_to_point_3_vector.hpp"
+#include "cgalpy/numpy/ndarray_to_point_3_vector.hpp"
 #include "cgalpy/add_insertion.hpp"
 #include "cgalpy/add_extraction.hpp"
 #include "cgalpy/cartesian_product.hpp"

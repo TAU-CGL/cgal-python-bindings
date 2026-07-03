@@ -49,7 +49,7 @@
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
 #include "cgalpy/Named_parameter_wrapper.hpp"
-#include "cgalpy/ndarray_to_point_3_vector.hpp"
+#include "cgalpy/numpy/ndarray_to_point_3_vector.hpp"
 #include "cgalpy/point_set_processing_type.hpp"
 
 namespace py = nanobind;
