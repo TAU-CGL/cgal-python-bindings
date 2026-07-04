@@ -438,18 +438,18 @@ if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
     list(APPEND CGALPY_MODULES Pmp)
     set(CGALPY_Pmp_FILTERS [=[{}]=])
 endif ()
-# Triangulated Surface Mesh Segmentation
-if (CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS)
+# Surface Mesh Segmentation
+if (CGALPY_SURFACE_MESH_SEGMENTATION_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulated_surface_mesh_segmentation_bindings.cpp)
 endif ()
-# Triangulated Surface Mesh Simplification
-if (CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
+# Surface Mesh Simplification
+if (CGALPY_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulated_surface_mesh_simplification_bindings.cpp)
     list(APPEND CGALPY_MODULES Sms)
     set(CGALPY_Sms_FILTERS [=[{}]=])
 endif ()
-# Triangulated Surface Mesh Skeletonization
-if (CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS)
+# Surface Mesh Skeletonization
+if (CGALPY_SURFACE_MESH_SKELETONIZATION_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulated_surface_mesh_skeletonization_bindings.cpp)
     list(APPEND CGALPY_MODULES Smsk)
     set(CGALPY_Smsk_FILTERS [=[{}]=])
@@ -708,19 +708,19 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
         get_polygon_mesh_processing_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
-    # Triangulated Surface Mesh Segmentation
-    if (CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS)
-        get_triangulated_surface_mesh_segmentation_lib_name(ret)
+    # Surface Mesh Segmentation
+    if (CGALPY_SURFACE_MESH_SEGMENTATION_BINDINGS)
+        get_surface_mesh_segmentation_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
-    # Triangulated Surface Mesh Simplification
-    if (CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
-        get_triangulated_surface_mesh_simplification_lib_name(ret)
+    # Surface Mesh Simplification
+    if (CGALPY_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
+        get_surface_mesh_simplification_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
-    # Triangulated Surface Mesh Skeletonization
-    if (CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS)
-        get_triangulated_surface_mesh_skeletonization_lib_name(ret)
+    # Surface Mesh Skeletonization
+    if (CGALPY_SURFACE_MESH_SKELETONIZATION_BINDINGS)
+        get_surface_mesh_skeletonization_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
     # 2D Visibility

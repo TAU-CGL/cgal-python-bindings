@@ -338,16 +338,16 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #endif
 #endif
 
-#if defined(CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS)
+#if defined(CGALPY_SURFACE_MESH_SEGMENTATION_BINDINGS)
   export_triangulated_surface_mesh_segmentation(m);
 #endif
 
-#if defined(CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
+#if defined(CGALPY_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
   auto tsms_m = m.def_submodule("Sms");
   export_triangulated_surface_mesh_simplification(tsms_m);
 #endif
 
-#if defined(CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS)
+#if defined(CGALPY_SURFACE_MESH_SKELETONIZATION_BINDINGS)
   auto tsmsk_m = m.def_submodule("Smsk");
   export_triangulated_surface_mesh_skeletonization(tsmsk_m);
 #endif
