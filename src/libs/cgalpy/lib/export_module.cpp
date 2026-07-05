@@ -79,6 +79,7 @@ void export_spatial_sorting(py::module_&);
 void export_straight_skeleton_2(py::module_&);
 void export_surface_mesh(py::module_&);
 void export_surface_mesh_approximation(py::module_&);
+void export_surface_mesh_decomposition(py::module_&);
 void export_surface_mesh_deformation(py::module_&);
 void export_surface_mesh_parameterization(py::module_&);
 void export_surface_mesh_shortest_path(py::module_&);
@@ -346,6 +347,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #if defined(CGALPY_SURFACE_MESH_APPROXIMATION_BINDINGS)
   auto sma_m = m.def_submodule("Sma");
   export_surface_mesh_approximation(sma_m);
+#endif
+
+#if defined(CGALPY_SURFACE_MESH_DECOMPOSITION_BINDINGS)
+  auto smdec_m = m.def_submodule("Smdec");
+  export_surface_mesh_decomposition(smdec_m);
 #endif
 
 #if defined(CGALPY_SURFACE_MESH_DEFORMATION_BINDINGS)
