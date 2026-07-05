@@ -11,7 +11,7 @@ if len(sys.argv) > 1:
 
 CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
-Sms = CGALPY.Sms
+Smsi = CGALPY.Smsi
 
 filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/small_cube.off")
 i += 1
@@ -29,10 +29,10 @@ threshold = float(sys.argv[i]) if len(sys.argv) > i else 0.2
 i += 1
 
 print(f"Collapsing edges with length larger than {threshold} of mesh: {filename}...")
-r = Sms.edge_collapse(surface_mesh,
-                      CGALPY.Sms.Edge_length_stop_predicate(threshold),
-                      {"get_cost": Sms.Edge_length_cost(),
-                      "get_placement": Sms.Midpoint_placement()})
+r = Smsi.edge_collapse(surface_mesh,
+                      CGALPY.Smsi.Edge_length_stop_predicate(threshold),
+                      {"get_cost": Smsi.Edge_length_cost(),
+                      "get_placement": Smsi.Midpoint_placement()})
 
 print(f"\nFinished!\n{r} edges removed.\n{surface_mesh.size_of_halfedges()//2} final edges.")
 

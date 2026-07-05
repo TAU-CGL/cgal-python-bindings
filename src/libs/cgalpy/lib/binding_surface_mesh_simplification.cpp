@@ -27,10 +27,11 @@
 #include "cgalpy/helpers.hpp"
 #include "cgalpy/pmp_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
-#include "cgalpy/Sms_docstrings.hpp"
+#include "cgalpy/sm/surface_mesh_simplification_types.hpp"
+#include "cgalpy/Smsi_docstrings.hpp"
 
 namespace py = nanobind;
-namespace sms_doc = cgalpy::sms::docstrings;
+namespace smsi_doc = cgalpy::smsi::docstrings;
 
 namespace SMS = CGAL::Surface_mesh_simplification;
 
@@ -461,14 +462,14 @@ template <typename Tm, typename... PolicyTypes>
 void define_edge_collapses(py::module_& m) {
     (m.def("edge_collapse", &sms::edge_collapse<Tm, PolicyTypes>,
           py::arg("tmesh"), py::arg("should_stop"), py::arg("np") = py::dict(),
-          sms_doc::Surface_mesh_simplification_edge_collapse), ...);
+          smsi_doc::Surface_mesh_simplification_edge_collapse), ...);
 }
 
 }
 } // namespace cgalpy // namespace sms
 
 // Export Polygon_mesh_processing
-void export_triangulated_surface_mesh_simplification(py::module_& m) {
+void export_surface_mesh_simplification(py::module_& m) {
   using Tm = cgalpy::pmp::Polygonal_mesh;
   using Fd = boost::graph_traits<Tm>::face_descriptor;
   using Hd = boost::graph_traits<Tm>::halfedge_descriptor;
@@ -508,63 +509,63 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
 
   using Ep = SMS::Edge_profile<Tm>;
   py::class_<Ep>(
-      m, "Edge_profile", sms_doc::Surface_mesh_simplification_Edge_profile_class)
-    .def("v0", &Ep::v0, sms_doc::Surface_mesh_simplification_Edge_profile_v0)
-    .def("v1", &Ep::v1, sms_doc::Surface_mesh_simplification_Edge_profile_v1)
-    .def("v0_v1", &Ep::v0_v1, sms_doc::Surface_mesh_simplification_Edge_profile_v0_v1)
-    .def("v1_v0", &Ep::v1_v0, sms_doc::Surface_mesh_simplification_Edge_profile_v1_v0)
-    .def("p0", &Ep::p0, sms_doc::Surface_mesh_simplification_Edge_profile_p0)
-    .def("p1", &Ep::p1, sms_doc::Surface_mesh_simplification_Edge_profile_p1)
-    .def("vL", &Ep::vL, sms_doc::Surface_mesh_simplification_Edge_profile_vL)
-    .def("v1_vL", &Ep::v1_vL, sms_doc::Surface_mesh_simplification_Edge_profile_v1_vL)
-    .def("vL_v0", &Ep::vL_v0, sms_doc::Surface_mesh_simplification_Edge_profile_vL_v0)
-    .def("vR", &Ep::vR, sms_doc::Surface_mesh_simplification_Edge_profile_vR)
-    .def("v0_vR", &Ep::v0_vR, sms_doc::Surface_mesh_simplification_Edge_profile_v0_vR)
-    .def("vR_v1", &Ep::vR_v1, sms_doc::Surface_mesh_simplification_Edge_profile_vR_v1)
-    .def("link", &Ep::link, sms_doc::Surface_mesh_simplification_Edge_profile_link)
-    .def("border_edges", &Ep::border_edges, sms_doc::Surface_mesh_simplification_Edge_profile_border_edges)
-    .def("left_face_exists", &Ep::left_face_exists, sms_doc::Surface_mesh_simplification_Edge_profile_left_face_exists)
-    .def("right_face_exists", &Ep::right_face_exists, sms_doc::Surface_mesh_simplification_Edge_profile_right_face_exists)
-    .def("surface_mesh", &Ep::surface_mesh, sms_doc::Surface_mesh_simplification_Edge_profile_surface_mesh)
+      m, "Edge_profile", smsi_doc::Surface_mesh_simplification_Edge_profile_class)
+    .def("v0", &Ep::v0, smsi_doc::Surface_mesh_simplification_Edge_profile_v0)
+    .def("v1", &Ep::v1, smsi_doc::Surface_mesh_simplification_Edge_profile_v1)
+    .def("v0_v1", &Ep::v0_v1, smsi_doc::Surface_mesh_simplification_Edge_profile_v0_v1)
+    .def("v1_v0", &Ep::v1_v0, smsi_doc::Surface_mesh_simplification_Edge_profile_v1_v0)
+    .def("p0", &Ep::p0, smsi_doc::Surface_mesh_simplification_Edge_profile_p0)
+    .def("p1", &Ep::p1, smsi_doc::Surface_mesh_simplification_Edge_profile_p1)
+    .def("vL", &Ep::vL, smsi_doc::Surface_mesh_simplification_Edge_profile_vL)
+    .def("v1_vL", &Ep::v1_vL, smsi_doc::Surface_mesh_simplification_Edge_profile_v1_vL)
+    .def("vL_v0", &Ep::vL_v0, smsi_doc::Surface_mesh_simplification_Edge_profile_vL_v0)
+    .def("vR", &Ep::vR, smsi_doc::Surface_mesh_simplification_Edge_profile_vR)
+    .def("v0_vR", &Ep::v0_vR, smsi_doc::Surface_mesh_simplification_Edge_profile_v0_vR)
+    .def("vR_v1", &Ep::vR_v1, smsi_doc::Surface_mesh_simplification_Edge_profile_vR_v1)
+    .def("link", &Ep::link, smsi_doc::Surface_mesh_simplification_Edge_profile_link)
+    .def("border_edges", &Ep::border_edges, smsi_doc::Surface_mesh_simplification_Edge_profile_border_edges)
+    .def("left_face_exists", &Ep::left_face_exists, smsi_doc::Surface_mesh_simplification_Edge_profile_left_face_exists)
+    .def("right_face_exists", &Ep::right_face_exists, smsi_doc::Surface_mesh_simplification_Edge_profile_right_face_exists)
+    .def("surface_mesh", &Ep::surface_mesh, smsi_doc::Surface_mesh_simplification_Edge_profile_surface_mesh)
     // .def("vertex_point_map", &Ep::vertex_point_map,
-    //      sms_doc::Surface_mesh_simplification_Edge_profile_vertex_point_map)
+    //      smsi_doc::Surface_mesh_simplification_Edge_profile_vertex_point_map)
     // .def("geom_traits", &Ep::geom_traits, // not supported
-    //      sms_doc::Surface_mesh_simplification_Edge_profile_geom_traits)
+    //      smsi_doc::Surface_mesh_simplification_Edge_profile_geom_traits)
     ;
 
   using Ecvb = cgalpy::sms::My_ec_visitor<Tm>;
   py::class_<Ecvb>(
       m, "Edge_collapse_visitor_base",
-      sms_doc::Surface_mesh_simplification_Edge_collapse_visitor_base_class)
+      smsi_doc::Surface_mesh_simplification_Edge_collapse_visitor_base_class)
     .def(py::init<>(), "Construct an edge collapse visitor.")
     ;
   m.def("set_OnStarted", &Ecvb::set_started,
         py::arg("visitor"), py::arg("OnStarted"),
-        sms_doc::EdgeCollapseSimplificationVisitor_OnStarted);
+        smsi_doc::EdgeCollapseSimplificationVisitor_OnStarted);
   m.def("set_OnFinished", &Ecvb::set_finished,
         py::arg("visitor"), py::arg("OnFinished"),
-        sms_doc::EdgeCollapseSimplificationVisitor_OnFinished);
+        smsi_doc::EdgeCollapseSimplificationVisitor_OnFinished);
   m.def("set_OnStopConditionReached", &Ecvb::set_stop_condition_reached,
         py::arg("visitor"), py::arg("OnStopConditionReached"),
-        sms_doc::EdgeCollapseSimplificationVisitor_OnStopConditionReached);
+        smsi_doc::EdgeCollapseSimplificationVisitor_OnStopConditionReached);
   m.def("set_OnCollected", &Ecvb::set_collected,
         py::arg("visitor"), py::arg("OnCollected"),
         py::sig("def set_OnCollected(visitor: Edge_collapse_visitor_base, OnCollected: Callable[[Edge_profile, float | None], None])"),
-        sms_doc::EdgeCollapseSimplificationVisitor_OnCollected);
+        smsi_doc::EdgeCollapseSimplificationVisitor_OnCollected);
   m.def("set_OnSelected", &Ecvb::set_selected,
         py::arg("visitor"), py::arg("OnSelected"),
         py::sig("def set_OnSelected(visitor: Edge_collapse_visitor_base, OnSelected: Callable[[Edge_profile, float | None, int, int], None])"),
-        sms_doc::EdgeCollapseSimplificationVisitor_OnSelected);
+        smsi_doc::EdgeCollapseSimplificationVisitor_OnSelected);
   m.def("set_OnCollapsing", &Ecvb::set_collapsing,
         py::arg("visitor"), py::arg("OnCollapsing"),
         py::sig("def set_OnCollapsing(visitor: Edge_collapse_visitor_base, OnCollapsing: Callable[[Edge_profile, CGALPY.Kernel.Point_3 | None], None])"),
-        sms_doc::EdgeCollapseSimplificationVisitor_OnCollapsing);
+        smsi_doc::EdgeCollapseSimplificationVisitor_OnCollapsing);
   m.def("set_OnCollapsed", &Ecvb::set_collapsed,
         py::arg("visitor"), py::arg("OnCollapsed"),
-        sms_doc::EdgeCollapseSimplificationVisitor_OnCollapsed);
+        smsi_doc::EdgeCollapseSimplificationVisitor_OnCollapsed);
   m.def("set_OnNonCollapsable", &Ecvb::set_non_collapsable,
         py::arg("visitor"), py::arg("OnNonCollapsable"),
-        sms_doc::EdgeCollapseSimplificationVisitor_OnNonCollapsable);
+        smsi_doc::EdgeCollapseSimplificationVisitor_OnNonCollapsable);
 
 
   // Predicates //
@@ -572,71 +573,71 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using Ecsp = SMS::Edge_count_stop_predicate<Tm>;
   py::class_<Ecsp>(
       m, "Edge_count_stop_predicate",
-      sms_doc::Surface_mesh_simplification_Edge_count_stop_predicate_class)
+      smsi_doc::Surface_mesh_simplification_Edge_count_stop_predicate_class)
     .def(py::init<edges_size_type>(), py::arg("threshold"),
-         sms_doc::Surface_mesh_simplification_Edge_count_stop_predicate_Edge_count_stop_predicate)
+         smsi_doc::Surface_mesh_simplification_Edge_count_stop_predicate_Edge_count_stop_predicate)
     .def("__call__",
          [](Ecsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec)
          { return self(0, ep, iec, cec); },
          py::arg("edge_profile"), py::arg("initial_edge_count"),
          py::arg("current_edge_count"),
-         sms_doc::Surface_mesh_simplification_Edge_count_stop_predicate_operator_call)
+         smsi_doc::Surface_mesh_simplification_Edge_count_stop_predicate_operator_call)
     ;
 
   using Ecrsp = SMS::Edge_count_ratio_stop_predicate<Tm>;
   py::class_<Ecrsp>(
       m, "Edge_count_ratio_stop_predicate",
-      sms_doc::Surface_mesh_simplification_Edge_count_ratio_stop_predicate_class)
+      smsi_doc::Surface_mesh_simplification_Edge_count_ratio_stop_predicate_class)
     .def(py::init<double>(), py::arg("ratio"),
-         sms_doc::Surface_mesh_simplification_Edge_count_ratio_stop_predicate_Edge_count_ratio_stop_predicate)
+         smsi_doc::Surface_mesh_simplification_Edge_count_ratio_stop_predicate_Edge_count_ratio_stop_predicate)
     .def("__call__",
          [](Ecrsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec)
          { return self(0, ep, iec, cec); },
          py::arg("edge_profile"), py::arg("initial_edge_count"),
          py::arg("current_edge_count"),
-         sms_doc::Surface_mesh_simplification_Edge_count_ratio_stop_predicate_operator_call)
+         smsi_doc::Surface_mesh_simplification_Edge_count_ratio_stop_predicate_operator_call)
     ;
 
   using Elsp = SMS::Edge_length_stop_predicate<FT>;
   py::class_<Elsp>(
       m, "Edge_length_stop_predicate",
-      sms_doc::Surface_mesh_simplification_Edge_length_stop_predicate_class)
+      smsi_doc::Surface_mesh_simplification_Edge_length_stop_predicate_class)
     .def(py::init<const FT>(), py::arg("threshold"),
-         sms_doc::Surface_mesh_simplification_Edge_length_stop_predicate_Edge_length_stop_predicate)
+         smsi_doc::Surface_mesh_simplification_Edge_length_stop_predicate_Edge_length_stop_predicate)
     .def("__call__",
          [](Elsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec)
          { return self(0, ep, iec, cec); },
          py::arg("edge_profile"), py::arg("initial_edge_count"),
          py::arg("current_edge_count"),
-         sms_doc::Surface_mesh_simplification_Edge_length_stop_predicate_operator_call)
+         smsi_doc::Surface_mesh_simplification_Edge_length_stop_predicate_operator_call)
     ;
 
   using Fcsp = SMS::Face_count_stop_predicate<Tm>;
   py::class_<Fcsp>(
       m, "Face_count_stop_predicate",
-      sms_doc::Surface_mesh_simplification_Face_count_stop_predicate_class)
+      smsi_doc::Surface_mesh_simplification_Face_count_stop_predicate_class)
     .def(py::init<edges_size_type>(), py::arg("threshold"),
-         sms_doc::Surface_mesh_simplification_Face_count_stop_predicate_Face_count_stop_predicate)
+         smsi_doc::Surface_mesh_simplification_Face_count_stop_predicate_Face_count_stop_predicate)
     .def("__call__",
          [](Fcsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec)
          { return self(0, ep, iec, cec); },
          py::arg("edge_profile"), py::arg("initial_edge_count"),
          py::arg("current_edge_count"),
-         sms_doc::Surface_mesh_simplification_Face_count_stop_predicate_operator_call)
+         smsi_doc::Surface_mesh_simplification_Face_count_stop_predicate_operator_call)
     ;
 
   using Fcrsp = SMS::Face_count_ratio_stop_predicate<Tm>;
   py::class_<Fcrsp>(
       m, "Face_count_ratio_stop_predicate",
-      sms_doc::Surface_mesh_simplification_Face_count_ratio_stop_predicate_class)
+      smsi_doc::Surface_mesh_simplification_Face_count_ratio_stop_predicate_class)
     .def(py::init<double, const Tm&>(), py::arg("ratio"), py::arg("tmesh"),
-         sms_doc::Surface_mesh_simplification_Face_count_ratio_stop_predicate_Face_count_ratio_stop_predicate)
+         smsi_doc::Surface_mesh_simplification_Face_count_ratio_stop_predicate_Face_count_ratio_stop_predicate)
     .def("__call__",
          [](Fcrsp& self, const Ep& ep, edges_size_type iec, edges_size_type cec)
          { return self(0, ep, iec, cec); },
          py::arg("edge_profile"), py::arg("initial_edge_count"),
          py::arg("current_edge_count"),
-         sms_doc::Surface_mesh_simplification_Face_count_ratio_stop_predicate_operator_call)
+         smsi_doc::Surface_mesh_simplification_Face_count_ratio_stop_predicate_operator_call)
     ;
 
   // Policies //
@@ -644,13 +645,13 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using Ghpp = SMS::GarlandHeckbert_plane_policies<Tm, Kernel>;
   py::class_<Ghpp>(
       m, "GarlandHeckbert_plane_policies",
-      sms_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_class)
+      smsi_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_class)
     .def(py::init<Tm&>(), py::arg("tmesh"),
-         sms_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_GarlandHeckbert_plane_policies)
+         smsi_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_GarlandHeckbert_plane_policies)
     /*.def("get_placement", &Ghpp::get_placement,
-           sms_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_get_placement)*/
+           smsi_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_get_placement)*/
     /*.def("get_cost", &Ghpp::get_cost,
-           sms_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_get_cost)*/
+           smsi_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_get_cost)*/
     ;
 
   // using Ghppp = SMS::GarlandHeckbert_probabilistic_plane_policies<Tm, Kernel>;
@@ -661,13 +662,13 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using Ghtp = SMS::GarlandHeckbert_triangle_policies<Tm, Kernel>;
   py::class_<Ghtp>(
       m, "GarlandHeckbert_triangle_policies",
-      sms_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_class)
+      smsi_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_class)
     .def(py::init<Tm&>(), py::arg("tmesh"),
-         sms_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_GarlandHeckbert_triangle_policies)
+         smsi_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_GarlandHeckbert_triangle_policies)
     .def("get_placement", &Ghtp::get_placement,
-         sms_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_get_placement)
+         smsi_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_get_placement)
     .def("get_cost", &Ghtp::get_cost,
-         sms_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_get_cost)
+         smsi_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_get_cost)
     ;
 
   // using Ghtpp = SMS::GarlandHeckbert_probabilistic_triangle_policies<Tm, Kernel>;
@@ -680,17 +681,17 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using Elc = SMS::Edge_length_cost<Tm>;
   py::class_<Elc>(
       m, "Edge_length_cost",
-      sms_doc::Surface_mesh_simplification_Edge_length_cost_class)
+      smsi_doc::Surface_mesh_simplification_Edge_length_cost_class)
     .def(py::init<>(),
-         sms_doc::Surface_mesh_simplification_Edge_length_cost_Edge_length_cost)
+         smsi_doc::Surface_mesh_simplification_Edge_length_cost_Edge_length_cost)
     ;
 
   using Ltc = SMS::LindstromTurk_cost<Tm>;
   py::class_<Ltc>(
       m, "LindstromTurk_cost",
-      sms_doc::Surface_mesh_simplification_LindstromTurk_cost_class)
+      smsi_doc::Surface_mesh_simplification_LindstromTurk_cost_class)
     .def(py::init<>(),
-         sms_doc::Surface_mesh_simplification_LindstromTurk_cost_LindstromTurk_cost)
+         smsi_doc::Surface_mesh_simplification_LindstromTurk_cost_LindstromTurk_cost)
     ;
 
   // Placements //
@@ -698,25 +699,25 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using Mp = SMS::Midpoint_placement<Tm>;
   py::class_<Mp>(
       m, "Midpoint_placement",
-      sms_doc::Surface_mesh_simplification_Midpoint_placement_class)
+      smsi_doc::Surface_mesh_simplification_Midpoint_placement_class)
     .def(py::init<>(),
-         sms_doc::Surface_mesh_simplification_Midpoint_placement_Midpoint_placement)
+         smsi_doc::Surface_mesh_simplification_Midpoint_placement_Midpoint_placement)
     ;
 
   using Ltp = SMS::LindstromTurk_placement<Tm>;
   py::class_<Ltp>(
       m, "LindstromTurk_placement",
-      sms_doc::Surface_mesh_simplification_LindstromTurk_placement_class)
+      smsi_doc::Surface_mesh_simplification_LindstromTurk_placement_class)
     .def(py::init<>(),
-         sms_doc::Surface_mesh_simplification_LindstromTurk_placement_LindstromTurk_placement)
+         smsi_doc::Surface_mesh_simplification_LindstromTurk_placement_LindstromTurk_placement)
     ;
 
   using Bncp = SMS::Bounded_normal_change_placement<Mp>;
   py::class_<Bncp>(
       m, "Bounded_normal_change_placement_Midpoint_placement",
-      sms_doc::Surface_mesh_simplification_Bounded_normal_change_placement_class)
+      smsi_doc::Surface_mesh_simplification_Bounded_normal_change_placement_class)
     .def(py::init<Mp>(), py::arg("get_placement"),
-         sms_doc::Surface_mesh_simplification_Bounded_normal_change_placement_Bounded_normal_change_placement_1)
+         smsi_doc::Surface_mesh_simplification_Bounded_normal_change_placement_Bounded_normal_change_placement_1)
     ;
 
   // placements for all
@@ -724,9 +725,9 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   // upon calling this classs constructor it gives the correct placement overload
   py::class_<Dummy_placement>(
       m, "Bounded_normal_change_placement",
-      sms_doc::Surface_mesh_simplification_Bounded_normal_change_placement_class)
+      smsi_doc::Surface_mesh_simplification_Bounded_normal_change_placement_class)
     .def(py::init<>(),
-         sms_doc::Surface_mesh_simplification_Bounded_normal_change_placement_Bounded_normal_change_placement)
+         smsi_doc::Surface_mesh_simplification_Bounded_normal_change_placement_Bounded_normal_change_placement)
     .def("__call__",
          [](Dummy_placement& self, Mp& bncp) { return Mp(bncp); },
          py::arg("get_placement"),
@@ -739,38 +740,38 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using MpBicm = SMS::Constrained_placement<Mp, edge_bool_map>;
   py::class_<MpBicm>(
       m, "Constrained_placement_Midpoint_placement_Edge_bool_map",
-      sms_doc::Surface_mesh_simplification_Constrained_placement_class)
+      smsi_doc::Surface_mesh_simplification_Constrained_placement_class)
     .def(py::init<edge_bool_map, Mp>(),
          py::arg("edge_is_constrained_map") = edge_bool_map(),
          py::arg("get_placement") = Mp(),
-         sms_doc::Surface_mesh_simplification_Constrained_placement_Constrained_placement)
+         smsi_doc::Surface_mesh_simplification_Constrained_placement_Constrained_placement)
     ;
 
   using LtpBicm = SMS::Constrained_placement<Ltp, edge_bool_map>;
   py::class_<LtpBicm>(
       m, "Constrained_placement_LindstromTurk_placement_Edge_bool_map",
-      sms_doc::Surface_mesh_simplification_Constrained_placement_class)
+      smsi_doc::Surface_mesh_simplification_Constrained_placement_class)
     .def(py::init<edge_bool_map, Ltp>(),
          py::arg("edge_is_constrained_map") = edge_bool_map(),
          py::arg("get_placement") = Ltp(),
-         sms_doc::Surface_mesh_simplification_Constrained_placement_Constrained_placement)
+         smsi_doc::Surface_mesh_simplification_Constrained_placement_Constrained_placement)
     ;
 
   using BncpBicm = SMS::Constrained_placement<Bncp, edge_bool_map>;
   py::class_<BncpBicm>(
       m, "Constrained_placement_Bounded_normal_change_placement_Edge_bool_map",
-      sms_doc::Surface_mesh_simplification_Constrained_placement_class)
+      smsi_doc::Surface_mesh_simplification_Constrained_placement_class)
     .def(py::init<edge_bool_map, Bncp>(),
          py::arg("edge_is_constrained_map") = edge_bool_map(),
          py::arg("get_placement") = Bncp(),
-         sms_doc::Surface_mesh_simplification_Constrained_placement_Constrained_placement)
+         smsi_doc::Surface_mesh_simplification_Constrained_placement_Constrained_placement)
     ;
 
   using Ghplacement = Ghpp::Get_placement;
   using GhplacementBicm = SMS::Constrained_placement<Ghplacement, edge_bool_map>;
   py::class_<GhplacementBicm>(
       m, "Constrained_placement_GarlandHeckbert_policies_Edge_bool_map",
-      sms_doc::Surface_mesh_simplification_Constrained_placement_class)
+      smsi_doc::Surface_mesh_simplification_Constrained_placement_class)
     .def(py::init<edge_bool_map, Ghplacement>(),
          py::arg("edge_is_constrained_map"), py::arg("get_placement"),
          "Construct a constrained placement policy from an edge constraint map and a Garland-Heckbert placement policy.")
@@ -781,15 +782,15 @@ void export_triangulated_surface_mesh_simplification(py::module_& m) {
   using Bncf = SMS::Bounded_normal_change_filter<>;
   py::class_<Bncf>(
       m, "Bounded_normal_change_filter",
-      sms_doc::Surface_mesh_simplification_Bounded_normal_change_filter_class)
+      smsi_doc::Surface_mesh_simplification_Bounded_normal_change_filter_class)
     .def(py::init<>(),
-         sms_doc::Surface_mesh_simplification_Bounded_normal_change_filter_Bounded_normal_change_filter)
+         smsi_doc::Surface_mesh_simplification_Bounded_normal_change_filter_Bounded_normal_change_filter)
     ;
 
   using Pef = SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>;
   py::class_<Pef>(
       m, "Polyhedral_envelope_filter",
-      sms_doc::Surface_mesh_simplification_Polyhedral_envelope_filter_class)
+      smsi_doc::Surface_mesh_simplification_Polyhedral_envelope_filter_class)
     .def(py::init<FT>(), py::arg("dist"),
          "Construct a polyhedral envelope filter with the given distance.")
     ;

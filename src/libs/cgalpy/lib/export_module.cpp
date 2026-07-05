@@ -85,9 +85,9 @@ void export_surface_mesh_shortest_path(py::module_&);
 void export_surface_mesh_topology(py::module_&);
 void export_surface_sweep_2(py::module_&);
 void export_tools(py::module_& m);
-void export_triangulated_surface_mesh_segmentation(py::module_&);
-void export_triangulated_surface_mesh_simplification(py::module_&);
-void export_triangulated_surface_mesh_skeletonization(py::module_&);
+void export_surface_mesh_segmentation(py::module_&);
+void export_surface_mesh_simplification(py::module_&);
+void export_surface_mesh_skeletonization(py::module_&);
 
 void export_triangulation_2(py::module_&);
 void export_tri2_plain(py::module_&);
@@ -364,17 +364,18 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #endif
 
 #if defined(CGALPY_SURFACE_MESH_SEGMENTATION_BINDINGS)
-  export_triangulated_surface_mesh_segmentation(m);
+  auto smse_m = m.def_submodule("Smse");
+  export_surface_mesh_segmentation(smse_m);
 #endif
 
 #if defined(CGALPY_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
-  auto tsms_m = m.def_submodule("Sms");
-  export_triangulated_surface_mesh_simplification(tsms_m);
+  auto smsi_m = m.def_submodule("Smsi");
+  export_surface_mesh_simplification(smsi_m);
 #endif
 
 #if defined(CGALPY_SURFACE_MESH_SKELETONIZATION_BINDINGS)
-  auto tsmsk_m = m.def_submodule("Smsk");
-  export_triangulated_surface_mesh_skeletonization(tsmsk_m);
+  auto smsk_m = m.def_submodule("Smsk");
+  export_surface_mesh_skeletonization(smsk_m);
 #endif
 
 #if defined(CGALPY_SURFACE_MESH_TOPOLOGY_BINDINGS)

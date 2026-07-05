@@ -6,6 +6,7 @@
 
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/kernel_types.hpp"
+#include "cgalpy/sm/surface_mesh_segmentation_types.hpp"
 
 namespace py = nanobind;
 
@@ -58,7 +59,7 @@ auto segmentation_via_sdf_values(const Tm& pm, SegmentPropertyMap segment_ids,
 
 } // namespace segment
 
-void export_triangulated_surface_mesh_segmentation(py::module_& m) {
+void export_surface_mesh_segmentation(py::module_& m) {
   using Tm = cgalpy::pmp::Polygonal_mesh;
   using Pm = Tm;
   using Kernel_ = Kernel;

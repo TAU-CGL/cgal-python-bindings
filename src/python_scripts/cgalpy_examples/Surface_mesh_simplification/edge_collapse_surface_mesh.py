@@ -12,7 +12,7 @@ if len(sys.argv) > 1:
 
 CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
-Sms = CGALPY.Sms
+Smsi = CGALPY.Smsi
 
 
 filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/eight.off")
@@ -33,8 +33,8 @@ print(f"{Sm.num_vertices(mesh)} vertices, {Sm.num_edges(mesh)} edges (BEFORE)")
 # drops below 10% of the initial count
 stop_ratio = float(sys.argv[i]) if len(sys.argv) > i else 0.1
 i += 1
-p = Sms.Edge_count_ratio_stop_predicate(stop_ratio)
-r = Sms.edge_collapse(mesh, p)
+p = Smsi.Edge_count_ratio_stop_predicate(stop_ratio)
+r = Smsi.edge_collapse(mesh, p)
 
 end_time = time.perf_counter_ns()
 

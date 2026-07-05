@@ -11,7 +11,7 @@ if len(sys.argv) > 1:
 
 CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
-Sms = CGALPY.Sms
+Smsi = CGALPY.Smsi
 
 filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/small_cube.off")
 i += 1
@@ -30,14 +30,14 @@ if not Pol3.is_triangle_mesh(surface_mesh):
 # left in the surface mesh drops below the specified number (1000)
 edge_count_treshold = int(sys.argv[i]) if len(sys.argv) > i else 1000
 i += 1
-stop = Sms.Edge_count_stop_predicate(edge_count_treshold)
+stop = Smsi.Edge_count_stop_predicate(edge_count_treshold)
 
 # This the actual call to the simplification algorithm.
 # The surface mesh and stop conditions are mandatory arguments.
 # The index maps are needed because the vertices and edges
 # of this surface mesh lack an "id()" field.
 print(f"Collapsing edges of Polyhedron: {filename}, aiming for {edge_count_treshold} final edges...")
-r = Sms.edge_collapse(surface_mesh, stop)
+r = Smsi.edge_collapse(surface_mesh, stop)
 
 print(f"\nFinished!\n{r} edges removed.\n{surface_mesh.size_of_halfedges()//2} final edges.")
 

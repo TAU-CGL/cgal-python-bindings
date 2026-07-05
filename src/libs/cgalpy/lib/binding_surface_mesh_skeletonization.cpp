@@ -17,13 +17,14 @@
 #include <CGAL/boost/graph/split_graph_into_polylines.h>
 
 #include "cgalpy/polygon_mesh_processing_types.hpp"
+#include "cgalpy/sm/surface_mesh_skeletonization_types.hpp"
 #include "cgalpy/Polyline_visitor.hpp"
 #include "cgalpy/Smsk_docstrings.hpp"
 
 namespace py = nanobind;
 namespace smsk_doc = cgalpy::smsk::docstrings;
 
-void export_triangulated_surface_mesh_skeletonization(py::module_& m) {
+void export_surface_mesh_skeletonization(py::module_& m) {
   using Tm = cgalpy::pmp::Polygonal_mesh;
   using Gt = boost::graph_traits<Tm>;
   using Fd = boost::graph_traits<Tm>::face_descriptor;

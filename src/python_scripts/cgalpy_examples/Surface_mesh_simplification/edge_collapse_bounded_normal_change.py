@@ -12,7 +12,7 @@ if len(sys.argv) > 1:
 
 CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
-Sms = CGALPY.Sms
+Smsi = CGALPY.Smsi
 
 filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/fold.off")
 i += 1
@@ -32,7 +32,7 @@ if not Sm.is_triangle_mesh(surface_mesh):
 # left in the surface mesh drops below the specified number
 stop_n = int(sys.argv[i]) if len(sys.argv) > i else Sm.num_edges(surface_mesh) // 2 - 1
 i += 1
-stop = Sms.Edge_count_stop_predicate(stop_n)
+stop = Smsi.Edge_count_stop_predicate(stop_n)
 
 timer = time.perf_counter_ns()
 # This the actual call to the simplification algorithm.
@@ -40,11 +40,11 @@ timer = time.perf_counter_ns()
 # The index maps are needed because the vertices and edges
 # of this surface mesh lack an "id()" field.
 print(f"Collapsing edges of mesh: {filename}, aiming for {stop_n} final edges...")
-filter = Sms.Bounded_normal_change_filter()
-r = Sms.edge_collapse(surface_mesh, stop,
-                      {"get_cost": Sms.LindstromTurk_cost(),
+filter = Smsi.Bounded_normal_change_filter()
+r = Smsi.edge_collapse(surface_mesh, stop,
+                      {"get_cost": Smsi.LindstromTurk_cost(),
                        "filter": filter,
-                       "get_placement": Sms.LindstromTurk_placement()
+                       "get_placement": Smsi.LindstromTurk_placement()
                       })
 print(f"{(time.perf_counter_ns() - timer) / 1e9} sec")
 Sm.write_polygon_mesh(sys.argv[i] if len(sys.argv) > i else "out_py.off", surface_mesh, {"stream_precision": 17})

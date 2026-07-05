@@ -11,7 +11,7 @@ if len(sys.argv) > 1:
 
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
-Sms = CGALPY.Sms
+Smsi = CGALPY.Smsi
 Sm = CGALPY.Sm
 
 class Stats:
@@ -24,11 +24,11 @@ class Stats:
     self.placement_uncomputable = 0
 
 
-def OnCollected(profile: Sms.Edge_profile, cost) -> None:
+def OnCollected(profile: Smsi.Edge_profile, cost) -> None:
     stats.collected += 1
     sys.stderr.write(f"\rEdges collected: {stats.collected}")
 
-def OnSelected(profile: Sms.Edge_profile, cost, initial: int, current: int) -> None:
+def OnSelected(profile: Smsi.Edge_profile, cost, initial: int, current: int) -> None:
     stats.processed += 1
     if cost is None:
         stats.cost_uncomputable += 1
@@ -36,14 +36,14 @@ def OnSelected(profile: Sms.Edge_profile, cost, initial: int, current: int) -> N
         sys.stderr.write(f"\n")
     sys.stderr.write(f"\r{current}")
 
-def OnCollapsing(profile: Sms.Edge_profile, placement: float | None) -> None:
+def OnCollapsing(profile: Smsi.Edge_profile, placement: float | None) -> None:
     if placement is None:
         stats.placement_uncomputable += 1
 
-def OnNonCollapsable(profile: Sms.Edge_profile) -> None:
+def OnNonCollapsable(profile: Smsi.Edge_profile) -> None:
     stats.non_collapsable += 1
 
-def OnCollapsed(profile: Sms.Edge_profile, vertex: Sm.SM_vertex_index | None) -> None:
+def OnCollapsed(profile: Smsi.Edge_profile, vertex: Sm.SM_vertex_index | None) -> None:
     stats.collapsed += 1
 
 
@@ -61,21 +61,21 @@ if not Sm.is_triangle_mesh(surface_mesh):
     sys.exit(1)
 
 stats = Stats()
-my_visitor = Sms.Edge_collapse_visitor_base()
+my_visitor = Smsi.Edge_collapse_visitor_base()
 
-Sms.set_OnCollected(my_visitor, OnCollected)
-Sms.set_OnSelected(my_visitor, OnSelected)
-Sms.set_OnCollapsing(my_visitor, OnCollapsing)
-Sms.set_OnNonCollapsable(my_visitor, OnNonCollapsable)
-Sms.set_OnCollapsed(my_visitor, OnCollapsed)
+Smsi.set_OnCollected(my_visitor, OnCollected)
+Smsi.set_OnSelected(my_visitor, OnSelected)
+Smsi.set_OnCollapsing(my_visitor, OnCollapsing)
+Smsi.set_OnNonCollapsable(my_visitor, OnNonCollapsable)
+Smsi.set_OnCollapsed(my_visitor, OnCollapsed)
 
 
 ratio = float(sys.argv[i]) if len(sys.argv) > i else 0.1
 i += 1
 
-stop = Sms.Edge_count_ratio_stop_predicate(ratio)
+stop = Smsi.Edge_count_ratio_stop_predicate(ratio)
 
-r = Sms.edge_collapse(surface_mesh, stop, {"visitor": my_visitor})
+r = Smsi.edge_collapse(surface_mesh, stop, {"visitor": my_visitor})
 
 print(f"\nEdges collected: {stats.collected}",
       f"\nEdges processed: {stats.processed}",

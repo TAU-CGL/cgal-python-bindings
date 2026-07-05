@@ -13,18 +13,18 @@ if len(sys.argv) > 1:
 CGALPY = importlib.import_module(lib)
 Ker = CGALPY.Ker
 Sm = CGALPY.Sm
-Sms = CGALPY.Sms
+Smsi = CGALPY.Smsi
 
 def collapse_gh(gh_policy, mesh, ratio):
     start_time = time.perf_counter_ns()
 
-    stop = Sms.Edge_count_ratio_stop_predicate(ratio)
+    stop = Smsi.Edge_count_ratio_stop_predicate(ratio)
     gh_cost = gh_policy.get_cost()
     gh_placement = gh_policy.get_placement()
-    bncp_chooser = Sms.Bounded_normal_change_placement()
+    bncp_chooser = Smsi.Bounded_normal_change_placement()
     placement = bncp_chooser(gh_placement)
 
-    r = Sms.edge_collapse(mesh, stop, {
+    r = Smsi.edge_collapse(mesh, stop, {
                           "get_cost": gh_cost,
                           "get_placement": placement
                           })
@@ -61,9 +61,9 @@ policy = sys.argv[i] if len(sys.argv) > i else "cp" # classic plane
 i += 1
 
 if (policy == "cp"):
-    collapse_gh(Sms.GarlandHeckbert_plane_policies(surface_mesh), surface_mesh, ratio)
+    collapse_gh(Smsi.GarlandHeckbert_plane_policies(surface_mesh), surface_mesh, ratio)
 elif (policy == "ct"):
-    collapse_gh(Sms.GarlandHeckbert_triangle_policies(surface_mesh), surface_mesh, ratio)
+    collapse_gh(Smsi.GarlandHeckbert_triangle_policies(surface_mesh), surface_mesh, ratio)
 
 
 Sm.write_polygon_mesh(sys.argv[i] if len(sys.argv) > i else "out.off", surface_mesh)

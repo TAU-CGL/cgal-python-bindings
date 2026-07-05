@@ -8,7 +8,7 @@ The GitHub smoke workflow contains curated deterministic C++/Python example comp
 - `As2`: deferred after `find_optimal_alpha` / iterator-conversion issues; mentor guidance was to move on for now.
 - `Bv` and `Bvr`: visual/Qt/OpenGL-oriented modules; defer until visual CI uses offscreen rendering and pixel-buffer comparison.
 - `Nef3`: skipped for now because the currently exposed Python API is too limited for a faithful direct C++ example translation.
-- `Sms`: skipped for now because `edge_collapse`/named-parameter support is not ready for the current bindings.
+- `Smsi`: skipped for now because `edge_collapse`/named-parameter support is not ready for the current bindings.
 - `Sd`: TODO; avoid RANSAC-based stdout comparisons for now because Efficient RANSAC output was observed to be nondeterministic.
 - `Pp2`: skipped for now because no usable Point_set_processing_2 config/example pair was found in the current checked tree.
 
@@ -29,7 +29,7 @@ Intentionally deferred from stdout comparison:
 - `As2`: deferred after `find_optimal_alpha` / iterator-conversion issues; mentor guidance was to move on.
 - `Bv` and `Bvr`: visual/Qt/OpenGL-oriented modules; validate with visual CI/offscreen pixel-buffer comparison instead of stdout.
 - `Nef3`: current Python API is too limited for a faithful direct C++ example translation.
-- `Sms`: `edge_collapse` / named-parameter support is not ready for the current bindings.
+- `Smsi`: `edge_collapse` / named-parameter support is not ready for the current bindings.
 - `Sd`: avoid RANSAC-based stdout checks because Efficient RANSAC output was observed to be nondeterministic.
 - `Pp2`: no usable Point_set_processing_2 config/example pair was found in the current checked tree.
 

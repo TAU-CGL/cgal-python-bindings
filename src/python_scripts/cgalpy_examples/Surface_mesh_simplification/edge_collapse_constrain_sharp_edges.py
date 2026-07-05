@@ -11,7 +11,7 @@ if len(sys.argv) > 1:
 
 CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
-Sms = CGALPY.Sms
+Smsi = CGALPY.Smsi
 
 def is_border(e, sm):
   return (Pol3.face(Pol3.halfedge(e, sm), sm) == Pol3.null_face()) or (Pol3.face(Pol3.opposite(Pol3.halfedge(e, sm), sm), sm) == Pol3.null_face())
@@ -69,11 +69,11 @@ with open("constrained_edges.polylines.txt", "w") as cst_output:
 print(f"# sharp edges = {nb_sharp_edges}")
 
 # Contract the surface mesh as much as possible
-stop = Sms.Edge_count_stop_predicate(0)
-placement = Sms.Constrained_placement_Midpoint_placement_Edge_bool_map(constraint_hmap)
+stop = Smsi.Edge_count_stop_predicate(0)
+placement = Smsi.Constrained_placement_Midpoint_placement_Edge_bool_map(constraint_hmap)
 
 print(f"Collapsing as many non-sharp edges of mesh: {filename} as possible...")
-r = Sms.edge_collapse(surface_mesh, stop,
+r = Smsi.edge_collapse(surface_mesh, stop,
             {"edge_is_constrained_map": constraint_hmap,
              "placement": placement
              })
@@ -92,7 +92,7 @@ assert constrained_before == constrained_after
 print("OK")
 
 print("Check that no removable edge has been forgotten...")
-r = Sms.edge_collapse(surface_mesh, stop,
+r = Smsi.edge_collapse(surface_mesh, stop,
             {"edge_is_constrained_map": constraint_hmap,
              "placement": placement
             })
