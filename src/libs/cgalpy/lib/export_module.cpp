@@ -81,6 +81,7 @@ void export_surface_mesh(py::module_&);
 void export_surface_mesh_approximation(py::module_&);
 void export_surface_mesh_deformation(py::module_&);
 void export_surface_mesh_parameterization(py::module_&);
+void export_surface_mesh_shortest_path(py::module_&);
 void export_surface_sweep_2(py::module_&);
 void export_tools(py::module_& m);
 void export_triangulated_surface_mesh_segmentation(py::module_&);
@@ -354,6 +355,11 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #if defined(CGALPY_SURFACE_MESH_PARAMETERIZATION_BINDINGS)
   auto smp_m = m.def_submodule("Smp");
   export_surface_mesh_parameterization(smp_m);
+#endif
+
+#if defined(CGALPY_SURFACE_MESH_SHORTEST_PATH_BINDINGS)
+  auto smsh_m = m.def_submodule("Smsh");
+  export_surface_mesh_shortest_path(smsh_m);
 #endif
 
 #if defined(CGALPY_SURFACE_MESH_SEGMENTATION_BINDINGS)
