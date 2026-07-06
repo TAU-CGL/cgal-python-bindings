@@ -12,6 +12,7 @@ if len(sys.argv) > 1:
 
 CGALPY = importlib.import_module(lib)
 Sm = CGALPY.Sm
+Smse = CGALPY.Smse
 
 filename = CGALPY.data_file_path("meshes/cactus.off")
 
@@ -21,24 +22,25 @@ if not Sm.is_triangle_mesh(mesh):
   sys.stderr.write("Invalid input file.\n")
   sys.exit(1)
 
-sdf_property_map = mesh.add_property_map_face_FT("f:sdf")[0]
+sdf_property_map = mesh.add_property_map_face_float("f:sdf")[0]
 
 # compute SDF values
 # We can't use default parameters for number of rays, and cone angle
 # and the postprocessing
-CGALPY.sdf_values(mesh, sdf_property_map, 2.0 / 3.0 * math.pi, 25, True)
+Smse.sdf_values(mesh, sdf_property_map, 2.0 / 3.0 * math.pi, 25, True)
 
 # create a property-map for segment-ids
 segment_property_map = mesh.add_property_map_face_size_t("f:sid")[0]
 
 # segment the mesh using default parameters for number of levels, and smoothing lambda
 # Any other scalar values can be used instead of using SDF values computed using the CGAL function
-number_of_segments = CGALPY.segmentation_from_sdf_values(mesh, sdf_property_map, segment_property_map)
+number_of_segments = Smse.segmentation_from_sdf_values(mesh, sdf_property_map, segment_property_map)
 
 print("Number of segments: ", number_of_segments)
 # print segment-ids
 
-for fd in Sm.faces(mesh):
+for i in range(mesh.number_of_faces()):
+  fd = Sm.Face_index(i)
   # ids are between [0, number_of_segments -1]
   print(segment_property_map[fd], " ")
 print()
@@ -48,4 +50,4 @@ smoothing_lambda = 0.3  # importance of surface features, suggested to be in-bet
 
 # Note that we can use the same SDF values (sdf_property_map) over and over again for segmentation.
 # This feature is relevant for segmenting the mesh several times with different parameters.
-CGALPY.segmentation_from_sdf_values(mesh, sdf_property_map, segment_property_map, number_of_clusters, smoothing_lambda)
+Smse.segmentation_from_sdf_values(mesh, sdf_property_map, segment_property_map, number_of_clusters, smoothing_lambda)

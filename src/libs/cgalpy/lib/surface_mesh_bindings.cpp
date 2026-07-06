@@ -10,7 +10,9 @@
 
 #define CGAL_USE_BASIC_VIEWER
 
+#include <stdexcept>
 #include <string>
+#include <utility>
 
 #include <boost/graph/graph_traits.hpp>
 #include <boost/property_map/vector_property_map.hpp>
@@ -33,6 +35,7 @@
 #include <CGAL/boost/graph/Face_filtered_graph.h>
 #include <CGAL/boost/graph/helpers.h>
 #include <CGAL/IO/polygon_soup_io.h>
+#include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 
 //! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
@@ -58,6 +61,12 @@
 #include "cgalpy/generator_functions.hpp"
 #include "cgalpy/make_iterator.hpp"
 #include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/Named_parameter_repair_polygon_soup.hpp"
+#include "cgalpy/Named_parameter_stream_precision.hpp"
+#include "cgalpy/Named_parameter_use_binary_mode.hpp"
+#include "cgalpy/Named_parameter_verbose.hpp"
+#include "cgalpy/Named_parameter_wrapper.hpp"
+#include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/surface_mesh_types.hpp"
 
 namespace py = nanobind;
@@ -258,6 +267,64 @@ auto read_polygon_soup(const std::string& fname, const py::dict& np = py::dict()
     throw std::runtime_error("Cannot read file!");
 
   return std::make_tuple(points, polygons);
+}
+
+/*! A class template that wraps CGAL::IO::read_polygon_mesh().
+ */
+template <typename NamedParameter, typename... Args>
+struct Read_polygon_mesh_wrapper {
+  static auto call(NamedParameter& np, Args&&... args)
+  { return CGAL::IO::read_polygon_mesh(std::forward<Args>(args)..., np); }
+};
+
+//! Read a surface mesh from a file.
+template <typename SurfaceMesh>
+void read_polygon_mesh_impl(const std::string& filename,
+                            SurfaceMesh& sm,
+                            const py::dict& params = py::dict()) {
+  using Sm = SurfaceMesh;
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_verbose verbose_op;
+  cgalpy::Named_parameter_repair_polygon_soup repair_polygon_soup_op;
+  cgalpy::Named_parameter_wrapper<Read_polygon_mesh_wrapper,
+                                  const std::string&, Sm&>
+    wrapper(filename, sm);
+  bool res = cgalpy::named_parameter_applicator
+    (wrapper, np, params, verbose_op, repair_polygon_soup_op);
+  if (! res) throw std::runtime_error("Cannot read file!");
+}
+
+//! Read a surface mesh from a file.
+template <typename SurfaceMesh>
+SurfaceMesh read_polygon_mesh(const std::string& filename,
+                              const py::dict& params = py::dict()) {
+  SurfaceMesh sm;
+  read_polygon_mesh_impl(filename, sm, params);
+  return sm;
+}
+
+/*! A class template that wraps CGAL::IO::write_polygon_mesh().
+ */
+template <typename NamedParameter, typename... Args>
+struct Write_polygon_mesh_wrapper {
+  static auto call(NamedParameter& np, Args&&... args)
+  { return CGAL::IO::write_polygon_mesh(std::forward<Args>(args)..., np); }
+};
+
+//! Write a surface mesh to a file.
+template <typename SurfaceMesh>
+bool write_polygon_mesh(const std::string& filename,
+                        const SurfaceMesh& sm,
+                        const py::dict& params = py::dict()) {
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_verbose verbose_op;
+  cgalpy::Named_parameter_stream_precision stream_precision_op;
+  cgalpy::Named_parameter_use_binary_mode use_binary_mode_op;
+  cgalpy::Named_parameter_wrapper<Write_polygon_mesh_wrapper,
+                                  const std::string&, const SurfaceMesh&>
+    wrapper(filename, sm);
+  return cgalpy::named_parameter_applicator
+    (wrapper, np, params, verbose_op, stream_precision_op, use_binary_mode_op);
 }
 
 // Draw a surface mesh.
@@ -942,6 +1009,14 @@ void export_surface_mesh(py::module_& m) {
   m.def("read_polygon_soup", &cgalpy::sm::read_polygon_soup<Sm_3>,
         py::arg("fname"), py::arg("np") = py::dict(),
         "Reads a polygon soup from a file and returns (points, polygons).");
+
+  m.def("read_polygon_mesh", &cgalpy::sm::read_polygon_mesh<Sm_3>,
+        py::arg("filename"), py::arg("params") = py::dict(),
+        "Reads a surface mesh from a file.");
+
+  m.def("write_polygon_mesh", &cgalpy::sm::write_polygon_mesh<Sm_3>,
+        py::arg("filename"), py::arg("sm"), py::arg("params") = py::dict(),
+        "Writes a surface mesh to a file.");
 
   // cgalpy::sm::vertex_map<Sm_3, Pnt>(m, "vertex_point_boost_map", "Vertex_point_boost_map"); //this is the boost::property_map
 
