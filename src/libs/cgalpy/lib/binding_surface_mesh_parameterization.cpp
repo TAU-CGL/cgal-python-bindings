@@ -15,8 +15,12 @@
 
 #include <CGAL/boost/graph/helpers.h>
 #include <CGAL/Polygon_mesh_processing/measure.h>
+#include <CGAL/Surface_mesh_parameterization/Barycentric_mapping_parameterizer_3.h>
+#include <CGAL/Surface_mesh_parameterization/Discrete_authalic_parameterizer_3.h>
+#include <CGAL/Surface_mesh_parameterization/Discrete_conformal_map_parameterizer_3.h>
 #include <CGAL/Surface_mesh_parameterization/Error_code.h>
 #include <CGAL/Surface_mesh_parameterization/IO/File_off.h>
+#include <CGAL/Surface_mesh_parameterization/Mean_value_coordinates_parameterizer_3.h>
 #include <CGAL/Surface_mesh_parameterization/parameterize.h>
 
 #include "cgalpy/sm/surface_mesh_parameterization_types.hpp"
@@ -34,8 +38,53 @@ using Vertex_descriptor = boost::graph_traits<Surface_mesh_3>::vertex_descriptor
 using Halfedge_descriptor = boost::graph_traits<Surface_mesh_3>::halfedge_descriptor;
 using UV_pmap = Surface_mesh_3::Property_map<Vertex_descriptor, Point_2>;
 
+enum class Parameterization_method {
+  Mean_value,
+  Barycentric,
+  Discrete_authalic,
+  Discrete_conformal
+};
+
+Smp::Error_code parameterize_impl(Surface_mesh_3& tmesh,
+                                  Halfedge_descriptor bhd,
+                                  UV_pmap uv_map,
+                                  Parameterization_method method) {
+  switch (method) {
+   case Parameterization_method::Mean_value:
+    return Smp::parameterize(
+      tmesh,
+      Smp::Mean_value_coordinates_parameterizer_3<Surface_mesh_3>(),
+      bhd,
+      uv_map);
+
+   case Parameterization_method::Barycentric:
+    return Smp::parameterize(
+      tmesh,
+      Smp::Barycentric_mapping_parameterizer_3<Surface_mesh_3>(),
+      bhd,
+      uv_map);
+
+   case Parameterization_method::Discrete_authalic:
+    return Smp::parameterize(
+      tmesh,
+      Smp::Discrete_authalic_parameterizer_3<Surface_mesh_3>(),
+      bhd,
+      uv_map);
+
+   case Parameterization_method::Discrete_conformal:
+    return Smp::parameterize(
+      tmesh,
+      Smp::Discrete_conformal_map_parameterizer_3<Surface_mesh_3>(),
+      bhd,
+      uv_map);
+  }
+
+  return Smp::ERROR_WRONG_PARAMETER;
+}
+
 Smp::Error_code parameterize_to_off(Surface_mesh_3& tmesh,
-                                    const std::string& output_filename) {
+                                    const std::string& output_filename,
+                                    Parameterization_method method = Parameterization_method::Mean_value) {
   if (!CGAL::is_triangle_mesh(tmesh)) return Smp::ERROR_NON_TRIANGULAR_MESH;
 
   Halfedge_descriptor bhd = Pmp::longest_border(tmesh).first;
@@ -45,7 +94,7 @@ Smp::Error_code parameterize_to_off(Surface_mesh_3& tmesh,
 
   UV_pmap uv_map = tmesh.add_property_map<Vertex_descriptor, Point_2>("h:uv").first;
 
-  Smp::Error_code err = Smp::parameterize(tmesh, bhd, uv_map);
+  Smp::Error_code err = parameterize_impl(tmesh, bhd, uv_map, method);
   if (err != Smp::OK) return err;
 
   std::ofstream out(output_filename);
@@ -58,6 +107,12 @@ Smp::Error_code parameterize_to_off(Surface_mesh_3& tmesh,
 } // namespace
 
 void export_surface_mesh_parameterization(py::module_& m) {
+  py::enum_<Parameterization_method>(m, "Parameterization_method")
+    .value("MEAN_VALUE", Parameterization_method::Mean_value)
+    .value("BARYCENTRIC", Parameterization_method::Barycentric)
+    .value("DISCRETE_AUTHALIC", Parameterization_method::Discrete_authalic)
+    .value("DISCRETE_CONFORMAL", Parameterization_method::Discrete_conformal);
+
   py::enum_<Smp::Error_code>(m, "Error_code")
     .value("OK", Smp::OK)
     .value("ERROR_EMPTY_MESH", Smp::ERROR_EMPTY_MESH)
@@ -85,5 +140,6 @@ void export_surface_mesh_parameterization(py::module_& m) {
   m.def("parameterize_to_off",
         &parameterize_to_off,
         py::arg("mesh"), py::arg("output_filename"),
+        py::arg("method") = Parameterization_method::Mean_value,
         "Parameterizes a triangulated surface mesh and writes the UV map to an OFF file.");
 }
