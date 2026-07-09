@@ -6,7 +6,10 @@
 //
 // Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
 
+#include <vector>
+
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/vector.h>
 
 #include <CGAL/Surface_mesh_deformation.h>
 
@@ -18,6 +21,7 @@ namespace {
 
 using Surface_mesh_3 = cgalpy::sm::Surface_mesh_3;
 using Point_3 = Kernel::Point_3;
+using Vector_3 = Kernel::Vector_3;
 using Vertex_descriptor = boost::graph_traits<Surface_mesh_3>::vertex_descriptor;
 using Surface_mesh_deformation = CGAL::Surface_mesh_deformation<Surface_mesh_3>;
 
@@ -41,10 +45,22 @@ void export_surface_mesh_deformation(py::module_& m) {
          },
          py::arg("mesh"),
          "Inserts all vertices of the given surface mesh into the region of interest.")
+    .def("insert_roi_vertices",
+         [](Surface_mesh_deformation& self, const std::vector<Vertex_descriptor>& vertices) {
+           self.insert_roi_vertices(vertices.begin(), vertices.end());
+         },
+         py::arg("vertices"),
+         "Inserts a sequence of vertices into the region of interest.")
     .def("insert_control_vertex",
          &Surface_mesh_deformation::insert_control_vertex,
          py::arg("vd"),
          "Inserts one control vertex.")
+    .def("insert_control_vertices",
+         [](Surface_mesh_deformation& self, const std::vector<Vertex_descriptor>& vertices) {
+           self.insert_control_vertices(vertices.begin(), vertices.end());
+         },
+         py::arg("vertices"),
+         "Inserts a sequence of control vertices.")
     .def("preprocess",
          &Surface_mesh_deformation::preprocess,
          "Preprocesses after ROI or control vertex changes.")
@@ -69,7 +85,22 @@ void export_surface_mesh_deformation(py::module_& m) {
          &Surface_mesh_deformation::set_tolerance,
          py::arg("tolerance"),
          "Sets the default deformation tolerance.")
+    .def("translate",
+         [](Surface_mesh_deformation& self, Vertex_descriptor vd, const Vector_3& vector) {
+           self.translate(vd, vector);
+         },
+         py::arg("vd"), py::arg("vector"),
+         "Translates one control vertex target position by a vector.")
+    .def("translate",
+         [](Surface_mesh_deformation& self, const std::vector<Vertex_descriptor>& vertices, const Vector_3& vector) {
+           self.translate(vertices.begin(), vertices.end(), vector);
+         },
+         py::arg("vertices"), py::arg("vector"),
+         "Translates a sequence of control vertex target positions by a vector.")
     .def("reset",
          &Surface_mesh_deformation::reset,
-         "Restores ROI vertices to their initial positions.");
+         "Restores ROI vertices to their initial positions.")
+    .def("overwrite_initial_geometry",
+         &Surface_mesh_deformation::overwrite_initial_geometry,
+         "Sets the current ROI vertex positions as the new initial geometry.");
 }
