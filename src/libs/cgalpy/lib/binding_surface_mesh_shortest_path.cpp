@@ -17,6 +17,7 @@
 #include <nanobind/stl/string.h>
 #include <nanobind/stl/vector.h>
 
+#include <CGAL/number_utils.h>
 #include <CGAL/Random.h>
 #include <CGAL/Surface_mesh_shortest_path.h>
 #include <CGAL/Surface_mesh_shortest_path/barycentric.h>
@@ -54,16 +55,42 @@ void add_source_point(Surface_mesh_shortest_path& self,
   self.add_source_point(face, make_barycentric_coordinates(location));
 }
 
+void add_source_vertex(Surface_mesh_shortest_path& self,
+                       Vertex_descriptor vertex) {
+  self.add_source_point(vertex);
+}
+
 Point_3 point(Surface_mesh_shortest_path& self,
               Face_descriptor face,
               const Python_barycentric_coordinates& location) {
   return self.point(face, make_barycentric_coordinates(location));
 }
 
+double shortest_distance_to_source_points(Surface_mesh_shortest_path& self,
+                                          Vertex_descriptor vertex) {
+  return CGAL::to_double(self.shortest_distance_to_source_points(vertex).first);
+}
+
+double shortest_distance_to_source_points(Surface_mesh_shortest_path& self,
+                                          Face_descriptor face,
+                                          const Python_barycentric_coordinates& location) {
+  return CGAL::to_double
+    (self.shortest_distance_to_source_points(face, make_barycentric_coordinates(location)).first);
+}
+
 std::vector<Point_3> shortest_path_points_to_source_points(Surface_mesh_shortest_path& self,
                                                            Vertex_descriptor vertex) {
   std::vector<Point_3> points;
   self.shortest_path_points_to_source_points(vertex, std::back_inserter(points));
+  return points;
+}
+
+std::vector<Point_3> shortest_path_points_to_source_points(Surface_mesh_shortest_path& self,
+                                                           Face_descriptor face,
+                                                           const Python_barycentric_coordinates& location) {
+  std::vector<Point_3> points;
+  self.shortest_path_points_to_source_points(face, make_barycentric_coordinates(location),
+                                             std::back_inserter(points));
   return points;
 }
 
@@ -99,14 +126,43 @@ void export_surface_mesh_shortest_path(py::module_& m) {
          &add_source_point,
          py::arg("face"), py::arg("location"),
          "Adds a source point inside a face using barycentric coordinates.")
+    .def("add_source_point",
+         &add_source_vertex,
+         py::arg("vertex"),
+         "Adds a mesh vertex as a source point.")
+    .def("build_sequence_tree",
+         &Surface_mesh_shortest_path::build_sequence_tree,
+         "Builds the internal sequence tree for the current source points.")
+    .def("clear",
+         &Surface_mesh_shortest_path::clear,
+         "Removes all source points and clears the internal sequence tree.")
+    .def("number_of_source_points",
+         &Surface_mesh_shortest_path::number_of_source_points,
+         "Returns the number of source points.")
     .def("point",
          &point,
          py::arg("face"), py::arg("location"),
          "Returns the 3D point at barycentric coordinates in a face.")
+    .def("shortest_distance_to_source_points",
+         py::overload_cast<Surface_mesh_shortest_path&, Vertex_descriptor>
+           (&shortest_distance_to_source_points),
+         py::arg("vertex"),
+         "Returns the shortest distance from a vertex to the closest source point.")
+    .def("shortest_distance_to_source_points",
+         py::overload_cast<Surface_mesh_shortest_path&, Face_descriptor, const Python_barycentric_coordinates&>
+           (&shortest_distance_to_source_points),
+         py::arg("face"), py::arg("location"),
+         "Returns the shortest distance from a face location to the closest source point.")
     .def("shortest_path_points_to_source_points",
-         &shortest_path_points_to_source_points,
+         py::overload_cast<Surface_mesh_shortest_path&, Vertex_descriptor>
+           (&shortest_path_points_to_source_points),
          py::arg("vertex"),
          "Returns the points of the shortest path from a vertex to the source points.")
+    .def("shortest_path_points_to_source_points",
+         py::overload_cast<Surface_mesh_shortest_path&, Face_descriptor, const Python_barycentric_coordinates&>
+           (&shortest_path_points_to_source_points),
+         py::arg("face"), py::arg("location"),
+         "Returns the points of the shortest path from a face location to the source points.")
     .def("write_shortest_paths_to_source_points",
          &write_shortest_paths_to_source_points,
          py::arg("mesh"), py::arg("filename"),
