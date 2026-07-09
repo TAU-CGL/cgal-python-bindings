@@ -185,12 +185,12 @@ void export_surface_mesh_skeletonization(py::module_& m) {
         "Returns the number of edges in the skeleton.");
   m.def("source",
         [](const boost::list_edge<unsigned long, boost::no_property>& e,
-           const Skeleton& skeleton) { source(e, skeleton); },
+           const Skeleton& skeleton) { return boost::source(e, skeleton); },
         py::arg("e"), py::arg("skeleton"),
         "Returns the source vertex of the edge e.");
   m.def("target",
         [](const boost::list_edge<unsigned long, boost::no_property>& e,
-           const Skeleton& skeleton) { target(e, skeleton); },
+           const Skeleton& skeleton) { return boost::target(e, skeleton); },
         py::arg("e"), py::arg("skeleton"),
         "Returns the target vertex of the edge e.");
 
