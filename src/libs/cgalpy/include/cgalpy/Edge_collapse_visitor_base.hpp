@@ -3,6 +3,7 @@
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/function.h>
+#include <nanobind/stl/optional.h>
 #include <CGAL/Surface_mesh_simplification/Edge_collapse_visitor_base.h>
 
 namespace py = nanobind;

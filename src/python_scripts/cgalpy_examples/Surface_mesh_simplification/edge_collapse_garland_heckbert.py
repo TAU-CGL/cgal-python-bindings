@@ -21,12 +21,12 @@ def collapse_gh(gh_policy, mesh, ratio):
     stop = Smsi.Edge_count_ratio_stop_predicate(ratio)
     gh_cost = gh_policy.get_cost()
     gh_placement = gh_policy.get_placement()
-    bncp_chooser = Smsi.Bounded_normal_change_placement()
-    placement = bncp_chooser(gh_placement)
+    filter = Smsi.Bounded_normal_change_filter()
 
     r = Smsi.edge_collapse(mesh, stop, {
                           "get_cost": gh_cost,
-                          "get_placement": placement
+                          "filter": filter,
+                          "get_placement": gh_placement
                           })
 
     end_time = time.perf_counter_ns()
@@ -36,7 +36,7 @@ def collapse_gh(gh_policy, mesh, ratio):
 
 
 
-filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/cube-meshed.off")
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/cube-subdivided.off")
 i += 1
 
 try:

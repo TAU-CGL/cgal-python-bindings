@@ -46,7 +46,7 @@ for e in surface_mesh.edges():
 print(f"Collapsing as many edges of mesh: {filename} as possible...")
 r = Smsi.edge_collapse(surface_mesh, stop,
                       {"edge_is_constrained_map": bem,
-                       "placement": Smsi.Constrained_placement_Midpoint_placement_Edge_bool_map(bem)
+                       "get_placement": Smsi.Constrained_placement_Midpoint_placement_Edge_bool_map(bem)
                       })
 
 print(f"\nFinished!\n{r} edges removed.\n",
