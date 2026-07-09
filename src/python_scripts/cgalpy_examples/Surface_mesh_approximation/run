@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+set -e
+
+cd "$(dirname "$0")"
+
+PYTHON_BIN="${PYTHON:-python3}"
+LIB="${1:-CGALPY_kerEpic_bgl_sm_pmpSm_smaSm_smdecSm_smdefSm_smpSm_smshSm_smtSm_smseSm_smsiSm_smskSm}"
+
+"$PYTHON_BIN" ./vsa_simple_approximation_example.py "$LIB"

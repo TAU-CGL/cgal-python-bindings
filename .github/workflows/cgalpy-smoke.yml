@@ -241,6 +241,16 @@ jobs:
             package_name: CGALPY_kerEpic_bgl_sm_pmpSmIo_smskSm
             wheel_pattern: cgalpy_kerepic_bgl_sm_pmpsmio_smsksm-*.whl
             extra_submodule: Smsk
+          - config: sm_all9_epic
+            label: SM all-nine EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/sm_all9_epic.cmake
+            module_name: CGALPY_kerEpic_bgl_sm_pmpSm_smaSm_smdecSm_smdefSm_smpSm_smshSm_smtSm_smseSm_smsiSm_smskSm
+            package_name: CGALPY_kerEpic_bgl_sm_pmpSm_smaSm_smdecSm_smdefSm_smpSm_smshSm_smtSm_smseSm_smsiSm_smskSm
+            wheel_pattern: cgalpy_kerepic_bgl_sm_pmpsm_smasm_smdecsm_smdefsm_smpsm_smshsm_smtsm_smsesm_smsism_smsksm-*.whl
+            extra_submodule: Sm
           - config: tri2_ct_wi_epic
             label: TRI2 constrained-Delaunay EPIC
             compiler_label: Clang
@@ -916,6 +926,37 @@ jobs:
               --work-dir "${WORK_DIR}" \
               --build-type Release
           done
+
+      - name: Run Surface Mesh all-nine examples
+        if: matrix.config == 'sm_all9_epic'
+        run: |
+          set -euxo pipefail
+
+          export PYTHONPATH="${BUILD_DIR}/src/libs/cgalpy:${BUILD_DIR}/src/libs"
+          export PYTHON="$(command -v python)"
+          LIB="${{ matrix.module_name }}"
+
+          for run_file in \
+            src/python_scripts/cgalpy_examples/Surface_mesh_approximation/run \
+            src/python_scripts/cgalpy_examples/Surface_mesh_decomposition/run \
+            src/python_scripts/cgalpy_examples/Surface_mesh_deformation/run \
+            src/python_scripts/cgalpy_examples/Surface_mesh_parameterization/run \
+            src/python_scripts/cgalpy_examples/Surface_mesh_segmentation/run \
+            src/python_scripts/cgalpy_examples/Surface_mesh_shortest_path/run \
+            src/python_scripts/cgalpy_examples/Surface_mesh_simplification/run \
+            src/python_scripts/cgalpy_examples/Surface_mesh_skeletonization/run \
+            src/python_scripts/cgalpy_examples/Surface_mesh_topology/run
+          do
+            "${run_file}" "${LIB}"
+          done
+
+          rm -f \
+            src/python_scripts/cgalpy_examples/Surface_mesh_deformation/deform_1.off \
+            src/python_scripts/cgalpy_examples/Surface_mesh_deformation/deform_2.off \
+            src/python_scripts/cgalpy_examples/Surface_mesh_parameterization/result.off \
+            src/python_scripts/cgalpy_examples/Surface_mesh_shortest_path/shortest_paths_with_id.polylines.txt \
+            src/python_scripts/cgalpy_examples/Surface_mesh_simplification/out.off
+          git checkout -- src/python_scripts/cgalpy_examples/Surface_mesh_skeletonization/skel-sm.polylines.txt
 
       - name: Install generated wheel in clean venv
         run: |
