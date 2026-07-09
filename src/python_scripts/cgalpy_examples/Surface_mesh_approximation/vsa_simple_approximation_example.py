@@ -23,7 +23,10 @@ if not Sm.is_triangle_mesh(mesh):
 is_manifold, anchors, triangles = Sma.approximate_triangle_mesh(
   mesh,
   Sma.Verbose_level.MAIN_STEPS,
-  200
+  200,
+  Sma.Seeding_method.HIERARCHICAL,
+  number_of_iterations=20,
+  subdivision_ratio=5.0
 )
 
 print("#anchor points:", len(anchors))

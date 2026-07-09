@@ -35,7 +35,16 @@ using Approximation_result =
 //! Approximate a triangle mesh and return the manifold flag, anchor points, and indexed triangles.
 Approximation_result approximate_triangle_mesh(const Surface_mesh_3& tmesh,
                                                Sma::Verbose_level verbose_level = Sma::SILENT,
-                                               std::size_t max_number_of_proxies = 200) {
+                                               std::size_t max_number_of_proxies = 200,
+                                               Sma::Seeding_method seeding_method = Sma::HIERARCHICAL,
+                                               double min_error_drop = 0.0,
+                                               std::size_t number_of_relaxations = 5,
+                                               std::size_t number_of_iterations = 20,
+                                               double subdivision_ratio = 5.0,
+                                               bool relative_to_chord = false,
+                                               bool with_dihedral_angle = false,
+                                               bool optimize_anchor_location = true,
+                                               bool pca_plane = false) {
   std::vector<Point_3> anchors;
   std::vector<Indexed_triangle> triangles;
 
@@ -43,6 +52,15 @@ Approximation_result approximate_triangle_mesh(const Surface_mesh_3& tmesh,
     (tmesh,
      CGAL::parameters::verbose_level(verbose_level)
                      .max_number_of_proxies(max_number_of_proxies)
+                     .seeding_method(seeding_method)
+                     .min_error_drop(min_error_drop)
+                     .number_of_relaxations(number_of_relaxations)
+                     .number_of_iterations(number_of_iterations)
+                     .subdivision_ratio(subdivision_ratio)
+                     .relative_to_chord(relative_to_chord)
+                     .with_dihedral_angle(with_dihedral_angle)
+                     .optimize_anchor_location(optimize_anchor_location)
+                     .pca_plane(pca_plane)
                      .anchors(std::back_inserter(anchors))
                      .triangles(std::back_inserter(triangles)));
 
@@ -57,10 +75,24 @@ void export_surface_mesh_approximation(py::module_& m) {
     .value("MAIN_STEPS", Sma::MAIN_STEPS)
     .value("VERBOSE", Sma::VERBOSE);
 
+  py::enum_<Sma::Seeding_method>(m, "Seeding_method")
+    .value("RANDOM", Sma::RANDOM)
+    .value("INCREMENTAL", Sma::INCREMENTAL)
+    .value("HIERARCHICAL", Sma::HIERARCHICAL);
+
   m.def("approximate_triangle_mesh",
         &approximate_triangle_mesh,
         py::arg("tmesh"),
         py::arg("verbose_level") = Sma::SILENT,
         py::arg("max_number_of_proxies") = std::size_t(200),
+        py::arg("seeding_method") = Sma::HIERARCHICAL,
+        py::arg("min_error_drop") = 0.0,
+        py::arg("number_of_relaxations") = std::size_t(5),
+        py::arg("number_of_iterations") = std::size_t(20),
+        py::arg("subdivision_ratio") = 5.0,
+        py::arg("relative_to_chord") = false,
+        py::arg("with_dihedral_angle") = false,
+        py::arg("optimize_anchor_location") = true,
+        py::arg("pca_plane") = false,
         "Approximates a triangle mesh and returns (is_manifold, anchors, triangles).");
 }
