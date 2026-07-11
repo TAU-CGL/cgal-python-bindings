@@ -8,7 +8,8 @@
 //            Efi Fogel          <efifogel@gmail.com>
 //            Utkarsh Khajuria   <utkarshkhajuria55@gmail.com>
 
-#include <boost/iterator/function_output_iterator.hpp>
+#include <cstdint>
+#include <iterator>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/ndarray.h>
@@ -56,6 +57,41 @@ namespace py = nanobind;
 
 namespace psp {
 
+template <typename T>
+class Python_list_output_iterator {
+public:
+  using iterator_category = std::output_iterator_tag;
+  using value_type = T;
+  using difference_type = void;
+  using pointer = void;
+  using reference = void;
+
+  explicit Python_list_output_iterator(py::list& points) :
+    m_points(&points)
+  {}
+
+  class Output_proxy {
+  public:
+    explicit Output_proxy(py::list* points) : m_points(points) {}
+
+    Output_proxy& operator=(const T& value) {
+      m_points->append(value);
+      return *this;
+    }
+
+  private:
+    py::list* m_points;
+  };
+
+  Output_proxy operator*() { return Output_proxy(m_points); }
+
+  Python_list_output_iterator& operator++() { return *this; }
+  Python_list_output_iterator& operator++(int) { return *this; }
+
+private:
+  py::list* m_points;
+};
+
 /*! A class template that wraps the function template
  * PMP::read_points()
  */
@@ -82,15 +118,8 @@ bool read_points_impl(const std::string& fname, OutputIterator oi,
 auto read_points(const std::string& fname,
                  const py::dict& params = py::dict()) {
   py::list points;
-#if 1
-  std::vector<Point_3> tmp;
-  bool res = read_points_impl(fname, std::back_inserter(tmp), params);
-  for (const auto& p : tmp) points.append(p);
-#else
-  auto op = [&] (const Point_3& p) mutable { points.append(p); };
-  auto it = boost::make_function_output_iterator(std::ref(op));
+  Python_list_output_iterator<Point_3> it(points);
   bool res = read_points_impl(fname, it, params);
-#endif
   if (! res) throw std::runtime_error("Cannot read points!");
   return points;
 }
@@ -220,7 +249,8 @@ auto grid_simplify_point_set(std::vector<Point_3> points,
   auto it = CGAL::grid_simplify_point_set
     (points, epsilon,
      CGAL::parameters::min_points_per_cell(min_points_per_cell));
-  return std::make_pair(points, std::distance(points.begin(), it));
+  const auto first_to_remove = std::distance(points.begin(), it);
+  return std::make_pair(std::move(points), first_to_remove);
 }
 
 //! Simplify NumPy-style points by grid clustering.
@@ -240,7 +270,8 @@ auto random_simplify_point_set(std::vector<Point_3> points,
                                const py::dict& params = py::dict()) {
   (void) params;
   auto it = CGAL::random_simplify_point_set(points, removed_percentage);
-  return std::make_pair(points, std::distance(points.begin(), it));
+  const auto first_to_remove = std::distance(points.begin(), it);
+  return std::make_pair(std::move(points), first_to_remove);
 }
 
 //! Randomly simplify NumPy-style points.
@@ -266,7 +297,8 @@ auto hierarchy_simplify_point_set(std::vector<Point_3> points,
     (points,
      CGAL::parameters::size(size)
      .maximum_variation(maximum_variation));
-  return std::make_pair(points, std::distance(points.begin(), it));
+  const auto first_to_remove = std::distance(points.begin(), it);
+  return std::make_pair(std::move(points), first_to_remove);
 }
 
 //! Simplify NumPy-style points using hierarchy simplification.
@@ -333,7 +365,8 @@ auto remove_outliers(std::vector<Point_3> points,
      CGAL::parameters::neighbor_radius(neighbor_radius)
      .threshold_percent(threshold_percent)
      .threshold_distance(threshold_distance));
-  return std::make_pair(points, std::distance(points.begin(), it));
+  const auto first_to_remove = std::distance(points.begin(), it);
+  return std::make_pair(std::move(points), first_to_remove);
 }
 
 //! Remove outliers from NumPy-style points.
@@ -352,23 +385,131 @@ template <typename Point_3, typename Vector_3>
 std::vector<std::pair<Point_3, Vector_3>>
 ndarray_to_point_normal_3_vector(const py::ndarray<>& points_array,
                                  const py::ndarray<>& normals_array) {
-  auto points =
-    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
-  auto normals =
-    cgalpy::ndarray_to_point_3_vector<Vector_3>(normals_array, "normals");
-
-  if (points.size() != normals.size()) {
-    throw std::runtime_error("points and normals must have the same number of rows.");
+  if (! points_array.is_valid()) {
+    throw std::runtime_error("points must be a valid NumPy array.");
   }
 
-  std::vector<std::pair<Point_3, Vector_3>> output;
-  output.reserve(points.size());
+  if (points_array.ndim() != 2) {
+    throw std::runtime_error
+      ("points must be a 2D NumPy array with shape (N, 3).");
+  }
 
-  for (std::size_t i = 0; i < points.size(); ++i) {
-    output.emplace_back(std::move(points[i]), std::move(normals[i]));
+  if (points_array.shape(1) != 3) {
+    throw std::runtime_error("points must have shape (N, 3).");
+  }
+
+  const auto points_dtype = points_array.dtype();
+  if (points_dtype.code !=
+        static_cast<uint8_t>(py::dlpack::dtype_code::Float) ||
+      points_dtype.bits != 64) {
+    throw std::runtime_error("points must have dtype float64.");
+  }
+
+  if (! normals_array.is_valid()) {
+    throw std::runtime_error("normals must be a valid NumPy array.");
+  }
+
+  if (normals_array.ndim() != 2) {
+    throw std::runtime_error
+      ("normals must be a 2D NumPy array with shape (N, 3).");
+  }
+
+  if (normals_array.shape(1) != 3) {
+    throw std::runtime_error("normals must have shape (N, 3).");
+  }
+
+  const auto normals_dtype = normals_array.dtype();
+  if (normals_dtype.code !=
+        static_cast<uint8_t>(py::dlpack::dtype_code::Float) ||
+      normals_dtype.bits != 64) {
+    throw std::runtime_error("normals must have dtype float64.");
+  }
+
+  const std::size_t number_of_points = points_array.shape(0);
+  if (number_of_points != normals_array.shape(0)) {
+    throw std::runtime_error
+      ("points and normals must have the same number of rows.");
+  }
+
+  const auto* points_data =
+    static_cast<const double*>(points_array.data());
+  const auto points_stride_0 = points_array.stride(0);
+  const auto points_stride_1 = points_array.stride(1);
+
+  const auto* normals_data =
+    static_cast<const double*>(normals_array.data());
+  const auto normals_stride_0 = normals_array.stride(0);
+  const auto normals_stride_1 = normals_array.stride(1);
+
+  std::vector<std::pair<Point_3, Vector_3>> output;
+  output.reserve(number_of_points);
+
+  std::int64_t point_offset = 0;
+  std::int64_t normal_offset = 0;
+
+  for (std::size_t i = 0; i < number_of_points; ++i) {
+    output.emplace_back
+      (Point_3(points_data[point_offset],
+               points_data[point_offset + points_stride_1],
+               points_data[point_offset + 2 * points_stride_1]),
+       Vector_3(normals_data[normal_offset],
+                normals_data[normal_offset + normals_stride_1],
+                normals_data[normal_offset + 2 * normals_stride_1]));
+
+    point_offset += points_stride_0;
+    normal_offset += normals_stride_0;
   }
 
   return output;
+}
+
+//! Convert NumPy-style points to point-normal pairs with zero normals.
+template <typename Point_3, typename Vector_3>
+std::vector<std::pair<Point_3, Vector_3>>
+ndarray_to_point_normal_3_vector_with_zero_normals(
+  const py::ndarray<>& points_array) {
+  if (! points_array.is_valid()) {
+    throw std::runtime_error("points must be a valid NumPy array.");
+  }
+
+  if (points_array.ndim() != 2) {
+    throw std::runtime_error
+      ("points must be a 2D NumPy array with shape (N, 3).");
+  }
+
+  if (points_array.shape(1) != 3) {
+    throw std::runtime_error("points must have shape (N, 3).");
+  }
+
+  const auto points_dtype = points_array.dtype();
+  if (points_dtype.code !=
+        static_cast<uint8_t>(py::dlpack::dtype_code::Float) ||
+      points_dtype.bits != 64) {
+    throw std::runtime_error("points must have dtype float64.");
+  }
+
+  const std::size_t number_of_points = points_array.shape(0);
+  const auto* points_data =
+    static_cast<const double*>(points_array.data());
+  const auto points_stride_0 = points_array.stride(0);
+  const auto points_stride_1 = points_array.stride(1);
+
+  std::vector<std::pair<Point_3, Vector_3>> point_normals;
+  point_normals.reserve(number_of_points);
+
+  std::int64_t point_offset = 0;
+
+  for (std::size_t i = 0; i < number_of_points; ++i) {
+    point_normals.emplace_back
+      (Point_3(points_data[point_offset],
+               points_data[point_offset + points_stride_1],
+               points_data[point_offset + 2 * points_stride_1]),
+       Vector_3(0, 0, 0));
+
+    point_offset += points_stride_0;
+  }
+
+  return point_normals;
 }
 
 //! Read points with normals from a file.
@@ -435,7 +576,8 @@ auto grid_simplify_point_set_with_normals(
      CGAL::parameters::min_points_per_cell(min_points_per_cell)
      .point_map(Point_map()));
 
-  return std::make_pair(points, std::distance(points.begin(), it));
+  const auto first_to_remove = std::distance(points.begin(), it);
+  return std::make_pair(std::move(points), first_to_remove);
 }
 
 //!
@@ -479,7 +621,7 @@ auto cluster_point_set(PointSet_3& points,
                               .adjacencies(std::back_inserter(adjacencies)));
   }
 
-  return std::make_pair(number_of_clusters, adjacencies);
+  return std::make_pair(number_of_clusters, std::move(adjacencies));
 }
 
 //! Estimate normals using PCA.
@@ -509,14 +651,9 @@ template <typename Point_3, typename Vector_3>
 auto pca_estimate_normals_np(const py::ndarray<>& points_array,
                              const unsigned int k,
                              const py::dict& params = py::dict()) {
-  auto points =
-    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
-
-  std::vector<std::pair<Point_3, Vector_3>> point_normals;
-  point_normals.reserve(points.size());
-  for (auto& point : points) {
-    point_normals.emplace_back(std::move(point), Vector_3(0, 0, 0));
-  }
+  auto point_normals =
+    ndarray_to_point_normal_3_vector_with_zero_normals
+      <Point_3, Vector_3>(points_array);
 
   return pca_estimate_normals(std::move(point_normals), k, params);
 }
@@ -552,14 +689,9 @@ template <typename Point_3, typename Vector_3>
 auto jet_estimate_normals_np(const py::ndarray<>& points_array,
                              const unsigned int k,
                              const py::dict& params = py::dict()) {
-  auto points =
-    cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "points");
-
-  std::vector<std::pair<Point_3, Vector_3>> point_normals;
-  point_normals.reserve(points.size());
-  for (auto& point : points) {
-    point_normals.emplace_back(std::move(point), Vector_3(0, 0, 0));
-  }
+  auto point_normals =
+    ndarray_to_point_normal_3_vector_with_zero_normals
+      <Point_3, Vector_3>(points_array);
 
   return jet_estimate_normals(std::move(point_normals), k, params);
 }
@@ -584,7 +716,8 @@ auto mst_orient_normals(std::vector<std::pair<Point_3, Vector_3>> points,
      .normal_map(Normal_map())
      .neighbor_radius(neighbor_radius));
 
-  return std::make_pair(points, std::distance(points.begin(), it));
+  const auto first_unoriented = std::distance(points.begin(), it);
+  return std::make_pair(std::move(points), first_unoriented);
 }
 
 //! Orient normals from NumPy-style points and normals using MST propagation.
@@ -609,7 +742,8 @@ auto compute_vcm(const std::vector<Point_3>& points,
   using FT = typename Kernel::FT;
   using Covariance = std::array<FT, 6>;
 
-  std::vector<Covariance> output(points.size());
+  std::vector<Covariance> output;
+  output.reserve(points.size());
   CGAL::compute_vcm(points, output, offset_radius, convolution_radius);
   return output;
 }
@@ -638,7 +772,8 @@ auto compute_vcm_with_normals(
   using PointNormalPair = std::pair<Point_3, Vector_3>;
   using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
 
-  std::vector<Covariance> output(points.size());
+  std::vector<Covariance> output;
+  output.reserve(points.size());
   CGAL::compute_vcm(points, output, offset_radius, convolution_radius,
                     CGAL::parameters::point_map(Point_map()));
   return output;
@@ -813,7 +948,7 @@ auto bilateral_smooth_point_set(
      .sharpness_angle(sharpness_angle)
      .neighbor_radius(neighbor_radius));
 
-  return std::make_pair(error, points);
+  return std::make_pair(error, std::move(points));
 }
 
 //!
