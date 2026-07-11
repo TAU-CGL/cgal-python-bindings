@@ -6,6 +6,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria   <utkarshkhajuria55@gmail.com>
 
 #include <CGAL/config.h>
 
@@ -73,7 +74,9 @@ void export_polygon_2(py::module_&);
 void export_polygon_partition_2(py::module_&);
 void export_polygon_set_2(py::module_&);
 void export_polygon_with_holes_2(py::module_&);
+#ifdef CGALPY_3D_POINT_SET_BINDINGS
 void export_region_growing(py::module_&);
+#endif
 void export_spatial_searching(py::module_&);
 void export_spatial_sorting(py::module_&);
 void export_straight_skeleton_2(py::module_&);
@@ -390,12 +393,20 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #endif
 
 #if defined(CGALPY_SHAPE_DETECTION_BINDINGS)
+#ifdef CGALPY_3D_POINT_SET_BINDINGS
   auto sd_m = m.def_submodule("Sd",
     "This CGAL component implements two algorithms for shape detection:\n\n"
     "• the Efficient RANSAC (RANdom SAmple Consensus) method, contributed by Schnabel et al. [2];\n"
     "• the Region Growing method, contributed by Lafarge and Mallet [1].");
+#else
+  auto sd_m = m.def_submodule("Sd",
+    "This CGAL component implements the Efficient RANSAC "
+    "(RANdom SAmple Consensus) method, contributed by Schnabel et al. [2].");
+#endif
   export_efficient_ransac(sd_m);
+#ifdef CGALPY_3D_POINT_SET_BINDINGS
   export_region_growing(sd_m);
+#endif
 #endif
 
 #if defined(CGALPY_VISIBILITY_2_BINDINGS)

@@ -2008,10 +2008,12 @@ void export_point_set_processing(py::module_& m) {
   using PointVectorPair_3 = std::pair<Point_3, Vector_3>;
   using PointRange_2 = std::vector<std::pair<Point_2, Vector_2>>;
   using PointRange_3 = std::vector<std::pair<Point_3, Vector_3>>;
+#ifdef CGALPY_3D_POINT_SET_BINDINGS
   using PointSet_2 = CGAL::Point_set_3<Point_2>;
   using PointSet_3 = CGAL::Point_set_3<Point_3>;
   using ClusterMap_2 = PointSet_2::Property_map<int>;
   using ClusterMap_3 = PointSet_3::Property_map<int>;
+#endif
 
   using Fopopm = CGAL::First_of_pair_property_map<PointVectorPair_3>;
   using Sopopm = CGAL::Second_of_pair_property_map<PointVectorPair_3>;
@@ -2138,11 +2140,13 @@ void export_point_set_processing(py::module_& m) {
         "Computes average spacing from k nearest neighbors for a point range.\n"
         "Precondition: k >= 2.");
 
+#ifdef CGALPY_3D_POINT_SET_BINDINGS
   m.def("compute_average_spacing",
         &psp::compute_average_spacing_point_set<PointSet_3>,
         py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
         "Computes average spacing from k nearest neighbors for a Point_set_3.\n"
         "Precondition: k >= 2.");
+#endif
 
   m.def("compute_average_spacing", &psp::compute_average_spacing_np<Point_3>,
         py::arg("points"), py::arg("k"), py::arg("params") = py::dict(),
@@ -2266,11 +2270,13 @@ void export_point_set_processing(py::module_& m) {
         py::arg("fname"), py::arg("params") = py::dict(),
         "Reads points with normals from a point-set file.");
 
+#ifdef CGALPY_3D_POINT_SET_BINDINGS
   m.def("cluster_point_set",
         &psp::cluster_point_set<PointSet_3, ClusterMap_3>,
         py::arg("points"), py::arg("cluster_map"), py::arg("params") = py::dict(),
         "Identifies connected components on a nearest-neighbor graph. "
         "Returns (number_of_clusters, adjacencies).");
+#endif
 
   m.def("compute_average_spacing_with_normals",
         &psp::compute_average_spacing_with_normals<Point_3, Vector_3>,
