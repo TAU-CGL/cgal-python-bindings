@@ -18,7 +18,7 @@
 #include "cgalpy/boolean_set_operations_2_types.hpp"
 #include "cgalpy/export_general_polygon_2.hpp"
 #include "cgalpy/export_general_polygon_with_holes_2.hpp"
-#include "cgalpy/append_iterator.hpp"
+#include "cgalpy/iterators/append_iterator.hpp"
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/stl_forward_iterator.hpp"
 

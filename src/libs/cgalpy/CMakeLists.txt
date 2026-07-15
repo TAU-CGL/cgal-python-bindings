@@ -1140,31 +1140,51 @@ if (NOT SKBUILD)
     add_custom_target(CGALPY_README ALL DEPENDS ${CGALPY_OUT_README})
     list(APPEND CGALPY_BUILD_DEPENDS CGALPY_README)
 
-    # Setup application
+    # Build and validate the Python distribution artifacts.
+    #
+    # The wheel backend determines the final platform tag from the compiled
+    # extension and its linked libraries. Do not predict the wheel filename
+    # from Python's sysconfig platform value.
     set(CGALPY_BUILD_OUTPUT_DIR "${CGALPY_LIB_DIR}/dist")
-    string(TOLOWER "${CGALPY_PACKAGE_NAME}-${cgalpy_VERSION}" CGALPY_TAR_BASENAME)
-    set (CGALPY_TAR ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_TAR_BASENAME}.tar.gz)
+    set(CGALPY_BUILD_MANIFEST
+        "${CGALPY_BUILD_OUTPUT_DIR}/distribution-artifacts.json")
+    set(CGALPY_ARTIFACT_RECORDER
+        "${CMAKE_SOURCE_DIR}/src/python_scripts/record_distribution_artifacts.py")
+    set(CGALPY_PYTHON_BUILD_DIR "${CGALPY_LIB_DIR}/build")
+    set(CGALPY_EGG_INFO_DIR
+        "${CGALPY_LIB_DIR}/${CGALPY_PACKAGE_NAME}.egg-info")
 
-    set (CGALPY_PYTHON_TAG "cp${CGALPY_PY_MAJOR_MINOR_VERSION}")
-    # set (CGALPY_PYTHON_TAG "py3")
+    set(CGALPY_BUILD_CMD "${Python_EXECUTABLE}")
+    set(CGALPY_BUILD_ARGS -m build)
 
-    set (CGALPY_ABI_TAG "cp${CGALPY_PY_MAJOR_MINOR_VERSION}")
-    # set (CGALPY_ABI_TAG "none")
-    execute_process(COMMAND ${Python_EXECUTABLE} -c "import sysconfig; print(sysconfig.get_platform().replace('-','_').replace('.','_'),end='')" OUTPUT_VARIABLE CGALPY_PLATFORM_TAG)
-    # set (CGALPY_PLATFORM_TAG "any")
+    if (NOT "${CGALPY_PYTHOM_BUILD_CONFIG_SETTING}" STREQUAL "")
+        list(APPEND CGALPY_BUILD_ARGS
+                --config-setting
+                "${CGALPY_PYTHOM_BUILD_CONFIG_SETTING}")
+    endif ()
 
-    set (CGALPY_WHL ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_PACKAGE_NAME}-${cgalpy_VERSION}-${CGALPY_PYTHON_TAG}-${CGALPY_ABI_TAG}-${CGALPY_PLATFORM_TAG}.whl)
-    string(TOLOWER ${CGALPY_WHL} CGALPY_WHL_LOWER)
-    set(CGALPY_BUILD_OUTPUT ${CGALPY_TAR} ${CGALPY_WHL_LOWER})
-    set(CGALPY_BUILD_CMD ${Python_EXECUTABLE})
-    set(CGALPY_BUILD_ARGS -m build --config-setting ${CGALPY_PYTHOM_BUILD_CONFIG_SETTING} ${CGALPY_LIB_DIR})
+    list(APPEND CGALPY_BUILD_ARGS "${CGALPY_LIB_DIR}")
+
     add_custom_command(
-            OUTPUT ${CGALPY_BUILD_OUTPUT}
-            COMMAND ${CGALPY_BUILD_CMD}
-            ARGS ${CGALPY_BUILD_ARGS}
-            DEPENDS ${CGALPY_BUILD_DEPENDS})
+            OUTPUT "${CGALPY_BUILD_MANIFEST}"
+            COMMAND "${CMAKE_COMMAND}" -E rm -rf
+                    "${CGALPY_BUILD_OUTPUT_DIR}"
+                    "${CGALPY_PYTHON_BUILD_DIR}"
+                    "${CGALPY_EGG_INFO_DIR}"
+            COMMAND "${CMAKE_COMMAND}" -E make_directory
+                    "${CGALPY_BUILD_OUTPUT_DIR}"
+            COMMAND "${CGALPY_BUILD_CMD}" ${CGALPY_BUILD_ARGS}
+            COMMAND "${Python_EXECUTABLE}"
+                    "${CGALPY_ARTIFACT_RECORDER}"
+                    --dist-dir "${CGALPY_BUILD_OUTPUT_DIR}"
+                    --distribution-name "${CGALPY_PACKAGE_NAME}"
+                    --version "${cgalpy_VERSION}"
+                    --manifest "${CGALPY_BUILD_MANIFEST}"
+            DEPENDS ${CGALPY_BUILD_DEPENDS}
+                    "${CGALPY_ARTIFACT_RECORDER}"
+            VERBATIM)
 
-    add_custom_target(BUILD ALL DEPENDS ${CGALPY_BUILD_OUTPUT})
+    add_custom_target(BUILD ALL DEPENDS "${CGALPY_BUILD_MANIFEST}")
 
     ################################################################################
     # Installation

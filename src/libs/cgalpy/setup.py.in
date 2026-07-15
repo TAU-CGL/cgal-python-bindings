@@ -14,7 +14,8 @@ except ImportError:
 
 package_data = {'@TARGET_PACKAGE_NAME@': [@TARGET_DATA@] }
 
-setup(version='@TARGET_VERSION_MAJOR@.@TARGET_VERSION_MINOR@.@TARGET_VERSION_PATCH@',
+setup(name='@TARGET_PACKAGE_NAME@',
+      version='@TARGET_VERSION_MAJOR@.@TARGET_VERSION_MINOR@.@TARGET_VERSION_PATCH@',
       description='CGAL Python Bindings',
       packages=['@TARGET_PACKAGE_NAME@'],
       # platforms=['any'], # linux_x86_64, darwin_arm64

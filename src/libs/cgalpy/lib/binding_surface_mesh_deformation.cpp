@@ -6,14 +6,12 @@
 //
 // Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
 
-#include <vector>
-
 #include <nanobind/nanobind.h>
-#include <nanobind/stl/vector.h>
 
 #include <CGAL/Surface_mesh_deformation.h>
 
 #include "cgalpy/sm/surface_mesh_deformation_types.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -46,8 +44,10 @@ void export_surface_mesh_deformation(py::module_& m) {
          py::arg("mesh"),
          "Inserts all vertices of the given surface mesh into the region of interest.")
     .def("insert_roi_vertices",
-         [](Surface_mesh_deformation& self, const std::vector<Vertex_descriptor>& vertices) {
-           self.insert_roi_vertices(vertices.begin(), vertices.end());
+         [](Surface_mesh_deformation& self, const py::list& vertices) {
+           auto begin = stl_forward_iterator<Vertex_descriptor>(vertices);
+           auto end = stl_forward_iterator<Vertex_descriptor>(vertices, false);
+           self.insert_roi_vertices(begin, end);
          },
          py::arg("vertices"),
          "Inserts a sequence of vertices into the region of interest.")
@@ -56,8 +56,10 @@ void export_surface_mesh_deformation(py::module_& m) {
          py::arg("vd"),
          "Inserts one control vertex.")
     .def("insert_control_vertices",
-         [](Surface_mesh_deformation& self, const std::vector<Vertex_descriptor>& vertices) {
-           self.insert_control_vertices(vertices.begin(), vertices.end());
+         [](Surface_mesh_deformation& self, const py::list& vertices) {
+           auto begin = stl_forward_iterator<Vertex_descriptor>(vertices);
+           auto end = stl_forward_iterator<Vertex_descriptor>(vertices, false);
+           self.insert_control_vertices(begin, end);
          },
          py::arg("vertices"),
          "Inserts a sequence of control vertices.")
@@ -92,8 +94,10 @@ void export_surface_mesh_deformation(py::module_& m) {
          py::arg("vd"), py::arg("vector"),
          "Translates one control vertex target position by a vector.")
     .def("translate",
-         [](Surface_mesh_deformation& self, const std::vector<Vertex_descriptor>& vertices, const Vector_3& vector) {
-           self.translate(vertices.begin(), vertices.end(), vector);
+         [](Surface_mesh_deformation& self, const py::list& vertices, const Vector_3& vector) {
+           auto begin = stl_forward_iterator<Vertex_descriptor>(vertices);
+           auto end = stl_forward_iterator<Vertex_descriptor>(vertices, false);
+           self.translate(begin, end, vector);
          },
          py::arg("vertices"), py::arg("vector"),
          "Translates a sequence of control vertex target positions by a vector.")

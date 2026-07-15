@@ -12,7 +12,7 @@
 
 #include "cgalpy/spatial_searching_types.hpp"
 #include "cgalpy/kernel_d_types.hpp"
-#include "cgalpy/append_iterator.hpp"
+#include "cgalpy/iterators/append_iterator.hpp"
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/stl_forward_iterator.hpp"
 #include "cgalpy/Ss_docstrings.hpp"

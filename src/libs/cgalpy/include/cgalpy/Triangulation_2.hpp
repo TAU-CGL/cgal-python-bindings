@@ -2,7 +2,6 @@
 #define CGALPY_TRIANGULATION_2_HPP
 
 #include <nanobind/nanobind.h>
-#include <nanobind/stl/vector.h>
 
 #include <CGAL/Triangulation_2.h>
 
@@ -10,6 +9,7 @@
 #include "cgalpy/add_insertion.hpp"
 #include "cgalpy/export_circulator.hpp"
 #include "cgalpy/make_iterator.hpp"
+#include "cgalpy/stl_forward_iterator.hpp"
 #include "cgalpy/triangulation_2_types.hpp"
 
 namespace py = nanobind;
@@ -45,7 +45,9 @@ auto export_triangulation_2(C& c) {
   add_insertion(c, "__str__");
   add_insertion(c, "__repr__");
   add_extraction(c);
-  c.def(py::init<const TriangulationType&>(),
+  c.def(py::init<>(),
+        "Constructs an empty 2D triangulation.")
+    .def(py::init<const TriangulationType&>(),
          py::arg("tr"),
          "Copy constructor.")
     .def("all_face_handles", [](const TriangulationType& tr) { return tr.all_face_handles(); },
@@ -104,7 +106,11 @@ auto export_triangulation_2(C& c) {
          "At last, if p is outside the affine hull (in case of degenerate 1-dimensional or 0-dimensional triangulations), p is linked all the other vertices to form a triangulation whose dimension is increased by one. The last argument f is an indication to the underlying locate algorithm of where to start.\n\n"
          "Examples\n"
          "• TriangulationType/adding_handles.py, Triangulation_2/colored_face.py, and Triangulation_2/for_loop_2.py.")
-    .def("insert", [](TriangulationType& tr, const std::vector<Point>& points) { return tr.insert(points.begin(), points.end()); },
+    .def("insert", [](TriangulationType& tr, py::list& points) {
+      auto begin = stl_forward_iterator<Point>(points);
+      auto end = stl_forward_iterator<Point>(points, false);
+      return tr.insert(begin, end);
+    },
          py::arg("points"),
          "Inserts the points in the given order, and returns the number of inserted points.\n")
     .def("insert_in_edge", [](TriangulationType& tr, const Point& p, const Face_handle& f, int i) { return tr.insert_in_edge(p, f, i); },
@@ -231,12 +237,25 @@ auto export_triangulation_2(C& c) {
          py::arg("f"), py::arg("p"),
          "Returns on which side of the circumcircle of face f lies the point p.\n"
          "The circle is assumed to be counterclockwise oriented, so its positive side correspond to its bounded side. This predicate is available only if the corresponding predicates on points is provided in the geometric traits class.")
-    .def("star_hole", [](TriangulationType& tr, const Point& p, const std::vector<Edge>& edges) { return tr.star_hole(p, edges.begin(), edges.end()); },
+    .def("star_hole", [](TriangulationType& tr, const Point& p,
+                         py::list& edges) {
+      auto begin = stl_forward_iterator<Edge>(edges);
+      auto end = stl_forward_iterator<Edge>(edges, false);
+      return tr.star_hole(p, begin, end);
+    },
          py::arg("p"), py::arg("edges"),
          "creates a new vertex v and use it to star the hole whose boundary is described by the sequence of edges.\n"
          "Returns a handle to the new vertex.\n"
          "This function is intended to be used in conjunction with the find_conflicts() member functions of Delaunay and constrained Delaunay triangulations to perform insertions.")
-    .def("star_hole", [](TriangulationType& tr, const Point& p, const std::vector<Edge>& edges, const std::vector<Face_handle>& faces) { return tr.star_hole(p, edges.begin(), edges.end(), faces.begin(), faces.end()); },
+    .def("star_hole", [](TriangulationType& tr, const Point& p,
+                         py::list& edges, py::list& faces) {
+      auto edges_begin = stl_forward_iterator<Edge>(edges);
+      auto edges_end = stl_forward_iterator<Edge>(edges, false);
+      auto faces_begin = stl_forward_iterator<Face_handle>(faces);
+      auto faces_end = stl_forward_iterator<Face_handle>(faces, false);
+      return tr.star_hole(p, edges_begin, edges_end,
+                          faces_begin, faces_end);
+    },
          py::arg("p"), py::arg("edges"), py::arg("faces"),
          "same as star_hole() with edges, except that the algorithm first recycles faces in the sequence and create new ones only when the sequence is exhausted.\n"
          "This function is intended to be used in conjunction with the find_conflicts() member functions of Delaunay and constrained Delaunay triangulations to perform insertions.")
@@ -367,7 +386,7 @@ auto export_triangulation_2(C& c) {
     .def("incident_edges",
          [](const TriangulationType& tri, const Vertex& v) {
            auto vh = Vertex_handle(const_cast<Vertex*>(&v));
-           return ri.incident_edges(vh);
+           return tri.incident_edges(vh);
          })
     .def("incident_edges",
          [](const TriangulationType& tri, const Vertex& v, const Face& f) {

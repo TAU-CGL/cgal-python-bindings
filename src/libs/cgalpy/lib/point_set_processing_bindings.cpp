@@ -47,6 +47,7 @@
 #include <CGAL/IO/write_points.h>
 
 #include "cgalpy/kernel_type.hpp"
+#include "cgalpy/iterators/append_iterator.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
 #include "cgalpy/Named_parameter_wrapper.hpp"
@@ -57,48 +58,14 @@ namespace py = nanobind;
 
 namespace psp {
 
-template <typename T>
-class Python_list_output_iterator {
-public:
-  using iterator_category = std::output_iterator_tag;
-  using value_type = T;
-  using difference_type = void;
-  using pointer = void;
-  using reference = void;
-
-  explicit Python_list_output_iterator(py::list& points) :
-    m_points(&points)
-  {}
-
-  class Output_proxy {
-  public:
-    explicit Output_proxy(py::list* points) : m_points(points) {}
-
-    Output_proxy& operator=(const T& value) {
-      m_points->append(value);
-      return *this;
-    }
-
-  private:
-    py::list* m_points;
-  };
-
-  Output_proxy operator*() { return Output_proxy(m_points); }
-
-  Python_list_output_iterator& operator++() { return *this; }
-  Python_list_output_iterator& operator++(int) { return *this; }
-
-private:
-  py::list* m_points;
-};
-
 /*! A class template that wraps the function template
  * PMP::read_points()
  */
 template <typename T, typename... Args>
 struct Read_points_wrapper {
   static auto call(T np, Args&&... args) {
-    return CGAL::IO::read_points(std::forward<Args>(args)..., std::forward<T>(np));
+    return CGAL::IO::read_points(
+      std::forward<Args>(args)..., std::forward<T>(np));
   }
 };
 
@@ -118,7 +85,7 @@ bool read_points_impl(const std::string& fname, OutputIterator oi,
 auto read_points(const std::string& fname,
                  const py::dict& params = py::dict()) {
   py::list points;
-  Python_list_output_iterator<Point_3> it(points);
+  append_iterator<Point_3> it(points);
   bool res = read_points_impl(fname, it, params);
   if (! res) throw std::runtime_error("Cannot read points!");
   return points;

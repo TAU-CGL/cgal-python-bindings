@@ -14,7 +14,7 @@
 
 #include "cgalpy/general_polygon_set_2_types.hpp"
 #include "cgalpy/add_attr.hpp"
-#include "cgalpy/append_iterator.hpp"
+#include "cgalpy/iterators/append_iterator.hpp"
 #include "cgalpy/stl_forward_iterator.hpp"
 #include "cgalpy/add_insertion.hpp"
 #include "cgalpy/add_extraction.hpp"
