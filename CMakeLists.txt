@@ -63,9 +63,15 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif ()
 
 if (SKBUILD)
-    # Get configuration from configuration file (default: config.cmake)
-    set(CMAKE_CONFIG_FILE "${CMAKE_SOURCE_DIR}/config.cmake" CACHE STRING "Path to configuration file")
-    include(${CMAKE_CONFIG_FILE})
+  # Map MinSizeRel and RelWithDebInfo to Release for Conan-generated targets.
+  # Conan 2 only generates Release and Debug configurations; without this mapping
+  # CMake cannot resolve imported target locations for the other build types.
+  set(CMAKE_MAP_IMPORTED_CONFIG_MINSIZEREL Release "")
+  set(CMAKE_MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release "")
+
+  # Get configuration from configuration file (default: config.cmake)
+  set(CMAKE_CONFIG_FILE "${CMAKE_SOURCE_DIR}/config.cmake" CACHE STRING "Path to configuration file")
+  include(${CMAKE_CONFIG_FILE})
 endif()
 
 # Binding options. Notice that The default value of option is OFF.
