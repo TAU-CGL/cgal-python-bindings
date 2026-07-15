@@ -1,10 +1,8 @@
 [build-system]
 requires = [
     "conan>=2.0.0",
-    "setuptools",
-    "scikit-build>=0.15.0",
     "scikit-build-core>=0.10.7",
-    "nanobind>=2.3.0,<=2.10.2",
+    "nanobind>=2.3.0",
     "sphinx>=7.1.2",
     "typing-extensions"
 ]
