@@ -248,7 +248,7 @@ def _patch_get_standard_metadata(name, version):
     original_meta = _meta.get_standard_metadata
     original_wheel = _wheel.get_standard_metadata
 
-    def _patched(pyproject_dict, settings):
+    def _patched(pyproject_dict, settings, **kwargs):
         d = copy.deepcopy(dict(pyproject_dict))
         if name:
             d["project"]["name"] = name
@@ -256,7 +256,7 @@ def _patch_get_standard_metadata(name, version):
             # Provide version statically; remove from dynamic[] if present
             d["project"]["version"] = version
             d["project"].pop("dynamic", None)
-        return original_meta(d, settings)
+        return original_meta(d, settings, **kwargs)
 
     _meta.get_standard_metadata = _patched
     _wheel.get_standard_metadata = _patched
