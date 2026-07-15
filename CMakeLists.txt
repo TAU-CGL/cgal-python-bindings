@@ -248,6 +248,12 @@ if (SKBUILD)
     if (result)
         message(FATAL_ERROR "Conan install failed: ${error}")
     endif ()
+    if(MSVC)
+      # Restrict to Release only — Python wheels are always Release builds.
+      # This prevents CMake from looking for Conan-generated targets in
+      # configurations that Conan did not generate (Debug, MinSizeRel, RelWithDebInfo).
+      set(CMAKE_CONFIGURATION_TYPES "Release" CACHE STRING "" FORCE)
+    endif()
     set(TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/build/${CMAKE_BUILD_TYPE}/generators/conan_toolchain.cmake)
     include(${TOOLCHAIN_FILE})
     list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
