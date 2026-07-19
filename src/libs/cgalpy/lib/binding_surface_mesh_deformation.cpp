@@ -11,7 +11,7 @@
 #include <CGAL/Surface_mesh_deformation.h>
 
 #include "cgalpy/sm/surface_mesh_deformation_types.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 
 namespace py = nanobind;
 
@@ -45,8 +45,8 @@ void export_surface_mesh_deformation(py::module_& m) {
          "Inserts all vertices of the given surface mesh into the region of interest.")
     .def("insert_roi_vertices",
          [](Surface_mesh_deformation& self, const py::list& vertices) {
-           auto begin = stl_forward_iterator<Vertex_descriptor>(vertices);
-           auto end = stl_forward_iterator<Vertex_descriptor>(vertices, false);
+           auto begin = py_list_forward_iterator<Vertex_descriptor>(vertices);
+           auto end = py_list_forward_iterator<Vertex_descriptor>(vertices, false);
            self.insert_roi_vertices(begin, end);
          },
          py::arg("vertices"),
@@ -57,8 +57,8 @@ void export_surface_mesh_deformation(py::module_& m) {
          "Inserts one control vertex.")
     .def("insert_control_vertices",
          [](Surface_mesh_deformation& self, const py::list& vertices) {
-           auto begin = stl_forward_iterator<Vertex_descriptor>(vertices);
-           auto end = stl_forward_iterator<Vertex_descriptor>(vertices, false);
+           auto begin = py_list_forward_iterator<Vertex_descriptor>(vertices);
+           auto end = py_list_forward_iterator<Vertex_descriptor>(vertices, false);
            self.insert_control_vertices(begin, end);
          },
          py::arg("vertices"),
@@ -95,8 +95,8 @@ void export_surface_mesh_deformation(py::module_& m) {
          "Translates one control vertex target position by a vector.")
     .def("translate",
          [](Surface_mesh_deformation& self, const py::list& vertices, const Vector_3& vector) {
-           auto begin = stl_forward_iterator<Vertex_descriptor>(vertices);
-           auto end = stl_forward_iterator<Vertex_descriptor>(vertices, false);
+           auto begin = py_list_forward_iterator<Vertex_descriptor>(vertices);
+           auto end = py_list_forward_iterator<Vertex_descriptor>(vertices, false);
            self.translate(begin, end, vector);
          },
          py::arg("vertices"), py::arg("vector"),

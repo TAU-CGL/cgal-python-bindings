@@ -16,7 +16,7 @@
 #include "cgalpy/bind_polynomial.hpp"
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/add_insertion.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 
 namespace py = nanobind;
@@ -45,8 +45,8 @@ using Bound = Gt::Bound;
  */
 Cv ctr_cv_from_rats(const Ctr_cv& ctr, const py::list& rats,
                   const Alg_real& x_s, bool dir_right) {
-  auto begin = stl_forward_iterator<Rational>(rats);
-  auto end = stl_forward_iterator<Rational>(rats, false);
+  auto begin = py_list_forward_iterator<Rational>(rats);
+  auto end = py_list_forward_iterator<Rational>(rats, false);
   return ctr(begin, end, x_s, dir_right);
 }
 
@@ -56,10 +56,10 @@ Cv ctr_cv_from_rats(const Ctr_cv& ctr, const py::list& rats,
 Xcv ctr_xcv_from_rats(const Ctr_xcv& ctr,
                    const py::list& numers, const py::list& demons,
                    const Alg_real& x_s, const Alg_real& x_t) {
-  auto begin1 = stl_forward_iterator<Rational>(numers);
-  auto end1 = stl_forward_iterator<Rational>(numers, false);
-  auto begin2 = stl_forward_iterator<Rational>(demons);
-  auto end2 = stl_forward_iterator<Rational>(demons, false);
+  auto begin1 = py_list_forward_iterator<Rational>(numers);
+  auto end1 = py_list_forward_iterator<Rational>(numers, false);
+  auto begin2 = py_list_forward_iterator<Rational>(demons);
+  auto end2 = py_list_forward_iterator<Rational>(demons, false);
   return ctr(begin1, end1, begin2, end2, x_s, x_t);
 }
 

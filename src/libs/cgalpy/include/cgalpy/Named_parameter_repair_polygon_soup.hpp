@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_repair_polygon_soup {
-  const std::string m_name = "repair_polygon_soup";
+  static constexpr const char* m_name = "repair_polygon_soup";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

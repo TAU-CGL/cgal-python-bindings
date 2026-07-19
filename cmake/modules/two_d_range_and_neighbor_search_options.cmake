@@ -3,7 +3,15 @@ set(TWO_D_RANGE_AND_NEIGHBOR_SEARCH_OPTIONS_FILE_INCLUDED)
 
 function(select_two_d_range_and_neighbor_search)
   if (CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS)
-    add_definitions(-DCGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS=)
+    if (NOT CGALPY_TRIANGULATION_2_BINDINGS)
+      message(WARNING
+        "CGALPY_TRIANGULATION_2_BINDINGS not set!\n"
+        "Turning off CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS")
+      set(CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS
+          OFF CACHE BOOL "" FORCE)
+    else()
+      add_definitions(-DCGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS=)
+    endif()
   endif()
 endfunction()
 

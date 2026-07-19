@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "tri3_del_epic",
+  "description": "Build variant defined by cmake/tests/tri3_del_epic.cmake",
+  "cmake_tests": [
+    "cmake/tests/tri3_del_epic.cmake"
+  ]
+}

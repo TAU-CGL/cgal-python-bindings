@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_do_not_use_cubic_algorithm {
-  const std::string m_name = "do_not_use_cubic_algorithm";
+  static constexpr const char* m_name = "do_not_use_cubic_algorithm";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

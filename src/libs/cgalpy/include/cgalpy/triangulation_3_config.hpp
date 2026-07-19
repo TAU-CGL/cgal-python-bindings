@@ -188,7 +188,7 @@ struct Tri3<CGALPY_TRI3_PLAIN, Tr, Tds, Lp> {
 template <typename Tr, typename Tds, typename Lp>
 struct Tri3<CGALPY_TRI3_REGULAR, Tr, Tds, Lp> {
   using type = typename CGAL::Regular_triangulation_3<Tr, Tds>;
-  using base_type = typename type::Base_tr;
+  using base_type = typename type::Tr_Base;
 };
 
 template <typename Tr, typename Tds, typename Lp>

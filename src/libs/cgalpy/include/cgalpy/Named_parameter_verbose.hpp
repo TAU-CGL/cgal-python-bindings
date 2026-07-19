@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_verbose {
-  const std::string m_name = "verbose";
+  static constexpr const char* m_name = "verbose";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

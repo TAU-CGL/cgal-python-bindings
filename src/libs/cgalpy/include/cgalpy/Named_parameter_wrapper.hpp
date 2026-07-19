@@ -10,33 +10,31 @@
 #define CGALPY_NAMED_PARAMETER_WRAPPER_HPP
 
 #include <tuple>
-#include <utility>  // for std::apply
+#include <utility>
 
 namespace cgalpy {
 
-// Define Named_parameter_wrapper, which takes a class template as a template
-// template parameter
+// Stores the non-named-parameter arguments of a wrapped function template.
+// The wrapper is single-use: invoking operator() consumes the stored tuple.
 template <template <typename...> class FuncTemplate, typename... StoredArgs>
 struct Named_parameter_wrapper {
-  std::tuple<StoredArgs...> data;  // Store variadic arguments in a tuple
+  std::tuple<StoredArgs...> data;
 
-  // Constructor to initialize the tuple with arguments
   Named_parameter_wrapper(StoredArgs&&... args) :
     data(std::forward<StoredArgs>(args)...) {}
 
-  // Function to call the stored function template with an additional parameter
-  // np
-  template <typename NPType>
-  auto operator()(NPType&& np) {
-    return std::apply([&np](StoredArgs&&... tupleArgs) {
-                      return FuncTemplate<NPType, StoredArgs...>::
-                        call(std::forward<NPType>(np),
-                             std::forward<StoredArgs>(tupleArgs)...);
-                      },
-      std::move(data));  // move the tuple to enable perfect forwarding
+  template <typename... NPTypes>
+  auto operator()(NPTypes&&... nps) && {
+    return std::apply(
+      [&](StoredArgs&&... tuple_args) {
+        return FuncTemplate<NPTypes..., StoredArgs...>::
+          call(std::forward<NPTypes>(nps)...,
+               std::forward<StoredArgs>(tuple_args)...);
+      },
+      std::move(data));
   }
 };
 
-}
+} // namespace cgalpy
 
 #endif

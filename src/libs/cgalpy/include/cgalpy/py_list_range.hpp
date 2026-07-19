@@ -11,6 +11,8 @@
 
 #include <nanobind/nanobind.h>
 
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
+
 namespace py = nanobind;
 
 /* Do not pass or store py::list as a reference, because it will result in a
@@ -22,17 +24,17 @@ template <typename T>
 struct py_list_range {
   // Standard STL-like typedefs required by CGAL's template traits
   using value_type = T;
-  using iterator = stl_forward_iterator<T>;
-  using const_iterator = stl_forward_iterator<T>;
+  using iterator = py_list_forward_iterator<T>;
+  using const_iterator = py_list_forward_iterator<T>;
 
   py::list m_lst;
 
   py_list_range(py::list lst) : m_lst(lst) {}
 
   // Return the types CGAL expects
-  const_iterator begin() const { return stl_forward_iterator<T>(m_lst, true); }
+  const_iterator begin() const { return py_list_forward_iterator<T>(m_lst, true); }
 
-  const_iterator end() const { return stl_forward_iterator<T>(m_lst, false); }
+  const_iterator end() const { return py_list_forward_iterator<T>(m_lst, false); }
 };
 
 #endif

@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_use_binary_mode {
-  const std::string m_name = "use_binary_mode";
+  static constexpr const char* m_name = "use_binary_mode";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

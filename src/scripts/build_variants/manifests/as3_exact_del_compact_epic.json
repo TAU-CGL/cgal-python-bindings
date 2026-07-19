@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "as3_exact_del_compact_epic",
+  "description": "Build variant defined by cmake/tests/as3_exact_del_compact_epic.cmake",
+  "cmake_tests": [
+    "cmake/tests/as3_exact_del_compact_epic.cmake"
+  ]
+}

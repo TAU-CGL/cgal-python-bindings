@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "ch2_epic",
+  "description": "Build variant defined by cmake/tests/ch2_epic.cmake",
+  "cmake_tests": [
+    "cmake/tests/ch2_epic.cmake"
+  ]
+}

@@ -15,8 +15,8 @@
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/make_iterator.hpp"
 #include "cgalpy/triangulation_d_types.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
-#include "cgalpy/stl_dereference_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
+#include "cgalpy/iterators/stl_dereference_forward_iterator.hpp"
 #include "cgalpy/types.hpp"
 #include "cgalpy/Trid_docstrings.hpp"
 
@@ -376,8 +376,8 @@ py::list incident_full_cells2(py::handle self, const Vertex& v) {
 //!
 template <typename Triangulation_>
 size_type insert1(Triangulation_& tri, py::list& points) {
-  auto begin = stl_forward_iterator<Point>(points);
-  auto end = stl_forward_iterator<Point>(points, false);
+  auto begin = py_list_forward_iterator<Point>(points);
+  auto end = py_list_forward_iterator<Point>(points, false);
   return tri.insert(begin, end);
 }
 

@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_apply_per_connected_component {
-  const std::string m_name = "apply_per_connected_component";
+  static constexpr const char* m_name = "apply_per_connected_component";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

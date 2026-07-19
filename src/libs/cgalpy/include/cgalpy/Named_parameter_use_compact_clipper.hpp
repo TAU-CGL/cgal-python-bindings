@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_use_compact_clipper {
-  const std::string m_name = "use_compact_clipper";
+  static constexpr const char* m_name = "use_compact_clipper";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

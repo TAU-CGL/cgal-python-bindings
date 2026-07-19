@@ -2,6 +2,15 @@ if(NOT SURFACE_MESH_SIMPLIFICATION_OPTIONS_FILE_INCLUDED)
 set(SURFACE_MESH_SIMPLIFICATION_OPTIONS_FILE_INCLUDED)
 
 function(select_surface_mesh_simplification)
+  if (CGALPY_SURFACE_MESH_SIMPLIFICATION_BINDINGS AND
+      "${CGALPY_KERNEL_NAME}" STREQUAL "epec")
+    message(WARNING
+      "CGALPY_SURFACE_MESH_SIMPLIFICATION_BINDINGS is incompatible with "
+      "CGALPY_KERNEL_NAME=epec and will be disabled.")
+    set(CGALPY_SURFACE_MESH_SIMPLIFICATION_BINDINGS OFF CACHE BOOL
+      "Compile bindings for surface mesh simplification" FORCE)
+  endif()
+
   select_polygonal_mesh()
   if (CGALPY_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
     add_definitions(-DCGALPY_SURFACE_MESH_SIMPLIFICATION_BINDINGS=)

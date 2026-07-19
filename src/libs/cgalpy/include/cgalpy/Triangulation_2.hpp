@@ -9,7 +9,7 @@
 #include "cgalpy/add_insertion.hpp"
 #include "cgalpy/export_circulator.hpp"
 #include "cgalpy/make_iterator.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/triangulation_2_types.hpp"
 
 namespace py = nanobind;
@@ -107,8 +107,8 @@ auto export_triangulation_2(C& c) {
          "Examples\n"
          "• TriangulationType/adding_handles.py, Triangulation_2/colored_face.py, and Triangulation_2/for_loop_2.py.")
     .def("insert", [](TriangulationType& tr, py::list& points) {
-      auto begin = stl_forward_iterator<Point>(points);
-      auto end = stl_forward_iterator<Point>(points, false);
+      auto begin = py_list_forward_iterator<Point>(points);
+      auto end = py_list_forward_iterator<Point>(points, false);
       return tr.insert(begin, end);
     },
          py::arg("points"),
@@ -239,8 +239,8 @@ auto export_triangulation_2(C& c) {
          "The circle is assumed to be counterclockwise oriented, so its positive side correspond to its bounded side. This predicate is available only if the corresponding predicates on points is provided in the geometric traits class.")
     .def("star_hole", [](TriangulationType& tr, const Point& p,
                          py::list& edges) {
-      auto begin = stl_forward_iterator<Edge>(edges);
-      auto end = stl_forward_iterator<Edge>(edges, false);
+      auto begin = py_list_forward_iterator<Edge>(edges);
+      auto end = py_list_forward_iterator<Edge>(edges, false);
       return tr.star_hole(p, begin, end);
     },
          py::arg("p"), py::arg("edges"),
@@ -249,10 +249,10 @@ auto export_triangulation_2(C& c) {
          "This function is intended to be used in conjunction with the find_conflicts() member functions of Delaunay and constrained Delaunay triangulations to perform insertions.")
     .def("star_hole", [](TriangulationType& tr, const Point& p,
                          py::list& edges, py::list& faces) {
-      auto edges_begin = stl_forward_iterator<Edge>(edges);
-      auto edges_end = stl_forward_iterator<Edge>(edges, false);
-      auto faces_begin = stl_forward_iterator<Face_handle>(faces);
-      auto faces_end = stl_forward_iterator<Face_handle>(faces, false);
+      auto edges_begin = py_list_forward_iterator<Edge>(edges);
+      auto edges_end = py_list_forward_iterator<Edge>(edges, false);
+      auto faces_begin = py_list_forward_iterator<Face_handle>(faces);
+      auto faces_end = py_list_forward_iterator<Face_handle>(faces, false);
       return tr.star_hole(p, edges_begin, edges_end,
                           faces_begin, faces_end);
     },

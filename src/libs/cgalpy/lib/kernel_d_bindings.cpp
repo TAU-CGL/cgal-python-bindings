@@ -18,7 +18,7 @@
 #include "cgalpy/config.hpp"
 #include "cgalpy/Kernel/export_ft.hpp"
 #include "cgalpy/kernel_d_types.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/make_iterator.hpp"
 #include "cgalpy/Kerd_docstrings.hpp"
 

@@ -125,7 +125,7 @@ auto is_on_vertex(const std::pair<
 
 //!
 struct Named_parameter_snapping_tolerance {
-  const std::string m_name = "snapping_tolerance";
+  static constexpr const char* m_name = "snapping_tolerance";
 
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const

@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_maximum_number {
-  const std::string m_name = "maximum_number";
+  static constexpr const char* m_name = "maximum_number";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_geom_traits {
-  const std::string m_name = "geom_traits";
+  static constexpr const char* m_name = "geom_traits";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     return np.geom_traits(py::cast<const Kernel&>(value));

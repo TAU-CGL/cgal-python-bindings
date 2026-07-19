@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_threshold_distance {
-  const std::string m_name = "threshold_distance";
+  static constexpr const char* m_name = "threshold_distance";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

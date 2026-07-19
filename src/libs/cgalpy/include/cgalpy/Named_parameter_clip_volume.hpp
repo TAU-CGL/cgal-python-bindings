@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_clip_volume {
-  const std::string m_name = "clip_volume";
+  static constexpr const char* m_name = "clip_volume";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

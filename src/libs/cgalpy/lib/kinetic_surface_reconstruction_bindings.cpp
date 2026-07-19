@@ -4,7 +4,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
-// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
+//            Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/make_iterator.h>
@@ -51,26 +52,25 @@ void export_kinetic_surface_reconstruction(py::module_& m) {
            return ksr.detect_planar_shapes();
          },
          py::arg("np") = py::dict(),
-         "detects shapes in the provided point cloud and regularizes them.\n")
-    .def("detected_planar_shapes",
-         [](KSR& ksr) { return ksr.detected_planar_shapes(); },
-      "returns the support planes of the detected and regularized shapes.\n")
-    .def("detected_planar_shape_indices",
-         [](KSR& ksr) { return ksr.detected_planar_shape_indices(); },
-      "returns the indices of detected and regularized shapes.\n")
+         "detects planar shapes in the provided point cloud.\n")
+    .def("regularize_planar_shapes",
+         [](KSR& ksr, const py::dict& np = py::dict()) {
+           return ksr.regularize_planar_shapes();
+         },
+         py::arg("np") = py::dict(),
+         "regularizes the detected planar shapes.\n")
+    .def("planar_shapes",
+         [](KSR& ksr) {
+           return ksr.planar_shapes();
+         },
+         "returns the detected planar-shape regions.\n")
     .def("detection_and_partition",
          [](KSR& ksr, std::size_t k, const py::dict& np = py::dict()) {
            return ksr.detection_and_partition(k);
          },
          py::arg("k"), py::arg("np") = py::dict(),
          "detects and regularizes shapes in the provided point cloud and creates the kinetic space partition.\n"
-         "Combines calls of detect_planar_shapes(), initialize_partition() and partition().\n")
-    .def("initialize_partition",
-         [](KSR& ksr, const py::dict& np = py::dict()) {
-           return ksr.initialize_partition();
-         },
-      py::arg("np") = py::dict(),
-      "initializes the kinetic partition.\n")
+         "Combines calls of detect_planar_shapes(), regularize_planar_shapes(), and partition().\n")
     // .def("kinetic_partition", [](const KSR& ksr) { // deprecated?
     //   return ksr.kinetic_partition();
     // },

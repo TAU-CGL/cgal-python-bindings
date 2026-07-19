@@ -26,8 +26,8 @@
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/export_circulator.hpp"
 #include "cgalpy/make_iterator.hpp"
-#include "cgalpy/stl_dereference_forward_iterator.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/stl_dereference_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/triangulation_2_types.hpp"
 #include "cgalpy/Tri2_docstrings.hpp"
 #include "cgalpy/types.hpp"
@@ -43,8 +43,8 @@ namespace tri2 {
 
 //!
 void tri2_init(tri2::Triangulation_2* tri, py::list& lst) {
-  auto begin = stl_forward_iterator<tri2::Point>(lst);
-  auto end = stl_forward_iterator<tri2::Point>(lst, false);
+  auto begin = py_list_forward_iterator<tri2::Point>(lst);
+  auto end = py_list_forward_iterator<tri2::Point>(lst, false);
   new (tri) tri2::Triangulation_2(begin, end);  // placement new
 }
 
@@ -272,15 +272,15 @@ CGAL::Oriented_side side_of_oriented_circle(const Triangulation_2& tri, Face& f,
 
 //!
 Vertex& star_hole1(Triangulation_2& tri, const Point& p, py::list& edges) {
-  auto edges_begin = stl_forward_iterator<Edge>(edges);
-  auto edges_end = stl_forward_iterator<Edge>(edges, false);
+  auto edges_begin = py_list_forward_iterator<Edge>(edges);
+  auto edges_end = py_list_forward_iterator<Edge>(edges, false);
   return *(tri.star_hole(p, edges_begin, edges_end));
 }
 
 //!
 Vertex& star_hole2(Triangulation_2& tri, const Point& p, py::list& edges, py::list& faces) {
-  auto edges_begin = stl_forward_iterator<Edge>(edges);
-  auto edges_end = stl_forward_iterator<Edge>(edges, false);
+  auto edges_begin = py_list_forward_iterator<Edge>(edges);
+  auto edges_end = py_list_forward_iterator<Edge>(edges, false);
   auto faces_begin = stl_dereference_forward_iterator<Face_handle>(faces);
   auto faces_end = stl_dereference_forward_iterator<Face_handle>(faces, false);
   return *(tri.star_hole(p, edges_begin, edges_end, faces_begin, faces_end));

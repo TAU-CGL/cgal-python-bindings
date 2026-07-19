@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_cap_threshold {
-  const std::string m_name = "cap_threshold";
+  static constexpr const char* m_name = "cap_threshold";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

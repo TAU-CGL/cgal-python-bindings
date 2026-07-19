@@ -14,7 +14,7 @@
 #include "cgalpy/kernel_d_types.hpp"
 #include "cgalpy/iterators/append_iterator.hpp"
 #include "cgalpy/add_attr.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/Ss_docstrings.hpp"
 
 namespace py = nanobind;
@@ -34,8 +34,8 @@ static T* init_tree() { return new T(); }
 template <typename T>
 void init_tree_from_list(T* tree, const py::list& lst) {
   using Pntd = typename T::Point_d;
-  auto begin = stl_forward_iterator<Pntd>(lst);
-  auto end = stl_forward_iterator<Pntd>(lst, false);
+  auto begin = py_list_forward_iterator<Pntd>(lst);
+  auto end = py_list_forward_iterator<Pntd>(lst, false);
   new (tree) T(begin, end);     // placement new
 }
 
@@ -43,8 +43,8 @@ void init_tree_from_list(T* tree, const py::list& lst) {
 template <typename T>
 void tree_insert(T& tree, const py::list& lst) {
   using Pntd = typename T::Point_d;
-  auto begin = stl_forward_iterator<Pntd>(lst);
-  auto end = stl_forward_iterator<Pntd>(lst, false);
+  auto begin = py_list_forward_iterator<Pntd>(lst);
+  auto end = py_list_forward_iterator<Pntd>(lst, false);
   tree.insert(begin, end);
 }
 
@@ -144,7 +144,7 @@ void export_spatial_searching(py::module_& m) {
          py::arg("rectangle"), ss_doc::Fuzzy_iso_box_outer_range_contains)
     ;
   auto res_fib = add_attr<Fib_point_d>(fib_c, "Point_d");
-  BOOST_ASSERT(res);
+  BOOST_ASSERT(res_fib);
 
   // Fuzzy_sphere
   using Fs = ss_code::Fuzzy_sphere;

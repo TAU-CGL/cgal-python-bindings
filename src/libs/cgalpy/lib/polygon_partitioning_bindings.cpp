@@ -16,7 +16,7 @@
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/polygon_partitioning_types.hpp"
 #include "cgalpy/polygon_2_types.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/Pp2_docstrings.hpp"
 
 namespace py = nanobind;
@@ -60,16 +60,16 @@ namespace pp2 {
 /*! Bind partition is valid.
  */
 // bool partition_is_valid_2(const Polygon_2& p, const py::list& lst) {
-//   auto begin = stl_forward_iterator<Polygon_2>(lst);
-//   auto end = stl_forward_iterator<Polygon_2>(lst, false);
+//   auto begin = py_list_forward_iterator<Polygon_2>(lst);
+//   auto end = py_list_forward_iterator<Polygon_2>(lst, false);
 //   return CGAL::partition_is_valid_2(p.vertices_begin(), p.vertices_end(),
 //                                     begin, end, traits);
 // }
 
 //
 // bool convex_partition_is_valid_2(Polygon_2& p, const py::list& lst) {
-//   auto begin = stl_forward_iterator<Polygon_2>(lst);
-//   auto end = stl_forward_iterator<Polygon_2>(lst, false);
+//   auto begin = py_list_forward_iterator<Polygon_2>(lst);
+//   auto end = py_list_forward_iterator<Polygon_2>(lst, false);
 //   return CGAL::convex_partition_is_valid_2(p.vertices_begin(), p.vertices_end(),
 //                                            begin, end, traits);
 // }
@@ -81,8 +81,8 @@ bool y_monotone_partition_is_valid_2(const Polygon_2& p, const py::list& lst) {
   // type Polygon_2 to be CGAL::Polygon_2<Kernel, std::list<Point_2>>.
   // However, we use the type CGAL::Polygon_2<Kernel, std::vector<Point_2>>,
   // So we copy all input polygons...
-  auto sbegin = stl_forward_iterator<Polygon_2>(lst);
-  auto send = stl_forward_iterator<Polygon_2>(lst, false);
+  auto sbegin = py_list_forward_iterator<Polygon_2>(lst);
+  auto send = py_list_forward_iterator<Polygon_2>(lst, false);
   using My_polygon_2 = CGAL::Polygon_2<Kernel, std::list<Kernel::Point_2>>;
   std::vector<My_polygon_2> pgns(lst.size());
   std::transform(sbegin, send, pgns.begin(),

@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_use_delaunay_triangulation {
-  const std::string m_name = "use_delaunay_triangulation";
+  static constexpr const char* m_name = "use_delaunay_triangulation";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

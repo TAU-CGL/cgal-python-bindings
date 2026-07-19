@@ -14,7 +14,7 @@
 #include "cgalpy/types.hpp"
 #include "cgalpy/alpha_shape_2_types.hpp"
 #include "cgalpy/add_attr.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/make_iterator.hpp"
 #include "cgalpy/As2_docstrings.hpp"
 
@@ -28,14 +28,14 @@ py::object alphas(const Alpha_shape_2& as)
 { return make_iterator(as.alpha_begin(), as.alpha_end()); }
 
 void as_init(Alpha_shape_2* as, py::list& lst) {
-  auto begin = stl_forward_iterator<Point>(lst);
-  auto end = stl_forward_iterator<Point>(lst, false);
+  auto begin = py_list_forward_iterator<Point>(lst);
+  auto end = py_list_forward_iterator<Point>(lst, false);
   new (as) Alpha_shape_2(begin, end);   // placement new
 }
 
 std::ptrdiff_t make_alpha_shape(Alpha_shape_2& as, py::list& lst) {
-  auto begin = stl_forward_iterator<Point>(lst);
-  auto end = stl_forward_iterator<Point>(lst, false);
+  auto begin = py_list_forward_iterator<Point>(lst);
+  auto end = py_list_forward_iterator<Point>(lst, false);
   return as.make_alpha_shape(begin, end);
 }
 

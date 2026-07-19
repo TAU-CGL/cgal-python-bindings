@@ -15,7 +15,7 @@
 #endif
 #include "cgalpy/kernel_types.hpp"
 #include "cgalpy/spatial_sorting_types.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/St_docstrings.hpp"
 
 namespace py = nanobind;
@@ -27,8 +27,8 @@ namespace st {
 //!
 void spatial_sort_2_1(py::list& points, const Kernel& kernel,
                       int threshold_hilbert, int threshold_multiscale, double ratio) {
-  auto begin = stl_forward_iterator<Point_2>(points);
-  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto begin = py_list_forward_iterator<Point_2>(points);
+  auto end = py_list_forward_iterator<Point_2>(points, false);
   std::vector<Point_2> v(begin, end);
   CGAL::spatial_sort<Concurrency>(v.begin(), v.end(), kernel, Policy(), threshold_hilbert, threshold_multiscale, ratio);
   points.clear();
@@ -37,8 +37,8 @@ void spatial_sort_2_1(py::list& points, const Kernel& kernel,
 
 //!
 void spatial_sort_2_2(py::list& points) {
-  auto begin = stl_forward_iterator<Point_2>(points);
-  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto begin = py_list_forward_iterator<Point_2>(points);
+  auto end = py_list_forward_iterator<Point_2>(points, false);
   std::vector<Point_2> v(begin, end);
   CGAL::spatial_sort<Concurrency>(v.begin(), v.end(), Policy());
   points.clear();
@@ -48,8 +48,8 @@ void spatial_sort_2_2(py::list& points) {
 //!
 void spatial_sort_3_1(py::list& points, const Kernel& kernel,
                       int threshold_hilbert, int threshold_multiscale, double ratio) {
-  auto begin = stl_forward_iterator<Point_3>(points);
-  auto end = stl_forward_iterator<Point_3>(points, false);
+  auto begin = py_list_forward_iterator<Point_3>(points);
+  auto end = py_list_forward_iterator<Point_3>(points, false);
   std::vector<Point_3> v(begin, end);
   CGAL::spatial_sort<Concurrency>(v.begin(), v.end(), kernel, Policy(), threshold_hilbert, threshold_multiscale, ratio);
   points.clear();
@@ -58,8 +58,8 @@ void spatial_sort_3_1(py::list& points, const Kernel& kernel,
 
 //!
 void spatial_sort_3_2(py::list& points) {
-  auto begin = stl_forward_iterator<Point_3>(points);
-  auto end = stl_forward_iterator<Point_3>(points, false);
+  auto begin = py_list_forward_iterator<Point_3>(points);
+  auto end = py_list_forward_iterator<Point_3>(points, false);
   std::vector<Point_3> v(begin, end);
   CGAL::spatial_sort<Concurrency>(v.begin(), v.end(), Policy());
   points.clear();
@@ -71,8 +71,8 @@ void spatial_sort_3_2(py::list& points) {
 //!
 void spatial_sort_d_1(py::list& points, const Kernel_d& kernel,
                       int threshold_hilbert, int threshold_multiscale, double ratio) {
-  auto begin = stl_forward_iterator<Point_d>(points);
-  auto end = stl_forward_iterator<Point_d>(points, false);
+  auto begin = py_list_forward_iterator<Point_d>(points);
+  auto end = py_list_forward_iterator<Point_d>(points, false);
   std::vector<Point_d> v(begin, end);
   CGAL::spatial_sort<Concurrency>(v.begin(), v.end(), kernel, Policy(), threshold_hilbert, threshold_multiscale, ratio);
   points.clear();
@@ -81,8 +81,8 @@ void spatial_sort_d_1(py::list& points, const Kernel_d& kernel,
 
 //!
 void spatial_sort_d_2(py::list& points) {
-  auto begin = stl_forward_iterator<Point_d>(points);
-  auto end = stl_forward_iterator<Point_d>(points, false);
+  auto begin = py_list_forward_iterator<Point_d>(points);
+  auto end = py_list_forward_iterator<Point_d>(points, false);
   std::vector<Point_d> v(begin, end);
   CGAL::spatial_sort<Concurrency>(v.begin(), v.end(), Policy());
   points.clear();

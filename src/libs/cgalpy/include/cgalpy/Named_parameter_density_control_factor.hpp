@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_density_control_factor {
-  const std::string m_name = "density_control_factor";
+  static constexpr const char* m_name = "density_control_factor";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

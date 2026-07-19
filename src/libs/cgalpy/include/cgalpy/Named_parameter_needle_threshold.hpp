@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_needle_threshold {
-  const std::string m_name = "needle_threshold";
+  static constexpr const char* m_name = "needle_threshold";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

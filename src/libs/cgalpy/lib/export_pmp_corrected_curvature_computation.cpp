@@ -38,7 +38,7 @@ namespace pmp {
 
 //!
 struct Named_parameter_ball_radius {
-  const std::string m_name = "ball_radius";
+  static constexpr const char* m_name = "ball_radius";
 
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const
@@ -48,7 +48,7 @@ struct Named_parameter_ball_radius {
 //!
 template <typename PolygonMesh>
 struct Named_parameter_vertex_normal_map {
-  const std::string m_name = "vertex_normal_map";
+  static constexpr const char* m_name = "vertex_normal_map";
 
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {

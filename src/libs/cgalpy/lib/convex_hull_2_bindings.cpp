@@ -21,7 +21,7 @@
 
 #include "cgalpy/convex_hull_2_config.hpp"
 #include "cgalpy/kernel_types.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/Ch2_docstrings.hpp"
 
 namespace py = nanobind;
@@ -29,8 +29,8 @@ namespace ch2_doc = cgalpy::ch2::docstrings;
 
 //! ch_akl_toussaint
 py::list ch_akl_toussaint(py::list& lst) {
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   py::list res;
   auto op = [&] (const Point_2& p) mutable { res.append(p); };
   auto it = boost::make_function_output_iterator(std::ref(op));
@@ -40,8 +40,8 @@ py::list ch_akl_toussaint(py::list& lst) {
 
 //! ch_bykat
 py::list ch_bykat(py::list& lst) {
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   py::list res;
   auto op = [&] (const Point_2& p) mutable { res.append(p); };
   auto it = boost::make_function_output_iterator(std::ref(op));
@@ -51,8 +51,8 @@ py::list ch_bykat(py::list& lst) {
 
 //! ch_eddy
 py::list ch_eddy(py::list& lst) {
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   py::list res;
   auto op = [&] (const Point_2& p) mutable { res.append(p); };
   auto it = boost::make_function_output_iterator(std::ref(op));
@@ -62,8 +62,8 @@ py::list ch_eddy(py::list& lst) {
 
 //! ch_graham_andrew
 py::list ch_graham_andrew(py::list& lst) {
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   py::list res;
   auto op = [&] (const Point_2& p) mutable { res.append(p); };
   auto it = boost::make_function_output_iterator(std::ref(op));
@@ -73,8 +73,8 @@ py::list ch_graham_andrew(py::list& lst) {
 
 //! ch_jarvis
 py::list ch_jarvis(py::list& lst) {
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   py::list res;
   auto op = [&] (const Point_2& p) mutable { res.append(p); };
   auto it = boost::make_function_output_iterator(std::ref(op));
@@ -84,8 +84,8 @@ py::list ch_jarvis(py::list& lst) {
 
 //! ch_melkman
 py::list ch_melkman(py::list& lst) {
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   py::list res;
   auto op = [&] (const Point_2& p) mutable { res.append(p); };
   auto it = boost::make_function_output_iterator(std::ref(op));
@@ -95,8 +95,8 @@ py::list ch_melkman(py::list& lst) {
 
 //! convex_hull_2
 py::list convex_hull_2(py::list& lst) {
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   py::list res;
   auto op = [&] (const Point_2& p) mutable { res.append(p); };
   auto it = boost::make_function_output_iterator(std::ref(op));
@@ -106,22 +106,22 @@ py::list convex_hull_2(py::list& lst) {
 
 //! is_ccw_strongly_convex_2
 bool is_ccw_strongly_convex_2(py::list& lst) {
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   return CGAL::is_ccw_strongly_convex_2(begin, end);
 }
 
 //! is_cw_strongly_convex_2
 bool is_cw_strongly_convex_2(py::list& lst) {
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   return CGAL::is_cw_strongly_convex_2(begin, end);
 }
 
 //! lower_hull_points_2
 py::list lower_hull_points_2(py::list& lst) {
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   py::list res;
   auto op = [&] (const Point_2& p) mutable { res.append(p); };
   auto it = boost::make_function_output_iterator(std::ref(op));
@@ -131,8 +131,8 @@ py::list lower_hull_points_2(py::list& lst) {
 
 //! upper_hull_points_2
 py::list upper_hull_points_2(py::list& lst) {
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   py::list res;
   auto op = [&] (const Point_2& p) mutable { res.append(p); };
   auto it = boost::make_function_output_iterator(std::ref(op));

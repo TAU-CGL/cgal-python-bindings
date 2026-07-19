@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_stream_precision {
-  const std::string m_name = "stream_precision";
+  static constexpr const char* m_name = "stream_precision";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

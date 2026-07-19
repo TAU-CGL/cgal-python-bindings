@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_do_not_triangulate_faces {
-  const std::string m_name = "do_not_triangulate_faces";
+  static constexpr const char* m_name = "do_not_triangulate_faces";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

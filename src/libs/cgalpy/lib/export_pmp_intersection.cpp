@@ -22,8 +22,10 @@
 #include <CGAL/Polygon_mesh_processing/intersection.h>
 #include <CGAL/Polygon_mesh_processing/self_intersections.h>
 
+#include "cgalpy/Named_parameter_do_overlap_test_of_bounded_sides.hpp"
 #include "cgalpy/Named_parameter_geom_traits.hpp"
 #include "cgalpy/Named_parameter_maximum_number.hpp"
+#include "cgalpy/Named_parameter_vertex_point_map.hpp"
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
@@ -307,11 +309,48 @@ bool do_intersect_polyline_ranges_np(const std::vector<py::ndarray<>>& range1_ar
 }
 
 //!
+template <typename NamedParameter1, typename NamedParameter2,
+          typename... Args>
+struct Do_intersect_meshes_wrapper;
+
+template <typename NamedParameter1, typename NamedParameter2,
+          typename PolygonMesh1, typename PolygonMesh2>
+struct Do_intersect_meshes_wrapper<NamedParameter1, NamedParameter2,
+                                   PolygonMesh1, PolygonMesh2> {
+  static auto call(NamedParameter1& np1, NamedParameter2& np2,
+                   PolygonMesh1&& pm1, PolygonMesh2&& pm2) {
+    return PMP::do_intersect(std::forward<PolygonMesh1>(pm1),
+                             std::forward<PolygonMesh2>(pm2),
+                             np1, np2);
+  }
+};
+
+//!
 template <typename PolygonMesh>
 bool do_intersect_meshes(const PolygonMesh& pm1, const PolygonMesh& pm2,
-                         const py::dict& np1 = py::dict(), const py::dict& np2 = py::dict()) {
-  using Pm = PolygonMesh;
-  return PMP::do_intersect(pm1, pm2);
+                         const py::dict& np1 = py::dict(),
+                         const py::dict& np2 = py::dict()) {
+  cgalpy::Named_parameter_vertex_point_map<PolygonMesh>
+    vertex_point_map_op;
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_do_overlap_test_of_bounded_sides
+    overlap_test_op;
+
+  cgalpy::Named_parameter_wrapper<
+    Do_intersect_meshes_wrapper,
+    const PolygonMesh&,
+    const PolygonMesh&
+  > wrapper(pm1, pm2);
+
+  return cgalpy::multi_np_applicator(
+    wrapper,
+    cgalpy::make_np_group(np1,
+                          vertex_point_map_op,
+                          geom_traits_op,
+                          overlap_test_op),
+    cgalpy::make_np_group(np2,
+                          vertex_point_map_op,
+                          overlap_test_op));
 }
 
 //!

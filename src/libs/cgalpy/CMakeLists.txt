@@ -875,7 +875,6 @@ endforeach()
 add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 # Add the library target
 nanobind_add_module(CGALPY STABLE_ABI NB_STATIC ${CGALPY_SRC_FILES})
-target_include_directories(CGALPY PRIVATE ${Boost_INCLUDE_DIR} ${Boost_INCLUDE_DIRS})
 if (MSVC)
   target_compile_options(CGALPY PRIVATE /EHsc)
 endif()
@@ -891,6 +890,13 @@ target_link_libraries(CGALPY PRIVATE
   CGAL::CGAL
   Boost::headers
   ${PYTHON_LIBRARIES})
+
+if (CGALPY_TRIANGULATION_3_BINDINGS AND
+    (${CGALPY_TRI3_CONCURRENCY} EQUAL
+     ${CGALPY_TRI3_CONCURRENCY_PARALLEL}) AND
+    TARGET CGAL::TBB_support)
+  target_link_libraries(CGALPY PRIVATE CGAL::TBB_support)
+endif()
 
 if (CGAL_Qt6_FOUND)
   target_link_libraries(CGALPY PRIVATE

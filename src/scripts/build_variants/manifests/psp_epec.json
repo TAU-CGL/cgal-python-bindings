@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "psp_epec",
+  "description": "Build variant defined by cmake/tests/psp_epec.cmake",
+  "cmake_tests": [
+    "cmake/tests/psp_epec.cmake"
+  ]
+}

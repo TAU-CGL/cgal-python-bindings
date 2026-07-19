@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_flip_triangle_height_threshold {
-  const std::string m_name = "flip_triangle_height_threshold";
+  static constexpr const char* m_name = "flip_triangle_height_threshold";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

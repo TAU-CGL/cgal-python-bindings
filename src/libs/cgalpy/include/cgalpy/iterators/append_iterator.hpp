@@ -20,6 +20,11 @@ namespace py = nanobind;
 // append_iterator is similar to back_insert_iterator.
 // Instead of applying 'container.push_back(element)' it applies
 // lst.append(element), where lst is the bound Python list.
+//
+// T defines value_type for algorithms and iterator-traits queries. It does not
+// affect nanobind conversion or Python list append behavior. Use a concrete T
+// when a producer constructs value_type objects; void supports consumers that
+// only assign already constructed values.
 template <typename T = void>
 class append_iterator {
 private:

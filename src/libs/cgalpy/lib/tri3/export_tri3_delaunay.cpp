@@ -15,7 +15,7 @@
 #include <nanobind/stl/function.h>
 
 #include "cgalpy/add_attr.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/triangulation_3_types.hpp"
 
 #include "cgalpy/Tri3_docstrings.hpp"
@@ -28,8 +28,8 @@ namespace tri3 {
 
 //!
 void dt3_init(tri3::Delaunay_triangulation_3* tri, py::list& lst) {
-  auto begin = stl_forward_iterator<tri3::Point>(lst);
-  auto end = stl_forward_iterator<tri3::Point>(lst, false);
+  auto begin = py_list_forward_iterator<tri3::Point>(lst);
+  auto end = py_list_forward_iterator<tri3::Point>(lst, false);
   new (tri) tri3::Delaunay_triangulation_3(begin, end);  // placement new
 }
 

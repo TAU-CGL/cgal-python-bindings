@@ -22,7 +22,7 @@
 #include "cgalpy/aos_2_concepts/Aos_directional_x_monotone_traits_classes.hpp"
 #include "cgalpy/add_insertion.hpp"
 #include "cgalpy/add_extraction.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 
@@ -37,8 +37,8 @@ void init_from_points(Curve_2* cv, py::list& lst) {
   using Nt_traits = CGAL::CORE_algebraic_number_traits;
   using Rational = Nt_traits::Rational;
   using Rat_kernel = CGAL::Cartesian<Rational>;
-  auto begin = stl_forward_iterator<Rat_kernel::Point_2>(lst);
-  auto end = stl_forward_iterator<Rat_kernel::Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Rat_kernel::Point_2>(lst);
+  auto end = py_list_forward_iterator<Rat_kernel::Point_2>(lst, false);
   new (cv) Curve_2(begin, end);         // placement new
 }
 

@@ -27,7 +27,7 @@ namespace cgalpy {
 
 template <typename PolygonMesh>
 struct Named_parameter_edge_is_constrained_map {
-  const std::string m_name = "edge_is_constrained_map";
+  static constexpr const char* m_name = "edge_is_constrained_map";
 
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {

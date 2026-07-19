@@ -8,3 +8,6 @@ ksr_*/
 *sm_*/
 *sd_*/
 *psp_*/
+
+# Generated build-variant launchers
+build_variants/generated/

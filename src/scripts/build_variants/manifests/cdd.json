@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "cdd",
+  "description": "Build variant defined by cmake/tests/cdd.cmake",
+  "cmake_tests": [
+    "cmake/tests/cdd.cmake"
+  ]
+}

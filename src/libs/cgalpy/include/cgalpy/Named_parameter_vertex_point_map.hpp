@@ -27,7 +27,7 @@ namespace cgalpy {
 
 template <typename PolygonMesh>
 struct Named_parameter_vertex_point_map {
-  const std::string m_name = "vertex_point_map";
+  static constexpr const char* m_name = "vertex_point_map";
 
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {

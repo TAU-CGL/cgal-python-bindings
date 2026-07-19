@@ -17,6 +17,7 @@
 
 #include <nanobind/nanobind.h>
 #include <nanobind/operators.h>
+#include <nanobind/stl/pair.h>
 #include <nanobind/stl/string.h>
 #include <nanobind/stl/tuple.h>
 #include <nanobind/stl/vector.h>
@@ -42,7 +43,7 @@
 #include "cgalpy/Kernel/export_ft.hpp"
 #include "cgalpy/Kernel/export_rt.hpp"
 #include "cgalpy/Kernel/export_kernel.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/to_string.hpp"
 
 #include "cgalpy/Ker_docstrings.hpp"
@@ -97,8 +98,8 @@ namespace cgalpy {
 namespace ker {
 
 CGAL::Bbox_2 bbox_2(const py::list& points) {
-  auto begin = stl_forward_iterator<Point_2>(points, true);
-  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto begin = py_list_forward_iterator<Point_2>(points, true);
+  auto end = py_list_forward_iterator<Point_2>(points, false);
   return CGAL::bbox_2(begin, end);
 }
 
@@ -183,8 +184,8 @@ void export_kernel_module(py::module_& m) {
            "Returns a double approximation of this FT value.")
       .def("exact", [](const FT& ft)->const Fte& { return ft.exact();}, ri,
            "Returns the exact representation of this FT value.")
-      .def("approx", [](const FT& ft)->const Fta& { return ft.approx();},
-           "Returns the approximate representation of this FT value.")
+      .def("approx", [](const FT& ft)->std::pair<double, double> { return ft.approx().pair();},
+           "Returns the lower and upper bounds of the approximate interval.")
       ;
   }
 

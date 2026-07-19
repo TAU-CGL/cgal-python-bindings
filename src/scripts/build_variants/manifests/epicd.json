@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "epicd",
+  "description": "Build variant defined by cmake/tests/epicd.cmake",
+  "cmake_tests": [
+    "cmake/tests/epicd.cmake"
+  ]
+}

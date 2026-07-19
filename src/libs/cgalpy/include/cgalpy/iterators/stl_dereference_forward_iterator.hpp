@@ -5,9 +5,10 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
-#ifndef CGALPY_STL_DEREFERENCE_FORWARD_ITERATOR_HPP
-#define CGALPY_STL_DEREFERENCE_FORWARD_ITERATOR_HPP
+#ifndef CGALPY_ITERATORS_STL_DEREFERENCE_FORWARD_ITERATOR_HPP
+#define CGALPY_ITERATORS_STL_DEREFERENCE_FORWARD_ITERATOR_HPP
 
 #include <boost/iterator/iterator_facade.hpp>
 

@@ -24,6 +24,10 @@ else()
   find_package(CGAL REQUIRED COMPONENTS)
 endif()
 
+# Provide CGAL::TBB_support when TBB is available.
+find_package(TBB QUIET)
+include(CGAL_TBB_support)
+
 if (NOT CGAL_FOUND AND NOT DEFINED ENV{CGALPY_PYPI})
   message(FATAL_ERROR "This library cannot be compiled, as it requires CGAL.")
   return()
@@ -160,7 +164,6 @@ if (Qt6_FOUND AND NOT SKBUILD)
   include_directories(${Qt6OpenGL_INCLUDE_DIRS})
 endif()
 include_directories(${PYTHON_INCLUDE_DIRS})
-include_directories(${Boost_INCLUDE_DIR})
 
 # Add some compiler options
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")

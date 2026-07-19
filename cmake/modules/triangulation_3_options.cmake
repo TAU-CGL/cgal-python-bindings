@@ -43,9 +43,21 @@ set_property(CACHE CGALPY_TRI3_LOCATION_POLICY_NAME PROPERTY STRINGS fast compac
 function(select_tri3_concurrency)
   # Select 3D triangulation concurrency
   if     ("${CGALPY_TRI3_CONCURRENCY_NAME}" STREQUAL "sequential")
-    set(CGALPY_TRI3_CONCURRENCY ${CGALPY_TRI3_CONCURRENCY_SEQUENTIAL} CACHE INTERNAL "")
+    set(CGALPY_TRI3_CONCURRENCY
+      ${CGALPY_TRI3_CONCURRENCY_SEQUENTIAL} CACHE INTERNAL "" FORCE)
   elseif ("${CGALPY_TRI3_CONCURRENCY_NAME}" STREQUAL "parallel")
-    set(CGALPY_TRI3_CONCURRENCY ${CGALPY_TRI3_CONCURRENCY_PARALLEL} CACHE INTERNAL "")
+    if (TARGET CGAL::TBB_support)
+      set(CGALPY_TRI3_CONCURRENCY
+        ${CGALPY_TRI3_CONCURRENCY_PARALLEL} CACHE INTERNAL "" FORCE)
+    else()
+      message(WARNING
+        "Parallel Triangulation_3 bindings requested, but "
+        "CGAL::TBB_support is unavailable. Falling back to sequential.")
+      set(CGALPY_TRI3_CONCURRENCY_NAME "sequential" CACHE STRING
+        "The 3D Triangulation concurrency tag" FORCE)
+      set(CGALPY_TRI3_CONCURRENCY
+        ${CGALPY_TRI3_CONCURRENCY_SEQUENTIAL} CACHE INTERNAL "" FORCE)
+    endif()
   endif()
   add_definitions(-DCGALPY_TRI3_CONCURRENCY=${CGALPY_TRI3_CONCURRENCY})
 endfunction()

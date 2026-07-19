@@ -17,7 +17,7 @@
 #include <CGAL/Polynomial_traits_d.h>
 #include <CGAL/Polynomial_type_generator.h>
 
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/make_iterator.hpp"
 #include "cgalpy/add_insertion.hpp"
 
@@ -27,8 +27,8 @@ template <typename PT>
 void init_polynomial(typename PT::Type* pol, py::list& lst) {
   using P = typename PT::Type;
   using CT = typename PT::Coefficient_type;
-  auto begin = stl_forward_iterator<CT>(lst);
-  auto end = stl_forward_iterator<CT>(lst, false);
+  auto begin = py_list_forward_iterator<CT>(lst);
+  auto end = py_list_forward_iterator<CT>(lst, false);
   new (pol) P(begin, end);      // placement new
 }
 

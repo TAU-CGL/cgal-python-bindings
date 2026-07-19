@@ -15,7 +15,7 @@
 #include <nanobind/nanobind.h>
 
 #include "cgalpy/add_insertion.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/make_iterator.hpp"
 #include "cgalpy/add_extraction.hpp"
 
@@ -39,8 +39,8 @@ void init_polygon_with_holes_2(GeneralPolygonWithHoles_2* pwh,
                                py::list& lst) {
   using Gpwh = GeneralPolygonWithHoles_2;
   using Gpgn = typename Gpwh::General_polygon_2;
-  auto begin = stl_forward_iterator<Gpgn>(lst);
-  auto end = stl_forward_iterator<Gpgn>(lst, false);
+  auto begin = py_list_forward_iterator<Gpgn>(lst);
+  auto end = py_list_forward_iterator<Gpgn>(lst, false);
   new (pwh) Gpwh(p, begin, end);        // placement new
 }
 

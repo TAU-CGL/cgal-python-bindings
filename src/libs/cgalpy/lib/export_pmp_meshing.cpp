@@ -77,7 +77,7 @@ auto apply_meshing_geom_traits_named_parameters(const py::dict& params,
 //! Apply triangulate_faces named parameters.
 template <typename PolygonMesh>
 struct Named_parameter_triangulate_faces_visitor {
-  const std::string m_name = "visitor";
+  static constexpr const char* m_name = "visitor";
 
   template <typename NamedParameter>
   auto operator()(NamedParameter& np, const py::handle& value) const
@@ -142,7 +142,7 @@ auto apply_random_perturbation_named_parameters(const py::dict& params,
 
 //! Apply tangential relaxation number-of-iterations parameter.
 struct Named_parameter_number_of_iterations {
-  const std::string m_name = "number_of_iterations";
+  static constexpr const char* m_name = "number_of_iterations";
 
   template <typename NamedParameter>
   auto operator()(NamedParameter& np, const py::handle& value) const
@@ -151,7 +151,7 @@ struct Named_parameter_number_of_iterations {
 
 //! Apply tangential relaxation constraint-relaxation flag.
 struct Named_parameter_relax_constraints {
-  const std::string m_name = "relax_constraints";
+  static constexpr const char* m_name = "relax_constraints";
 
   template <typename NamedParameter>
   auto operator()(NamedParameter& np, const py::handle& value) const
@@ -161,7 +161,7 @@ struct Named_parameter_relax_constraints {
 //! Apply tangential relaxation move filter.
 template <typename PolygonMesh>
 struct Named_parameter_allow_move_functor {
-  const std::string m_name = "allow_move_functor";
+  static constexpr const char* m_name = "allow_move_functor";
 
   template <typename NamedParameter>
   auto operator()(NamedParameter& np, const py::handle& value) const {

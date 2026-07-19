@@ -60,7 +60,7 @@
 #include "cgalpy/export_property_map.hpp"
 #include "cgalpy/generator_functions.hpp"
 #include "cgalpy/make_iterator.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/Named_parameter_repair_polygon_soup.hpp"
 #include "cgalpy/Named_parameter_stream_precision.hpp"
 #include "cgalpy/Named_parameter_use_binary_mode.hpp"

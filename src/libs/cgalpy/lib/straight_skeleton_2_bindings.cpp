@@ -34,8 +34,8 @@
 
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/straight_skeleton_2_types.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
-#include "cgalpy/stl_nested_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
+#include "cgalpy/iterators/py_nested_list_forward_iterator.hpp"
 #include "cgalpy/Sn2_docstrings.hpp"
 #if defined(CGALPY_POLYGON_2_BINDINGS)
 #include "cgalpy/polygon_2_types.hpp"
@@ -67,8 +67,8 @@ using Shared_pgn = std::shared_ptr<Pgn>;
 /*! creates a straight skeleton in the interior of a polygon defined by its outer boundary.
  */
 Sss2 create_interior_straight_skeleton_2_11(const py::list& points, const Kernel& kernel) {
-  auto points_begin = stl_forward_iterator<Point_2>(points, true);
-  auto points_end = stl_forward_iterator<Point_2>(points, false);
+  auto points_begin = py_list_forward_iterator<Point_2>(points, true);
+  auto points_end = py_list_forward_iterator<Point_2>(points, false);
   auto ss = CGAL::create_interior_straight_skeleton_2(points_begin, points_end, kernel);
   if (! ss) throw std::runtime_error("Failed to create straight skeleton");
   return ss;
@@ -82,10 +82,10 @@ Sss2 create_interior_straight_skeleton_2_12(const py::list& points)
 /*! creates a straight skeleton in the interior of a polygon with holes defined by its outer boundary and holes.
  */
 Sss2 create_interior_straight_skeleton_2_21(const py::list& points, const py::list& holes, const Kernel& kernel) {
-  auto points_begin = stl_forward_iterator<Point_2>(points, true);
-  auto points_end = stl_forward_iterator<Point_2>(points, false);
-  auto holes_begin = stl_nested_forward_iterator<Point_2>(holes, true);
-  auto holes_end = stl_nested_forward_iterator<Point_2>(holes, false);
+  auto points_begin = py_list_forward_iterator<Point_2>(points, true);
+  auto points_end = py_list_forward_iterator<Point_2>(points, false);
+  auto holes_begin = py_nested_list_forward_iterator<Point_2>(holes, true);
+  auto holes_end = py_nested_list_forward_iterator<Point_2>(holes, false);
   auto ss = CGAL::create_interior_straight_skeleton_2(points_begin, points_end, holes_begin, holes_end, kernel);
   if (! ss) throw std::runtime_error("Failed to create straight skeleton");
   return ss;
@@ -114,10 +114,10 @@ Sss2 create_exterior_straight_skeleton_2_12(const FT& max_offset, const py::list
  */
 Sss2 create_interior_weighted_straight_skeleton_2_11(const py::list& points, const py::list& weights,
                                                      const Kernel& kernel) {
-  auto points_begin = stl_forward_iterator<Point_2>(points, true);
-  auto points_end = stl_forward_iterator<Point_2>(points, false);
-  auto weights_begin = stl_forward_iterator<FT>(weights, true);
-  auto weights_end = stl_forward_iterator<FT>(weights, false);
+  auto points_begin = py_list_forward_iterator<Point_2>(points, true);
+  auto points_end = py_list_forward_iterator<Point_2>(points, false);
+  auto weights_begin = py_list_forward_iterator<FT>(weights, true);
+  auto weights_end = py_list_forward_iterator<FT>(weights, false);
   auto ss = CGAL::create_interior_weighted_straight_skeleton_2(points_begin, points_end,
                                                                weights_begin, weights_end, kernel);
   if (! ss) throw std::runtime_error("Failed to create straight skeleton");
@@ -134,14 +134,14 @@ Sss2 create_interior_weighted_straight_skeleton_2_12(const py::list& points, con
 Sss2 create_interior_weighted_straight_skeleton_2_21(const py::list& points, const py::list& holes,
                                                      const py::list& outer_weights, const py::list& hole_weights,
                                                      const Kernel& kernel) {
-  auto points_begin = stl_forward_iterator<Point_2>(points, true);
-  auto points_end = stl_forward_iterator<Point_2>(points, false);
-  auto outer_weights_begin = stl_forward_iterator<FT>(outer_weights, true);
-  auto outer_weights_end = stl_forward_iterator<FT>(outer_weights, false);
-  auto holes_begin = stl_nested_forward_iterator<Point_2>(holes, true);
-  auto holes_end = stl_nested_forward_iterator<Point_2>(holes, false);
-  auto hole_weights_begin = stl_nested_forward_iterator<FT>(hole_weights, true);
-  auto hole_weights_end = stl_nested_forward_iterator<FT>(hole_weights, false);
+  auto points_begin = py_list_forward_iterator<Point_2>(points, true);
+  auto points_end = py_list_forward_iterator<Point_2>(points, false);
+  auto outer_weights_begin = py_list_forward_iterator<FT>(outer_weights, true);
+  auto outer_weights_end = py_list_forward_iterator<FT>(outer_weights, false);
+  auto holes_begin = py_nested_list_forward_iterator<Point_2>(holes, true);
+  auto holes_end = py_nested_list_forward_iterator<Point_2>(holes, false);
+  auto hole_weights_begin = py_nested_list_forward_iterator<FT>(hole_weights, true);
+  auto hole_weights_end = py_nested_list_forward_iterator<FT>(hole_weights, false);
   auto ss = CGAL::create_interior_weighted_straight_skeleton_2(points_begin, points_end, holes_begin, holes_end,
                                                                outer_weights_begin, outer_weights_end,
                                                                hole_weights_begin, hole_weights_end,
@@ -180,8 +180,8 @@ Sss2 create_exterior_weighted_straight_skeleton_2_12(const FT& max_offset, const
 std::vector<Shared_pgn>
 create_interior_skeleton_and_offset_polygons_2_11(const FT& offset, const Pgn& pgn, const py::list& holes,
                                                   const Kernel& kernel) {
-  auto holes_begin = stl_nested_forward_iterator<Point_2>(holes, true);
-  auto holes_end = stl_nested_forward_iterator<Point_2>(holes, false);
+  auto holes_begin = py_nested_list_forward_iterator<Point_2>(holes, true);
+  auto holes_end = py_nested_list_forward_iterator<Point_2>(holes, false);
   return CGAL::create_interior_skeleton_and_offset_polygons_2(offset, pgn, holes_begin, holes_end, kernel, kernel);
 }
 
@@ -201,10 +201,10 @@ create_interior_weighted_skeleton_and_offset_polygons_2_11(const FT& offset, con
                                                            const std::vector<FT>& outer_weights,
                                                            const py::list& hole_weights,
                                                            const Kernel& kernel) {
-  auto holes_begin = stl_nested_forward_iterator<Point_2>(holes, true);
-  auto holes_end = stl_nested_forward_iterator<Point_2>(holes, false);
-  auto hole_weights_begin = stl_nested_forward_iterator<FT>(hole_weights, true);
-  auto hole_weights_end = stl_nested_forward_iterator<FT>(hole_weights, false);
+  auto holes_begin = py_nested_list_forward_iterator<Point_2>(holes, true);
+  auto holes_end = py_nested_list_forward_iterator<Point_2>(holes, false);
+  auto hole_weights_begin = py_nested_list_forward_iterator<FT>(hole_weights, true);
+  auto hole_weights_end = py_nested_list_forward_iterator<FT>(hole_weights, false);
   return CGAL::create_interior_weighted_skeleton_and_offset_polygons_2(offset, pgn, holes_begin, holes_end,
                                                                        outer_weights,
                                                                        hole_weights_begin, hole_weights_end,

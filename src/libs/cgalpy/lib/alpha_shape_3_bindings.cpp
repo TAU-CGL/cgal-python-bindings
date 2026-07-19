@@ -14,7 +14,7 @@
 #include "cgalpy/triangulation_3_types.hpp"
 #include "cgalpy/alpha_shape_3_types.hpp"
 #include "cgalpy/add_attr.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/make_iterator.hpp"
 #include "cgalpy/As3_docstrings.hpp"
 
@@ -30,40 +30,40 @@ py::object alphas(const Alpha_shape_3& as)
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
 std::ptrdiff_t make_alpha_shape(Alpha_shape_3& as, py::list& lst) {
-  auto begin = stl_forward_iterator<Point>(lst);
-  auto end = stl_forward_iterator<Point>(lst, false);
+  auto begin = py_list_forward_iterator<Point>(lst);
+  auto end = py_list_forward_iterator<Point>(lst, false);
   return as.make_alpha_shape(begin, end);
 }
 #endif
 
   void as_init1(Alpha_shape_3* as, py::list& lst) {
-  auto begin = stl_forward_iterator<Point>(lst);
-  auto end = stl_forward_iterator<Point>(lst, false);
+  auto begin = py_list_forward_iterator<Point>(lst);
+  auto end = py_list_forward_iterator<Point>(lst, false);
   new (as) Alpha_shape_3(begin, end);           // placement new
 }
 
   void as_init2(Alpha_shape_3* as, py::list& lst, const FT& alpha) {
-  auto begin = stl_forward_iterator<Point>(lst);
-  auto end = stl_forward_iterator<Point>(lst, false);
+  auto begin = py_list_forward_iterator<Point>(lst);
+  auto end = py_list_forward_iterator<Point>(lst, false);
   new (as) Alpha_shape_3(begin, end, alpha);    // placement new
 }
 
   void as_init3(Alpha_shape_3* as, py::list& lst, double alpha) {
-  auto begin = stl_forward_iterator<Point>(lst);
-  auto end = stl_forward_iterator<Point>(lst, false);
+  auto begin = py_list_forward_iterator<Point>(lst);
+  auto end = py_list_forward_iterator<Point>(lst, false);
   new (as) Alpha_shape_3(begin, end, alpha);    // placement new
 }
 
 #if CGALPY_AS3 == CGALPY_AS3_PLAIN
   void as_init4(Alpha_shape_3* as, py::list& lst, const FT& alpha, Mode m) {
-  auto begin = stl_forward_iterator<Point>(lst);
-  auto end = stl_forward_iterator<Point>(lst, false);
+  auto begin = py_list_forward_iterator<Point>(lst);
+  auto end = py_list_forward_iterator<Point>(lst, false);
   new (as) Alpha_shape_3(begin, end, alpha, m); // placement new
 }
 
   void as_init5(Alpha_shape_3* as, py::list& lst, double alpha, Mode m) {
-  auto begin = stl_forward_iterator<Point>(lst);
-  auto end = stl_forward_iterator<Point>(lst, false);
+  auto begin = py_list_forward_iterator<Point>(lst);
+  auto end = py_list_forward_iterator<Point>(lst, false);
   new (as) Alpha_shape_3(begin, end, alpha, m); // placement new
 }
 
@@ -501,7 +501,7 @@ void export_alpha_shape_3(py::module_& m) {
     // \todo: generate bindings for periodic traits
     ;
   else {
-    if (! add_attr<cgalpy::tri3::Geom_traits>(as3_scope, "Gt"))
+    if (! add_attr<cgalpy::tri3::Geom_traits>(as3_c, "Gt"))
       std::cerr << "'cgalpy::tri3::Geom_traits' not registered!\n";
   }
   if (! add_attr<cgalpy::as3::Point>(as3_c, "Point"))

@@ -37,7 +37,7 @@ using Convex_volume = std::pair<std::vector<Point_3>, std::vector<Triangle>>;
 namespace smdec_doc = cgalpy::smdec::docstrings;
 
 struct Named_parameter_maximum_number_of_voxels {
-  const std::string m_name = "maximum_number_of_voxels";
+  static constexpr const char* m_name = "maximum_number_of_voxels";
 
   template <typename NamedParameters>
   auto operator()(NamedParameters np, const py::handle& value) const {
@@ -51,7 +51,7 @@ struct Named_parameter_maximum_number_of_voxels {
 };
 
 struct Named_parameter_maximum_depth {
-  const std::string m_name = "maximum_depth";
+  static constexpr const char* m_name = "maximum_depth";
 
   template <typename NamedParameters>
   auto operator()(NamedParameters np, const py::handle& value) const {
@@ -65,7 +65,7 @@ struct Named_parameter_maximum_depth {
 };
 
 struct Named_parameter_refitting {
-  const std::string m_name = "refitting";
+  static constexpr const char* m_name = "refitting";
 
   template <typename NamedParameters>
   auto operator()(NamedParameters np, const py::handle& value) const {
@@ -79,7 +79,7 @@ struct Named_parameter_refitting {
 };
 
 struct Named_parameter_maximum_number_of_convex_volumes {
-  const std::string m_name = "maximum_number_of_convex_volumes";
+  static constexpr const char* m_name = "maximum_number_of_convex_volumes";
 
   template <typename NamedParameters>
   auto operator()(NamedParameters np, const py::handle& value) const {
@@ -93,7 +93,7 @@ struct Named_parameter_maximum_number_of_convex_volumes {
 };
 
 struct Named_parameter_volume_error {
-  const std::string m_name = "volume_error";
+  static constexpr const char* m_name = "volume_error";
 
   template <typename NamedParameters>
   auto operator()(NamedParameters np, const py::handle& value) const {
@@ -107,7 +107,7 @@ struct Named_parameter_volume_error {
 };
 
 struct Named_parameter_split_at_concavity {
-  const std::string m_name = "split_at_concavity";
+  static constexpr const char* m_name = "split_at_concavity";
 
   template <typename NamedParameters>
   auto operator()(NamedParameters np, const py::handle& value) const {

@@ -12,7 +12,7 @@
 
 #include <nanobind/nanobind.h>
 
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/add_insertion.hpp"
 #include "cgalpy/add_extraction.hpp"
 #include "cgalpy/make_iterator.hpp"
@@ -38,8 +38,8 @@ template <typename GeneralPolygon_2>
 void init_polygon_2(GeneralPolygon_2* pgn, py::list& lst) {
   using Gpgn = GeneralPolygon_2;
   using Xcv = typename Gpgn::X_monotone_curve_2;
-  auto begin = stl_forward_iterator<Xcv>(lst);
-  auto end = stl_forward_iterator<Xcv>(lst, false);
+  auto begin = py_list_forward_iterator<Xcv>(lst);
+  auto end = py_list_forward_iterator<Xcv>(lst, false);
   new (pgn) Gpgn(begin, end);   // placement new
 }
 

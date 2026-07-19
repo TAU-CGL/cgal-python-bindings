@@ -29,8 +29,8 @@
 #include "cgalpy/add_insertion.hpp"
 #include "cgalpy/export_circulator.hpp"
 #include "cgalpy/make_iterator.hpp"
-#include "cgalpy/stl_dereference_forward_iterator.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/stl_dereference_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/triangulation_3_types.hpp"
 
 #include "cgalpy/Tri3_docstrings.hpp"
@@ -96,8 +96,8 @@ auto has_vertex4(const Triangulation_3& tri, Cell& c, int i, Vertex& v) {
 
 //!
 void tri3_init(tri3::Triangulation_3* tri, py::list& lst) {
-  auto begin = stl_forward_iterator<tri3::Point>(lst);
-  auto end = stl_forward_iterator<tri3::Point>(lst, false);
+  auto begin = py_list_forward_iterator<tri3::Point>(lst);
+  auto end = py_list_forward_iterator<tri3::Point>(lst, false);
   new (tri) tri3::Triangulation_3(begin, end);  // placement new
 }
 
@@ -105,8 +105,8 @@ void tri3_init(tri3::Triangulation_3* tri, py::list& lst) {
 auto insert_points(Triangulation_3& tri, py::list& lst) {
   if (! lst) return 0l;
   if (! py::isinstance<tri3::Point>(lst[0])) return 0l;
-  auto begin = stl_forward_iterator<tri3::Point>(lst);
-  auto end = stl_forward_iterator<tri3::Point>(lst, false);
+  auto begin = py_list_forward_iterator<tri3::Point>(lst);
+  auto end = py_list_forward_iterator<tri3::Point>(lst, false);
   return tri.insert(begin, end);
 }
 
@@ -358,10 +358,10 @@ Vertex& mirror_vertex(const Triangulation_3& tri, Cell& c, int i) {
 }
 
 //!
-const Point_3& point1(const Triangulation_3& tri, Vertex& v) { return tri.point(Vertex_handle(&v)); }
+const Point& point1(const Triangulation_3& tri, Vertex& v) { return tri.point(Vertex_handle(&v)); }
 
 //!
-const Point_3& point2(const Triangulation_3& tri, Cell& c, int i) { return tri.point(Cell_handle(&c), i); }
+const Point& point2(const Triangulation_3& tri, Cell& c, int i) { return tri.point(Cell_handle(&c), i); }
 
 //!
 Segment_3 segment1(const Triangulation_3& tri, Edge& e) { return tri.segment(e); }
@@ -379,7 +379,7 @@ Triangle_3 triangle2(const Triangulation_3& tri, Cell& c, int i) { return tri.tr
 Tetrahedron tetrahedron(const Triangulation_3& tri, Cell& c) { return tri.tetrahedron(Cell_handle(&c)); }
 
 //!
-py::object side_of_cell(const Triangulation_3& tri, const Point_3& p, Cell& c) {
+py::object side_of_cell(const Triangulation_3& tri, const Point& p, Cell& c) {
   Locate_type lt;
   int li;
   int lj;
@@ -402,7 +402,7 @@ py::object side_of_cell(const Triangulation_3& tri, const Point_3& p, Cell& c) {
 }
 
 //!
-py::object side_of_facet(const Triangulation_3& tri, const Point_3& p, Facet& f) {
+py::object side_of_facet(const Triangulation_3& tri, const Point& p, Facet& f) {
   Locate_type lt;
   int li;
   int lj;
@@ -425,7 +425,7 @@ py::object side_of_facet(const Triangulation_3& tri, const Point_3& p, Facet& f)
 }
 
 //!
-py::object side_of_edge(const Triangulation_3& tri, const Point_3& p, Edge& e) {
+py::object side_of_edge(const Triangulation_3& tri, const Point& p, Edge& e) {
   Locate_type lt;
   int li;
   auto res = tri.side_of_edge(p, e, lt, li);
@@ -484,20 +484,23 @@ py::object finite_facets(const Triangulation_3& tri)
 py::object points(const Triangulation_3& tri)
 { return make_iterator(tri.points_begin(), tri.points_end()); }
 
+#if (CGALPY_TRI3 != CGALPY_TRI3_REGULAR) && \
+    (CGALPY_TRI3 != CGALPY_TRI3_PERIODIC_REGULAR)
 //!
 py::object segment_traverser_cells1(const Triangulation_3& tri,
-                                    const Point_3& ps, const Point& pt) {
+                                    const Point& ps, const Point& pt) {
   return make_iterator(tri.segment_traverser_cells_begin(ps, pt),
                        tri.segment_traverser_cells_end());
 }
 
 //!
 py::object segment_traverser_cells2(const Triangulation_3& tri,
-                                   const Point_3& ps, const Point& pt,
+                                   const Point& ps, const Point& pt,
                                    Cell& hint) {
   return make_iterator(tri.segment_traverser_cells_begin(ps, pt, Cell_handle(&hint)),
                        tri.segment_traverser_cells_end());
 }
+#endif
 
 /// Iterators & Circulators
 /// @{
@@ -1025,7 +1028,10 @@ void export_tri3_plain(py::module_& m) {
 
   add_iterator<Pi, Pi, const Pnt&>("Point_iterator", tri_c);
 
+#if (CGALPY_TRI3 != CGALPY_TRI3_REGULAR) && \
+    (CGALPY_TRI3 != CGALPY_TRI3_PERIODIC_REGULAR)
   add_iterator<Sci, Sci, const Cell&>("Segment_cell_iterator", tri_c);
+#endif
 
   tri_c.def("all_cells", &cgalpy::tri3::all_cells, py::keep_alive<0, 1>(),
             tri3_doc::Triangulation_3_all_cell_handles)
@@ -1048,12 +1054,15 @@ void export_tri3_plain(py::module_& m) {
     .def("points", &cgalpy::tri3::points, py::keep_alive<0, 1>(),
          tri3_doc::Triangulation_3_points)
 
+#if (CGALPY_TRI3 != CGALPY_TRI3_REGULAR) && \
+    (CGALPY_TRI3 != CGALPY_TRI3_PERIODIC_REGULAR)
     .def("segment_traverser_cells", &cgalpy::tri3::segment_traverser_cells1,
          py::keep_alive<0, 1>(), py::arg("ps"), py::arg("pt"),
          tri3_doc::Triangulation_3_segment_traverser_cells_begin_1)
     .def("segment_traverser_cells", &cgalpy::tri3::segment_traverser_cells2,
          py::keep_alive<0, 1>(), py::arg("ps"), py::arg("pt"), py::arg("hint"),
          tri3_doc::Triangulation_3_segment_traverser_cells_begin_1)
+#endif
     ;
 
   // Iterators

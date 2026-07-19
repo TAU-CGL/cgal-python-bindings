@@ -21,7 +21,7 @@
 #include "cgalpy/arr_point_location_config.hpp"
 #include "cgalpy/arrangement_on_surface_2_types.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 
 namespace py = nanobind;
 namespace aos2_doc = cgalpy::aos2::docstrings;
@@ -57,8 +57,8 @@ py::list locate_batch(const Arrangement_on_surface_2& arr, const py::list& lst)
   // The argument type of boost::function_output_iterator (UnaryFunction) must
   // be Assignable and Copy Constructible; hence the application of std::ref().
   auto it = boost::make_function_output_iterator(std::ref(op));
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   locate(arr, begin, end, it);
   return res;
 }

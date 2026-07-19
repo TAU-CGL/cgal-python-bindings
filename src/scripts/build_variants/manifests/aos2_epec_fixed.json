@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "aos2_epec_fixed",
+  "description": "Build variant defined by cmake/tests/aos2_epec_fixed.cmake",
+  "cmake_tests": [
+    "cmake/tests/aos2_epec_fixed.cmake"
+  ]
+}

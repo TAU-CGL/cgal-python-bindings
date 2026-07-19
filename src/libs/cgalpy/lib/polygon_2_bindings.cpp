@@ -12,7 +12,7 @@
 #include <nanobind/operators.h>
 
 #include "cgalpy/polygon_2_types.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/add_insertion.hpp"
 #include "cgalpy/make_iterator.hpp"
@@ -39,16 +39,16 @@ Point_2& bottom_vertex(Polygon_2& pgn) { return *(pgn.bottom_vertex()); }
 
 // Initialize a polygon from a list of vertices.
 void init_polygon_2(Polygon_2* pgn, py::list& lst) {
-  auto begin = stl_forward_iterator<Point_2>(lst);
-  auto end = stl_forward_iterator<Point_2>(lst, false);
+  auto begin = py_list_forward_iterator<Point_2>(lst);
+  auto end = py_list_forward_iterator<Point_2>(lst, false);
   new (pgn) Polygon_2(begin, end);      // placement new
 }
 
 /*!
  */
 FT area_2_1(const py::list& points, const Kernel& kernel) {
-  auto begin = stl_forward_iterator<Point_2>(points);
-  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto begin = py_list_forward_iterator<Point_2>(points);
+  auto end = py_list_forward_iterator<Point_2>(points, false);
   FT area;
   CGAL::area_2(begin, end, area, kernel);
   return area;
@@ -61,15 +61,15 @@ FT area_2_2(const py::list& points) { return area_2_1(points, Kernel()); }
 /*!
  */
 py::object bottom_vertex_2_1(const py::list& points, const Kernel& kernel) {
-  auto begin = stl_forward_iterator<Point_2>(points);
-  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto begin = py_list_forward_iterator<Point_2>(points);
+  auto end = py_list_forward_iterator<Point_2>(points, false);
   auto result_it = CGAL::bottom_vertex_2(begin, end, kernel);
   if (result_it == end) {
     throw std::invalid_argument("Cannot find bottom vertex of an empty list.");
   }
   // Re-create a fresh 'begin' iterator to calculate the index distance safely.
-  // Note: This relies on stl_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
-  auto start_it = stl_forward_iterator<Point_2>(points);
+  // Note: This relies on py_list_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
+  auto start_it = py_list_forward_iterator<Point_2>(points);
   std::size_t index = std::distance(start_it, result_it);
 
   // Return the exact same Python object that was passed in!
@@ -83,8 +83,8 @@ py::object bottom_vertex_2_2(const py::list& points) { return bottom_vertex_2_1(
 /*!
  */
 CGAL::Bounded_side bounded_side_2_1(const py::list& points, const Point_2& pnt, const Kernel& kernel) {
-  auto begin = stl_forward_iterator<Point_2>(points);
-  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto begin = py_list_forward_iterator<Point_2>(points);
+  auto end = py_list_forward_iterator<Point_2>(points, false);
   return CGAL::bounded_side_2(begin, end, pnt, kernel);
 }
 
@@ -96,8 +96,8 @@ CGAL::Bounded_side bounded_side_2_2(const py::list& points, const Point_2& pnt)
 /*!
  */
 bool is_convex_2_1(const py::list& points, const Kernel& kernel) {
-  auto begin = stl_forward_iterator<Point_2>(points);
-  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto begin = py_list_forward_iterator<Point_2>(points);
+  auto end = py_list_forward_iterator<Point_2>(points, false);
   return CGAL::is_convex_2(begin, end, kernel);
 }
 
@@ -108,8 +108,8 @@ bool is_convex_2_2(const py::list& points) { return is_convex_2_1(points, Kernel
 /*!
  */
 bool is_simple_2_1(const py::list& points, const Kernel& kernel) {
-  auto begin = stl_forward_iterator<Point_2>(points);
-  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto begin = py_list_forward_iterator<Point_2>(points);
+  auto end = py_list_forward_iterator<Point_2>(points, false);
   return CGAL::is_simple_2(begin, end, kernel);
 }
 
@@ -120,15 +120,15 @@ bool is_simple_2_2(const py::list& points) { return is_simple_2_1(points, Kernel
 /*!
  */
 py::object left_vertex_2_1(const py::list& points, const Kernel& kernel) {
-  auto begin = stl_forward_iterator<Point_2>(points);
-  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto begin = py_list_forward_iterator<Point_2>(points);
+  auto end = py_list_forward_iterator<Point_2>(points, false);
   auto result_it = CGAL::left_vertex_2(begin, end, kernel);
   if (result_it == end) {
     throw std::invalid_argument("Cannot find left vertex of an empty list.");
   }
   // Re-create a fresh 'begin' iterator to calculate the index distance safely.
-  // Note: This relies on stl_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
-  auto start_it = stl_forward_iterator<Point_2>(points);
+  // Note: This relies on py_list_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
+  auto start_it = py_list_forward_iterator<Point_2>(points);
   std::size_t index = std::distance(start_it, result_it);
 
   // Return the exact same Python object that was passed in!
@@ -175,8 +175,8 @@ CGAL::Oriented_side oriented_side_2_2(const py::list& points, const Point_2& pnt
 /*!
  */
 FT polygon_area_2_1(const py::list& points, const Kernel& kernel) {
-  auto begin = stl_forward_iterator<Point_2>(points);
-  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto begin = py_list_forward_iterator<Point_2>(points);
+  auto end = py_list_forward_iterator<Point_2>(points, false);
   return CGAL::polygon_area_2(begin, end, kernel);
 }
 
@@ -187,15 +187,15 @@ FT polygon_area_2_2(const py::list& points) { return polygon_area_2_1(points, Ke
 /*!
  */
 py::object right_vertex_2_1(const py::list& points, const Kernel& kernel) {
-  auto begin = stl_forward_iterator<Point_2>(points);
-  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto begin = py_list_forward_iterator<Point_2>(points);
+  auto end = py_list_forward_iterator<Point_2>(points, false);
   auto result_it =  CGAL::right_vertex_2(begin, end, kernel);
   if (result_it == end) {
     throw std::invalid_argument("Cannot find right vertex of an empty list.");
   }
   // Re-create a fresh 'begin' iterator to calculate the index distance safely.
-  // Note: This relies on stl_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
-  auto start_it = stl_forward_iterator<Point_2>(points);
+  // Note: This relies on py_list_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
+  auto start_it = py_list_forward_iterator<Point_2>(points);
   std::size_t index = std::distance(start_it, result_it);
 
   // Return the exact same Python object that was passed in!
@@ -209,15 +209,15 @@ py::object right_vertex_2_2(const py::list& points) { return right_vertex_2_1(po
 /*!
  */
 py::object top_vertex_2_1(const py::list& points, const Kernel& kernel) {
-  auto begin = stl_forward_iterator<Point_2>(points);
-  auto end = stl_forward_iterator<Point_2>(points, false);
+  auto begin = py_list_forward_iterator<Point_2>(points);
+  auto end = py_list_forward_iterator<Point_2>(points, false);
   auto result_it = CGAL::top_vertex_2(begin, end, kernel);
   if (result_it == end) {
     throw std::invalid_argument("Cannot find top vertex of an empty list.");
   }
   // Re-create a fresh 'begin' iterator to calculate the index distance safely.
-  // Note: This relies on stl_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
-  auto start_it = stl_forward_iterator<Point_2>(points);
+  // Note: This relies on py_list_forward_iterator being a true Forward Iterator, not a single-pass Input Iterator.
+  auto start_it = py_list_forward_iterator<Point_2>(points);
   std::size_t index = std::distance(start_it, result_it);
 
   // Return the exact same Python object that was passed in!

@@ -11,7 +11,7 @@
 #include <CGAL/Sweep_line_2_algorithms.h>
 
 #include "cgalpy/surface_sweep_2_types.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 
 #include "cgalpy/Ss2_docstrings.hpp"
 
@@ -30,13 +30,13 @@ py::list compute_intersection_points0(py::list& curves, bool report_endpoints = 
   // be Assignable and Copy Constructible; hence the application of std::ref().
   auto it = boost::make_function_output_iterator(std::ref(op));
   if (py::isinstance<X_monotone_curve_2>(curves[0])) {
-    auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
-    auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
+    auto begin = py_list_forward_iterator<X_monotone_curve_2>(curves);
+    auto end = py_list_forward_iterator<X_monotone_curve_2>(curves, false);
     CGAL::compute_intersection_points(begin, end, it, report_endpoints);
   }
   else if (py::isinstance<Curve_2>(curves[0])) {
-    auto begin = stl_forward_iterator<Curve_2>(curves);
-    auto end = stl_forward_iterator<Curve_2>(curves, false);
+    auto begin = py_list_forward_iterator<Curve_2>(curves);
+    auto end = py_list_forward_iterator<Curve_2>(curves, false);
     CGAL::compute_intersection_points(begin, end, it, report_endpoints);
   }
   else {
@@ -55,13 +55,13 @@ py::list compute_intersection_points1(py::list& curves, bool report_endpoints, c
   // be Assignable and Copy Constructible; hence the application of std::ref().
   auto it = boost::make_function_output_iterator(std::ref(op));
   if (py::isinstance<X_monotone_curve_2>(curves[0])) {
-    auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
-    auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
+    auto begin = py_list_forward_iterator<X_monotone_curve_2>(curves);
+    auto end = py_list_forward_iterator<X_monotone_curve_2>(curves, false);
     CGAL::compute_intersection_points(begin, end, it, report_endpoints, traits);
   }
   else if (py::isinstance<Curve_2>(curves[0])) {
-    auto begin = stl_forward_iterator<Curve_2>(curves);
-    auto end = stl_forward_iterator<Curve_2>(curves, false);
+    auto begin = py_list_forward_iterator<Curve_2>(curves);
+    auto end = py_list_forward_iterator<Curve_2>(curves, false);
     CGAL::compute_intersection_points(begin, end, it, report_endpoints, traits);
   }
   else {
@@ -81,13 +81,13 @@ py::list compute_subcurves0(py::list& curves, bool mult_overlaps = false) {
   // be Assignable and Copy Constructible; hence the application of std::ref().
   auto it = boost::make_function_output_iterator(std::ref(op));
   if (py::isinstance<X_monotone_curve_2>(curves[0])) {
-    auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
-    auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
+    auto begin = py_list_forward_iterator<X_monotone_curve_2>(curves);
+    auto end = py_list_forward_iterator<X_monotone_curve_2>(curves, false);
     CGAL::compute_subcurves(begin, end, it, mult_overlaps);
   }
   else if (py::isinstance<Curve_2>(curves[0])) {
-    auto begin = stl_forward_iterator<Curve_2>(curves);
-    auto end = stl_forward_iterator<Curve_2>(curves, false);
+    auto begin = py_list_forward_iterator<Curve_2>(curves);
+    auto end = py_list_forward_iterator<Curve_2>(curves, false);
     CGAL::compute_subcurves(begin, end, it, mult_overlaps);
   }
   else {
@@ -107,13 +107,13 @@ py::list compute_subcurves1(py::list& curves, bool mult_overlaps, const Geometry
   // be Assignable and Copy Constructible; hence the application of std::ref().
   auto it = boost::make_function_output_iterator(std::ref(op));
   if (py::isinstance<X_monotone_curve_2>(curves[0])) {
-    auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
-    auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
+    auto begin = py_list_forward_iterator<X_monotone_curve_2>(curves);
+    auto end = py_list_forward_iterator<X_monotone_curve_2>(curves, false);
     CGAL::compute_subcurves(begin, end, it, mult_overlaps, traits);
   }
   else if (py::isinstance<Curve_2>(curves[0])) {
-    auto begin = stl_forward_iterator<Curve_2>(curves);
-    auto end = stl_forward_iterator<Curve_2>(curves, false);
+    auto begin = py_list_forward_iterator<Curve_2>(curves);
+    auto end = py_list_forward_iterator<Curve_2>(curves, false);
     CGAL::compute_subcurves(begin, end, it, mult_overlaps, traits);
   }
   else {
@@ -133,13 +133,13 @@ bool do_intersect0(py::list& curves, bool consider_common_endpoints = true) {
   (void)consider_common_endpoints;
 
   if (py::isinstance<X_monotone_curve_2>(curves[0])) {
-    auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
-    auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
+    auto begin = py_list_forward_iterator<X_monotone_curve_2>(curves);
+    auto end = py_list_forward_iterator<X_monotone_curve_2>(curves, false);
     return CGAL::do_curves_intersect(begin, end);
   }
   else if (py::isinstance<Curve_2>(curves[0])) {
-    auto begin = stl_forward_iterator<Curve_2>(curves);
-    auto end = stl_forward_iterator<Curve_2>(curves, false);
+    auto begin = py_list_forward_iterator<Curve_2>(curves);
+    auto end = py_list_forward_iterator<Curve_2>(curves, false);
     return CGAL::do_curves_intersect(begin, end);
   }
   else {
@@ -156,13 +156,13 @@ bool do_intersect1(py::list& curves, bool consider_common_endpoints, const Geome
   (void)consider_common_endpoints;
 
   if (py::isinstance<X_monotone_curve_2>(curves[0])) {
-    auto begin = stl_forward_iterator<X_monotone_curve_2>(curves);
-    auto end = stl_forward_iterator<X_monotone_curve_2>(curves, false);
+    auto begin = py_list_forward_iterator<X_monotone_curve_2>(curves);
+    auto end = py_list_forward_iterator<X_monotone_curve_2>(curves, false);
     return CGAL::do_curves_intersect(begin, end, traits);
   }
   else if (py::isinstance<Curve_2>(curves[0])) {
-    auto begin = stl_forward_iterator<Curve_2>(curves);
-    auto end = stl_forward_iterator<Curve_2>(curves, false);
+    auto begin = py_list_forward_iterator<Curve_2>(curves);
+    auto end = py_list_forward_iterator<Curve_2>(curves, false);
     return CGAL::do_curves_intersect(begin, end, traits);
   }
   else {

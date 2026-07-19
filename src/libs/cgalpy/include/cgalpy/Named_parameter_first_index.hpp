@@ -21,7 +21,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_first_index {
-  const std::string m_name = "first_index";
+  static constexpr const char* m_name = "first_index";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

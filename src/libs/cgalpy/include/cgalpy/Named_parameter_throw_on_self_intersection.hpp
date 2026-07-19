@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_throw_on_self_intersection {
-  const std::string m_name = "throw_on_self_intersection";
+  static constexpr const char* m_name = "throw_on_self_intersection";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

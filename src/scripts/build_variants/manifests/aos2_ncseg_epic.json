@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "aos2_ncseg_epic",
+  "description": "Build variant defined by cmake/tests/aos2_ncseg_epic.cmake",
+  "cmake_tests": [
+    "cmake/tests/aos2_ncseg_epic.cmake"
+  ]
+}

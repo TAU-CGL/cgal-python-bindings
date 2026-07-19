@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_fairing_continuity {
-  const std::string m_name = "fairing_continuity";
+  static constexpr const char* m_name = "fairing_continuity";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

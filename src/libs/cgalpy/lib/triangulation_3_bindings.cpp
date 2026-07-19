@@ -21,8 +21,8 @@
 #include "cgalpy/add_insertion.hpp"
 #include "cgalpy/export_circulator.hpp"
 #include "cgalpy/make_iterator.hpp"
-#include "cgalpy/stl_dereference_forward_iterator.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/stl_dereference_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/triangulation_3_types.hpp"
 #include "cgalpy/types.hpp"
 

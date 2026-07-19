@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_collapse_length_threshold {
-  const std::string m_name = "collapse_length_threshold";
+  static constexpr const char* m_name = "collapse_length_threshold";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

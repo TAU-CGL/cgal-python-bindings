@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_volume_threshold {
-  const std::string m_name = "volume_threshold";
+  static constexpr const char* m_name = "volume_threshold";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

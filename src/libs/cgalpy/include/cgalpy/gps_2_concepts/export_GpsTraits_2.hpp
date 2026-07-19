@@ -15,7 +15,7 @@
 #include "cgalpy/gps_2_concepts/Gps_traits_classes.hpp"
 #include "cgalpy/export_general_polygon_2.hpp"
 #include "cgalpy/export_general_polygon_with_holes_2.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 
 #include "cgalpy/Bso2_docstrings.hpp"
 
@@ -37,8 +37,8 @@ void ctr_pgn_op(const typename T::Construct_polygon_2& ctr,
                 const py::list& curves,
                 typename T::Polygon_2& pgn) {
   using Xcv = typename T::X_monotone_curve_2;
-  auto begin = stl_forward_iterator<Xcv>(curves);
-  auto end = stl_forward_iterator<Xcv>(curves, false);
+  auto begin = py_list_forward_iterator<Xcv>(curves);
+  auto end = py_list_forward_iterator<Xcv>(curves, false);
   ctr(begin, end, pgn);
 }
 
@@ -54,8 +54,8 @@ ctr_pwh_op(const typename T::Construct_polygon_with_holes_2 ctr,
            const typename T::Polygon_2& boundary,
            const py::list& holes) {
   using Pgn = typename T::Polygon_2;
-  auto begin = stl_forward_iterator<const Pgn&>(holes);
-  auto end = stl_forward_iterator<const Pgn&>(holes, false);
+  auto begin = py_list_forward_iterator<const Pgn&>(holes);
+  auto end = py_list_forward_iterator<const Pgn&>(holes, false);
   return ctr(boundary, begin, end);
 }
 

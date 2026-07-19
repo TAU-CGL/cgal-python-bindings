@@ -20,7 +20,7 @@ namespace py = nanobind;
 namespace cgalpy {
 
 struct Named_parameter_require_same_orientation {
-  const std::string m_name = "require_same_orientation";
+  static constexpr const char* m_name = "require_same_orientation";
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
     try {

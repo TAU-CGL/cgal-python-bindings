@@ -15,7 +15,7 @@
 #include "cgalpy/config.hpp"
 #include "cgalpy/alpha_shape_2_config.hpp"
 #include "cgalpy/kernel_types.hpp"
-#include "cgalpy/stl_forward_iterator.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
 #include "cgalpy/triangulation_2_config.hpp"
 
 namespace py = nanobind;
@@ -113,8 +113,8 @@ Vertex& insert_point3(Triangulation_& tri, const Point& p, Locate_type lt, Face&
 //!
 template <typename Triangulation_>
 int insert_points(Triangulation_& t, py::list& lst) {
-  auto begin = stl_forward_iterator<Point>(lst);
-  auto end = stl_forward_iterator<Point>(lst, false);
+  auto begin = py_list_forward_iterator<Point>(lst);
+  auto end = py_list_forward_iterator<Point>(lst, false);
   return t.insert(begin, end);
 }
 
