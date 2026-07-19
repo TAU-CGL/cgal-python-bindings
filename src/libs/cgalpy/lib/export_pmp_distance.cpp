@@ -18,6 +18,7 @@
 #include <CGAL/Polygon_mesh_processing/distance.h>
 
 #include "cgalpy/Named_parameter_geom_traits.hpp"
+#include "cgalpy/Named_parameter_number_of_points_per_face.hpp"
 #include "cgalpy/Named_parameter_vertex_point_map.hpp"
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/named_parameter_applicator.hpp"
@@ -49,6 +50,27 @@ auto apply_distance_named_parameters(const py::dict& params, Args&&... args)
   return cgalpy::named_parameter_applicator(wrapper, np, params,
                                             vertex_point_map_op,
                                             geom_traits_op);
+}
+
+/*! Apply sampling parameters to sample_triangle_mesh().
+ */
+template <typename PolygonMesh, template <typename...> class Wrapper,
+          typename... Args>
+auto apply_sample_triangle_mesh_named_parameters(const py::dict& params,
+                                                 Args&&... args)
+{
+  auto np = CGAL::parameters::default_values();
+  cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
+  cgalpy::Named_parameter_geom_traits geom_traits_op;
+  cgalpy::Named_parameter_number_of_points_per_face
+    number_of_points_per_face_op;
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
+    wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(
+    wrapper, np, params,
+    vertex_point_map_op,
+    geom_traits_op,
+    number_of_points_per_face_op);
 }
 
 /*! Apply geom_traits to a PMP distance wrapper that has no mesh vertex point
@@ -213,7 +235,8 @@ template <typename PolygonMesh>
 auto sample_triangle_mesh(const PolygonMesh& tm, const py::dict& np = py::dict()) {
   using Pm = PolygonMesh;
   PointRange pts;
-  apply_distance_named_parameters<Pm, Sample_triangle_mesh_wrapper>(np, tm, pts);
+  apply_sample_triangle_mesh_named_parameters<
+    Pm, Sample_triangle_mesh_wrapper>(np, tm, pts);
   return pts;
 }
 
