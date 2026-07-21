@@ -12,6 +12,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
+TIMING_VALUE_PATTERN = (
+    r"[-+]?(?:\d+(?:\.\d*)?|\.\d+)"
+    r"(?:[eE][-+]?\d+)?"
+)
+
+
 @dataclass(frozen=True)
 class ExamplePair:
     name: str
@@ -535,27 +541,27 @@ def comparable_stdout(pair, text):
     if not pair.normalize_timing:
         return text
     text = re.sub(
-        r"Constructed the input polygons in [0-9.]+ seconds\.",
+        rf"Constructed the input polygons in {TIMING_VALUE_PATTERN} seconds\.",
         "Constructed the input polygons in <TIME> seconds.",
         text,
     )
     text = re.sub(
-        r"The intersection computation took [0-9.]+ seconds\.",
+        rf"The intersection computation took {TIMING_VALUE_PATTERN} seconds\.",
         "The intersection computation took <TIME> seconds.",
         text,
     )
     text = re.sub(
-        r"Offset computation took [0-9.]+ seconds\.",
+        rf"Offset computation took {TIMING_VALUE_PATTERN} seconds\.",
         "Offset computation took <TIME> seconds.",
         text,
     )
     text = re.sub(
-        r"Inset computation took [0-9.]+ seconds\.",
+        rf"Inset computation took {TIMING_VALUE_PATTERN} seconds\.",
         "Inset computation took <TIME> seconds.",
         text,
     )
     text = re.sub(
-        r"Construction took [0-9.]+ seconds\.",
+        rf"Construction took {TIMING_VALUE_PATTERN} seconds\.",
         "Construction took <TIME> seconds.",
         text,
     )
