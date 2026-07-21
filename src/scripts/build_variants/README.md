@@ -1,7 +1,45 @@
 # CGAL Python Binding Variant Runner
 
-`src/scripts/run` is the cross-platform entry point for configuring and
-building CGAL Python binding variants.
+The **CGAL Python Binding Variant Runner** (`src/scripts/run`) is a
+cross-platform, multi-variant build driver that serves as a component
+in the regression testing of CGAL Python bindings automated pipeline.
+It processes declarative JSON manifests, referencing underlying CMake
+test preload configurations, to handle out-of-source builds across
+Linux, macOS, and Windows. By standardizing directory isolation,
+parallel execution, logging, and result tracking, the runner enables
+systematic verification of binding variations across different CGAL
+modules. The compiled Python packages produced by the runner serve as
+the foundation for downstream integration tests, where translated
+Python example programs are executed and verified against their
+reference C++ outputs.
+
+## Introduction
+
+### Role
+
+### Role
+
+The **CGAL Python Binding Variant Runner** acts as the primary build driver and orchestration stage within the automated regression testing pipeline for `cgalpy`. Its principal responsibility is to consume declarative JSON manifests and execute **Step 1: Out-of-Source Build Driver**, preparing isolated binary environments across target platforms.
+
+Once the runner completes the compilation phase, downstream automation steps execute and verify the binding variations across distinct CGAL packages.
+
+```mermaid
+graph TD
+    A[Declarative Manifests<br>JSON Specs + CMake Preloads] --> B[Step 1: Variant Runner Driver<br>Configures & Builds Variants]
+
+    subgraph Step 1 Detail: Runner Processing
+        B --> B1[Validate Manifests & Dependencies]
+        B1 --> B2[Create Isolated Out-of-Source Build Dirs]
+        B2 --> B3[Invoke CMake Configure & Build]
+    end
+
+    B3 --> C[Compiled Python Extension Libraries / Wheels]
+
+    C --> D[Step 2: Example Execution Driver<br>Executes Translated Python Examples]
+    D --> E[Step 3: Output Verification Engine<br>Compares Python Output vs. C++ Reference]
+```
+
+### Objectives
 
 Each build variant is described by a validated JSON manifest. A manifest
 references one or more existing CMake preload files under `cmake/tests/`.
@@ -39,15 +77,98 @@ Display the complete command-line interface with:
 src/scripts/run --help
 ```
 
+## Quick Start
+
+```bash
+# 1. List all available manifests
+src/scripts/run --list
+
+# 2. Preview commands for a variant (dry-run)
+src/scripts/run sm_pmp_epic --dry-run
+
+# 3. Build a variant
+src/scripts/run sm_pmp_epic --cgal-dir <path-to-cgal-build>
+```
+
 ## Default behavior
 
 The runner uses these defaults:
 
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Setting</th>
+      <th rowspan="2">Name</th>
+      <th colspan="3">Default</th>
+    </tr>
+    <tr>
+      <th>Linux</th>
+      <th>macOS</th>
+      <th>Windows</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Source directory</strong></td>
+      <td><code>source_directory</code></td>
+      <td colspan="3">Repository root</td>
+    </tr>
+    <tr>
+      <td><strong>Manifest directory</strong></td>
+      <td><code>manifest_directory</code></td>
+      <td colspan="3"><code><code>$source_directory/src/scripts/build_variants/manifests</code></td>
+    </tr>
+    <tr>
+      <td><strong>Detached build directory</strong></td>
+      <td><code>default_build_directory</code></td>
+      <td colspan="2"><code>~/build/cgalpy</code></td>
+      <td><code>%USERPROFILE%\build\cgalpy</code></td>
+    </tr>
+    <tr>
+      <td><strong>Build type</strong></td>
+      <td><code>build_type</code></td>
+      <td colspan="3"><code>Release</code></td>
+    </tr>
+    <tr>
+      <td><strong>Library naming</strong></td>
+      <td><code>library_name</code></td>
+      <td colspan="3">Computed library name</td>
+    </tr>
+    <tr>
+      <td><strong>No. of parallel jobs</strong></td>
+      <td><code>job_count</code></td>
+      <td colspan="3"><code>4</code></td>
+    </tr>
+    <tr>
+      <td><strong>Operating system</strong></td>
+      <td><code>os</code></td>
+      <td><code>linux</code></td>
+      <td><code>macos</code></td>
+      <td><code>windows</code></td>
+    </tr>
+    <tr>
+      <td><strong>Compiler</strong></td>
+      <td><code>compiler</code></td>
+      <td><code>c++</code></td>
+      <td><code>/usr/bin/c++</code></td>
+      <td><code>msvc</code></td>
+    </tr>
+    <tr>
+      <td><strong>Python executable</strong></td>
+      <td><code>python_executable</code></td>
+      <td><code>python</code> / <code>python3</code></td>
+      <td><code>python3</code></td>
+      <td><code>python.exe</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<!--
 | Setting | Default |
 | --- | --- |
 | Source directory | Repository root |
 | Manifest directory | `src/scripts/build_variants/manifests` |
-| Detached build root | `~/build/cgalpy` |
+| Detached build directory | `~/build/cgalpy` |
 | Build type | `Release` |
 | Library naming | Computed library name |
 | Parallel jobs | `4` |
@@ -56,6 +177,7 @@ The runner uses these defaults:
 | macOS compiler | `/usr/bin/c++` |
 | Windows compiler | `msvc` |
 | Python executable | Interpreter running the runner |
+-->
 
 In-source builds are rejected. Every build directory must be outside the source tree.
 
