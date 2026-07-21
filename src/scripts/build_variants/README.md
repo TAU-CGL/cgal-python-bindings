@@ -17,8 +17,6 @@ reference C++ outputs.
 
 ### Role
 
-### Role
-
 The **CGAL Python Binding Variant Runner** acts as the primary build driver and orchestration stage within the automated regression testing pipeline for `cgalpy`. Its principal responsibility is to consume declarative JSON manifests and execute **Step 1: Out-of-Source Build Driver**, preparing isolated binary environments across target platforms.
 
 Once the runner completes the compilation phase, downstream automation steps execute and verify the binding variations across distinct CGAL packages.
