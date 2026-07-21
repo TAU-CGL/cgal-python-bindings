@@ -20,9 +20,14 @@ from .manifest import BuildVariantManifest
 
 
 _DEFAULT_COMPILERS = {
-    "linux": "c++",
-    "macos": "/usr/bin/c++",
+    "linux": "gcc",
+    "macos": "clang",
     "windows": "msvc",
+}
+
+_CMAKE_COMPILERS = {
+    "gcc": "g++",
+    "clang": "clang++",
 }
 
 
@@ -37,7 +42,10 @@ class VariantPlan:
     manifest: BuildVariantManifest
     operating_system: str
     compiler: str
-    build_directory: Path
+    build_variant_directory: Path
+    python_executable: Path
+    install_wheel: bool
+    pip_install_options: Tuple[str, ...]
     configure_command: Tuple[str, ...]
     build_command: Tuple[str, ...]
 
@@ -105,14 +113,14 @@ def compiler_tag(compiler: str) -> str:
     return tag
 
 
-def build_directory_name(
+def build_variant_directory_name(
     manifest_name: str,
     operating_system: str,
     compiler: str,
     fixed_library_name: bool,
     build_type: str,
 ) -> str:
-    """Create a collision-resistant detached build directory name."""
+    """Create a collision-resistant detached build variant directory name."""
 
     naming_mode = (
         "fixed"
@@ -137,13 +145,18 @@ def _cmake_compiler(
 ) -> Optional[str]:
     """Map toolchain identities to optional CMake compiler arguments."""
 
+    normalized_compiler = compiler.lower()
+
     if (
         operating_system == "windows"
-        and compiler.lower() == "msvc"
+        and normalized_compiler == "msvc"
     ):
         return None
 
-    return compiler
+    return _CMAKE_COMPILERS.get(
+        normalized_compiler,
+        compiler,
+    )
 
 
 def create_variant_plan(
@@ -157,9 +170,9 @@ def create_variant_plan(
         arguments.compiler,
     )
 
-    build_directory = (
-        arguments.build_root
-        / build_directory_name(
+    build_variant_directory = (
+        arguments.build_directory
+        / build_variant_directory_name(
             manifest_name=manifest.name,
             operating_system=arguments.operating_system,
             compiler=compiler,
@@ -172,7 +185,7 @@ def create_variant_plan(
         manifest,
         ConfigureOptions(
             source_directory=arguments.source_directory,
-            build_directory=build_directory,
+            build_variant_directory=build_variant_directory,
             cmake_executable="cmake",
             build_type=arguments.build_type,
             fixed_library_name=arguments.fixed_library_name,
@@ -187,7 +200,7 @@ def create_variant_plan(
     )
 
     build_command = build_build_command(
-        build_directory,
+        build_variant_directory,
         jobs=arguments.jobs,
         build_type=arguments.build_type,
         operating_system=arguments.operating_system,
@@ -198,7 +211,10 @@ def create_variant_plan(
         manifest=manifest,
         operating_system=arguments.operating_system,
         compiler=compiler,
-        build_directory=build_directory,
+        build_variant_directory=build_variant_directory,
+        python_executable=arguments.python_executable,
+        install_wheel=arguments.install_wheel,
+        pip_install_options=arguments.pip_install_options,
         configure_command=configure_command,
         build_command=build_command,
     )

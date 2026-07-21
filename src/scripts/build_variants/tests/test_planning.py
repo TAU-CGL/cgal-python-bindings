@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for runner platform and build-directory planning."""
+"""Tests for runner platform and build variant directory planning."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ from build_variants.catalog import load_catalog
 from build_variants.cli import RunnerArguments
 from build_variants.planning import (
     PlanningError,
-    build_directory_name,
+    build_variant_directory_name,
     compiler_tag,
     create_variant_plan,
     create_variant_plans,
@@ -28,7 +28,7 @@ class VariantPlanningTests(unittest.TestCase):
         ).resolve()
 
         self.source_directory = self.root / "source"
-        self.build_root = self.root / "build"
+        self.build_directory = self.root / "build"
         self.manifest_directory = (
             self.source_directory
             / "src/scripts/build_variants/manifests"
@@ -39,7 +39,7 @@ class VariantPlanningTests(unittest.TestCase):
 
         self.manifest_directory.mkdir(parents=True)
         self.cmake_test_directory.mkdir(parents=True)
-        self.build_root.mkdir()
+        self.build_directory.mkdir()
 
         self.python_executable = self.root / "python"
         self.python_executable.write_text(
@@ -92,6 +92,8 @@ class VariantPlanningTests(unittest.TestCase):
         compiler=None,
         build_type="Release",
         fixed_library_name=False,
+        install_wheel=False,
+        pip_install_options=(),
     ) -> RunnerArguments:
         return RunnerArguments(
             manifests=tuple(manifests),
@@ -103,9 +105,11 @@ class VariantPlanningTests(unittest.TestCase):
             abort_after_run_generation=False,
             manifest_directory=self.manifest_directory,
             source_directory=self.source_directory,
-            build_root=self.build_root,
+            build_directory=self.build_directory,
             cgal_dir=None,
             python_executable=self.python_executable,
+            install_wheel=install_wheel,
+            pip_install_options=tuple(pip_install_options),
             nanobind_dir=None,
             jobs=4,
             list_manifests=False,
@@ -115,11 +119,8 @@ class VariantPlanningTests(unittest.TestCase):
         )
 
     def test_approved_default_compilers(self) -> None:
-        self.assertEqual(default_compiler("linux"), "c++")
-        self.assertEqual(
-            default_compiler("macos"),
-            "/usr/bin/c++",
-        )
+        self.assertEqual(default_compiler("linux"), "gcc")
+        self.assertEqual(default_compiler("macos"), "clang")
         self.assertEqual(default_compiler("windows"), "msvc")
 
     def test_unknown_operating_system_is_rejected(self) -> None:
@@ -130,6 +131,8 @@ class VariantPlanningTests(unittest.TestCase):
             default_compiler("plan9")
 
     def test_compiler_tags_are_filesystem_safe(self) -> None:
+        self.assertEqual(compiler_tag("gcc"), "gcc")
+        self.assertEqual(compiler_tag("clang"), "clang")
         self.assertEqual(compiler_tag("c++"), "cxx")
         self.assertEqual(compiler_tag("g++"), "gxx")
         self.assertEqual(compiler_tag("msvc"), "msvc")
@@ -168,9 +171,9 @@ class VariantPlanningTests(unittest.TestCase):
             homebrew_compiler.startswith("clangxx_")
         )
 
-    def test_build_directory_name_encodes_policy(self) -> None:
+    def test_build_variant_directory_name_encodes_policy(self) -> None:
         self.assertEqual(
-            build_directory_name(
+            build_variant_directory_name(
                 manifest_name="epec",
                 operating_system="macos",
                 compiler="/usr/bin/c++",
@@ -185,7 +188,7 @@ class VariantPlanningTests(unittest.TestCase):
         )
 
         self.assertEqual(
-            build_directory_name(
+            build_variant_directory_name(
                 manifest_name="epec",
                 operating_system="windows",
                 compiler="msvc",
@@ -195,27 +198,23 @@ class VariantPlanningTests(unittest.TestCase):
             "epec_windows_msvc_fixed_debug",
         )
 
-    def test_macos_default_compiler_is_passed_to_cmake(self) -> None:
+    def test_macos_default_toolchain_maps_to_clangxx(self) -> None:
         plan = create_variant_plan(
             self.catalog.get("alpha"),
             self.arguments(),
         )
 
-        self.assertEqual(plan.compiler, "/usr/bin/c++")
+        self.assertEqual(plan.compiler, "clang")
         self.assertEqual(
-            plan.build_directory,
+            plan.build_variant_directory,
             (
-                self.build_root
-                / (
-                    "alpha_macos_"
-                    f"{compiler_tag('/usr/bin/c++')}"
-                    "_computed_release"
-                )
+                self.build_directory
+                / "alpha_macos_clang_computed_release"
             ).resolve(),
         )
 
         self.assertIn(
-            "-DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++",
+            "-DCMAKE_CXX_COMPILER:FILEPATH=clang++",
             plan.configure_command,
         )
 
@@ -224,13 +223,60 @@ class VariantPlanningTests(unittest.TestCase):
             (
                 "cmake",
                 "--build",
-                str(plan.build_directory),
+                str(plan.build_variant_directory),
                 "--target",
                 "BUILD",
                 "--parallel",
                 "4",
             ),
         )
+
+    def test_linux_default_toolchain_maps_to_gxx(self) -> None:
+        plan = create_variant_plan(
+            self.catalog.get("alpha"),
+            self.arguments(
+                operating_system="linux",
+            ),
+        )
+
+        self.assertEqual(plan.compiler, "gcc")
+        self.assertEqual(
+            plan.build_variant_directory,
+            (
+                self.build_directory
+                / "alpha_linux_gcc_computed_release"
+            ).resolve(),
+        )
+
+        self.assertIn(
+            "-DCMAKE_CXX_COMPILER:FILEPATH=g++",
+            plan.configure_command,
+        )
+
+    def test_plan_preserves_installation_policy_and_python(
+        self,
+    ) -> None:
+        plan = create_variant_plan(
+            self.catalog.get("alpha"),
+            self.arguments(
+                install_wheel=True,
+                pip_install_options=(
+                    "--user",
+                    "--no-deps",
+                ),
+            ),
+        )
+
+        self.assertTrue(plan.install_wheel)
+        self.assertEqual(
+            plan.pip_install_options,
+            ("--user", "--no-deps"),
+        )
+        self.assertEqual(
+            plan.python_executable,
+            self.python_executable,
+        )
+
 
     def test_windows_msvc_uses_default_toolchain_selection(self) -> None:
         plan = create_variant_plan(
@@ -242,7 +288,7 @@ class VariantPlanningTests(unittest.TestCase):
 
         self.assertEqual(plan.compiler, "msvc")
         self.assertEqual(
-            plan.build_directory.name,
+            plan.build_variant_directory.name,
             "alpha_windows_msvc_computed_release",
         )
 
@@ -260,7 +306,7 @@ class VariantPlanningTests(unittest.TestCase):
             (
                 "cmake",
                 "--build",
-                str(plan.build_directory),
+                str(plan.build_variant_directory),
                 "--target",
                 "BUILD",
                 "--config",
@@ -305,7 +351,7 @@ class VariantPlanningTests(unittest.TestCase):
         )
 
         self.assertEqual(
-            tuple(plan.build_directory.name for plan in plans),
+            tuple(plan.build_variant_directory.name for plan in plans),
             (
                 (
                     "beta_macos_"

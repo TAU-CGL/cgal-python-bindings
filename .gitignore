@@ -4,11 +4,6 @@ cmake-build-debug/CMakeFiles/
 build/
 _skbuild/
 cmake-build*/
-src/python_scripts/cgalpy_examples/__pycache__/
-src/python_scripts/cgalpy_demos/gui/__pycache__/
-src/python_scripts/precompiled/__pycache__/
-src/python_scripts/cgalpy_demos/__pycache__/
-src/python_scripts/__pycache__/
 .DS_Store
 *.egg-info/
 *.dylib

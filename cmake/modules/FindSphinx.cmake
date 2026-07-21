@@ -74,7 +74,7 @@ function(add_sphinx_document TARGET_NAME)
   set(CONF_INDEX_ARGS ${INDEX_FILE_IN}
     --module ${${TARGET_NAME}_MODULES}
     --output-file ${INDEX_FILE_OUT})
-  set (CONF_INDEX "${CMAKE_SOURCE_DIR}/src/python_scripts/configure_index.py")
+  set (CONF_INDEX "${CMAKE_SOURCE_DIR}/src/scripts/configure_index.py")
   if (WIN32)
     set(CONF_INDEX_CMD ${Python3_EXECUTABLE} ${CONF_INDEX})
   else()

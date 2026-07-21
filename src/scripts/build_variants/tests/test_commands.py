@@ -25,7 +25,7 @@ class ConfigureCommandTests(unittest.TestCase):
         ).resolve()
 
         self.source_directory = self.root / "source"
-        self.build_root = self.root / "build"
+        self.build_directory = self.root / "build"
         self.manifest_directory = (
             self.source_directory
             / "src/scripts/build_variants/manifests"
@@ -36,7 +36,7 @@ class ConfigureCommandTests(unittest.TestCase):
 
         self.manifest_directory.mkdir(parents=True)
         self.cmake_test_directory.mkdir(parents=True)
-        self.build_root.mkdir()
+        self.build_directory.mkdir()
 
         (
             self.cmake_test_directory / "first.cmake"
@@ -93,7 +93,7 @@ class ConfigureCommandTests(unittest.TestCase):
             manifest,
             ConfigureOptions(
                 source_directory=self.source_directory,
-                build_directory=self.build_root / "example",
+                build_variant_directory=self.build_directory / "example",
             ),
         )
 
@@ -113,7 +113,7 @@ class ConfigureCommandTests(unittest.TestCase):
                 "-S",
                 str(self.source_directory),
                 "-B",
-                str((self.build_root / "example").resolve()),
+                str((self.build_directory / "example").resolve()),
             ),
         )
 
@@ -129,7 +129,7 @@ class ConfigureCommandTests(unittest.TestCase):
             manifest,
             ConfigureOptions(
                 source_directory=self.source_directory,
-                build_directory=self.build_root / "ordered",
+                build_variant_directory=self.build_directory / "ordered",
             ),
         )
 
@@ -179,7 +179,7 @@ class ConfigureCommandTests(unittest.TestCase):
             manifest,
             ConfigureOptions(
                 source_directory=self.source_directory,
-                build_directory=self.build_root / "debug",
+                build_variant_directory=self.build_directory / "debug",
                 cmake_executable="/path with spaces/cmake",
                 build_type="Debug",
                 fixed_library_name=True,
@@ -221,10 +221,10 @@ class ConfigureCommandTests(unittest.TestCase):
         )
 
     def test_macos_build_command(self) -> None:
-        build_directory = self.build_root / "macos"
+        build_variant_directory = self.build_directory / "macos"
 
         command = build_build_command(
-            build_directory,
+            build_variant_directory,
             jobs=4,
             build_type="Release",
             operating_system="macos",
@@ -235,7 +235,7 @@ class ConfigureCommandTests(unittest.TestCase):
             (
                 "cmake",
                 "--build",
-                str(build_directory.resolve()),
+                str(build_variant_directory.resolve()),
                 "--target",
                 "BUILD",
                 "--parallel",
@@ -244,10 +244,10 @@ class ConfigureCommandTests(unittest.TestCase):
         )
 
     def test_linux_build_command(self) -> None:
-        build_directory = self.build_root / "linux"
+        build_variant_directory = self.build_directory / "linux"
 
         command = build_build_command(
-            build_directory,
+            build_variant_directory,
             jobs=7,
             build_type="Debug",
             operating_system="linux",
@@ -259,7 +259,7 @@ class ConfigureCommandTests(unittest.TestCase):
             (
                 "/opt/cmake/bin/cmake",
                 "--build",
-                str(build_directory.resolve()),
+                str(build_variant_directory.resolve()),
                 "--target",
                 "BUILD",
                 "--parallel",
@@ -270,10 +270,10 @@ class ConfigureCommandTests(unittest.TestCase):
     def test_windows_build_command_includes_configuration(
         self,
     ) -> None:
-        build_directory = self.build_root / "windows"
+        build_variant_directory = self.build_directory / "windows"
 
         command = build_build_command(
-            build_directory,
+            build_variant_directory,
             jobs=2,
             build_type="Debug",
             operating_system="windows",
@@ -284,7 +284,7 @@ class ConfigureCommandTests(unittest.TestCase):
             (
                 "cmake",
                 "--build",
-                str(build_directory.resolve()),
+                str(build_variant_directory.resolve()),
                 "--target",
                 "BUILD",
                 "--config",
@@ -302,7 +302,7 @@ class ConfigureCommandTests(unittest.TestCase):
                     "jobs must be a positive integer",
                 ):
                     build_build_command(
-                        self.build_root / "invalid-jobs",
+                        self.build_directory / "invalid-jobs",
                         jobs=jobs,
                         build_type="Release",
                         operating_system="macos",
@@ -316,7 +316,7 @@ class ConfigureCommandTests(unittest.TestCase):
             "operating system must be one of",
         ):
             build_build_command(
-                self.build_root / "invalid-os",
+                self.build_directory / "invalid-os",
                 jobs=4,
                 build_type="Release",
                 operating_system="plan9",
@@ -334,7 +334,7 @@ class ConfigureCommandTests(unittest.TestCase):
                 manifest,
                 ConfigureOptions(
                     source_directory=self.source_directory,
-                    build_directory=self.build_root / "invalid",
+                    build_variant_directory=self.build_directory / "invalid",
                     build_type="RelWithDebInfo",
                 ),
             )
@@ -350,7 +350,7 @@ class ConfigureCommandTests(unittest.TestCase):
                 manifest,
                 ConfigureOptions(
                     source_directory=self.source_directory,
-                    build_directory=(
+                    build_variant_directory=(
                         self.source_directory / "build"
                     ),
                 ),

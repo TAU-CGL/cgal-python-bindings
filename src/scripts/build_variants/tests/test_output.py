@@ -38,7 +38,9 @@ class RunnerOutputTests(unittest.TestCase):
         name: str,
         *,
         operating_system: str = "macos",
-        build_directory: Path = Path("/tmp/build path"),
+        build_variant_directory: Path = Path("/tmp/build path"),
+        install_wheel: bool = False,
+        pip_install_options=(),
     ) -> VariantPlan:
         manifest = self.manifest(
             name,
@@ -50,7 +52,10 @@ class RunnerOutputTests(unittest.TestCase):
             manifest=manifest,
             operating_system=operating_system,
             compiler="/usr/bin/c++",
-            build_directory=build_directory,
+            build_variant_directory=build_variant_directory,
+            python_executable=Path("/usr/bin/python3"),
+            install_wheel=install_wheel,
+            pip_install_options=tuple(pip_install_options),
             configure_command=(
                 "cmake",
                 "-C",
@@ -58,12 +63,12 @@ class RunnerOutputTests(unittest.TestCase):
                 "-S",
                 "/source path",
                 "-B",
-                str(build_directory),
+                str(build_variant_directory),
             ),
             build_command=(
                 "cmake",
                 "--build",
-                str(build_directory),
+                str(build_variant_directory),
                 "--target",
                 "BUILD",
                 "--parallel",
@@ -187,7 +192,7 @@ class RunnerOutputTests(unittest.TestCase):
         )
         self.assertEqual(
             lines[1],
-            "build-directory: /tmp/build path",
+            "build-variant-directory: /tmp/build path",
         )
         self.assertEqual(
             lines[2],
@@ -207,6 +212,26 @@ class RunnerOutputTests(unittest.TestCase):
                 "--target BUILD --parallel 4"
             ),
         )
+        self.assertEqual(
+            lines[4],
+            "install-wheel: disabled",
+        )
+
+    def test_variant_plan_rendering_reports_enabled_install(
+        self,
+    ) -> None:
+        lines = render_variant_plan(
+            self.plan(
+                "alpha",
+                install_wheel=True,
+            )
+        )
+
+        self.assertEqual(
+            lines[4],
+            "install-wheel: enabled",
+        )
+
 
     def test_multiple_plan_rendering_preserves_order(self) -> None:
         lines = render_variant_plans(
@@ -221,11 +246,11 @@ class RunnerOutputTests(unittest.TestCase):
             "manifest: beta",
         )
         self.assertEqual(
-            lines[4],
+            lines[5],
             "",
         )
         self.assertEqual(
-            lines[5],
+            lines[6],
             "manifest: alpha",
         )
 

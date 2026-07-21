@@ -30,7 +30,7 @@ class RunnerApplicationTests(unittest.TestCase):
         ).resolve()
 
         self.source_directory = self.root / "source"
-        self.build_root = self.root / "build"
+        self.build_directory = self.root / "build"
         self.manifest_directory = (
             self.source_directory
             / "src/scripts/build_variants/manifests"
@@ -41,7 +41,7 @@ class RunnerApplicationTests(unittest.TestCase):
 
         self.manifest_directory.mkdir(parents=True)
         self.cmake_test_directory.mkdir(parents=True)
-        self.build_root.mkdir()
+        self.build_directory.mkdir()
 
         self.runner_path = (
             self.source_directory / "src/scripts/run"
@@ -102,6 +102,8 @@ class RunnerApplicationTests(unittest.TestCase):
         generate_run=False,
         abort_after_run_generation=False,
         continue_on_error=False,
+        install_wheel=False,
+        pip_install_options=(),
         log_directory=None,
         manifest_directory=None,
     ) -> RunnerArguments:
@@ -121,9 +123,11 @@ class RunnerApplicationTests(unittest.TestCase):
                 else self.manifest_directory
             ),
             source_directory=self.source_directory,
-            build_root=self.build_root,
+            build_directory=self.build_directory,
             cgal_dir=None,
             python_executable=self.python_executable,
+            install_wheel=install_wheel,
+            pip_install_options=tuple(pip_install_options),
             nanobind_dir=None,
             jobs=4,
             list_manifests=list_manifests,
@@ -274,6 +278,7 @@ class RunnerApplicationTests(unittest.TestCase):
         *,
         configure_return_code=0,
         build_return_code=0,
+        install_return_code=None,
     ):
         configure_result = CommandExecutionResult(
             command=plan.configure_command,
@@ -291,10 +296,21 @@ class RunnerApplicationTests(unittest.TestCase):
             )
         )
 
+        install_result = (
+            None
+            if install_return_code is None
+            else CommandExecutionResult(
+                command=("install-helper",),
+                return_code=install_return_code,
+                log_path=None,
+            )
+        )
+
         return VariantExecutionResult(
             plan=plan,
             configure_result=configure_result,
             build_result=build_result,
+            install_result=install_result,
         )
 
     def successful_execution(
@@ -509,6 +525,68 @@ class RunnerApplicationTests(unittest.TestCase):
             ],
         )
 
+    def test_install_failure_is_reported(
+        self,
+    ) -> None:
+        def failing_install(plans, **unused_arguments):
+            return (
+                self.execution_result(
+                    plans[0],
+                    install_return_code=9,
+                ),
+            )
+
+        with mock.patch(
+            "build_variants.application.execute_variants",
+            side_effect=failing_install,
+        ):
+            exit_code, stdout, stderr = self.run_case(
+                self.arguments(
+                    manifests=("alpha",),
+                    install_wheel=True,
+                )
+            )
+
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(stderr, "")
+        self.assertEqual(
+            stdout,
+            (
+                "variant-result: alpha: "
+                "install-failed (exit 9)\n"
+            ),
+        )
+
+    def test_successful_install_is_reported_as_success(
+        self,
+    ) -> None:
+        def successful_install(plans, **unused_arguments):
+            return (
+                self.execution_result(
+                    plans[0],
+                    install_return_code=0,
+                ),
+            )
+
+        with mock.patch(
+            "build_variants.application.execute_variants",
+            side_effect=successful_install,
+        ):
+            exit_code, stdout, stderr = self.run_case(
+                self.arguments(
+                    manifests=("alpha",),
+                    install_wheel=True,
+                )
+            )
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(stderr, "")
+        self.assertEqual(
+            stdout,
+            "variant-result: alpha: success\n",
+        )
+
+
     def test_continue_on_error_reports_all_results(
         self,
     ) -> None:
@@ -588,7 +666,7 @@ class RunnerApplicationTests(unittest.TestCase):
         self,
     ) -> None:
         build_directories_before = tuple(
-            self.build_root.iterdir()
+            self.build_directory.iterdir()
         )
 
         lines = prepare_application_output(
@@ -599,7 +677,7 @@ class RunnerApplicationTests(unittest.TestCase):
         )
 
         build_directories_after = tuple(
-            self.build_root.iterdir()
+            self.build_directory.iterdir()
         )
 
         self.assertTrue(lines)

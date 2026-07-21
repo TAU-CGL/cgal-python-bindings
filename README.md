@@ -105,13 +105,13 @@ Assuming you have all dependencies installed, type:
     pip install src/libs/cgalpy/dist/*.whl
 
 Then, you should be able to execute the program
-`<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`
+`<CGALPY_SRC_DIR>/src/python_examples/cgalpy_examples/aos2.py`
 where `<CGALPY_SRC_DIR>` is the root of your clone.
 
 The cmake script `<CGALPY_SRC_DIR>/cmake/tests/release/aos2_epec_fixed_release.cmake` sets the flags
 that are needed for the generation of bindings used in the Python script
-`<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`. Additional python programs that exploit
-the bindings reside under `<CGALPY_SRC_DIR>/src/python_scripts`. Naturally, different bindings are
+`<CGALPY_SRC_DIR>/src/python_examples/cgalpy_examples/aos2.py`. Additional Python example programs that exploit
+the bindings reside under `<CGALPY_SRC_DIR>/src/python_examples/cgalpy_examples`. Naturally, different bindings are
 needed for different Python scripts.
 
 ### Notes

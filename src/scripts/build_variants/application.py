@@ -136,9 +136,27 @@ def _variant_result_line(
             f"build result for manifest {name!r}"
         )
 
+    if not result.build_result.succeeded:
+        return (
+            f"variant-result: {name}: build-failed "
+            f"(exit {result.build_result.return_code})"
+        )
+
+    if not result.plan.install_wheel:
+        raise ApplicationError(
+            "wheel installation result is present for a plan "
+            f"that did not request installation: {name!r}"
+        )
+
+    if result.install_result is None:
+        raise ApplicationError(
+            "successful build result is missing its wheel "
+            f"installation result for manifest {name!r}"
+        )
+
     return (
-        f"variant-result: {name}: build-failed "
-        f"(exit {result.build_result.return_code})"
+        f"variant-result: {name}: install-failed "
+        f"(exit {result.install_result.return_code})"
     )
 
 

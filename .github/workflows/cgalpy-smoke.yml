@@ -916,7 +916,7 @@ jobs:
 
           for pair in "${pairs[@]}"
           do
-            python src/python_scripts/cgalpy_examples/compare_examples.py \
+            python src/python_examples/cgalpy_examples/compare_examples.py \
               --pair "${pair}" \
               --cgal-source "${{ github.workspace }}/cgal" \
               --cgal-dir "${CGAL_BUILD_DIR}" \
@@ -937,26 +937,26 @@ jobs:
           LIB="${{ matrix.module_name }}"
 
           for run_file in \
-            src/python_scripts/cgalpy_examples/Surface_mesh_approximation/run \
-            src/python_scripts/cgalpy_examples/Surface_mesh_decomposition/run \
-            src/python_scripts/cgalpy_examples/Surface_mesh_deformation/run \
-            src/python_scripts/cgalpy_examples/Surface_mesh_parameterization/run \
-            src/python_scripts/cgalpy_examples/Surface_mesh_segmentation/run \
-            src/python_scripts/cgalpy_examples/Surface_mesh_shortest_path/run \
-            src/python_scripts/cgalpy_examples/Surface_mesh_simplification/run \
-            src/python_scripts/cgalpy_examples/Surface_mesh_skeletonization/run \
-            src/python_scripts/cgalpy_examples/Surface_mesh_topology/run
+            src/python_examples/cgalpy_examples/Surface_mesh_approximation/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_decomposition/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_deformation/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_parameterization/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_segmentation/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_shortest_path/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_simplification/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_skeletonization/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_topology/run
           do
             "${run_file}" "${LIB}"
           done
 
           rm -f \
-            src/python_scripts/cgalpy_examples/Surface_mesh_deformation/deform_1.off \
-            src/python_scripts/cgalpy_examples/Surface_mesh_deformation/deform_2.off \
-            src/python_scripts/cgalpy_examples/Surface_mesh_parameterization/result.off \
-            src/python_scripts/cgalpy_examples/Surface_mesh_shortest_path/shortest_paths_with_id.polylines.txt \
-            src/python_scripts/cgalpy_examples/Surface_mesh_simplification/out.off
-          git checkout -- src/python_scripts/cgalpy_examples/Surface_mesh_skeletonization/skel-sm.polylines.txt
+            src/python_examples/cgalpy_examples/Surface_mesh_deformation/deform_1.off \
+            src/python_examples/cgalpy_examples/Surface_mesh_deformation/deform_2.off \
+            src/python_examples/cgalpy_examples/Surface_mesh_parameterization/result.off \
+            src/python_examples/cgalpy_examples/Surface_mesh_shortest_path/shortest_paths_with_id.polylines.txt \
+            src/python_examples/cgalpy_examples/Surface_mesh_simplification/out.off
+          git checkout -- src/python_examples/cgalpy_examples/Surface_mesh_skeletonization/skel-sm.polylines.txt
 
       - name: Install generated wheel in clean venv
         run: |

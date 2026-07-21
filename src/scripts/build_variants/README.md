@@ -1,40 +1,47 @@
 # CGAL Python Binding Variant Runner
 
-The **CGAL Python Binding Variant Runner** (`src/scripts/run`) is a
-cross-platform, multi-variant build driver that serves as a component
-in the regression testing of CGAL Python bindings automated pipeline.
-It processes declarative JSON manifests, referencing underlying CMake
-test preload configurations, to handle out-of-source builds across
-Linux, macOS, and Windows. By standardizing directory isolation,
-parallel execution, logging, and result tracking, the runner enables
-systematic verification of binding variations across different CGAL
-modules. The compiled Python packages produced by the runner serve as
-the foundation for downstream integration tests, where translated
-Python example programs are executed and verified against their
-reference C++ outputs.
+The **CGAL Python Binding Variant Runner** (`src/scripts/run`) is the
+canonical cross-platform build driver for reproducible CGAL Python
+binding variants. It selects declarative JSON manifests by exact name,
+resolves an isolated build variant directory for each manifest, invokes CMake
+configure and build stages, records deterministic results and logs, and
+can optionally install the exact validated wheel into the Python
+environment selected by the user.
+
+The runner is one component of the regression-testing workflow. The
+compiled packages it produces are consumed by separate downstream
+automation that executes translated Python examples and compares their
+behavior with the corresponding C++ references.
 
 ## Introduction
 
 ### Role
 
-The **CGAL Python Binding Variant Runner** acts as the primary build driver and orchestration stage within the automated regression testing pipeline for `cgalpy`. Its principal responsibility is to consume declarative JSON manifests and execute **Step 1: Out-of-Source Build Driver**, preparing isolated binary environments across target platforms.
+The **CGAL Python Binding Variant Runner** is responsible for the
+build and optional installation stages of the `cgalpy` regression
+workflow. It consumes validated manifests, creates detached
+per-variant build plans, and executes those plans without taking over
+the separate example-execution or output-comparison stages.
 
-Once the runner completes the compilation phase, downstream automation steps execute and verify the binding variations across distinct CGAL packages.
+A successful runner result means that the requested variant was
+configured and built successfully and, when explicitly requested, that
+its validated wheel was also installed successfully.
 
 ```mermaid
-graph TD
-    A[Declarative Manifests<br>JSON Specs + CMake Preloads] --> B[Step 1: Variant Runner Driver<br>Configures & Builds Variants]
-
-    subgraph Step 1 Detail: Runner Processing
-        B --> B1[Validate Manifests & Dependencies]
-        B1 --> B2[Create Isolated Out-of-Source Build Dirs]
-        B2 --> B3[Invoke CMake Configure & Build]
-    end
-
-    B3 --> C[Compiled Python Extension Libraries / Wheels]
-
-    C --> D[Step 2: Example Execution Driver<br>Executes Translated Python Examples]
-    D --> E[Step 3: Output Verification Engine<br>Compares Python Output vs. C++ Reference]
+flowchart TD
+    A[Requested manifest names] --> B[Select exact manifests]
+    B --> C[Validate manifests and CMake preloads]
+    C --> D[Resolve detached parent build directory]
+    D --> E[Resolve one build variant directory per manifest]
+    E --> F[CMake configure<br>Runner does not select a generator]
+    F --> G[CMake build<br>Uses the configured generator]
+    G --> H[Wheel and distribution-artifacts.json]
+    H --> I{Install wheel enabled?}
+    I -- No --> J[Report variant result]
+    I -- Yes --> K[Validate exact wheel name, size, and SHA-256]
+    K --> L[Install using the Python selected by --python]
+    L --> J
+    J --> M[Separate example execution and output comparison]
 ```
 
 ### Objectives
@@ -44,13 +51,15 @@ references one or more existing CMake preload files under `cmake/tests/`.
 The runner keeps those CMake configurations as the source of truth while
 providing consistent handling for:
 
-- detached build directories;
-- operating-system and compiler selection;
+- exact manifest selection in command-line order;
+- a detached parent build directory and isolated build variant directories;
+- operating-system and compiler policy;
 - Release and Debug builds;
 - computed or fixed library names;
 - CGAL, Python, and nanobind paths;
 - parallel builds;
-- configure and build logs;
+- configure, build, and optional install logs;
+- optional installation of the exact validated wheel;
 - multiple variants;
 - failure reporting and continuation;
 - optional local `run_*` launchers.
@@ -114,11 +123,11 @@ The runner uses these defaults:
     <tr>
       <td><strong>Manifest directory</strong></td>
       <td><code>manifest_directory</code></td>
-      <td colspan="3"><code><code>$source_directory/src/scripts/build_variants/manifests</code></td>
+      <td colspan="3"><code>$source_directory/src/scripts/build_variants/manifests</code></td>
     </tr>
     <tr>
-      <td><strong>Detached build directory</strong></td>
-      <td><code>default_build_directory</code></td>
+      <td><strong>Parent build directory</strong></td>
+      <td><code>build_directory</code></td>
       <td colspan="2"><code>~/build/cgalpy</code></td>
       <td><code>%USERPROFILE%\build\cgalpy</code></td>
     </tr>
@@ -147,8 +156,8 @@ The runner uses these defaults:
     <tr>
       <td><strong>Compiler</strong></td>
       <td><code>compiler</code></td>
-      <td><code>c++</code></td>
-      <td><code>/usr/bin/c++</code></td>
+      <td><code>gcc</code></td>
+      <td><code>clang</code></td>
       <td><code>msvc</code></td>
     </tr>
     <tr>
@@ -158,26 +167,21 @@ The runner uses these defaults:
       <td><code>python3</code></td>
       <td><code>python.exe</code></td>
     </tr>
+    <tr>
+      <td><strong>Wheel installation</strong></td>
+      <td><code>install_wheel</code></td>
+      <td colspan="3">Disabled</td>
+    </tr>
   </tbody>
 </table>
 
-<!--
-| Setting | Default |
-| --- | --- |
-| Source directory | Repository root |
-| Manifest directory | `src/scripts/build_variants/manifests` |
-| Detached build directory | `~/build/cgalpy` |
-| Build type | `Release` |
-| Library naming | Computed library name |
-| Parallel jobs | `4` |
-| Operating system | Current operating system |
-| Linux compiler | `c++` |
-| macOS compiler | `/usr/bin/c++` |
-| Windows compiler | `msvc` |
-| Python executable | Interpreter running the runner |
--->
+`build_directory` is the detached parent directory that contains all
+runner-managed variant builds. It is not itself a single variant build
+directory. For every requested manifest, the runner derives a separate
+`build_variant_directory` beneath it using the manifest name, operating
+system, compiler identity, library-naming policy, and build type.
 
-In-source builds are rejected. Every build directory must be outside the source tree.
+In-source builds are rejected. Every build variant directory must be outside the source tree.
 
 Variant build directories use this structure:
 
@@ -188,12 +192,12 @@ Variant build directories use this structure:
 For example:
 
 ```text
-sm_pmp_epic_macos_cxx_a7b85a70_computed_release
+sm_pmp_epic_macos_clang_computed_release
 ```
 
 When an absolute compiler path is used, the compiler tag includes a short
 hash. This prevents two compiler paths with the same executable name from
-using the same build directory.
+using the same build variant directory.
 
 ## Listing available variants
 
@@ -210,6 +214,11 @@ Each output line contains:
 - the referenced `cmake/tests/*.cmake` files.
 
 Listing manifests does not configure or build anything.
+
+Live and dry-run operations select manifests only by the exact names
+provided on the command line. The operating-system and compiler
+options affect the generated build plan; they do not filter the
+manifest catalog or automatically select variants.
 
 ## Manifest format
 
@@ -273,7 +282,7 @@ after all preload files.
 ## Inspecting a build with dry-run mode
 
 Use `--dry-run` to inspect the complete resolved plan without executing
-CMake or creating a build directory:
+CMake or creating a build variant directory:
 
 ```bash
 src/scripts/run sm_pmp_epic \
@@ -287,13 +296,14 @@ The output includes:
 
 ```text
 manifest: sm_pmp_epic
-build-directory: <resolved-detached-build-directory>
+build-variant-directory: <resolved-build-variant-directory>
 configure-command: <complete-cmake-configure-command>
 build-command: <complete-cmake-build-command>
+install-wheel: disabled
 ```
 
 Dry-run mode preserves the order of manifests supplied on the command line
-and has no build-directory side effects.
+and does not create build variant directories.
 
 ## Building one variant
 
@@ -301,7 +311,7 @@ A typical live build is:
 
 ```bash
 src/scripts/run sm_pmp_epic \
-  --build-root ~/build/cgalpy \
+  --build-directory ~/build/cgalpy \
   --cgal-dir ~/build/cgal/<configured-cgal-build> \
   --python "$(command -v python)" \
   --nanobind-dir "$(python -m nanobind --cmake_dir)" \
@@ -313,27 +323,77 @@ For each selected manifest, the runner:
 
 1. loads and validates the manifest;
 2. validates every referenced CMake preload file;
-3. resolves a detached build directory;
-4. creates that directory for live execution;
+3. resolves a detached build variant directory under the parent
+   build directory;
+4. creates the build variant directory for live execution;
 5. runs the configure command;
 6. runs the `BUILD` target only when configure succeeds;
 7. streams command output to the terminal;
-8. optionally records configure and build logs;
-9. reports the final variant result.
+8. when requested, validates and installs the generated wheel after a
+   successful build;
+9. optionally records configure, build, and install logs;
+10. reports the final variant result.
 
 The generated build command has this form:
 
 ```text
-cmake --build <build-directory> --target BUILD --parallel <jobs>
+cmake --build <build-variant-directory> --target BUILD \
+  --parallel <jobs>
 ```
 
-On Windows, the selected build configuration is also provided:
+The runner does not choose a CMake generator. It supplies
+`CMAKE_BUILD_TYPE` during configuration for single-configuration generators.
+
+On Windows, the build command also supplies:
 
 ```text
 --config <Release-or-Debug>
 ```
 
-The runner builds the package but does not install the generated wheel.
+This allows multi-configuration generators, such as Visual Studio, to select
+the requested configuration during the build stage.
+
+By default, the runner builds the package without installing it.
+
+## Installing a built wheel
+
+Add `--install-wheel` to install each successfully built variant into the
+Python environment selected by `--python`:
+
+```bash
+src/scripts/run sm_pmp_epic \
+  --install-wheel \
+  --pip-install-option=--user \
+  --pip-install-option=--no-deps \
+  --cgal-dir ~/build/cgal/<configured-cgal-build> \
+  --python "$(command -v python)" \
+  --nanobind-dir "$(python -m nanobind --cmake_dir)"
+```
+
+`--pip-install-option` forwards one additional argument to `pip install`.
+Repeat it to forward several arguments. It requires `--install-wheel`, and
+each value must be nonempty. Use the `=<value>` form for values beginning
+with `-`, such as `--pip-install-option=--user`.
+
+Installation runs only after configuration and compilation succeed. The
+runner reads:
+
+```text
+<build-variant-directory>/src/libs/cgalpy/dist/distribution-artifacts.json
+```
+
+It resolves the exact recorded `.whl` file from the same distribution
+directory and validates its filename, recorded byte size, and SHA-256 digest
+before starting pip. The selected interpreter then runs the equivalent of:
+
+```text
+<python> -m pip install --force-reinstall \
+  <forwarded-pip-options> <exact-wheel-file>
+```
+
+A failed artifact validation or pip command fails the installation stage and
+therefore fails that variant. With `--continue-on-error`, later variants may
+still be processed.
 
 ## Building several variants
 
@@ -381,18 +441,27 @@ Override the detected operating system:
 src/scripts/run sm_pmp_epic --operating-system macos
 ```
 
-Override the default compiler:
+The default compiler values are generic toolchain identities:
+
+- `gcc` on Linux, mapped to the `g++` C++ driver;
+- `clang` on macOS, mapped to the `clang++` C++ driver;
+- `msvc` on Windows, selected by the active CMake generator.
+
+The generic identity is retained in the build variant directory name. The
+mapped C++ driver is passed to CMake through `CMAKE_CXX_COMPILER` where
+required.
+
+Override the default with another identity, executable name, or exact path:
 
 ```bash
-src/scripts/run sm_pmp_epic --compiler /usr/bin/c++
+src/scripts/run sm_pmp_epic \
+  --compiler /opt/homebrew/bin/clang++
 ```
 
-When Windows uses the default `msvc` compiler identity, the runner does not
-add `CMAKE_CXX_COMPILER`. The active CMake generator selects the MSVC
-toolchain.
-
-An explicitly selected Windows compiler, such as `clang-cl`, is forwarded to
-CMake through `CMAKE_CXX_COMPILER`.
+Explicit compiler executable names and paths are forwarded unchanged. When
+Windows uses the default `msvc` identity, the runner does not add
+`CMAKE_CXX_COMPILER`. An explicit Windows compiler such as `clang-cl` is
+forwarded to CMake.
 
 ## Dependency paths
 
@@ -438,13 +507,16 @@ The runner uses deterministic filenames:
 ```text
 <manifest>.configure.log
 <manifest>.build.log
+<manifest>.install.log
 ```
 
-A build command is not executed when configure fails, so no successful build
-stage exists for that variant.
+A build command is not executed when configure fails. Installation is not
+attempted when configure or build fails, or when `--install-wheel` is
+disabled. An install log is therefore created only when the install stage
+actually runs.
 
 Command output is streamed to the terminal while also being written to the
-selected log file.
+selected stage log file.
 
 ## Result states
 
@@ -454,6 +526,7 @@ Final result lines use these forms:
 variant-result: <manifest>: success
 variant-result: <manifest>: configure-failed (exit <code>)
 variant-result: <manifest>: build-failed (exit <code>)
+variant-result: <manifest>: install-failed (exit <code>)
 variant-result: <manifest>: skipped
 ```
 
@@ -545,7 +618,7 @@ The test suite covers:
 - CMake command construction;
 - detached build enforcement;
 - compiler selection;
-- collision-resistant build-directory names;
+- collision-resistant build variant directory names;
 - list output;
 - dry-run output;
 - launcher generation;
@@ -553,6 +626,9 @@ The test suite covers:
 - log creation;
 - configure failures;
 - build failures;
+- exact wheel filename, byte-size, and SHA-256 validation;
+- ordered pip-option forwarding without performing a real installation;
+- installation success and failure reporting;
 - stop-on-error behavior;
 - continue-on-error behavior;
 - result reporting;
@@ -571,8 +647,9 @@ To add a build variant:
 5. Run `src/scripts/run --list` to validate the full manifest catalog.
 6. Inspect the variant with `--dry-run`.
 7. Run the complete runner test suite.
-8. Build the variant in a detached build root.
-9. Record failures using the configure and build logs.
+8. Build the variant under a detached parent build directory.
+9. Record failures using the configure, build, and optional install
+   logs.
 10. Do not commit generated launchers or build evidence.
 
 ## Repository policy
@@ -580,8 +657,8 @@ To add a build variant:
 Keep source files and generated output separate:
 
 - runner source and manifests belong in the repository;
-- build directories belong under a detached root such as
-  `~/build/cgalpy`;
+- build variant directories belong under a detached parent build
+  directory such as `~/build/cgalpy`;
 - generated documentation belongs in the build tree;
 - generated `run_*` launchers must not be committed;
 - configure and build logs belong outside the source tree;

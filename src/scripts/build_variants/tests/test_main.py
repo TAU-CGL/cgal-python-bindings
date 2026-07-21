@@ -25,7 +25,7 @@ class RunnerMainTests(unittest.TestCase):
         ).resolve()
 
         self.source_directory = self.root / "source"
-        self.build_root = self.root / "build"
+        self.build_directory = self.root / "build"
         self.manifest_directory = (
             self.source_directory
             / "src/scripts/build_variants/manifests"
@@ -36,7 +36,7 @@ class RunnerMainTests(unittest.TestCase):
 
         self.manifest_directory.mkdir(parents=True)
         self.cmake_test_directory.mkdir(parents=True)
-        self.build_root.mkdir()
+        self.build_directory.mkdir()
 
         self.write_variant("alpha")
         self.write_variant("beta")
@@ -80,7 +80,7 @@ class RunnerMainTests(unittest.TestCase):
             stderr=stderr,
             source_directory=self.source_directory,
             manifest_directory=self.manifest_directory,
-            build_root=self.build_root,
+            build_directory=self.build_directory,
         )
 
         return (
@@ -179,6 +179,7 @@ class RunnerMainTests(unittest.TestCase):
                             log_path=None,
                         )
                     ),
+                    install_result=None,
                 )
                 for plan in plans
             )
@@ -198,10 +199,10 @@ class RunnerMainTests(unittest.TestCase):
         )
         self.assertEqual(stderr, "")
 
-    def test_dry_run_does_not_create_build_directory(
+    def test_dry_run_does_not_create_build_variant_directory(
         self,
     ) -> None:
-        before = tuple(self.build_root.iterdir())
+        before = tuple(self.build_directory.iterdir())
 
         exit_code, stdout, stderr = self.invoke(
             [
@@ -210,7 +211,7 @@ class RunnerMainTests(unittest.TestCase):
             ]
         )
 
-        after = tuple(self.build_root.iterdir())
+        after = tuple(self.build_directory.iterdir())
 
         self.assertEqual(exit_code, 0)
         self.assertTrue(stdout)

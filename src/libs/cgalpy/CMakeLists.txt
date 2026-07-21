@@ -1155,7 +1155,7 @@ if (NOT SKBUILD)
     set(CGALPY_BUILD_MANIFEST
         "${CGALPY_BUILD_OUTPUT_DIR}/distribution-artifacts.json")
     set(CGALPY_ARTIFACT_RECORDER
-        "${CMAKE_SOURCE_DIR}/src/python_scripts/record_distribution_artifacts.py")
+        "${CMAKE_SOURCE_DIR}/src/scripts/record_distribution_artifacts.py")
     set(CGALPY_PYTHON_BUILD_DIR "${CGALPY_LIB_DIR}/build")
     set(CGALPY_EGG_INFO_DIR
         "${CGALPY_LIB_DIR}/${CGALPY_PACKAGE_NAME}.egg-info")

@@ -11,6 +11,11 @@ from typing import Iterable, Optional, Sequence, TextIO, Tuple
 from .planning import VariantPlan
 
 
+_INSTALL_WHEEL_SCRIPT = (
+    Path(__file__).resolve().with_name("install_wheel.py")
+)
+
+
 class ExecutionError(ValueError):
     """Raised when a resolved plan cannot be executed safely."""
 
@@ -37,16 +42,26 @@ class VariantExecutionResult:
     plan: VariantPlan
     configure_result: CommandExecutionResult
     build_result: Optional[CommandExecutionResult]
+    install_result: Optional[CommandExecutionResult]
 
     @property
     def succeeded(self) -> bool:
-        """Return whether configure and build both succeeded."""
+        """Return whether every required stage succeeded."""
 
-        return (
-            self.configure_result.succeeded
-            and self.build_result is not None
-            and self.build_result.succeeded
-        )
+        if (
+            not self.configure_result.succeeded
+            or self.build_result is None
+            or not self.build_result.succeeded
+        ):
+            return False
+
+        if self.plan.install_wheel:
+            return (
+                self.install_result is not None
+                and self.install_result.succeeded
+            )
+
+        return self.install_result is None
 
 
 def _validated_command(
@@ -258,22 +273,45 @@ def _preflight_plan(
             "every plan must be a validated VariantPlan"
         )
 
-    build_directory = (
-        Path(plan.build_directory)
+    build_variant_directory = (
+        Path(plan.build_variant_directory)
         .expanduser()
         .resolve()
     )
 
     if (
-        build_directory.exists()
-        and not build_directory.is_dir()
+        build_variant_directory.exists()
+        and not build_variant_directory.is_dir()
     ):
         raise ExecutionError(
-            "build directory path exists but is not a directory: "
-            f"{build_directory}"
+            "build variant directory path exists but is not a directory: "
+            f"{build_variant_directory}"
         )
 
-    for stage in ("configure", "build"):
+    stages = ["configure", "build"]
+
+    if plan.install_wheel:
+        python_executable = (
+            Path(plan.python_executable)
+            .expanduser()
+            .resolve()
+        )
+
+        if not python_executable.is_file():
+            raise ExecutionError(
+                "Python executable for wheel installation does not "
+                f"exist or is not a file: {python_executable}"
+            )
+
+        if not _INSTALL_WHEEL_SCRIPT.is_file():
+            raise ExecutionError(
+                "wheel installation helper does not exist or is not "
+                f"a file: {_INSTALL_WHEEL_SCRIPT}"
+            )
+
+        stages.append("install")
+
+    for stage in stages:
         log_path = _stage_log_path(
             log_directory,
             plan.manifest.name,
@@ -291,11 +329,11 @@ def _preflight_plan(
             )
 
 
-def _create_build_directory(
-    build_directory: Path,
+def _create_build_variant_directory(
+    build_variant_directory: Path,
 ) -> Path:
     resolved = (
-        Path(build_directory)
+        Path(build_variant_directory)
         .expanduser()
         .resolve()
     )
@@ -307,7 +345,7 @@ def _create_build_directory(
         )
     except OSError as exc:
         raise ExecutionError(
-            f"could not create build directory "
+            f"could not create build variant directory "
             f"{resolved}: {exc}"
         ) from exc
 
@@ -319,13 +357,37 @@ def _create_build_directory(
     return resolved
 
 
+def _install_command(
+    plan: VariantPlan,
+) -> Tuple[str, ...]:
+    """Return the runtime wheel-installation helper command."""
+
+    artifact_manifest = (
+        plan.build_variant_directory
+        / "src/libs/cgalpy/dist/distribution-artifacts.json"
+    ).resolve()
+
+    pip_option_arguments = tuple(
+        f"--pip-install-option={option}"
+        for option in plan.pip_install_options
+    )
+
+    return (
+        str(plan.python_executable),
+        str(_INSTALL_WHEEL_SCRIPT),
+        "--manifest",
+        str(artifact_manifest),
+        *pip_option_arguments,
+    )
+
+
 def execute_variant(
     plan: VariantPlan,
     *,
     log_directory: Optional[Path] = None,
     output_stream: Optional[TextIO] = None,
 ) -> VariantExecutionResult:
-    """Configure and then build one resolved variant plan."""
+    """Configure, build, and optionally install one variant."""
 
     resolved_log_directory = _prepare_log_directory(
         log_directory
@@ -336,13 +398,13 @@ def execute_variant(
         resolved_log_directory,
     )
 
-    build_directory = _create_build_directory(
-        plan.build_directory
+    build_variant_directory = _create_build_variant_directory(
+        plan.build_variant_directory
     )
 
     configure_result = execute_command(
         plan.configure_command,
-        working_directory=build_directory,
+        working_directory=build_variant_directory,
         output_stream=output_stream,
         log_path=_stage_log_path(
             resolved_log_directory,
@@ -356,11 +418,12 @@ def execute_variant(
             plan=plan,
             configure_result=configure_result,
             build_result=None,
+            install_result=None,
         )
 
     build_result = execute_command(
         plan.build_command,
-        working_directory=build_directory,
+        working_directory=build_variant_directory,
         output_stream=output_stream,
         log_path=_stage_log_path(
             resolved_log_directory,
@@ -369,10 +432,33 @@ def execute_variant(
         ),
     )
 
+    if (
+        not build_result.succeeded
+        or not plan.install_wheel
+    ):
+        return VariantExecutionResult(
+            plan=plan,
+            configure_result=configure_result,
+            build_result=build_result,
+            install_result=None,
+        )
+
+    install_result = execute_command(
+        _install_command(plan),
+        working_directory=build_variant_directory,
+        output_stream=output_stream,
+        log_path=_stage_log_path(
+            resolved_log_directory,
+            plan.manifest.name,
+            "install",
+        ),
+    )
+
     return VariantExecutionResult(
         plan=plan,
         configure_result=configure_result,
         build_result=build_result,
+        install_result=install_result,
     )
 
 

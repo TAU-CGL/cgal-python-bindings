@@ -87,7 +87,7 @@ def render_variant_plan(
 
     return (
         f"manifest: {plan.manifest.name}",
-        f"build-directory: {plan.build_directory}",
+        f"build-variant-directory: {plan.build_variant_directory}",
         (
             "configure-command: "
             f"{format_command(plan.configure_command, plan.operating_system)}"
@@ -95,6 +95,10 @@ def render_variant_plan(
         (
             "build-command: "
             f"{format_command(plan.build_command, plan.operating_system)}"
+        ),
+        (
+            "install-wheel: "
+            + ("enabled" if plan.install_wheel else "disabled")
         ),
     )
 

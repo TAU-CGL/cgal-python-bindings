@@ -1,5 +1,4 @@
-The examples accept as an argument the name of the compiled bindings library to be used.
-Several precompiled libraries are provided for Windows 10 64 bit, Python 3.9, under "src/python_scripts/precompiled". If no argument is provided, these libraries will be used by default in all examples.
+The examples accept an optional argument naming the compiled bindings library to use. If no argument is provided, they use `CGALPY` by default.
 
 ## Curated C++/Python example-comparison notes
 

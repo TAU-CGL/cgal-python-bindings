@@ -25,11 +25,11 @@ class RunnerCliTests(unittest.TestCase):
 
         self.source_directory = self.root / "source"
         self.manifest_directory = self.root / "manifests"
-        self.build_root = self.root / "build"
+        self.build_directory = self.root / "build"
 
         self.source_directory.mkdir()
         self.manifest_directory.mkdir()
-        self.build_root.mkdir()
+        self.build_directory.mkdir()
 
     def tearDown(self) -> None:
         self.temporary_directory.cleanup()
@@ -39,7 +39,7 @@ class RunnerCliTests(unittest.TestCase):
             arguments,
             default_source_directory=self.source_directory,
             default_manifest_directory=self.manifest_directory,
-            default_build_root=self.build_root,
+            default_build_directory=self.build_directory,
         )
 
     def test_minimal_manifest_defaults(self) -> None:
@@ -48,6 +48,8 @@ class RunnerCliTests(unittest.TestCase):
         self.assertEqual(parsed.manifests, ("epec",))
         self.assertEqual(parsed.build_type, "Release")
         self.assertFalse(parsed.fixed_library_name)
+        self.assertFalse(parsed.install_wheel)
+        self.assertEqual(parsed.pip_install_options, ())
         self.assertEqual(parsed.jobs, 4)
         self.assertFalse(parsed.dry_run)
         self.assertFalse(parsed.continue_on_error)
@@ -75,12 +77,15 @@ class RunnerCliTests(unittest.TestCase):
                 str(self.manifest_directory),
                 "--source-directory",
                 str(self.source_directory),
-                "--build-root",
-                str(self.build_root),
+                "--build-directory",
+                str(self.build_directory),
                 "--cgal-dir",
                 str(cgal_dir),
                 "--python",
                 str(python_executable),
+                "--install-wheel",
+                "--pip-install-option=--user",
+                "--pip-install-option=--no-deps",
                 "--nanobind-dir",
                 str(nanobind_dir),
                 "--jobs",
@@ -105,6 +110,11 @@ class RunnerCliTests(unittest.TestCase):
         self.assertEqual(parsed.jobs, 7)
         self.assertTrue(parsed.dry_run)
         self.assertTrue(parsed.continue_on_error)
+        self.assertTrue(parsed.install_wheel)
+        self.assertEqual(
+            parsed.pip_install_options,
+            ("--user", "--no-deps"),
+        )
         self.assertEqual(parsed.cgal_dir, cgal_dir.resolve())
         self.assertEqual(
             parsed.python_executable,
@@ -161,6 +171,17 @@ class RunnerCliTests(unittest.TestCase):
                     )
 
                 self.assertEqual(context.exception.code, 2)
+
+    def test_pip_install_option_requires_install_wheel(self) -> None:
+        with self.assertRaises(SystemExit) as context:
+            self.parse(
+                [
+                    "epec",
+                    "--pip-install-option=--user",
+                ]
+            )
+
+        self.assertEqual(context.exception.code, 2)
 
     def test_positive_integer(self) -> None:
         self.assertEqual(positive_integer("5"), 5)

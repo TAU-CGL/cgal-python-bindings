@@ -40,9 +40,11 @@ class RunnerArguments:
     abort_after_run_generation: bool
     manifest_directory: Path
     source_directory: Path
-    build_root: Path
+    build_directory: Path
     cgal_dir: Optional[Path]
     python_executable: Path
+    install_wheel: bool
+    pip_install_options: Tuple[str, ...]
     nanobind_dir: Optional[Path]
     jobs: int
     list_manifests: bool
@@ -91,7 +93,7 @@ def positive_integer(value: str) -> int:
 def create_parser(
     default_source_directory: Path,
     default_manifest_directory: Path,
-    default_build_root: Path,
+    default_build_directory: Path,
 ) -> argparse.ArgumentParser:
     """Create the runner argument parser."""
 
@@ -164,10 +166,10 @@ def create_parser(
     )
 
     parser.add_argument(
-        "--build-root",
+        "--build-directory",
         type=Path,
-        default=default_build_root,
-        help="detached root directory for variant builds",
+        default=default_build_directory,
+        help="detached parent directory containing variant builds",
     )
 
     parser.add_argument(
@@ -182,6 +184,25 @@ def create_parser(
         type=Path,
         default=Path(sys.executable),
         help="Python interpreter used by CMake and wheel generation",
+    )
+
+    parser.add_argument(
+        "--install-wheel",
+        action="store_true",
+        help=(
+            "install each generated wheel into the environment "
+            "selected by --python"
+        ),
+    )
+
+    parser.add_argument(
+        "--pip-install-option",
+        action="append",
+        default=[],
+        help=(
+            "additional argument forwarded to pip install; repeat this "
+            "option for multiple arguments; requires --install-wheel"
+        ),
     )
 
     parser.add_argument(
@@ -249,6 +270,18 @@ def validate_namespace(
             "--abort-after-run-generation requires --generate-run"
         )
 
+    pip_install_options = tuple(namespace.pip_install_option)
+
+    if pip_install_options and not namespace.install_wheel:
+        parser.error(
+            "--pip-install-option requires --install-wheel"
+        )
+
+    if any(not option for option in pip_install_options):
+        parser.error(
+            "--pip-install-option values must not be empty"
+        )
+
     return RunnerArguments(
         manifests=manifests,
         build_type=namespace.build_type,
@@ -269,8 +302,8 @@ def validate_namespace(
             .expanduser()
             .resolve()
         ),
-        build_root=(
-            namespace.build_root
+        build_directory=(
+            namespace.build_directory
             .expanduser()
             .resolve()
         ),
@@ -284,6 +317,8 @@ def validate_namespace(
             .expanduser()
             .resolve()
         ),
+        install_wheel=namespace.install_wheel,
+        pip_install_options=pip_install_options,
         nanobind_dir=(
             namespace.nanobind_dir.expanduser().resolve()
             if namespace.nanobind_dir is not None
@@ -306,14 +341,14 @@ def parse_arguments(
     *,
     default_source_directory: Path,
     default_manifest_directory: Path,
-    default_build_root: Path,
+    default_build_directory: Path,
 ) -> RunnerArguments:
     """Parse and validate runner command-line arguments."""
 
     parser = create_parser(
         default_source_directory=default_source_directory,
         default_manifest_directory=default_manifest_directory,
-        default_build_root=default_build_root,
+        default_build_directory=default_build_directory,
     )
 
     namespace = parser.parse_args(arguments)

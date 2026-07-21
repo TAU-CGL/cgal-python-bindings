@@ -145,7 +145,7 @@ PAIRS = {
     "aos2_visual_buffer_summary": ExamplePair(
         name="aos2_visual_buffer_summary",
         python_relpath="Arrangement_on_surface_2/aos2_visual_buffer_summary.py",
-        cpp_relpath="src/python_scripts/cgalpy_examples/Arrangement_on_surface_2/aos2_visual_buffer_summary.cpp",
+        cpp_relpath="src/python_examples/cgalpy_examples/Arrangement_on_surface_2/aos2_visual_buffer_summary.cpp",
         python_workdir_relpath="Arrangement_on_surface_2",
         cpp_include_relpath="Arrangement_on_surface_2/examples/Arrangement_on_surface_2",
         executable="aos2_visual_buffer_summary",
@@ -743,7 +743,7 @@ def main():
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parents[3]
-    examples_root = repo_root / "src/python_scripts/cgalpy_examples"
+    examples_root = repo_root / "src/python_examples/cgalpy_examples"
 
     ok = run_pair(PAIRS[args.pair], args, examples_root)
     return 0 if ok else 1

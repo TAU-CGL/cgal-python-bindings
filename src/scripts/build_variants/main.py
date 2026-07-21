@@ -24,7 +24,7 @@ def main(
     stderr: Optional[TextIO] = None,
     source_directory: Optional[Path] = None,
     manifest_directory: Optional[Path] = None,
-    build_root: Optional[Path] = None,
+    build_directory: Optional[Path] = None,
 ) -> int:
     """Parse arguments and invoke the tested runner application."""
 
@@ -43,9 +43,9 @@ def main(
         )
     )
 
-    resolved_build_root = (
-        Path(build_root).expanduser().resolve()
-        if build_root is not None
+    resolved_build_directory = (
+        Path(build_directory).expanduser().resolve()
+        if build_directory is not None
         else (
             Path.home()
             / "build/cgalpy"
@@ -60,7 +60,7 @@ def main(
         ),
         default_source_directory=resolved_source_directory,
         default_manifest_directory=resolved_manifest_directory,
-        default_build_root=resolved_build_root,
+        default_build_directory=resolved_build_directory,
     )
 
     return run_application(

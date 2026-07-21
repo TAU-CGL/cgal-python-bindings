@@ -25,7 +25,7 @@ class ConfigureOptions:
     """Options needed to construct one CMake configure command."""
 
     source_directory: Path
-    build_directory: Path
+    build_variant_directory: Path
     cmake_executable: str = "cmake"
     build_type: str = "Release"
     fixed_library_name: bool = False
@@ -59,21 +59,21 @@ def _existing_file(path: Path, label: str) -> Path:
 
 def _validate_detached_build(
     source_directory: Path,
-    build_directory: Path,
+    build_variant_directory: Path,
 ) -> None:
     try:
-        build_directory.relative_to(source_directory)
+        build_variant_directory.relative_to(source_directory)
     except ValueError:
         return
 
     raise CommandError(
-        "build directory must be detached from the source directory: "
-        f"{build_directory}"
+        "build variant directory must be detached from the source directory: "
+        f"{build_variant_directory}"
     )
 
 
 def build_build_command(
-    build_directory: Path,
+    build_variant_directory: Path,
     *,
     jobs: int,
     build_type: str,
@@ -110,8 +110,8 @@ def build_build_command(
             "linux, macos, windows"
         )
 
-    resolved_build_directory = (
-        Path(build_directory)
+    resolved_build_variant_directory = (
+        Path(build_variant_directory)
         .expanduser()
         .resolve()
     )
@@ -119,7 +119,7 @@ def build_build_command(
     command = [
         cmake_executable.strip(),
         "--build",
-        str(resolved_build_directory),
+        str(resolved_build_variant_directory),
         "--target",
         "BUILD",
     ]
@@ -180,15 +180,15 @@ def build_configure_command(
         "source directory",
     )
 
-    build_directory = (
-        Path(options.build_directory)
+    build_variant_directory = (
+        Path(options.build_variant_directory)
         .expanduser()
         .resolve()
     )
 
     _validate_detached_build(
         source_directory,
-        build_directory,
+        build_variant_directory,
     )
 
     command = [
@@ -269,7 +269,7 @@ def build_configure_command(
             "-S",
             str(source_directory),
             "-B",
-            str(build_directory),
+            str(build_variant_directory),
         ]
     )
 

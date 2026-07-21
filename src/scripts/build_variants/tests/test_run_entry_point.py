@@ -23,7 +23,7 @@ class RequiredRunEntryPointTests(unittest.TestCase):
         ).resolve()
 
         self.source_directory = self.root / "source"
-        self.build_root = self.root / "build"
+        self.build_directory = self.root / "build"
         self.manifest_directory = (
             self.source_directory
             / "src/scripts/build_variants/manifests"
@@ -34,7 +34,7 @@ class RequiredRunEntryPointTests(unittest.TestCase):
 
         self.manifest_directory.mkdir(parents=True)
         self.cmake_test_directory.mkdir(parents=True)
-        self.build_root.mkdir()
+        self.build_directory.mkdir()
 
         self.write_variant("alpha")
         self.write_variant("beta")
@@ -82,8 +82,8 @@ class RequiredRunEntryPointTests(unittest.TestCase):
             str(self.source_directory),
             "--manifest-directory",
             str(self.manifest_directory),
-            "--build-root",
-            str(self.build_root),
+            "--build-directory",
+            str(self.build_directory),
         ]
 
         return subprocess.run(
@@ -134,7 +134,7 @@ class RequiredRunEntryPointTests(unittest.TestCase):
     def test_required_entry_point_dry_run_preserves_order(
         self,
     ) -> None:
-        before = tuple(self.build_root.iterdir())
+        before = tuple(self.build_directory.iterdir())
 
         result = self.invoke(
             [
@@ -148,7 +148,7 @@ class RequiredRunEntryPointTests(unittest.TestCase):
             ]
         )
 
-        after = tuple(self.build_root.iterdir())
+        after = tuple(self.build_directory.iterdir())
 
         self.assertEqual(result.returncode, 0)
         self.assertEqual(result.stderr, "")
@@ -188,7 +188,7 @@ class RequiredRunEntryPointTests(unittest.TestCase):
         )
 
         build_directories = tuple(
-            self.build_root.iterdir()
+            self.build_directory.iterdir()
         )
 
         self.assertEqual(

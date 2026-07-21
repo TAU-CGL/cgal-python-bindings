@@ -36,8 +36,8 @@ pipelines:
                 - cmake -C ../{path_to_cmakes}/{cmake_name}_{compile_mode}.cmake ../
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
-                - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../cgal {" ".join(examples)} # run examples
+                - cd ../src/python_examples # go to examples
+                - ../scripts/compare_examples.sh ../../cgal {" ".join(examples)} # run examples
       """
   
   return yml
