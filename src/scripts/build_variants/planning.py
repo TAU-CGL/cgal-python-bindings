@@ -220,16 +220,34 @@ def create_variant_plan(
     )
 
 
+def select_manifests(
+    catalog: ManifestCatalog,
+    arguments: RunnerArguments,
+) -> Tuple[BuildVariantManifest, ...]:
+    """Select manifests in deterministic execution order."""
+
+    if arguments.all_manifests:
+        return catalog.manifests
+
+    return tuple(
+        catalog.get(name)
+        for name in arguments.manifests
+    )
+
+
 def create_variant_plans(
     catalog: ManifestCatalog,
     arguments: RunnerArguments,
 ) -> Tuple[VariantPlan, ...]:
-    """Create plans in the same order as requested manifest names."""
+    """Create plans in selected manifest order."""
 
     return tuple(
         create_variant_plan(
-            catalog.get(name),
+            manifest,
             arguments,
         )
-        for name in arguments.manifests
+        for manifest in select_manifests(
+            catalog,
+            arguments,
+        )
     )

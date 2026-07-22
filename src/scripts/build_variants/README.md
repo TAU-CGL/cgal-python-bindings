@@ -2,8 +2,9 @@
 
 The **CGAL Python Binding Variant Runner** (`src/scripts/run`) is the
 canonical cross-platform build driver for reproducible CGAL Python
-binding variants. It selects declarative JSON manifests by exact name,
-resolves an isolated build variant directory for each manifest, invokes CMake
+binding variants. It selects declarative JSON manifests by exact name
+or selects the complete validated catalog, resolves an isolated build variant
+directory for each manifest, and invokes CMake
 configure and build stages, records deterministic results and logs, and
 can optionally install the exact validated wheel into the Python
 environment selected by the user.
@@ -52,6 +53,7 @@ The runner keeps those CMake configurations as the source of truth while
 providing consistent handling for:
 
 - exact manifest selection in command-line order;
+- complete catalog selection in deterministic order;
 - a detached parent build directory and isolated build variant directories;
 - operating-system and compiler policy;
 - Release and Debug builds;
@@ -95,7 +97,16 @@ src/scripts/run sm_pmp_epic --dry-run
 
 # 3. Build a variant
 src/scripts/run sm_pmp_epic --cgal-dir <path-to-cgal-build>
+
+# 4. Build all validated manifests
+src/scripts/run --all \
+  --continue-on-error \
+  --cgal-dir <path-to-cgal-build>
 ```
+
+`--all` selects every validated manifest in deterministic catalog order.
+`--continue-on-error` ensures that later manifests are still attempted when
+an earlier configure, build, or installation stage fails.
 
 ## Default behavior
 
@@ -215,10 +226,10 @@ Each output line contains:
 
 Listing manifests does not configure or build anything.
 
-Live and dry-run operations select manifests only by the exact names
-provided on the command line. The operating-system and compiler
-options affect the generated build plan; they do not filter the
-manifest catalog or automatically select variants.
+Live and dry-run operations accept exact manifest names in command-line
+order or `--all` to select every validated manifest in deterministic catalog
+order. The operating-system and compiler options affect the generated build
+plan; they do not filter the manifest catalog.
 
 ## Manifest format
 
@@ -405,10 +416,21 @@ src/scripts/run sm_pmp_epic psp_epic tri2_wi_hi_epic \
   --nanobind-dir "$(python -m nanobind --cmake_dir)"
 ```
 
-Repeated manifest names in one command are rejected.
+Repeated manifest names in one command are rejected. Explicit manifest
+names cannot be combined with `--all`.
+
+Build every validated manifest in catalog order with:
+
+```bash
+src/scripts/run --all \
+  --continue-on-error \
+  --cgal-dir ~/build/cgal/<configured-cgal-build> \
+  --nanobind-dir "$(python -m nanobind --cmake_dir)"
+```
 
 By default, execution stops after the first failed variant. Variants that
-were not attempted are reported as skipped.
+were not attempted are reported as skipped. Use `--continue-on-error` when
+the intention is to attempt the complete selected set.
 
 Use `--continue-on-error` to process the remaining variants:
 
@@ -621,6 +643,7 @@ The test suite covers:
 - collision-resistant build variant directory names;
 - list output;
 - dry-run output;
+- complete catalog selection with `--all`;
 - launcher generation;
 - command execution;
 - log creation;

@@ -88,6 +88,7 @@ class VariantPlanningTests(unittest.TestCase):
         self,
         *,
         manifests=("alpha",),
+        all_manifests=False,
         operating_system="macos",
         compiler=None,
         build_type="Release",
@@ -97,6 +98,7 @@ class VariantPlanningTests(unittest.TestCase):
     ) -> RunnerArguments:
         return RunnerArguments(
             manifests=tuple(manifests),
+            all_manifests=all_manifests,
             build_type=build_type,
             fixed_library_name=fixed_library_name,
             operating_system=operating_system,
@@ -364,6 +366,20 @@ class VariantPlanningTests(unittest.TestCase):
                     "_fixed_debug"
                 ),
             ),
+        )
+
+    def test_all_manifests_uses_catalog_order(self) -> None:
+        plans = create_variant_plans(
+            self.catalog,
+            self.arguments(
+                manifests=(),
+                all_manifests=True,
+            ),
+        )
+
+        self.assertEqual(
+            tuple(plan.manifest.name for plan in plans),
+            ("alpha", "beta"),
         )
 
 

@@ -46,6 +46,7 @@ class RunnerCliTests(unittest.TestCase):
         parsed = self.parse(["epec"])
 
         self.assertEqual(parsed.manifests, ("epec",))
+        self.assertFalse(parsed.all_manifests)
         self.assertEqual(parsed.build_type, "Release")
         self.assertFalse(parsed.fixed_library_name)
         self.assertFalse(parsed.install_wheel)
@@ -134,6 +135,20 @@ class RunnerCliTests(unittest.TestCase):
 
         self.assertTrue(parsed.list_manifests)
         self.assertEqual(parsed.manifests, ())
+
+    def test_all_selects_catalog_instead_of_explicit_names(
+        self,
+    ) -> None:
+        parsed = self.parse(["--all"])
+
+        self.assertTrue(parsed.all_manifests)
+        self.assertEqual(parsed.manifests, ())
+
+    def test_all_with_explicit_manifest_is_rejected(self) -> None:
+        with self.assertRaises(SystemExit) as context:
+            self.parse(["epec", "--all"])
+
+        self.assertEqual(context.exception.code, 2)
 
     def test_missing_manifest_without_list_is_rejected(self) -> None:
         with self.assertRaises(SystemExit) as context:

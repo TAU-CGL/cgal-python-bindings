@@ -97,6 +97,7 @@ class RunnerApplicationTests(unittest.TestCase):
         self,
         *,
         manifests=(),
+        all_manifests=False,
         list_manifests=False,
         dry_run=False,
         generate_run=False,
@@ -109,6 +110,7 @@ class RunnerApplicationTests(unittest.TestCase):
     ) -> RunnerArguments:
         return RunnerArguments(
             manifests=tuple(manifests),
+            all_manifests=all_manifests,
             build_type="Release",
             fixed_library_name=False,
             operating_system="macos",
@@ -217,6 +219,21 @@ class RunnerApplicationTests(unittest.TestCase):
         self.assertIn(
             "build-command: cmake --build ",
             stdout,
+        )
+
+    def test_all_dry_run_uses_catalog_order(self) -> None:
+        exit_code, stdout, stderr = self.run_case(
+            self.arguments(
+                all_manifests=True,
+                dry_run=True,
+            )
+        )
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(stderr, "")
+        self.assertLess(
+            stdout.index("manifest: alpha"),
+            stdout.index("manifest: beta"),
         )
 
     def test_unknown_dry_run_manifest_returns_error(self) -> None:
@@ -345,6 +362,41 @@ class RunnerApplicationTests(unittest.TestCase):
             f"generated-launcher: {launcher}\n",
         )
         self.assertTrue(launcher.is_file())
+
+    def test_generate_all_writes_catalog_launchers(
+        self,
+    ) -> None:
+        exit_code, stdout, stderr = (
+            self.run_generation_case(
+                self.arguments(
+                    all_manifests=True,
+                    generate_run=True,
+                    abort_after_run_generation=True,
+                )
+            )
+        )
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(stderr, "")
+        self.assertEqual(
+            stdout.splitlines(),
+            [
+                (
+                    "generated-launcher: "
+                    f"{self.root / 'run_alpha'}"
+                ),
+                (
+                    "generated-launcher: "
+                    f"{self.root / 'run_beta'}"
+                ),
+            ],
+        )
+        self.assertTrue(
+            (self.root / "run_alpha").is_file()
+        )
+        self.assertTrue(
+            (self.root / "run_beta").is_file()
+        )
 
     def test_generate_and_dry_run_preserves_order(
         self,

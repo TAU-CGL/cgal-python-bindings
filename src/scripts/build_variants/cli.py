@@ -32,6 +32,7 @@ class RunnerArguments:
     """Validated command-line arguments for the build runner."""
 
     manifests: Tuple[str, ...]
+    all_manifests: bool
     build_type: str
     fixed_library_name: bool
     operating_system: str
@@ -109,6 +110,13 @@ def create_parser(
         nargs="*",
         metavar="MANIFEST",
         help="manifest name to process; may be specified more than once",
+    )
+
+    parser.add_argument(
+        "--all",
+        dest="all_manifests",
+        action="store_true",
+        help="process every validated manifest in catalog order",
     )
 
     parser.add_argument(
@@ -257,9 +265,19 @@ def validate_namespace(
     if len(manifests) != len(set(manifests)):
         parser.error("manifest names must not be repeated")
 
-    if not namespace.list_manifests and not manifests:
+    if namespace.all_manifests and manifests:
         parser.error(
-            "at least one MANIFEST is required unless --list is used"
+            "--all cannot be combined with MANIFEST arguments"
+        )
+
+    if (
+        not namespace.list_manifests
+        and not namespace.all_manifests
+        and not manifests
+    ):
+        parser.error(
+            "at least one MANIFEST or --all is required "
+            "unless --list is used"
         )
 
     if (
@@ -284,6 +302,7 @@ def validate_namespace(
 
     return RunnerArguments(
         manifests=manifests,
+        all_manifests=namespace.all_manifests,
         build_type=namespace.build_type,
         fixed_library_name=namespace.fixed_library_name,
         operating_system=namespace.operating_system,

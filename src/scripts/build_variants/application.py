@@ -29,6 +29,7 @@ from .planning import (
     PlanningError,
     VariantPlan,
     create_variant_plans,
+    select_manifests,
 )
 
 
@@ -91,11 +92,11 @@ def _selected_manifests(
     catalog: ManifestCatalog,
     arguments: RunnerArguments,
 ):
-    """Return requested manifests in command-line order."""
+    """Return manifests in resolved execution order."""
 
-    return tuple(
-        catalog.get(name)
-        for name in arguments.manifests
+    return select_manifests(
+        catalog,
+        arguments,
     )
 
 
