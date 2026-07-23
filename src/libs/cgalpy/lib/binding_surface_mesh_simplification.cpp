@@ -20,8 +20,10 @@
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Polyhedral_envelope_filter.h>
 // #include <CGAL/Surface_mesh_simplification/Edge_collapse_visitor_base.h> // custom
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_filter.h>
-#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_placement.h>
 #include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Constrained_placement.h>
+#if CGAL_VERSION_NR < 1060300900
+#include <CGAL/Surface_mesh_simplification/Policies/Edge_collapse/Bounded_normal_change_placement.h>
+#endif
 
 #include "cgalpy/Edge_collapse_visitor_base.hpp"
 #include "cgalpy/Named_parameter_edge_is_constrained_map.hpp"
@@ -39,10 +41,12 @@ namespace SMS = CGAL::Surface_mesh_simplification;
 namespace cgalpy {
 namespace sms {
 
-inline bool has_get_placement(const py::dict& np) {
-  return np.contains("get_placement") || np.contains("placement");
-}
+/*!
+ */
+inline bool has_get_placement(const py::dict& np) { return np.contains("get_placement") || np.contains("placement"); }
 
+/*!
+ */
 template <typename PlacementType>
 PlacementType get_placement_from_named_parameters(const py::dict& np) {
   try {
@@ -55,13 +59,16 @@ PlacementType get_placement_from_named_parameters(const py::dict& np) {
   throw std::runtime_error("Named parameter 'get_placement' must be a placement policy.");
 }
 
+/*!
+ */
 template <typename CostType>
 CostType get_cost_from_named_parameters(const py::dict& np) {
   try { return py::cast<CostType>(np["get_cost"]); }
   catch (const py::cast_error&) { throw; }
 }
 
-
+/*!
+ */
 template <typename TriangleMesh, typename StopPolicy, typename PlacementType, typename CostType> // this assumes cost
 std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy stop_policy,
                                                 const py::dict& np = py::dict()) {
@@ -80,9 +87,9 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
   try {
     auto placement = get_placement_from_named_parameters<PlacementType>(np);
     auto cost = get_cost_from_named_parameters<CostType>(np);
-    auto eicm = get_edge_prop_map<Tm, bool>
-      (pm, "INTERNAL_MAP0",
-       np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+    auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
+                                            np.contains("edge_is_constrained_map") ?
+                                            np["edge_is_constrained_map"] : py::none());
     V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
 
     const bool has_eicm = np.contains("edge_is_constrained_map");
@@ -110,7 +117,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
                                                  .get_placement(placement));
     };
 
-    if (!np.contains("filter")) retv = call_without_filter();
+    if (! np.contains("filter")) retv = call_without_filter();
     else {
       try {
         auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
@@ -173,7 +180,7 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
     }
 
 #if CGALPY_PMP_POLYGONAL_MESH == 1
-    if (!has_eicm) pm.remove_property_map(eicm);
+    if (! has_eicm) pm.remove_property_map(eicm);
 #endif
   }
   catch (const py::cast_error&) {}
@@ -181,6 +188,8 @@ std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy sto
   return retv;
 }
 
+/*!
+ */
 template <typename TriangleMesh, typename StopPolicy, typename PlacementType> // this assumes no cost
 std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_policy,
                                            const py::dict& np = py::dict()) {
@@ -198,15 +207,15 @@ std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_pol
 
   try {
     auto placement = get_placement_from_named_parameters<PlacementType>(np);
-    auto eicm = get_edge_prop_map<Tm, bool>
-      (pm, "INTERNAL_MAP0",
-       np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+    auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
+                                            np.contains("edge_is_constrained_map") ?
+                                            np["edge_is_constrained_map"] : py::none());
     V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
 
     const bool has_eicm = np.contains("edge_is_constrained_map");
     const bool has_visitor = np.contains("visitor");
 
-    if (!np.contains("filter")) {
+    if (! np.contains("filter")) {
       if (has_eicm && has_visitor)
         retv = SMS::edge_collapse(pm, stop_policy,
                                   CGAL::parameters::edge_is_constrained_map(eicm)
@@ -278,7 +287,7 @@ std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_pol
     }
 
 #if CGALPY_PMP_POLYGONAL_MESH == 1
-    if (!has_eicm) pm.remove_property_map(eicm);
+    if (! has_eicm) pm.remove_property_map(eicm);
 #endif
   }
   catch (const py::cast_error&) {}
@@ -286,6 +295,8 @@ std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_pol
   return retv;
 }
 
+/*!
+ */
 template <typename TriangleMesh, typename StopPolicy, typename CostType> // this assumes cost but no placement
 std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
                                       const py::dict& np = py::dict()) {
@@ -303,15 +314,15 @@ std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
 
   try {
     auto cost = get_cost_from_named_parameters<CostType>(np);
-    auto eicm = get_edge_prop_map<Tm, bool>
-      (pm, "INTERNAL_MAP0",
-       np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+    auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
+                                            np.contains("edge_is_constrained_map") ?
+                                            np["edge_is_constrained_map"] : py::none());
     V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
 
     const bool has_eicm = np.contains("edge_is_constrained_map");
     const bool has_visitor = np.contains("visitor");
 
-    if (!np.contains("filter")) {
+    if (! np.contains("filter")) {
       if (has_eicm && has_visitor)
         retv = SMS::edge_collapse(pm, stop_policy,
                                   CGAL::parameters::edge_is_constrained_map(eicm)
@@ -383,7 +394,7 @@ std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
     }
 
 #if CGALPY_PMP_POLYGONAL_MESH == 1
-    if (!has_eicm) pm.remove_property_map(eicm);
+    if (! has_eicm) pm.remove_property_map(eicm);
 #endif
   }
   catch (const py::cast_error&) {}
@@ -391,6 +402,8 @@ std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
   return retv;
 }
 
+/*!
+ */
 template <typename TriangleMesh, typename StopPolicy>
 auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
@@ -409,16 +422,19 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
   using Pef = SMS::Polyhedral_envelope_filter<Kernel,SMS::Bounded_normal_change_filter<>>;
   using Mp = SMS::Midpoint_placement<Tm>;
   using Ltp = SMS::LindstromTurk_placement<Tm>;
-  using Bncp = SMS::Bounded_normal_change_placement<Mp>;
   using Ghplacement = typename SMS::GarlandHeckbert_policies<Tm, Kernel>::Get_placement;
   using MpBicm = SMS::Constrained_placement<Mp, edge_bool_map>;
   using LtpBicm = SMS::Constrained_placement<Ltp, edge_bool_map>;
-  using BncpBicm = SMS::Constrained_placement<Bncp, edge_bool_map>;
   using GhplacementBicm = SMS::Constrained_placement<Ghplacement, edge_bool_map>;
   using Ghpp = SMS::GarlandHeckbert_plane_policies<Tm, Kernel>;
-  using BncpGhpp = SMS::Bounded_normal_change_placement<Ghpp>;
   using Ghtp = SMS::GarlandHeckbert_triangle_policies<Tm, Kernel>;
+
+#if CGAL_VERSION_NR < 1060300900
+  using Bncp = SMS::Bounded_normal_change_placement<Mp>;
+  using BncpBicm = SMS::Constrained_placement<Bncp, edge_bool_map>;
+  using BncpGhpp = SMS::Bounded_normal_change_placement<Ghpp>;
   using BncpGhtp = SMS::Bounded_normal_change_placement<Ghtp>;
+#endif
 
   using Elc = SMS::Edge_length_cost<Tm>;
   using Ltc = SMS::LindstromTurk_cost<Tm>;
@@ -426,12 +442,11 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
 
   using V = sms::My_ec_visitor<Tm>;
 
-
   bool place = has_get_placement(np);
   bool vim = np.contains("vertex_index_map");
   bool cost = np.contains("get_cost");
   bool filter = np.contains("filter");
-  if (place && !cost) {
+  if (place && ! cost) {
     std::optional<int> r;
     r = edge_collapse_placement<TriangleMesh, StopPolicy, MpBicm>(pm, stop_policy, np);
     if (r) return r.value();
@@ -445,16 +460,19 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
     if (r) return r.value();
     r = edge_collapse_placement<TriangleMesh, StopPolicy, Ltp>(pm, stop_policy, np);
     if (r) return r.value();
-    r = edge_collapse_placement<TriangleMesh, StopPolicy, Bncp>(pm, stop_policy, np);
-    if (r) return r.value();
     r = edge_collapse_placement<TriangleMesh, StopPolicy, Ghpp>(pm, stop_policy, np);
     if (r) return r.value();
     r = edge_collapse_placement<TriangleMesh, StopPolicy, Ghtp>(pm, stop_policy, np);
+    if (r) return r.value();
+
+#if CGAL_VERSION_NR < 1060300900
+    r = edge_collapse_placement<TriangleMesh, StopPolicy, Bncp>(pm, stop_policy, np);
     if (r) return r.value();
     r = edge_collapse_placement<TriangleMesh, StopPolicy, BncpGhpp>(pm, stop_policy, np);
     if (r) return r.value();
     r = edge_collapse_placement<TriangleMesh, StopPolicy, BncpGhtp>(pm, stop_policy, np);
     if (r) return r.value();
+#endif
     throw std::runtime_error("Invalid placement type");
   }
   else if (place && cost) {
@@ -471,12 +489,6 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
     r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, LtpBicm, Ltc>(pm, stop_policy, np);
     if (r) return r.value();
     r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, LtpBicm, Ghcost>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpBicm, Elc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpBicm, Ltc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpBicm, Ghcost>(pm, stop_policy, np);
     if (r) return r.value();
     r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, GhplacementBicm, Elc>(pm, stop_policy, np);
     if (r) return r.value();
@@ -496,15 +508,22 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
     if (r) return r.value();
     r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ltp, Ghcost>(pm, stop_policy, np);
     if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ghpp, Ghpp>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ghtp, Ghtp>(pm, stop_policy, np);
+    if (r) return r.value();
+#if CGAL_VERSION_NR < 1060300900
     r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Bncp, Elc>(pm, stop_policy, np);
     if (r) return r.value();
     r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Bncp, Ltc>(pm, stop_policy, np);
     if (r) return r.value();
     r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Bncp, Ghcost>(pm, stop_policy, np);
     if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ghpp, Ghpp>(pm, stop_policy, np);
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpBicm, Elc>(pm, stop_policy, np);
     if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ghtp, Ghtp>(pm, stop_policy, np);
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpBicm, Ltc>(pm, stop_policy, np);
+    if (r) return r.value();
+    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpBicm, Ghcost>(pm, stop_policy, np);
     if (r) return r.value();
     r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhpp, Elc>(pm, stop_policy, np);
     if (r) return r.value();
@@ -518,6 +537,7 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
     if (r) return r.value();
     r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhtp, Ghcost>(pm, stop_policy, np);
     if (r) return r.value();
+#endif
     throw std::runtime_error("Invalid placement or cost type");
   }
   else if (!place && cost) {
@@ -538,15 +558,15 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
   }
   else {
     V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
-    auto eicm = get_edge_prop_map<Tm, bool>
-      (pm, "INTERNAL_MAP0",
-       np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
+    auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
+                                            np.contains("edge_is_constrained_map") ?
+                                            np["edge_is_constrained_map"] : py::none());
 
     const bool has_eicm = np.contains("edge_is_constrained_map");
     const bool has_visitor = np.contains("visitor");
     std::optional<int> retv = std::nullopt;
 
-    if (!np.contains("filter")) {
+    if (! np.contains("filter")) {
       if (has_eicm && has_visitor)
         retv = SMS::edge_collapse(pm, stop_policy,
                                   CGAL::parameters::edge_is_constrained_map(eicm)
@@ -613,17 +633,22 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
   }
 }
 
+/*!
+ */
 template <typename Tm, typename... PolicyTypes>
 void define_edge_collapses(py::module_& m) {
     (m.def("edge_collapse", &sms::edge_collapse<Tm, PolicyTypes>,
-          py::arg("tmesh"), py::arg("should_stop"), py::arg("np") = py::dict(),
-          smsi_doc::Surface_mesh_simplification_edge_collapse), ...);
+           py::arg("tmesh"), py::arg("should_stop"), py::arg("np") = py::dict(),
+           smsi_doc::Surface_mesh_simplification_edge_collapse), ...);
 }
 
 }
 } // namespace cgalpy // namespace sms
 
 // Export Polygon_mesh_processing
+
+/*!
+ */
 void export_surface_mesh_simplification(py::module_& m) {
   using Tm = cgalpy::pmp::Polygonal_mesh;
   using Fd = boost::graph_traits<Tm>::face_descriptor;
@@ -663,8 +688,7 @@ void export_surface_mesh_simplification(py::module_& m) {
   using edges_size_type = boost::graph_traits<Tm>::edges_size_type;
 
   using Ep = SMS::Edge_profile<Tm>;
-  py::class_<Ep>(
-      m, "Edge_profile", smsi_doc::Surface_mesh_simplification_Edge_profile_class)
+  py::class_<Ep>(m, "Edge_profile", smsi_doc::Surface_mesh_simplification_Edge_profile_class)
     .def("v0", &Ep::v0, smsi_doc::Surface_mesh_simplification_Edge_profile_v0)
     .def("v1", &Ep::v1, smsi_doc::Surface_mesh_simplification_Edge_profile_v1)
     .def("v0_v1", &Ep::v0_v1, smsi_doc::Surface_mesh_simplification_Edge_profile_v0_v1)
@@ -689,11 +713,11 @@ void export_surface_mesh_simplification(py::module_& m) {
     ;
 
   using Ecvb = cgalpy::sms::My_ec_visitor<Tm>;
-  py::class_<Ecvb>(
-      m, "Edge_collapse_visitor_base",
-      smsi_doc::Surface_mesh_simplification_Edge_collapse_visitor_base_class)
+  py::class_<Ecvb>(m, "Edge_collapse_visitor_base",
+                   smsi_doc::Surface_mesh_simplification_Edge_collapse_visitor_base_class)
     .def(py::init<>(), "Construct an edge collapse visitor.")
     ;
+
   m.def("set_OnStarted", &Ecvb::set_started,
         py::arg("visitor"), py::arg("OnStarted"),
         smsi_doc::EdgeCollapseSimplificationVisitor_OnStarted);
@@ -722,13 +746,11 @@ void export_surface_mesh_simplification(py::module_& m) {
         py::arg("visitor"), py::arg("OnNonCollapsable"),
         smsi_doc::EdgeCollapseSimplificationVisitor_OnNonCollapsable);
 
-
   // Predicates //
 
   using Ecsp = SMS::Edge_count_stop_predicate<Tm>;
-  py::class_<Ecsp>(
-      m, "Edge_count_stop_predicate",
-      smsi_doc::Surface_mesh_simplification_Edge_count_stop_predicate_class)
+  py::class_<Ecsp>(m, "Edge_count_stop_predicate",
+                   smsi_doc::Surface_mesh_simplification_Edge_count_stop_predicate_class)
     .def(py::init<edges_size_type>(), py::arg("threshold"),
          smsi_doc::Surface_mesh_simplification_Edge_count_stop_predicate_Edge_count_stop_predicate)
     .def("__call__",
@@ -740,9 +762,8 @@ void export_surface_mesh_simplification(py::module_& m) {
     ;
 
   using Ecrsp = SMS::Edge_count_ratio_stop_predicate<Tm>;
-  py::class_<Ecrsp>(
-      m, "Edge_count_ratio_stop_predicate",
-      smsi_doc::Surface_mesh_simplification_Edge_count_ratio_stop_predicate_class)
+  py::class_<Ecrsp>(m, "Edge_count_ratio_stop_predicate",
+                    smsi_doc::Surface_mesh_simplification_Edge_count_ratio_stop_predicate_class)
     .def(py::init<double>(), py::arg("ratio"),
          smsi_doc::Surface_mesh_simplification_Edge_count_ratio_stop_predicate_Edge_count_ratio_stop_predicate)
     .def("__call__",
@@ -754,9 +775,8 @@ void export_surface_mesh_simplification(py::module_& m) {
     ;
 
   using Elsp = SMS::Edge_length_stop_predicate<FT>;
-  py::class_<Elsp>(
-      m, "Edge_length_stop_predicate",
-      smsi_doc::Surface_mesh_simplification_Edge_length_stop_predicate_class)
+  py::class_<Elsp>(m, "Edge_length_stop_predicate",
+                   smsi_doc::Surface_mesh_simplification_Edge_length_stop_predicate_class)
     .def(py::init<const FT>(), py::arg("threshold"),
          smsi_doc::Surface_mesh_simplification_Edge_length_stop_predicate_Edge_length_stop_predicate)
     .def("__call__",
@@ -768,9 +788,8 @@ void export_surface_mesh_simplification(py::module_& m) {
     ;
 
   using Fcsp = SMS::Face_count_stop_predicate<Tm>;
-  py::class_<Fcsp>(
-      m, "Face_count_stop_predicate",
-      smsi_doc::Surface_mesh_simplification_Face_count_stop_predicate_class)
+  py::class_<Fcsp>(m, "Face_count_stop_predicate",
+                   smsi_doc::Surface_mesh_simplification_Face_count_stop_predicate_class)
     .def(py::init<edges_size_type>(), py::arg("threshold"),
          smsi_doc::Surface_mesh_simplification_Face_count_stop_predicate_Face_count_stop_predicate)
     .def("__call__",
@@ -782,9 +801,8 @@ void export_surface_mesh_simplification(py::module_& m) {
     ;
 
   using Fcrsp = SMS::Face_count_ratio_stop_predicate<Tm>;
-  py::class_<Fcrsp>(
-      m, "Face_count_ratio_stop_predicate",
-      smsi_doc::Surface_mesh_simplification_Face_count_ratio_stop_predicate_class)
+  py::class_<Fcrsp>(m, "Face_count_ratio_stop_predicate",
+                    smsi_doc::Surface_mesh_simplification_Face_count_ratio_stop_predicate_class)
     .def(py::init<double, const Tm&>(), py::arg("ratio"), py::arg("tmesh"),
          smsi_doc::Surface_mesh_simplification_Face_count_ratio_stop_predicate_Face_count_ratio_stop_predicate)
     .def("__call__",
@@ -798,9 +816,8 @@ void export_surface_mesh_simplification(py::module_& m) {
   // Policies //
 
   using Ghpp = SMS::GarlandHeckbert_plane_policies<Tm, Kernel>;
-  py::class_<Ghpp>(
-      m, "GarlandHeckbert_plane_policies",
-      smsi_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_class)
+  py::class_<Ghpp>(m, "GarlandHeckbert_plane_policies",
+                   smsi_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_class)
     .def(py::init<Tm&>(), py::arg("tmesh"),
          smsi_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_GarlandHeckbert_plane_policies)
     .def("get_placement", &Ghpp::get_placement,
@@ -815,9 +832,8 @@ void export_surface_mesh_simplification(py::module_& m) {
   //   ;
 
   using Ghtp = SMS::GarlandHeckbert_triangle_policies<Tm, Kernel>;
-  py::class_<Ghtp>(
-      m, "GarlandHeckbert_triangle_policies",
-      smsi_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_class)
+  py::class_<Ghtp>(m, "GarlandHeckbert_triangle_policies",
+                   smsi_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_class)
     .def(py::init<Tm&>(), py::arg("tmesh"),
          smsi_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_GarlandHeckbert_triangle_policies)
     .def("get_placement", &Ghtp::get_placement,
@@ -834,17 +850,15 @@ void export_surface_mesh_simplification(py::module_& m) {
   // Costs //
 
   using Elc = SMS::Edge_length_cost<Tm>;
-  py::class_<Elc>(
-      m, "Edge_length_cost",
-      smsi_doc::Surface_mesh_simplification_Edge_length_cost_class)
+  py::class_<Elc>(m, "Edge_length_cost",
+                  smsi_doc::Surface_mesh_simplification_Edge_length_cost_class)
     .def(py::init<>(),
          smsi_doc::Surface_mesh_simplification_Edge_length_cost_Edge_length_cost)
     ;
 
   using Ltc = SMS::LindstromTurk_cost<Tm>;
-  py::class_<Ltc>(
-      m, "LindstromTurk_cost",
-      smsi_doc::Surface_mesh_simplification_LindstromTurk_cost_class)
+  py::class_<Ltc>(m, "LindstromTurk_cost",
+                  smsi_doc::Surface_mesh_simplification_LindstromTurk_cost_class)
     .def(py::init<>(),
          smsi_doc::Surface_mesh_simplification_LindstromTurk_cost_LindstromTurk_cost)
     ;
@@ -852,35 +866,33 @@ void export_surface_mesh_simplification(py::module_& m) {
   // Placements //
 
   using Mp = SMS::Midpoint_placement<Tm>;
-  py::class_<Mp>(
-      m, "Midpoint_placement",
-      smsi_doc::Surface_mesh_simplification_Midpoint_placement_class)
+  py::class_<Mp>(m, "Midpoint_placement",
+                 smsi_doc::Surface_mesh_simplification_Midpoint_placement_class)
     .def(py::init<>(),
          smsi_doc::Surface_mesh_simplification_Midpoint_placement_Midpoint_placement)
     ;
 
   using Ltp = SMS::LindstromTurk_placement<Tm>;
-  py::class_<Ltp>(
-      m, "LindstromTurk_placement",
-      smsi_doc::Surface_mesh_simplification_LindstromTurk_placement_class)
+  py::class_<Ltp>(m, "LindstromTurk_placement",
+                  smsi_doc::Surface_mesh_simplification_LindstromTurk_placement_class)
     .def(py::init<>(),
          smsi_doc::Surface_mesh_simplification_LindstromTurk_placement_LindstromTurk_placement)
     ;
 
+#if CGAL_VERSION_NR < 1060300900
   using Bncp = SMS::Bounded_normal_change_placement<Mp>;
-  py::class_<Bncp>(
-      m, "Bounded_normal_change_placement_Midpoint_placement",
-      smsi_doc::Surface_mesh_simplification_Bounded_normal_change_placement_class)
+  py::class_<Bncp>(m, "Bounded_normal_change_placement_Midpoint_placement",
+                   smsi_doc::Surface_mesh_simplification_Bounded_normal_change_placement_class)
     .def(py::init<Mp>(), py::arg("get_placement"),
          smsi_doc::Surface_mesh_simplification_Bounded_normal_change_placement_Bounded_normal_change_placement_1)
     ;
+#endif
 
   // placements for all
   struct Dummy_placement {};
   // upon calling this classs constructor it gives the correct placement overload
-  py::class_<Dummy_placement>(
-      m, "Bounded_normal_change_placement",
-      smsi_doc::Surface_mesh_simplification_Bounded_normal_change_placement_class)
+  py::class_<Dummy_placement>(m, "Bounded_normal_change_placement",
+                              smsi_doc::Surface_mesh_simplification_Bounded_normal_change_placement_class)
     .def(py::init<>(),
          smsi_doc::Surface_mesh_simplification_Bounded_normal_change_placement_Bounded_normal_change_placement)
     .def("__call__",
@@ -893,9 +905,8 @@ void export_surface_mesh_simplification(py::module_& m) {
   // Constrained_placement //
 
   using MpBicm = SMS::Constrained_placement<Mp, edge_bool_map>;
-  py::class_<MpBicm>(
-      m, "Constrained_placement_Midpoint_placement_Edge_bool_map",
-      smsi_doc::Surface_mesh_simplification_Constrained_placement_class)
+  py::class_<MpBicm>(m, "Constrained_placement_Midpoint_placement_Edge_bool_map",
+                     smsi_doc::Surface_mesh_simplification_Constrained_placement_class)
     .def(py::init<edge_bool_map, Mp>(),
          py::arg("edge_is_constrained_map") = edge_bool_map(),
          py::arg("get_placement") = Mp(),
@@ -903,30 +914,29 @@ void export_surface_mesh_simplification(py::module_& m) {
     ;
 
   using LtpBicm = SMS::Constrained_placement<Ltp, edge_bool_map>;
-  py::class_<LtpBicm>(
-      m, "Constrained_placement_LindstromTurk_placement_Edge_bool_map",
-      smsi_doc::Surface_mesh_simplification_Constrained_placement_class)
+  py::class_<LtpBicm>(m, "Constrained_placement_LindstromTurk_placement_Edge_bool_map",
+                      smsi_doc::Surface_mesh_simplification_Constrained_placement_class)
     .def(py::init<edge_bool_map, Ltp>(),
          py::arg("edge_is_constrained_map") = edge_bool_map(),
          py::arg("get_placement") = Ltp(),
          smsi_doc::Surface_mesh_simplification_Constrained_placement_Constrained_placement)
     ;
 
+#if CGAL_VERSION_NR < 1060300900
   using BncpBicm = SMS::Constrained_placement<Bncp, edge_bool_map>;
-  py::class_<BncpBicm>(
-      m, "Constrained_placement_Bounded_normal_change_placement_Edge_bool_map",
-      smsi_doc::Surface_mesh_simplification_Constrained_placement_class)
+  py::class_<BncpBicm>(m, "Constrained_placement_Bounded_normal_change_placement_Edge_bool_map",
+                       smsi_doc::Surface_mesh_simplification_Constrained_placement_class)
     .def(py::init<edge_bool_map, Bncp>(),
          py::arg("edge_is_constrained_map") = edge_bool_map(),
          py::arg("get_placement") = Bncp(),
          smsi_doc::Surface_mesh_simplification_Constrained_placement_Constrained_placement)
     ;
+#endif
 
   using Ghplacement = Ghpp::Get_placement;
   using GhplacementBicm = SMS::Constrained_placement<Ghplacement, edge_bool_map>;
-  py::class_<GhplacementBicm>(
-      m, "Constrained_placement_GarlandHeckbert_policies_Edge_bool_map",
-      smsi_doc::Surface_mesh_simplification_Constrained_placement_class)
+  py::class_<GhplacementBicm>(m, "Constrained_placement_GarlandHeckbert_policies_Edge_bool_map",
+                              smsi_doc::Surface_mesh_simplification_Constrained_placement_class)
     .def(py::init<edge_bool_map, Ghplacement>(),
          py::arg("edge_is_constrained_map"), py::arg("get_placement"),
          "Construct a constrained placement policy from an edge constraint map and a Garland-Heckbert placement policy.")
@@ -935,17 +945,15 @@ void export_surface_mesh_simplification(py::module_& m) {
   // Filters //
 
   using Bncf = SMS::Bounded_normal_change_filter<>;
-  py::class_<Bncf>(
-      m, "Bounded_normal_change_filter",
-      smsi_doc::Surface_mesh_simplification_Bounded_normal_change_filter_class)
+  py::class_<Bncf>(m, "Bounded_normal_change_filter",
+                   smsi_doc::Surface_mesh_simplification_Bounded_normal_change_filter_class)
     .def(py::init<>(),
          smsi_doc::Surface_mesh_simplification_Bounded_normal_change_filter_Bounded_normal_change_filter)
     ;
 
   using Pef = SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>;
-  py::class_<Pef>(
-      m, "Polyhedral_envelope_filter",
-      smsi_doc::Surface_mesh_simplification_Polyhedral_envelope_filter_class)
+  py::class_<Pef>(m, "Polyhedral_envelope_filter",
+                  smsi_doc::Surface_mesh_simplification_Polyhedral_envelope_filter_class)
     .def(py::init<FT>(), py::arg("dist"),
          "Construct a polyhedral envelope filter with the given distance.")
     ;
