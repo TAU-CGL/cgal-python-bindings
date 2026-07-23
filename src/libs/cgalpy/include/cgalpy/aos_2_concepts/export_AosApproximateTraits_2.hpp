@@ -32,24 +32,19 @@ template <typename T, typename C, typename Concepts>
 void export_approximate_point(C& c, Concepts& concepts, ...) {}
 
 // Bind the approximate point related objects
-template <typename T, typename C, typename Concepts,
-          typename = typename T::Approximate_point_2>
+template <typename T, typename C, typename Concepts, typename = typename T::Approximate_point_2>
 void export_approximate_point(C& c, Concepts& concepts, bool) {
   using Pt = typename T::Point_2;
   using Approximate_2 = typename T::Approximate_2;
-  using Ant = typename T::Approximate_number_type;
   using Ap = typename T::Approximate_point_2;
   using ovld2 = Ap(Approximate_2::*)(const Pt&) const;
 
   // Bind the approximate point
-  if (! add_attr<Ap>(c, "Approximate_point_2")) {
-    throw std::runtime_error("Approximate_point_2 is not bound!");
-  }
+  if (! add_attr<Ap>(c, "Approximate_point_2")) { throw std::runtime_error("Approximate_point_2 is not bound!"); }
 
   // Bind the operator
   auto& classes = concepts.m_aos_approximate_traits_2_classes;
-  classes.m_approximate_2->def("__call__",
-                               static_cast<ovld2>(&Approximate_2::operator()),
+  classes.m_approximate_2->def("__call__", static_cast<ovld2>(&Approximate_2::operator()),
                                py::arg("point"),
                                aos2_approximate_doc::AosTraits_ApproximatePoint_2_operator_call);
 }
@@ -64,14 +59,17 @@ void export_AosApproximateTraits_2(C& c, Concepts& concepts) {
 
   using Pt = typename T::Point_2;
   using Approximate_2 = typename T::Approximate_2;
+#if CGAL_VERSION_NR >= 1060300900
+  using Ant = typename Approximate_2::Approximate_number_type;
+#else
   using Ant = typename T::Approximate_number_type;
+#endif
 
   auto& classes = concepts.m_aos_approximate_traits_2_classes;
 
   if (! add_attr<Approximate_2>(c, "Approximate_2")) {
-    classes.m_approximate_2 = new py::class_<Approximate_2>(
-      c, "Approximate_2",
-      aos2_approximate_doc::AosApproximateTraits_2_Approximate_2);
+    classes.m_approximate_2 = new py::class_<Approximate_2>(c, "Approximate_2",
+                                                            aos2_approximate_doc::AosApproximateTraits_2_Approximate_2);
     using ovld1 = Ant(Approximate_2::*)(const Pt&, int i) const;
     classes.m_approximate_2->def("__call__",
                                  static_cast<ovld1>(&Approximate_2::operator()),

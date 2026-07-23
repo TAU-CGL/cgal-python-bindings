@@ -20,12 +20,18 @@ namespace aos2_doc = cgalpy::aos2::docstrings;
 //
 void export_arr_tracing_traits_2(py::module_& m) {
   using Gt = cgalpy::aos2::Trc_geometry_traits_2;
-  using Base_gt = Gt::Base;
 
   if (add_attr<Gt>(m, "Arr_tracing_traits_2")) return;
 
+#if CGAL_VERSION_NR >= 1060300900
+  using Shared_base = Gt::Shared_base;
+  py::class_<Gt> traits_c(m, "Arr_tracing_traits_2",
+                          aos2_doc::Arr_tracing_traits_2_class);
+#else
+  using Base_gt = Gt::Base;
   py::class_<Gt, Base_gt> traits_c(m, "Arr_tracing_traits_2",
-                                      aos2_doc::Arr_tracing_traits_2_class);
+                                   aos2_doc::Arr_tracing_traits_2_class);
+#endif
 
   // Do not use add_attr() for enums, as py::type_check(info) is false.
   const py::handle info_op_id = py::type<Gt::Operation_id>();
@@ -65,6 +71,10 @@ void export_arr_tracing_traits_2(py::module_& m) {
 
   traits_c.def(py::init<>(),
                aos2_doc::Arr_tracing_traits_2_Arr_tracing_traits_2)
+#if CGAL_VERSION_NR >= 1060300900
+    .def(py::init<Shared_base>(), py::arg("traits"))
+    .def("shared_traits", &Gt::shared_traits)
+#endif
     .def("disable_all_traces", &Gt::disable_all_traces,
          aos2_doc::Arr_tracing_traits_2_disable_all_traces)
     .def("enable_trace", &Gt::enable_trace, py::arg("id"),

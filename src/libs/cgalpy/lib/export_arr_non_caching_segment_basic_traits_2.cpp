@@ -26,9 +26,9 @@ void export_arr_non_caching_segment_basic_traits_2(py::module_& m) {
 
   if (add_attr<Bgt>(m, "Arr_non_caching_segment_basic_traits_2")) return;
 
-  py::class_<Bgt, Kernel> bt_c(
-    m, "Arr_non_caching_segment_basic_traits_2",
-    "Basic traits for arrangements of non-caching segments.");
+  py::class_<Bgt, Kernel> bt_c(m,
+                               "Arr_non_caching_segment_basic_traits_2",
+                               "Basic traits for arrangements of non-caching segments.");
 
   /// \name AosBaiscTraits
   /// @{
@@ -75,11 +75,15 @@ void export_arr_non_caching_segment_basic_traits_2(py::module_& m) {
          aos2_doc::AosTraits_CompareYAtXLeft_2_operator_call)
     ;
 
-  using Ant = Bgt::Approximate_number_type;
   using Approx = Bgt::Approximate_2;
+#if CGAL_VERSION_NR >= 1060300900
+  using Ant = Approx::Approximate_number_type;
+#else
+  using Ant = Bgt::Approximate_number_type;
+#endif
   using ovld1 = Ant(Approx::*)(const Pnt&, int i) const;
   py::class_<Approx>(bt_c, "Approximate_2",
-                       aos2_doc::AosTraits_Approximate_2_class)
+                     aos2_doc::AosTraits_Approximate_2_class)
     .def("__call__", static_cast<ovld1>(&Approx::operator()),
          py::arg("point"), py::arg("i"),
          aos2_doc::AosTraits_Approximate_2_operator_call)

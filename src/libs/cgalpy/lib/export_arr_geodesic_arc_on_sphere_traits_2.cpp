@@ -40,9 +40,8 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
 
   if (add_attr<Gt>(m, "Arr_geodesic_arc_on_sphere_traits_2")) return;
 
-  py::class_<Gt, Kernel> traits_c(
-    m, "Arr_geodesic_arc_on_sphere_traits_2",
-    aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_class);
+  py::class_<Gt, Kernel> traits_c(m, "Arr_geodesic_arc_on_sphere_traits_2",
+                                  aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_class);
   traits_c.def(py::init<>(),
                "Construct a default geodesic-arc-on-sphere traits object.")
     .def("construct_point_2_object", &Gt::construct_point_2_object,
@@ -63,15 +62,12 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
 
   if (! add_attr<Pnt>(traits_c, "Point_2")) {
     concepts.m_aos_basic_traits_2_classes.m_point_2 =
-      new py::class_<Pnt, Direction_3>(
-        traits_c, "Point_2",
-        aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Point_2_class);
-    concepts.m_aos_basic_traits_2_classes.m_point_2->def(
-      py::init<>(),
-      aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Point_2_Point_2);
-    concepts.m_aos_basic_traits_2_classes.m_point_2->def(
-      py::init<const Pnt&>(), py::arg("point"),
-      "Copy-construct a geodesic point.");
+      new py::class_<Pnt, Direction_3>(traits_c, "Point_2",
+                                       aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Point_2_class);
+    concepts.m_aos_basic_traits_2_classes.m_point_2->def(py::init<>(),
+                                                         aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Point_2_Point_2);
+    concepts.m_aos_basic_traits_2_classes.m_point_2->def(py::init<const Pnt&>(), py::arg("point"),
+                                                         "Copy-construct a geodesic point.");
   }
 
   export_AosTraits_2<Gt>(traits_c, concepts);
@@ -79,11 +75,15 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
   export_AosSphericalBoundaryTraits_2<Gt>(traits_c, concepts);
 
   using Ctr_pnt = Gt::Construct_point_2;
+#if CGAL_VERSION_NR >= 1060300900
+  using Ctr_pnt_op1 = Pnt(Ctr_pnt::*)(const FT&, const FT&, const FT&) const;
+  using Ctr_pnt_op2 = Pnt(Ctr_pnt::*)(const Dir&) const;
+#else
   using Ctr_pnt_op1 = Pnt(Ctr_pnt::*)(const FT&, const FT&, const FT&);
   using Ctr_pnt_op2 = Pnt(Ctr_pnt::*)(const Dir&);
-  py::class_<Ctr_pnt>(
-    traits_c, "Construct_point_2",
-    aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Construct_point_2_class)
+#endif
+  py::class_<Ctr_pnt>(traits_c, "Construct_point_2",
+                      aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Construct_point_2_class)
     .def("__call__", static_cast<Ctr_pnt_op1>(&Ctr_pnt::operator()),
          py::arg("x"), py::arg("y"), py::arg("z"),
          aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Construct_point_2_operator_call)
@@ -93,10 +93,13 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
   ;
 
   using Ctr_cv = Gt::Construct_curve_2;
+#if CGAL_VERSION_NR >= 1060300900
+  using Ctr_cv_op = Cv(Ctr_cv::*)(const Pnt&, const Pnt&) const;
+#else
   using Ctr_cv_op = Cv(Ctr_cv::*)(const Pnt&, const Pnt&);
-  py::class_<Ctr_cv>(
-    traits_c, "Construct_curve_2",
-    aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Construct_curve_2_class)
+#endif
+  py::class_<Ctr_cv>(traits_c, "Construct_curve_2",
+                     aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Construct_curve_2_class)
     .def("__call__", static_cast<Ctr_cv_op>(&Ctr_cv::operator()),
          py::arg("source"), py::arg("target"),
          aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Construct_curve_2_operator_call_1);
@@ -104,9 +107,8 @@ void export_arr_geodesic_arc_on_sphere_traits_2(py::module_& m) {
 
   using Ctr_xcv = Gt::Construct_x_monotone_curve_2;
   using Ctr_xcv_op = Xcv(Ctr_xcv::*)(const Pnt&, const Pnt&)const;
-  py::class_<Ctr_xcv>(
-    traits_c, "Construct_x_monotone_curve_2",
-    aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Construct_x_monotone_curve_2_class)
+  py::class_<Ctr_xcv>(traits_c, "Construct_x_monotone_curve_2",
+                      aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Construct_x_monotone_curve_2_class)
     .def("__call__", static_cast<Ctr_xcv_op>(&Ctr_xcv::operator()),
          py::arg("source"), py::arg("target"),
          aos2_doc::Arr_geodesic_arc_on_sphere_traits_2_Construct_x_monotone_curve_2_operator_call);
