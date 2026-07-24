@@ -1,3 +1,8 @@
+#include <optional>
+#include <stdexcept>
+#include <type_traits>
+#include <utility>
+
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
 
@@ -26,7 +31,7 @@
 #endif
 
 #include "cgalpy/Edge_collapse_visitor_base.hpp"
-#include "cgalpy/Named_parameter_edge_is_constrained_map.hpp"
+#include "cgalpy/cartesian_product.hpp"
 #include "cgalpy/helpers.hpp"
 #include "cgalpy/pmp_helpers.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
@@ -41,393 +46,213 @@ namespace SMS = CGAL::Surface_mesh_simplification;
 namespace cgalpy {
 namespace sms {
 
-/*!
- */
-inline bool has_get_placement(const py::dict& np) { return np.contains("get_placement") || np.contains("placement"); }
+struct No_policy {};
 
-/*!
- */
-template <typename PlacementType>
-PlacementType get_placement_from_named_parameters(const py::dict& np) {
+template <typename Policy>
+inline constexpr bool is_no_policy_v = std::is_same_v<Policy, No_policy>;
+
+inline bool has_get_placement(const py::dict& np) {
+  return np.contains("get_placement") || np.contains("placement");
+}
+
+template <typename Placement>
+Placement get_placement_from_named_parameters(const py::dict& np) {
+  if constexpr (is_no_policy_v<Placement>) {
+    return {};
+  }
+  else {
+    if (np.contains("get_placement"))
+      return py::cast<Placement>(np["get_placement"]);
+    if (np.contains("placement"))
+      return py::cast<Placement>(np["placement"]);
+    throw std::runtime_error(
+      "Named parameter 'get_placement' must be a placement policy.");
+  }
+}
+
+template <typename Cost>
+Cost get_cost_from_named_parameters(const py::dict& np) {
+  if constexpr (is_no_policy_v<Cost>) return {};
+  else return py::cast<Cost>(np["get_cost"]);
+}
+
+template <typename Filter>
+Filter get_filter_from_named_parameters(const py::dict& np) {
+  if constexpr (is_no_policy_v<Filter>) return {};
+  else return py::cast<Filter>(np["filter"]);
+}
+
+template <bool UseEdgeIsConstrainedMap, typename NamedParameters,
+          typename EdgeIsConstrainedMap>
+auto apply_edge_is_constrained_map(NamedParameters np,
+                                   const EdgeIsConstrainedMap& eicm) {
+  if constexpr (UseEdgeIsConstrainedMap)
+    return np.edge_is_constrained_map(eicm);
+  else
+    return np;
+}
+
+template <typename NamedParameters, typename Cost>
+auto apply_cost(NamedParameters np, const Cost& cost) {
+  if constexpr (is_no_policy_v<Cost>) return np;
+  else return np.get_cost(cost);
+}
+
+template <typename NamedParameters, typename Filter>
+auto apply_filter(NamedParameters np, const Filter& filter) {
+  if constexpr (is_no_policy_v<Filter>) return np;
+  else return np.filter(filter);
+}
+
+template <typename NamedParameters, typename Placement>
+auto apply_placement(NamedParameters np, const Placement& placement) {
+  if constexpr (is_no_policy_v<Placement>) return np;
+  else return np.get_placement(placement);
+}
+
+template <bool UseVisitor, typename NamedParameters, typename Visitor>
+auto apply_visitor(NamedParameters np, const Visitor& visitor) {
+  if constexpr (UseVisitor) return np.visitor(visitor);
+  else return np;
+}
+
+template <bool UseEdgeIsConstrainedMap, bool UseVisitor,
+          typename TriangleMesh, typename StopPolicy, typename Placement,
+          typename Cost, typename Filter, typename EdgeIsConstrainedMap,
+          typename Visitor>
+int invoke_edge_collapse(TriangleMesh& pm, StopPolicy stop_policy,
+                         const Placement& placement, const Cost& cost,
+                         const Filter& filter,
+                         const EdgeIsConstrainedMap& eicm,
+                         const Visitor& visitor) {
+  auto np0 = CGAL::parameters::default_values();
+  auto np1 = apply_edge_is_constrained_map<UseEdgeIsConstrainedMap>(np0, eicm);
+  auto np2 = apply_cost(np1, cost);
+  auto np3 = apply_filter(np2, filter);
+  auto np4 = apply_placement(np3, placement);
+  auto np5 = apply_visitor<UseVisitor>(np4, visitor);
+  return SMS::edge_collapse(pm, stop_policy, np5);
+}
+
+template <typename TriangleMesh, typename StopPolicy, typename Placement,
+          typename Cost, typename Filter>
+std::optional<int> try_edge_collapse(TriangleMesh& pm, StopPolicy stop_policy,
+                                     const py::dict& np) {
+  using Tm = TriangleMesh;
+  using V = sms::My_ec_visitor<Tm>;
+  using Ed = typename boost::graph_traits<Tm>::edge_descriptor;
+
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+  using edge_bool_map = typename Tm::template Property_map<Ed, bool>;
+#else
+  using edge_bool_map =
+    typename boost::property_map<Tm,
+                                 CGAL::dynamic_edge_property_t<bool>>::type;
+#endif
+
   try {
-    if (np.contains("get_placement")) return py::cast<PlacementType>(np["get_placement"]);
-    if (np.contains("placement")) return py::cast<PlacementType>(np["placement"]);
+    auto placement = get_placement_from_named_parameters<Placement>(np);
+    auto cost = get_cost_from_named_parameters<Cost>(np);
+    auto filter = get_filter_from_named_parameters<Filter>(np);
+    V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
+
+    const bool has_eicm = np.contains("edge_is_constrained_map");
+    const bool has_visitor = np.contains("visitor");
+    auto eicm = get_edge_prop_map<Tm, bool>(
+      pm, "INTERNAL_MAP0",
+      has_eicm ? np["edge_is_constrained_map"] : py::none());
+
+    int result;
+    if (has_eicm && has_visitor)
+      result = invoke_edge_collapse<true, true>(
+        pm, stop_policy, placement, cost, filter, eicm, visitor);
+    else if (has_eicm)
+      result = invoke_edge_collapse<true, false>(
+        pm, stop_policy, placement, cost, filter, eicm, visitor);
+    else if (has_visitor)
+      result = invoke_edge_collapse<false, true>(
+        pm, stop_policy, placement, cost, filter, eicm, visitor);
+    else
+      result = invoke_edge_collapse<false, false>(
+        pm, stop_policy, placement, cost, filter, eicm, visitor);
+
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+    if (! has_eicm) pm.remove_property_map(eicm);
+#endif
+    return result;
   }
   catch (const py::cast_error&) {
-    throw;
+    return std::nullopt;
   }
-  throw std::runtime_error("Named parameter 'get_placement' must be a placement policy.");
 }
 
-/*!
- */
-template <typename CostType>
-CostType get_cost_from_named_parameters(const py::dict& np) {
-  try { return py::cast<CostType>(np["get_cost"]); }
-  catch (const py::cast_error&) { throw; }
-}
-
-/*!
- */
-template <typename TriangleMesh, typename StopPolicy, typename PlacementType, typename CostType> // this assumes cost
-std::optional<int> edge_collapse_placement_cost(TriangleMesh& pm, StopPolicy stop_policy,
-                                                const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  using V = sms::My_ec_visitor<Tm>;
-  using Ed = typename boost::graph_traits<Tm>::edge_descriptor;
-
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-  using edge_bool_map = typename Tm::template Property_map<Ed, bool>;
-#else
-  using edge_bool_map = typename boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
-#endif
-
-  std::optional<int> retv = std::nullopt;
-
-  try {
-    auto placement = get_placement_from_named_parameters<PlacementType>(np);
-    auto cost = get_cost_from_named_parameters<CostType>(np);
-    auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
-                                            np.contains("edge_is_constrained_map") ?
-                                            np["edge_is_constrained_map"] : py::none());
-    V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
-
-    const bool has_eicm = np.contains("edge_is_constrained_map");
-    const bool has_visitor = np.contains("visitor");
-
-    auto call_without_filter = [&]() {
-      if (has_eicm && has_visitor)
-        return SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::edge_is_constrained_map(eicm)
-                                                   .get_cost(cost)
-                                                   .get_placement(placement)
-                                                   .visitor(visitor));
-      if (has_eicm)
-        return SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::edge_is_constrained_map(eicm)
-                                                   .get_cost(cost)
-                                                   .get_placement(placement));
-      if (has_visitor)
-        return SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::get_cost(cost)
-                                                   .get_placement(placement)
-                                                   .visitor(visitor));
-      return SMS::edge_collapse(pm, stop_policy,
-                                CGAL::parameters::get_cost(cost)
-                                                 .get_placement(placement));
-    };
-
-    if (! np.contains("filter")) retv = call_without_filter();
-    else {
-      try {
-        auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
-        if (has_eicm && has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .get_cost(cost)
-                                                     .filter(f)
-                                                     .get_placement(placement)
-                                                     .visitor(visitor));
-        else if (has_eicm)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .get_cost(cost)
-                                                     .filter(f)
-                                                     .get_placement(placement));
-        else if (has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::get_cost(cost)
-                                                     .filter(f)
-                                                     .get_placement(placement)
-                                                     .visitor(visitor));
-        else
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::get_cost(cost)
-                                                     .filter(f)
-                                                     .get_placement(placement));
-      }
-      catch (const py::cast_error&) {
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-        auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
-        if (has_eicm && has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .get_cost(cost)
-                                                     .filter(f)
-                                                     .get_placement(placement)
-                                                     .visitor(visitor));
-        else if (has_eicm)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .get_cost(cost)
-                                                     .filter(f)
-                                                     .get_placement(placement));
-        else if (has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::get_cost(cost)
-                                                     .filter(f)
-                                                     .get_placement(placement)
-                                                     .visitor(visitor));
-        else
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::get_cost(cost)
-                                                     .filter(f)
-                                                     .get_placement(placement));
-#else
-        throw;
-#endif
-      }
-    }
-
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-    if (! has_eicm) pm.remove_property_map(eicm);
-#endif
-  }
-  catch (const py::cast_error&) {}
-
-  return retv;
-}
-
-/*!
- */
-template <typename TriangleMesh, typename StopPolicy, typename PlacementType> // this assumes no cost
-std::optional<int> edge_collapse_placement(TriangleMesh& pm, StopPolicy stop_policy,
-                                           const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  using V = sms::My_ec_visitor<Tm>;
-  using Ed = typename boost::graph_traits<Tm>::edge_descriptor;
-
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-  using edge_bool_map = typename Tm::template Property_map<Ed, bool>;
-#else
-  using edge_bool_map = typename boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
-#endif
-
-  std::optional<int> retv = std::nullopt;
-
-  try {
-    auto placement = get_placement_from_named_parameters<PlacementType>(np);
-    auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
-                                            np.contains("edge_is_constrained_map") ?
-                                            np["edge_is_constrained_map"] : py::none());
-    V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
-
-    const bool has_eicm = np.contains("edge_is_constrained_map");
-    const bool has_visitor = np.contains("visitor");
-
-    if (! np.contains("filter")) {
-      if (has_eicm && has_visitor)
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::edge_is_constrained_map(eicm)
-                                                   .get_placement(placement)
-                                                   .visitor(visitor));
-      else if (has_eicm)
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::edge_is_constrained_map(eicm)
-                                                   .get_placement(placement));
-      else if (has_visitor)
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::get_placement(placement)
-                                                   .visitor(visitor));
-      else
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::get_placement(placement));
-    }
-    else {
-      try {
-        auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
-        if (has_eicm && has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .filter(f)
-                                                     .get_placement(placement)
-                                                     .visitor(visitor));
-        else if (has_eicm)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .filter(f)
-                                                     .get_placement(placement));
-        else if (has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::filter(f)
-                                                     .get_placement(placement)
-                                                     .visitor(visitor));
-        else
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::filter(f)
-                                                     .get_placement(placement));
-      }
-      catch (const py::cast_error&) {
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-        auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
-        if (has_eicm && has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .filter(f)
-                                                     .get_placement(placement)
-                                                     .visitor(visitor));
-        else if (has_eicm)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .filter(f)
-                                                     .get_placement(placement));
-        else if (has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::filter(f)
-                                                     .get_placement(placement)
-                                                     .visitor(visitor));
-        else
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::filter(f)
-                                                     .get_placement(placement));
-#else
-        throw;
-#endif
-      }
-    }
-
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-    if (! has_eicm) pm.remove_property_map(eicm);
-#endif
-  }
-  catch (const py::cast_error&) {}
-
-  return retv;
-}
-
-/*!
- */
-template <typename TriangleMesh, typename StopPolicy, typename CostType> // this assumes cost but no placement
-std::optional<int> edge_collapse_cost(TriangleMesh& pm, StopPolicy stop_policy,
-                                      const py::dict& np = py::dict()) {
-  using Tm = TriangleMesh;
-  using V = sms::My_ec_visitor<Tm>;
-  using Ed = typename boost::graph_traits<Tm>::edge_descriptor;
-
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-  using edge_bool_map = typename Tm::template Property_map<Ed, bool>;
-#else
-  using edge_bool_map = typename boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
-#endif
-
-  std::optional<int> retv = std::nullopt;
-
-  try {
-    auto cost = get_cost_from_named_parameters<CostType>(np);
-    auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
-                                            np.contains("edge_is_constrained_map") ?
-                                            np["edge_is_constrained_map"] : py::none());
-    V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
-
-    const bool has_eicm = np.contains("edge_is_constrained_map");
-    const bool has_visitor = np.contains("visitor");
-
-    if (! np.contains("filter")) {
-      if (has_eicm && has_visitor)
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::edge_is_constrained_map(eicm)
-                                                   .get_cost(cost)
-                                                   .visitor(visitor));
-      else if (has_eicm)
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::edge_is_constrained_map(eicm)
-                                                   .get_cost(cost));
-      else if (has_visitor)
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::get_cost(cost)
-                                                   .visitor(visitor));
-      else
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::get_cost(cost));
-    }
-    else {
-      try {
-        auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
-        if (has_eicm && has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .get_cost(cost)
-                                                     .filter(f)
-                                                     .visitor(visitor));
-        else if (has_eicm)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .get_cost(cost)
-                                                     .filter(f));
-        else if (has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::get_cost(cost)
-                                                     .filter(f)
-                                                     .visitor(visitor));
-        else
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::get_cost(cost)
-                                                     .filter(f));
-      }
-      catch (const py::cast_error&) {
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-        auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
-        if (has_eicm && has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .get_cost(cost)
-                                                     .filter(f)
-                                                     .visitor(visitor));
-        else if (has_eicm)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .get_cost(cost)
-                                                     .filter(f));
-        else if (has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::get_cost(cost)
-                                                     .filter(f)
-                                                     .visitor(visitor));
-        else
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::get_cost(cost)
-                                                     .filter(f));
-#else
-        throw;
-#endif
-      }
-    }
-
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-    if (! has_eicm) pm.remove_property_map(eicm);
-#endif
-  }
-  catch (const py::cast_error&) {}
-
-  return retv;
-}
-
-/*!
- */
 template <typename TriangleMesh, typename StopPolicy>
-auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np = py::dict()) {
+struct Edge_collapse_context {
+  using Triangle_mesh = TriangleMesh;
+  using Stop_policy = StopPolicy;
+
+  TriangleMesh& pm;
+  StopPolicy& stop_policy;
+  const py::dict& np;
+  std::optional<int> result = std::nullopt;
+};
+
+template <typename Context, typename Placement, typename Cost,
+          typename Filter>
+struct Edge_collapse_product_wrapper {
+  void operator()(Context& context) {
+    if (context.result) return;
+    context.result = try_edge_collapse<typename Context::Triangle_mesh,
+                                       typename Context::Stop_policy,
+                                       Placement, Cost, Filter>(
+      context.pm, context.stop_policy, context.np);
+  }
+};
+
+template <typename Context, typename PlacementList, typename CostList>
+void dispatch_filter_product(Context& context, PlacementList placements,
+                             CostList costs, bool has_filter) {
+  if (has_filter) {
+    using Bncf = SMS::Bounded_normal_change_filter<>;
+#if CGALPY_PMP_POLYGONAL_MESH == 1
+    using Pef = SMS::Polyhedral_envelope_filter<Kernel, Bncf>;
+    cgalpy::Type_list<Bncf, Pef> filters;
+#else
+    cgalpy::Type_list<Bncf> filters;
+#endif
+    cgalpy::cartesian_product<Edge_collapse_product_wrapper>(
+      context, placements, costs, filters);
+  }
+  else {
+    cgalpy::Type_list<No_policy> filters;
+    cgalpy::cartesian_product<Edge_collapse_product_wrapper>(
+      context, placements, costs, filters);
+  }
+}
+
+template <typename TriangleMesh, typename StopPolicy>
+auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy,
+                   const py::dict& np = py::dict()) {
   using Tm = TriangleMesh;
-  using Gt = typename boost::graph_traits<Tm>;
-  using Fd = typename boost::graph_traits<Tm>::face_descriptor;
-  using Hd = typename boost::graph_traits<Tm>::halfedge_descriptor;
-  using Vd = typename boost::graph_traits<Tm>::vertex_descriptor;
   using Ed = typename boost::graph_traits<Tm>::edge_descriptor;
-  using faces_size_type = typename boost::graph_traits<Tm>::faces_size_type;
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   using edge_bool_map = typename Tm::template Property_map<Ed, bool>;
+#else
+  using edge_bool_map =
+    typename boost::property_map<Tm,
+                                 CGAL::dynamic_edge_property_t<bool>>::type;
 #endif
-#if CGALPY_PMP_POLYGONAL_MESH == 0
-  using edge_bool_map = typename boost::property_map<Tm, CGAL::dynamic_edge_property_t<bool>>::type;
-#endif
-  using Pef = SMS::Polyhedral_envelope_filter<Kernel,SMS::Bounded_normal_change_filter<>>;
+
   using Mp = SMS::Midpoint_placement<Tm>;
   using Ltp = SMS::LindstromTurk_placement<Tm>;
-  using Ghplacement = typename SMS::GarlandHeckbert_policies<Tm, Kernel>::Get_placement;
-  using MpBicm = SMS::Constrained_placement<Mp, edge_bool_map>;
-  using LtpBicm = SMS::Constrained_placement<Ltp, edge_bool_map>;
-  using GhplacementBicm = SMS::Constrained_placement<Ghplacement, edge_bool_map>;
   using Ghpp = SMS::GarlandHeckbert_plane_policies<Tm, Kernel>;
   using Ghtp = SMS::GarlandHeckbert_triangle_policies<Tm, Kernel>;
+  using Ghplacement =
+    typename SMS::GarlandHeckbert_policies<Tm, Kernel>::Get_placement;
+  using MpBicm = SMS::Constrained_placement<Mp, edge_bool_map>;
+  using LtpBicm = SMS::Constrained_placement<Ltp, edge_bool_map>;
+  using GhplacementBicm =
+    SMS::Constrained_placement<Ghplacement, edge_bool_map>;
 
 #if CGAL_VERSION_NR < 1060300900
   using Bncp = SMS::Bounded_normal_change_placement<Mp>;
@@ -440,213 +265,72 @@ auto edge_collapse(TriangleMesh& pm, StopPolicy stop_policy, const py::dict& np 
   using Ltc = SMS::LindstromTurk_cost<Tm>;
   using Ghcost = typename SMS::GarlandHeckbert_policies<Tm, Kernel>::Get_cost;
 
-  using V = sms::My_ec_visitor<Tm>;
+  const bool has_placement = has_get_placement(np);
+  const bool has_cost = np.contains("get_cost");
+  const bool has_filter = np.contains("filter");
 
-  bool place = has_get_placement(np);
-  bool vim = np.contains("vertex_index_map");
-  bool cost = np.contains("get_cost");
-  bool filter = np.contains("filter");
-  if (place && ! cost) {
-    std::optional<int> r;
-    r = edge_collapse_placement<TriangleMesh, StopPolicy, MpBicm>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement<TriangleMesh, StopPolicy, LtpBicm>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement<TriangleMesh, StopPolicy, MpBicm>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement<TriangleMesh, StopPolicy, GhplacementBicm>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement<TriangleMesh, StopPolicy, Mp>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement<TriangleMesh, StopPolicy, Ltp>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement<TriangleMesh, StopPolicy, Ghpp>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement<TriangleMesh, StopPolicy, Ghtp>(pm, stop_policy, np);
-    if (r) return r.value();
+  Edge_collapse_context<Tm, StopPolicy> context{pm, stop_policy, np};
 
+  if (has_placement && ! has_cost) {
+    cgalpy::Type_list<MpBicm, LtpBicm, GhplacementBicm,
+                      Mp, Ltp, Ghpp, Ghtp> placements;
+    cgalpy::Type_list<No_policy> costs;
+    dispatch_filter_product(context, placements, costs, has_filter);
 #if CGAL_VERSION_NR < 1060300900
-    r = edge_collapse_placement<TriangleMesh, StopPolicy, Bncp>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement<TriangleMesh, StopPolicy, BncpGhpp>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement<TriangleMesh, StopPolicy, BncpGhtp>(pm, stop_policy, np);
-    if (r) return r.value();
+    cgalpy::Type_list<Bncp, BncpGhpp, BncpGhtp> deprecated_placements;
+    dispatch_filter_product(context, deprecated_placements, costs, has_filter);
 #endif
+    if (context.result) return context.result.value();
     throw std::runtime_error("Invalid placement type");
   }
-  else if (place && cost) {
-    // every combination of placement and cost
-    std::optional<int> r;
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, MpBicm, Elc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, MpBicm, Ltc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, MpBicm, Ghcost>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, LtpBicm, Elc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, LtpBicm, Ltc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, LtpBicm, Ghcost>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, GhplacementBicm, Elc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, GhplacementBicm, Ltc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, GhplacementBicm, Ghcost>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Mp, Elc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Mp, Ltc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Mp, Ghcost>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ltp, Elc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ltp, Ltc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ltp, Ghcost>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ghpp, Ghpp>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Ghtp, Ghtp>(pm, stop_policy, np);
-    if (r) return r.value();
+
+  if (has_placement && has_cost) {
+    cgalpy::Type_list<MpBicm, LtpBicm, GhplacementBicm, Mp, Ltp>
+      placements;
+    cgalpy::Type_list<Elc, Ltc, Ghcost> costs;
+    dispatch_filter_product(context, placements, costs, has_filter);
+
+    cgalpy::Type_list<Ghpp> ghpp;
+    dispatch_filter_product(context, ghpp, ghpp, has_filter);
+    cgalpy::Type_list<Ghtp> ghtp;
+    dispatch_filter_product(context, ghtp, ghtp, has_filter);
+
 #if CGAL_VERSION_NR < 1060300900
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Bncp, Elc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Bncp, Ltc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, Bncp, Ghcost>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpBicm, Elc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpBicm, Ltc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpBicm, Ghcost>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhpp, Elc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhpp, Ltc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhpp, Ghcost>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhtp, Elc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhtp, Ltc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_placement_cost<TriangleMesh, StopPolicy, BncpGhtp, Ghcost>(pm, stop_policy, np);
-    if (r) return r.value();
+    cgalpy::Type_list<Bncp, BncpBicm, BncpGhpp, BncpGhtp>
+      deprecated_placements;
+    dispatch_filter_product(context, deprecated_placements, costs,
+                            has_filter);
 #endif
+    if (context.result) return context.result.value();
     throw std::runtime_error("Invalid placement or cost type");
   }
-  else if (!place && cost) {
-    auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
-      np.contains("edge_is_constrained_map") ? np["edge_is_constrained_map"] : py::none());
-    std::optional<int> r;
-    r = edge_collapse_cost<TriangleMesh, StopPolicy, Elc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_cost<TriangleMesh, StopPolicy, Ltc>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_cost<TriangleMesh, StopPolicy, Ghcost>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_cost<TriangleMesh, StopPolicy, Ghpp>(pm, stop_policy, np);
-    if (r) return r.value();
-    r = edge_collapse_cost<TriangleMesh, StopPolicy, Ghtp>(pm, stop_policy, np);
-    if (r) return r.value();
+
+  if (has_cost) {
+    cgalpy::Type_list<No_policy> placements;
+    cgalpy::Type_list<Elc, Ltc, Ghcost, Ghpp, Ghtp> costs;
+    dispatch_filter_product(context, placements, costs, has_filter);
+    if (context.result) return context.result.value();
     throw std::runtime_error("Invalid cost type");
   }
-  else {
-    V visitor = np.contains("visitor") ? py::cast<V>(np["visitor"]) : V();
-    auto eicm = get_edge_prop_map<Tm, bool>(pm, "INTERNAL_MAP0",
-                                            np.contains("edge_is_constrained_map") ?
-                                            np["edge_is_constrained_map"] : py::none());
 
-    const bool has_eicm = np.contains("edge_is_constrained_map");
-    const bool has_visitor = np.contains("visitor");
-    std::optional<int> retv = std::nullopt;
-
-    if (! np.contains("filter")) {
-      if (has_eicm && has_visitor)
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::edge_is_constrained_map(eicm)
-                                                   .visitor(visitor));
-      else if (has_eicm)
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::edge_is_constrained_map(eicm));
-      else if (has_visitor)
-        retv = SMS::edge_collapse(pm, stop_policy,
-                                  CGAL::parameters::visitor(visitor));
-      else
-        retv = SMS::edge_collapse(pm, stop_policy);
-    }
-    else {
-      try {
-        auto f = py::cast<SMS::Bounded_normal_change_filter<>>(np["filter"]);
-        if (has_eicm && has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .filter(f)
-                                                     .visitor(visitor));
-        else if (has_eicm)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .filter(f));
-        else if (has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::filter(f)
-                                                     .visitor(visitor));
-        else
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::filter(f));
-      }
-      catch (const py::cast_error&) {
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-        auto f = py::cast<SMS::Polyhedral_envelope_filter<Kernel, SMS::Bounded_normal_change_filter<>>>(np["filter"]);
-        if (has_eicm && has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .filter(f)
-                                                     .visitor(visitor));
-        else if (has_eicm)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::edge_is_constrained_map(eicm)
-                                                     .filter(f));
-        else if (has_visitor)
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::filter(f)
-                                                     .visitor(visitor));
-        else
-          retv = SMS::edge_collapse(pm, stop_policy,
-                                    CGAL::parameters::filter(f));
-#else
-        throw;
-#endif
-      }
-    }
-
-#if CGALPY_PMP_POLYGONAL_MESH == 1
-    if (!has_eicm) pm.remove_property_map(eicm);
-#endif
-    if (retv) return retv.value();
-    throw std::runtime_error("Invalid named parameters");
-  }
+  cgalpy::Type_list<No_policy> policies;
+  dispatch_filter_product(context, policies, policies, has_filter);
+  if (context.result) return context.result.value();
+  throw std::runtime_error("Invalid named parameters");
 }
 
-/*!
- */
 template <typename Tm, typename... PolicyTypes>
 void define_edge_collapses(py::module_& m) {
-    (m.def("edge_collapse", &sms::edge_collapse<Tm, PolicyTypes>,
-           py::arg("tmesh"), py::arg("should_stop"), py::arg("np") = py::dict(),
-           smsi_doc::Surface_mesh_simplification_edge_collapse), ...);
+  (m.def("edge_collapse", &sms::edge_collapse<Tm, PolicyTypes>,
+         py::arg("tmesh"), py::arg("should_stop"),
+         py::arg("np") = py::dict(),
+         smsi_doc::Surface_mesh_simplification_edge_collapse), ...);
 }
 
-}
-} // namespace cgalpy // namespace sms
+} // namespace sms
+} // namespace cgalpy
 
 // Export Polygon_mesh_processing
-
 /*!
  */
 void export_surface_mesh_simplification(py::module_& m) {
