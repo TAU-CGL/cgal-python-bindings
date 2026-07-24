@@ -52,6 +52,8 @@ class RunnerArguments:
     dry_run: bool
     continue_on_error: bool
     log_directory: Optional[Path]
+    quiet: bool = False
+    clean: bool = False
 
 
 def detect_operating_system() -> str:
@@ -246,6 +248,23 @@ def create_parser(
     )
 
     parser.add_argument(
+        "--quiet",
+        action="store_true",
+        help=(
+            "suppress configure and build command output while retaining "
+            "concise variant progress and result lines"
+        ),
+    )
+
+    parser.add_argument(
+        "--clean",
+        action="store_true",
+        help=(
+            "remove each variant CMakeCache.txt before configuration"
+        ),
+    )
+
+    parser.add_argument(
         "--log-directory",
         type=Path,
         help="directory for configure and build logs",
@@ -352,6 +371,8 @@ def validate_namespace(
             if namespace.log_directory is not None
             else None
         ),
+        quiet=namespace.quiet,
+        clean=namespace.clean,
     )
 
 

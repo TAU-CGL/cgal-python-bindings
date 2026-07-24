@@ -15475,6 +15475,29 @@
           "kind": "function",
           "name": "Arr_counting_traits_2",
           "qualified_name": "CGAL::Arr_counting_traits_2::Arr_counting_traits_2",
+          "brief": "constructs from a shared pointer.",
+          "detailed": "traits the taits being counted.",
+          "return_type": "",
+          "definition": "CGAL::Arr_counting_traits_2< BaseTraits >::Arr_counting_traits_2",
+          "argsstring": "(std::shared_ptr< BaseTraits > traits)",
+          "params": [
+            {
+              "type": "std::shared_ptr< BaseTraits >",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Arr_counting_traits_2.h",
+          "line": "83"
+        },
+        {
+          "kind": "function",
+          "name": "Arr_counting_traits_2",
+          "qualified_name": "CGAL::Arr_counting_traits_2::Arr_counting_traits_2",
           "brief": "disables copy constructor.",
           "detailed": "",
           "return_type": "",
@@ -15966,6 +15989,21 @@
           "section": "",
           "file": "CGAL/Arr_counting_traits_2.h",
           "line": "136"
+        },
+        {
+          "kind": "function",
+          "name": "shared_traits",
+          "qualified_name": "CGAL::Arr_counting_traits_2::shared_traits",
+          "brief": "obtains the smart pointer to the traits being counted.",
+          "detailed": "",
+          "return_type": "Shared_base",
+          "definition": "Shared_base CGAL::Arr_counting_traits_2< BaseTraits >::shared_traits",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Arr_counting_traits_2.h",
+          "line": "188"
         }
       ],
       "xml_file": "class_c_g_a_l_1_1_arr__counting__traits__2.xml",
@@ -23135,6 +23173,29 @@
           "kind": "function",
           "name": "Arr_tracing_traits_2",
           "qualified_name": "CGAL::Arr_tracing_traits_2::Arr_tracing_traits_2",
+          "brief": "constructs from a shared pointer.",
+          "detailed": "traits the taits being traced.",
+          "return_type": "",
+          "definition": "CGAL::Arr_tracing_traits_2< BaseTraits >::Arr_tracing_traits_2",
+          "argsstring": "(std::shared_ptr< BaseTraits > traits)",
+          "params": [
+            {
+              "type": "std::shared_ptr< BaseTraits >",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Arr_tracing_traits_2.h",
+          "line": "73"
+        },
+        {
+          "kind": "function",
+          "name": "Arr_tracing_traits_2",
+          "qualified_name": "CGAL::Arr_tracing_traits_2::Arr_tracing_traits_2",
           "brief": "disables copy constructor.",
           "detailed": "",
           "return_type": "",
@@ -23634,6 +23695,21 @@
           "section": "",
           "file": "CGAL/Arr_tracing_traits_2.h",
           "line": "86"
+        },
+        {
+          "kind": "function",
+          "name": "shared_traits",
+          "qualified_name": "CGAL::Arr_tracing_traits_2::shared_traits",
+          "brief": "obtains the smart pointer to the traits being traced.",
+          "detailed": "",
+          "return_type": "std::shared_ptr< BaseTraits >",
+          "definition": "std::shared_ptr< BaseTraits > CGAL::Arr_tracing_traits_2< BaseTraits >::shared_traits",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Arr_tracing_traits_2.h",
+          "line": "109"
         }
       ],
       "xml_file": "class_c_g_a_l_1_1_arr__tracing__traits__2.xml",

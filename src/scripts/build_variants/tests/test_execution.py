@@ -61,7 +61,7 @@ class VariantExecutionTests(unittest.TestCase):
             manifest=self.manifest(name),
             operating_system="macos",
             compiler="test-compiler",
-            build_variant_directory=(
+            variant_build_directory=(
                 self.build_directory / name
             ),
             python_executable=Path(sys.executable).resolve(),
@@ -198,7 +198,7 @@ class VariantExecutionTests(unittest.TestCase):
         self.assertIsNotNone(result.build_result)
         self.assertEqual(
             (
-                plan.build_variant_directory / "order.txt"
+                plan.variant_build_directory / "order.txt"
             ).read_text(encoding="utf-8"),
             "configure\nbuild\n",
         )
@@ -226,7 +226,7 @@ class VariantExecutionTests(unittest.TestCase):
         self.assertIsNone(result.build_result)
         self.assertFalse(
             (
-                plan.build_variant_directory
+                plan.variant_build_directory
                 / "build-ran.txt"
             ).exists()
         )
@@ -257,7 +257,7 @@ class VariantExecutionTests(unittest.TestCase):
         self.assertEqual(len(results), 1)
         self.assertFalse(results[0].succeeded)
         self.assertFalse(
-            second.build_variant_directory.exists()
+            second.variant_build_directory.exists()
         )
 
     def test_execute_variants_can_continue_after_failure(
@@ -362,7 +362,7 @@ class VariantExecutionTests(unittest.TestCase):
         self.assertEqual(
             Path(install_command[3]),
             (
-                plan.build_variant_directory
+                plan.variant_build_directory
                 / "src/libs/cgalpy/dist/"
                 "distribution-artifacts.json"
             ).resolve(),
@@ -672,14 +672,14 @@ class VariantExecutionTests(unittest.TestCase):
             build_code="pass",
         )
 
-        second.build_variant_directory.write_text(
+        second.variant_build_directory.write_text(
             "not a directory\n",
             encoding="utf-8",
         )
 
         with self.assertRaisesRegex(
             ExecutionError,
-            "build variant directory path exists",
+            "variant build directory path exists",
         ):
             execute_variants(
                 (first, second),
@@ -687,8 +687,411 @@ class VariantExecutionTests(unittest.TestCase):
             )
 
         self.assertFalse(
-            first.build_variant_directory.exists()
+            first.variant_build_directory.exists()
         )
+
+    def test_clean_removes_cmake_cache_before_configure(
+        self,
+    ) -> None:
+        plan = self.plan(
+            "clean",
+            configure_code=(
+                "from pathlib import Path; "
+                "root = Path.cwd(); "
+                "assert not (root / 'CMakeCache.txt').exists(); "
+                "assert (root / 'sentinel.txt').read_text("
+                "encoding='utf-8') == 'preserve'"
+            ),
+            build_code="pass",
+        )
+
+        plan.variant_build_directory.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+        cache_path = (
+            plan.variant_build_directory
+            / "CMakeCache.txt"
+        )
+        sentinel_path = (
+            plan.variant_build_directory
+            / "sentinel.txt"
+        )
+
+        cache_path.write_text(
+            "stale",
+            encoding="utf-8",
+        )
+        sentinel_path.write_text(
+            "preserve",
+            encoding="utf-8",
+        )
+
+        result = execute_variant(
+            plan,
+            clean=True,
+        )
+
+        self.assertTrue(result.succeeded)
+        self.assertFalse(cache_path.exists())
+        self.assertEqual(
+            sentinel_path.read_text(encoding="utf-8"),
+            "preserve",
+        )
+
+    def test_nonclean_preserves_cmake_cache(
+        self,
+    ) -> None:
+        plan = self.plan(
+            "nonclean",
+            configure_code=(
+                "from pathlib import Path; "
+                "root = Path.cwd(); "
+                "assert (root / 'CMakeCache.txt').read_text("
+                "encoding='utf-8') == 'retain'"
+            ),
+            build_code="pass",
+        )
+
+        plan.variant_build_directory.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+        cache_path = (
+            plan.variant_build_directory
+            / "CMakeCache.txt"
+        )
+        cache_path.write_text(
+            "retain",
+            encoding="utf-8",
+        )
+
+        result = execute_variant(
+            plan,
+            clean=False,
+        )
+
+        self.assertTrue(result.succeeded)
+        self.assertEqual(
+            cache_path.read_text(encoding="utf-8"),
+            "retain",
+        )
+
+    def test_execute_variant_rejects_nonboolean_clean(
+        self,
+    ) -> None:
+        plan = self.plan(
+            "invalid-clean",
+            configure_code="pass",
+            build_code="pass",
+        )
+
+        with self.assertRaisesRegex(
+            ExecutionError,
+            "clean must be a boolean",
+        ):
+            execute_variant(
+                plan,
+                clean="yes",
+            )
+
+    def test_execute_variants_rejects_nonboolean_clean(
+        self,
+    ) -> None:
+        plan = self.plan(
+            "invalid-batch-clean",
+            configure_code="pass",
+            build_code="pass",
+        )
+
+        with self.assertRaisesRegex(
+            ExecutionError,
+            "clean must be a boolean",
+        ):
+            execute_variants(
+                (plan,),
+                continue_on_error=False,
+                clean="yes",
+            )
+
+    def test_quiet_unix_makefiles_adds_native_make_flags(
+        self,
+    ) -> None:
+        plan = self.plan(
+            "quiet-unix-makefiles",
+            configure_code="pass",
+            build_code="pass",
+        )
+        executed_commands = []
+
+        def execute(
+            command,
+            **kwargs,
+        ):
+            command_tuple = tuple(command)
+            executed_commands.append(command_tuple)
+
+            if len(executed_commands) == 1:
+                (
+                    plan.variant_build_directory
+                    / "CMakeCache.txt"
+                ).write_text(
+                    "CMAKE_GENERATOR:INTERNAL=Unix Makefiles\n",
+                    encoding="utf-8",
+                )
+
+            return CommandExecutionResult(
+                command=command_tuple,
+                return_code=0,
+                log_path=None,
+            )
+
+        with mock.patch(
+            "build_variants.execution.execute_command",
+            side_effect=execute,
+        ):
+            result = execute_variant(
+                plan,
+                quiet=True,
+            )
+
+        self.assertTrue(result.succeeded)
+        self.assertEqual(
+            executed_commands[1],
+            (
+                *plan.build_command,
+                "--",
+                "--quiet",
+                "--no-print-directory",
+            ),
+        )
+
+    def test_quiet_non_make_generator_preserves_build_command(
+        self,
+    ) -> None:
+        plan = self.plan(
+            "quiet-ninja",
+            configure_code="pass",
+            build_code="pass",
+        )
+        executed_commands = []
+
+        def execute(
+            command,
+            **kwargs,
+        ):
+            command_tuple = tuple(command)
+            executed_commands.append(command_tuple)
+
+            if len(executed_commands) == 1:
+                (
+                    plan.variant_build_directory
+                    / "CMakeCache.txt"
+                ).write_text(
+                    "CMAKE_GENERATOR:INTERNAL=Ninja\n",
+                    encoding="utf-8",
+                )
+
+            return CommandExecutionResult(
+                command=command_tuple,
+                return_code=0,
+                log_path=None,
+            )
+
+        with mock.patch(
+            "build_variants.execution.execute_command",
+            side_effect=execute,
+        ):
+            result = execute_variant(
+                plan,
+                quiet=True,
+            )
+
+        self.assertTrue(result.succeeded)
+        self.assertEqual(
+            executed_commands[1],
+            plan.build_command,
+        )
+
+    def test_nonquiet_unix_makefiles_preserves_build_command(
+        self,
+    ) -> None:
+        plan = self.plan(
+            "nonquiet-unix-makefiles",
+            configure_code="pass",
+            build_code="pass",
+        )
+        executed_commands = []
+
+        def execute(
+            command,
+            **kwargs,
+        ):
+            command_tuple = tuple(command)
+            executed_commands.append(command_tuple)
+
+            if len(executed_commands) == 1:
+                (
+                    plan.variant_build_directory
+                    / "CMakeCache.txt"
+                ).write_text(
+                    "CMAKE_GENERATOR:INTERNAL=Unix Makefiles\n",
+                    encoding="utf-8",
+                )
+
+            return CommandExecutionResult(
+                command=command_tuple,
+                return_code=0,
+                log_path=None,
+            )
+
+        with mock.patch(
+            "build_variants.execution.execute_command",
+            side_effect=execute,
+        ):
+            result = execute_variant(
+                plan,
+                quiet=False,
+            )
+
+        self.assertTrue(result.succeeded)
+        self.assertEqual(
+            executed_commands[1],
+            plan.build_command,
+        )
+
+    def test_execute_variant_rejects_nonboolean_quiet(
+        self,
+    ) -> None:
+        plan = self.plan(
+            "invalid-variant-quiet",
+            configure_code="pass",
+            build_code="pass",
+        )
+
+        with self.assertRaisesRegex(
+            ExecutionError,
+            "quiet must be a boolean",
+        ):
+            execute_variant(
+                plan,
+                quiet="yes",
+            )
+
+    def test_quiet_execution_hides_output_and_preserves_logs(
+        self,
+    ) -> None:
+        plan = self.plan(
+            "quiet",
+            configure_code=(
+                "print('CONFIGURE_SUBPROCESS_OUTPUT')"
+            ),
+            build_code=(
+                "print('BUILD_SUBPROCESS_OUTPUT')"
+            ),
+        )
+        output = io.StringIO()
+        log_directory = self.root / "quiet-logs"
+
+        results = execute_variants(
+            (plan,),
+            continue_on_error=False,
+            log_directory=log_directory,
+            output_stream=output,
+            quiet=True,
+        )
+
+        terminal_output = output.getvalue()
+
+        self.assertEqual(len(results), 1)
+        self.assertTrue(results[0].succeeded)
+        self.assertIn(
+            "variant: quiet:",
+            terminal_output,
+        )
+        self.assertIn(
+            str(plan.variant_build_directory),
+            terminal_output,
+        )
+        self.assertNotIn(
+            "CONFIGURE_SUBPROCESS_OUTPUT",
+            terminal_output,
+        )
+        self.assertNotIn(
+            "BUILD_SUBPROCESS_OUTPUT",
+            terminal_output,
+        )
+        self.assertEqual(
+            (
+                log_directory
+                / "quiet.configure.log"
+            ).read_text(encoding="utf-8"),
+            "CONFIGURE_SUBPROCESS_OUTPUT\n",
+        )
+        self.assertEqual(
+            (
+                log_directory
+                / "quiet.build.log"
+            ).read_text(encoding="utf-8"),
+            "BUILD_SUBPROCESS_OUTPUT\n",
+        )
+
+    def test_nonquiet_execution_streams_subprocess_output(
+        self,
+    ) -> None:
+        plan = self.plan(
+            "nonquiet",
+            configure_code=(
+                "print('CONFIGURE_SUBPROCESS_OUTPUT')"
+            ),
+            build_code=(
+                "print('BUILD_SUBPROCESS_OUTPUT')"
+            ),
+        )
+        output = io.StringIO()
+
+        results = execute_variants(
+            (plan,),
+            continue_on_error=False,
+            output_stream=output,
+            quiet=False,
+        )
+
+        terminal_output = output.getvalue()
+
+        self.assertEqual(len(results), 1)
+        self.assertTrue(results[0].succeeded)
+        self.assertIn(
+            "CONFIGURE_SUBPROCESS_OUTPUT",
+            terminal_output,
+        )
+        self.assertIn(
+            "BUILD_SUBPROCESS_OUTPUT",
+            terminal_output,
+        )
+        self.assertNotIn(
+            "variant: nonquiet:",
+            terminal_output,
+        )
+
+    def test_execute_variants_rejects_nonboolean_quiet(
+        self,
+    ) -> None:
+        plan = self.plan(
+            "invalid-quiet",
+            configure_code="pass",
+            build_code="pass",
+        )
+
+        with self.assertRaisesRegex(
+            ExecutionError,
+            "quiet must be a boolean",
+        ):
+            execute_variants(
+                (plan,),
+                continue_on_error=False,
+                quiet="yes",
+            )
 
 
 if __name__ == "__main__":

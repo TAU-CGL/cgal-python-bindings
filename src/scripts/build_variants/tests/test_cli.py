@@ -54,6 +54,8 @@ class RunnerCliTests(unittest.TestCase):
         self.assertEqual(parsed.jobs, 4)
         self.assertFalse(parsed.dry_run)
         self.assertFalse(parsed.continue_on_error)
+        self.assertFalse(parsed.quiet)
+        self.assertFalse(parsed.clean)
 
     def test_all_approved_options_parse(self) -> None:
         cgal_dir = self.root / "cgal"
@@ -93,6 +95,8 @@ class RunnerCliTests(unittest.TestCase):
                 "7",
                 "--dry-run",
                 "--continue-on-error",
+                "--quiet",
+                "--clean",
                 "--log-directory",
                 str(log_directory),
             ]
@@ -111,6 +115,8 @@ class RunnerCliTests(unittest.TestCase):
         self.assertEqual(parsed.jobs, 7)
         self.assertTrue(parsed.dry_run)
         self.assertTrue(parsed.continue_on_error)
+        self.assertTrue(parsed.quiet)
+        self.assertTrue(parsed.clean)
         self.assertTrue(parsed.install_wheel)
         self.assertEqual(
             parsed.pip_install_options,

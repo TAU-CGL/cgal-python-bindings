@@ -46,7 +46,7 @@ from .output import (
 from .planning import (
     PlanningError,
     VariantPlan,
-    build_variant_directory_name,
+    variant_build_directory_name,
     compiler_tag,
     create_variant_plan,
     create_variant_plans,
@@ -72,7 +72,7 @@ __all__ = [
     "VariantPlan",
     "build_build_command",
     "build_configure_command",
-    "build_variant_directory_name",
+    "variant_build_directory_name",
     "compiler_tag",
     "create_parser",
     "create_variant_plan",

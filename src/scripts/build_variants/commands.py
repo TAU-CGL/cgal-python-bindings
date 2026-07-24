@@ -25,7 +25,7 @@ class ConfigureOptions:
     """Options needed to construct one CMake configure command."""
 
     source_directory: Path
-    build_variant_directory: Path
+    variant_build_directory: Path
     cmake_executable: str = "cmake"
     build_type: str = "Release"
     fixed_library_name: bool = False
@@ -33,6 +33,7 @@ class ConfigureOptions:
     cgal_dir: Optional[Path] = None
     python_executable: Optional[Path] = None
     nanobind_dir: Optional[Path] = None
+    quiet: bool = False
 
 
 def _existing_directory(path: Path, label: str) -> Path:
@@ -59,21 +60,21 @@ def _existing_file(path: Path, label: str) -> Path:
 
 def _validate_detached_build(
     source_directory: Path,
-    build_variant_directory: Path,
+    variant_build_directory: Path,
 ) -> None:
     try:
-        build_variant_directory.relative_to(source_directory)
+        variant_build_directory.relative_to(source_directory)
     except ValueError:
         return
 
     raise CommandError(
-        "build variant directory must be detached from the source directory: "
-        f"{build_variant_directory}"
+        "variant build directory must be detached from the source directory: "
+        f"{variant_build_directory}"
     )
 
 
 def build_build_command(
-    build_variant_directory: Path,
+    variant_build_directory: Path,
     *,
     jobs: int,
     build_type: str,
@@ -110,8 +111,8 @@ def build_build_command(
             "linux, macos, windows"
         )
 
-    resolved_build_variant_directory = (
-        Path(build_variant_directory)
+    resolved_variant_build_directory = (
+        Path(variant_build_directory)
         .expanduser()
         .resolve()
     )
@@ -119,7 +120,7 @@ def build_build_command(
     command = [
         cmake_executable.strip(),
         "--build",
-        str(resolved_build_variant_directory),
+        str(resolved_variant_build_directory),
         "--target",
         "BUILD",
     ]
@@ -164,6 +165,11 @@ def build_configure_command(
             "fixed_library_name must be a boolean"
         )
 
+    if type(options.quiet) is not bool:
+        raise CommandError(
+            "quiet must be a boolean"
+        )
+
     if (
         options.compiler is not None
         and (
@@ -180,15 +186,15 @@ def build_configure_command(
         "source directory",
     )
 
-    build_variant_directory = (
-        Path(options.build_variant_directory)
+    variant_build_directory = (
+        Path(options.variant_build_directory)
         .expanduser()
         .resolve()
     )
 
     _validate_detached_build(
         source_directory,
-        build_variant_directory,
+        variant_build_directory,
     )
 
     command = [
@@ -218,6 +224,11 @@ def build_configure_command(
         "-DCMAKE_BUILD_TYPE:STRING="
         f"{options.build_type}"
     )
+
+    if options.quiet:
+        command.append(
+            "-DCMAKE_MESSAGE_LOG_LEVEL:STRING=WARNING"
+        )
 
     fixed_value = (
         "ON"
@@ -269,7 +280,7 @@ def build_configure_command(
             "-S",
             str(source_directory),
             "-B",
-            str(build_variant_directory),
+            str(variant_build_directory),
         ]
     )
 

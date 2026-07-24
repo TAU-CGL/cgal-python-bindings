@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for runner platform and build variant directory planning."""
+"""Tests for runner platform and variant build directory planning."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ from build_variants.catalog import load_catalog
 from build_variants.cli import RunnerArguments
 from build_variants.planning import (
     PlanningError,
-    build_variant_directory_name,
+    variant_build_directory_name,
     compiler_tag,
     create_variant_plan,
     create_variant_plans,
@@ -173,9 +173,9 @@ class VariantPlanningTests(unittest.TestCase):
             homebrew_compiler.startswith("clangxx_")
         )
 
-    def test_build_variant_directory_name_encodes_policy(self) -> None:
+    def test_variant_build_directory_name_encodes_policy(self) -> None:
         self.assertEqual(
-            build_variant_directory_name(
+            variant_build_directory_name(
                 manifest_name="epec",
                 operating_system="macos",
                 compiler="/usr/bin/c++",
@@ -190,7 +190,7 @@ class VariantPlanningTests(unittest.TestCase):
         )
 
         self.assertEqual(
-            build_variant_directory_name(
+            variant_build_directory_name(
                 manifest_name="epec",
                 operating_system="windows",
                 compiler="msvc",
@@ -208,7 +208,7 @@ class VariantPlanningTests(unittest.TestCase):
 
         self.assertEqual(plan.compiler, "clang")
         self.assertEqual(
-            plan.build_variant_directory,
+            plan.variant_build_directory,
             (
                 self.build_directory
                 / "alpha_macos_clang_computed_release"
@@ -225,7 +225,7 @@ class VariantPlanningTests(unittest.TestCase):
             (
                 "cmake",
                 "--build",
-                str(plan.build_variant_directory),
+                str(plan.variant_build_directory),
                 "--target",
                 "BUILD",
                 "--parallel",
@@ -243,7 +243,7 @@ class VariantPlanningTests(unittest.TestCase):
 
         self.assertEqual(plan.compiler, "gcc")
         self.assertEqual(
-            plan.build_variant_directory,
+            plan.variant_build_directory,
             (
                 self.build_directory
                 / "alpha_linux_gcc_computed_release"
@@ -290,7 +290,7 @@ class VariantPlanningTests(unittest.TestCase):
 
         self.assertEqual(plan.compiler, "msvc")
         self.assertEqual(
-            plan.build_variant_directory.name,
+            plan.variant_build_directory.name,
             "alpha_windows_msvc_computed_release",
         )
 
@@ -308,7 +308,7 @@ class VariantPlanningTests(unittest.TestCase):
             (
                 "cmake",
                 "--build",
-                str(plan.build_variant_directory),
+                str(plan.variant_build_directory),
                 "--target",
                 "BUILD",
                 "--config",
@@ -353,7 +353,7 @@ class VariantPlanningTests(unittest.TestCase):
         )
 
         self.assertEqual(
-            tuple(plan.build_variant_directory.name for plan in plans),
+            tuple(plan.variant_build_directory.name for plan in plans),
             (
                 (
                     "beta_macos_"

@@ -273,19 +273,19 @@ def _preflight_plan(
             "every plan must be a validated VariantPlan"
         )
 
-    build_variant_directory = (
-        Path(plan.build_variant_directory)
+    variant_build_directory = (
+        Path(plan.variant_build_directory)
         .expanduser()
         .resolve()
     )
 
     if (
-        build_variant_directory.exists()
-        and not build_variant_directory.is_dir()
+        variant_build_directory.exists()
+        and not variant_build_directory.is_dir()
     ):
         raise ExecutionError(
-            "build variant directory path exists but is not a directory: "
-            f"{build_variant_directory}"
+            "variant build directory path exists but is not a directory: "
+            f"{variant_build_directory}"
         )
 
     stages = ["configure", "build"]
@@ -329,11 +329,11 @@ def _preflight_plan(
             )
 
 
-def _create_build_variant_directory(
-    build_variant_directory: Path,
+def _create_variant_build_directory(
+    variant_build_directory: Path,
 ) -> Path:
     resolved = (
-        Path(build_variant_directory)
+        Path(variant_build_directory)
         .expanduser()
         .resolve()
     )
@@ -345,7 +345,7 @@ def _create_build_variant_directory(
         )
     except OSError as exc:
         raise ExecutionError(
-            f"could not create build variant directory "
+            f"could not create variant build directory "
             f"{resolved}: {exc}"
         ) from exc
 
@@ -357,13 +357,94 @@ def _create_build_variant_directory(
     return resolved
 
 
+def _remove_cmake_cache(
+    variant_build_directory: Path,
+) -> None:
+    cache_path = (
+        Path(variant_build_directory)
+        .expanduser()
+        .resolve()
+        / "CMakeCache.txt"
+    )
+
+    if not cache_path.exists():
+        return
+
+    if not cache_path.is_file():
+        raise ExecutionError(
+            "CMake cache path exists but is not a file: "
+            f"{cache_path}"
+        )
+
+    try:
+        cache_path.unlink()
+    except OSError as exc:
+        raise ExecutionError(
+            f"could not remove CMake cache {cache_path}: {exc}"
+        ) from exc
+
+
+def _native_quiet_build_command(
+    command: Sequence[str],
+    variant_build_directory: Path,
+    *,
+    quiet: bool,
+) -> Tuple[str, ...]:
+    """Add native Make quiet flags for a Unix Makefiles build."""
+
+    command_tuple = _validated_command(command)
+
+    if not quiet:
+        return command_tuple
+
+    cache_path = (
+        Path(variant_build_directory)
+        .expanduser()
+        .resolve()
+        / "CMakeCache.txt"
+    )
+
+    if not cache_path.is_file():
+        return command_tuple
+
+    try:
+        cache_lines = cache_path.read_text(
+            encoding="utf-8",
+            errors="replace",
+        ).splitlines()
+    except OSError as exc:
+        raise ExecutionError(
+            f"could not read CMake cache {cache_path}: {exc}"
+        ) from exc
+
+    generator = None
+
+    for line in cache_lines:
+        if (
+            line.startswith("CMAKE_GENERATOR:")
+            and "=" in line
+        ):
+            generator = line.split("=", 1)[1]
+            break
+
+    if generator != "Unix Makefiles":
+        return command_tuple
+
+    return (
+        *command_tuple,
+        "--",
+        "--quiet",
+        "--no-print-directory",
+    )
+
+
 def _install_command(
     plan: VariantPlan,
 ) -> Tuple[str, ...]:
     """Return the runtime wheel-installation helper command."""
 
     artifact_manifest = (
-        plan.build_variant_directory
+        plan.variant_build_directory
         / "src/libs/cgalpy/dist/distribution-artifacts.json"
     ).resolve()
 
@@ -386,8 +467,20 @@ def execute_variant(
     *,
     log_directory: Optional[Path] = None,
     output_stream: Optional[TextIO] = None,
+    clean: bool = False,
+    quiet: bool = False,
 ) -> VariantExecutionResult:
     """Configure, build, and optionally install one variant."""
+
+    if type(clean) is not bool:
+        raise ExecutionError(
+            "clean must be a boolean"
+        )
+
+    if type(quiet) is not bool:
+        raise ExecutionError(
+            "quiet must be a boolean"
+        )
 
     resolved_log_directory = _prepare_log_directory(
         log_directory
@@ -398,13 +491,18 @@ def execute_variant(
         resolved_log_directory,
     )
 
-    build_variant_directory = _create_build_variant_directory(
-        plan.build_variant_directory
+    variant_build_directory = _create_variant_build_directory(
+        plan.variant_build_directory
     )
+
+    if clean:
+        _remove_cmake_cache(
+            variant_build_directory
+        )
 
     configure_result = execute_command(
         plan.configure_command,
-        working_directory=build_variant_directory,
+        working_directory=variant_build_directory,
         output_stream=output_stream,
         log_path=_stage_log_path(
             resolved_log_directory,
@@ -421,9 +519,15 @@ def execute_variant(
             install_result=None,
         )
 
-    build_result = execute_command(
+    build_command = _native_quiet_build_command(
         plan.build_command,
-        working_directory=build_variant_directory,
+        variant_build_directory,
+        quiet=quiet,
+    )
+
+    build_result = execute_command(
+        build_command,
+        working_directory=variant_build_directory,
         output_stream=output_stream,
         log_path=_stage_log_path(
             resolved_log_directory,
@@ -445,7 +549,7 @@ def execute_variant(
 
     install_result = execute_command(
         _install_command(plan),
-        working_directory=build_variant_directory,
+        working_directory=variant_build_directory,
         output_stream=output_stream,
         log_path=_stage_log_path(
             resolved_log_directory,
@@ -468,12 +572,24 @@ def execute_variants(
     continue_on_error: bool,
     log_directory: Optional[Path] = None,
     output_stream: Optional[TextIO] = None,
+    clean: bool = False,
+    quiet: bool = False,
 ) -> Tuple[VariantExecutionResult, ...]:
     """Execute plans in order with optional continuation after failure."""
 
     if type(continue_on_error) is not bool:
         raise ExecutionError(
             "continue_on_error must be a boolean"
+        )
+
+    if type(clean) is not bool:
+        raise ExecutionError(
+            "clean must be a boolean"
+        )
+
+    if type(quiet) is not bool:
+        raise ExecutionError(
+            "quiet must be a boolean"
         )
 
     plan_tuple = tuple(plans)
@@ -490,10 +606,25 @@ def execute_variants(
     results = []
 
     for plan in plan_tuple:
+        if quiet and output_stream is not None:
+            print(
+                "variant: "
+                f"{plan.manifest.name}: "
+                f"{plan.variant_build_directory}",
+                file=output_stream,
+                flush=True,
+            )
+
         result = execute_variant(
             plan,
             log_directory=resolved_log_directory,
-            output_stream=output_stream,
+            output_stream=(
+                None
+                if quiet
+                else output_stream
+            ),
+            clean=clean,
+            quiet=quiet,
         )
         results.append(result)
 

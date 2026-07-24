@@ -199,7 +199,7 @@ class RunnerMainTests(unittest.TestCase):
         )
         self.assertEqual(stderr, "")
 
-    def test_dry_run_does_not_create_build_variant_directory(
+    def test_dry_run_does_not_create_variant_build_directory(
         self,
     ) -> None:
         before = tuple(self.build_directory.iterdir())

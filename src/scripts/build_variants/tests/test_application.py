@@ -103,6 +103,8 @@ class RunnerApplicationTests(unittest.TestCase):
         generate_run=False,
         abort_after_run_generation=False,
         continue_on_error=False,
+        clean=False,
+        quiet=False,
         install_wheel=False,
         pip_install_options=(),
         log_directory=None,
@@ -136,6 +138,8 @@ class RunnerApplicationTests(unittest.TestCase):
             dry_run=dry_run,
             continue_on_error=continue_on_error,
             log_directory=log_directory,
+            clean=clean,
+            quiet=quiet,
         )
 
     def run_case(self, arguments):
@@ -539,6 +543,68 @@ class RunnerApplicationTests(unittest.TestCase):
         self.assertIsNone(
             executor.call_args.kwargs[
                 "log_directory"
+            ]
+        )
+        self.assertFalse(
+            executor.call_args.kwargs[
+                "clean"
+            ]
+        )
+        self.assertFalse(
+            executor.call_args.kwargs[
+                "quiet"
+            ]
+        )
+
+    def test_live_execution_forwards_clean(
+        self,
+    ) -> None:
+        with mock.patch(
+            "build_variants.application.execute_variants",
+            side_effect=self.successful_execution,
+        ) as executor:
+            exit_code, stdout, stderr = self.run_case(
+                self.arguments(
+                    manifests=("alpha",),
+                    clean=True,
+                )
+            )
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(
+            stdout,
+            "variant-result: alpha: success\n",
+        )
+        self.assertEqual(stderr, "")
+        self.assertTrue(
+            executor.call_args.kwargs[
+                "clean"
+            ]
+        )
+
+    def test_live_execution_forwards_quiet(
+        self,
+    ) -> None:
+        with mock.patch(
+            "build_variants.application.execute_variants",
+            side_effect=self.successful_execution,
+        ) as executor:
+            exit_code, stdout, stderr = self.run_case(
+                self.arguments(
+                    manifests=("alpha",),
+                    quiet=True,
+                )
+            )
+
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(
+            stdout,
+            "variant-result: alpha: success\n",
+        )
+        self.assertEqual(stderr, "")
+        self.assertTrue(
+            executor.call_args.kwargs[
+                "quiet"
             ]
         )
 

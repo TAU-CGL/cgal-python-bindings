@@ -38,7 +38,7 @@ class RunnerOutputTests(unittest.TestCase):
         name: str,
         *,
         operating_system: str = "macos",
-        build_variant_directory: Path = Path("/tmp/build path"),
+        variant_build_directory: Path = Path("/tmp/build path"),
         install_wheel: bool = False,
         pip_install_options=(),
     ) -> VariantPlan:
@@ -52,7 +52,7 @@ class RunnerOutputTests(unittest.TestCase):
             manifest=manifest,
             operating_system=operating_system,
             compiler="/usr/bin/c++",
-            build_variant_directory=build_variant_directory,
+            variant_build_directory=variant_build_directory,
             python_executable=Path("/usr/bin/python3"),
             install_wheel=install_wheel,
             pip_install_options=tuple(pip_install_options),
@@ -63,12 +63,12 @@ class RunnerOutputTests(unittest.TestCase):
                 "-S",
                 "/source path",
                 "-B",
-                str(build_variant_directory),
+                str(variant_build_directory),
             ),
             build_command=(
                 "cmake",
                 "--build",
-                str(build_variant_directory),
+                str(variant_build_directory),
                 "--target",
                 "BUILD",
                 "--parallel",
@@ -192,7 +192,7 @@ class RunnerOutputTests(unittest.TestCase):
         )
         self.assertEqual(
             lines[1],
-            "build-variant-directory: /tmp/build path",
+            "variant-build-directory: /tmp/build path",
         )
         self.assertEqual(
             lines[2],

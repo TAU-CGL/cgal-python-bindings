@@ -93,7 +93,7 @@ class ConfigureCommandTests(unittest.TestCase):
             manifest,
             ConfigureOptions(
                 source_directory=self.source_directory,
-                build_variant_directory=self.build_directory / "example",
+                variant_build_directory=self.build_directory / "example",
             ),
         )
 
@@ -129,7 +129,7 @@ class ConfigureCommandTests(unittest.TestCase):
             manifest,
             ConfigureOptions(
                 source_directory=self.source_directory,
-                build_variant_directory=self.build_directory / "ordered",
+                variant_build_directory=self.build_directory / "ordered",
             ),
         )
 
@@ -179,7 +179,7 @@ class ConfigureCommandTests(unittest.TestCase):
             manifest,
             ConfigureOptions(
                 source_directory=self.source_directory,
-                build_variant_directory=self.build_directory / "debug",
+                variant_build_directory=self.build_directory / "debug",
                 cmake_executable="/path with spaces/cmake",
                 build_type="Debug",
                 fixed_library_name=True,
@@ -221,10 +221,10 @@ class ConfigureCommandTests(unittest.TestCase):
         )
 
     def test_macos_build_command(self) -> None:
-        build_variant_directory = self.build_directory / "macos"
+        variant_build_directory = self.build_directory / "macos"
 
         command = build_build_command(
-            build_variant_directory,
+            variant_build_directory,
             jobs=4,
             build_type="Release",
             operating_system="macos",
@@ -235,7 +235,7 @@ class ConfigureCommandTests(unittest.TestCase):
             (
                 "cmake",
                 "--build",
-                str(build_variant_directory.resolve()),
+                str(variant_build_directory.resolve()),
                 "--target",
                 "BUILD",
                 "--parallel",
@@ -244,10 +244,10 @@ class ConfigureCommandTests(unittest.TestCase):
         )
 
     def test_linux_build_command(self) -> None:
-        build_variant_directory = self.build_directory / "linux"
+        variant_build_directory = self.build_directory / "linux"
 
         command = build_build_command(
-            build_variant_directory,
+            variant_build_directory,
             jobs=7,
             build_type="Debug",
             operating_system="linux",
@@ -259,7 +259,7 @@ class ConfigureCommandTests(unittest.TestCase):
             (
                 "/opt/cmake/bin/cmake",
                 "--build",
-                str(build_variant_directory.resolve()),
+                str(variant_build_directory.resolve()),
                 "--target",
                 "BUILD",
                 "--parallel",
@@ -270,10 +270,10 @@ class ConfigureCommandTests(unittest.TestCase):
     def test_windows_build_command_includes_configuration(
         self,
     ) -> None:
-        build_variant_directory = self.build_directory / "windows"
+        variant_build_directory = self.build_directory / "windows"
 
         command = build_build_command(
-            build_variant_directory,
+            variant_build_directory,
             jobs=2,
             build_type="Debug",
             operating_system="windows",
@@ -284,7 +284,7 @@ class ConfigureCommandTests(unittest.TestCase):
             (
                 "cmake",
                 "--build",
-                str(build_variant_directory.resolve()),
+                str(variant_build_directory.resolve()),
                 "--target",
                 "BUILD",
                 "--config",
@@ -334,7 +334,7 @@ class ConfigureCommandTests(unittest.TestCase):
                 manifest,
                 ConfigureOptions(
                     source_directory=self.source_directory,
-                    build_variant_directory=self.build_directory / "invalid",
+                    variant_build_directory=self.build_directory / "invalid",
                     build_type="RelWithDebInfo",
                 ),
             )
@@ -350,11 +350,56 @@ class ConfigureCommandTests(unittest.TestCase):
                 manifest,
                 ConfigureOptions(
                     source_directory=self.source_directory,
-                    build_variant_directory=(
+                    variant_build_directory=(
                         self.source_directory / "build"
                     ),
                 ),
             )
+
+    def test_quiet_configure_command_sets_warning_log_level(
+        self,
+    ) -> None:
+        manifest = self.write_manifest()
+
+        command = build_configure_command(
+            manifest,
+            ConfigureOptions(
+                source_directory=self.source_directory,
+                variant_build_directory=(
+                    self.build_directory / "quiet"
+                ),
+                quiet=True,
+            ),
+        )
+
+        quiet_argument = (
+            "-DCMAKE_MESSAGE_LOG_LEVEL:STRING=WARNING"
+        )
+
+        self.assertEqual(
+            command.count(quiet_argument),
+            1,
+        )
+
+    def test_nonquiet_configure_command_omits_warning_log_level(
+        self,
+    ) -> None:
+        manifest = self.write_manifest()
+
+        command = build_configure_command(
+            manifest,
+            ConfigureOptions(
+                source_directory=self.source_directory,
+                variant_build_directory=(
+                    self.build_directory / "nonquiet"
+                ),
+            ),
+        )
+
+        self.assertNotIn(
+            "-DCMAKE_MESSAGE_LOG_LEVEL:STRING=WARNING",
+            command,
+        )
 
 
 if __name__ == "__main__":

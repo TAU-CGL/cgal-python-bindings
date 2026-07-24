@@ -300,6 +300,8 @@ def run_application(
             ),
             log_directory=arguments.log_directory,
             output_stream=stdout,
+            clean=arguments.clean,
+            quiet=arguments.quiet,
         )
 
         _write_lines(

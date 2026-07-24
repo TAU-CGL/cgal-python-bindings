@@ -87,7 +87,7 @@ def render_variant_plan(
 
     return (
         f"manifest: {plan.manifest.name}",
-        f"build-variant-directory: {plan.build_variant_directory}",
+        f"variant-build-directory: {plan.variant_build_directory}",
         (
             "configure-command: "
             f"{format_command(plan.configure_command, plan.operating_system)}"

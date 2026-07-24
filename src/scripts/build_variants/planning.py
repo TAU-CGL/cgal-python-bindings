@@ -42,7 +42,7 @@ class VariantPlan:
     manifest: BuildVariantManifest
     operating_system: str
     compiler: str
-    build_variant_directory: Path
+    variant_build_directory: Path
     python_executable: Path
     install_wheel: bool
     pip_install_options: Tuple[str, ...]
@@ -113,14 +113,14 @@ def compiler_tag(compiler: str) -> str:
     return tag
 
 
-def build_variant_directory_name(
+def variant_build_directory_name(
     manifest_name: str,
     operating_system: str,
     compiler: str,
     fixed_library_name: bool,
     build_type: str,
 ) -> str:
-    """Create a collision-resistant detached build variant directory name."""
+    """Create a collision-resistant detached variant build directory name."""
 
     naming_mode = (
         "fixed"
@@ -170,9 +170,9 @@ def create_variant_plan(
         arguments.compiler,
     )
 
-    build_variant_directory = (
+    variant_build_directory = (
         arguments.build_directory
-        / build_variant_directory_name(
+        / variant_build_directory_name(
             manifest_name=manifest.name,
             operating_system=arguments.operating_system,
             compiler=compiler,
@@ -185,7 +185,7 @@ def create_variant_plan(
         manifest,
         ConfigureOptions(
             source_directory=arguments.source_directory,
-            build_variant_directory=build_variant_directory,
+            variant_build_directory=variant_build_directory,
             cmake_executable="cmake",
             build_type=arguments.build_type,
             fixed_library_name=arguments.fixed_library_name,
@@ -196,11 +196,12 @@ def create_variant_plan(
             cgal_dir=arguments.cgal_dir,
             python_executable=arguments.python_executable,
             nanobind_dir=arguments.nanobind_dir,
+            quiet=arguments.quiet,
         ),
     )
 
     build_command = build_build_command(
-        build_variant_directory,
+        variant_build_directory,
         jobs=arguments.jobs,
         build_type=arguments.build_type,
         operating_system=arguments.operating_system,
@@ -211,7 +212,7 @@ def create_variant_plan(
         manifest=manifest,
         operating_system=arguments.operating_system,
         compiler=compiler,
-        build_variant_directory=build_variant_directory,
+        variant_build_directory=variant_build_directory,
         python_executable=arguments.python_executable,
         install_wheel=arguments.install_wheel,
         pip_install_options=arguments.pip_install_options,

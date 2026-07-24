@@ -33,7 +33,7 @@ flowchart TD
     A[Requested manifest names] --> B[Select exact manifests]
     B --> C[Validate manifests and CMake preloads]
     C --> D[Resolve detached parent build directory]
-    D --> E[Resolve one build variant directory per manifest]
+    D --> E[Resolve one variant build directory per manifest]
     E --> F[CMake configure<br>Runner does not select a generator]
     F --> G[CMake build<br>Uses the configured generator]
     G --> H[Wheel and distribution-artifacts.json]
@@ -54,7 +54,7 @@ providing consistent handling for:
 
 - exact manifest selection in command-line order;
 - complete catalog selection in deterministic order;
-- a detached parent build directory and isolated build variant directories;
+- a detached parent build directory and isolated variant build directories;
 - operating-system and compiler policy;
 - Release and Debug builds;
 - computed or fixed library names;
@@ -189,10 +189,10 @@ The runner uses these defaults:
 `build_directory` is the detached parent directory that contains all
 runner-managed variant builds. It is not itself a single variant build
 directory. For every requested manifest, the runner derives a separate
-`build_variant_directory` beneath it using the manifest name, operating
+`variant_build_directory` beneath it using the manifest name, operating
 system, compiler identity, library-naming policy, and build type.
 
-In-source builds are rejected. Every build variant directory must be outside the source tree.
+In-source builds are rejected. Every variant build directory must be outside the source tree.
 
 Variant build directories use this structure:
 
@@ -208,7 +208,7 @@ sm_pmp_epic_macos_clang_computed_release
 
 When an absolute compiler path is used, the compiler tag includes a short
 hash. This prevents two compiler paths with the same executable name from
-using the same build variant directory.
+using the same variant build directory.
 
 ## Listing available variants
 
@@ -293,7 +293,7 @@ after all preload files.
 ## Inspecting a build with dry-run mode
 
 Use `--dry-run` to inspect the complete resolved plan without executing
-CMake or creating a build variant directory:
+CMake or creating a variant build directory:
 
 ```bash
 src/scripts/run sm_pmp_epic \
@@ -307,14 +307,14 @@ The output includes:
 
 ```text
 manifest: sm_pmp_epic
-build-variant-directory: <resolved-build-variant-directory>
+variant-build-directory: <resolved-variant-build-directory>
 configure-command: <complete-cmake-configure-command>
 build-command: <complete-cmake-build-command>
 install-wheel: disabled
 ```
 
 Dry-run mode preserves the order of manifests supplied on the command line
-and does not create build variant directories.
+and does not create variant build directories.
 
 ## Building one variant
 
@@ -334,12 +334,13 @@ For each selected manifest, the runner:
 
 1. loads and validates the manifest;
 2. validates every referenced CMake preload file;
-3. resolves a detached build variant directory under the parent
+3. resolves a detached variant build directory under the parent
    build directory;
-4. creates the build variant directory for live execution;
+4. creates the variant build directory for live execution;
 5. runs the configure command;
 6. runs the `BUILD` target only when configure succeeds;
-7. streams command output to the terminal;
+7. streams stage command output to the terminal unless `--quiet` is
+   enabled;
 8. when requested, validates and installs the generated wheel after a
    successful build;
 9. optionally records configure, build, and install logs;
@@ -348,7 +349,7 @@ For each selected manifest, the runner:
 The generated build command has this form:
 
 ```text
-cmake --build <build-variant-directory> --target BUILD \
+cmake --build <variant-build-directory> --target BUILD \
   --parallel <jobs>
 ```
 
@@ -390,7 +391,7 @@ Installation runs only after configuration and compilation succeed. The
 runner reads:
 
 ```text
-<build-variant-directory>/src/libs/cgalpy/dist/distribution-artifacts.json
+<variant-build-directory>/src/libs/cgalpy/dist/distribution-artifacts.json
 ```
 
 It resolves the exact recorded `.whl` file from the same distribution
@@ -469,7 +470,7 @@ The default compiler values are generic toolchain identities:
 - `clang` on macOS, mapped to the `clang++` C++ driver;
 - `msvc` on Windows, selected by the active CMake generator.
 
-The generic identity is retained in the build variant directory name. The
+The generic identity is retained in the variant build directory name. The
 mapped C++ driver is passed to CMake through `CMAKE_CXX_COMPILER` where
 required.
 
@@ -484,6 +485,61 @@ Explicit compiler executable names and paths are forwarded unchanged. When
 Windows uses the default `msvc` identity, the runner does not add
 `CMAKE_CXX_COMPILER`. An explicit Windows compiler such as `clang-cl` is
 forwarded to CMake.
+
+## Reducing terminal output
+
+Use quiet mode with:
+
+```text
+--quiet
+```
+
+Quiet mode adds this definition to the configure command:
+
+```text
+-DCMAKE_MESSAGE_LOG_LEVEL:STRING=WARNING
+```
+
+Before executing each selected variant, the runner prints one concise progress
+line:
+
+```text
+variant: <manifest>: <variant-build-directory>
+```
+
+Configure, build, and installation subprocess output is not streamed to the
+terminal in quiet mode. Final `variant-result` lines are still reported.
+When `--log-directory` is also supplied, complete stage output continues to be
+written to the corresponding log files.
+
+The planned build command remains generator-neutral through
+`cmake --build`. After configuration, quiet execution reads
+`CMAKE_GENERATOR` from the variant's `CMakeCache.txt`. When the configured
+generator is `Unix Makefiles`, the runner forwards these native Make options:
+
+```text
+-- --quiet --no-print-directory
+```
+
+Other generators retain the generator-neutral build command without
+Make-specific options.
+
+## Refreshing the CMake cache
+
+Remove the existing CMake cache before configuring each selected variant with:
+
+```text
+--clean
+```
+
+This option removes only:
+
+```text
+<variant-build-directory>/CMakeCache.txt
+```
+
+The removal occurs immediately before the configure stage. The runner does not
+delete the variant build directory or any other files within it.
 
 ## Dependency paths
 
@@ -537,8 +593,10 @@ attempted when configure or build fails, or when `--install-wheel` is
 disabled. An install log is therefore created only when the install stage
 actually runs.
 
-Command output is streamed to the terminal while also being written to the
-selected stage log file.
+Without `--quiet`, command output is streamed to the terminal while also
+being written to the selected stage log file. With `--quiet`, subprocess
+output is omitted from the terminal but the selected stage log file still
+receives the complete output.
 
 ## Result states
 
@@ -640,12 +698,15 @@ The test suite covers:
 - CMake command construction;
 - detached build enforcement;
 - compiler selection;
-- collision-resistant build variant directory names;
+- collision-resistant variant build directory names;
 - list output;
 - dry-run output;
 - complete catalog selection with `--all`;
 - launcher generation;
 - command execution;
+- quiet-mode progress and subprocess-output suppression;
+- complete stage-log retention in quiet mode;
+- selective `CMakeCache.txt` cleanup with unrelated-file preservation;
 - log creation;
 - configure failures;
 - build failures;
@@ -680,7 +741,7 @@ To add a build variant:
 Keep source files and generated output separate:
 
 - runner source and manifests belong in the repository;
-- build variant directories belong under a detached parent build
+- variant build directories belong under a detached parent build
   directory such as `~/build/cgalpy`;
 - generated documentation belongs in the build tree;
 - generated `run_*` launchers must not be committed;

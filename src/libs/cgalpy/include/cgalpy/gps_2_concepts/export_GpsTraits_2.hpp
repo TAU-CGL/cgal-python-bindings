@@ -6,6 +6,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #ifndef CGALPY_EXPORT_GPSTRAITS_2_HPP
 #define CGALPY_EXPORT_GPSTRAITS_2_HPP
