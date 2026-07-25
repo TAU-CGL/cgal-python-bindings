@@ -642,5 +642,7 @@ void export_surface_mesh_simplification(py::module_& m) {
          "Construct a polyhedral envelope filter with the given distance.")
     ;
 
-  cgalpy::sms::define_edge_collapses<Tm, Ecsp, Ecrsp, Elsp, Fcsp, Fcrsp>(m);
+  if constexpr (! is_exact_ft()) {
+    cgalpy::sms::define_edge_collapses<Tm, Ecsp, Ecrsp, Elsp, Fcsp, Fcrsp>(m);
+  }
 }
