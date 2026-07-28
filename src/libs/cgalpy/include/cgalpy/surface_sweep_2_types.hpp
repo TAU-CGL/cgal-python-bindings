@@ -10,7 +10,7 @@
 #define CGALPY_SURFACE_SWEEP_2_TYPES_HPP
 
 #include "cgalpy/kernel_types.hpp"
-#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos2/arrangement_on_surface_2_types.hpp"
 
 namespace cgalpy {
 namespace ss2 {

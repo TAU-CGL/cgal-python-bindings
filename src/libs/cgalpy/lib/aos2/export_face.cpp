@@ -1,0 +1,203 @@
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
+
+#include <nanobind/nanobind.h>
+
+#include <CGAL/Envelope_3/Envelope_base.h>
+
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/aos2/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/Aos2_docstrings.hpp"
+#include "cgalpy/export_circulator.hpp"
+#include "cgalpy/make_iterator.hpp"
+
+namespace py = nanobind;
+namespace aos2_doc = cgalpy::aos2::docstrings;
+
+namespace cgalpy {
+namespace aos2 {
+
+// Bind iterators & circulators
+
+//! Wrap the function that obtains the real circulator
+auto outer_ccb_circulator(const Face& f){ return f.outer_ccb(); }
+
+//! Wrap the iterator
+py::object outer_ccb_iterator(const Face& f)
+{ return make_iterator_from_circulator(f.outer_ccb()); }
+
+//!
+py::object outer_ccbs(const Face& f) {
+  // Workaround a defficiency in CGAL/MSVC: explicitly specify the inner CCB iterators.
+  using Occi = Arrangement_on_surface_2::Outer_ccb_const_iterator;
+  Occi begin = f.outer_ccbs_begin();
+  Occi end = f.outer_ccbs_end();
+  return make_iterator(begin, end);
+}
+
+//!
+py::object inner_ccbs(const Face& f) {
+  // Workaround a defficiency in CGAL/MSVC: explicitly specify the inner CCB iterators.
+  using Icci = Arrangement_on_surface_2::Inner_ccb_const_iterator;
+  Icci begin = f.inner_ccbs_begin();
+  Icci end = f.inner_ccbs_end();
+  return make_iterator(begin, end);
+}
+
+//!
+size_t number_of_inner_ccbs(const Face& f) { return f.number_of_inner_ccbs(); }
+size_t number_of_outer_ccbs(const Face& f) { return f.number_of_outer_ccbs(); }
+
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+py::object surfaces(const Face& f)
+{ return make_iterator(f.surfaces_begin(), f.surfaces_end()); }
+#endif
+
+}
+} // namespace cgalpy
+
+//!
+void export_face(py::class_<cgalpy::aos2::Arrangement_on_surface_2>& c) {
+  using Aos = cgalpy::aos2::Arrangement_on_surface_2;
+  using Face = Aos::Face;
+  using V = Aos::Vertex;
+
+  // Face base
+  if (! add_attr<CGAL::Arr_face_base>(c, "Arr_face_base")) {
+    py::class_<CGAL::Arr_face_base> face_base_c(c, "Arr_face_base",
+                                                aos2_doc::AosDcelFace_class);
+    face_base_c.def("assign", &CGAL::Arr_face_base::assign,
+                    py::arg("other"), aos2_doc::AosDcelFace_assign)
+      .def("is_unbounded", &CGAL::Arr_face_base::is_unbounded,
+           aos2_doc::AosDcelFace_is_unbounded)
+      .def("is_fictitious", &CGAL::Arr_face_base::is_fictitious,
+           aos2_doc::Arrangement_on_surface_2_Face_is_fictitious)
+      ;
+
+    // Isolated vertices
+    using Ivci = Aos::Isolated_vertex_const_iterator;
+    add_iterator<Ivci, Ivci, const V&>("Isolated_vertex_iterator", face_base_c);
+    face_base_c.def("isolated_vertices",
+                    [](const Face& face) {
+                      return make_iterator(face.isolated_vertices_begin(),
+                                           face.isolated_vertices_end());
+                    },
+                    py::keep_alive<0, 1>(),
+                    aos2_doc::Arrangement_on_surface_2_Face_isolated_vertices_begin);
+  }
+
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+  using Env_data = Face::Face_data;
+  using Dd = CGAL::Dac_decision;
+#endif
+
+  // Face
+  if (add_attr<Face>(c, "Face")) return;
+  py::class_<Face, CGAL::Arr_face_base> face_c(c, "Face",
+                                                aos2_doc::Arrangement_on_surface_2_Face_class);
+  face_c.def(py::init<>(),
+             aos2_doc::Arrangement_on_surface_2_Face_Face)
+    .def("number_of_inner_ccbs", &cgalpy::aos2::number_of_inner_ccbs,
+         aos2_doc::Arrangement_on_surface_2_Face_number_of_inner_ccbs)
+    .def("number_of_outer_ccbs", &cgalpy::aos2::number_of_outer_ccbs,
+         aos2_doc::Arrangement_on_surface_2_Face_number_of_outer_ccbs)
+    .def("number_of_isolated_vertices", &Face::number_of_isolated_vertices,
+         "Return the number of isolated vertices in the face.")
+    .def("has_outer_ccb", &Face::has_outer_ccb,
+         aos2_doc::Arrangement_on_surface_2_Face_has_outer_ccb)
+    .def("number_of_holes", &Face::number_of_holes,
+         aos2_doc::Arrangement_on_surface_2_Face_number_of_holes)
+
+    .def("outer_ccb", &cgalpy::aos2::outer_ccb_iterator,
+         py::keep_alive<0, 1>(),
+         aos2_doc::Arrangement_on_surface_2_Face_outer_ccb)
+
+    // Wrap also the function that obtains the real circulator
+    .def("outer_ccb_circulator", &cgalpy::aos2::outer_ccb_circulator,
+         aos2_doc::Arrangement_on_surface_2_Face_outer_ccb)
+
+#ifdef CGALPY_AOS2_FACE_EXTENDED
+    // The member functions set_data() and data() are defined in a base class of
+    // Face. Therefore, we cannot directly refere to any of them, e.g.,
+    // `Face::set_data`. Instead, we introduce lambda functions that calls the
+    // appropriate member functions.
+    .def("set_data", [](Face& f, py::object obj) { f.set_data(obj); },
+         py::arg("data"), py::keep_alive<1, 2>(),
+         aos2_doc::Arr_extended_face_set_data)
+    .def("data", [](const Face& f)->py::object { return f.data(); },
+         aos2_doc::Arr_extended_face_data)
+#endif
+
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+  // Nanobind does not support multiple inheritance; therfore, we bind
+  // Envelope_pm_face members, using explicit lamda functions
+    .def("is_env_set", [](Face& f)->bool { return f.is_env_set(); },
+         "Return whether envelope data is set for the face.")
+    .def("set_is_env_set", [](Face& f, bool b) { f.set_is_env_set(b); },
+         py::arg("value"), "Set whether envelope data is set for the face.")
+    .def("is_decision_set", [](Face& f)->bool { return f.is_decision_set(); },
+         "Return whether an envelope decision is set for the face.")
+    .def("decision", [](Face& f)->Dd { return f.decision(); },
+         "Return the envelope decision stored on the face.")
+    .def("set_decision", [](Face& f, CGAL::Comparison_result cr) { f.set_decision(cr); },
+         py::arg("decision"), "Set the envelope decision from a comparison result.")
+    .def("set_decision", [](Face& f, Dd dd) { f.set_decision(dd); },
+         py::arg("decision"), "Set the envelope decision.")
+    .def("number_of_surfaces", [](Face& f) { return f.number_of_surfaces(); },
+         "Return the number of envelope surfaces stored on the face.")
+    .def("surfaces", &cgalpy::aos2::surfaces, py::keep_alive<0, 1>(),
+         "Iterate over envelope surfaces stored on the face.")
+    .def("surface", [](Face& f)->const Env_data& { return f.surface(); },
+         "Return the envelope surface stored on the face.")
+    .def("number_of_surfaces", [](Face& f)->int { return f.number_of_surfaces(); })
+    .def("has_no_env_data", [](Face& f)->bool { return f.has_no_env_data(); },
+         "Return whether the face has no envelope data.")
+    .def("env_data_front", [](Face& f)->const Env_data&  { return f.env_data_front(); },
+         "Return the first envelope data item.")
+    .def("set_env_data", [](Face& f, const Env_data& data) { f.set_env_data(data); },
+         py::arg("data"), "Set envelope data for the face.")
+    //.def("set_env_data", [](Face& f) { f.set_env_data(); })
+    .def("set_no_env_data", [](Face& f) { f.set_no_env_data(); },
+         "Mark the face as having no envelope data.")
+    .def("add_env_data", [](Face& f, const Env_data& data) { f.add_env_data(data); },
+         py::arg("data"), "Add envelope data to the face.")
+    //.def("add_data", [](Face& f) { f.add_data(); })
+    .def("clear_env_data", [](Face& f) { f.clear_env_data(); },
+         "Clear envelope data from the face.")
+    //.def("is_equal_data", [](Face& f) { f.is_equal_data(); })
+    //.def("has_equal_data", [](Face& f) { f.has_equal_data(); })
+#endif
+    ;
+
+  using Chcc = Aos::Ccb_halfedge_const_circulator;
+  using Icci = Aos::Inner_ccb_const_iterator;
+  using Occi = Aos::Outer_ccb_const_iterator;
+
+  add_iterator_from_circulator<Chcc>("Ccb_halfedge_iterator", face_c);
+  add_iterator_of_circulator<Icci, Icci, Chcc>("Inner_ccb_iterator", face_c);
+  add_iterator_of_circulator<Occi, Occi, Chcc>("Outer_ccb_iterator", face_c);
+
+  face_c.def("outer_ccbs", &cgalpy::aos2::outer_ccbs, py::keep_alive<0, 1>(),
+             aos2_doc::Arrangement_on_surface_2_Face_outer_ccbs_begin)
+    .def("inner_ccbs", &cgalpy::aos2::inner_ccbs, py::keep_alive<0, 1>(),
+         aos2_doc::Arrangement_on_surface_2_Face_inner_ccbs_begin)
+    .def("holes", &cgalpy::aos2::inner_ccbs, py::keep_alive<0, 1>(),
+         aos2_doc::Arrangement_on_surface_2_Face_holes_begin)
+    ;
+
+  //! Weap also the real circulator
+  export_circulator<Chcc>(face_c, "Ccb_halfedge_circulator");
+
+#ifdef CGALPY_ENVELOPE_3_BINDINGS
+  using Si = Face::Data_const_iterator;
+  add_iterator<Si, Si>("Surface_iterator", face_c);
+#endif
+
+  add_attr<V>(face_c, "Vertex");
+}

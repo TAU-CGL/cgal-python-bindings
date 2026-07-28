@@ -14,7 +14,7 @@
 #include <CGAL/Triangular_expansion_visibility_2.h>
 
 #include "cgalpy/visibility_2_config.hpp"
-#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos2/arrangement_on_surface_2_types.hpp"
 
 namespace cgalpy {
 namespace vis2 {

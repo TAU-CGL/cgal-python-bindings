@@ -13,7 +13,7 @@
 #include <CGAL/General_polygon_set_2.h>
 
 #include "cgalpy/general_polygon_set_2_config.hpp"
-#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos2/arrangement_on_surface_2_types.hpp"
 
 namespace cgalpy {
 namespace bso2 {

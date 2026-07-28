@@ -8,8 +8,8 @@
 
 #include <boost/graph/graph_traits.hpp>
 
-#include "cgalpy/arrangement_on_surface_2_types.hpp"
-#include "cgalpy/polyhedron_3_types.hpp"
+#include "cgalpy/aos2/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/pol3/polyhedron_3_types.hpp"
 
 #ifndef CGALPY_BASIC_VIEWER_CONFIG_HPP
 #define CGALPY_BASIC_VIEWER_CONFIG_HPP

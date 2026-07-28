@@ -13,7 +13,7 @@
 
 #include <CGAL/Envelope_diagram_1.h>
 
-#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos2/arrangement_on_surface_2_types.hpp"
 
 namespace cgalpy {
 namespace env2 {

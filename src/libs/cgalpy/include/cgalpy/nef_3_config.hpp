@@ -9,7 +9,7 @@
 #ifndef CGALPY_NEF_3_CONFIG_HPP
 #define CGALPY_NEF_3_CONFIG_HPP
 
-#include "cgalpy/polyhedron_3_types.hpp"
+#include "cgalpy/pol3/polyhedron_3_types.hpp"
 #include "cgalpy/surface_mesh_types.hpp"
 
 #define CGALPY_NEF3_POLYHEDRON_3_POLYGONAL_MESH         0

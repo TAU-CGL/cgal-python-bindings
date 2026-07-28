@@ -11,7 +11,7 @@
 
 #include "cgalpy/visibility_2_types.hpp"
 #include "cgalpy/add_attr.hpp"
-#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos2/arrangement_on_surface_2_types.hpp"
 
 #include "cgalpy/Vis2_docstrings.hpp"
 

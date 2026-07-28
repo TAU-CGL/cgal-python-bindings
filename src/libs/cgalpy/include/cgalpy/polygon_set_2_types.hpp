@@ -14,7 +14,7 @@
 
 #include "cgalpy/polygon_set_2_config.hpp"
 #include "cgalpy/kernel_types.hpp"
-#include "cgalpy/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos2/arrangement_on_surface_2_types.hpp"
 #include "cgalpy/general_polygon_set_2_types.hpp"
 
 namespace cgalpy {

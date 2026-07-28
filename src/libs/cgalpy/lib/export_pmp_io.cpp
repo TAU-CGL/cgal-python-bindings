@@ -22,7 +22,7 @@
 #include "cgalpy/Named_parameter_wrapper.hpp"
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
-#include "cgalpy/polyhedron_3_types.hpp"
+#include "cgalpy/pol3/polyhedron_3_types.hpp"
 #endif
 
 namespace py = nanobind;

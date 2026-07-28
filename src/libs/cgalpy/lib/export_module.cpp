@@ -13,7 +13,7 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 
-#include "cgalpy/arrangement_on_surface_2_values.hpp"
+#include "cgalpy/aos2/arrangement_on_surface_2_values.hpp"
 #include "cgalpy/kernel_types.hpp"
 #include "cgalpy/triangulation_3_values.hpp"
 #include "cgalpy/triangulation_2_values.hpp"
@@ -93,17 +93,17 @@ void export_surface_mesh_segmentation(py::module_&);
 void export_surface_mesh_simplification(py::module_&);
 void export_surface_mesh_skeletonization(py::module_&);
 
+void export_triangulation_data_structure_2(py::module_&);
 void export_triangulation_2(py::module_&);
-void export_tri2_plain(py::module_&);
 void export_tri2_regular(py::module_&);
-void export_tri2_constrained(py::module_&);
+void export_constrained_triangulation_2(py::module_&);
 void export_tri2_constrained_delaunay(py::module_&);
-void export_tri2_delaunay(py::module_&);
+void export_delaunay_triangulation_2(py::module_&);
 
-void export_triangulation_3(py::module_&);
-void export_tri3_plain(py::module_& m);
+void export_triangulation_data_structure_3(py::module_&);
+void export_triangulation_3(py::module_& m);
 void export_tri3_regular(py::module_& m);
-void export_tri3_delaunay(py::module_& m);
+void export_delaunay_triangulation_3(py::module_& m);
 
 void export_triangulation_d(py::module_&);
 
@@ -166,15 +166,15 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
   auto tri2_m = m.def_submodule("Tri2");
+  export_triangulation_data_structure_2(tri2_m);
   export_triangulation_2(tri2_m);
-  export_tri2_plain(tri2_m);
 
 #if (CGALPY_TRI2 == CGALPY_TRI2_REGULAR)
   export_tri2_regular(tri2_m);
 #elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
-  export_tri2_constrained(tri2_m);
+  export_constrained_triangulation_2(tri2_m);
 #elif (CGALPY_TRI2 == CGALPY_TRI2_DELAUNAY)
-  export_tri2_delaunay(tri2_m);
+  export_delaunay_triangulation_2(tri2_m);
 #elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY)
   export_tri2_constrained_delaunay(tri2_m);
 #endif
@@ -255,12 +255,12 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
 #if defined(CGALPY_TRIANGULATION_3_BINDINGS)
   auto tri3_m = m.def_submodule("Tri3");
-  export_tri3_plain(tri3_m);
   export_triangulation_3(tri3_m);
+  export_triangulation_data_structure_3(tri3_m);
 #if (CGALPY_TRI3 == CGALPY_TRI3_REGULAR)
   export_tri3_regular(tri3_m);
 #elif (CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY)
-  export_tri3_delaunay(tri3_m);
+  export_delaunay_triangulation_3(tri3_m);
 #endif
 #endif
 

@@ -57,13 +57,13 @@ class RepositoryManifestCatalogTests(unittest.TestCase):
             for reference in manifest.cmake_tests
         )
 
-        self.assertEqual(len(canonical_references), 136)
+        self.assertEqual(len(canonical_references), 137)
         self.assertEqual(
             deferred_references,
             canonical_references & deferred_references,
         )
-        self.assertEqual(len(catalog.manifests), 135)
-        self.assertEqual(len(expected_references), 135)
+        self.assertEqual(len(catalog.manifests), 136)
+        self.assertEqual(len(expected_references), 136)
         self.assertEqual(
             len(actual_references),
             len(set(actual_references)),
