@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #ifndef CGALPY_NAMED_PARAMETER_HPP
 #define CGALPY_NAMED_PARAMETER_HPP
@@ -12,3 +13,5 @@
 namespace cgalpy {
 
 }
+
+#endif // CGALPY_NAMED_PARAMETER_HPP

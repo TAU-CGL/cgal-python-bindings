@@ -1231,17 +1231,40 @@ if (CGALPY_BUILD_DEV_DOC)
     set(CGALPY_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
     if (DOXYGEN_FOUND)
+        if (TARGET Doxygen::dot)
+            set(CGALPY_DOXYGEN_HAVE_DOT YES)
+            get_target_property(CGALPY_DOXYGEN_DOT_EXECUTABLE
+                    Doxygen::dot IMPORTED_LOCATION)
+            get_filename_component(CGALPY_DOXYGEN_DOT_PATH
+                    "${CGALPY_DOXYGEN_DOT_EXECUTABLE}" DIRECTORY)
+            if (WIN32)
+                file(TO_NATIVE_PATH "${CGALPY_DOXYGEN_DOT_PATH}"
+                        CGALPY_DOXYGEN_DOT_PATH)
+            endif ()
+        else ()
+            set(CGALPY_DOXYGEN_HAVE_DOT NO)
+            set(CGALPY_DOXYGEN_DOT_PATH "")
+        endif ()
+
         add_custom_command(
                 OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
                 COMMAND "${CMAKE_COMMAND}"
                 "-DFILE_IN=${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
                 "-DFILE_OUT=${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
                 "-DCGALPY_SOURCE_DIR=${CGALPY_SOURCE_DIR}"
+                "-DCGALPY_DOXYGEN_HAVE_DOT=${CGALPY_DOXYGEN_HAVE_DOT}"
+                "-DCGALPY_DOXYGEN_DOT_PATH=${CGALPY_DOXYGEN_DOT_PATH}"
                 -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
                 DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in")
 
+        file(GLOB_RECURSE CGALPY_CPP_DOC_INPUT_FILES
+                CONFIGURE_DEPENDS
+                LIST_DIRECTORIES false
+                "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
+                "${CMAKE_CURRENT_SOURCE_DIR}/lib/*.cpp")
+
         set(CGALPY_CPP_DOC_DEPENDS
-                ${CGALPY_SRC_FILES}
+                ${CGALPY_CPP_DOC_INPUT_FILES}
                 ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
         add_custom_command(
@@ -1269,9 +1292,14 @@ if (CGALPY_BUILD_DOC)
     if (Sphinx_FOUND)
         add_sphinx_document(${CGALPY_LIB_NAME}
                 MODULES "${CGALPY_MODULES}"
+                STUB_TARGETS "${CGALPY_STUBS_DEPENDS}"
                 AUTHORS "${CGALPY_PROJECT_AUTHORS}"
                 CONF_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/conf.py"
-                INDEX_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst")
+                INDEX_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst"
+                ROOT_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/library.rst.in"
+                MODULE_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/module.rst.in"
+                ROOT_STUB "${CGALPY_MODULE_OUTPUT}"
+                STUBS_DIR "${CGALPY_DST_STUBS_DIR}")
     else ()
         message(WARNING "No Sphinx found. Documentation target not available.")
     endif ()

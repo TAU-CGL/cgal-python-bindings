@@ -6,6 +6,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #ifndef CGALPY_ARR_OVERLAY_FUNCTION_TRAITS_HPP
 #define CGALPY_ARR_OVERLAY_FUNCTION_TRAITS_HPP
@@ -106,7 +107,7 @@ void apply(Fnc fnc, const A* a, const B* b, R* r) {
 
 #endif
 
-/*! \class
+/*! \class Arr_overlay_function_traits
  *
  * An overlay-traits class for computing the overlay of two arrangement whose
  * all records are extended with auxiliary data fields, of type data_type.

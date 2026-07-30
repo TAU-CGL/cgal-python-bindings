@@ -6,6 +6,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #ifndef CGALPY_ARR_OVERLAY_TRAITS_HPP
 #define CGALPY_ARR_OVERLAY_TRAITS_HPP
@@ -17,7 +18,7 @@
 
 #include "cgalpy/config.hpp"
 
-/*! \class
+/*! \class Arr_overlay_traits
  *
  * An overlay-traits class for computing the overlay of two arrangement whose
  * all records are extended with auxiliary data fields, of type data_type.

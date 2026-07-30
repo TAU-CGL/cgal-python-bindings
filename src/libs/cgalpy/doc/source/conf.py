@@ -31,6 +31,45 @@ extensions = [
     'sphinx.ext.autodoc'
 ]
 
+
+def normalize_module_docstring(
+    app,
+    what,
+    name,
+    obj,
+    options,
+    lines,
+):
+    """Normalize generated nanobind documentation for reStructuredText."""
+    for index, line in enumerate(lines):
+        lines[index] = line.replace('*this', r'\*this')
+
+    if what != 'module':
+        return
+
+    normalized = []
+
+    for line in lines:
+        line = line.expandtabs(4).strip()
+
+        if line.startswith('•'):
+            line = f'*{line[1:]}'
+
+            if normalized and normalized[-1] != '':
+                normalized.append('')
+
+        normalized.append(line)
+
+    lines[:] = normalized
+
+
+def setup(app):
+    """Register the generated-docstring normalization hook."""
+    app.connect(
+        'autodoc-process-docstring',
+        normalize_module_docstring,
+    )
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -44,8 +83,7 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
-# html_theme = 'alabaster'
+html_theme = 'alabaster'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

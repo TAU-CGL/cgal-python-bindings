@@ -534,31 +534,17 @@ void export_triangulation_2(py::module_& m) {
     .def("oriented_side", &cgalpy::tri2::oriented_side, py::arg("f"), py::arg("p"),
          tri2_doc::Triangulation_2_oriented_side)
     .def("point", &cgalpy::tri2::point1, py::arg("v"),
-         "Obtain the point of a vertex\n"
-         "Parameters:\n"
-         "  v (Vertex) the input vertex\n"
-         "Return:\n"
-         "  Point_2\n")
+         tri2_doc::Triangulation_2_point_1)
     .def("point", &cgalpy::tri2::point2, py::arg("f"), py::arg("i"),
-         "Obtain the point of vertex i of face f\n"
-         "Parameters:\n"
-         "  f (Face) the input face\n"
-         "  i (int)\n"
-         "Return:\n"
-         "  Point_2\n")
+         tri2_doc::Triangulation_2_point)
     .def("push_back", &cgalpy::tri2::push_back, ri, py::arg("p"),
          tri2_doc::Triangulation_2_push_back)
     .def("remove", &cgalpy::tri2::remove, py::arg("v"),
          tri2_doc::Triangulation_2_remove)
     .def("remove_degree_3", &cgalpy::tri2::remove_degree_31, py::arg("v"),
-         "Remove a vertex of degree three\n"
-         "Parameters:\n"
-         "  v (Vertex): the vertex to remove\n")
+         tri2_doc::Triangulation_2_remove_degree_3)
     .def("remove_degree_3", &cgalpy::tri2::remove_degree_32, py::arg("v"), py::arg("f"),
-         "Remove a vertex of degree three\n"
-         "Parameters:\n"
-         "  v (Vertex): the vertex to remove\n"
-         "  f (Face)\n")
+         "Removes a vertex of degree three using the supplied face.")
     .def("remove_first", &cgalpy::tri2::remove_first, py::arg("v"),
          tri2_doc::Triangulation_2_remove_first)
     .def("remove_second", &cgalpy::tri2::remove_second, py::arg("v"),
@@ -573,15 +559,7 @@ void export_triangulation_2(py::module_& m) {
          py::overload_cast<const Pnt&, const Pnt&, const Pnt&, const Pnt&, bool>
          (&Tri::side_of_oriented_circle, py::const_),
          py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p"), py::arg("perturb"),
-         "Determine on which side of the circumcircle of the a face defined by three points lies a forth point\n"
-         "Parameters:\n"
-         "  p1 (point_2)\n"
-         "  p2 (point_2)\n"
-         "  p2 (point_2)\n"
-         "  p (point_2) the input point\n"
-         "  perturb (Boolean)\n"
-         "Return:\n"
-         "  Oriented_side\n")
+         "Determines on which side of the oriented circumcircle through p1, p2, and p3 the point p lies.")
     .def("side_of_oriented_circle", &cgalpy::tri2::side_of_oriented_circle,
          py::arg("f"), py::arg("p"), py::arg("perturb") = false,
          tri2_doc::Triangulation_2_side_of_oriented_circle)

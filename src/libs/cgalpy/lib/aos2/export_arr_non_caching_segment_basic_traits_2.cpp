@@ -6,6 +6,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <nanobind/nanobind.h>
 
@@ -30,7 +31,7 @@ void export_arr_non_caching_segment_basic_traits_2(py::module_& m) {
                                "Arr_non_caching_segment_basic_traits_2",
                                "Basic traits for arrangements of non-caching segments.");
 
-  /// \name AosBaiscTraits
+  /// \name AosBasicTraits
   /// @{
   using Pnt = Bgt::Point_2;
   using Xcv = Bgt::X_monotone_curve_2;
@@ -103,4 +104,6 @@ void export_arr_non_caching_segment_basic_traits_2(py::module_& m) {
     .def("approximate_2_object", &Bgt::approximate_2_object,
          aos2_doc::AosApproximateTraits_2_approximate_2_object)
     ;
+
+  /// @}
 }

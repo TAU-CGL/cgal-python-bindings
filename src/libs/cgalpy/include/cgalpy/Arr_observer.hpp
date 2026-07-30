@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #ifndef CGALPY_ARR_OBSERVER_HPP
 #define CGALPY_ARR_OBSERVER_HPP
@@ -318,7 +319,7 @@ public:
   /// @}
 
   /// \name Notification functions on global arrangement operations.
-  //@{
+  /// @{
 
   /*! Notification before the arrangement is assigned with another
    * arrangement.
@@ -348,10 +349,10 @@ public:
   /*! Notification after a global operation is completed. */
   virtual void after_global_change()
   { if (! m_after_global_change.is_none()) m_after_global_change(); }
-  //@}
+  /// @}
 
   /// \name Notification functions on observer attachment or detachment.
-  //@{
+  /// @{
 
   /*! Notification before the observer is attached to an arrangement.
    * \param arr The arrangement we are about to attach the observer to.
@@ -370,10 +371,10 @@ public:
   /*! Notification after the observer has been detached to the arrangement. */
   virtual void after_detach()
   { if (! m_after_detach.is_none()) m_after_detach(); }
-  //@}
+  /// @}
 
   /// \name Notification functions on local changes in the arrangement.
-  //@{
+  /// @{
 
   /*!
    * Notification before the creation of a new vertex.
@@ -520,7 +521,7 @@ public:
 
   /*! Notification after a face was split.
    * \param f A handle to the face we have just split.
-   * \param new_f A handle to the new face that has been created.
+   * \param nf A handle to the new face that has been created.
    * \param is_hole Whether the new face forms a hole inside f.
    */
   virtual void after_split_face(Face_handle f, Face_handle nf, bool is_hole)

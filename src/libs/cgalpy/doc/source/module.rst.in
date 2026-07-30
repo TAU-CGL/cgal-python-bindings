@@ -1,0 +1,23 @@
+@SPHINX_MODULE_NAME@ Python API
+================================================================================
+
+This interface is generated automatically from the active nanobind module.
+
+Runtime API
+-----------
+
+.. automodule:: cgalpy.@SPHINX_TARGET_NAME@.@SPHINX_MODULE_NAME@
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :noindex:
+
+Generated Stub
+--------------
+
+The generated stub contains the complete exported Python signatures and the
+available generated docstrings for this package.
+
+.. literalinclude:: @SPHINX_STUB_FILE@
+   :language: python
+   :linenos:

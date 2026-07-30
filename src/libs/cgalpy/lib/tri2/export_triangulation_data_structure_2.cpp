@@ -119,12 +119,7 @@ void export_triangulation_data_structure_2(py::module_& m) {
     .def("create_vertex", &cgalpy::tri2::create_vertex, ri,
          "Creates a new vertex.")
     .def("degree", &cgalpy::tri2::degree, py::arg("v"),
-         "Obtain the degree of a vertex\n"
-         "The infinite vertex is counted"
-         "Parameters:\n"
-         " v: the vertex\n"
-         "Return:\n"
-         "  int\n")
+         "Returns the degree of a vertex. The infinite vertex is counted.")
     // .def("delete_face", &delete_face),
     // .def("delete_vertex", &delete_vertex),
     // .def("dim_down", &dim_down),
@@ -155,21 +150,13 @@ void export_triangulation_data_structure_2(py::module_& m) {
     // .def("mirror_index", &mirror_index),
     // .def("mirror_vertex", &mirror_vertex),
     .def("number_of_edges", &Tds::number_of_edges,
-         "Obtain the number of edges\n"
-         "Return:\n"
-         "  int\n")
+         "Returns the number of edges.")
     .def("number_of_faces", &Tds::number_of_faces,
-         "Obtain the number of two dimensional faces\n"
-         "Return:\n"
-         "  int\n")
+         "Returns the number of two-dimensional faces.")
     .def("number_of_full_dim_faces", &Tds::number_of_full_dim_faces,
-         "Obtain the number of full dimensional faces\n"
-         "Return:\n"
-         "  int\n")
+         "Returns the number of full-dimensional faces.")
     .def("number_of_vertices", &Tds::number_of_vertices,
-         "Obtain the number of vertices\n"
-         "Return:\n"
-         "  int\n")
+         "Returns the number of vertices.")
     // .def("remove_degree_3", &remove_degree_3),
     // .def("remove_dim_down", &remove_dim_down),
     // .def("remove_first", &remove_first),
