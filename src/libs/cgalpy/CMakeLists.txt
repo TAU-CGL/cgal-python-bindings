@@ -1231,6 +1231,14 @@ if (CGALPY_BUILD_DEV_DOC)
     set(CGALPY_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
     if (DOXYGEN_FOUND)
+        find_package(LATEX COMPONENTS PDFLATEX)
+
+        if (LATEX_PDFLATEX_FOUND)
+            set(CGALPY_DOXYGEN_GENERATE_LATEX YES)
+        else ()
+            set(CGALPY_DOXYGEN_GENERATE_LATEX NO)
+        endif ()
+
         if (TARGET Doxygen::dot)
             set(CGALPY_DOXYGEN_HAVE_DOT YES)
             get_target_property(CGALPY_DOXYGEN_DOT_EXECUTABLE
@@ -1252,6 +1260,7 @@ if (CGALPY_BUILD_DEV_DOC)
                 "-DFILE_IN=${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
                 "-DFILE_OUT=${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
                 "-DCGALPY_SOURCE_DIR=${CGALPY_SOURCE_DIR}"
+                "-DCGALPY_DOXYGEN_GENERATE_LATEX=${CGALPY_DOXYGEN_GENERATE_LATEX}"
                 "-DCGALPY_DOXYGEN_HAVE_DOT=${CGALPY_DOXYGEN_HAVE_DOT}"
                 "-DCGALPY_DOXYGEN_DOT_PATH=${CGALPY_DOXYGEN_DOT_PATH}"
                 -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
