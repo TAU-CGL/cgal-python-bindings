@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 // Testing the do_equal function
 
 #include <CGAL/config.h>

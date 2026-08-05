@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """Install the exact wheel recorded by a distribution-artifact manifest."""
 
 from __future__ import annotations

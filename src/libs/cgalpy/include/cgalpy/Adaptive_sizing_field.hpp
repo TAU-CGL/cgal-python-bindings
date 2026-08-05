@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #ifndef CGALPY_ADAPTIVE_SIZING_FIELD_HPP
 #define CGALPY_ADAPTIVE_SIZING_FIELD_HPP
 

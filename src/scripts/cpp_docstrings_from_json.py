@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """
 Generate C++ docstring declarations/definitions from CGAL doc JSON.
 

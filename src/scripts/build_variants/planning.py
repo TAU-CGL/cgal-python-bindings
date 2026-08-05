@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """Resolve platform policy and create build-variant execution plans."""
 
 from __future__ import annotations

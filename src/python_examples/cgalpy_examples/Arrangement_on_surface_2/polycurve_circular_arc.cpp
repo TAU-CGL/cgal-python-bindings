@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 // Constructing an arrangement of polycurves.
 
 #include <CGAL/config.h>

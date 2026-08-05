@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 // Constructing a arrangement of Bezier polycurves.
 
 #include <CGAL/config.h>

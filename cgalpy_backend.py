@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 # cgalpy_backend.py
 """
 PEP 517 build backend wrapper around scikit_build_core.

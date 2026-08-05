@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 from collections.abc import Callable, Sequence
 from typing import overload
 

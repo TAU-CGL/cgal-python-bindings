@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #ifndef CGALPY_TRIANGULATION_2_HPP
 #define CGALPY_TRIANGULATION_2_HPP
 

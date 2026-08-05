@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 import os
 #os.add_dll_directory("@Boost_LIBRARY_DIRS@")
 os.add_dll_directory("@GMP_BINARY_DIR@")

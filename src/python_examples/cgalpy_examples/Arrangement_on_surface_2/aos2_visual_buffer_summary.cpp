@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #include "arr_exact_construction_segments.h"
 
 #include <CGAL/draw_arrangement_2.h>

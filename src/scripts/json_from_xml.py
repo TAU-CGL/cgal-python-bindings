@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """
 Convert CGAL Doxygen XML output into compact structured JSON.
 

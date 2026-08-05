@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 if (NOT POINT_SET_PROCESSING_OPTIONS_FILE_INCLUDED)
 set(POINT_SET_PROCESSING_OPTIONS_FILE_INCLUDED)
 

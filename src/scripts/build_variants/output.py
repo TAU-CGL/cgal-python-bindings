@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """Render deterministic output for runner list and dry-run modes."""
 
 from __future__ import annotations

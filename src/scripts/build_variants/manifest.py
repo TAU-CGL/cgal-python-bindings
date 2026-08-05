@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """Load and validate CGAL Python build-variant manifests."""
 
 from __future__ import annotations

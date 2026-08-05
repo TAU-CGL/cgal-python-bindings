@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #ifndef CGALPY_EXPORT_WEIGHTED_POINT_2_HPP
 #define CGALPY_EXPORT_WEIGHTED_POINT_2_HPP
 

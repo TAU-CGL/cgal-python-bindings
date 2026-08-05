@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """Tests for runner platform and variant build directory planning."""
 
 from __future__ import annotations

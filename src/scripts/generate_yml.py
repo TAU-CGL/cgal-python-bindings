@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 import click
 
 def generate_yml(path_to_cmakes: str, compile_mode: str, cmake2example: dict) -> str:

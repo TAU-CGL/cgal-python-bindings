@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 # ./bezier_traits_adapter2.py CGALPY_kerCcrInt_aos2Bez_bso2
 ./bezier_traits_adapter.py CGALPY_kerCcrInt_aos2Bez_bso2 char_g.dat char_m.dat
 ./circle_segment.py CGALPY_kerEpecInt_aos2Cs_bso2

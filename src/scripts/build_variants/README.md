@@ -1,3 +1,5 @@
+<!-- Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com> -->
+
 # CGAL Python Binding Variant Runner
 
 The **CGAL Python Binding Variant Runner** (`src/scripts/run`) is the

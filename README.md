@@ -1,3 +1,5 @@
+<!-- Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com> -->
+
 # cgalpy: CGAL Python Bindings
 
 We introduce bindings that enable the convenient, efficient, and

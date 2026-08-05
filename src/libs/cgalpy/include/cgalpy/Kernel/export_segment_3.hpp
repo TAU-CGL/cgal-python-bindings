@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #ifndef CGALPY_EXPORT_SEGMENT_3
 #define CGALPY_EXPORT_SEGMENT_3
 

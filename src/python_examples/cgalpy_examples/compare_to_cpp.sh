@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 # save failed commands in a table and print them at the end
 # failed_commands=()
 # success_commands=()

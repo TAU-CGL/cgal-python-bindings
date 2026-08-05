@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 //! \file examples/Arrangement_on_surface_2/bgl_primal_adapter.cpp
 // Adapting an arrangement to a BGL graph.
 

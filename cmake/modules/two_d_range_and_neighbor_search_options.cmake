@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 if(NOT TWO_D_RANGE_AND_NEIGHBOR_SEARCH_OPTIONS_FILE_INCLUDED)
 set(TWO_D_RANGE_AND_NEIGHBOR_SEARCH_OPTIONS_FILE_INCLUDED)
 

@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 //! \file examples/Arrangement_on_surface_2/spherical_degenerate_sweep.cpp
 // Using the global aggregated insertion function.
 

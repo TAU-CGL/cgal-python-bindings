@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 if(NOT SHAPE_DETECTION_OPTIONS_FILE_INCLUDED)
 set(SHAPE_DETECTION_OPTIONS_FILE_INCLUDED)
 

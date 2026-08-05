@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 ./as3_del_fast_epic.py CGALPY_kerEpic_as3Plain_tri3DelFasSeq
 ./as3_del_compact_epic.py CGALPY_kerEpic_as3Plain_tri3DelFasSeq
 ./as3_exact_del_compact_epic.py CGALPY_kerEpic_as3Plain_tri3DelFasSeq

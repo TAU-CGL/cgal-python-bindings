@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 set(_SPHINX_SCRIPT_DIR ${CMAKE_CURRENT_LIST_DIR})
 
 include(FindPackageHandleStandardArgs)

@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 //! \file examples/Arrangement_on_surface_2/edge_manipulation_curve_history.cpp
 // Removing curves and manipulating edges in an arrangement with history.
 

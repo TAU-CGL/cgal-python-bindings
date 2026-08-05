@@ -1,4 +1,6 @@
 #!/bin/bash
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 # This script compares the output of all examples passed as arguments to the output of C++ programs
 # Usage: ./compare_examples.sh <cgal_path> <example1> <example2> ...
 # cgal_path is the path to the root of the CGAL C++ library

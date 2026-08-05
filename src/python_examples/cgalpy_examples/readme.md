@@ -1,3 +1,5 @@
+<!-- Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com> -->
+
 The examples accept an optional argument naming the compiled bindings library to use. If no argument is provided, they use `CGALPY` by default.
 
 ## Curated C++/Python example-comparison notes

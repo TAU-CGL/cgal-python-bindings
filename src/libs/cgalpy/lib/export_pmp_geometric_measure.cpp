@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 //            Utkarsh Khajuria <utkarshkhajuria7@gmail.com>
 
 #include <tuple>

@@ -1,3 +1,5 @@
+<!-- Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com> -->
+
 # Safety and precondition examples
 
 This file records real Python-side safety/precondition examples collected before changing wrappers. The goal is to discuss the desired exception mapping first, then make the smallest wrapper changes only after mentor agreement.

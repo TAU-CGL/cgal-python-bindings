@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #ifndef CGALPY_CUSTOM_SIZING_FIELD_HPP
 #define CGALPY_CUSTOM_SIZING_FIELD_HPP
 

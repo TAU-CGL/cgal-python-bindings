@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #ifndef CGALPY_EDGE_COLLAPSE_VISITOR_BASE_HPP
 #define CGALPY_EDGE_COLLAPSE_VISITOR_BASE_HPP
 

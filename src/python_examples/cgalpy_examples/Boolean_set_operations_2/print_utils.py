@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 # Pretty-print a polygon
 def print_polygon(pgn):
   print('[ {} vertices:'.format(pgn.size()), end='')

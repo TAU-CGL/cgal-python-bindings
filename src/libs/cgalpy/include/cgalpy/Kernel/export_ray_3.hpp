@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #ifndef CGALPY_EXPORT_RAY_3_HPP
 #define CGALPY_EXPORT_RAY_3_HPP
 

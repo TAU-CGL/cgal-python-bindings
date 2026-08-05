@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 class Terminal_parser:
     def __init__(self, num_parameters, parameters, path_to_save=""):
         self.m_path_to_save = path_to_save

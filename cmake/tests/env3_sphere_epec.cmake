@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 set(CGALPY_USE_SHARED_LIBS on CACHE BOOL "" FORCE)
 set(CGALPY_KERNEL_NAME "epec" CACHE STRING "" FORCE)
 set(CGALPY_KERNEL_INTERSECTION_BINDINGS on CACHE BOOL "with intersections" FORCE)

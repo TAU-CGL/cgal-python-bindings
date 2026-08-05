@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """
 Convert all CGAL Doxygen XML package directories under a doc_output tree
 into JSON files.

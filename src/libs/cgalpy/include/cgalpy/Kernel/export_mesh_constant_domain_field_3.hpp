@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #ifndef CGALPY_MESH_CONSTANT_DOMAIN_FIELD_3_HPP
 #define CGALPY_MESH_CONSTANT_DOMAIN_FIELD_3_HPP
 

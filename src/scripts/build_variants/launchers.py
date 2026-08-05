@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """Generate local thin launchers for build-variant manifests."""
 
 from __future__ import annotations

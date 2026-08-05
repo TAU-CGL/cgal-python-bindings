@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 ######## Packages ###############################################################
 ################################################################################
 
@@ -846,12 +848,19 @@ function(add_module name)
   #   DEPENDS ${CGALPY_STUBS_GENERATOR} ${MODULE_INPUT})
   # add_custom_target(CGALPY_${name}_STUBS ALL DEPENDS ${MODULE_OUTPUT})
 
+  set(MODULE_STUB_ARGS)
+  if ("${name}" STREQUAL "Tri2")
+    list(APPEND MODULE_STUB_ARGS
+      PATTERN_FILE "${CGALPY_SRC_STUBS_DIR}/patterns/Tri2.pattern")
+  endif ()
+
   nanobind_add_stub(
     CGALPY_${name}_STUBS
     MODULE cgalpy.${CGALPY_LIB_NAME}.${name}
     OUTPUT ${name}/__init__.pyi
     DEPENDS CGALPY CGALPY_INIT
     PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
+    ${MODULE_STUB_ARGS}
   )
 
   set(STUBS_DEPENDS ${CGALPY_STUBS_DEPENDS})

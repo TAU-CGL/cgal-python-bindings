@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #ifndef CGALPY_BOOST_UTILS_EXPORT_MESH_HELPERS_HPP
 #define CGALPY_BOOST_UTILS_EXPORT_MESH_HELPERS_HPP

@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 ./check_orientation.py CGALPY_kerEpic_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOri
 ./draw_surface_mesh.py CGALPY_kerEpic_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOri
 ./sm_circualtors.py CGALPY_kerEpic_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOri

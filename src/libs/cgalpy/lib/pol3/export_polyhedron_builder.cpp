@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Modifier_base.h>

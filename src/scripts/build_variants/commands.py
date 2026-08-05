@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """Construct cross-platform CMake commands for build manifests."""
 
 from __future__ import annotations

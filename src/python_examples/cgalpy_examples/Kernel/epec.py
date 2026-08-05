@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 # export PYTHONPATH=...
 
 import os

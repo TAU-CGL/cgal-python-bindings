@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 set -e
 
 cd "$(dirname "$0")"

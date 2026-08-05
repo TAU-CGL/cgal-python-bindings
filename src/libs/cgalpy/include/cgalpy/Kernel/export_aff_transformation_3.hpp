@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #ifndef CGALPY_EXPORT_AFF_TRANSFORMATION_3_HPP
 #define CGALPY_EXPORT_AFF_TRANSFORMATION_3_HPP
 

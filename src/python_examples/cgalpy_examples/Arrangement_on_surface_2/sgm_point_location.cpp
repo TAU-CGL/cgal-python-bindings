@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #include <list>
 
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>

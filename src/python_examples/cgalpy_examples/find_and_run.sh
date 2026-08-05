@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 # execute all python scripts in all directories recursively and each time echo: "Executing {script_name} in {directory_name}"
 
 # save failed commands in a table and print them at the end

@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """Subprocess tests for the required src/scripts/run entry point."""
 
 from __future__ import annotations

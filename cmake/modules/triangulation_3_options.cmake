@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 if(NOT TRIANGULATION_3_OPTIONS_FILE_INCLUDED)
 set(TRIANGULATION_3_OPTIONS_FILE_INCLUDED)
 

@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 set(CGALPY_USE_SHARED_LIBS on CACHE BOOL "" FORCE)
 set(CGALPY_KERNEL_NAME "epic" CACHE STRING "use EPIC kernel" FORCE)
 set(CGALPY_KERNEL_INTERSECTION_BINDINGS OFF CACHE BOOL "without intersections" FORCE)

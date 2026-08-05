@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #ifndef CGALPY_NON_MANIFOLD_OUTPUT_VISITOR_HPP
 #define CGALPY_NON_MANIFOLD_OUTPUT_VISITOR_HPP
 

@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 def read_objects(Type, filename):
   lst = []
   with open(filename, 'r') as f:

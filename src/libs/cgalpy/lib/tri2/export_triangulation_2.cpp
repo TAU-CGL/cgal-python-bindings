@@ -680,7 +680,7 @@ void export_triangulation_2(py::module_& m) {
     ;
 
   // Types that have been registered already:
-#if ((CGALPY_TRI2 == CGALPY_TRI2_PERIODIC_REGULAR) ||       \
+#if ((CGALPY_TRI2 == CGALPY_TRI2_PERIODIC_PLAIN) ||       \
      (CGALPY_TRI2 == CGALPY_TRI2_PERIODIC_DELAUNAY))
   // \todo: generate bindings for periodic traits
   ;

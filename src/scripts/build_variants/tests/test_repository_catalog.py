@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """Repository-level coverage test for the canonical manifest catalog."""
 
 from __future__ import annotations

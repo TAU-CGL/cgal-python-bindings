@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 //! \file examples/Arrangement_on_surface_2/io_curve_history.cpp
 // Using the arrangement-with-history I/O operators.
 

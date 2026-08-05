@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 """Execute resolved build-variant plans sequentially and safely."""
 
 from __future__ import annotations

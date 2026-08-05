@@ -1,4 +1,6 @@
 #!/bin/bash
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 # This script compares the output of all examples present in the cmake2example file to the output of C++ programs
 # Usage: ./compare_completed.sh <cgal_path> [root_path=../../]
 # cgal_path is the path to the root of the CGAL C++ library

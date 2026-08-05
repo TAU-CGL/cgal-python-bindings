@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 def print_point_location(arr, point, obj):
   print('The point {} is located '.format(point), end = '')
 

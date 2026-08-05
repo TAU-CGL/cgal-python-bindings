@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 # normal_estimation.py
 #----------------------------------------------------------
 # Normal estimation:

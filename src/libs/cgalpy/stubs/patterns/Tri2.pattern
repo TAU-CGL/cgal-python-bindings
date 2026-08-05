@@ -1,0 +1,8 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
+^cgalpy\.[A-Za-z_][A-Za-z0-9_]*\.Tri2\.Triangulation_2\.__prefix__$:
+  \from typing import TypeAlias
+  Geom_traits: TypeAlias = Geom_traits
+  Point: TypeAlias = Point
+  Segment: TypeAlias = Segment
+  Triangle: TypeAlias = Triangle

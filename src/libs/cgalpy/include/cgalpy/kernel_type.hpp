@@ -1,3 +1,5 @@
+// Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 #ifndef CGALPY_KERNEL_TYPE_HPP
 #define CGALPY_KERNEL_TYPE_HPP
 
