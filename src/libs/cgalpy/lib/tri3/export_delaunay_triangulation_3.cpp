@@ -86,7 +86,7 @@ auto insert_del4(Delaunay_triangulation_3& dt, const Point& p, Locate_type lt,
   return could_lock_zone ? &*vh : nullptr;
 }
 
-//! See manual of locate_face()
+//! See manual of locate_get_incident()
 py::tuple find_conflicts(py::handle self, const Point& p, Cell& start) {
   constexpr auto ri(py::rv_policy::reference_internal);
 

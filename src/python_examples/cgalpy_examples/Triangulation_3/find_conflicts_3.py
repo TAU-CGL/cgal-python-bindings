@@ -35,8 +35,10 @@ assert(dt.dimension() == 3)
 generator = Gog.Random_points_in_sphere_3()
 for i in range(100):
   p = next(generator)
-  lt, c = dt.locate_face(p)
+  loc = dt.locate_get_incident(p)
+  lt = loc[0]
   if lt == dt.Locate_type.VERTEX: continue # Point already exists
+  c = loc[1]
   bfs, cells = dt.find_conflicts(p, c)
   f = bfs[-1]
   if (len(cells) % 2) == 0:  #  Even number of conflict cells ?

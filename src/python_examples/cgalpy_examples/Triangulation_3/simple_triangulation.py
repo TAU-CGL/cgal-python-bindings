@@ -21,7 +21,7 @@ n = n + T.insert(V)
 assert(n == 6)       # 6 points have been inserted
 assert(T.is_valid()) # checking validity of T
 p = Point(0,0,0)
-lt, c, li = T.locate_face(p)
+lt, c, li = T.locate_get_incident(p)
 # p is the vertex of c of index li :
 assert(lt == Tri3.Triangulation_3.VERTEX)
 assert(c.vertex(li).point() == p)
