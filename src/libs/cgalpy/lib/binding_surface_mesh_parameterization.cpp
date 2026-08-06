@@ -24,6 +24,7 @@
 #include <CGAL/Surface_mesh_parameterization/parameterize.h>
 
 #include "cgalpy/sm/surface_mesh_parameterization_types.hpp"
+#include "cgalpy/Smp_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -107,13 +108,19 @@ Smp::Error_code parameterize_to_off(Surface_mesh_3& tmesh,
 } // namespace
 
 void export_surface_mesh_parameterization(py::module_& m) {
-  py::enum_<Parameterization_method>(m, "Parameterization_method")
+  py::enum_<Parameterization_method>(
+    m,
+    "Parameterization_method",
+    "Selects the surface-mesh parameterization algorithm used by parameterize_to_off().")
     .value("MEAN_VALUE", Parameterization_method::Mean_value)
     .value("BARYCENTRIC", Parameterization_method::Barycentric)
     .value("DISCRETE_AUTHALIC", Parameterization_method::Discrete_authalic)
     .value("DISCRETE_CONFORMAL", Parameterization_method::Discrete_conformal);
 
-  py::enum_<Smp::Error_code>(m, "Error_code")
+  py::enum_<Smp::Error_code>(
+    m,
+    "Error_code",
+    cgalpy::smp::docstrings::Surface_mesh_parameterization_Error_code)
     .value("OK", Smp::OK)
     .value("ERROR_EMPTY_MESH", Smp::ERROR_EMPTY_MESH)
     .value("ERROR_NON_TRIANGULAR_MESH", Smp::ERROR_NON_TRIANGULAR_MESH)

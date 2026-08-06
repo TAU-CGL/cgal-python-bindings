@@ -5,7 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
-//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
+//            Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
 
 #ifndef CGALPY_EXPOST_PROPERTY_MAP_HPP
 #define CGALPY_EXPOST_PROPERTY_MAP_HPP
@@ -68,7 +68,7 @@ auto export_property_map(py::module_& m, const std::string& name) {
               std::size_t from, std::size_t to) {
              return self.transfer(other, from, to);
            },
-        py::arg("other"), py::arg("from"), py::arg("to"),
+        py::arg("other"), py::arg("from_index"), py::arg("to_index"),
         "Transfers values from another boolean property map in an index range.")
       .def("reset", &Graph_property_map::reset,
            "Resets the boolean property map.")
@@ -99,7 +99,7 @@ auto export_property_map(py::module_& m, const std::string& name) {
            "Transfers values from another property map.")
       .def("transfer", [](Graph_property_map& self, const Graph_property_map& other, std::size_t from, std::size_t to)
       { return self.transfer(other, from, to); },
-           py::arg("other"), py::arg("from"), py::arg("to"),
+           py::arg("other"), py::arg("from_index"), py::arg("to_index"),
            "Transfers values from another property map in an index range.")
       .def("reset", &Graph_property_map::reset,
            "Resets the property map.")

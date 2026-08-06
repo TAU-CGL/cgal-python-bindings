@@ -5,7 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
-//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
+//            Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <nanobind/nanobind.h>

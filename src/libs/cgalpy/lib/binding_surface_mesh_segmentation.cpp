@@ -9,6 +9,7 @@
 #include "cgalpy/polygon_mesh_processing_types.hpp"
 #include "cgalpy/kernel_types.hpp"
 #include "cgalpy/sm/surface_mesh_segmentation_types.hpp"
+#include "cgalpy/Smse_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -93,106 +94,24 @@ void export_surface_mesh_segmentation(py::module_& m) {
         py::arg("triangle_mesh"), py::arg("sdf_values_map"), py::arg("cone_angle") = 2.0 / 3.0 * CGAL_PI,
         py::arg("number_of_rays") = 25, py::arg("postprocess") = true,
         py::arg("ppmap") = std::optional<PointPropertyMap>(),
-        "Function computing the Shape Diameter Function over a surface mesh.\n"
-        "This function implements the Shape Diameter Function (SDF) as described in [4]. It is possible to compute raw SDF values (without post-processing). In such a case, -1 is used to indicate when no SDF value could be computed for a facet.\n"
-        "\n"
-        "Precondition\n"
-        "• is_triangle_mesh(triangle_mesh)\n"
-        "\n"
-        "Parameters\n"
-        "• triangle_mesh: surface mesh on which SDF values are computed\n"
-        "• sdf_values_map: the SDF value of each facet\n"
-        "• cone_angle: opening angle in radians for the cone of each facet\n"
-        "• number_of_rays: number of rays picked in the cone of each facet. In our experiments, we observe that increasing the number of rays beyond the default has little effect on the quality of the segmentation result\n"
-        "• postprocess: if true, CGALPY.sdf_values_postprocessing() is called on raw SDF value computed.\n"
-        "• ppmap: point property map.\n"
-        "Returns\n"
-        "• minimum and maximum raw SDF values if postprocess is true, otherwise minimum and maximum SDF values (before linear normalization) \n"
-        "Examples\n"
-        "Surface_mesh_segmentation/extract_segmentation_into_mesh_example.py, Surface_mesh_segmentation/sdf_values_example.py, Surface_mesh_segmentation/segmentation_from_sdf_values_SM_example.py, Surface_mesh_segmentation/segmentation_from_sdf_values_example.py, and Surface_mesh_segmentation/segmentation_with_facet_ids_example.py.\n");
+        cgalpy::smse::docstrings::sdf_values);
 
   m.def("sdf_values_postprocessing", &CGAL::sdf_values_postprocessing<Pm, SDFPropertyMap>,
         py::arg("triangle_mesh"), py::arg("sdf_values_map"),
-        "Function post-processing raw SDF values computed per facet.\n"
-        "Post-processing steps applied :\n"
-        "\n"
-        "• Facets with -1 SDF values are assigned the average SDF value of their edge-adjacent neighbors. If there is still a facet having -1 SDF value, the minimum valid SDF value assigned to it. Note that this step is not inherited from the paper. The main reason for not assigning 0 to facets with no SDF values (i.e. -1) is that it can obstruct log-normalization process which takes place at the beginning of CGAL::segmentation_from_sdf_values().\n"
-        "• SDF values are smoothed with bilateral filtering.\n"
-        "• SDF values are linearly normalized between [0,1].\n"
-        "\n"
-        "See the section Post-processing of Raw SDF Values for more details.\n"
-        "\n"
-        "Precondition\n"
-        "• is_triangle_mesh(triangle_mesh) \n"
-        "• Raw values should be greater or equal to 0. -1 indicates when no value could be computed\n"
-        "\n"
-        "Parameters\n"
-        "• triangle_mesh: surface mesh on which SDF values are computed\n"
-        "• sdf_values_map: the SDF value of each facet\n"
-        "\n"
-        "Returns\n"
-        "• minimum and maximum SDF values before linear normalization \n"
-        "Examples\n"
-        "Surface_mesh_segmentation/extract_segmentation_into_mesh_example.py, Surface_mesh_segmentation/sdf_values_example.py, Surface_mesh_segmentation/segmentation_from_sdf_values_SM_example.py, Surface_mesh_segmentation/segmentation_from_sdf_values_example.py, and Surface_mesh_segmentation/segmentation_with_facet_ids_example.py.\n");
+        cgalpy::smse::docstrings::sdf_values_postprocessing);
 
   m.def("segmentation_from_sdf_values", &segment::segmentation_from_sdf_values<Tm, SDFPropertyMap, SegmentPropertyMap, PointPropertyMap>,
         py::arg("triangle_mesh"), py::arg("sdf_values_map"), py::arg("segment_ids"),
         py::arg("number_of_clusters") = 5, py::arg("smoothing_lambda") = 0.26,
         py::arg("output_cluster_ids") = false, py::arg("ppmap") = std::optional<PointPropertyMap>(),
-        "Function computing the segmentation of a surface mesh given an SDF value per facet.\n"
-        "This function fills a property map which associates a segment-id (in [0, number of segments -1]) or a cluster-id (in [0, number_of_clusters -1]) to each facet. A segment is a set of connected facets which are placed under the same cluster (see Figure 73.5).\n"
-        "\n"
-        "Note\n"
-        "• Log-normalization is applied on sdf_values_map before segmentation. As described in the original paper [4], this normalization is done to preserve thin parts of the mesh by increasing the distance between smaller SDF values and reducing it between larger ones. \n"
-        "• There is no direct relation between the parameter number_of_clusters and the final number of segments after segmentation. However, setting a large number of clusters will result in a detailed segmentation of the mesh with a large number of segments.\n"
-        "\n"
-        "Precondition\n"
-        "• is_triangle_mesh(triangle_mesh) \n"
-        "• number_of_clusters > 0\n"
-        "Parameters\n"
-        "• triangle_mesh: surface mesh corresponding to the SDF values\n"
-        "• sdf_values_map: the SDF value of each facet between [0-1]\n"
-        "• segment_ids: the segment or cluster id of each facet\n"
-        "• number_of_clusters: number of clusters for the soft clustering\n"
-        "• smoothing_lambda: factor which indicates the importance of the surface features for the energy minimization. It is recommended to choose a value in the interval [0,1]. See the section Hard clustering for more details.\n"
-        "• output_cluster_ids: if false fill segment_ids with segment-ids, and with cluster-ids otherwise (see Figure 73.5)\n"
-        "• ppmap: point property map.\n"
-        "Returns\n"
-        "• number of segments if output_cluster_ids is set to false and number_of_clusters otherwise \n"
-        "Examples\n"
-        "Surface_mesh_segmentation/extract_segmentation_into_mesh_example.py, Surface_mesh_segmentation/segmentation_from_sdf_values_SM_example.py, Surface_mesh_segmentation/segmentation_from_sdf_values_example.py, and Surface_mesh_segmentation/segmentation_with_facet_ids_example.py.\n");
+        cgalpy::smse::docstrings::segmentation_from_sdf_values);
 
   m.def("segmentation_via_sdf_values", &segment::segmentation_via_sdf_values<Pm, SegmentPropertyMap, PointPropertyMap>,
         py::arg("triangle_mesh"), py::arg("segment_ids"),
         py::arg("cone_angle") = 2.0 / 3.0 * CGAL_PI, py::arg("number_of_rays") = 25,
         py::arg("number_of_clusters") = 5, py::arg("smoothing_lambda") = 0.26,
         py::arg("output_cluster_ids") = false, py::arg("ppmap") = std::optional<PointPropertyMap>(),
-        "Function computing the segmentation of a surface mesh\n"
-        "This function is equivalent to calling the functions CGALPY.sdf_values() and CGALPY.segmentation_from_sdf_values() with the same parameters.\n"
-        "\n"
-        "Note\n"
-        "• There is no direct relation between the parameter number_of_clusters and the final number of segments after segmentation. However, setting a large number of clusters will result in a detailed segmentation of the mesh with a large number of segments. \n"
-        "• For computing segmentations of the mesh with different parameters (i.e. number of levels, and smoothing lambda), it is more efficient to first compute the SDF values using CGALPY.sdf_values() and use them in different calls to CGALPY.segmentation_from_sdf_values().\n"
-        "\n"
-        "Precondition\n"
-        "• is_triangle_mesh(triangle_mesh) \n"
-        "• number_of_clusters > 0\n"
-        "\n"
-        "Parameters\n"
-        "• triangle_mesh: surface mesh corresponding to the SDF values\n"
-        "• segment_ids: the segment or cluster id of each facet\n"
-        "• cone_angle: opening angle in radians for the cone of each facet\n"
-        "• number_of_rays: number of rays picked in the cone of each facet. In our experiments, we observe that increasing the number of rays beyond the default has a little effect on the quality of the segmentation result\n"
-        "• number_of_clusters: number of clusters for the soft clustering\n"
-        "• smoothing_lambda: factor which indicates the importance of the surface features for the energy minimization. It is recommended to choose a value in the interval [0,1]. See the section Hard clustering for more details.\n"
-        "• output_cluster_ids: if false fill segment_ids with segment-ids, and with cluster-ids otherwise (see Figure 73.5)\n"
-        "• ppmap: point property map.\n"
-        "\n"
-        "Returns\n"
-        "• number of segments if output_cluster_ids is set to false and number_of_clusters otherwise\n"
-        "\n"
-        "Examples\n"
-        "Surface_mesh_segmentation/segmentation_via_sdf_values_example.py.\n");
+        cgalpy::smse::docstrings::segmentation_via_sdf_values);
 
 }
 

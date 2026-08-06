@@ -6,7 +6,7 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
-//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
+//            Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
 
 #include <nanobind/nanobind.h>
 
@@ -112,6 +112,27 @@ void bind_neighbor_search(py::module_& m, const char* python_name) {
   py::class_<T>(m, python_name, ss_doc::K_neighbor_search_class)
     .def(py::init<const typename T::Tree&, typename T::Query_item, unsigned int>(),
          py::arg("tree"), py::arg("q"), py::arg("k"),
+         py::keep_alive<1, 2>(),
+         ss_doc::K_neighbor_search_K_neighbor_search)
+    .def(py::init<const typename T::Tree&, typename T::Query_item,
+                  unsigned int, FT_d, bool, typename T::Distance, bool>(),
+         py::arg("tree"), py::arg("q"), py::arg("k"), py::arg("eps"),
+         py::arg("search_nearest"), py::arg("d"), py::arg("sorted"),
+         py::keep_alive<1, 2>(),
+         ss_doc::K_neighbor_search_K_neighbor_search)
+    .def("k_neighbors", &k_neighbors<T>,
+         "Return the neighbor-search result as a Python list of (point, distance) pairs.")
+    ;
+}
+
+template <typename T>
+void bind_neighbor_search_python(py::module_& m, const char* python_name) {
+  py::class_<T>(m, python_name, ss_doc::K_neighbor_search_class)
+    .def(py::init<const typename T::Tree&, typename T::Query_item,
+                  unsigned int, FT_d, bool, typename T::Distance, bool>(),
+         py::arg("tree"), py::arg("q"), py::arg("k"), py::arg("eps"),
+         py::arg("search_nearest"), py::arg("d"), py::arg("sorted"),
+         py::keep_alive<1, 2>(),
          ss_doc::K_neighbor_search_K_neighbor_search)
     .def("k_neighbors", &k_neighbors<T>,
          "Return the neighbor-search result as a Python list of (point, distance) pairs.")
@@ -160,7 +181,7 @@ void export_spatial_searching(py::module_& m) {
          py::arg("p"), ss_doc::Fuzzy_sphere_contains)
     .def("inner_range_intersects", &Fs::inner_range_intersects,
          py::arg("rectangle"), ss_doc::Fuzzy_sphere_inner_range_intersects)
-    .def("outer_range_intersects", &Fs::outer_range_contains,
+    .def("outer_range_contains", &Fs::outer_range_contains,
          py::arg("rectangle"), ss_doc::Fuzzy_sphere_outer_range_contains)
     ;
   auto res_fs = add_attr<Fs_point_d>(fs_c, "Point_d");
@@ -246,7 +267,8 @@ void export_spatial_searching(py::module_& m) {
     // .def("inverse_of_transformed_distance", &Ed::inverse_of_transformed_distance)
     ;
 
-  bind_neighbor_search<ss_code::K_neighbor_search_python>(m, "K_neighbor_search_python");
+  bind_neighbor_search_python<ss_code::K_neighbor_search_python>(
+    m, "K_neighbor_search_python");
 
   bind_neighbor_search<ss_code::K_neighbor_search>(m, "K_neighbor_search");
 

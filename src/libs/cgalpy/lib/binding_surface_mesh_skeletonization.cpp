@@ -4,8 +4,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
-// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
-//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
+// Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
+//            Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/function.h>
@@ -24,6 +24,32 @@
 
 namespace py = nanobind;
 namespace smsk_doc = cgalpy::smsk::docstrings;
+
+namespace {
+
+template <typename Descriptor>
+auto append_input_vertex(py::list& result,
+                         Descriptor& descriptor,
+                         int)
+  -> decltype(*descriptor, void())
+{
+  result.append(
+    py::cast(
+      *descriptor,
+      py::rv_policy::reference
+    )
+  );
+}
+
+template <typename Descriptor>
+void append_input_vertex(py::list& result,
+                         Descriptor& descriptor,
+                         long)
+{
+  result.append(descriptor);
+}
+
+} // namespace
 
 void export_surface_mesh_skeletonization(py::module_& m) {
   using Tm = cgalpy::pmp::Polygonal_mesh;
@@ -122,8 +148,15 @@ void export_surface_mesh_skeletonization(py::module_& m) {
   py::class_<Mcfs_vmap> vmap(skeletonization, "Vmap");
   vmap.def_rw("point", &Mcfs_vmap::point,
               ri)
-    .def_rw("vertices", &Mcfs_vmap::vertices,
-            ri)
+    .def_prop_ro(
+      "vertices",
+      [](Mcfs_vmap& value) {
+        py::list result;
+        for (auto& vertex : value.vertices)
+          append_input_vertex(result, vertex, 0);
+        return result;
+      },
+      "Returns the input mesh vertices associated with this skeleton vertex.")
     ;
 
   // TODO: this is an unspecified_type

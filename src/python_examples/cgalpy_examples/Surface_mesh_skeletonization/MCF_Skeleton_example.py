@@ -13,14 +13,17 @@ if len(sys.argv) > 1:
 
 CGALPY = importlib.import_module(lib)
 Pol3 = CGALPY.Pol3
+Pmp = CGALPY.Pmp
 Smsk = CGALPY.Smsk
 Skeletonization = Smsk.Mean_curvature_flow_skeletonization
 Skeleton = Skeletonization.Skeleton
 
-tmesh = Pol3.read_polygon_mesh(CGALPY.data_file_path("meshes/elephant.off"))
+tmesh = Pmp.read_polygon_mesh(CGALPY.data_file_path("meshes/elephant.off"))
 if not Pol3.is_triangle_mesh(tmesh):
   print("Input geometry is not triangulated.")
   sys.exit(1)
+
+vertex_point_map = Pol3.get_vertex_point_map(tmesh)
 
 skeleton = Skeleton()
 skeletonization = Smsk.Mean_curvature_flow_skeletonization(tmesh)
@@ -59,4 +62,4 @@ with open("skel-poly.polylines.txt", "w") as out:
 with open("correspondance-poly.polylines.txt", "w") as out:
     for v in skeleton.vertex_set():
         for vd in skeleton[v].vertices:
-            out.write(f"2 {skeleton[v].point} {Pol3.get_vertex_point(tmesh, vd)}\n")
+            out.write(f"2 {skeleton[v].point} {vertex_point_map[vd]}\n")

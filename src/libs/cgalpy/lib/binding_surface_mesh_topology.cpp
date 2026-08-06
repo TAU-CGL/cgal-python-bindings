@@ -17,9 +17,11 @@
 #include <CGAL/Path_on_surface.h>
 #include <CGAL/Polygonal_schema_min_items.h>
 
+#include "cgalpy/Smt_docstrings.hpp"
 #include "cgalpy/sm/surface_mesh_topology_types.hpp"
 
 namespace py = nanobind;
+namespace smt_doc = cgalpy::smt::docstrings;
 
 namespace {
 
@@ -66,29 +68,35 @@ std::pair<bool, bool> open_path_homotopy(const Surface_mesh_3& sm) {
 } // namespace
 
 void export_surface_mesh_topology(py::module_& m) {
-  py::class_<Smt::Polygonal_schema_min_items>(m, "Polygonal_schema_min_items")
+  py::class_<Smt::Polygonal_schema_min_items>(
+    m,
+    "Polygonal_schema_min_items",
+    smt_doc::Surface_mesh_topology_Polygonal_schema_min_items_class)
     .def(py::init<>());
 
-  py::class_<Path_on_surface>(m, "Path_on_surface")
+  py::class_<Path_on_surface>(
+    m,
+    "Path_on_surface",
+    smt_doc::Surface_mesh_topology_Path_on_surface_class)
     .def(py::init<const Surface_mesh_3&>(),
          py::arg("mesh"),
          py::keep_alive<1, 2>(),
-         "Creates an empty path on the given surface mesh.")
+         smt_doc::Surface_mesh_topology_Path_on_surface_Path_on_surface)
     .def(py::init<const Path_on_surface&>(),
          py::arg("other"),
          "Copy constructor.")
     .def("is_empty",
          &Path_on_surface::is_empty,
-         "Returns true iff the path is empty.")
+         smt_doc::Surface_mesh_topology_Path_on_surface_is_empty)
     .def("length",
          &Path_on_surface::length,
-         "Returns the number of darts in the path.")
+         smt_doc::Surface_mesh_topology_Path_on_surface_length)
     .def("is_closed",
          &Path_on_surface::is_closed,
-         "Returns true iff the path is closed.")
+         smt_doc::Surface_mesh_topology_Path_on_surface_is_closed)
     .def("clear",
          &Path_on_surface::clear,
-         "Clears the path.")
+         smt_doc::Surface_mesh_topology_Path_on_surface_clear)
     .def("push_back_by_index",
          [](Path_on_surface& path,
             std::size_t index,
@@ -99,7 +107,7 @@ void export_surface_mesh_topology(py::module_& m) {
          py::arg("index"),
          py::arg("flip") = false,
          py::arg("update_isclosed") = true,
-         "Adds the dart with the given index at the end of the path.")
+         smt_doc::Surface_mesh_topology_Path_on_surface_push_back_by_index)
     .def("push_back_by_indices",
          [](Path_on_surface& path,
             const std::vector<std::size_t>& indices,
@@ -110,7 +118,7 @@ void export_surface_mesh_topology(py::module_& m) {
          },
          py::arg("indices"),
          py::arg("update_isclosed") = true,
-         "Adds the darts with the given indices at the end of the path.")
+         smt_doc::Surface_mesh_topology_Path_on_surface_push_back_by_index_1)
     .def("extend_straight_positive",
          [](Path_on_surface& path,
             std::size_t nb,
@@ -137,7 +145,7 @@ void export_surface_mesh_topology(py::module_& m) {
          },
          py::arg("nb") = 1,
          py::arg("update_isclosed") = true,
-         "Extends the path with a positive turn.")
+         smt_doc::Surface_mesh_topology_Path_on_surface_extend_positive_turn)
     .def("extend_negative_turn",
          [](Path_on_surface& path,
             std::size_t nb,
@@ -146,7 +154,7 @@ void export_surface_mesh_topology(py::module_& m) {
          },
          py::arg("nb") = 1,
          py::arg("update_isclosed") = true,
-         "Extends the path with a negative turn.")
+         smt_doc::Surface_mesh_topology_Path_on_surface_extend_negative_turn)
     .def("simplify_flips",
          &Path_on_surface::simplify_flips,
          py::arg("show_flips_left") = false,
@@ -167,12 +175,15 @@ void export_surface_mesh_topology(py::module_& m) {
          py::arg("update_isclosed") = true,
          "Initializes this path to a random starting dart.");
 
-  py::class_<Curves_on_surface_topology>(m, "Curves_on_surface_topology")
+  py::class_<Curves_on_surface_topology>(
+    m,
+    "Curves_on_surface_topology",
+    smt_doc::Surface_mesh_topology_Curves_on_surface_topology_class)
     .def(py::init<const Surface_mesh_3&, bool>(),
          py::arg("mesh"),
          py::arg("display_time") = false,
          py::keep_alive<1, 2>(),
-         "Creates a topology helper for curves on a surface mesh.")
+         smt_doc::Surface_mesh_topology_Curves_on_surface_topology_Curves_on_surface_topology)
     .def("is_minimal_quadrangulation_computed",
          &Curves_on_surface_topology::is_minimal_quadrangulation_computed,
          "Returns true iff the minimal quadrangulation is computed.")
@@ -188,7 +199,7 @@ void export_surface_mesh_topology(py::module_& m) {
          },
          py::arg("path"),
          py::arg("display_time") = false,
-         "Returns true iff the path is contractible.")
+         smt_doc::Surface_mesh_topology_Curves_on_surface_topology_is_contractible)
     .def("are_freely_homotopic",
          [](const Curves_on_surface_topology& cst,
             const Path_on_surface& path_1,
@@ -199,7 +210,7 @@ void export_surface_mesh_topology(py::module_& m) {
          py::arg("path_1"),
          py::arg("path_2"),
          py::arg("display_time") = false,
-         "Returns true iff the two paths are freely homotopic.")
+         smt_doc::Surface_mesh_topology_Curves_on_surface_topology_are_freely_homotopic)
     .def("are_base_point_homotopic",
          [](const Curves_on_surface_topology& cst,
             const Path_on_surface& path_1,
@@ -210,7 +221,7 @@ void export_surface_mesh_topology(py::module_& m) {
          py::arg("path_1"),
          py::arg("path_2"),
          py::arg("display_time") = false,
-         "Returns true iff the two paths are base point homotopic.")
+         smt_doc::Surface_mesh_topology_Curves_on_surface_topology_are_homotopic_with_fixed_endpoints)
     .def("is_homotopic_to_simple_cycle",
          [](const Curves_on_surface_topology& cst,
             const Path_on_surface& path,
@@ -219,11 +230,11 @@ void export_surface_mesh_topology(py::module_& m) {
          },
          py::arg("path"),
          py::arg("display_time") = false,
-         "Returns true iff the path is homotopic to a simple cycle.")
+         smt_doc::Surface_mesh_topology_Curves_on_surface_topology_is_homotopic_to_simple_cycle)
     .def("set_verbose",
          &Curves_on_surface_topology::set_verbose,
          py::arg("is_verbose"),
-         "Sets whether warning messages are displayed.");
+         smt_doc::Surface_mesh_topology_Curves_on_surface_topology_set_verbose);
 
   m.def("open_path_homotopy",
         &open_path_homotopy,

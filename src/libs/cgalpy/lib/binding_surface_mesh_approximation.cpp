@@ -19,6 +19,7 @@
 #include <CGAL/Surface_mesh_approximation/approximate_triangle_mesh.h>
 
 #include "cgalpy/sm/surface_mesh_approximation_types.hpp"
+#include "cgalpy/Sma_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -70,12 +71,12 @@ Approximation_result approximate_triangle_mesh(const Surface_mesh_3& tmesh,
 } // namespace
 
 void export_surface_mesh_approximation(py::module_& m) {
-  py::enum_<Sma::Verbose_level>(m, "Verbose_level")
+  py::enum_<Sma::Verbose_level>(m, "Verbose_level", cgalpy::sma::docstrings::Surface_mesh_approximation_Verbose_level)
     .value("SILENT", Sma::SILENT)
     .value("MAIN_STEPS", Sma::MAIN_STEPS)
     .value("VERBOSE", Sma::VERBOSE);
 
-  py::enum_<Sma::Seeding_method>(m, "Seeding_method")
+  py::enum_<Sma::Seeding_method>(m, "Seeding_method", cgalpy::sma::docstrings::Surface_mesh_approximation_Seeding_method)
     .value("RANDOM", Sma::RANDOM)
     .value("INCREMENTAL", Sma::INCREMENTAL)
     .value("HIERARCHICAL", Sma::HIERARCHICAL);

@@ -23,6 +23,7 @@
 #include <CGAL/Surface_mesh_shortest_path/barycentric.h>
 
 #include "cgalpy/sm/surface_mesh_shortest_path_types.hpp"
+#include "cgalpy/Smsh_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -113,56 +114,65 @@ void write_shortest_paths_to_source_points(Surface_mesh_shortest_path& self,
 } // namespace
 
 void export_surface_mesh_shortest_path(py::module_& m) {
-  py::enum_<Smsh::Barycentric_coordinates_type>(m, "Barycentric_coordinates_type")
+  py::enum_<Smsh::Barycentric_coordinates_type>(
+    m,
+    "Barycentric_coordinates_type",
+    cgalpy::smsh::docstrings::Surface_mesh_shortest_paths_3_Barycentric_coordinates_type)
     .value("BARYCENTRIC_COORDINATES_INVALID", Smsh::BARYCENTRIC_COORDINATES_INVALID)
     .value("BARYCENTRIC_COORDINATES_ON_VERTEX", Smsh::BARYCENTRIC_COORDINATES_ON_VERTEX)
     .value("BARYCENTRIC_COORDINATES_ON_BOUNDARY", Smsh::BARYCENTRIC_COORDINATES_ON_BOUNDARY)
     .value("BARYCENTRIC_COORDINATES_ON_BOUNDED_SIDE", Smsh::BARYCENTRIC_COORDINATES_ON_BOUNDED_SIDE)
     .value("BARYCENTRIC_COORDINATES_ON_UNBOUNDED_SIDE", Smsh::BARYCENTRIC_COORDINATES_ON_UNBOUNDED_SIDE);
 
-  py::class_<Surface_mesh_shortest_path>(m, "Surface_mesh_shortest_path")
-    .def(py::init<const Surface_mesh_3&>(), py::arg("mesh"), py::keep_alive<1, 2>())
+  py::class_<Surface_mesh_shortest_path>(
+    m,
+    "Surface_mesh_shortest_path",
+    cgalpy::smsh::docstrings::Surface_mesh_shortest_path_class)
+    .def(py::init<const Surface_mesh_3&>(),
+         py::arg("mesh"),
+         py::keep_alive<1, 2>(),
+         cgalpy::smsh::docstrings::Surface_mesh_shortest_path_Surface_mesh_shortest_path)
     .def("add_source_point",
          &add_source_point,
          py::arg("face"), py::arg("location"),
-         "Adds a source point inside a face using barycentric coordinates.")
+         cgalpy::smsh::docstrings::Surface_mesh_shortest_path_add_source_point_1)
     .def("add_source_point",
          &add_source_vertex,
          py::arg("vertex"),
-         "Adds a mesh vertex as a source point.")
+         cgalpy::smsh::docstrings::Surface_mesh_shortest_path_add_source_point)
     .def("build_sequence_tree",
          &Surface_mesh_shortest_path::build_sequence_tree,
-         "Builds the internal sequence tree for the current source points.")
+         cgalpy::smsh::docstrings::Surface_mesh_shortest_path_build_sequence_tree)
     .def("clear",
          &Surface_mesh_shortest_path::clear,
-         "Removes all source points and clears the internal sequence tree.")
+         cgalpy::smsh::docstrings::Surface_mesh_shortest_path_clear)
     .def("number_of_source_points",
          &Surface_mesh_shortest_path::number_of_source_points,
-         "Returns the number of source points.")
+         cgalpy::smsh::docstrings::Surface_mesh_shortest_path_number_of_source_points)
     .def("point",
          &point,
          py::arg("face"), py::arg("location"),
-         "Returns the 3D point at barycentric coordinates in a face.")
+         cgalpy::smsh::docstrings::Surface_mesh_shortest_path_point)
     .def("shortest_distance_to_source_points",
          py::overload_cast<Surface_mesh_shortest_path&, Vertex_descriptor>
            (&shortest_distance_to_source_points),
          py::arg("vertex"),
-         "Returns the shortest distance from a vertex to the closest source point.")
+         cgalpy::smsh::docstrings::Surface_mesh_shortest_path_shortest_distance_to_source_points)
     .def("shortest_distance_to_source_points",
          py::overload_cast<Surface_mesh_shortest_path&, Face_descriptor, const Python_barycentric_coordinates&>
            (&shortest_distance_to_source_points),
          py::arg("face"), py::arg("location"),
-         "Returns the shortest distance from a face location to the closest source point.")
+         cgalpy::smsh::docstrings::Surface_mesh_shortest_path_shortest_distance_to_source_points_1)
     .def("shortest_path_points_to_source_points",
          py::overload_cast<Surface_mesh_shortest_path&, Vertex_descriptor>
            (&shortest_path_points_to_source_points),
          py::arg("vertex"),
-         "Returns the points of the shortest path from a vertex to the source points.")
+         cgalpy::smsh::docstrings::Surface_mesh_shortest_path_shortest_path_points_to_source_points)
     .def("shortest_path_points_to_source_points",
          py::overload_cast<Surface_mesh_shortest_path&, Face_descriptor, const Python_barycentric_coordinates&>
            (&shortest_path_points_to_source_points),
          py::arg("face"), py::arg("location"),
-         "Returns the points of the shortest path from a face location to the source points.")
+         cgalpy::smsh::docstrings::Surface_mesh_shortest_path_shortest_path_points_to_source_points_1)
     .def("write_shortest_paths_to_source_points",
          &write_shortest_paths_to_source_points,
          py::arg("mesh"), py::arg("filename"),

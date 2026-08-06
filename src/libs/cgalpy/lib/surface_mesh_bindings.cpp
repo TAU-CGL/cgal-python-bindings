@@ -6,7 +6,7 @@
 //
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
 //            Efi Fogel         <efifogel@gmail.com>
-//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
+//            Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
 
 #define CGAL_USE_BASIC_VIEWER
 
@@ -75,6 +75,50 @@ namespace sm_doc = cgalpy::sm::docstrings;
 
 namespace cgalpy {
 namespace sm {
+
+template <std::size_t I>
+struct Keep_result_alive_from {
+  static void precall(PyObject**, std::size_t,
+                      py::detail::cleanup_list*) {}
+
+  template <std::size_t N>
+  static void postcall(PyObject** args,
+                       std::integral_constant<std::size_t, N>,
+                       py::handle result) {
+    static_assert(I > 0 && I <= N,
+                  "Owner argument index is outside the function argument range.");
+
+    if (result.ptr() != nullptr && result.ptr() != Py_None)
+      py::detail::keep_alive(result.ptr(), args[I - 1]);
+  }
+};
+
+template <std::size_t I>
+struct Keep_first_tuple_item_alive_from {
+  static void precall(PyObject**, std::size_t,
+                      py::detail::cleanup_list*) {}
+
+  template <std::size_t N>
+  static void postcall(PyObject** args,
+                       std::integral_constant<std::size_t, N>,
+                       py::handle result) {
+    static_assert(I > 0 && I <= N,
+                  "Owner argument index is outside the function argument range.");
+
+    PyObject* tuple = result.ptr();
+
+    if (tuple == nullptr ||
+        !PyTuple_Check(tuple) ||
+        PyTuple_GET_SIZE(tuple) < 1)
+      throw std::runtime_error(
+        "Expected a tuple containing a property map result.");
+
+    PyObject* property_map = PyTuple_GET_ITEM(tuple, 0);
+
+    if (property_map != Py_None)
+      py::detail::keep_alive(property_map, args[I - 1]);
+  }
+};
 
 //! Add a face from a list of vertices.
 template <typename SurfaceMesh>
@@ -160,10 +204,11 @@ void export_dynamic_vertex_map(py::module_& m, const std::string& name) {
   using Vd = typename boost::graph_traits<Sm>::vertex_descriptor;
   using Dvpt = CGAL::dynamic_vertex_property_t<T>;
   using Mt = typename boost::property_map<Sm, Dvpt>::type;
-  constexpr auto ri(py::rv_policy::reference_internal);
+  constexpr auto policy(Policy);
   export_dynamic_property_map<Mt>(m, "Dynamic_" + name);
-  m.def("get", [](Dvpt tag, Sm& g) { return CGAL::get(tag, g); }, ri,
+  m.def("get", [](Dvpt tag, Sm& g) { return CGAL::get(tag, g); }, policy,
         py::arg("tag"), py::arg("graph"),
+        py::call_policy<cgalpy::sm::Keep_result_alive_from<2>>(),
         "Returns a dynamic vertex property map from a Surface_mesh.");
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
@@ -171,8 +216,9 @@ void export_dynamic_vertex_map(py::module_& m, const std::string& name) {
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
   // Also, transfer the first character into lower case
-  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dvpt(), g); }, ri,
+  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dvpt(), g); }, policy,
         py::arg("graph"),
+        py::call_policy<cgalpy::sm::Keep_result_alive_from<1>>(),
         "Returns a dynamic vertex property map from a Surface_mesh.");
 }
 
@@ -183,10 +229,11 @@ void export_dynamic_halfedge_map(py::module_& m, const std::string& name) {
   using Hd = typename boost::graph_traits<Sm>::halfedge_descriptor;
   using Dhpt = CGAL::dynamic_halfedge_property_t<T>;
   using Mt = typename boost::property_map<Sm, Dhpt>::type;
-  constexpr auto ri(py::rv_policy::reference_internal);
+  constexpr auto policy(Policy);
   export_dynamic_property_map<Mt>(m, "Dynamic_" + name);
-  m.def("get", [](Dhpt tag, Sm& g) { return CGAL::get(tag, g); }, ri,
+  m.def("get", [](Dhpt tag, Sm& g) { return CGAL::get(tag, g); }, policy,
         py::arg("property_map"), py::arg("graph"),
+        py::call_policy<cgalpy::sm::Keep_result_alive_from<2>>(),
         "Returns a dynamic halfedge property map from a Surface_mesh.");
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
@@ -194,8 +241,9 @@ void export_dynamic_halfedge_map(py::module_& m, const std::string& name) {
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
   // Also, transfer the first character into lower case
-  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dhpt(), g); }, ri,
+  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dhpt(), g); }, policy,
         py::arg("graph"),
+        py::call_policy<cgalpy::sm::Keep_result_alive_from<1>>(),
         "Returns a dynamic halfedge property map from a Surface_mesh.");
 }
 
@@ -206,10 +254,11 @@ void export_dynamic_face_map(py::module_& m, const std::string& name) {
   using Fd = typename boost::graph_traits<Sm>::face_descriptor;
   using Dfpt = CGAL::dynamic_face_property_t<T>;
   using Mt = typename boost::property_map<Sm, Dfpt>::type;
-  constexpr auto ri(py::rv_policy::reference_internal);
+  constexpr auto policy(Policy);
   export_dynamic_property_map<Mt>(m, "Dynamic_" + name);
-  m.def("get", [](Dfpt tag, Sm& g) { return CGAL::get(tag, g); }, ri,
+  m.def("get", [](Dfpt tag, Sm& g) { return CGAL::get(tag, g); }, policy,
         py::arg("property_map"), py::arg("graph"),
+        py::call_policy<cgalpy::sm::Keep_result_alive_from<2>>(),
         "Returns a dynamic face property map from a Surface_mesh.");
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
@@ -217,8 +266,9 @@ void export_dynamic_face_map(py::module_& m, const std::string& name) {
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
   // Also, transfer the first character into lower case
-  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dfpt(), g); }, ri,
+  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dfpt(), g); }, policy,
         py::arg("graph"),
+        py::call_policy<cgalpy::sm::Keep_result_alive_from<1>>(),
         "Returns a dynamic face property map from a Surface_mesh.");
 }
 
@@ -229,10 +279,11 @@ void export_dynamic_edge_map(py::module_& m, const std::string& name) {
   using Ed = typename boost::graph_traits<Sm>::edge_descriptor;
   using Dept = CGAL::dynamic_edge_property_t<T>;
   using Mt = typename boost::property_map<Sm, Dept>::type;
-  constexpr auto ri(py::rv_policy::reference_internal);
+  constexpr auto policy(Policy);
   export_dynamic_property_map<Mt>(m, "Dynamic_" + name);
-  m.def("get", [](Dept tag, Sm& g) { return CGAL::get(tag, g); }, ri,
+  m.def("get", [](Dept tag, Sm& g) { return CGAL::get(tag, g); }, policy,
         py::arg("property_map"), py::arg("graph"),
+        py::call_policy<cgalpy::sm::Keep_result_alive_from<2>>(),
         "Returns a dynamic edge property map from a Surface_mesh.");
 
   // Observe that Dvpt is (an instance) exported by the Bgl module.
@@ -240,8 +291,9 @@ void export_dynamic_edge_map(py::module_& m, const std::string& name) {
   // A Python user must create bindings for the Bgl in order to obtain the wrapped tag.
   // As a shortcut, we also provide the alias below, which obliviates the Bgl bindings at least for this purpose.
   // Also, transfer the first character into lower case
-  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dept(), g); }, ri,
+  m.def(("get_dynamic_" + name).c_str(), [](Sm& g) { return CGAL::get(Dept(), g); }, policy,
         py::arg("graph"),
+        py::call_policy<cgalpy::sm::Keep_result_alive_from<1>>(),
         "Returns a dynamic edge property map from a Surface_mesh.");
 }
 
@@ -405,9 +457,11 @@ void add_generic_map(C& c, const std::string& map_name, const Value& default_val
 
   c.def(("add_" + map_name).c_str(), sm::add_map<Sm, Key, Value>,
         py::arg("name") = std::string(), py::arg("default_value") = default_value,
+        py::call_policy<cgalpy::sm::Keep_first_tuple_item_alive_from<1>>(),
         sm_doc::Surface_mesh_add_property_map)
     .def(map_name.c_str(), &Sm::template property_map<Key, Value>,
          py::arg("name") = std::string(),
+         py::call_policy<cgalpy::sm::Keep_result_alive_from<1>>(),
          sm_doc::Surface_mesh_property_map)
     .def("remove_property_map", &Sm::template remove_property_map<Key, Value>,
          py::arg("p"),
@@ -463,6 +517,7 @@ void add_maps(C& c) {
            return sm::add_map<Sm, Vi, std::set<int>>(sm, name, s);
          },
          py::arg("name") = std::string(), py::arg("default_value") = py::set(),
+         py::call_policy<cgalpy::sm::Keep_first_tuple_item_alive_from<1>>(),
          sm_doc::Surface_mesh_add_property_map)
     ;
 
@@ -471,9 +526,11 @@ void add_maps(C& c) {
   using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
   c.def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>,
         py::arg("name"), py::arg("default_value"),
+        py::call_policy<cgalpy::sm::Keep_first_tuple_item_alive_from<1>>(),
         sm_doc::Surface_mesh_add_property_map)
     .def("property_map_vertex_Principal_curvatures_and_directions", &Sm::template property_map<Vi, Pcad>,
          py::arg("name") = std::string(),
+         py::call_policy<cgalpy::sm::Keep_result_alive_from<1>>(),
          sm_doc::Surface_mesh_property_map)
     ;
 #endif
@@ -716,14 +773,14 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
     cgalpy::sm::export_dynamic_property_maps<Sm, int>(m, "int");
     cgalpy::sm::export_dynamic_property_maps<Sm, double>(m, "float");
     cgalpy::sm::export_dynamic_property_maps<Sm, std::size_t>(m, "size_t");
-    cgalpy::sm::export_dynamic_property_maps<Sm, Pnt, py::rv_policy::reference_internal>(m, "point");
-    cgalpy::sm::export_dynamic_property_maps<Sm, Vec, py::rv_policy::reference_internal>(m, "vector_3");
-    cgalpy::sm::export_dynamic_property_maps<Sm, CGAL::IO::Color, py::rv_policy::reference_internal>(m, "color");
+    cgalpy::sm::export_dynamic_property_maps<Sm, Pnt>(m, "point");
+    cgalpy::sm::export_dynamic_property_maps<Sm, Vec>(m, "vector_3");
+    cgalpy::sm::export_dynamic_property_maps<Sm, CGAL::IO::Color>(m, "color");
     cgalpy::sm::export_dynamic_property_maps<Sm, py::tuple>(m, "tuple");
     cgalpy::sm::export_dynamic_property_maps<Sm, py::set>(m, "set");
 
     if constexpr (! std::is_same<double, FT>::value)
-      cgalpy::sm::export_dynamic_property_maps<Sm, FT, py::rv_policy::reference_internal>(m, "FT");
+      cgalpy::sm::export_dynamic_property_maps<Sm, FT>(m, "FT");
 
 
     sm_c.def(py::init<>(), sm_doc::Surface_mesh_Surface_mesh)
@@ -917,6 +974,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
            py::arg("v"),
            sm_doc::Surface_mesh_point)
       .def("points", &cgalpy::sm::points<Sm, Vi, Pnt>,
+           py::call_policy<cgalpy::sm::Keep_result_alive_from<1>>(),
            sm_doc::Surface_mesh_points)
 
       // .def("__iadd__",
@@ -982,7 +1040,7 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
 
 #ifdef CGALPY_HAS_VISUAL
   m.def("faces", &boost_utils::my_faces<Sm>,
-        py::arg("graph"), py::keep_alive<0, 1>(), bgl_doc::FaceListGraph_faces);
+        py::arg("graph"), bgl_doc::FaceListGraph_faces);
 
 #endif
 }
@@ -1084,6 +1142,7 @@ void export_surface_mesh(py::module_& m) {
                     "Face-filtered view of a Surface_mesh.")
     .def(py::init<const Sm_3&, std::size_t, const Sm_3::Property_map<Fi, std::size_t>&>(),
          py::arg("graph"), py::arg("selected_face_patch_id"), py::arg("face_patch_id_map"),
+         py::keep_alive<1, 2>(),
          "Constructs a face-filtered graph view.")
     .def("graph", [](const Ffg3& ffg) { return ffg.graph(); },
          "Returns the underlying graph.")
@@ -1181,17 +1240,21 @@ void export_surface_mesh(py::module_& m) {
 
   //! Obtain the propery maps
 #ifdef CGALPY_BGL_BINDINGS
-  m.def("get", [](CGAL::vertex_point_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
+  m.def("get", [](CGAL::vertex_point_t tag, Sm_3& g) { return CGAL::get(tag, g); },
         py::arg("tag"), py::arg("graph"),
+        py::call_policy<cgalpy::sm::Keep_result_alive_from<2>>(),
         "Returns the vertex point property map.");
-  m.def("get", [](CGAL::vertex_index_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
+  m.def("get", [](CGAL::vertex_index_t tag, Sm_3& g) { return CGAL::get(tag, g); },
         py::arg("tag"), py::arg("graph"),
+        py::call_policy<cgalpy::sm::Keep_result_alive_from<2>>(),
         "Returns the vertex index property map.");
-  m.def("get", [](CGAL::halfedge_index_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
+  m.def("get", [](CGAL::halfedge_index_t tag, Sm_3& g) { return CGAL::get(tag, g); },
         py::arg("tag"), py::arg("graph"),
+        py::call_policy<cgalpy::sm::Keep_result_alive_from<2>>(),
         "Returns the halfedge index property map.");
-  m.def("get", [](CGAL::face_index_t tag, Sm_3& g) { return CGAL::get(tag, g); }, ri,
+  m.def("get", [](CGAL::face_index_t tag, Sm_3& g) { return CGAL::get(tag, g); },
         py::arg("tag"), py::arg("graph"),
+        py::call_policy<cgalpy::sm::Keep_result_alive_from<2>>(),
         "Returns the face index property map.");
   m.def("adjacent_vertices", &cgalpy::bgl::adjacent_vertices<Sm_3>,
         py::arg("vertex"), py::arg("graph"), bgl_doc::adjacent_vertices);
@@ -1325,11 +1388,11 @@ void export_surface_mesh(py::module_& m) {
         bgl_doc::MutableHalfedgeGraph_set_target);
 
   m.def("vertices", &boost_utils::my_vertices<Sm_3>,
-        py::arg("graph"), py::keep_alive<0, 1>(), bgl_doc::VertexListGraph_vertices);
+        py::arg("graph"), bgl_doc::VertexListGraph_vertices);
 
 
   m.def("edges", &boost_utils::my_edges<Sm_3>,
-        py::arg("graph"), py::keep_alive<0, 1>(), bgl_doc::EdgeListGraph_edges);
+        py::arg("graph"), bgl_doc::EdgeListGraph_edges);
 
   m.def("in_edges", &boost_utils::my_in_edges<Sm_3>,
         py::arg("vertex"), py::arg("graph"), bgl_doc::in_edges);
@@ -1338,11 +1401,11 @@ void export_surface_mesh(py::module_& m) {
         py::arg("vertex"), py::arg("graph"), bgl_doc::out_edges);
 
   m.def("halfedges", &boost_utils::my_halfedges<Sm_3>,
-        py::arg("graph"), py::keep_alive<0, 1>(),
+        py::arg("graph"),
         bgl_doc::HalfedgeListGraph_halfedges);
 
   m.def("faces", &boost_utils::my_faces<Sm_3>,
-        py::arg("graph"), py::keep_alive<0, 1>(), bgl_doc::FaceListGraph_faces);
+        py::arg("graph"), bgl_doc::FaceListGraph_faces);
 
   m.def("make_tetrahedron", &cgalpy::bgl::my_make_tetrahedron<Sm_3>,
         py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"),

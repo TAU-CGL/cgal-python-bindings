@@ -12,6 +12,7 @@
 
 #include "cgalpy/sm/surface_mesh_deformation_types.hpp"
 #include "cgalpy/iterators/py_list_forward_iterator.hpp"
+#include "cgalpy/Smdef_docstrings.hpp"
 
 namespace py = nanobind;
 
@@ -26,12 +27,12 @@ using Surface_mesh_deformation = CGAL::Surface_mesh_deformation<Surface_mesh_3>;
 } // namespace
 
 void export_surface_mesh_deformation(py::module_& m) {
-  py::enum_<CGAL::Deformation_algorithm_tag>(m, "Deformation_algorithm_tag")
+  py::enum_<CGAL::Deformation_algorithm_tag>(m, "Deformation_algorithm_tag", cgalpy::smdef::docstrings::Deformation_algorithm_tag)
     .value("ORIGINAL_ARAP", CGAL::ORIGINAL_ARAP)
     .value("SPOKES_AND_RIMS", CGAL::SPOKES_AND_RIMS)
     .value("SRE_ARAP", CGAL::SRE_ARAP);
 
-  py::class_<Surface_mesh_deformation>(m, "Surface_mesh_deformation")
+  py::class_<Surface_mesh_deformation>(m, "Surface_mesh_deformation", cgalpy::smdef::docstrings::Surface_mesh_deformation_class)
     .def(py::init<Surface_mesh_3&>(), py::arg("mesh"), py::keep_alive<1, 2>())
     .def("insert_roi_vertex",
          &Surface_mesh_deformation::insert_roi_vertex,
