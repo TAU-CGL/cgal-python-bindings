@@ -87,7 +87,7 @@ void export_envelope_3(py::module_& m) {
     py::class_<Edos, Aos> edos_c(m, "Envelope_diagram_on_surface_2");
     edos_c.def(py::init<>())
       .def(py::init<const Edos&>())
-      .def(py::init<const Traits*>(), py::arg("traits"))
+      .def(py::init<const Traits*>(), py::arg("traits"), py::keep_alive<1, 2>())
       ;
   }
 
@@ -99,6 +99,7 @@ void export_envelope_3(py::module_& m) {
       .def(py::init<const Ed&>(), py::arg("other"),
            env3_doc::Envelope_diagram_2_Envelope_diagram_2_1)
       .def(py::init<const Traits*>(), py::arg("traits"),
+           py::keep_alive<1, 2>(),
            env3_doc::Envelope_diagram_2_Envelope_diagram_2_2)
       ;
   }
