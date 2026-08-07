@@ -42,6 +42,7 @@
 #include "cgalpy/kernel_types.hpp"
 #include "cgalpy/make_iterator.hpp"
 #include "cgalpy/pol3/polyhedron_3_types.hpp"
+#include "cgalpy/pol3/Polyhedron_builder.hpp"
 #include "cgalpy/Bgl_docstrings.hpp"
 #include "cgalpy/Pol3_docstrings.hpp"
 
@@ -367,6 +368,28 @@ Halfedge& make_triangle(Polyhedron_3& prn, const Point_3& p1,
                    const Point_3& p2, const Point_3& p3)
 { return *(prn.make_triangle(p1, p2, p3)); }
 
+//!
+void delegate_with_owner(Polyhedron_3& prn,
+                         CGAL::Modifier_base<Halfedge_ds>& modifier) {
+  auto* builder = dynamic_cast<Polyhedron_builder*>(&modifier);
+  if (builder == nullptr) {
+    prn.delegate(modifier);
+    return;
+  }
+
+  builder->set_owner(py::cast(&prn, py::rv_policy::reference));
+
+  try {
+    prn.delegate(modifier);
+  }
+  catch (...) {
+    builder->clear_owner();
+    throw;
+  }
+
+  builder->clear_owner();
+}
+
 /// \name Internal Iterators
 /// @{
 
@@ -551,7 +574,7 @@ void export_polyhedron_3(py::module_& m) {
            pol3_doc::Polyhedron_3_split_vertex)
       .def("make_triangle", &cgalpy::pol3::make_triangle_empty, ri, pol3_doc::Polyhedron_3_make_triangle)
       .def("make_triangle", &cgalpy::pol3::make_triangle, ri, py::arg("p1"), py::arg("p2"), py::arg("p3"), pol3_doc::Polyhedron_3_make_triangle_1)
-      .def("delegate", &Prn::delegate,
+      .def("delegate", &cgalpy::pol3::delegate_with_owner,
            py::arg("modifier"),
            pol3_doc::Polyhedron_3_delegate)
       .def("is_pure_quad", py::overload_cast<>(&Prn::is_pure_quad, py::const_), pol3_doc::Polyhedron_3_is_pure_quad)

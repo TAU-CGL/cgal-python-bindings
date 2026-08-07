@@ -40,7 +40,10 @@ void export_polyhedron_incremental_builder_3(py::module_& m) {
   constexpr auto ri(py::rv_policy::reference_internal);
   if (! add_attr<Pib>(m, "Polyhedron_incremental_builder_3")) {
     py::class_<Pib>(m, "Polyhedron_incremental_builder_3", pol3_doc::Polyhedron_incremental_builder_3_class)
-      .def(py::init<Hds&, bool>(), py::arg("hds"), py::arg("verbose") = false, pol3_doc::Polyhedron_incremental_builder_3_Polyhedron_incremental_builder_3)
+      .def(py::init<Hds&, bool>(),
+           py::arg("hds"), py::arg("verbose") = false,
+           py::keep_alive<1, 2>(),
+           pol3_doc::Polyhedron_incremental_builder_3_Polyhedron_incremental_builder_3)
       .def("begin_surface", &Pib::begin_surface,
            py::arg("v"), py::arg("f"), py::arg("h") = 0,
            py::arg("mode") = 0,

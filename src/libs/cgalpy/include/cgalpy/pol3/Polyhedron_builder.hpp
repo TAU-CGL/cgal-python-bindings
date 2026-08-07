@@ -25,14 +25,24 @@ class Polyhedron_builder : public CGAL::Modifier_base<Halfedge_ds> {
 private:
   py::object m_data;
   py::object m_operator = py::none();
+  py::object m_owner = py::none();
 
 public:
   Polyhedron_builder(py::object data) { m_data = data; }
   void set_operator(py::object op) { m_operator = op; }
   void set_data(py::object data) { m_data = data; }
+  void set_owner(py::object owner) { m_owner = owner; }
+  void clear_owner() { m_owner = py::none(); }
 
-  void operator()(Halfedge_ds& hds)
-  { if (! m_operator.is_none()) m_operator(&hds, m_data); }
+  void operator()(Halfedge_ds& hds) {
+    if (m_operator.is_none()) return;
+
+    auto hds_obj = py::cast(&hds, py::rv_policy::reference);
+    if (! m_owner.is_none())
+      py::setattr(hds_obj, "_cgalpy_polyhedron_owner", m_owner);
+
+    m_operator(hds_obj, m_data);
+  }
 
   py::object data() const { return m_data; }
 };
