@@ -434,8 +434,8 @@ void export_polygon_mesh_processing(py::module_& m) {
   using Sotm_op = CGAL::Bounded_side(Sotm::*)(const Point_3&)const;
   if (! add_attr<Sotm>(m, "Side_of_triangle_mesh")) {
     py::class_<Sotm>(m, "Side_of_triangle_mesh")
-      .def(py::init<const Pm&>())
-      .def(py::init<const Pm&, const Kernel&>())
+      .def(py::init<const Pm&>(), py::keep_alive<1, 2>())
+      .def(py::init<const Pm&, const Kernel&>(), py::keep_alive<1, 2>())
       .def("__call__", static_cast<Sotm_op>(&Sotm::operator()))
       ;
   }
