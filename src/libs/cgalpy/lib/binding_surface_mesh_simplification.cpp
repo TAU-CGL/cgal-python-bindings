@@ -504,7 +504,7 @@ void export_surface_mesh_simplification(py::module_& m) {
   using Ghpp = SMS::GarlandHeckbert_plane_policies<Tm, Kernel>;
   py::class_<Ghpp>(m, "GarlandHeckbert_plane_policies",
                    smsi_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_class)
-    .def(py::init<Tm&>(), py::arg("tmesh"),
+    .def(py::init<Tm&>(), py::keep_alive<1, 2>(), py::arg("tmesh"),
          smsi_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_GarlandHeckbert_plane_policies)
     .def("get_placement", &Ghpp::get_placement,
          smsi_doc::Surface_mesh_simplification_GarlandHeckbert_plane_policies_get_placement)
@@ -520,7 +520,7 @@ void export_surface_mesh_simplification(py::module_& m) {
   using Ghtp = SMS::GarlandHeckbert_triangle_policies<Tm, Kernel>;
   py::class_<Ghtp>(m, "GarlandHeckbert_triangle_policies",
                    smsi_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_class)
-    .def(py::init<Tm&>(), py::arg("tmesh"),
+    .def(py::init<Tm&>(), py::keep_alive<1, 2>(), py::arg("tmesh"),
          smsi_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_GarlandHeckbert_triangle_policies)
     .def("get_placement", &Ghtp::get_placement,
          smsi_doc::Surface_mesh_simplification_GarlandHeckbert_triangle_policies_get_placement)

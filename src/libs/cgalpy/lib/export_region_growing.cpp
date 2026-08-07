@@ -7,6 +7,8 @@
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
 //            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
+#include <new>
+
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/vector.h>
 
@@ -29,21 +31,26 @@ void export_region_growing(py::module_& m) {
   using Point_map   = typename Input_range::Point_map;
   using Normal_map  = typename Input_range::Vector_map;
   // Point Set
-  py::class_<PS::K_neighbor_query<Kernel_, Point_set::Index,
-                                  Point_set::Point_map>>(
+  using Knn_ps3 =
+    PS::K_neighbor_query<Kernel_, Point_set::Index, Point_set::Point_map>;
+
+  py::class_<Knn_ps3>(
       m, "K_neighbor_query_3",
       sd_doc::Shape_detection_Point_set_K_neighbor_query_class)
-    .def(py::init<const Point_set&>(),
-         py::arg("input_range"),
-         sd_doc::Shape_detection_Point_set_K_neighbor_query_K_neighbor_query)
+    .def("__init__", [](Knn_ps3* self, const Point_set& ps) {
+      new (self) Knn_ps3(PS::make_k_neighbor_query(ps));
+    },
+      py::keep_alive<1, 2>(),
+      py::arg("input_range"),
+      sd_doc::Shape_detection_Point_set_K_neighbor_query_K_neighbor_query)
 
     .def_static("init_with_params", [](const Point_set& ps, const py::dict& np) {
-      return PS::K_neighbor_query<Kernel_, Point_set::Index, Point_set::Point_map>(ps);
+      return PS::make_k_neighbor_query(ps);
     },
+      py::keep_alive<0, 1>(),
       py::arg("ps"), py::arg("np"),
       sd_doc::Shape_detection_Point_set_K_neighbor_query_K_neighbor_query)
-    .def("__call__", &PS::K_neighbor_query<Kernel_, Point_set::Index,
-         Point_set::Point_map>::operator(),
+    .def("__call__", &Knn_ps3::operator(),
          py::arg("query"), py::arg("neighbors"),
          sd_doc::Shape_detection_Point_set_K_neighbor_query_operator_call)
     ;
