@@ -626,21 +626,27 @@ void export_triangulation_2(py::module_& m) {
 
   tri_c.def("incident_faces", &cgalpy::tri2::incident_faces_iterator_0,
           py::arg("v"),
+          py::keep_alive<0, 1>(),
           tri2_doc::Triangulation_2_incident_faces)
     .def("incident_faces", &cgalpy::tri2::incident_faces_iterator_1,
          py::arg("v"), py::arg("f"),
+         py::keep_alive<0, 1>(),
          tri2_doc::Triangulation_2_incident_faces_1)
     .def("incident_edges", &cgalpy::tri2::incident_edges_iterator_0,
          py::arg("v"),
+         py::keep_alive<0, 1>(),
          tri2_doc::Triangulation_2_incident_edges)
     .def("incident_edges", &cgalpy::tri2::incident_edges_iterator_1,
          py::arg("v"), py::arg("f"),
+         py::keep_alive<0, 1>(),
          tri2_doc::Triangulation_2_incident_edges_1)
     .def("incident_vertices", &cgalpy::tri2::incident_vertices_iterator_0,
          py::arg("v"),
+         py::keep_alive<0, 1>(),
          tri2_doc::Triangulation_2_incident_vertices)
     .def("incident_vertices", &cgalpy::tri2::incident_vertices_iterator_1,
          py::arg("v"), py::arg("f"),
+         py::keep_alive<0, 1>(),
          tri2_doc::Triangulation_2_incident_vertices_1)
     ;
 
@@ -651,21 +657,27 @@ void export_triangulation_2(py::module_& m) {
 
   tri_c.def("incident_faces_circulator", &cgalpy::tri2::incident_faces_circulator_0,
             py::arg("v"),
+            py::keep_alive<0, 1>(),
             "Returns a circulator over faces incident to a vertex.")
     .def("incident_faces_circulator", &cgalpy::tri2::incident_faces_circulator_1,
          py::arg("v"), py::arg("f"),
+         py::keep_alive<0, 1>(),
          "Returns a circulator over faces incident to a vertex, starting at a face.")
     .def("incident_edges_circulator", &cgalpy::tri2::incident_edges_circulator_0,
          py::arg("v"),
+         py::keep_alive<0, 1>(),
          "Returns a circulator over edges incident to a vertex.")
     .def("incident_edges_circulator", &cgalpy::tri2::incident_edges_circulator_1,
          py::arg("v"), py::arg("f"),
+         py::keep_alive<0, 1>(),
          "Returns a circulator over edges incident to a vertex, starting at a face.")
     .def("incident_vertices_circulator", &cgalpy::tri2::incident_vertices_circulator_0,
          py::arg("v"),
+         py::keep_alive<0, 1>(),
          "Returns a circulator over vertices incident to a vertex.")
     .def("incident_vertices_circulator", &cgalpy::tri2::incident_vertices_circulator_1,
          py::arg("v"), py::arg("f"),
+         py::keep_alive<0, 1>(),
          "Returns a circulator over vertices incident to a vertex, starting at a face.")
     ;
 
