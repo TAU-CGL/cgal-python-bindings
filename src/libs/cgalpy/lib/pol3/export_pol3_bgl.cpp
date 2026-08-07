@@ -192,9 +192,11 @@ void export_pol3_bgl(py::module_& m) {
   using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
   export_dereference_circulator<Hatc, Halfedge&>(m, "Halfedge_around_target_circulator");
   m.def("halfedges_around_target_circulator", &cgalpy::pol3::halfedges_around_target_v_circulator,
-        py::arg("v"), py::arg("g"), bgl_doc::Halfedge_around_target_circulator_class);
+        py::arg("v"), py::arg("g"), bgl_doc::Halfedge_around_target_circulator_class,
+        py::keep_alive<0, 1>());
   m.def("halfedges_around_target_circulator", &cgalpy::pol3::halfedges_around_target_h_circulator,
-        py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_target_circulator_class);
+        py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_target_circulator_class,
+        py::keep_alive<0, 1>());
 
   // Halfedges around source
   // We use the dereference circulator, because we need to dereference twice
@@ -210,9 +212,11 @@ void export_pol3_bgl(py::module_& m) {
   using Hasc = CGAL::Halfedge_around_source_circulator<Prn>;
   export_dereference_circulator<Hasc, Halfedge&>(m, "Halfedge_around_source_circulator");
   m.def("halfedges_around_source_circulator", &cgalpy::pol3::halfedges_around_source_v_circulator,
-        py::arg("v"), py::arg("g"), bgl_doc::Halfedge_around_source_circulator_class);
+        py::arg("v"), py::arg("g"), bgl_doc::Halfedge_around_source_circulator_class,
+        py::keep_alive<0, 1>());
   m.def("halfedges_around_source_circulator", &cgalpy::pol3::halfedges_around_source_h_circulator,
-        py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_source_circulator_class);
+        py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_source_circulator_class,
+        py::keep_alive<0, 1>());
 
   // Halfedges around face
   // We use the dereference circulator, because we need to dereference twice
@@ -225,7 +229,8 @@ void export_pol3_bgl(py::module_& m) {
   using Hafc = CGAL::Halfedge_around_face_circulator<Prn>;
   export_dereference_circulator<Hafc, Halfedge&>(m, "Halfedge_around_face_circulator");
   m.def("halfedges_around_face_circulator", &cgalpy::pol3::halfedges_around_face_circulator,
-        py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_face_circulator_class);
+        py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_face_circulator_class,
+        py::keep_alive<0, 1>());
 
   // Faces around target
   // We use the dereference circulator, because we need to dereference twice
@@ -238,7 +243,8 @@ void export_pol3_bgl(py::module_& m) {
   using Fatc = CGAL::Face_around_target_circulator<Prn>;
   export_dereference_circulator<Fatc, Face&>(m, "Face_around_target_circulator");
   m.def("faces_around_target_circulator", &cgalpy::pol3::faces_around_target_circulator,
-        py::arg("h"), py::arg("g"), bgl_doc::Face_around_target_circulator_class);
+        py::arg("h"), py::arg("g"), bgl_doc::Face_around_target_circulator_class,
+        py::keep_alive<0, 1>());
 
   // Faces around face
   // We use the dereference circulator, because we need to dereference twice
@@ -263,7 +269,8 @@ void export_pol3_bgl(py::module_& m) {
   using Vatc = CGAL::Vertex_around_target_circulator<Prn>;
   export_dereference_circulator<Vatc, Vertex&>(m, "Vertex_around_target_circulator");
   m.def("vertices_around_target_circulator", &cgalpy::pol3::vertices_around_target_circulator,
-        py::arg("h"), py::arg("g"), bgl_doc::Vertex_around_target_circulator_class);
+        py::arg("h"), py::arg("g"), bgl_doc::Vertex_around_target_circulator_class,
+        py::keep_alive<0, 1>());
 
   // Vertices around face
   // We use the dereference circulator, because we need to dereference twice
@@ -276,5 +283,6 @@ void export_pol3_bgl(py::module_& m) {
   using Vafc = CGAL::Vertex_around_face_circulator<Prn>;
   export_dereference_circulator<Vafc, Vertex&>(m, "Vertex_around_face_circulator");
   m.def("vertices_around_face_circulator", &cgalpy::pol3::vertices_around_face_circulator,
-        py::arg("h"), py::arg("g"), bgl_doc::Vertex_around_face_circulator_class);
+        py::arg("h"), py::arg("g"), bgl_doc::Vertex_around_face_circulator_class,
+        py::keep_alive<0, 1>());
 }

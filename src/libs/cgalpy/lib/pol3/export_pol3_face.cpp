@@ -58,7 +58,9 @@ void export_pol3_face(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c) {
     .def("halfedges", &cgalpy::pol3::halfedges_around_facet_iterator, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_Facet_facet_begin)
 
     //! Wrap the function that returns the real circulator
-    .def("halfedges_circulator", &cgalpy::pol3::halfedges_around_facet_circulator, pol3_doc::Polyhedron_3_Facet_facet_begin)
+    .def("halfedges_circulator", &cgalpy::pol3::halfedges_around_facet_circulator,
+         py::keep_alive<0, 1>(),
+         pol3_doc::Polyhedron_3_Facet_facet_begin)
 
     // if CGALPY_POL3_GEOMETRY_TRAITS == CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS
     // plane is actually the normal and is of type Kernel::Vector_3

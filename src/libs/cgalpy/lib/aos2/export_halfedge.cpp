@@ -108,6 +108,7 @@ void export_halfedge(py::class_<cgalpy::aos2::Arrangement_on_surface_2>& c) {
 
     // Wrap also the function that obtains the real circulator
     .def("ccb_circulator", &cgalpy::aos2::ccb_circulator,
+         py::keep_alive<0, 1>(),
          aos2_doc::Arrangement_on_surface_2_Halfedge_ccb)
 
 #ifdef CGALPY_AOS2_HALFEDGE_EXTENDED

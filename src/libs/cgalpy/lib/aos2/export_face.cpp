@@ -121,6 +121,7 @@ void export_face(py::class_<cgalpy::aos2::Arrangement_on_surface_2>& c) {
 
     // Wrap also the function that obtains the real circulator
     .def("outer_ccb_circulator", &cgalpy::aos2::outer_ccb_circulator,
+         py::keep_alive<0, 1>(),
          aos2_doc::Arrangement_on_surface_2_Face_outer_ccb)
 
 #ifdef CGALPY_AOS2_FACE_EXTENDED
