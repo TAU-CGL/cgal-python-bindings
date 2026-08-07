@@ -198,6 +198,7 @@ void export_surface_mesh_skeletonization(py::module_& m) {
                                   "Iterator",
                                   skeleton.vertex_set().begin(), skeleton.vertex_set().end());
          },
+         py::keep_alive<0, 1>(),
          "Return an iterator of vertices of the skeleton.")
     .def_ro("m_vertices",&Skeleton::m_vertices,
             "Return an iterator of vertices of the skeleton.")
