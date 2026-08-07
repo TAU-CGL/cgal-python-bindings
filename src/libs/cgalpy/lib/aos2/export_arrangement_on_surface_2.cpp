@@ -671,8 +671,100 @@ typename Arrangement_::Face& unbounded_face(Arrangement_& arr)
 
 /// @}
 
+constexpr const char* observer_arrangement_owner_attr =
+  "_cgalpy_arrangement_owner";
+
+template <typename Observer, typename Aos>
+struct observer_sync_arrangement_owner {
+  static void precall(
+    PyObject**,
+    size_t,
+    py::detail::cleanup_list*)
+  {}
+
+  template <size_t N>
+  static void postcall(
+    PyObject** args,
+    std::integral_constant<size_t, N>,
+    py::handle)
+  {
+    static_assert(
+      N >= 2,
+      "observer ownership synchronization needs self and arrangement");
+
+    auto* observer =
+      py::inst_ptr<Observer>(args[0]);
+
+    auto* requested =
+      py::inst_ptr<Aos>(args[1]);
+
+    auto* actual =
+      observer->arrangement();
+
+    if (actual == requested) {
+      py::setattr(
+        py::handle(args[0]),
+        observer_arrangement_owner_attr,
+        py::handle(args[1]));
+    }
+    else if (actual == nullptr) {
+      py::setattr(
+        py::handle(args[0]),
+        observer_arrangement_owner_attr,
+        py::none());
+    }
+  }
+};
+
+template <typename Observer>
+void observer_tp_finalize(PyObject* self) {
+  if (! py::inst_ready(self)) return;
+
+  auto* observer =
+    py::inst_ptr<Observer>(self);
+
+  if (observer->arrangement() != nullptr)
+    observer->detach();
+}
+
+template <typename Observer>
+struct observer_clear_arrangement_owner {
+  static void precall(
+    PyObject**,
+    size_t,
+    py::detail::cleanup_list*)
+  {}
+
+  template <size_t N>
+  static void postcall(
+    PyObject** args,
+    std::integral_constant<size_t, N>,
+    py::handle)
+  {
+    static_assert(
+      N >= 1,
+      "observer clear-owner policy needs self");
+
+    auto* observer =
+      py::inst_ptr<Observer>(args[0]);
+
+    if (observer->arrangement() != nullptr)
+      throw std::runtime_error(
+        "CGAL observer remained attached after detach()");
+
+    py::setattr(
+      py::handle(args[0]),
+      observer_arrangement_owner_attr,
+      py::none());
+  }
+};
+
 //!
 static PyType_Slot aos_observer_slots[] = {
+  {
+    Py_tp_finalize,
+    (void*) Arr_observer::tp_finalize
+  },
   {Py_tp_traverse, (void*) Arr_observer::tp_traverse},
   {Py_tp_clear, (void*) Arr_observer::tp_clear},
   {0, nullptr}
@@ -1428,15 +1520,42 @@ void export_arrangement_on_surface_2(py::module_& m) {
 
   using Aob = CGAL::Arr_observer<Aos>;
   if (! add_attr<Aob>(m, "Arr_observer_base")) {
-    py::class_<Aob>(m, "Arr_observer_base",
-                    "Base observer for arrangement notifications.")
-      .def(py::init<>(), "Construct a detached observer.")
-      .def(py::init<Aos&>(), py::arg("arr"), py::keep_alive<1, 2>(),
-           "Construct and attach an observer to an arrangement.")
-      .def("attach", &Aob::attach, py::arg("arr"),
-           "Attach the observer to an arrangement.")
-      .def("detach", &Aob::detach,
-           "Detach the observer from its arrangement.")
+    static PyType_Slot aob_owner_slots[] = {
+      {
+        Py_tp_finalize,
+        (void*) cgalpy::aos2::observer_tp_finalize<Aob>
+      },
+      {0, nullptr}
+    };
+
+    py::class_<Aob>(
+      m,
+      "Arr_observer_base",
+      py::dynamic_attr(),
+      py::type_slots(aob_owner_slots),
+      "Base observer for arrangement notifications.")
+      .def(
+        py::init<>(),
+        "Construct a detached observer.")
+      .def(
+        py::init<Aos&>(),
+        py::arg("arr"),
+        py::call_policy<
+          cgalpy::aos2::observer_sync_arrangement_owner<Aob, Aos>>(),
+        "Construct and attach an observer to an arrangement.")
+      .def(
+        "attach",
+        &Aob::attach,
+        py::arg("arr"),
+        py::call_policy<
+          cgalpy::aos2::observer_sync_arrangement_owner<Aob, Aos>>(),
+        "Attach the observer to an arrangement.")
+      .def(
+        "detach",
+        &Aob::detach,
+        py::call_policy<
+          cgalpy::aos2::observer_clear_arrangement_owner<Aob>>(),
+        "Detach the observer from its arrangement.")
       ;
   }
 
@@ -1446,8 +1565,12 @@ void export_arrangement_on_surface_2(py::module_& m) {
                         py::type_slots(cgalpy::aos2::aos_observer_slots),
                         aos2_doc::Arr_observer)
       .def(py::init<>(), "Construct a detached Python callback observer.")
-      .def(py::init<Aos&>(), py::arg("arr"), py::keep_alive<1, 2>(),
-           "Construct and attach a Python callback observer to an arrangement.")
+      .def(
+        py::init<Aos&>(),
+        py::arg("arr"),
+        py::call_policy<
+          cgalpy::aos2::observer_sync_arrangement_owner<Ao, Aos>>(),
+        "Construct and attach a Python callback observer to an arrangement.")
       //
       .def("set_after_split_face", &Ao::set_after_split_face, py::arg("fnc"),
            "Set the after_split_face callback.")

@@ -836,9 +836,47 @@ public:
   /// @}
 
   //!
+  static void tp_finalize(PyObject* self) {
+    if (! py::inst_ready(self)) return;
+
+    Arr_observer* w =
+      py::inst_ptr<Arr_observer>(self);
+
+    if (w->arrangement() == nullptr) return;
+
+    w->m_before_detach = py::none();
+    w->m_after_detach = py::none();
+
+    w->detach();
+  }
+
+  //!
   static int tp_traverse(PyObject* self, visitproc visit, void* arg) {
-    // Get the C++ object associated with 'self' (this always succeeds)
-    Arr_observer* w = py::inst_ptr<Arr_observer>(self);
+    py::handle base_type =
+      py::type<CGAL::Arr_observer<Aos>>();
+
+    auto base_traverse =
+      reinterpret_cast<traverseproc>(
+        py::type_get_slot(
+          base_type,
+          Py_tp_traverse));
+
+    if (base_traverse != nullptr) {
+      const int result =
+        base_traverse(self, visit, arg);
+
+      if (result != 0)
+        return result;
+    }
+    else {
+      Py_VISIT(Py_TYPE(self));
+    }
+
+    if (! py::inst_ready(self))
+      return 0;
+
+    Arr_observer* w =
+      py::inst_ptr<Arr_observer>(self);
 
     // If w->value has an associated Python object, return it.
     // If not, value.ptr() will equal NULL, which is also fine.
@@ -967,19 +1005,32 @@ public:
     Py_VISIT(value_before_remove_inner_ccb.ptr());
     Py_VISIT(value_after_remove_inner_ccb.ptr());
 
-    // On Python 3.9+, we must traverse the implicit dependency
-    // of an object on its associated type object.
-#if PY_VERSION_HEX >= 0x03090000
-    Py_VISIT(Py_TYPE(self));
-#endif
-
     return 0;
   }
 
   //!
   static int tp_clear(PyObject* self) {
-    // Get the C++ object associated with 'self' (this always succeeds)
-    Arr_observer* w = py::inst_ptr<Arr_observer>(self);
+    py::handle base_type =
+      py::type<CGAL::Arr_observer<Aos>>();
+
+    auto base_clear =
+      reinterpret_cast<inquiry>(
+        py::type_get_slot(
+          base_type,
+          Py_tp_clear));
+
+    if (! py::inst_ready(self))
+      return (base_clear != nullptr) ?
+        base_clear(self) : 0;
+
+    Arr_observer* w =
+      py::inst_ptr<Arr_observer>(self);
+
+    if (w->arrangement() != nullptr) {
+      w->m_before_detach = py::none();
+      w->m_after_detach = py::none();
+      w->detach();
+    }
 
     // Break reference cycles!
     w->m_before_assign = {};
@@ -1043,6 +1094,14 @@ public:
     w->m_after_remove_outer_ccb = {};
     w->m_before_remove_inner_ccb = {};
     w->m_after_remove_inner_ccb = {};
+
+    if (base_clear != nullptr) {
+      const int result =
+        base_clear(self);
+
+      if (result != 0)
+        return result;
+    }
 
     return 0;
   }

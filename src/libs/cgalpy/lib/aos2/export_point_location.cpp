@@ -137,19 +137,80 @@ public:
   }
 
   static int tp_traverse(PyObject* self, visitproc visit, void* arg) {
+    bool traversed_base = false;
+
+    py::handle bound_type =
+      py::type<Point_location_with_owner>();
+
+    auto* py_type =
+      reinterpret_cast<PyTypeObject*>(
+        bound_type.ptr());
+
+    if (py_type->tp_base != nullptr) {
+      py::handle base_type(
+        reinterpret_cast<PyObject*>(
+          py_type->tp_base));
+
+      auto base_traverse =
+        reinterpret_cast<traverseproc>(
+          py::type_get_slot(
+            base_type,
+            Py_tp_traverse));
+
+      if (base_traverse != nullptr) {
+        const int result =
+          base_traverse(
+            self,
+            visit,
+            arg);
+
+        if (result != 0)
+          return result;
+
+        traversed_base = true;
+      }
+    }
+
+    if (! traversed_base)
+      Py_VISIT(Py_TYPE(self));
+
+    if (! py::inst_ready(self))
+      return 0;
+
     auto* w =
       py::inst_ptr<Point_location_with_owner>(self);
 
     Py_VISIT(w->m_arrangement_owner.ptr());
 
-#if PY_VERSION_HEX >= 0x03090000
-    Py_VISIT(Py_TYPE(self));
-#endif
-
     return 0;
   }
 
   static int tp_clear(PyObject* self) {
+    inquiry base_clear = nullptr;
+
+    py::handle bound_type =
+      py::type<Point_location_with_owner>();
+
+    auto* py_type =
+      reinterpret_cast<PyTypeObject*>(
+        bound_type.ptr());
+
+    if (py_type->tp_base != nullptr) {
+      py::handle base_type(
+        reinterpret_cast<PyObject*>(
+          py_type->tp_base));
+
+      base_clear =
+        reinterpret_cast<inquiry>(
+          py::type_get_slot(
+            base_type,
+            Py_tp_clear));
+    }
+
+    if (! py::inst_ready(self))
+      return (base_clear != nullptr) ?
+        base_clear(self) : 0;
+
     auto* w =
       py::inst_ptr<Point_location_with_owner>(self);
 
@@ -159,6 +220,14 @@ public:
     }
 
     w->m_arrangement_owner = {};
+
+    if (base_clear != nullptr) {
+      const int result =
+        base_clear(self);
+
+      if (result != 0)
+        return result;
+    }
 
     return 0;
   }
