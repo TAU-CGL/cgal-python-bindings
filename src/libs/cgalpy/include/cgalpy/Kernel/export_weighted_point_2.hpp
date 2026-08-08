@@ -40,11 +40,31 @@ void export_weighted_point_2(C& c) {
          "returns the Cartesian x coordinate, that is hx()/hw().")
     .def("y", &Wd_pnt_2::y,
          "returns the Cartesian y coordinate, that is hy()/hw().")
-    .def("homogeneous", &Wd_pnt_2::homogeneous, py::arg("i"),
+    .def("homogeneous",
+         [](const Wd_pnt_2& p, int i) -> decltype(auto) {
+           if (i < 0 || i >= 3)
+             throw py::index_error(
+               "Weighted_point_2 homogeneous index out of range");
+           return p.homogeneous(i);
+         },
+         py::arg("i"),
          "returns the i'th homogeneous coordinate of p.")
-    .def("cartesian", &Wd_pnt_2::cartesian, py::arg("i"),
+    .def("cartesian",
+         [](const Wd_pnt_2& p, int i) -> decltype(auto) {
+           if (i < 0 || i >= 2)
+             throw py::index_error(
+               "Weighted_point_2 Cartesian index out of range");
+           return p.cartesian(i);
+         },
+         py::arg("i"),
          "returns the i'th Cartesian coordinate of p.")
-    .def("__getitem__", &Wd_pnt_2::operator[], py::arg("i"),
+    .def("__getitem__",
+         [](const Wd_pnt_2& p, int i) -> decltype(auto) {
+           if (i < 0 || i >= 2)
+             throw py::index_error("Weighted_point_2 index out of range");
+           return p[i];
+         },
+         py::arg("i"),
          "returns cartesian(i).")
     .def("dimension", &Wd_pnt_2::dimension,
          "returns the dimension (the constant 2).")

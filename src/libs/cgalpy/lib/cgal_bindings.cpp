@@ -214,10 +214,18 @@ void export_cgal(py::module_& m) {
            py::arg("alpha")=255,
            "Replaces the rgb values of the colors by the conversion to rgb of the hsv values given as parameters.")
       .def("__getitem__",
-           [](const Color& c, std::size_t i) { return c[i]; },
+           [](const Color& c, int i) {
+             if (i < 0 || i >= 4)
+               throw py::index_error("Color index out of range");
+             return c[static_cast<std::size_t>(i)];
+           },
            "Returns the ith component of the rgb color (the 0th is red, the 1st is blue, etc).")
       .def("__setitem__",
-           [](Color& c, std::size_t i, unsigned char v) { c[i] = v; },
+           [](Color& c, int i, unsigned char v) {
+             if (i < 0 || i >= 4)
+               throw py::index_error("Color index out of range");
+             c[static_cast<std::size_t>(i)] = v;
+           },
            "Sets the ith component of the rgb color (the 0th is red, the 1st is blue, etc).")
       .def("to_rgba",
            [](const Color& c) {

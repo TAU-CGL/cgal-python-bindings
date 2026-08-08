@@ -49,8 +49,18 @@ void export_point_3(C& c) {
     .def("hz", &Pnt::hz)
     .def("hw", &Pnt::hw)
     .def("bbox", &Pnt::bbox)
-    .def("cartesian", &Pnt::cartesian)
-    .def("__getitem__", &Pnt::operator[])
+    .def("cartesian",
+         [](const Pnt& p, int i) -> decltype(auto) {
+           if (i < 0 || i >= 3)
+             throw py::index_error("Point_3 Cartesian index out of range");
+           return p.cartesian(i);
+         })
+    .def("__getitem__",
+         [](const Pnt& p, int i) -> decltype(auto) {
+           if (i < 0 || i >= 3)
+             throw py::index_error("Point_3 index out of range");
+           return p[i];
+         })
     .def("dimension", &Pnt::dimension)
     .def(py::self == py::self, py::sig("def __eq__(self, arg: object, /) -> bool"))
     .def(py::self != py::self, py::sig("def __ne__(self, arg: object, /) -> bool"))

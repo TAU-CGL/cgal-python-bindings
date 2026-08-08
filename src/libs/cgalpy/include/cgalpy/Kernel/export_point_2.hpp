@@ -60,8 +60,18 @@ void export_point_2(C& c) {
     .def("hy", &Pnt::hy)
     .def("hw", &Pnt::hw)
     .def("bbox", &Pnt::bbox)
-    .def("cartesian", &Pnt::cartesian)
-    .def("__getitem__", &Pnt::operator[])
+    .def("cartesian",
+         [](const Pnt& p, int i) -> decltype(auto) {
+           if (i < 0 || i >= 2)
+             throw py::index_error("Point_2 Cartesian index out of range");
+           return p.cartesian(i);
+         })
+    .def("__getitem__",
+         [](const Pnt& p, int i) -> decltype(auto) {
+           if (i < 0 || i >= 2)
+             throw py::index_error("Point_2 index out of range");
+           return p[i];
+         })
     .def("dimension", &Pnt::dimension)
     .def(py::self == py::self, py::sig("def __eq__(self, arg: object, /) -> bool"))
     .def(py::self != py::self, py::sig("def __ne__(self, arg: object, /) -> bool"))

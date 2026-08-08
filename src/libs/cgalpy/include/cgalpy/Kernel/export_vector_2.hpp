@@ -50,9 +50,24 @@ void export_vector_2(C& c) {
     .def("x", &Vec::x)
     .def("y", &Vec::y)
     .def("squared_length", &Vec::squared_length)
-    .def("homogeneous", &Vec::homogeneous)
-    .def("cartesian", &Vec::cartesian)
-    .def("__getitem__", &Vec::operator[])
+    .def("homogeneous",
+         [](const Vec& v, int i) -> decltype(auto) {
+           if (i < 0 || i >= 3)
+             throw py::index_error("Vector_2 homogeneous index out of range");
+           return v.homogeneous(i);
+         })
+    .def("cartesian",
+         [](const Vec& v, int i) -> decltype(auto) {
+           if (i < 0 || i >= 2)
+             throw py::index_error("Vector_2 Cartesian index out of range");
+           return v.cartesian(i);
+         })
+    .def("__getitem__",
+         [](const Vec& v, int i) -> decltype(auto) {
+           if (i < 0 || i >= 2)
+             throw py::index_error("Vector_2 index out of range");
+           return v[i];
+         })
     .def("dimension", &Vec::dimension)
     .def("direction", &Vec::direction)
     .def("transform", &Vec::transform)
