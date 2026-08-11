@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 //            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
+#include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <vector>
 #include <utility>
 
@@ -526,16 +527,19 @@ void export_pmp_connected_components(py::module_& m) {
         pmp_doc::Polygon_mesh_processing_connected_components);
   m.def("keep_connected_components", &cgalpy::pmp::keep_connected_components_map<Pm, Face_component_map>,
         py::arg("pmesh"), py::arg("components_to_keep"), py::arg("fcm"), py::arg("np") = py::dict(),
-        pmp_doc::Polygon_mesh_processing_keep_connected_components);
+        pmp_doc::Polygon_mesh_processing_keep_connected_components,
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 #endif
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
   m.def("keep_connected_components", &cgalpy::pmp::keep_connected_components_faces<Pm>,
         py::arg("pmesh"), py::arg("components_to_keep"), py::arg("np") = py::dict(),
-        pmp_doc::Polygon_mesh_processing_keep_connected_components_1);
+        pmp_doc::Polygon_mesh_processing_keep_connected_components_1,
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 #else
   m.def("keep_connected_components", &cgalpy::pmp::keep_connected_components<Pm>,
         py::arg("pmesh"), py::arg("components_to_keep"), py::arg("np") = py::dict(),
-        pmp_doc::Polygon_mesh_processing_keep_connected_components_1);
+        pmp_doc::Polygon_mesh_processing_keep_connected_components_1,
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 #endif
   m.def("keep_large_connected_components", &cgalpy::pmp::keep_large_connected_components<Pm, std::size_t>,
         py::arg("pmesh"), py::arg("threshold_value"), py::arg("np") = py::dict(),
@@ -550,19 +554,23 @@ void export_pmp_connected_components(py::module_& m) {
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("remove_connected_components", &cgalpy::pmp::remove_connected_components_map<Pm, Face_component_map>,
         py::arg("pmesh"), py::arg("components_to_remove"), py::arg("fcm"), py::arg("np") = py::dict(),
-        pmp_doc::Polygon_mesh_processing_remove_connected_components);
+        pmp_doc::Polygon_mesh_processing_remove_connected_components,
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 #endif
 
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
   m.def("remove_connected_components", &cgalpy::pmp::remove_connected_components_faces<Pm>,
         py::arg("pmesh"), py::arg("components_to_remove"), py::arg("np") = py::dict(),
-        pmp_doc::Polygon_mesh_processing_remove_connected_components_1);
+        pmp_doc::Polygon_mesh_processing_remove_connected_components_1,
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 #else
   m.def("remove_connected_components", &cgalpy::pmp::remove_connected_components<Pm>,
         py::arg("pmesh"), py::arg("components_to_remove"), py::arg("np") = py::dict(),
-        pmp_doc::Polygon_mesh_processing_remove_connected_components_1);
+        pmp_doc::Polygon_mesh_processing_remove_connected_components_1,
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 #endif
   m.def("split_connected_components", &cgalpy::pmp::split_connected_components<Pm>,
         py::arg("pmesh"), py::arg("cc_meshes"), py::arg("np") = py::dict(),
-        pmp_doc::Polygon_mesh_processing_split_connected_components);
+        pmp_doc::Polygon_mesh_processing_split_connected_components,
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 }

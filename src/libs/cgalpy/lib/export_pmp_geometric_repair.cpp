@@ -7,6 +7,7 @@
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
 //            Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
 
+#include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <vector>
 #include <functional>
 #include <iterator>
@@ -294,7 +295,8 @@ void export_pmp_geometric_repair(py::module_& m) {
   m.def("remove_connected_components_of_negligible_size",
         &cgalpy::pmp::remove_connected_components_of_negligible_size<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
-        "Removes connected components of negligible size from a triangle mesh.");
+        "Removes connected components of negligible size from a triangle mesh.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("remove_isolated_vertices", &PMP::remove_isolated_vertices<Pm>,
         py::arg("pmesh"),
         "Removes isolated vertices from a polygon mesh.");

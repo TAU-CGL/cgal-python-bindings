@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 //            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
+#include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Polyhedron_incremental_builder_3.h>
@@ -43,6 +44,7 @@ void export_polyhedron_incremental_builder_3(py::module_& m) {
       .def(py::init<Hds&, bool>(),
            py::arg("hds"), py::arg("verbose") = false,
            py::keep_alive<1, 2>(),
+           py::call_policy<cgalpy::pol3::lifetime::Register_self_lease_from_owner_attr_at<2>>(),
            pol3_doc::Polyhedron_incremental_builder_3_Polyhedron_incremental_builder_3)
       .def("begin_surface", &Pib::begin_surface,
            py::arg("v"), py::arg("f"), py::arg("h") = 0,

@@ -8,6 +8,7 @@
 //            Efi Fogel          <efifogel@gmail.com>
 //            Utkarsh Khajuria   <utkarshkhajuria55@gmail.com>
 
+#include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <array>
 #include <functional>
 #include <tuple>
@@ -1285,43 +1286,54 @@ void export_pmp_corefinement(py::module_& m) {
         "Autorefines a triangle soup from a NumPy point array.");
   m.def("clip", &cgalpy::pmp::clip_c<Pm>,
         py::arg("tm"), py::arg("iso_cuboid"), py::arg("np") = py::dict(),
-        "Clips a triangle mesh by an iso-cuboid.");
+        "Clips a triangle mesh by an iso-cuboid.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 #if CGAL_VERSION_NR > 1060100900
   m.def("clip", &cgalpy::pmp::clip_p<Pm>,
         py::arg("tm"), py::arg("plane"), py::arg("np") = py::dict(),
-        "Clips a triangle mesh by a plane.");
+        "Clips a triangle mesh by a plane.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 #endif
   m.def("clip", &cgalpy::pmp::clip<Pm>,
         py::arg("tm"), py::arg("clipper"), py::arg("np_tm") = py::dict(), py::arg("np_c") = py::dict(),
-        "Clips a triangle mesh by another triangle mesh.");
+        "Clips a triangle mesh by another triangle mesh.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("corefine", &cgalpy::pmp::corefine<Pm>,
         py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
-        "Corefines two polygon meshes.");
+        "Corefines two polygon meshes.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("corefine_and_compute_boolean_operations", &cgalpy::pmp::corefine_and_compute_boolean_operations<Pm>,
         py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::tuple(),
-        "Corefines two polygon meshes and computes Boolean operation outputs.");
+        "Corefines two polygon meshes and computes Boolean operation outputs.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("corefine_and_compute_difference", &cgalpy::pmp::corefine_and_compute_difference<Pm>,
         py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict(),
-        "Corefines two polygon meshes and computes their difference.");
+        "Corefines two polygon meshes and computes their difference.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("corefine_and_compute_intersection", &cgalpy::pmp::corefine_and_compute_intersection<Pm>,
         py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict(),
-        "Corefines two polygon meshes and computes their intersection.");
+        "Corefines two polygon meshes and computes their intersection.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("corefine_and_compute_union", &cgalpy::pmp::corefine_and_compute_union<Pm>,
         py::arg("pm1"), py::arg("pm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         py::arg("np_out") = py::dict(),
-        "Corefines two polygon meshes and computes their union.");
+        "Corefines two polygon meshes and computes their union.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("split", &cgalpy::pmp::split_c<Pm>,
         py::arg("tm"), py::arg("iso_cuboid"), py::arg("np") = py::dict(),
-        "Splits a triangle mesh by an iso-cuboid.");
+        "Splits a triangle mesh by an iso-cuboid.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("split", &cgalpy::pmp::split_p<Pm>,
         py::arg("tm"), py::arg("plane"), py::arg("np") = py::dict(),
-        "Splits a triangle mesh by a plane.");
+        "Splits a triangle mesh by a plane.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("split", &cgalpy::pmp::split<Pm>,
         py::arg("tm"), py::arg("splitter"), py::arg("np_tm") = py::dict(), py::arg("np_s") = py::dict(),
-        "Splits a triangle mesh by another triangle mesh.");
+        "Splits a triangle mesh by another triangle mesh.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("intersection_polylines", &cgalpy::pmp::intersection_polylines<Pm>,
         py::arg("tm1"), py::arg("tm2"), py::arg("np1") = py::dict(), py::arg("np2") = py::dict(),
         "Computes intersection polylines of two triangle meshes.");

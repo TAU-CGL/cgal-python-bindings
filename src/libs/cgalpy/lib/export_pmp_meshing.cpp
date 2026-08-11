@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 //            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
+#include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <vector>
 #include <tuple>
 #include <functional>
@@ -673,20 +674,24 @@ void export_pmp_meshing(py::module_& m) {
 
   m.def("refine", &cgalpy::pmp::refine<Pm>,
         py::arg("tmesh"), py::arg("faces"), py::arg("np") = py::dict(),
-        "Refines selected faces of a triangle mesh.");
+        "Refines selected faces of a triangle mesh.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 
 #if 0 // broken for now because of CGAL
   m.def("fair", &cgalpy::pmp::fair<Pm>,
         py::arg("tmesh"), py::arg("vertices"), py::arg("np") = py::dict(),
-        "Fairs selected vertices of a triangle mesh.");
+        "Fairs selected vertices of a triangle mesh.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 #endif
 
   m.def("triangulate_faces", &cgalpy::pmp::triangulate_faces<Pm>,
         py::arg("pm"), py::arg("np") = py::dict(),
-        "Triangulates all faces of a polygon mesh.");
+        "Triangulates all faces of a polygon mesh.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("triangulate_faces", &cgalpy::pmp::triangulate_faces_r<Pm>,
         py::arg("face_range"), py::arg("pm"), py::arg("np") = py::dict(),
-        "Triangulates selected faces of a polygon mesh.");
+        "Triangulates selected faces of a polygon mesh.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("triangulate_polygons", &cgalpy::pmp::triangulate_polygons,
         py::arg("points"), py::arg("polygons"), py::arg("np") = py::dict(),
         "Triangulates polygon soup faces.");
@@ -730,12 +735,14 @@ void export_pmp_meshing(py::module_& m) {
   m.def("isotropic_remeshing",
         &cgalpy::pmp::isotropic_remeshing_sf<Pm, cgalpy::pmp::Adaptive_sizing_field<Pm>>,
         py::arg("faces"), py::arg("sizing"), py::arg("pmesh"), py::arg("np") = py::dict(),
-        "Performs isotropic remeshing using an adaptive sizing field.");
+        "Performs isotropic remeshing using an adaptive sizing field.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 
   m.def("isotropic_remeshing",
         &cgalpy::pmp::isotropic_remeshing_sf<Pm, cgalpy::pmp::Uniform_sizing_field<Pm>>,
         py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"), py::arg("np") = py::dict(),
-        "Performs isotropic remeshing using a uniform target edge length.");
+        "Performs isotropic remeshing using a uniform target edge length.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   // m.def("isotropic_remeshing",
   //       &cgalpy::pmp::isotropic_remeshing_sf<Pm, cgalpy::pmp::Custom_sizing_field<Pm>>,
   //       py::arg("faces"), py::arg("target_edge_length"), py::arg("pmesh"),
@@ -745,14 +752,16 @@ void export_pmp_meshing(py::module_& m) {
   // The CGAL code is faulty and cannot coop with Polyhedron_3
   m.def("surface_Delaunay_remeshing", &cgalpy::pmp::surface_Delaunay_remeshing<Pm>,
         py::arg("tmesh"), py::arg("np") = py::dict(),
-        "Performs surface Delaunay remeshing.");
+        "Performs surface Delaunay remeshing.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 #endif
 
   //! \todo Fix interpolated_corrected_curvatures to use epeck
   m.def("split_long_edges", &cgalpy::pmp::split_long_edges<Pm>,
         py::arg("edge_range"), py::arg("max_length"), py::arg("pmesh"),
         py::arg("np") = py::dict(),
-        "Splits edges longer than the given maximum length.");
+        "Splits edges longer than the given maximum length.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 #endif
 
   m.def("extrude_mesh", &cgalpy::pmp::extrude_mesh_v<Pm, Pm>,

@@ -7,6 +7,7 @@
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
 //            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
+#include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <functional>
 #include <vector>
 #include <utility>
@@ -457,13 +458,15 @@ void export_pmp_orientation(py::module_& m) {
         "Orients the polygons of a polygon soup from a NumPy point array.");
   m.def("orient", &cgalpy::pmp::orient<Pm>,
         py::arg("tm"), py::arg("np") = py::dict(),
-        "Orients a triangle mesh.");
+        "Orients a triangle mesh.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("does_bound_a_volume", &cgalpy::pmp::does_bound_a_volume<Pm>,
         py::arg("tm"), py::arg("np") = py::dict(),
         "Returns whether the triangle mesh bounds a volume.");
   m.def("orient_to_bound_a_volume", &cgalpy::pmp::orient_to_bound_a_volume<Pm>,
         py::arg("tm"), py::arg("np") = py::dict(),
-        "Orients a polygon mesh to bound a volume.");
+        "Orients a polygon mesh to bound a volume.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 #if CGALPY_PMP_POLYGONAL_MESH == 1
   m.def("volume_connected_components", &cgalpy::pmp::volume_connected_components<Pm, Face_size_type_map>,
         py::arg("tm"), py::arg("volume_id_map"), py::arg("np") = py::dict(),
@@ -474,10 +477,12 @@ void export_pmp_orientation(py::module_& m) {
         "Returns whether the polygon mesh is outward oriented.");
   m.def("reverse_face_orientations", &cgalpy::pmp::reverse_face_orientations<Pm>,
         py::arg("face_range"), py::arg("pmesh"),
-        "Reverses the orientations of the selected faces.");
+        "Reverses the orientations of the selected faces.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("reverse_face_orientations", &PMP::reverse_face_orientations<Pm>,
         py::arg("pmesh"),
-        "Reverses the orientations of all faces of a polygon mesh.");
+        "Reverses the orientations of all faces of a polygon mesh.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("duplicate_non_manifold_edges_in_polygon_soup", &cgalpy::pmp::duplicate_non_manifold_edges_in_polygon_soup,
         py::arg("points"), py::arg("polygons"),
         "Duplicates non-manifold edges in a polygon soup.");

@@ -7,6 +7,7 @@
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
 //            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
+#include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <array>
 #include <stdexcept>
 #include <utility>
@@ -349,7 +350,8 @@ void export_pmp_location(py::module_& m) {
         pmp_doc::Polygon_mesh_processing_barycentric_coordinates);
   m.def("get_descriptor_from_location", &cgalpy::pmp::get_descriptor_from_location<Pm>,
         py::arg("loc"), py::arg("tm"),
-        pmp_doc::Polygon_mesh_processing_get_descriptor_from_location);
+        pmp_doc::Polygon_mesh_processing_get_descriptor_from_location,
+      py::call_policy<cgalpy::pol3::lifetime::Register_dependent_result_tree_from_owner_argument>());
   m.def("is_in_face", &cgalpy::pmp::is_in_face_bar<Pm>,
         py::arg("bar"), py::arg("tm"),
         pmp_doc::Polygon_mesh_processing_is_in_face);
@@ -373,20 +375,25 @@ void export_pmp_location(py::module_& m) {
         pmp_doc::Polygon_mesh_processing_construct_point);
   m.def("locate_vertex", &cgalpy::pmp::locate_vertex<Pm>,
         py::arg("vd"), py::arg("tm"),
-        pmp_doc::Polygon_mesh_processing_locate_vertex);
+        pmp_doc::Polygon_mesh_processing_locate_vertex,
+      py::call_policy<cgalpy::pol3::lifetime::Register_dependent_result_tree_from_owner_argument>());
   m.def("locate_vertex", &cgalpy::pmp::locate_vertex_in_face<Pm>,
         py::arg("vd"), py::arg("fd"), py::arg("tm"),
-        pmp_doc::Polygon_mesh_processing_locate_vertex_1);
+        pmp_doc::Polygon_mesh_processing_locate_vertex_1,
+      py::call_policy<cgalpy::pol3::lifetime::Register_dependent_result_tree_from_owner_argument>());
   m.def("locate_on_halfedge", &cgalpy::pmp::locate_on_halfedge<Pm>,
         py::arg("hd"), py::arg("t"), py::arg("tm"),
-        pmp_doc::Polygon_mesh_processing_locate_on_halfedge);
+        pmp_doc::Polygon_mesh_processing_locate_on_halfedge,
+      py::call_policy<cgalpy::pol3::lifetime::Register_dependent_result_tree_from_owner_argument>());
   m.def("locate_in_face", &cgalpy::pmp::locate_in_face<Pm>,
         py::arg("query"), py::arg("fd"), py::arg("tm"), py::arg("np") = py::dict(),
-        pmp_doc::Polygon_mesh_processing_locate_in_face);
+        pmp_doc::Polygon_mesh_processing_locate_in_face,
+      py::call_policy<cgalpy::pol3::lifetime::Register_dependent_result_tree_from_owner_argument>());
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
   m.def("get_descriptor_from_location", &cgalpy::pmp::get_descriptor_from_location_pol3<Pm>,
         py::arg("loc"), py::arg("tm"),
-        pmp_doc::Polygon_mesh_processing_get_descriptor_from_location);
+        pmp_doc::Polygon_mesh_processing_get_descriptor_from_location,
+      py::call_policy<cgalpy::pol3::lifetime::Register_dependent_result_tree_from_owner_argument>());
   m.def("is_in_face", &cgalpy::pmp::is_in_face_loc_pol3<Pm>,
         py::arg("loc"), py::arg("tm"),
         pmp_doc::Polygon_mesh_processing_is_in_face);
@@ -407,15 +414,19 @@ void export_pmp_location(py::module_& m) {
         pmp_doc::Polygon_mesh_processing_construct_point);
   m.def("locate_vertex", &cgalpy::pmp::locate_vertex_pol3<Pm>,
         py::arg("vd"), py::arg("tm"),
-        pmp_doc::Polygon_mesh_processing_locate_vertex);
+        pmp_doc::Polygon_mesh_processing_locate_vertex,
+      py::call_policy<cgalpy::pol3::lifetime::Register_dependent_result_tree_from_owner_argument>());
   m.def("locate_vertex", &cgalpy::pmp::locate_vertex_in_face_pol3<Pm>,
         py::arg("vd"), py::arg("fd"), py::arg("tm"),
-        pmp_doc::Polygon_mesh_processing_locate_vertex_1);
+        pmp_doc::Polygon_mesh_processing_locate_vertex_1,
+      py::call_policy<cgalpy::pol3::lifetime::Register_dependent_result_tree_from_owner_argument>());
   m.def("locate_on_halfedge", &cgalpy::pmp::locate_on_halfedge_pol3<Pm>,
         py::arg("hd"), py::arg("t"), py::arg("tm"),
-        pmp_doc::Polygon_mesh_processing_locate_on_halfedge);
+        pmp_doc::Polygon_mesh_processing_locate_on_halfedge,
+      py::call_policy<cgalpy::pol3::lifetime::Register_dependent_result_tree_from_owner_argument>());
   m.def("locate_in_face", &cgalpy::pmp::locate_in_face_pol3<Pm>,
         py::arg("query"), py::arg("fd"), py::arg("tm"), py::arg("np") = py::dict(),
-        pmp_doc::Polygon_mesh_processing_locate_in_face);
+        pmp_doc::Polygon_mesh_processing_locate_in_face,
+      py::call_policy<cgalpy::pol3::lifetime::Register_dependent_result_tree_from_owner_argument>());
 #endif
 }

@@ -7,6 +7,7 @@
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com>
 //            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
+#include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <iterator>
 #include <stdexcept>
 #include <tuple>
@@ -399,7 +400,8 @@ void export_pmp_combinatorial_repair(py::module_& m) {
 
   m.def("duplicate_non_manifold_vertices", &cgalpy::pmp::duplicate_non_manifold_vertices<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict(),
-        "Duplicates non-manifold vertices of a polygon mesh.");
+        "Duplicates non-manifold vertices of a polygon mesh.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("is_non_manifold_vertex", &PMP::is_non_manifold_vertex<Pm>,
         py::arg("v"), py::arg("pm"),
         "Returns whether a vertex is non-manifold.");
@@ -450,13 +452,16 @@ void export_pmp_combinatorial_repair(py::module_& m) {
         "Repairs a polygon soup from a NumPy point array.");
   m.def("stitch_borders", &cgalpy::pmp::stitch_borders_bc<Pm>,
         py::arg("boundary_cycle_representatives"), py::arg("pmesh"), py::arg("np") = py::dict(),
-        "Stitches borders using boundary cycle representatives.");
+        "Stitches borders using boundary cycle representatives.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("stitch_borders", &cgalpy::pmp::stitch_borders_he<Pm>,
         py::arg("pmesh"), py::arg("hedge_pairs_to_stitch"), py::arg("np") = py::dict(),
-        "Stitches borders using halfedge pairs.");
+        "Stitches borders using halfedge pairs.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("stitch_borders", &cgalpy::pmp::stitch_borders<Pm>,
         py::arg("pmesh"), py::arg("np") = py::dict(),
-        "Stitches borders of a polygon mesh.");
+        "Stitches borders of a polygon mesh.",
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("stitch_boundary_cycle", &cgalpy::pmp::stitch_boundary_cycle<Pm>,
         py::arg("h"), py::arg("pmesh"), py::arg("np") = py::dict(),
         "Stitches one boundary cycle of a polygon mesh.");

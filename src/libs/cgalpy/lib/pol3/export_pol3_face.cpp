@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 //            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
+#include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <nanobind/nanobind.h>
 
 #include "cgalpy/add_attr.hpp"
@@ -49,6 +50,7 @@ void export_pol3_face(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c) {
   if (add_attr<Face>(prn_c, "Face")) return;
 
   py::class_<Face> face_c(prn_c, "Face", pol3_doc::Polyhedron_3_Facet_class);
+  cgalpy::pol3::lifetime::register_dependent_python_type(face_c.ptr());
   face_c.def(py::init<>(), pol3_doc::Polyhedron_3_Facet_Facet)
     .def("facet_degree", [](const Face& f) { return f.facet_degree(); }, pol3_doc::Polyhedron_3_Facet_facet_degree)
     .def("halfedge", &cgalpy::pol3::face_halfedge, ri, pol3_doc::Polyhedron_3_Facet_halfedge)

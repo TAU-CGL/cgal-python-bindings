@@ -9,6 +9,7 @@
 
 #define CGAL_USE_BASIC_VIEWER
 
+#include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <stdexcept>
 #include <iterator>
 
@@ -476,7 +477,8 @@ void export_polygon_mesh_processing(py::module_& m) {
 #if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
   m.def("refine_mesh_at_isolevel",
         &cgalpy::pmp::refine_mesh_at_isolevel<Pm, Vertex_double_map>,
-        py::arg("pm"), py::arg("value_map"), py::arg("isovalue"), py::arg("np") = py::dict());
+        py::arg("pm"), py::arg("value_map"), py::arg("isovalue"), py::arg("np") = py::dict(),
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("region_growing_of_planes_on_faces",
         &cgalpy::pmp::region_growing_of_planes_on_faces<Pm, Face_size_map>,
         py::arg("pmesh"), py::arg("region_map"), py::arg("np") = py::dict());
@@ -484,7 +486,8 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   // region growing only for sm
 
-  m.def("transform", &cgalpy::pmp::transform<Pm>, py::arg("transformation"), py::arg("pmesh"), py::arg("np") = py::dict());
+  m.def("transform", &cgalpy::pmp::transform<Pm>, py::arg("transformation"), py::arg("pmesh"), py::arg("np") = py::dict(),
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
   m.def("triangle", &cgalpy::pmp::triangle<Pm>, py::arg("f"), py::arg("tmesh"), py::arg("np") = py::dict());
   m.def("vertex_bbox", &cgalpy::pmp::vertex_bbox<Pm>, py::arg("vd"), py::arg("pmesh"), py::arg("np") = py::dict());
 
@@ -532,5 +535,6 @@ void export_polygon_mesh_processing(py::module_& m) {
 #endif
 
   m.def("merge_coplanar_facets", &cgalpy::pmp::merge_coplanar_facets<Pm, Face_normal_map>,
-        py::arg("pmesh"), py::arg("face_normals"), py::arg("np") = py::dict());
+        py::arg("pmesh"), py::arg("face_normals"), py::arg("np") = py::dict(),
+      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
 }

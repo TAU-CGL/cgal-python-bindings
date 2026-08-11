@@ -7,6 +7,7 @@
 // Author(s): Efi Fogel         <efifogel@gmail.com>
 //            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
+#include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <nanobind/nanobind.h>
 
 #include "cgalpy/add_attr.hpp"
@@ -36,6 +37,7 @@ void export_pol3_vertex(py::class_<cgalpy::pol3::Polyhedron_3>& prn_c) {
   if (add_attr<Vertex>(prn_c, "Vertex")) return;
 
   py::class_<Vertex> vertex_c(prn_c, "Vertex", pol3_doc::Polyhedron_3_Vertex_class);
+  cgalpy::pol3::lifetime::register_dependent_python_type(vertex_c.ptr());
   vertex_c.def(py::init<>(), pol3_doc::Polyhedron_3_Vertex_Vertex)
     .def("degree", [](const Vertex& v) { return v.degree(); },
          pol3_doc::Polyhedron_3_Vertex_vertex_degree)
