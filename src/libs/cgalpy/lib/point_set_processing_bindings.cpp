@@ -91,13 +91,52 @@ auto read_points(const std::string& fname,
   return points;
 }
 
+//! Convert an optional Python progress callback to the CGAL callback type.
+std::function<bool(double)> make_progress_callback(const py::dict& params) {
+  if (! params.contains("callback")) return {};
+
+  py::handle callback = params["callback"];
+  if (! PyCallable_Check(callback.ptr()))
+    throw py::type_error("callback must be callable");
+
+  auto converted = py::cast<std::function<bool(double)>>(callback);
+
+  // CGAL checks interruption before processing the first point. For exact
+  // number types, stopping at progress 0 leaves an empty processed subset.
+  // Defer only that initial stop until one point has been processed, while
+  // keeping the Python callback itself single-shot for an immediate stop.
+  return [converted, defer_initial_stop = false](double progress) mutable {
+    if (defer_initial_stop)
+      return false;
+
+    const bool keep_running = converted(progress);
+    if (! keep_running && progress == 0.0) {
+      defer_initial_stop = true;
+      return true;
+    }
+    return keep_running;
+  };
+}
+
+//! Compute average spacing from a point range with optional callback.
+template <typename PointRange>
+auto compute_average_spacing_impl(const PointRange& points,
+                                  const unsigned int k,
+                                  const py::dict& params = py::dict()) {
+  auto callback = make_progress_callback(params);
+  if (! callback)
+    return CGAL::compute_average_spacing<CGAL::Sequential_tag>(points, k);
+
+  return CGAL::compute_average_spacing<CGAL::Sequential_tag>
+    (points, k, CGAL::parameters::callback(callback));
+}
+
 //! Compute average spacing from a point range.
 template <typename Point_3>
 auto compute_average_spacing(const std::vector<Point_3>& points,
                              const unsigned int k,
                              const py::dict& params = py::dict()) {
-  (void) params;
-  return CGAL::compute_average_spacing<CGAL::Sequential_tag>(points, k);
+  return compute_average_spacing_impl(points, k, params);
 }
 
 //! Compute average spacing from a NumPy-style point array.
@@ -115,8 +154,7 @@ template <typename PointSet_3>
 auto compute_average_spacing_point_set(const PointSet_3& points,
                                        const unsigned int k,
                                        const py::dict& params = py::dict()) {
-  (void) params;
-  return CGAL::compute_average_spacing<CGAL::Sequential_tag>(points, k);
+  return compute_average_spacing_impl(points, k, params);
 }
 
 //! Estimate global scale in the K nearest neighbors sense from a point range.
@@ -503,12 +541,16 @@ auto compute_average_spacing_with_normals(
   const std::vector<std::pair<Point_3, Vector_3>>& points,
   const unsigned int k,
   const py::dict& params = py::dict()) {
-  (void) params;
   using PointNormalPair = std::pair<Point_3, Vector_3>;
   using Point_map = CGAL::First_of_pair_property_map<PointNormalPair>;
 
+  auto callback = make_progress_callback(params);
+  if (! callback)
+    return CGAL::compute_average_spacing<CGAL::Sequential_tag>
+      (points, k, CGAL::parameters::point_map(Point_map()));
+
   return CGAL::compute_average_spacing<CGAL::Sequential_tag>
-    (points, k, CGAL::parameters::point_map(Point_map()));
+    (points, k, CGAL::parameters::point_map(Point_map()).callback(callback));
 }
 
 //!
