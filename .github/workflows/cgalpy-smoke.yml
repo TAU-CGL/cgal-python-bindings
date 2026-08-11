@@ -764,6 +764,7 @@ jobs:
             aos2_seg_bvr_epec)
               pairs=(
                 aos2_visual_buffer_summary
+                aos2_visual_buffer_raster
               )
               ;;
             vis2_rg_epec)
@@ -926,6 +927,24 @@ jobs:
               --work-dir "${WORK_DIR}" \
               --build-type Release
           done
+
+      - name: Upload deterministic visual comparison artifacts
+        if: always() && matrix.config == 'aos2_seg_bvr_epec'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cgalpy-aos2-visual-comparison-linux
+          path: |
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/comparison.json
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/cpp.stdout
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/cpp.stderr
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/python.stdout
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/python.stderr
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/cpp_output/*.ppm
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/python_output/*.ppm
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/raster_diagnostics/*.json
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/raster_diagnostics/*.ppm
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Run Surface Mesh all-nine examples
         if: matrix.config == 'sm_all9_epic'

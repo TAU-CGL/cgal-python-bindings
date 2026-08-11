@@ -3,12 +3,13 @@
 # Author(s): Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 import argparse
+import json
 import os
 import re
 import shutil
 import subprocess
 import sys
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from pathlib import Path
 
 
@@ -32,6 +33,38 @@ class ExamplePair:
     cpp_needs_qt: bool = False
     normalize_timing: bool = False
     normalize_gog_cube_d: bool = False
+    comparison_kind: str = "stdout"
+    output_filename: str = ""
+    raster_abs_tolerance: int = 0
+    raster_max_bad_fraction: float = 0.0
+
+
+@dataclass(frozen=True)
+class ComparisonResult:
+    kind: str
+    passed: bool
+    exact_match: bool
+    metrics: dict[str, object]
+    reason: str = ""
+
+
+@dataclass(frozen=True)
+class RasterImage:
+    width: int
+    height: int
+    channels: int
+    pixels: bytes
+
+    def __post_init__(self):
+        if self.width <= 0 or self.height <= 0:
+            raise ValueError("Raster dimensions must be positive")
+        if self.channels not in (1, 3, 4):
+            raise ValueError("Raster channels must be 1, 3, or 4")
+        expected = self.width * self.height * self.channels
+        if len(self.pixels) != expected:
+            raise ValueError(
+                f"Raster byte count mismatch: expected {expected}, got {len(self.pixels)}"
+            )
 
 
 PAIRS = {
@@ -157,6 +190,34 @@ PAIRS = {
         executable="aos2_visual_buffer_summary",
         cpp_source_in_repo=True,
         cpp_needs_qt=True,
+    ),
+    "aos2_visual_buffer_raster": ExamplePair(
+        name="aos2_visual_buffer_raster",
+        python_relpath="Arrangement_on_surface_2/aos2_visual_buffer_raster.py",
+        cpp_relpath="src/python_examples/cgalpy_examples/Arrangement_on_surface_2/aos2_visual_buffer_raster.cpp",
+        python_workdir_relpath="Arrangement_on_surface_2",
+        cpp_include_relpath="Arrangement_on_surface_2/examples/Arrangement_on_surface_2",
+        executable="aos2_visual_buffer_raster",
+        cpp_source_in_repo=True,
+        cpp_needs_qt=True,
+        comparison_kind="raster",
+        output_filename="visual.ppm",
+        raster_abs_tolerance=0,
+        raster_max_bad_fraction=0.0,
+    ),
+    "pol3_visual_buffer_raster": ExamplePair(
+        name="pol3_visual_buffer_raster",
+        python_relpath="Polyhedron_3/pol3_visual_buffer_raster.py",
+        cpp_relpath="src/python_examples/cgalpy_examples/Polyhedron_3/pol3_visual_buffer_raster.cpp",
+        python_workdir_relpath="Polyhedron_3",
+        cpp_include_relpath=".",
+        executable="pol3_visual_buffer_raster",
+        cpp_source_in_repo=True,
+        cpp_needs_qt=True,
+        comparison_kind="raster",
+        output_filename="visual.ppm",
+        raster_abs_tolerance=0,
+        raster_max_bad_fraction=0.0,
     ),
     "env2_envelope_segments": ExamplePair(
         name="env2_envelope_segments",
@@ -568,6 +629,300 @@ def comparable_stdout(pair, text):
     return text
 
 
+def write_comparison_result(path, result):
+    write_text(path, json.dumps(asdict(result), indent=2, sort_keys=True) + "\n")
+
+
+def compare_stdout(pair, cpp_stdout, python_stdout):
+    comparable_cpp = comparable_stdout(pair, cpp_stdout)
+    comparable_python = comparable_stdout(pair, python_stdout)
+    exact_match = comparable_cpp == comparable_python
+    normalized_match = (
+        " ".join(comparable_cpp.split())
+        == " ".join(comparable_python.split())
+    )
+    return ComparisonResult(
+        kind="stdout",
+        passed=exact_match,
+        exact_match=exact_match,
+        metrics={
+            "normalized_match": normalized_match,
+        },
+    )
+
+
+def _normalize_transparent_rgb(image):
+    if image.channels != 4:
+        return image
+
+    pixels = bytearray(image.pixels)
+    for offset in range(0, len(pixels), 4):
+        if pixels[offset + 3] == 0:
+            pixels[offset] = 0
+            pixels[offset + 1] = 0
+            pixels[offset + 2] = 0
+
+    return RasterImage(
+        width=image.width,
+        height=image.height,
+        channels=image.channels,
+        pixels=bytes(pixels),
+    )
+
+
+def compare_raster_images(
+    cpp_image,
+    python_image,
+    *,
+    abs_tolerance=0,
+    max_bad_fraction=0.0,
+    normalize_transparent_rgb=True,
+):
+    if abs_tolerance < 0 or abs_tolerance > 255:
+        raise ValueError("abs_tolerance must be in [0, 255]")
+    if max_bad_fraction < 0.0 or max_bad_fraction > 1.0:
+        raise ValueError("max_bad_fraction must be in [0, 1]")
+
+    cpp_shape = (
+        cpp_image.width,
+        cpp_image.height,
+        cpp_image.channels,
+    )
+    python_shape = (
+        python_image.width,
+        python_image.height,
+        python_image.channels,
+    )
+
+    if cpp_shape != python_shape:
+        return ComparisonResult(
+            kind="raster",
+            passed=False,
+            exact_match=False,
+            metrics={
+                "cpp_width": cpp_image.width,
+                "cpp_height": cpp_image.height,
+                "cpp_channels": cpp_image.channels,
+                "python_width": python_image.width,
+                "python_height": python_image.height,
+                "python_channels": python_image.channels,
+            },
+            reason="raster shape mismatch",
+        )
+
+    if normalize_transparent_rgb:
+        cpp_image = _normalize_transparent_rgb(cpp_image)
+        python_image = _normalize_transparent_rgb(python_image)
+
+    differences = [
+        abs(left - right)
+        for left, right in zip(cpp_image.pixels, python_image.pixels)
+    ]
+    compared_values = len(differences)
+    compared_pixels = cpp_image.width * cpp_image.height
+    exact_differences = sum(value != 0 for value in differences)
+    bad_values = sum(value > abs_tolerance for value in differences)
+    bad_pixels = sum(
+        any(
+            value > abs_tolerance
+            for value in differences[offset:offset + cpp_image.channels]
+        )
+        for offset in range(0, compared_values, cpp_image.channels)
+    )
+    bad_fraction = bad_pixels / compared_pixels
+    value_bad_fraction = bad_values / compared_values
+    max_abs_error = max(differences, default=0)
+    mean_abs_error = sum(differences) / compared_values
+
+    return ComparisonResult(
+        kind="raster",
+        passed=bad_fraction <= max_bad_fraction,
+        exact_match=exact_differences == 0,
+        metrics={
+            "width": cpp_image.width,
+            "height": cpp_image.height,
+            "channels": cpp_image.channels,
+            "compared_values": compared_values,
+            "compared_pixels": compared_pixels,
+            "exact_differences": exact_differences,
+            "values_over_tolerance": bad_values,
+            "pixels_over_tolerance": bad_pixels,
+            "value_bad_fraction": value_bad_fraction,
+            "bad_fraction": bad_fraction,
+            "max_abs_error": max_abs_error,
+            "mean_abs_error": mean_abs_error,
+            "abs_tolerance": abs_tolerance,
+            "max_bad_fraction": max_bad_fraction,
+            "normalize_transparent_rgb": normalize_transparent_rgb,
+        },
+    )
+
+
+def _raster_rgb_bytes(image):
+    if image.channels == 3:
+        return image.pixels
+
+    out = bytearray()
+    if image.channels == 1:
+        for value in image.pixels:
+            out.extend((value, value, value))
+        return bytes(out)
+
+    for offset in range(0, len(image.pixels), 4):
+        red, green, blue, alpha = image.pixels[offset:offset + 4]
+        inverse_alpha = 255 - alpha
+        out.extend(
+            (
+                (red * alpha + 255 * inverse_alpha + 127) // 255,
+                (green * alpha + 255 * inverse_alpha + 127) // 255,
+                (blue * alpha + 255 * inverse_alpha + 127) // 255,
+            )
+        )
+    return bytes(out)
+
+
+def write_ppm(path, image):
+    rgb = _raster_rgb_bytes(image)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("wb") as output:
+        output.write(
+            f"P6\n{image.width} {image.height}\n255\n".encode("ascii")
+        )
+        output.write(rgb)
+
+
+def read_ppm(path):
+    data = path.read_bytes()
+    parts = data.split(b"\n", 3)
+    if len(parts) != 4:
+        raise ValueError(f"Invalid PPM header: {path}")
+    magic, dimensions, max_value, pixels = parts
+    if magic != b"P6":
+        raise ValueError(f"Expected P6 PPM: {path}")
+    dimension_tokens = dimensions.split()
+    if len(dimension_tokens) != 2:
+        raise ValueError(f"Invalid PPM dimensions: {path}")
+    try:
+        width = int(dimension_tokens[0])
+        height = int(dimension_tokens[1])
+        maximum = int(max_value)
+    except ValueError as exc:
+        raise ValueError(f"Invalid PPM numeric header: {path}") from exc
+    if maximum != 255:
+        raise ValueError(f"Only 8-bit PPM is supported: {path}")
+    return RasterImage(
+        width=width,
+        height=height,
+        channels=3,
+        pixels=pixels,
+    )
+
+
+def _difference_heatmap(cpp_image, python_image):
+    pixels = bytearray()
+    channels = cpp_image.channels
+
+    for offset in range(0, len(cpp_image.pixels), channels):
+        channel_differences = [
+            abs(left - right)
+            for left, right in zip(
+                cpp_image.pixels[offset:offset + channels],
+                python_image.pixels[offset:offset + channels],
+            )
+        ]
+
+        if channels == 1:
+            value = channel_differences[0]
+            pixels.extend((value, value, value))
+        elif channels == 3:
+            pixels.extend(channel_differences)
+        else:
+            alpha_difference = channel_differences[3]
+            pixels.extend(
+                max(value, alpha_difference)
+                for value in channel_differences[:3]
+            )
+
+    return RasterImage(
+        width=cpp_image.width,
+        height=cpp_image.height,
+        channels=3,
+        pixels=bytes(pixels),
+    )
+
+
+def _side_by_side(cpp_image, python_image):
+    cpp_rgb = _raster_rgb_bytes(cpp_image)
+    python_rgb = _raster_rgb_bytes(python_image)
+    row_bytes = cpp_image.width * 3
+    pixels = bytearray()
+
+    for row in range(cpp_image.height):
+        begin = row * row_bytes
+        end = begin + row_bytes
+        pixels.extend(cpp_rgb[begin:end])
+        pixels.extend(python_rgb[begin:end])
+
+    return RasterImage(
+        width=cpp_image.width * 2,
+        height=cpp_image.height,
+        channels=3,
+        pixels=bytes(pixels),
+    )
+
+
+def write_raster_diagnostics(
+    output_dir,
+    result,
+    cpp_image,
+    python_image,
+):
+    output_dir.mkdir(parents=True, exist_ok=True)
+    write_comparison_result(
+        output_dir / "comparison.json",
+        result,
+    )
+    write_ppm(output_dir / "cpp.ppm", cpp_image)
+    write_ppm(output_dir / "python.ppm", python_image)
+
+    cpp_shape = (
+        cpp_image.width,
+        cpp_image.height,
+        cpp_image.channels,
+    )
+    python_shape = (
+        python_image.width,
+        python_image.height,
+        python_image.channels,
+    )
+
+    if cpp_shape == python_shape:
+        normalize_transparent_rgb = bool(
+            result.metrics.get("normalize_transparent_rgb", False)
+        )
+        if normalize_transparent_rgb:
+            comparison_cpp = _normalize_transparent_rgb(cpp_image)
+            comparison_python = _normalize_transparent_rgb(python_image)
+        else:
+            comparison_cpp = cpp_image
+            comparison_python = python_image
+
+        write_ppm(
+            output_dir / "diff_heatmap.ppm",
+            _difference_heatmap(
+                comparison_cpp,
+                comparison_python,
+            ),
+        )
+        write_ppm(
+            output_dir / "side_by_side.ppm",
+            _side_by_side(
+                comparison_cpp,
+                comparison_python,
+            ),
+        )
+
+
 def build_cpp(pair, *, cgal_source, cgal_dir, work_dir, build_type, osx_architectures, cmake_prefix_path):
     repo_root = Path(__file__).resolve().parents[3]
     cpp_source_root = repo_root if pair.cpp_source_in_repo else cgal_source
@@ -657,9 +1012,15 @@ endif()
     return build, cmake_build_dir / pair.executable
 
 
+def prepare_pair_dir(work_dir, pair_name):
+    pair_dir = work_dir / pair_name
+    shutil.rmtree(pair_dir, ignore_errors=True)
+    pair_dir.mkdir(parents=True)
+    return pair_dir
+
+
 def run_pair(pair, args, examples_root):
-    pair_dir = args.work_dir / pair.name
-    pair_dir.mkdir(parents=True, exist_ok=True)
+    pair_dir = prepare_pair_dir(args.work_dir, pair.name)
 
     build_result, cpp_exe = build_cpp(
         pair,
@@ -684,7 +1045,23 @@ def run_pair(pair, args, examples_root):
     for data_arg in data_args:
         shutil.copy2(data_arg, cpp_exe.parent / Path(data_arg).name)
 
-    cpp_run = run_command([str(cpp_exe), *data_args], cwd=cpp_exe.parent)
+    cpp_output_path = None
+    python_output_path = None
+    cpp_command = [str(cpp_exe), *data_args]
+    if pair.comparison_kind == "raster":
+        if not pair.output_filename:
+            raise ValueError(
+                f"Raster pair {pair.name} must define output_filename"
+            )
+        cpp_output_dir = pair_dir / "cpp_output"
+        python_output_dir = pair_dir / "python_output"
+        cpp_output_dir.mkdir(parents=True, exist_ok=True)
+        python_output_dir.mkdir(parents=True, exist_ok=True)
+        cpp_output_path = cpp_output_dir / pair.output_filename
+        python_output_path = python_output_dir / pair.output_filename
+        cpp_command.append(str(cpp_output_path))
+
+    cpp_run = run_command(cpp_command, cwd=cpp_exe.parent)
     write_text(pair_dir / "cpp.stdout", cpp_run.stdout)
     write_text(pair_dir / "cpp.stderr", cpp_run.stderr)
 
@@ -699,27 +1076,101 @@ def run_pair(pair, args, examples_root):
     if old_pythonpath:
         env["PYTHONPATH"] += os.pathsep + old_pythonpath
 
+    python_command = [
+        str(args.python_executable),
+        str(python_script.name),
+        args.library,
+        *data_args,
+    ]
+    if pair.comparison_kind == "raster":
+        python_command.append(str(python_output_path))
+
     py_run = run_command(
-        [str(args.python_executable), str(python_script.name), args.library, *data_args],
+        python_command,
         cwd=python_workdir,
         env=env,
     )
     write_text(pair_dir / "python.stdout", py_run.stdout)
     write_text(pair_dir / "python.stderr", py_run.stderr)
 
-    comparable_cpp_stdout = comparable_stdout(pair, cpp_run.stdout)
-    comparable_py_stdout = comparable_stdout(pair, py_run.stdout)
-    exact_match = comparable_cpp_stdout == comparable_py_stdout
-    normalized_match = " ".join(comparable_cpp_stdout.split()) == " ".join(comparable_py_stdout.split())
+    normalized_match = None
+    if pair.comparison_kind == "stdout":
+        comparison = compare_stdout(
+            pair,
+            cpp_run.stdout,
+            py_run.stdout,
+        )
+        normalized_match = bool(
+            comparison.metrics["normalized_match"]
+        )
+    elif pair.comparison_kind == "raster":
+        if cpp_run.returncode != 0 or py_run.returncode != 0:
+            comparison = ComparisonResult(
+                kind="raster",
+                passed=False,
+                exact_match=False,
+                metrics={},
+                reason="producer process failed",
+            )
+        elif not cpp_output_path.is_file() or not python_output_path.is_file():
+            comparison = ComparisonResult(
+                kind="raster",
+                passed=False,
+                exact_match=False,
+                metrics={
+                    "cpp_output_exists": cpp_output_path.is_file(),
+                    "python_output_exists": python_output_path.is_file(),
+                },
+                reason="raster producer did not create its output",
+            )
+        else:
+            cpp_image = read_ppm(cpp_output_path)
+            python_image = read_ppm(python_output_path)
+            comparison = compare_raster_images(
+                cpp_image,
+                python_image,
+                abs_tolerance=pair.raster_abs_tolerance,
+                max_bad_fraction=pair.raster_max_bad_fraction,
+            )
+            write_raster_diagnostics(
+                pair_dir / "raster_diagnostics",
+                comparison,
+                cpp_image,
+                python_image,
+            )
+    else:
+        raise ValueError(
+            f"Unsupported comparison kind for {pair.name}: "
+            f"{pair.comparison_kind}"
+        )
+
+    write_comparison_result(
+        pair_dir / "comparison.json",
+        comparison,
+    )
 
     print(f"PAIR: {pair.name}")
     print(f"CPP_RC: {cpp_run.returncode}")
     print(f"PYTHON_RC: {py_run.returncode}")
-    print(f"EXACT_MATCH: {exact_match}")
-    print(f"NORMALIZED_MATCH: {normalized_match}")
+    print(f"EXACT_MATCH: {comparison.exact_match}")
+    if normalized_match is not None:
+        print(f"NORMALIZED_MATCH: {normalized_match}")
+    print(f"COMPARISON_KIND: {comparison.kind}")
+    print(f"COMPARISON_RESULT: {comparison.passed}")
+    if comparison.kind == "raster":
+        print(
+            "RASTER_METRICS: "
+            + json.dumps(comparison.metrics, sort_keys=True)
+        )
+        if comparison.reason:
+            print(f"COMPARISON_REASON: {comparison.reason}")
     print(f"OUTPUT_DIR: {pair_dir}")
 
-    if cpp_run.returncode != 0 or py_run.returncode != 0 or not exact_match:
+    if (
+        cpp_run.returncode != 0
+        or py_run.returncode != 0
+        or not comparison.passed
+    ):
         print()
         print("C++ stdout:")
         print(cpp_run.stdout)
