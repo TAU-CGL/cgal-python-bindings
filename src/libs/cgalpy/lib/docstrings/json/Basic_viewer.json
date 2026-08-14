@@ -5,7 +5,7 @@
     "kind": "CGAL Doxygen XML",
     "generated_with": "CGAL_GENERATE_XML=ON"
   },
-  "compound_count": 11,
+  "compound_count": 12,
   "skipped_count": 0,
   "compounds": {
     "CGAL::Graphics_scene": {
@@ -14,6 +14,21 @@
       "brief": "The class Graphics_scene stores points, segments, triangles, rays, and lines.",
       "detailed": "Elements can be added, possibly with associated colors. Non triangular faces can be directly added and are triangulated internally.",
       "members": [
+        {
+          "kind": "function",
+          "name": "Graphics_scene",
+          "qualified_name": "CGAL::Graphics_scene::Graphics_scene",
+          "brief": "constructs an empty graphics scene.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Graphics_scene::Graphics_scene",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "13"
+        },
         {
           "kind": "function",
           "name": "add_point",
@@ -35,7 +50,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "15"
+          "line": "18"
         },
         {
           "kind": "function",
@@ -65,7 +80,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "20"
+          "line": "23"
         },
         {
           "kind": "function",
@@ -95,7 +110,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "25"
+          "line": "28"
         },
         {
           "kind": "function",
@@ -132,7 +147,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "30"
+          "line": "33"
         },
         {
           "kind": "function",
@@ -162,7 +177,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "37"
+          "line": "40"
         },
         {
           "kind": "function",
@@ -199,7 +214,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "43"
+          "line": "46"
         },
         {
           "kind": "function",
@@ -229,7 +244,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "50"
+          "line": "53"
         },
         {
           "kind": "function",
@@ -266,7 +281,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "56"
+          "line": "59"
         },
         {
           "kind": "function",
@@ -281,7 +296,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "60"
+          "line": "63"
         },
         {
           "kind": "function",
@@ -304,7 +319,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "63"
+          "line": "66"
         },
         {
           "kind": "function",
@@ -319,7 +334,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "66"
+          "line": "69"
         },
         {
           "kind": "function",
@@ -342,7 +357,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "71"
+          "line": "74"
         },
         {
           "kind": "function",
@@ -372,7 +387,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "78"
+          "line": "81"
         },
         {
           "kind": "function",
@@ -387,7 +402,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "82"
+          "line": "85"
         },
         {
           "kind": "function",
@@ -417,7 +432,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "87"
+          "line": "90"
         },
         {
           "kind": "function",
@@ -447,7 +462,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "92"
+          "line": "95"
         },
         {
           "kind": "function",
@@ -462,7 +477,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "95"
+          "line": "98"
         },
         {
           "kind": "function",
@@ -477,7 +492,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "98"
+          "line": "101"
         },
         {
           "kind": "function",
@@ -492,7 +507,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "101"
+          "line": "104"
         },
         {
           "kind": "function",
@@ -507,7 +522,76 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "104"
+          "line": "107"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_elements",
+          "qualified_name": "CGAL::Graphics_scene::number_of_elements",
+          "brief": "returns the number of triples stored in the graphics buffer selected by index .",
+          "detailed": "\\param index the index of the graphics buffer.",
+          "return_type": "unsigned int",
+          "definition": "unsigned int CGAL::Graphics_scene::number_of_elements",
+          "argsstring": "(int index) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "index",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "111"
+        },
+        {
+          "kind": "function",
+          "name": "get_size_of_index",
+          "qualified_name": "CGAL::Graphics_scene::get_size_of_index",
+          "brief": "returns the size in bytes of the graphics buffer selected by index .",
+          "detailed": "\\param index the index of the graphics buffer.",
+          "return_type": "int",
+          "definition": "int CGAL::Graphics_scene::get_size_of_index",
+          "argsstring": "(int index) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "index",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "115"
+        },
+        {
+          "kind": "function",
+          "name": "get_array_of_index",
+          "qualified_name": "CGAL::Graphics_scene::get_array_of_index",
+          "brief": "returns the array of floats of the graphics buffer selected by index .",
+          "detailed": "\\param index the index of the graphics buffer.",
+          "return_type": "const std::vector< float > &",
+          "definition": "const std::vector< float > & CGAL::Graphics_scene::get_array_of_index",
+          "argsstring": "(int index) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "index",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene.h",
+          "line": "119"
         },
         {
           "kind": "function",
@@ -530,7 +614,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "107"
+          "line": "122"
         },
         {
           "kind": "function",
@@ -553,7 +637,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "110"
+          "line": "125"
         },
         {
           "kind": "function",
@@ -576,7 +660,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "113"
+          "line": "128"
         },
         {
           "kind": "function",
@@ -599,7 +683,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "116"
+          "line": "131"
         },
         {
           "kind": "function",
@@ -622,7 +706,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "119"
+          "line": "134"
         },
         {
           "kind": "function",
@@ -637,7 +721,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "122"
+          "line": "137"
         },
         {
           "kind": "function",
@@ -652,7 +736,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "125"
+          "line": "140"
         },
         {
           "kind": "function",
@@ -667,7 +751,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "128"
+          "line": "143"
         },
         {
           "kind": "function",
@@ -682,7 +766,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "131"
+          "line": "146"
         },
         {
           "kind": "function",
@@ -697,7 +781,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Graphics_scene.h",
-          "line": "134"
+          "line": "149"
         }
       ],
       "xml_file": "class_c_g_a_l_1_1_graphics__scene.xml",
@@ -723,7 +807,7 @@
           "section_kind": "public-type",
           "section": "",
           "file": "CGAL/Graphics_scene_options.h",
-          "line": "30"
+          "line": "38"
         },
         {
           "kind": "typedef",
@@ -738,7 +822,7 @@
           "section_kind": "public-type",
           "section": "",
           "file": "CGAL/Graphics_scene_options.h",
-          "line": "31"
+          "line": "39"
         },
         {
           "kind": "typedef",
@@ -753,7 +837,7 @@
           "section_kind": "public-type",
           "section": "",
           "file": "CGAL/Graphics_scene_options.h",
-          "line": "32"
+          "line": "40"
         },
         {
           "kind": "typedef",
@@ -768,7 +852,22 @@
           "section_kind": "public-type",
           "section": "",
           "file": "CGAL/Graphics_scene_options.h",
-          "line": "33"
+          "line": "41"
+        },
+        {
+          "kind": "function",
+          "name": "Graphics_scene_options",
+          "qualified_name": "CGAL::Graphics_scene_options::Graphics_scene_options",
+          "brief": "constructs default graphics scene options.",
+          "detailed": "Vertices, edges, and faces are enabled. The draw_vertex , draw_edge , and draw_face callbacks return true by default, while the colored_vertex , colored_edge , colored_face , and face_wireframe callbacks return false by default.",
+          "return_type": "",
+          "definition": "CGAL::Graphics_scene_options< DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor, VolumeDescriptor >::Graphics_scene_options",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Graphics_scene_options.h",
+          "line": "36"
         }
       ],
       "xml_file": "struct_c_g_a_l_1_1_graphics__scene__options.xml",
@@ -1743,12 +1842,12 @@
         },
         {
           "kind": "variable",
-          "name": "ignore_vertex",
-          "qualified_name": "GraphicsSceneOptions::ignore_vertex",
-          "brief": "std::function that returns true if the given vertex must be ignored, false otherwise.",
-          "detailed": "Returns false by default.",
+          "name": "draw_vertex",
+          "qualified_name": "GraphicsSceneOptions::draw_vertex",
+          "brief": "std::function that returns true if the given vertex must be drawn, false otherwise.",
+          "detailed": "Returns true by default.",
           "return_type": "std::function< bool(const DS &, vertex_descriptor )>",
-          "definition": "std::function<bool(const DS &, vertex_descriptor)> GraphicsSceneOptions::ignore_vertex",
+          "definition": "std::function<bool(const DS &, vertex_descriptor)> GraphicsSceneOptions::draw_vertex",
           "argsstring": "",
           "params": [],
           "section_kind": "public-attrib",
@@ -1758,12 +1857,12 @@
         },
         {
           "kind": "variable",
-          "name": "ignore_edge",
-          "qualified_name": "GraphicsSceneOptions::ignore_edge",
-          "brief": "std::function that returns true if the given edge must be ignored, false otherwise.",
+          "name": "draw_edge",
+          "qualified_name": "GraphicsSceneOptions::draw_edge",
+          "brief": "std::function that returns true if the given edge must be drawn, false otherwise.",
           "detailed": "Returns true by default.",
           "return_type": "std::function< bool(const DS &, edge_descriptor )>",
-          "definition": "std::function<bool(const DS &, edge_descriptor)> GraphicsSceneOptions::ignore_edge",
+          "definition": "std::function<bool(const DS &, edge_descriptor)> GraphicsSceneOptions::draw_edge",
           "argsstring": "",
           "params": [],
           "section_kind": "public-attrib",
@@ -1773,12 +1872,12 @@
         },
         {
           "kind": "variable",
-          "name": "ignore_face",
-          "qualified_name": "GraphicsSceneOptions::ignore_face",
-          "brief": "std::function that returns true if the given face must be ignored, false otherwise.",
+          "name": "draw_face",
+          "qualified_name": "GraphicsSceneOptions::draw_face",
+          "brief": "std::function that returns true if the given face must be drawn, false otherwise.",
           "detailed": "Returns true by default.",
           "return_type": "std::function< bool(const DS &, face_descriptor )>",
-          "definition": "std::function<bool(const DS &, face_descriptor)> GraphicsSceneOptions::ignore_face",
+          "definition": "std::function<bool(const DS &, face_descriptor)> GraphicsSceneOptions::draw_face",
           "argsstring": "",
           "params": [],
           "section_kind": "public-attrib",
@@ -1788,12 +1887,12 @@
         },
         {
           "kind": "variable",
-          "name": "is_vertex_colored",
-          "qualified_name": "GraphicsSceneOptions::is_vertex_colored",
+          "name": "colored_vertex",
+          "qualified_name": "GraphicsSceneOptions::colored_vertex",
           "brief": "std::function that returns true if the given vertex is colored, false otherwise.",
           "detailed": "Returns false by default. For non colored vertices, this is the role of the user of a graphic scene to decide which color must be used (cf. for example Basic_viewer , vertices_mono_color ).",
           "return_type": "std::function< bool(const DS &, vertex_descriptor )>",
-          "definition": "std::function<bool(const DS &, vertex_descriptor)> GraphicsSceneOptions::is_vertex_colored",
+          "definition": "std::function<bool(const DS &, vertex_descriptor)> GraphicsSceneOptions::colored_vertex",
           "argsstring": "",
           "params": [],
           "section_kind": "public-attrib",
@@ -1803,12 +1902,12 @@
         },
         {
           "kind": "variable",
-          "name": "is_edge_colored",
-          "qualified_name": "GraphicsSceneOptions::is_edge_colored",
+          "name": "colored_edge",
+          "qualified_name": "GraphicsSceneOptions::colored_edge",
           "brief": "std::function that returns true if the given edge is colored, false otherwise.",
           "detailed": "For non colored edges, this is the role of the user of a graphic scene to decide which color must be used (cf. for example Basic_viewer , edges_mono_color ). Returns false by default.",
           "return_type": "std::function< bool(const DS &, edge_descriptor )>",
-          "definition": "std::function<bool(const DS &, edge_descriptor)> GraphicsSceneOptions::is_edge_colored",
+          "definition": "std::function<bool(const DS &, edge_descriptor)> GraphicsSceneOptions::colored_edge",
           "argsstring": "",
           "params": [],
           "section_kind": "public-attrib",
@@ -1818,12 +1917,12 @@
         },
         {
           "kind": "variable",
-          "name": "is_face_colored",
-          "qualified_name": "GraphicsSceneOptions::is_face_colored",
+          "name": "colored_face",
+          "qualified_name": "GraphicsSceneOptions::colored_face",
           "brief": "std::function that returns true if the given face is colored, false otherwise.",
           "detailed": "For non colored faces, this is the role of the user of a graphic scene to decide which color must be used (cf. for example Basic_viewer , faces_mono_color ). Returns false by default.",
           "return_type": "std::function< bool(const DS &, face_descriptor )>",
-          "definition": "std::function<bool(const DS &, face_descriptor)> GraphicsSceneOptions::is_face_colored",
+          "definition": "std::function<bool(const DS &, face_descriptor)> GraphicsSceneOptions::colored_face",
           "argsstring": "",
           "params": [],
           "section_kind": "public-attrib",
@@ -1833,12 +1932,12 @@
         },
         {
           "kind": "variable",
-          "name": "is_face_wireframe",
-          "qualified_name": "GraphicsSceneOptions::is_face_wireframe",
+          "name": "face_wireframe",
+          "qualified_name": "GraphicsSceneOptions::face_wireframe",
           "brief": "std::function that returns true if the given face is in wireframe, false otherwise.",
           "detailed": "Returns false by default.",
           "return_type": "std::function< bool(const DS &, face_descriptor )>",
-          "definition": "std::function<bool(const DS &, face_descriptor)> GraphicsSceneOptions::is_face_wireframe",
+          "definition": "std::function<bool(const DS &, face_descriptor)> GraphicsSceneOptions::face_wireframe",
           "argsstring": "",
           "params": [],
           "section_kind": "public-attrib",
@@ -1893,9 +1992,54 @@
         },
         {
           "kind": "function",
+          "name": "disable_vertices",
+          "qualified_name": "GraphicsSceneOptions::disable_vertices",
+          "brief": "Disables drawing of all vertices.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void GraphicsSceneOptions::disable_vertices",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "79"
+        },
+        {
+          "kind": "function",
+          "name": "enable_vertices",
+          "qualified_name": "GraphicsSceneOptions::enable_vertices",
+          "brief": "Enables drawing of vertices.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void GraphicsSceneOptions::enable_vertices",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "82"
+        },
+        {
+          "kind": "function",
+          "name": "are_vertices_enabled",
+          "qualified_name": "GraphicsSceneOptions::are_vertices_enabled",
+          "brief": "Returns true if drawing of vertices is enabled, false otherwise.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool GraphicsSceneOptions::are_vertices_enabled",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "85"
+        },
+        {
+          "kind": "function",
           "name": "ignore_all_vertices",
           "qualified_name": "GraphicsSceneOptions::ignore_all_vertices",
-          "brief": "ignores all vertices when b is true ; otherwise ignores only vertices for which ignore_vertex() returns true .",
+          "brief": "Disables all vertices when b is true ; enables them otherwise.",
           "detailed": "",
           "return_type": "void",
           "definition": "void GraphicsSceneOptions::ignore_all_vertices",
@@ -1912,13 +2056,58 @@
           "section_kind": "public-func",
           "section": "",
           "file": "Concepts/GraphicsSceneOptions.h",
-          "line": "79"
+          "line": "88"
+        },
+        {
+          "kind": "function",
+          "name": "disable_edges",
+          "qualified_name": "GraphicsSceneOptions::disable_edges",
+          "brief": "Disables drawing of all edges.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void GraphicsSceneOptions::disable_edges",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "91"
+        },
+        {
+          "kind": "function",
+          "name": "enable_edges",
+          "qualified_name": "GraphicsSceneOptions::enable_edges",
+          "brief": "Enables drawing of edges.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void GraphicsSceneOptions::enable_edges",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "94"
+        },
+        {
+          "kind": "function",
+          "name": "are_edges_enabled",
+          "qualified_name": "GraphicsSceneOptions::are_edges_enabled",
+          "brief": "Returns true if drawing of edges is enabled, false otherwise.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool GraphicsSceneOptions::are_edges_enabled",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "97"
         },
         {
           "kind": "function",
           "name": "ignore_all_edges",
           "qualified_name": "GraphicsSceneOptions::ignore_all_edges",
-          "brief": "ignores all edges when b is true ; otherwise ignores only edges for which ignore_edge() returns true .",
+          "brief": "Disables all edges when b is true ; enables them otherwise.",
           "detailed": "",
           "return_type": "void",
           "definition": "void GraphicsSceneOptions::ignore_all_edges",
@@ -1935,13 +2124,58 @@
           "section_kind": "public-func",
           "section": "",
           "file": "Concepts/GraphicsSceneOptions.h",
-          "line": "82"
+          "line": "100"
+        },
+        {
+          "kind": "function",
+          "name": "disable_faces",
+          "qualified_name": "GraphicsSceneOptions::disable_faces",
+          "brief": "Disables drawing of all faces.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void GraphicsSceneOptions::disable_faces",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "103"
+        },
+        {
+          "kind": "function",
+          "name": "enable_faces",
+          "qualified_name": "GraphicsSceneOptions::enable_faces",
+          "brief": "Enables drawing of faces.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void GraphicsSceneOptions::enable_faces",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "106"
+        },
+        {
+          "kind": "function",
+          "name": "are_faces_enabled",
+          "qualified_name": "GraphicsSceneOptions::are_faces_enabled",
+          "brief": "Returns true if drawing of faces is enabled, false otherwise.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool GraphicsSceneOptions::are_faces_enabled",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/GraphicsSceneOptions.h",
+          "line": "109"
         },
         {
           "kind": "function",
           "name": "ignore_all_faces",
           "qualified_name": "GraphicsSceneOptions::ignore_all_faces",
-          "brief": "ignores all faces when b is true ; otherwise ignores only faces for which ignore_face() returns true .",
+          "brief": "Disables all faces when b is true ; enables them otherwise.",
           "detailed": "",
           "return_type": "void",
           "definition": "void GraphicsSceneOptions::ignore_all_faces",
@@ -1958,7 +2192,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "Concepts/GraphicsSceneOptions.h",
-          "line": "85"
+          "line": "112"
         }
       ],
       "xml_file": "class_graphics_scene_options.xml",
@@ -1984,7 +2218,7 @@
           "section_kind": "public-type",
           "section": "",
           "file": "Concepts/GraphicsSceneOptions.h",
-          "line": "107"
+          "line": "134"
         },
         {
           "kind": "variable",
@@ -1999,7 +2233,7 @@
           "section_kind": "public-attrib",
           "section": "",
           "file": "Concepts/GraphicsSceneOptions.h",
-          "line": "111"
+          "line": "138"
         },
         {
           "kind": "variable",
@@ -2014,7 +2248,7 @@
           "section_kind": "public-attrib",
           "section": "",
           "file": "Concepts/GraphicsSceneOptions.h",
-          "line": "116"
+          "line": "143"
         },
         {
           "kind": "variable",
@@ -2029,7 +2263,7 @@
           "section_kind": "public-attrib",
           "section": "",
           "file": "Concepts/GraphicsSceneOptions.h",
-          "line": "120"
+          "line": "147"
         },
         {
           "kind": "variable",
@@ -2044,7 +2278,7 @@
           "section_kind": "public-attrib",
           "section": "",
           "file": "Concepts/GraphicsSceneOptions.h",
-          "line": "124"
+          "line": "151"
         },
         {
           "kind": "function",
@@ -2067,12 +2301,22 @@
           "section_kind": "public-func",
           "section": "",
           "file": "Concepts/GraphicsSceneOptions.h",
-          "line": "127"
+          "line": "154"
         }
       ],
       "xml_file": "class_graphics_scene_options_with_volumes.xml",
       "file": "Concepts/GraphicsSceneOptions.h",
-      "line": "101"
+      "line": "128"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Basic_viewer.txt",
+      "line": "1"
     },
     "CGAL::Qt": {
       "kind": "namespace",
@@ -2098,7 +2342,7 @@
       "kind": "group",
       "name": "PkgBasicViewerRef",
       "brief": "",
-      "detailed": "Guillaume Damiand and Mostafa Ashraf This package provides interactive visualization for most CGAL packages. First, the function draw() is provided for each data structure. Several data structures can be added to a same graphics scene and visualized simultaneously. Rendering can be controlled (color, point size, etc.). Finally a Qt widget is provided that can be integrated in the GUI of a user application. Introduced in: CGAL 6.0 BibTeX: cgal:d-bv-26a License: LGPL Classified Reference Pages Concepts GraphicsSceneOptions GraphicsSceneOptionsWithVolumes Classes CGAL::Qt::Basic_viewer CGAL::Graphics_scene CGAL::Graphics_scene_options <DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor, VolumeDescriptor> CGAL::Qt::QApplication_and_basic_viewer Draw a Graphics Scene CGAL::draw_graphics_scene() Draw for Different Packages CGAL::Arrangement_2 CGAL::draw<ARR>() CGAL::Constrained_triangulation_2 CGAL::draw<CT2>() CGAL::Linear_cell_complex_for_combinatorial_map CGAL::draw<LCC>() CGAL::Linear_cell_complex_for_generalized_map CGAL::draw<LCC>() CGAL::Nef_polyhedron_3 CGAL::draw<Nef3>() CGAL::Periodic_2_triangulation_2 CGAL::draw<P2T2>() CGAL::Point_set_3 CGAL::draw<PS>() CGAL::Polygon_2 CGAL::draw<P2>() CGAL::Polygon_set_2 CGAL::draw<PS>() CGAL::Polygon_with_holes_2 CGAL::draw<PH2>() CGAL::Polyhedron_3 CGAL::draw<POLY>() CGAL::Surface_mesh CGAL::draw<SM>() CGAL::Surface_mesh_topology CGAL::draw<SMT>() CGAL::Triangulation_2 CGAL::draw<T2>() CGAL::Triangulation_3 CGAL::draw<T3>() CGAL::Voronoi_diagram_2 CGAL::draw<V2>() Fill Graphics Scene for Different Packages CGAL::Arrangement_2 CGAL::add_to_graphics_scene<ARR>() CGAL::Constrained_triangulation_2 CGAL::add_to_graphics_scene<CT2>() CGAL::Linear_cell_complex_for_combinatorial_map CGAL::add_to_graphics_scene<LCC>() CGAL::Linear_cell_complex_for_generalized_map CGAL::add_to_graphics_scene<LCC>() CGAL::Nef_polyhedron_3 CGAL::add_to_graphics_scene<Nef3>() CGAL::Periodic_2_triangulation_2 CGAL::add_to_graphics_scene<P2T2>() CGAL::Point_set_3 CGAL::add_to_graphics_scene<PS>() CGAL::Polygon_2 CGAL::add_to_graphics_scene<P2>() CGAL::Polygon_set_2 CGAL::add_to_graphics_scene<PS>() CGAL::Polygon_with_holes_2 CGAL::add_to_graphics_scene<PH2>() CGAL::Polyhedron_3 CGAL::add_to_graphics_scene<POLY>() CGAL::Surface_mesh CGAL::add_to_graphics_scene<SM>() CGAL::Surface_mesh_topology CGAL::add_to_graphics_scene<SMT>() CGAL::Triangulation_2 CGAL::add_to_graphics_scene<T2>() CGAL::Triangulation_3 CGAL::add_to_graphics_scene<T3>() CGAL::Voronoi_diagram_2 CGAL::add_to_graphics_scene<V2>()",
+      "detailed": "Guillaume Damiand and Mostafa Ashraf This package provides interactive visualization for most CGAL packages. First, the function draw() is provided for each data structure. Several data structures can be added to a same graphics scene and visualized simultaneously. Rendering can be controlled (color, point size, etc.). Finally a Qt widget is provided that can be integrated in the GUI of a user application. Introduced in: CGAL 6.0 BibTeX: cgal:d-bv-26b License: LGPL Classified Reference Pages Concepts GraphicsSceneOptions GraphicsSceneOptionsWithVolumes Classes CGAL::Qt::Basic_viewer CGAL::Graphics_scene CGAL::Graphics_scene_options <DS, VertexDescriptor, EdgeDescriptor, FaceDescriptor, VolumeDescriptor> CGAL::Qt::QApplication_and_basic_viewer Draw a Graphics Scene CGAL::draw_graphics_scene() Draw for Different Packages CGAL::Arrangement_2 CGAL::draw<ARR>() CGAL::Constrained_triangulation_2 CGAL::draw<CT2>() CGAL::Linear_cell_complex_for_combinatorial_map CGAL::draw<LCC>() CGAL::Linear_cell_complex_for_generalized_map CGAL::draw<LCC>() CGAL::Nef_polyhedron_3 CGAL::draw<Nef3>() CGAL::Periodic_2_triangulation_2 CGAL::draw<P2T2>() CGAL::Point_set_3 CGAL::draw<PS>() CGAL::Polygon_2 CGAL::draw<P2>() CGAL::Polygon_set_2 CGAL::draw<PS>() CGAL::Polygon_with_holes_2 CGAL::draw<PH2>() CGAL::Polyhedron_3 CGAL::draw<POLY>() CGAL::Surface_mesh CGAL::draw<SM>() CGAL::Surface_mesh_topology CGAL::draw<SMT>() CGAL::Triangulation_2 CGAL::draw<T2>() CGAL::Triangulation_3 CGAL::draw<T3>() CGAL::Voronoi_diagram_2 CGAL::draw<V2>() Fill Graphics Scene for Different Packages CGAL::Arrangement_2 CGAL::add_to_graphics_scene<ARR>() CGAL::Constrained_triangulation_2 CGAL::add_to_graphics_scene<CT2>() CGAL::Linear_cell_complex_for_combinatorial_map CGAL::add_to_graphics_scene<LCC>() CGAL::Linear_cell_complex_for_generalized_map CGAL::add_to_graphics_scene<LCC>() CGAL::Nef_polyhedron_3 CGAL::add_to_graphics_scene<Nef3>() CGAL::Periodic_2_triangulation_2 CGAL::add_to_graphics_scene<P2T2>() CGAL::Point_set_3 CGAL::add_to_graphics_scene<PS>() CGAL::Polygon_2 CGAL::add_to_graphics_scene<P2>() CGAL::Polygon_set_2 CGAL::add_to_graphics_scene<PS>() CGAL::Polygon_with_holes_2 CGAL::add_to_graphics_scene<PH2>() CGAL::Polyhedron_3 CGAL::add_to_graphics_scene<POLY>() CGAL::Surface_mesh CGAL::add_to_graphics_scene<SM>() CGAL::Surface_mesh_topology CGAL::add_to_graphics_scene<SMT>() CGAL::Triangulation_2 CGAL::add_to_graphics_scene<T2>() CGAL::Triangulation_3 CGAL::add_to_graphics_scene<T3>() CGAL::Voronoi_diagram_2 CGAL::add_to_graphics_scene<V2>()",
       "members": [],
       "xml_file": "group___pkg_basic_viewer_ref.xml"
     },

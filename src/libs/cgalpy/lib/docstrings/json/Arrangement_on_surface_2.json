@@ -16,21 +16,6 @@
       "members": [
         {
           "kind": "typedef",
-          "name": "Approximate_number_type",
-          "qualified_name": "AosApproximatePointTraits_2::Approximate_number_type",
-          "brief": "the number type used to approximate point coordinates, e.g., double.",
-          "detailed": "",
-          "return_type": "unspecified_type",
-          "definition": "typedef unspecified_type AosApproximatePointTraits_2::Approximate_number_type",
-          "argsstring": "",
-          "params": [],
-          "section_kind": "user-defined",
-          "section": "Types",
-          "file": "Concepts/AosApproximatePointTraits_2.h",
-          "line": "29"
-        },
-        {
-          "kind": "typedef",
           "name": "Approximate_2",
           "qualified_name": "AosApproximatePointTraits_2::Approximate_2",
           "brief": "models the concept AosTraits::ApproximatePoint_2 .",
@@ -42,7 +27,7 @@
           "section_kind": "user-defined",
           "section": "Functor Types",
           "file": "Concepts/AosApproximatePointTraits_2.h",
-          "line": "37"
+          "line": "29"
         },
         {
           "kind": "function",
@@ -57,7 +42,7 @@
           "section_kind": "user-defined",
           "section": "Accessing Functor Objects",
           "file": "Concepts/AosApproximatePointTraits_2.h",
-          "line": "45"
+          "line": "37"
         }
       ],
       "xml_file": "class_aos_approximate_point_traits__2.xml",
@@ -72,21 +57,6 @@
       "members": [
         {
           "kind": "typedef",
-          "name": "Approximate_point_2",
-          "qualified_name": "AosApproximateTraits_2::Approximate_point_2",
-          "brief": "the approximate point.",
-          "detailed": "",
-          "return_type": "unspecified_type",
-          "definition": "typedef unspecified_type AosApproximateTraits_2::Approximate_point_2",
-          "argsstring": "",
-          "params": [],
-          "section_kind": "user-defined",
-          "section": "Types",
-          "file": "Concepts/AosApproximateTraits_2.h",
-          "line": "30"
-        },
-        {
-          "kind": "typedef",
           "name": "Approximate_2",
           "qualified_name": "AosApproximateTraits_2::Approximate_2",
           "brief": "models the concept AosTraits::Approximate_2 .",
@@ -98,7 +68,7 @@
           "section_kind": "user-defined",
           "section": "Functor Types",
           "file": "Concepts/AosApproximateTraits_2.h",
-          "line": "38"
+          "line": "30"
         },
         {
           "kind": "function",
@@ -113,7 +83,7 @@
           "section_kind": "user-defined",
           "section": "Accessing Functor Objects",
           "file": "Concepts/AosApproximateTraits_2.h",
-          "line": "46"
+          "line": "38"
         }
       ],
       "xml_file": "class_aos_approximate_traits__2.xml",
@@ -6445,6 +6415,21 @@
       "detailed": "Refines ApproximatePoint_2 Has models AosApproximatePointTraits_2::Approximate_2 AosApproximateTraits_2::Approximate_2",
       "members": [
         {
+          "kind": "typedef",
+          "name": "Approximate_point_2",
+          "qualified_name": "AosTraits::Approximate_2::Approximate_point_2",
+          "brief": "the approximate point type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AosTraits::Approximate_2::Approximate_point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AosTraits--Approximate_2.h",
+          "line": "21"
+        },
+        {
           "kind": "function",
           "name": "operator()",
           "qualified_name": "AosTraits::Approximate_2::operator()",
@@ -6465,7 +6450,7 @@
           "section_kind": "user-defined",
           "section": "Operations",
           "file": "Concepts/AosTraits--Approximate_2.h",
-          "line": "21"
+          "line": "30"
         },
         {
           "kind": "function",
@@ -6509,7 +6494,7 @@
           "section_kind": "user-defined",
           "section": "Operations",
           "file": "Concepts/AosTraits--Approximate_2.h",
-          "line": "42"
+          "line": "51"
         }
       ],
       "xml_file": "class_aos_traits_1_1_approximate__2.xml",
@@ -6522,6 +6507,21 @@
       "brief": "",
       "detailed": "Refines Functor Has models AosApproximatePointTraits_2::Approximate_2 AosApproximateTraits_2::Approximate_2",
       "members": [
+        {
+          "kind": "typedef",
+          "name": "Approximate_number_type",
+          "qualified_name": "AosTraits::ApproximatePoint_2::Approximate_number_type",
+          "brief": "the number type used to approximate point coordinates, e.g., double.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AosTraits::ApproximatePoint_2::Approximate_number_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AosTraits--ApproximatePoint_2.h",
+          "line": "21"
+        },
         {
           "kind": "function",
           "name": "operator()",
@@ -6550,7 +6550,7 @@
           "section_kind": "user-defined",
           "section": "Operations",
           "file": "Concepts/AosTraits--ApproximatePoint_2.h",
-          "line": "23"
+          "line": "32"
         }
       ],
       "xml_file": "class_aos_traits_1_1_approximate_point__2.xml",
@@ -13723,51 +13723,6 @@
           "line": "97"
         },
         {
-          "kind": "typedef",
-          "name": "Approximate_number_type",
-          "qualified_name": "CGAL::Arr_conic_traits_2::Approximate_number_type",
-          "brief": "",
-          "detailed": "",
-          "return_type": "double",
-          "definition": "typedef double CGAL::Arr_conic_traits_2< RatKernel, AlgKernel, NtTraits >::Approximate_number_type",
-          "argsstring": "",
-          "params": [],
-          "section_kind": "user-defined",
-          "section": "Auxiliary Functor definitions, used for, e.g., the landmarks point-location strategy and the drawing function.",
-          "file": "CGAL/Arr_conic_traits_2.h",
-          "line": "445"
-        },
-        {
-          "kind": "typedef",
-          "name": "Approximate_kernel",
-          "qualified_name": "CGAL::Arr_conic_traits_2::Approximate_kernel",
-          "brief": "",
-          "detailed": "",
-          "return_type": "CGAL::Cartesian< Approximate_number_type >",
-          "definition": "typedef CGAL::Cartesian<Approximate_number_type> CGAL::Arr_conic_traits_2< RatKernel, AlgKernel, NtTraits >::Approximate_kernel",
-          "argsstring": "",
-          "params": [],
-          "section_kind": "user-defined",
-          "section": "Auxiliary Functor definitions, used for, e.g., the landmarks point-location strategy and the drawing function.",
-          "file": "CGAL/Arr_conic_traits_2.h",
-          "line": "446"
-        },
-        {
-          "kind": "typedef",
-          "name": "Approximate_point_2",
-          "qualified_name": "CGAL::Arr_conic_traits_2::Approximate_point_2",
-          "brief": "",
-          "detailed": "",
-          "return_type": "Approximate_kernel::Point_2",
-          "definition": "typedef Approximate_kernel::Point_2 CGAL::Arr_conic_traits_2< RatKernel, AlgKernel, NtTraits >::Approximate_point_2",
-          "argsstring": "",
-          "params": [],
-          "section_kind": "user-defined",
-          "section": "Auxiliary Functor definitions, used for, e.g., the landmarks point-location strategy and the drawing function.",
-          "file": "CGAL/Arr_conic_traits_2.h",
-          "line": "447"
-        },
-        {
           "kind": "function",
           "name": "construct_curve_2_object",
           "qualified_name": "CGAL::Arr_conic_traits_2::construct_curve_2_object",
@@ -13780,7 +13735,7 @@
           "section_kind": "user-defined",
           "section": "Accessing Functor Objects",
           "file": "CGAL/Arr_conic_traits_2.h",
-          "line": "470"
+          "line": "461"
         },
         {
           "kind": "function",
@@ -13795,7 +13750,7 @@
           "section_kind": "user-defined",
           "section": "Accessing Functor Objects",
           "file": "CGAL/Arr_conic_traits_2.h",
-          "line": "473"
+          "line": "464"
         },
         {
           "kind": "function",
@@ -13810,7 +13765,7 @@
           "section_kind": "user-defined",
           "section": "Accessing Functor Objects",
           "file": "CGAL/Arr_conic_traits_2.h",
-          "line": "476"
+          "line": "467"
         },
         {
           "kind": "function",
@@ -13825,7 +13780,7 @@
           "section_kind": "user-defined",
           "section": "Accessing Functor Objects",
           "file": "CGAL/Arr_conic_traits_2.h",
-          "line": "479"
+          "line": "470"
         }
       ],
       "xml_file": "class_c_g_a_l_1_1_arr__conic__traits__2.xml",
@@ -14917,12 +14872,12 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Arr_conic_traits_2.h",
-          "line": "461"
+          "line": "452"
         }
       ],
       "xml_file": "class_c_g_a_l_1_1_arr__conic__traits__2_1_1_trim__2.xml",
       "file": "CGAL/Arr_conic_traits_2.h",
-      "line": "453"
+      "line": "444"
     },
     "CGAL::Arr_conic_traits_2::X_monotone_curve_2": {
       "kind": "class",
@@ -15311,7 +15266,7 @@
       "kind": "class",
       "name": "CGAL::Arr_counting_traits_2",
       "brief": "A metadata traits-class decorator for the arrangement package.",
-      "detailed": "It counts the number of invocations of traits-class functors. It is parameterized with another traits class and inherits from it. For each traits method it maintains a counter that counts the number of invocations into the method. It models all the concepts that the original traits models.",
+      "detailed": "It counts the number of invocations of traits-class functors. It is parameterized with another traits class. For each traits method it maintains a counter that counts the number of invocations into the method. It models all the concepts that the original traits models.",
       "members": [
         {
           "kind": "typedef",
@@ -15324,9 +15279,9 @@
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types and functors coming from BaseTraits",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "89"
+          "line": "103"
         },
         {
           "kind": "typedef",
@@ -15339,9 +15294,9 @@
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types and functors coming from BaseTraits",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "90"
+          "line": "104"
         },
         {
           "kind": "typedef",
@@ -15354,9 +15309,9 @@
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types and functors coming from BaseTraits",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "92"
+          "line": "106"
         },
         {
           "kind": "typedef",
@@ -15369,9 +15324,9 @@
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types and functors coming from BaseTraits",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "93"
+          "line": "107"
         },
         {
           "kind": "typedef",
@@ -15384,9 +15339,9 @@
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types and functors coming from BaseTraits",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "94"
+          "line": "108"
         },
         {
           "kind": "typedef",
@@ -15399,9 +15354,9 @@
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types and functors coming from BaseTraits",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "95"
+          "line": "109"
         },
         {
           "kind": "typedef",
@@ -15414,9 +15369,9 @@
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types and functors coming from BaseTraits",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "97"
+          "line": "111"
         },
         {
           "kind": "typedef",
@@ -15429,30 +15384,45 @@
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types and functors coming from BaseTraits",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "98"
+          "line": "112"
         },
         {
           "kind": "typedef",
           "name": "Curve_2",
           "qualified_name": "CGAL::Arr_counting_traits_2::Curve_2",
-          "brief": "",
+          "brief": "Defined only if the traits being counted models the concept AosTraits_2 .",
           "detailed": "",
           "return_type": "typename Base::Curve_2",
           "definition": "using CGAL::Arr_counting_traits_2< BaseTraits >::Curve_2 = typename Base::Curve_2",
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types and functors coming from BaseTraits",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "99"
+          "line": "115"
+        },
+        {
+          "kind": "typedef",
+          "name": "Multiplicity",
+          "qualified_name": "CGAL::Arr_counting_traits_2::Multiplicity",
+          "brief": "Defined only if the traits being counted models the concept AosXMonotoneTraits_2 .",
+          "detailed": "",
+          "return_type": "typename Base::Multiplicity",
+          "definition": "using CGAL::Arr_counting_traits_2< BaseTraits >::Multiplicity = typename Base::Multiplicity",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types and functors coming from BaseTraits",
+          "file": "CGAL/Arr_counting_traits_2.h",
+          "line": "118"
         },
         {
           "kind": "function",
           "name": "Arr_counting_traits_2",
           "qualified_name": "CGAL::Arr_counting_traits_2::Arr_counting_traits_2",
-          "brief": "constructs default",
+          "brief": "constructs default.",
           "detailed": "",
           "return_type": "",
           "definition": "CGAL::Arr_counting_traits_2< BaseTraits >::Arr_counting_traits_2",
@@ -15469,7 +15439,7 @@
           "section_kind": "user-defined",
           "section": "Creation",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "72"
+          "line": "78"
         },
         {
           "kind": "function",
@@ -15515,7 +15485,7 @@
           "section_kind": "user-defined",
           "section": "Creation",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "75"
+          "line": "87"
         },
         {
           "kind": "function",
@@ -15530,7 +15500,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "106"
+          "line": "124"
         },
         {
           "kind": "function",
@@ -15545,7 +15515,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "107"
+          "line": "125"
         },
         {
           "kind": "function",
@@ -15560,7 +15530,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "108"
+          "line": "126"
         },
         {
           "kind": "function",
@@ -15575,7 +15545,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "109"
+          "line": "127"
         },
         {
           "kind": "function",
@@ -15590,7 +15560,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "110"
+          "line": "128"
         },
         {
           "kind": "function",
@@ -15605,7 +15575,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "111"
+          "line": "129"
         },
         {
           "kind": "function",
@@ -15620,7 +15590,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "112"
+          "line": "130"
         },
         {
           "kind": "function",
@@ -15635,7 +15605,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "113"
+          "line": "131"
         },
         {
           "kind": "function",
@@ -15650,37 +15620,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "114"
-        },
-        {
-          "kind": "function",
-          "name": "make_x_monotone_2_object",
-          "qualified_name": "CGAL::Arr_counting_traits_2::make_x_monotone_2_object",
-          "brief": "",
-          "detailed": "",
-          "return_type": "Make_x_monotone_2",
-          "definition": "Make_x_monotone_2 CGAL::Arr_counting_traits_2< BaseTraits >::make_x_monotone_2_object",
-          "argsstring": "() const",
-          "params": [],
-          "section_kind": "user-defined",
-          "section": "Obtain the appropriate functor",
-          "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "115"
-        },
-        {
-          "kind": "function",
-          "name": "split_2_object",
-          "qualified_name": "CGAL::Arr_counting_traits_2::split_2_object",
-          "brief": "",
-          "detailed": "",
-          "return_type": "Split_2",
-          "definition": "Split_2 CGAL::Arr_counting_traits_2< BaseTraits >::split_2_object",
-          "argsstring": "() const",
-          "params": [],
-          "section_kind": "user-defined",
-          "section": "Obtain the appropriate functor",
-          "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "116"
+          "line": "132"
         },
         {
           "kind": "function",
@@ -15695,7 +15635,22 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "117"
+          "line": "133"
+        },
+        {
+          "kind": "function",
+          "name": "split_2_object",
+          "qualified_name": "CGAL::Arr_counting_traits_2::split_2_object",
+          "brief": "Supported only if the traits being counted models the concept AosXMonotoneTraits_2 .",
+          "detailed": "",
+          "return_type": "Split_2",
+          "definition": "Split_2 CGAL::Arr_counting_traits_2< BaseTraits >::split_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Obtain the appropriate functor",
+          "file": "CGAL/Arr_counting_traits_2.h",
+          "line": "136"
         },
         {
           "kind": "function",
@@ -15710,7 +15665,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "118"
+          "line": "137"
         },
         {
           "kind": "function",
@@ -15725,7 +15680,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "119"
+          "line": "138"
         },
         {
           "kind": "function",
@@ -15740,13 +15695,28 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "120"
+          "line": "139"
+        },
+        {
+          "kind": "function",
+          "name": "make_x_monotone_2_object",
+          "qualified_name": "CGAL::Arr_counting_traits_2::make_x_monotone_2_object",
+          "brief": "Supported only if the traits being counted models the concept AosTraits_2 .",
+          "detailed": "",
+          "return_type": "Make_x_monotone_2",
+          "definition": "Make_x_monotone_2 CGAL::Arr_counting_traits_2< BaseTraits >::make_x_monotone_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Obtain the appropriate functor",
+          "file": "CGAL/Arr_counting_traits_2.h",
+          "line": "142"
         },
         {
           "kind": "function",
           "name": "construct_opposite_2_object",
           "qualified_name": "CGAL::Arr_counting_traits_2::construct_opposite_2_object",
-          "brief": "",
+          "brief": "Supported only if the traits being counted models the concept AosDirectionalXMonotoneTraits_2 .",
           "detailed": "",
           "return_type": "Construct_opposite_2",
           "definition": "Construct_opposite_2 CGAL::Arr_counting_traits_2< BaseTraits >::construct_opposite_2_object",
@@ -15755,7 +15725,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "121"
+          "line": "145"
         },
         {
           "kind": "function",
@@ -15770,13 +15740,13 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "122"
+          "line": "146"
         },
         {
           "kind": "function",
           "name": "approximate_2_object",
           "qualified_name": "CGAL::Arr_counting_traits_2::approximate_2_object",
-          "brief": "",
+          "brief": "Supported only if the traits being counted models the concept AosApproximateTraits_2 .",
           "detailed": "",
           "return_type": "Approximate_2",
           "definition": "Approximate_2 CGAL::Arr_counting_traits_2< BaseTraits >::approximate_2_object",
@@ -15785,13 +15755,58 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "123"
+          "line": "149"
+        },
+        {
+          "kind": "function",
+          "name": "construct_point_2_object",
+          "qualified_name": "CGAL::Arr_counting_traits_2::construct_point_2_object",
+          "brief": "Supported only if the traits being counted models the concept AosConstructPointTraits_2 .",
+          "detailed": "",
+          "return_type": "Construct_point_2",
+          "definition": "Construct_point_2 CGAL::Arr_counting_traits_2< BaseTraits >::construct_point_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Obtain the appropriate functor",
+          "file": "CGAL/Arr_counting_traits_2.h",
+          "line": "152"
+        },
+        {
+          "kind": "function",
+          "name": "construct_x_monotone_curve_2_object",
+          "qualified_name": "CGAL::Arr_counting_traits_2::construct_x_monotone_curve_2_object",
+          "brief": "Supported only if the traits being counted models the concept AosConstructXMonotoneCurveTraits_2 .",
+          "detailed": "",
+          "return_type": "Construct_x_monotone_curve_2",
+          "definition": "Construct_x_monotone_curve_2 CGAL::Arr_counting_traits_2< BaseTraits >::construct_x_monotone_curve_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Obtain the appropriate functor",
+          "file": "CGAL/Arr_counting_traits_2.h",
+          "line": "155"
+        },
+        {
+          "kind": "function",
+          "name": "construct_curve_2_object",
+          "qualified_name": "CGAL::Arr_counting_traits_2::construct_curve_2_object",
+          "brief": "Supported only if the traits being counted models the concept AosConstructCurveTraits_2 .",
+          "detailed": "",
+          "return_type": "Construct_curve_2",
+          "definition": "Construct_curve_2 CGAL::Arr_counting_traits_2< BaseTraits >::construct_curve_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Obtain the appropriate functor",
+          "file": "CGAL/Arr_counting_traits_2.h",
+          "line": "158"
         },
         {
           "kind": "function",
           "name": "parameter_space_in_x_2_object",
           "qualified_name": "CGAL::Arr_counting_traits_2::parameter_space_in_x_2_object",
-          "brief": "",
+          "brief": "Supported only if the traits being counted models the concepts AosOpenBoundaryTraits_2 or AosSphericalBoundaryTraits_2 .",
           "detailed": "",
           "return_type": "Parameter_space_in_x_2",
           "definition": "Parameter_space_in_x_2 CGAL::Arr_counting_traits_2< BaseTraits >::parameter_space_in_x_2_object",
@@ -15800,7 +15815,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "124"
+          "line": "163"
         },
         {
           "kind": "function",
@@ -15815,7 +15830,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "125"
+          "line": "164"
         },
         {
           "kind": "function",
@@ -15830,7 +15845,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "126"
+          "line": "165"
         },
         {
           "kind": "function",
@@ -15845,7 +15860,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "127"
+          "line": "166"
         },
         {
           "kind": "function",
@@ -15860,7 +15875,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "128"
+          "line": "167"
         },
         {
           "kind": "function",
@@ -15875,7 +15890,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "129"
+          "line": "168"
         },
         {
           "kind": "function",
@@ -15890,7 +15905,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "130"
+          "line": "169"
         },
         {
           "kind": "function",
@@ -15905,7 +15920,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "131"
+          "line": "170"
         },
         {
           "kind": "enum",
@@ -15926,7 +15941,7 @@
           "kind": "function",
           "name": "count",
           "qualified_name": "CGAL::Arr_counting_traits_2::count",
-          "brief": "obtains the counter of the given operation",
+          "brief": "obtains the counter of the given operation.",
           "detailed": "",
           "return_type": "std::size_t",
           "definition": "std::size_t CGAL::Arr_counting_traits_2< BaseTraits >::count",
@@ -15943,7 +15958,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "80"
+          "line": "93"
         },
         {
           "kind": "function",
@@ -15973,13 +15988,13 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "84"
+          "line": "98"
         },
         {
           "kind": "function",
           "name": "clear_counters",
           "qualified_name": "CGAL::Arr_counting_traits_2::clear_counters",
-          "brief": "cleans all operation counters",
+          "brief": "cleans all operation counters.",
           "detailed": "",
           "return_type": "void",
           "definition": "void CGAL::Arr_counting_traits_2< BaseTraits >::clear_counters",
@@ -15988,7 +16003,37 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "136"
+          "line": "176"
+        },
+        {
+          "kind": "function",
+          "name": "traits",
+          "qualified_name": "CGAL::Arr_counting_traits_2::traits",
+          "brief": "obtains a const reference to the traits being counted.",
+          "detailed": "",
+          "return_type": "const Base &",
+          "definition": "const Base & CGAL::Arr_counting_traits_2< BaseTraits >::traits",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Arr_counting_traits_2.h",
+          "line": "180"
+        },
+        {
+          "kind": "function",
+          "name": "traits",
+          "qualified_name": "CGAL::Arr_counting_traits_2::traits",
+          "brief": "obtains a reference to the traits being counted.",
+          "detailed": "",
+          "return_type": "Base &",
+          "definition": "Base & CGAL::Arr_counting_traits_2< BaseTraits >::traits",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Arr_counting_traits_2.h",
+          "line": "184"
         },
         {
           "kind": "function",
@@ -22994,7 +23039,7 @@
       "kind": "class",
       "name": "CGAL::Arr_tracing_traits_2",
       "brief": "A metadata traits-class decorator for the arrangement package.",
-      "detailed": "It traces the invocations of traits-class functors. It is parameterized with another traits class and inherits from it. For each traits method it prints out its input parameters and its output result It models all the concepts that the original traits models.",
+      "detailed": "It traces the invocations of traits-class functors. It is parameterized with another traits class. For each traits method it prints out its input parameters and its output result It models all the concepts that the original traits models.",
       "members": [
         {
           "kind": "typedef",
@@ -23007,9 +23052,9 @@
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types coming from BaseTraits",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "91"
+          "line": "114"
         },
         {
           "kind": "typedef",
@@ -23022,9 +23067,9 @@
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types coming from BaseTraits",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "92"
+          "line": "115"
         },
         {
           "kind": "typedef",
@@ -23033,13 +23078,13 @@
           "brief": "",
           "detailed": "",
           "return_type": "typename internal::Arr_complete_left_side_category< Base >::Category",
-          "definition": "using CGAL::Arr_tracing_traits_2< BaseTraits >::Left_side_category = typename internal::Arr_complete_left_side_category< Base >::Category",
+          "definition": "using CGAL::Arr_tracing_traits_2< BaseTraits >::Left_side_category = typename internal::Arr_complete_left_side_category<Base>::Category",
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types coming from BaseTraits",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "94"
+          "line": "117"
         },
         {
           "kind": "typedef",
@@ -23048,13 +23093,13 @@
           "brief": "",
           "detailed": "",
           "return_type": "typename internal::Arr_complete_bottom_side_category< Base >::Category",
-          "definition": "using CGAL::Arr_tracing_traits_2< BaseTraits >::Bottom_side_category = typename internal::Arr_complete_bottom_side_category< Base >::Category",
+          "definition": "using CGAL::Arr_tracing_traits_2< BaseTraits >::Bottom_side_category = typename internal::Arr_complete_bottom_side_category<Base>::Category",
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types coming from BaseTraits",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "95"
+          "line": "118"
         },
         {
           "kind": "typedef",
@@ -23063,13 +23108,13 @@
           "brief": "",
           "detailed": "",
           "return_type": "typename internal::Arr_complete_top_side_category< Base >::Category",
-          "definition": "using CGAL::Arr_tracing_traits_2< BaseTraits >::Top_side_category = typename internal::Arr_complete_top_side_category< Base >::Category",
+          "definition": "using CGAL::Arr_tracing_traits_2< BaseTraits >::Top_side_category = typename internal::Arr_complete_top_side_category<Base>::Category",
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types coming from BaseTraits",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "96"
+          "line": "119"
         },
         {
           "kind": "typedef",
@@ -23078,13 +23123,13 @@
           "brief": "",
           "detailed": "",
           "return_type": "typename internal::Arr_complete_right_side_category< Base >::Category",
-          "definition": "using CGAL::Arr_tracing_traits_2< BaseTraits >::Right_side_category = typename internal::Arr_complete_right_side_category< Base >::Category",
+          "definition": "using CGAL::Arr_tracing_traits_2< BaseTraits >::Right_side_category = typename internal::Arr_complete_right_side_category<Base>::Category",
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types coming from BaseTraits",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "97"
+          "line": "120"
         },
         {
           "kind": "typedef",
@@ -23097,9 +23142,9 @@
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types coming from BaseTraits",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "99"
+          "line": "122"
         },
         {
           "kind": "typedef",
@@ -23112,45 +23157,45 @@
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types coming from BaseTraits",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "100"
+          "line": "123"
         },
         {
           "kind": "typedef",
           "name": "Curve_2",
           "qualified_name": "CGAL::Arr_tracing_traits_2::Curve_2",
-          "brief": "",
+          "brief": "Defined only if the traits being traced models the concept AosTraits_2 .",
           "detailed": "",
           "return_type": "typename Base::Curve_2",
           "definition": "using CGAL::Arr_tracing_traits_2< BaseTraits >::Curve_2 = typename Base::Curve_2",
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types coming from BaseTraits",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "101"
+          "line": "126"
         },
         {
           "kind": "typedef",
           "name": "Multiplicity",
           "qualified_name": "CGAL::Arr_tracing_traits_2::Multiplicity",
-          "brief": "",
+          "brief": "Defined only if the traits being traced models the concept AosXMonotoneTraits_2 .",
           "detailed": "",
           "return_type": "typename Base::Multiplicity",
           "definition": "using CGAL::Arr_tracing_traits_2< BaseTraits >::Multiplicity = typename Base::Multiplicity",
           "argsstring": "",
           "params": [],
           "section_kind": "user-defined",
-          "section": "Types and functors inherited from <tt>BaseTraits</tt>",
+          "section": "Types coming from BaseTraits",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "102"
+          "line": "129"
         },
         {
           "kind": "function",
           "name": "Arr_tracing_traits_2",
           "qualified_name": "CGAL::Arr_tracing_traits_2::Arr_tracing_traits_2",
-          "brief": "constructs default",
+          "brief": "constructs default.",
           "detailed": "",
           "return_type": "",
           "definition": "CGAL::Arr_tracing_traits_2< BaseTraits >::Arr_tracing_traits_2",
@@ -23167,7 +23212,7 @@
           "section_kind": "user-defined",
           "section": "Creation",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "63"
+          "line": "68"
         },
         {
           "kind": "function",
@@ -23213,7 +23258,7 @@
           "section_kind": "user-defined",
           "section": "Creation",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "66"
+          "line": "77"
         },
         {
           "kind": "function",
@@ -23228,7 +23273,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "109"
+          "line": "136"
         },
         {
           "kind": "function",
@@ -23243,7 +23288,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "110"
+          "line": "137"
         },
         {
           "kind": "function",
@@ -23258,7 +23303,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "111"
+          "line": "138"
         },
         {
           "kind": "function",
@@ -23273,7 +23318,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "112"
+          "line": "139"
         },
         {
           "kind": "function",
@@ -23288,7 +23333,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "113"
+          "line": "140"
         },
         {
           "kind": "function",
@@ -23303,7 +23348,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "114"
+          "line": "141"
         },
         {
           "kind": "function",
@@ -23318,7 +23363,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "115"
+          "line": "142"
         },
         {
           "kind": "function",
@@ -23333,7 +23378,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "116"
+          "line": "143"
         },
         {
           "kind": "function",
@@ -23348,37 +23393,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "117"
-        },
-        {
-          "kind": "function",
-          "name": "make_x_monotone_2_object",
-          "qualified_name": "CGAL::Arr_tracing_traits_2::make_x_monotone_2_object",
-          "brief": "",
-          "detailed": "",
-          "return_type": "Make_x_monotone_2",
-          "definition": "Make_x_monotone_2 CGAL::Arr_tracing_traits_2< BaseTraits >::make_x_monotone_2_object",
-          "argsstring": "() const",
-          "params": [],
-          "section_kind": "user-defined",
-          "section": "Obtain the appropriate functor",
-          "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "118"
-        },
-        {
-          "kind": "function",
-          "name": "split_2_object",
-          "qualified_name": "CGAL::Arr_tracing_traits_2::split_2_object",
-          "brief": "",
-          "detailed": "",
-          "return_type": "Split_2",
-          "definition": "Split_2 CGAL::Arr_tracing_traits_2< BaseTraits >::split_2_object",
-          "argsstring": "() const",
-          "params": [],
-          "section_kind": "user-defined",
-          "section": "Obtain the appropriate functor",
-          "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "119"
+          "line": "144"
         },
         {
           "kind": "function",
@@ -23393,7 +23408,22 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "120"
+          "line": "145"
+        },
+        {
+          "kind": "function",
+          "name": "split_2_object",
+          "qualified_name": "CGAL::Arr_tracing_traits_2::split_2_object",
+          "brief": "Supported only if the traits being traced models the concept AosXMonotoneTraits_2 .",
+          "detailed": "",
+          "return_type": "Split_2",
+          "definition": "Split_2 CGAL::Arr_tracing_traits_2< BaseTraits >::split_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Obtain the appropriate functor",
+          "file": "CGAL/Arr_tracing_traits_2.h",
+          "line": "148"
         },
         {
           "kind": "function",
@@ -23408,7 +23438,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "121"
+          "line": "149"
         },
         {
           "kind": "function",
@@ -23423,7 +23453,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "122"
+          "line": "150"
         },
         {
           "kind": "function",
@@ -23438,13 +23468,28 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "123"
+          "line": "151"
+        },
+        {
+          "kind": "function",
+          "name": "make_x_monotone_2_object",
+          "qualified_name": "CGAL::Arr_tracing_traits_2::make_x_monotone_2_object",
+          "brief": "Supported only if the traits being traced models the concept AosTraits_2 .",
+          "detailed": "",
+          "return_type": "Make_x_monotone_2",
+          "definition": "Make_x_monotone_2 CGAL::Arr_tracing_traits_2< BaseTraits >::make_x_monotone_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Obtain the appropriate functor",
+          "file": "CGAL/Arr_tracing_traits_2.h",
+          "line": "154"
         },
         {
           "kind": "function",
           "name": "construct_opposite_2_object",
           "qualified_name": "CGAL::Arr_tracing_traits_2::construct_opposite_2_object",
-          "brief": "",
+          "brief": "Supported only if the traits being traced models the concept AosDirectionalXMonotoneTraits_2 .",
           "detailed": "",
           "return_type": "Construct_opposite_2",
           "definition": "Construct_opposite_2 CGAL::Arr_tracing_traits_2< BaseTraits >::construct_opposite_2_object",
@@ -23453,7 +23498,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "124"
+          "line": "157"
         },
         {
           "kind": "function",
@@ -23468,13 +23513,13 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "125"
+          "line": "158"
         },
         {
           "kind": "function",
           "name": "approximate_2_object",
           "qualified_name": "CGAL::Arr_tracing_traits_2::approximate_2_object",
-          "brief": "",
+          "brief": "Supported only if the traits being traced models the concept AosApproximateTraits_2 .",
           "detailed": "",
           "return_type": "Approximate_2",
           "definition": "Approximate_2 CGAL::Arr_tracing_traits_2< BaseTraits >::approximate_2_object",
@@ -23483,13 +23528,58 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "126"
+          "line": "161"
+        },
+        {
+          "kind": "function",
+          "name": "construct_point_2_object",
+          "qualified_name": "CGAL::Arr_tracing_traits_2::construct_point_2_object",
+          "brief": "Supported only if the traits being traced models the concept AosConstructPointTraits_2 .",
+          "detailed": "",
+          "return_type": "Construct_point_2",
+          "definition": "Construct_point_2 CGAL::Arr_tracing_traits_2< BaseTraits >::construct_point_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Obtain the appropriate functor",
+          "file": "CGAL/Arr_tracing_traits_2.h",
+          "line": "164"
+        },
+        {
+          "kind": "function",
+          "name": "construct_x_monotone_curve_2_object",
+          "qualified_name": "CGAL::Arr_tracing_traits_2::construct_x_monotone_curve_2_object",
+          "brief": "Supported only if the traits being traced models the concept AosConstructXMonotoneCurveTraits_2 .",
+          "detailed": "",
+          "return_type": "Construct_x_monotone_curve_2",
+          "definition": "Construct_x_monotone_curve_2 CGAL::Arr_tracing_traits_2< BaseTraits >::construct_x_monotone_curve_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Obtain the appropriate functor",
+          "file": "CGAL/Arr_tracing_traits_2.h",
+          "line": "167"
+        },
+        {
+          "kind": "function",
+          "name": "construct_curve_2_object",
+          "qualified_name": "CGAL::Arr_tracing_traits_2::construct_curve_2_object",
+          "brief": "Supported only if the traits being traced models the concept AosConstructCurveTraits_2 .",
+          "detailed": "",
+          "return_type": "Construct_curve_2",
+          "definition": "Construct_curve_2 CGAL::Arr_tracing_traits_2< BaseTraits >::construct_curve_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Obtain the appropriate functor",
+          "file": "CGAL/Arr_tracing_traits_2.h",
+          "line": "170"
         },
         {
           "kind": "function",
           "name": "parameter_space_in_x_2_object",
           "qualified_name": "CGAL::Arr_tracing_traits_2::parameter_space_in_x_2_object",
-          "brief": "",
+          "brief": "Supported only if the traits being traced models the concepts AosOpenBoundaryTraits_2 or AosSphericalBoundaryTraits_2 .",
           "detailed": "",
           "return_type": "Parameter_space_in_x_2",
           "definition": "Parameter_space_in_x_2 CGAL::Arr_tracing_traits_2< BaseTraits >::parameter_space_in_x_2_object",
@@ -23498,7 +23588,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "127"
+          "line": "175"
         },
         {
           "kind": "function",
@@ -23513,7 +23603,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "128"
+          "line": "176"
         },
         {
           "kind": "function",
@@ -23528,7 +23618,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "129"
+          "line": "177"
         },
         {
           "kind": "function",
@@ -23543,7 +23633,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "130"
+          "line": "178"
         },
         {
           "kind": "function",
@@ -23558,7 +23648,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "131"
+          "line": "179"
         },
         {
           "kind": "function",
@@ -23573,7 +23663,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "132"
+          "line": "180"
         },
         {
           "kind": "function",
@@ -23588,7 +23678,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "133"
+          "line": "181"
         },
         {
           "kind": "function",
@@ -23603,7 +23693,7 @@
           "section_kind": "user-defined",
           "section": "Obtain the appropriate functor",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "134"
+          "line": "182"
         },
         {
           "kind": "enum",
@@ -23641,7 +23731,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "73"
+          "line": "84"
         },
         {
           "kind": "function",
@@ -23656,7 +23746,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "77"
+          "line": "88"
         },
         {
           "kind": "function",
@@ -23679,7 +23769,7 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "82"
+          "line": "93"
         },
         {
           "kind": "function",
@@ -23694,7 +23784,37 @@
           "section_kind": "public-func",
           "section": "",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "86"
+          "line": "97"
+        },
+        {
+          "kind": "function",
+          "name": "traits",
+          "qualified_name": "CGAL::Arr_tracing_traits_2::traits",
+          "brief": "obtains a const reference to the traits being traced.",
+          "detailed": "",
+          "return_type": "const Base &",
+          "definition": "const Base & CGAL::Arr_tracing_traits_2< BaseTraits >::traits",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Arr_tracing_traits_2.h",
+          "line": "101"
+        },
+        {
+          "kind": "function",
+          "name": "traits",
+          "qualified_name": "CGAL::Arr_tracing_traits_2::traits",
+          "brief": "obtains a reference to the traits being traced.",
+          "detailed": "",
+          "return_type": "Base &",
+          "definition": "Base & CGAL::Arr_tracing_traits_2< BaseTraits >::traits",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Arr_tracing_traits_2.h",
+          "line": "105"
         },
         {
           "kind": "function",
@@ -23720,7 +23840,7 @@
       "kind": "class",
       "name": "CGAL::Arr_trapezoid_ric_point_location",
       "brief": "",
-      "detailed": "The Arr_trapezoid_ric_point_location class implements the incremental randomized algorithm introduced by Mulmuley [11] as presented by Seidel [13] (see also [ [5] Chapter 6). It subdivides each arrangement face to pseudo-trapezoidal cells, each of constant complexity, and constructs and maintains a linear-size search structure on top of these cells, such that each query can be answered in $O(\\log n)$ time, where $n$ is the complexity of the arrangement. Constructing the search structures takes $O(n \\log n)$ expected time and may require a small number of rebuilds [10] . Therefore attaching a trapezoidal point-location object to an existing arrangement may incur some overhead in running times. In addition, the point-location object needs to keep its auxiliary data structures up-to-date as the arrangement goes through structural changes. It is therefore recommended to use this point-location strategy for static arrangements (or arrangement that do not alter frequently), and when the number of issued queries is relatively large. This strategy supports arbitrary subdivisions, including unbounded ones. Is model of AosPointLocation_2 AosVerticalRayShoot_2 AosPointLocation_2 AosVerticalRayShoot_2 CGAL::Arr_point_location_result <Arrangement>",
+      "detailed": "The Arr_trapezoid_ric_point_location class implements the incremental randomized algorithm introduced by Mulmuley [m-fppa-90] as presented by Seidel [s-sfira-91] (see also [ [bkos-cgaa-00] Chapter 6). It subdivides each arrangement face to pseudo-trapezoidal cells, each of constant complexity, and constructs and maintains a linear-size search structure on top of these cells, such that each query can be answered in $O(\\log n)$ time, where $n$ is the complexity of the arrangement. Constructing the search structures takes $O(n \\log n)$ expected time and may require a small number of rebuilds [hkh-iiplgtds-12] . Therefore attaching a trapezoidal point-location object to an existing arrangement may incur some overhead in running times. In addition, the point-location object needs to keep its auxiliary data structures up-to-date as the arrangement goes through structural changes. It is therefore recommended to use this point-location strategy for static arrangements (or arrangement that do not alter frequently), and when the number of issued queries is relatively large. This strategy supports arbitrary subdivisions, including unbounded ones. Is model of AosPointLocation_2 AosVerticalRayShoot_2 AosPointLocation_2 AosVerticalRayShoot_2 CGAL::Arr_point_location_result <Arrangement>",
       "members": [
         {
           "kind": "function",
@@ -29375,7 +29495,7 @@
           "section_kind": "func",
           "section": "",
           "file": "CGAL/Arr_counting_traits_2.h",
-          "line": "140"
+          "line": "192"
         },
         {
           "kind": "function",
@@ -29405,7 +29525,7 @@
           "section_kind": "func",
           "section": "",
           "file": "CGAL/Arr_tracing_traits_2.h",
-          "line": "140"
+          "line": "188"
         },
         {
           "kind": "function",
@@ -29524,6 +29644,73 @@
           "section": "",
           "file": "CGAL/Arrangement_with_history_2.h",
           "line": "191"
+        },
+        {
+          "kind": "function",
+          "name": "add_to_graphics_scene",
+          "qualified_name": "CGAL::add_to_graphics_scene",
+          "brief": "\\ingroup PkgArrangementOnSurface2Draw",
+          "detailed": "Adds the vertices, edges, and faces of arr to the graphics scene gs . The scene is not cleared before it is filled. \\tparam GeometryTraits a geometry traits type, a model of a 2D arrangement geometry traits concept. \\tparam TopologyTraits a topology traits type, a model of the AosTopologyTraits concept. \\tparam GSOptions a model of the GraphicsSceneOptions concept. \\param arr the arrangement to add to the graphics scene. \\param gs the graphics scene to fill. \\param gso the graphics scene options.",
+          "return_type": "void",
+          "definition": "void CGAL::add_to_graphics_scene",
+          "argsstring": "(const Arrangement_on_surface_2< GeometryTraits, TopologyTraits > &arr, Graphics_scene &gs, const GSOptions &gso)",
+          "params": [
+            {
+              "type": "const Arrangement_on_surface_2 < GeometryTraits, TopologyTraits > &",
+              "name": "arr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Graphics_scene &",
+              "name": "gs",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GSOptions &",
+              "name": "gso",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/draw_arrangement_2.h",
+          "line": "116"
+        },
+        {
+          "kind": "function",
+          "name": "add_to_graphics_scene",
+          "qualified_name": "CGAL::add_to_graphics_scene",
+          "brief": "\\ingroup PkgArrangementOnSurface2Draw",
+          "detailed": "A shortcut to CGAL::add_to_graphics_scene (arr, gs, Graphics_scene_options<Aos, Aos::Vertex_const_handle, Aos::Halfedge_const_handle, Aos::Face_const_handle>{}) , where Aos is Arrangement_on_surface_2 <GeometryTraits, TopologyTraits> . \\param arr the arrangement to add to the graphics scene. \\param gs the graphics scene to fill.",
+          "return_type": "void",
+          "definition": "void CGAL::add_to_graphics_scene",
+          "argsstring": "(const Arrangement_on_surface_2< GeometryTraits, TopologyTraits > &arr, Graphics_scene &gs)",
+          "params": [
+            {
+              "type": "const Arrangement_on_surface_2 < GeometryTraits, TopologyTraits > &",
+              "name": "arr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Graphics_scene &",
+              "name": "gs",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/draw_arrangement_2.h",
+          "line": "132"
         }
       ],
       "xml_file": "namespace_c_g_a_l.xml",
@@ -29720,7 +29907,7 @@
       "kind": "group",
       "name": "PkgArrangementOnSurface2Ref",
       "brief": "",
-      "detailed": "Ron Wein, Eric Berberich, Efi Fogel, Dan Halperin, Michael Hemmer, Oren Salzman, and Baruch Zukerman This package can be used to construct, maintain, alter, and display arrangements in the plane. Once an arrangement is constructed, the package can be used to obtain results of various queries on the arrangement, such as point location. The package also includes generic implementations of two algorithmic frameworks, that are, computing the zone of an arrangement, and line-sweeping the plane, the arrangements is embedded on. These frameworks are used in turn in the implementations of other operations on arrangements. Computing the overlay of two arrangements, for example, is based on the sweep-line framework. Arrangements and arrangement components can also be extended to store additional data. An important extension stores the construction history of the arrangement, such that it is possible to obtain the originating curve of an arrangement subcurve. Introduced in: CGAL 2.1 BibTeX: cgal:wfzh-a2-26a License: GPL Windows Demo: 2D Arrangements Given a set $\\mathcal{C}$ of planar curves, the arrangement $ {\\mathcal A}({\\mathcal C})$ is the subdivision of the plane induced by the curves in $\\mathcal{C}$ into maximally connected cells. The cells can be $0$ -dimensional ( vertices ), $1$ -dimensional ( edges ) or $2$ -dimensional ( faces ). The class Arrangement_2<Traits,Dcel> encapsulates a data structure that maintains arrangements of arbitrary bounded planar curves. It comes with a variety of algorithms that operate on planar arrangement, such as point-location queries and overlay computations, which are implemented as peripheral classes or as free (global) functions. Classified Reference Pages Enumerations CGAL::Arr_parameter_space CGAL::Arr_curve_end CGAL::Arr_halfedge_direction Tags CGAL::Arr_oblivious_side_tag CGAL::Arr_open_side_tag CGAL::Arr_closed_side_tag CGAL::Arr_contracted_side_tag CGAL::Arr_identified_side_tag Concepts AosApproximateTraits_2 AosApproximatePointTraits_2 AosApproximateUnboundedTraits_2 AosBasicTopologyTraits AosBasicTraits_2 AosBottomSideTraits_2 AosClosedBottomTraits_2 AosClosedLeftTraits_2 AosClosedRightTraits_2 AosClosedTopTraits_2 AosConstructCurveTraits_2 AosConstructXMonotoneCurveTraits_2 AosContractedBottomTraits_2 AosContractedLeftTraits_2 AosContractedRightTraits_2 AosContractedTopTraits_2 AosDcel AosDcelFace AosDcelHalfedge AosDcelInnerCcb AosDcelIsolatedVertex AosDcelOuterCcb AosDcelVertex AosDcelWithRebind AosHorizontalSideTraits_2 AosIdentifiedHorizontalTraits_2 AosIdentifiedVerticalTraits_2 AosInputFormatter AosLandmarkTraits_2 AosLeftSideTraits_2 AosOpenBottomTraits_2 AosOpenBoundaryTraits_2 AosOpenLeftTraits_2 AosOpenRightTraits_2 AosOpenTopTraits_2 AosOutputFormatter AosPointLocation_2 AosRightSideTraits_2 AosSphericalBoundaryTraits_2 AosTopologyTraits AosTopSideTraits_2 AosTraits_2 AosVerticalRayShoot_2 AosVerticalSideTraits_2 AosWithHistoryInputFormatter AosWithHistoryOutputFormatter AosXMonotoneTraits_2 Geometric Object Concepts AosTraits::Point_2 AosTraits::XMonotoneCurve_2 AosTraits::Curve_2 Function Object Concepts AosTraits::Approximate_2 AosTraits::ApproximatePoint_2 AosTraits::ApproximateUnbounded_2 AosTraits::AreMergeable_2 AosTraits::CompareX_2 AosTraits::CompareXy_2 AosTraits::CompareYAtX_2 AosTraits::CompareYAtXLeft_2 AosTraits::CompareYAtXRight_2 AosTraits::ConstructMinVertex_2 AosTraits::ConstructMaxVertex_2 AosTraits::CompareXOnBoundary_2 AosTraits::CompareYOnBoundary_2 AosTraits::CompareXNearBoundary_2 AosTraits::CompareYNearBoundary_2 AosTraits::CompareXOnBoundaryOfCurveEnd_2 AosTraits::ConstructCurve_2 AosTraits::ConstructXMonotoneCurve_2 AosTraits::DoIntersect_2 AosTraits::Equal_2 AosTraits::Intersect_2 AosTraits::IsVertical_2 AosTraits::IsOnXIdentification_2 AosTraits::IsOnYIdentification_2 AosTraits::MakeXMonotone_2 AosTraits::Merge_2 AosTraits::ParameterSpaceInX_2 AosTraits::ParameterSpaceInY_2 AosTraits::Split_2 Classes CGAL::Arrangement_on_surface_2 <GeometryTraits_2,TopologyTraits> CGAL::Arrangement_on_surface_with_history_2 <GeometryTraits_2,TopologyTraits> CGAL::Arrangement_2 <Traits,Dcel> CGAL::Arrangement_with_history_2 <Traits,Dcel> CGAL::Arrangement_2::Vertex CGAL::Arrangement_2::Halfedge CGAL::Arrangement_2::Face CGAL::Arr_accessor <Arrangement> CGAL::Arr_algebraic_segment_traits_2 <Coefficient> CGAL::Arr_Bezier_curve_traits_2 <RatKernel,AlgKernel,NtTraits> CGAL::Arr_bounded_planar_topology_traits_2 <GeometryTraits_2,Dcel> CGAL::Arr_circle_segment_traits_2 <Kernel> CGAL::Arr_circular_arc_traits_2 <CircularKernel> CGAL::Arr_circular_line_arc_traits_2 <CircularKernel> CGAL::Arr_conic_traits_2 <RatKernel,AlgKernel,NtTraits> CGAL::Arr_consolidated_curve_data_traits_2 <Traits,Data> CGAL::Arr_counting_traits_2 <BaseTraits> CGAL::Arr_curve_data_traits_2 <Tr,XData,Mrg,CData,Cnv> CGAL::Arr_dcel_base <V,H,F> CGAL::Arr_dcel <Traits,V,H,F> CGAL::Arr_default_dcel <Traits> CGAL::Arr_face_extended_dcel <Traits,FData,V,H,F> CGAL::Arr_face_index_map <Arrangement> CGAL::Arr_extended_dcel <Traits,VData,HData,FData,V,H,F> CGAL::Arr_extended_dcel_text_formatter <Arrangement> CGAL::Arr_face_extended_text_formatter <Arrangement> CGAL::Arr_geodesic_arc_on_sphere_traits_2 <Kernel,x,y> CGAL::Arr_landmarks_point_location <Arrangement,Generator> CGAL::Arr_line_arc_traits_2 <CircularKernel> CGAL::Arr_linear_traits_2 <Kernel> CGAL::Arr_naive_point_location <Arrangement> CGAL::Arr_non_caching_segment_traits_2 <Kernel> CGAL::Arr_observer <Arrangement_2> CGAL::Arr_polyline_traits_2 <SegmentTraits> CGAL::Arr_point_location_result <Arrangement> CGAL::Arr_rational_function_traits_2 <AlgebraicKernel_d_1> CGAL::Arr_segment_traits_2 <Kernel> CGAL::Arr_spherical_topology_traits_2 <GeometryTraits_2,Dcel> CGAL::Arr_text_formatter <Arrangement> CGAL::Arr_tracing_traits_2 <BaseTraits> CGAL::Arr_trapezoid_ric_point_location <Arrangement> CGAL::Arr_unb_planar_topology_traits_2 <GeometryTraits_2,Dcel> CGAL::Arr_vertex_index_map <Arrangement> CGAL::Arr_walk_along_line_point_location <Arrangement> CGAL::Arr_with_history_text_formatter <ArrFormatter> CGAL::Aos_observer <ArrangementOnSurface_2> CGAL::CORE_algebraic_number_traits Functions CGAL::is_valid() CGAL::insert() CGAL::insert_non_intersecting_curve() CGAL::insert_non_intersecting_curves() CGAL::insert_point() CGAL::remove_edge() CGAL::remove_vertex() CGAL::locate() CGAL::decompose() CGAL::overlay() CGAL::IO::read() CGAL::IO::write() CGAL::remove_curve() CGAL::operator<< CGAL::operator<< Draw an Arrangemen_2 object CGAL::draw<>()",
+      "detailed": "Ron Wein, Eric Berberich, Efi Fogel, Dan Halperin, Michael Hemmer, Oren Salzman, and Baruch Zukerman This package can be used to construct, maintain, alter, and display arrangements in the plane. Once an arrangement is constructed, the package can be used to obtain results of various queries on the arrangement, such as point location. The package also includes generic implementations of two algorithmic frameworks, that are, computing the zone of an arrangement, and line-sweeping the plane, the arrangements is embedded on. These frameworks are used in turn in the implementations of other operations on arrangements. Computing the overlay of two arrangements, for example, is based on the sweep-line framework. Arrangements and arrangement components can also be extended to store additional data. An important extension stores the construction history of the arrangement, such that it is possible to obtain the originating curve of an arrangement subcurve. Introduced in: CGAL 2.1 BibTeX: cgal:wfzh-a2-26b License: GPL Windows Demo: 2D Arrangements Given a set $\\mathcal{C}$ of planar curves, the arrangement $ {\\mathcal A}({\\mathcal C})$ is the subdivision of the plane induced by the curves in $\\mathcal{C}$ into maximally connected cells. The cells can be $0$ -dimensional ( vertices ), $1$ -dimensional ( edges ) or $2$ -dimensional ( faces ). The class CGAL::Arrangement_2 <Traits,Dcel> encapsulates a data structure that maintains arrangements of arbitrary bounded planar curves. It comes with a variety of algorithms that operate on planar arrangement, such as point-location queries and overlay computations, which are implemented as peripheral classes or as free (global) functions. Classified Reference Pages Enumerations CGAL::Arr_parameter_space CGAL::Arr_curve_end CGAL::Arr_halfedge_direction Tags CGAL::Arr_oblivious_side_tag CGAL::Arr_open_side_tag CGAL::Arr_closed_side_tag CGAL::Arr_contracted_side_tag CGAL::Arr_identified_side_tag Concepts AosApproximateTraits_2 AosApproximatePointTraits_2 AosApproximateUnboundedTraits_2 AosBasicTopologyTraits AosBasicTraits_2 AosBottomSideTraits_2 AosClosedBottomTraits_2 AosClosedLeftTraits_2 AosClosedRightTraits_2 AosClosedTopTraits_2 AosConstructCurveTraits_2 AosConstructXMonotoneCurveTraits_2 AosContractedBottomTraits_2 AosContractedLeftTraits_2 AosContractedRightTraits_2 AosContractedTopTraits_2 AosDcel AosDcelFace AosDcelHalfedge AosDcelInnerCcb AosDcelIsolatedVertex AosDcelOuterCcb AosDcelVertex AosDcelWithRebind AosHorizontalSideTraits_2 AosIdentifiedHorizontalTraits_2 AosIdentifiedVerticalTraits_2 AosInputFormatter AosLandmarkTraits_2 AosLeftSideTraits_2 AosOpenBottomTraits_2 AosOpenBoundaryTraits_2 AosOpenLeftTraits_2 AosOpenRightTraits_2 AosOpenTopTraits_2 AosOutputFormatter AosPointLocation_2 AosRightSideTraits_2 AosSphericalBoundaryTraits_2 AosTopologyTraits AosTopSideTraits_2 AosTraits_2 AosVerticalRayShoot_2 AosVerticalSideTraits_2 AosWithHistoryInputFormatter AosWithHistoryOutputFormatter AosXMonotoneTraits_2 Geometric Object Concepts AosTraits::Point_2 AosTraits::XMonotoneCurve_2 AosTraits::Curve_2 Function Object Concepts AosTraits::Approximate_2 AosTraits::ApproximatePoint_2 AosTraits::ApproximateUnbounded_2 AosTraits::AreMergeable_2 AosTraits::CompareX_2 AosTraits::CompareXy_2 AosTraits::CompareYAtX_2 AosTraits::CompareYAtXLeft_2 AosTraits::CompareYAtXRight_2 AosTraits::ConstructMinVertex_2 AosTraits::ConstructMaxVertex_2 AosTraits::CompareXOnBoundary_2 AosTraits::CompareYOnBoundary_2 AosTraits::CompareXNearBoundary_2 AosTraits::CompareYNearBoundary_2 AosTraits::CompareXOnBoundaryOfCurveEnd_2 AosTraits::ConstructCurve_2 AosTraits::ConstructXMonotoneCurve_2 AosTraits::DoIntersect_2 AosTraits::Equal_2 AosTraits::Intersect_2 AosTraits::IsVertical_2 AosTraits::IsOnXIdentification_2 AosTraits::IsOnYIdentification_2 AosTraits::MakeXMonotone_2 AosTraits::Merge_2 AosTraits::ParameterSpaceInX_2 AosTraits::ParameterSpaceInY_2 AosTraits::Split_2 Classes CGAL::Arrangement_on_surface_2 <GeometryTraits_2,TopologyTraits> CGAL::Arrangement_on_surface_with_history_2 <GeometryTraits_2,TopologyTraits> CGAL::Arrangement_2 <Traits,Dcel> CGAL::Arrangement_with_history_2 <Traits,Dcel> CGAL::Arrangement_2::Vertex CGAL::Arrangement_2::Halfedge CGAL::Arrangement_2::Face CGAL::Arr_accessor <Arrangement> CGAL::Arr_algebraic_segment_traits_2 <Coefficient> CGAL::Arr_Bezier_curve_traits_2 <RatKernel,AlgKernel,NtTraits> CGAL::Arr_bounded_planar_topology_traits_2 <GeometryTraits_2,Dcel> CGAL::Arr_circle_segment_traits_2 <Kernel> CGAL::Arr_circular_arc_traits_2 <CircularKernel> CGAL::Arr_circular_line_arc_traits_2 <CircularKernel> CGAL::Arr_conic_traits_2 <RatKernel,AlgKernel,NtTraits> CGAL::Arr_consolidated_curve_data_traits_2 <Traits,Data> CGAL::Arr_counting_traits_2 <BaseTraits> CGAL::Arr_curve_data_traits_2 <Tr,XData,Mrg,CData,Cnv> CGAL::Arr_dcel_base <V,H,F> CGAL::Arr_dcel <Traits,V,H,F> CGAL::Arr_default_dcel <Traits> CGAL::Arr_face_extended_dcel <Traits,FData,V,H,F> CGAL::Arr_face_index_map <Arrangement> CGAL::Arr_extended_dcel <Traits,VData,HData,FData,V,H,F> CGAL::Arr_extended_dcel_text_formatter <Arrangement> CGAL::Arr_face_extended_text_formatter <Arrangement> CGAL::Arr_geodesic_arc_on_sphere_traits_2 <Kernel,x,y> CGAL::Arr_landmarks_point_location <Arrangement,Generator> CGAL::Arr_line_arc_traits_2 <CircularKernel> CGAL::Arr_linear_traits_2 <Kernel> CGAL::Arr_naive_point_location <Arrangement> CGAL::Arr_non_caching_segment_traits_2 <Kernel> CGAL::Arr_observer <Arrangement_2> CGAL::Arr_polyline_traits_2 <SegmentTraits> CGAL::Arr_point_location_result <Arrangement> CGAL::Arr_rational_function_traits_2 <AlgebraicKernel_d_1> CGAL::Arr_segment_traits_2 <Kernel> CGAL::Arr_spherical_topology_traits_2 <GeometryTraits_2,Dcel> CGAL::Arr_text_formatter <Arrangement> CGAL::Arr_tracing_traits_2 <BaseTraits> CGAL::Arr_trapezoid_ric_point_location <Arrangement> CGAL::Arr_unb_planar_topology_traits_2 <GeometryTraits_2,Dcel> CGAL::Arr_vertex_index_map <Arrangement> CGAL::Arr_walk_along_line_point_location <Arrangement> CGAL::Arr_with_history_text_formatter <ArrFormatter> CGAL::Aos_observer <ArrangementOnSurface_2> CGAL::CORE_algebraic_number_traits Functions CGAL::is_valid() CGAL::insert() CGAL::insert_non_intersecting_curve() CGAL::insert_non_intersecting_curves() CGAL::insert_point() CGAL::remove_edge() CGAL::remove_vertex() CGAL::locate() CGAL::decompose() CGAL::overlay() CGAL::IO::read() CGAL::IO::write() CGAL::remove_curve() CGAL::operator<< CGAL::operator<< Draw an Arrangemen_2 object CGAL::draw<>()",
       "members": [
         {
           "kind": "typedef",
@@ -30731,7 +30918,7 @@
           "section_kind": "func",
           "section": "",
           "file": "CGAL/draw_arrangement_2.h",
-          "line": "60"
+          "line": "61"
         },
         {
           "kind": "function",
@@ -30768,7 +30955,7 @@
           "section_kind": "func",
           "section": "",
           "file": "CGAL/draw_arrangement_2.h",
-          "line": "73"
+          "line": "74"
         },
         {
           "kind": "function",
@@ -30805,7 +30992,7 @@
           "section_kind": "func",
           "section": "",
           "file": "CGAL/draw_arrangement_2.h",
-          "line": "84"
+          "line": "85"
         },
         {
           "kind": "function",
@@ -30835,7 +31022,7 @@
           "section_kind": "func",
           "section": "",
           "file": "CGAL/draw_arrangement_2.h",
-          "line": "96"
+          "line": "97"
         }
       ],
       "xml_file": "group___pkg_arrangement_on_surface2_draw.xml"

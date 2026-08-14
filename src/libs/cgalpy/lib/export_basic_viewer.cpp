@@ -22,8 +22,24 @@
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/Bvr_docstrings.hpp"
 
+#if ((CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_2_DATA_STRUCTURE) || \
+     (CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_WITH_HISTORY_2_DATA_STRUCTURE))
+#include "cgalpy/Aos2_docstrings.hpp"
+#elif (CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_POLYHEDRON_3_DATA_STRUCTURE)
+#include "cgalpy/Pol3_docstrings.hpp"
+#else
+#error "Unsupported CGALPY basic viewer data structure"
+#endif
+
 namespace py = nanobind;
 namespace bvr_doc = cgalpy::bvr::docstrings;
+
+#if ((CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_2_DATA_STRUCTURE) || \
+     (CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_WITH_HISTORY_2_DATA_STRUCTURE))
+namespace bvr_ds_doc = cgalpy::aos2::docstrings;
+#elif (CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_POLYHEDRON_3_DATA_STRUCTURE)
+namespace bvr_ds_doc = cgalpy::pol3::docstrings;
+#endif
 
 namespace cgalpy {
 namespace bvr {
@@ -70,7 +86,29 @@ void export_basic_viewer(py::module_& m) {
         m, "Graphics_scene_options_base",
         bvr_doc::Graphics_scene_options_class)
       .def(py::init<>(),
-           "Construct default graphics scene options.")
+           bvr_doc::Graphics_scene_options_Graphics_scene_options)
+      .def("disable_vertices", &Gso::disable_vertices,
+           bvr_doc::GraphicsSceneOptions_disable_vertices)
+      .def("enable_vertices", &Gso::enable_vertices,
+           bvr_doc::GraphicsSceneOptions_enable_vertices)
+      .def("are_vertices_enabled", &Gso::are_vertices_enabled,
+           bvr_doc::GraphicsSceneOptions_are_vertices_enabled)
+      .def("ignore_all_vertices", &Gso::ignore_all_vertices, py::arg("b"),
+           bvr_doc::GraphicsSceneOptions_ignore_all_vertices)
+      .def("disable_edges", &Gso::disable_edges,
+           bvr_doc::GraphicsSceneOptions_disable_edges)
+      .def("enable_edges", &Gso::enable_edges,
+           bvr_doc::GraphicsSceneOptions_enable_edges)
+      .def("are_edges_enabled", &Gso::are_edges_enabled,
+           bvr_doc::GraphicsSceneOptions_are_edges_enabled)
+      .def("ignore_all_edges", &Gso::ignore_all_edges, py::arg("b"),
+           bvr_doc::GraphicsSceneOptions_ignore_all_edges)
+      .def("disable_faces", &Gso::disable_faces,
+           bvr_doc::GraphicsSceneOptions_disable_faces)
+      .def("enable_faces", &Gso::enable_faces,
+           bvr_doc::GraphicsSceneOptions_enable_faces)
+      .def("are_faces_enabled", &Gso::are_faces_enabled,
+           bvr_doc::GraphicsSceneOptions_are_faces_enabled)
       .def("ignore_all_faces", &Gso::ignore_all_faces, py::arg("b"),
            bvr_doc::GraphicsSceneOptions_ignore_all_faces)
       ;
@@ -80,13 +118,39 @@ void export_basic_viewer(py::module_& m) {
   if (! add_attr<Gsoe>(m, "Graphics_scene_options")) {
     py::class_<Gsoe, Gso>(
         m, "Graphics_scene_options",
-        bvr_doc::GraphicsSceneOptions_class,
+        "Python extension of CGAL::Graphics_scene_options that retains Python "
+        "callback objects and installs C++ wrappers for the corresponding "
+        "drawing callbacks.",
         py::type_slots(cgalpy::bvr::gsoe_slots))
       .def(py::init<>(),
-           "Construct default Python-extended graphics scene options.")
+           bvr_doc::Graphics_scene_options_Graphics_scene_options)
+      .def("draw_vertex", &Gsoe::apply_draw_vertex,
+           py::arg("draw_vertex"),
+           bvr_doc::GraphicsSceneOptions_draw_vertex)
+      .def("draw_edge", &Gsoe::apply_draw_edge,
+           py::arg("draw_edge"),
+           bvr_doc::GraphicsSceneOptions_draw_edge)
+      .def("draw_face", &Gsoe::apply_draw_face,
+           py::arg("draw_face"),
+           bvr_doc::GraphicsSceneOptions_draw_face)
+      .def("colored_vertex", &Gsoe::apply_colored_vertex,
+           py::arg("colored_vertex"),
+           bvr_doc::GraphicsSceneOptions_colored_vertex)
+      .def("colored_edge", &Gsoe::apply_colored_edge,
+           py::arg("colored_edge"),
+           bvr_doc::GraphicsSceneOptions_colored_edge)
       .def("colored_face", &Gsoe::apply_colored_face,
            py::arg("colored_face"),
-           bvr_doc::GraphicsSceneOptions_is_face_colored)
+           bvr_doc::GraphicsSceneOptions_colored_face)
+      .def("face_wireframe", &Gsoe::apply_face_wireframe,
+           py::arg("face_wireframe"),
+           bvr_doc::GraphicsSceneOptions_face_wireframe)
+      .def("vertex_color", &Gsoe::apply_vertex_color,
+           py::arg("vertex_color"),
+           bvr_doc::GraphicsSceneOptions_vertex_color)
+      .def("edge_color", &Gsoe::apply_edge_color,
+           py::arg("edge_color"),
+           bvr_doc::GraphicsSceneOptions_edge_color)
       .def("face_color", &Gsoe::apply_face_color,
            py::arg("face_color"),
            bvr_doc::GraphicsSceneOptions_face_color)
@@ -98,21 +162,21 @@ void export_basic_viewer(py::module_& m) {
     py::class_<Gs>(m, "Graphics_scene",
                    bvr_doc::Graphics_scene_class)
       .def(py::init<>(),
-           "Construct an empty graphics scene.")
+           bvr_doc::Graphics_scene_Graphics_scene)
       .def("empty", &Gs::empty,
-           "Return whether the graphics scene has no buffered geometry.")
+           bvr_doc::Graphics_scene_empty)
       .def("clear", &Gs::clear,
-           "Clear all buffered geometry and reset the bounding box.")
+           bvr_doc::Graphics_scene_clear)
       .def("is_two_dimensional", &Gs::is_two_dimensional,
-           "Return whether the buffered scene is two-dimensional.")
+           bvr_doc::Graphics_scene_is_two_dimensional)
       .def("number_of_elements", &Gs::number_of_elements, py::arg("index"),
-           "Return the number of 3-float elements stored in the selected graphics buffer.")
+           bvr_doc::Graphics_scene_number_of_elements)
       .def("get_size_of_index", &Gs::get_size_of_index, py::arg("index"),
-           "Return the selected graphics buffer size in bytes.")
+           bvr_doc::Graphics_scene_get_size_of_index)
       .def("buffer", [](const Gs& gs, int index) {
           return gs.get_array_of_index(index);
         }, py::arg("index"),
-        "Return a copy of the selected graphics buffer as a list of floats.")
+        bvr_doc::Graphics_scene_get_array_of_index)
       ;
   }
 
@@ -134,12 +198,12 @@ void export_basic_viewer(py::module_& m) {
         [](const cgalpy::bvr::Ds& ds, Gs& gs)
         { CGAL::add_to_graphics_scene(ds, gs); },
         py::arg("ds"), py::arg("gs"),
-        "Add a data structure to a graphics scene using default graphics scene options.")
+        bvr_ds_doc::add_to_graphics_scene_1)
     .def("add_to_graphics_scene",
          [](const cgalpy::bvr::Ds& ds, Gs& gs, const Gso& gso)
          { CGAL::add_to_graphics_scene(ds, gs, gso); },
          py::arg("ds"), py::arg("gs"), py::arg("gso"),
-         "Add a data structure to a graphics scene using the given graphics scene options.")
+         bvr_ds_doc::add_to_graphics_scene)
     .def("draw_graphics_scene", &CGAL::draw_graphics_scene,
          py::arg("graphics_scene"),
          py::arg("title") = "CGAL Basic Viewer (Qt)",
