@@ -27,7 +27,7 @@ Observed behavior:
 
 Relevant binding location:
 
-- `src/libs/cgalpy/lib/polygon_2_bindings.cpp`
+- `src/libs/cgalpy/lib/export_polygon_2.cpp`
 - `Polygon_2.vertex(size_t)`
 - `Polygon_2.__getitem__(size_t)`
 

@@ -24,7 +24,7 @@
 
 #include <CGAL/IO/polygon_soup_io.h>
 
-//! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
+//! \todo move to export_polygon_mesh_processing.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h> // needed for a type
 #endif
@@ -679,7 +679,7 @@ void export_polyhedron_3(py::module_& m) {
   // \todo export CGAL::vertex_incident_patches_t<int> in bgl_bindings, then the following
   // cgalpy::pol3::vertex_map<Prn, CGAL::vertex_incident_patches_t<int>>(m, "vertex_incident_patches_map");
 
-  //! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
+  //! \todo move to export_polygon_mesh_processing.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
   namespace PMP = CGAL::Polygon_mesh_processing;
   using Pcad = PMP::Principal_curvatures_and_directions<Kernel>;

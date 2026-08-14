@@ -37,7 +37,7 @@
 #include <CGAL/IO/polygon_soup_io.h>
 #include <CGAL/Polygon_mesh_processing/IO/polygon_mesh_io.h>
 
-//! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
+//! \todo move to export_polygon_mesh_processing.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
 #include <CGAL/Polygon_mesh_processing/interpolated_corrected_curvatures.h>
 #endif
@@ -521,7 +521,7 @@ void add_maps(C& c) {
          sm_doc::Surface_mesh_add_property_map)
     ;
 
-//! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
+//! \todo move to export_polygon_mesh_processing.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
   using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
   c.def("add_property_map_vertex_Principal_curvatures_and_directions", &sm::add_map<Sm, Vi, Pcad>,
@@ -1087,7 +1087,7 @@ void export_surface_mesh(py::module_& m) {
   using ebmap_type = typename Sm_3::template Property_map<Ei, bool>;
   internal::export_property_map<Sm_3, Ei, bool>(m, "Edge_bool_map");
 
-//! \todo move to polygon_mesh_processing_bindings.cpp because it depends on Eigen
+//! \todo move to export_polygon_mesh_processing.cpp because it depends on Eigen
 #ifdef CGALPY_POLYGON_MESH_PROCESSING_BINDINGS
   using Pcad = CGAL::Polygon_mesh_processing::Principal_curvatures_and_directions<Kernel>;
   internal::export_property_map<Sm_3, Vi, Pcad>(m, "Vertex_Principal_curvatures_and_directions_map");
