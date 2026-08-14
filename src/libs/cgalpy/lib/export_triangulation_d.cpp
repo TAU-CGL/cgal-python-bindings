@@ -671,7 +671,7 @@ void export_triangulation_d(py::module_& m) {
       .def(py::init<int>(), py::arg("dim") = 0,
            trid_doc::Triangulation_Triangulation)
       .def(py::init<int, const cgalpy::trid::Geom_traits&>(),
-           py::arg("dim") = 0, py::arg("gt"),
+           py::arg("dim"), py::arg("gt"),
            trid_doc::Triangulation_Triangulation)
       .def(py::init<const Tri&>(), py::arg("other"),
            trid_doc::Triangulation_Triangulation_1)
@@ -887,7 +887,7 @@ void export_triangulation_d(py::module_& m) {
       rtri_c.def(py::init<int>(), py::arg("dim") = 0,
                   trid_doc::Regular_triangulation_Regular_triangulation)
         .def(py::init<int, const cgalpy::trid::Geom_traits&>(),
-             py::arg("dim") = 0, py::arg("gt"),
+             py::arg("dim"), py::arg("gt"),
              trid_doc::Regular_triangulation_Regular_triangulation)
         .def(py::init<const Rtri&>(), py::arg("other"), "Copy constructor.")
         .def("compute_conflict_zone", &cgalpy::trid::compute_conflict_zone<Rtri>,
@@ -927,7 +927,7 @@ void export_triangulation_d(py::module_& m) {
       dtri_c.def(py::init<int>(), py::arg("dim") = 0,
                   trid_doc::Delaunay_triangulation_Delaunay_triangulation)
         .def(py::init<int, const cgalpy::trid::Geom_traits&>(),
-             py::arg("dim") = 0, py::arg("traits"),
+             py::arg("dim"), py::arg("traits"),
              trid_doc::Delaunay_triangulation_Delaunay_triangulation)
         .def(py::init<const Dtri&>(), py::arg("other"), "Copy constructor.")
         .def("compute_conflict_zone", &cgalpy::trid::compute_conflict_zone<Dtri>,
