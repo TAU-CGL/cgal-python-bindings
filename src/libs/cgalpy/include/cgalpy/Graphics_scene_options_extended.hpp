@@ -12,7 +12,7 @@
 #define CGALPY_GRAPHICS_SCENE_OPTIONS_EXTENDED_HPP
 
 #include <functional>
-// #include <memory>
+#include <utility>
 
 #include <CGAL/IO/Color.h>
 #include <CGAL/Graphics_scene_options.h>
@@ -49,34 +49,24 @@ public:
 
 private:
   py::object m_draw_vertex_object;
-  Draw_vertex_fnc* m_draw_vertex_fnc;
 
   py::object m_draw_edge_object;
-  Draw_edge_fnc* m_draw_edge_fnc;
 
   py::object m_draw_face_object;
-  Draw_face_fnc* m_draw_face_fnc;
 
   py::object m_colored_vertex_object;
-  Colored_vertex_fnc* m_colored_vertex_fnc;
 
   py::object m_colored_edge_object;
-  Colored_edge_fnc* m_colored_edge_fnc;
 
   py::object m_edge_color_object;
-  Edge_color_fnc* m_edge_color_fnc;
 
   py::object m_colored_face_object;
-  Colored_face_fnc* m_colored_face_fnc;
 
   py::object m_face_wireframe_object;
-  Face_wireframe_fnc* m_face_wireframe_fnc;
 
   py::object m_vertex_color_object;
-  Vertex_color_fnc* m_vertex_color_fnc;
 
   py::object m_face_color_object;
-  Face_color_fnc* m_face_color_fnc;
 
 public:
   /*! constructs default. */
@@ -84,208 +74,128 @@ public:
   Graphics_scene_options_extended(Args ... args) :
     Base(std::forward<Args>(args)...),
     m_draw_vertex_object(py::none()),
-    m_draw_vertex_fnc(nullptr),
     m_draw_edge_object(py::none()),
-    m_draw_edge_fnc(nullptr),
     m_draw_face_object(py::none()),
-    m_draw_face_fnc(nullptr),
     m_colored_vertex_object(py::none()),
-    m_colored_vertex_fnc(nullptr),
     m_colored_edge_object(py::none()),
-    m_colored_edge_fnc(nullptr),
     m_edge_color_object(py::none()),
-    m_edge_color_fnc(nullptr),
     m_colored_face_object(py::none()),
-    m_colored_face_fnc(nullptr),
     m_face_wireframe_object(py::none()),
-    m_face_wireframe_fnc(nullptr),
     m_vertex_color_object(py::none()),
-    m_vertex_color_fnc(nullptr),
-    m_face_color_object(py::none()),
-    m_face_color_fnc(nullptr) {
-    // Handle draw_vertex
-    auto draw_vertex = [&](const Ds& ds, Vd vd) -> bool {
-      return execute_draw_vertex(ds, *vd);
-    };
-    m_draw_vertex_fnc = new Draw_vertex_fnc(draw_vertex);
+    m_face_color_object(py::none())
+  {}
 
-    // Handle draw_edge
-#if ((CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_2_DATA_STRUCTURE) || \
-     (CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_WITH_HISTORY_2_DATA_STRUCTURE))
-    auto draw_edge = [&](const Ds& ds, Ed ed) -> bool {
-      return execute_draw_edge(ds, *ed);
-    };
-#else
-    auto draw_edge = [&](const Ds& ds, Ed ed) -> bool {
-      return execute_draw_edge(ds, *CGAL::halfedge(ed, ds));
-    };
-#endif
-    m_draw_edge_fnc = new Draw_edge_fnc(draw_edge);
+  Graphics_scene_options_extended(
+    const Graphics_scene_options_extended&) = delete;
 
-    // Handle draw_face
-    auto draw_face = [&](const Ds& ds, Fd fd) -> bool {
-      return execute_draw_face(ds, *fd);
-    };
-    m_draw_face_fnc = new Draw_face_fnc(draw_face);
+  Graphics_scene_options_extended&
+  operator=(const Graphics_scene_options_extended&) = delete;
 
-    // Handle colored_vertex
-    auto colored_vertex = [&](const Ds& ds, Vd vd) -> bool {
-      return execute_colored_vertex(ds, *vd);
-    };
-    m_colored_vertex_fnc = new Colored_vertex_fnc(colored_vertex);
+  Graphics_scene_options_extended(
+    Graphics_scene_options_extended&&) = delete;
 
-    // Handle colored_edge
-#if ((CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_2_DATA_STRUCTURE) || \
-     (CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_WITH_HISTORY_2_DATA_STRUCTURE))
-    auto colored_edge = [&](const Ds& ds, Ed ed) -> bool { return execute_colored_edge(ds, *ed); };
-#else
-    auto colored_edge = [&](const Ds& ds, Ed ed) -> bool { return execute_colored_edge(ds, *CGAL::halfedge(ed, ds)); };
-#endif
-    m_colored_edge_fnc = new Colored_edge_fnc(colored_edge);
-
-    // Handle edge_color
-#if ((CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_2_DATA_STRUCTURE) || \
-     (CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_WITH_HISTORY_2_DATA_STRUCTURE))
-    auto edge_color = [&](const Ds& ds, Ed ed) -> Color { return execute_edge_color(ds, *ed); };
-#else
-    auto edge_color = [&](const Ds& ds, Ed ed) -> Color { return execute_edge_color(ds, *CGAL::halfedge(ed, ds)); };
-#endif
-    m_edge_color_fnc = new Edge_color_fnc(edge_color);
-
-    // Handle colored_face
-    auto colored_face = [&](const Ds& ds, Fd fd) -> bool { return execute_colored_face(ds, *fd); };
-    m_colored_face_fnc = new Colored_face_fnc(colored_face);
-
-    // Handle face_wireframe
-    auto face_wireframe = [&](const Ds& ds, Fd fd) -> bool {
-      return execute_face_wireframe(ds, *fd);
-    };
-    m_face_wireframe_fnc = new Face_wireframe_fnc(face_wireframe);
-
-    // Handle vertex_color
-    auto vertex_color = [&](const Ds& ds, Vd vd) -> Color {
-      return execute_vertex_color(ds, *vd);
-    };
-    m_vertex_color_fnc = new Vertex_color_fnc(vertex_color);
-
-    // Handle face_color
-    auto face_color = [&](const Ds& ds, Fd fd) -> Color {
-      return execute_face_color(ds, *fd);
-    };
-    m_face_color_fnc = new Face_color_fnc(face_color);
-  }
-
-  /*! destructs */
-  ~Graphics_scene_options_extended() {
-    if (m_draw_vertex_fnc) {
-      delete m_draw_vertex_fnc;
-      m_draw_vertex_fnc = nullptr;
-    }
-
-    if (m_draw_edge_fnc) {
-      delete m_draw_edge_fnc;
-      m_draw_edge_fnc = nullptr;
-    }
-
-    if (m_draw_face_fnc) {
-      delete m_draw_face_fnc;
-      m_draw_face_fnc = nullptr;
-    }
-
-    if (m_colored_vertex_fnc) {
-      delete m_colored_vertex_fnc;
-      m_colored_vertex_fnc = nullptr;
-    }
-
-    if (m_colored_edge_fnc) {
-      delete m_colored_edge_fnc;
-      m_colored_edge_fnc = nullptr;
-    }
-
-    if (m_edge_color_fnc) {
-      delete m_edge_color_fnc;
-      m_edge_color_fnc = nullptr;
-    }
-
-    if (m_colored_face_fnc) {
-      delete m_colored_face_fnc;
-      m_colored_face_fnc = nullptr;
-    }
-
-    if (m_face_wireframe_fnc) {
-      delete m_face_wireframe_fnc;
-      m_face_wireframe_fnc = nullptr;
-    }
-
-    if (m_vertex_color_fnc) {
-      delete m_vertex_color_fnc;
-      m_vertex_color_fnc = nullptr;
-    }
-
-    if (m_face_color_fnc) {
-      delete m_face_color_fnc;
-      m_face_color_fnc = nullptr;
-    }
-  }
+  Graphics_scene_options_extended&
+  operator=(Graphics_scene_options_extended&&) = delete;
 
   //!
   void apply_draw_vertex(const py::object& draw_vertex_object) {
     m_draw_vertex_object = draw_vertex_object;
-    this->draw_vertex = *m_draw_vertex_fnc;
+    this->draw_vertex = [this](const Ds& ds, Vd vd) -> bool {
+      return execute_draw_vertex(ds, *vd);
+    };
   }
 
   //!
   void apply_draw_edge(const py::object& draw_edge_object) {
     m_draw_edge_object = draw_edge_object;
-    this->draw_edge = *m_draw_edge_fnc;
+#if ((CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_2_DATA_STRUCTURE) || \
+     (CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_WITH_HISTORY_2_DATA_STRUCTURE))
+    this->draw_edge = [this](const Ds& ds, Ed ed) -> bool {
+      return execute_draw_edge(ds, *ed);
+    };
+#else
+    this->draw_edge = [this](const Ds& ds, Ed ed) -> bool {
+      return execute_draw_edge(ds, *CGAL::halfedge(ed, ds));
+    };
+#endif
   }
 
   //!
   void apply_draw_face(const py::object& draw_face_object) {
     m_draw_face_object = draw_face_object;
-    this->draw_face = *m_draw_face_fnc;
+    this->draw_face = [this](const Ds& ds, Fd fd) -> bool {
+      return execute_draw_face(ds, *fd);
+    };
   }
 
   //!
   void apply_colored_vertex(const py::object& colored_vertex_object) {
     m_colored_vertex_object = colored_vertex_object;
-    this->colored_vertex = *m_colored_vertex_fnc;
+    this->colored_vertex = [this](const Ds& ds, Vd vd) -> bool {
+      return execute_colored_vertex(ds, *vd);
+    };
   }
 
   //!
   void apply_face_wireframe(const py::object& face_wireframe_object) {
     m_face_wireframe_object = face_wireframe_object;
-    this->face_wireframe = *m_face_wireframe_fnc;
+    this->face_wireframe = [this](const Ds& ds, Fd fd) -> bool {
+      return execute_face_wireframe(ds, *fd);
+    };
   }
 
   //!
   void apply_vertex_color(const py::object& vertex_color_object) {
     m_vertex_color_object = vertex_color_object;
-    this->vertex_color = *m_vertex_color_fnc;
+    this->vertex_color = [this](const Ds& ds, Vd vd) -> Color {
+      return execute_vertex_color(ds, *vd);
+    };
   }
 
   //!
   void apply_colored_edge(const py::object& colored_edge_object) {
     m_colored_edge_object = colored_edge_object;
-    this->colored_edge = *m_colored_edge_fnc;
+#if ((CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_2_DATA_STRUCTURE) || \
+     (CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_WITH_HISTORY_2_DATA_STRUCTURE))
+    this->colored_edge = [this](const Ds& ds, Ed ed) -> bool {
+      return execute_colored_edge(ds, *ed);
+    };
+#else
+    this->colored_edge = [this](const Ds& ds, Ed ed) -> bool {
+      return execute_colored_edge(ds, *CGAL::halfedge(ed, ds));
+    };
+#endif
   }
 
   //!
   void apply_edge_color(const py::object& edge_color_object) {
     m_edge_color_object = edge_color_object;
-    this->edge_color = *m_edge_color_fnc;
+#if ((CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_2_DATA_STRUCTURE) || \
+     (CGALPY_BVR_DATA_STRUCTURE == CGALPY_BVR_AOS_WITH_HISTORY_2_DATA_STRUCTURE))
+    this->edge_color = [this](const Ds& ds, Ed ed) -> Color {
+      return execute_edge_color(ds, *ed);
+    };
+#else
+    this->edge_color = [this](const Ds& ds, Ed ed) -> Color {
+      return execute_edge_color(ds, *CGAL::halfedge(ed, ds));
+    };
+#endif
   }
 
   //!
   void apply_colored_face(const py::object& colored_face_object) {
     m_colored_face_object = colored_face_object;
-    this->colored_face = *m_colored_face_fnc;
+    this->colored_face = [this](const Ds& ds, Fd fd) -> bool {
+      return execute_colored_face(ds, *fd);
+    };
   }
 
   //!
   void apply_face_color(const py::object& face_color_object) {
     m_face_color_object = face_color_object;
-    this->face_color = *m_face_color_fnc;
+    this->face_color = [this](const Ds& ds, Fd fd) -> Color {
+      return execute_face_color(ds, *fd);
+    };
   }
 
   //!

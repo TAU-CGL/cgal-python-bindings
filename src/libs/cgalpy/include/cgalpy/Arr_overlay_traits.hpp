@@ -115,20 +115,6 @@ public:
     m_ff_f(py_function)
   {}
 
-  // Destruct
-  ~Arr_overlay_traits() {
-    m_vv_v = py::none();
-    m_ve_v = py::none();
-    m_vf_v = py::none();
-    m_ev_v = py::none();
-    m_fv_v = py::none();
-    m_ee_v = py::none();
-    m_ee_e = py::none();
-    m_ef_e = py::none();
-    m_fe_e = py::none();
-    m_ff_f = py::none();
-  }
-
   // Constructor with all operators
   Arr_overlay_traits(py::object py_function0, py::object py_function1,
                      py::object py_function2, py::object py_function3,
@@ -294,7 +280,7 @@ private:
    * or, better yet, passing a pointer, which is automatically wrapped.
    */
   template <typename A, typename B, typename R>
-  void execute(py::object func, const A& a, const B& b, R& r) const
+  void execute(const py::object& func, const A& a, const B& b, R& r) const
   { if (! func.is_none()) func(&a, &b, &r); }
 };
 

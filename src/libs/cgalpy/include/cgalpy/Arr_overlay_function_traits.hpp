@@ -31,12 +31,12 @@ const py::object& data_a(const A* a) { return a->data(); }
 
 // Fall through; target does not exist
 template <typename Fnc, typename A, typename B, typename R>
-void apply(Fnc fnc, ...) {}
+void apply(const Fnc& fnc, ...) {}
 
 // Target does exsist
 template <typename Fnc, typename A, typename B, typename R,
           typename = decltype(std::declval<R>().set_data(std::declval<typename R::Data>()))>
-void apply(Fnc fnc, const A* a, const B* b, R* r) {
+void apply(const Fnc& fnc, const A* a, const B* b, R* r) {
   if (fnc.is_none()) return;
   r->set_data(fnc(data_a<A>(a), data_a<B>(b)));
 }
@@ -96,12 +96,12 @@ struct ApplyA<Fnc, A, B, R,
 };
 
 // Fall through; target does not exist
-template <typename Fnc, typename A, typename B, typename R> void apply(Fnc fnc, ...) {}
+template <typename Fnc, typename A, typename B, typename R> void apply(const Fnc& fnc, ...) {}
 
 // Target does exist
 template <typename Fnc, typename A, typename B, typename R,
           typename = decltype(std::declval<R>().set_data(std::declval<typename R::Data>()))>
-void apply(Fnc fnc, const A* a, const B* b, R* r) {
+void apply(const Fnc& fnc, const A* a, const B* b, R* r) {
   ApplyA<Fnc, A, B, R>()(fnc, a, b, r);
 }
 
@@ -222,20 +222,6 @@ public:
     m_fe_e(py_function8),
     m_ff_f(py_function9)
     {}
-
-  // Destruct
-  ~Arr_overlay_function_traits() {
-    m_vv_v = py::none();
-    m_ve_v = py::none();
-    m_vf_v = py::none();
-    m_ev_v = py::none();
-    m_fv_v = py::none();
-    m_ee_v = py::none();
-    m_ee_e = py::none();
-    m_ef_e = py::none();
-    m_fe_e = py::none();
-    m_ff_f = py::none();
-  }
 
   /// @}
 
