@@ -22,6 +22,16 @@
 namespace cgalpy::pol3::lifetime {
 namespace py = nanobind;
 
+#ifndef CGALPY_POL3_LIFETIME_POLICIES
+#define CGALPY_POL3_LIFETIME_POLICIES 1
+#endif
+
+#if CGALPY_POL3_LIFETIME_POLICIES
+#define CGALPY_POL3_LIFETIME_POLICY(Policy) , nanobind::call_policy<Policy>()
+#else
+#define CGALPY_POL3_LIFETIME_POLICY(Policy)
+#endif
+
 struct Owner_state { PyObject* owner = nullptr; std::size_t active = 0; };
 
 inline auto& owner_states() {
@@ -38,18 +48,26 @@ inline void register_dependent_python_type(PyObject* type) {
 }
 inline bool& lifetime_checks_enabled_flag() { static bool enabled = true; return enabled; }
 inline bool& lifetime_checks_ever_disabled_flag() { static bool disabled = false; return disabled; }
-inline bool lifetime_checks_enabled() noexcept { return lifetime_checks_enabled_flag(); }
+inline bool lifetime_checks_enabled() noexcept {
+#if CGALPY_POL3_LIFETIME_POLICIES
+  return lifetime_checks_enabled_flag();
+#else
+  return false;
+#endif
+}
 inline std::size_t total_active_lease_count() noexcept {
   std::size_t total = 0;
   for (const auto& entry : owner_states()) if (entry.second != nullptr) total += entry.second->active;
   return total;
 }
 inline void disable_lifetime_checks() {
+#if CGALPY_POL3_LIFETIME_POLICIES
   if (lifetime_checks_ever_disabled_flag()) return;
   if (total_active_lease_count() != 0)
     throw std::runtime_error("Polyhedron_3 lifetime checks can only be disabled after all tracked dependent handles are released.");
   lifetime_checks_enabled_flag() = false;
   lifetime_checks_ever_disabled_flag() = true;
+#endif
 }
 inline void release_owner_state(void* payload) noexcept {
   auto* state = static_cast<Owner_state*>(payload);

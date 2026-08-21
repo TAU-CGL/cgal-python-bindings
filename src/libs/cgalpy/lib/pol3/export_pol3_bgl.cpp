@@ -185,23 +185,23 @@ void export_pol3_bgl(py::module_& m) {
   add_dereference_iterator<Hati, Hati, Halfedge&>("Halfedge_around_target_iterator", m);
   m.def("halfedges_around_target", &cgalpy::pol3::halfedges_around_target_v_iterator,
         py::arg("v"), py::arg("g"), bgl_doc::halfedges_around_target_1,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   m.def("halfedges_around_target", &cgalpy::pol3::halfedges_around_target_h_iterator,
         py::arg("h"), py::arg("g"), bgl_doc::halfedges_around_target,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   using Hatc = CGAL::Halfedge_around_target_circulator<Prn>;
   export_dereference_circulator<Hatc, Halfedge&>(m, "Halfedge_around_target_circulator");
   m.def("halfedges_around_target_circulator", &cgalpy::pol3::halfedges_around_target_v_circulator,
         py::arg("v"), py::arg("g"), bgl_doc::Halfedge_around_target_circulator_class,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   m.def("halfedges_around_target_circulator", &cgalpy::pol3::halfedges_around_target_h_circulator,
         py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_target_circulator_class,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   // Halfedges around source
   // We use the dereference circulator, because we need to dereference twice
@@ -209,23 +209,23 @@ void export_pol3_bgl(py::module_& m) {
   add_dereference_iterator<Hasi, Hasi, Halfedge&>("Halfedge_around_source_iterator", m);
   m.def("halfedges_around_source", &cgalpy::pol3::halfedges_around_source_v_iterator,
         py::arg("v"), py::arg("g"), bgl_doc::halfedges_around_source_1,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   m.def("halfedges_around_source", &cgalpy::pol3::halfedges_around_source_h_iterator,
         py::arg("h"), py::arg("g"), bgl_doc::halfedges_around_source,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   using Hasc = CGAL::Halfedge_around_source_circulator<Prn>;
   export_dereference_circulator<Hasc, Halfedge&>(m, "Halfedge_around_source_circulator");
   m.def("halfedges_around_source_circulator", &cgalpy::pol3::halfedges_around_source_v_circulator,
         py::arg("v"), py::arg("g"), bgl_doc::Halfedge_around_source_circulator_class,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   m.def("halfedges_around_source_circulator", &cgalpy::pol3::halfedges_around_source_h_circulator,
         py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_source_circulator_class,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   // Halfedges around face
   // We use the dereference circulator, because we need to dereference twice
@@ -233,15 +233,15 @@ void export_pol3_bgl(py::module_& m) {
   add_dereference_iterator<Hafi, Hafi, Halfedge&>("Halfedge_around_face_iterator", m);
   m.def("halfedges_around_face", &cgalpy::pol3::halfedges_around_face_iterator,
         py::arg("h"), py::arg("g"), bgl_doc::halfedges_around_face,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   using Hafc = CGAL::Halfedge_around_face_circulator<Prn>;
   export_dereference_circulator<Hafc, Halfedge&>(m, "Halfedge_around_face_circulator");
   m.def("halfedges_around_face_circulator", &cgalpy::pol3::halfedges_around_face_circulator,
         py::arg("h"), py::arg("g"), bgl_doc::Halfedge_around_face_circulator_class,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   // Faces around target
   // We use the dereference circulator, because we need to dereference twice
@@ -249,15 +249,15 @@ void export_pol3_bgl(py::module_& m) {
   add_dereference_iterator<Fati, Fati, Face&>("Face_around_target_iterator", m);
   m.def("Face_around_target", &cgalpy::pol3::faces_around_target_iterator,
         py::arg("h"), py::arg("g"), bgl_doc::faces_around_target,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   using Fatc = CGAL::Face_around_target_circulator<Prn>;
   export_dereference_circulator<Fatc, Face&>(m, "Face_around_target_circulator");
   m.def("faces_around_target_circulator", &cgalpy::pol3::faces_around_target_circulator,
         py::arg("h"), py::arg("g"), bgl_doc::Face_around_target_circulator_class,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   // Faces around face
   // We use the dereference circulator, because we need to dereference twice
@@ -265,8 +265,8 @@ void export_pol3_bgl(py::module_& m) {
   add_dereference_iterator<Fafi, Fafi, Face&>("Face_around_face_iterator", m);
   m.def("Face_around_face", &cgalpy::pol3::faces_around_face_iterator,
         py::arg("h"), py::arg("g"), bgl_doc::faces_around_face,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   // Do not export Face_around_face_circulator here.  CGAL currently exposes it
   // as an empty placeholder type.  The iterator API Face_around_face remains
@@ -278,15 +278,15 @@ void export_pol3_bgl(py::module_& m) {
   add_dereference_iterator<Vati, Vati, Vertex&>("Vertex_around_target_iterator", m);
   m.def("Vertex_around_target", &cgalpy::pol3::vertices_around_target_iterator,
         py::arg("h"), py::arg("g"), bgl_doc::vertices_around_target_1,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   using Vatc = CGAL::Vertex_around_target_circulator<Prn>;
   export_dereference_circulator<Vatc, Vertex&>(m, "Vertex_around_target_circulator");
   m.def("vertices_around_target_circulator", &cgalpy::pol3::vertices_around_target_circulator,
         py::arg("h"), py::arg("g"), bgl_doc::Vertex_around_target_circulator_class,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   // Vertices around face
   // We use the dereference circulator, because we need to dereference twice
@@ -294,13 +294,13 @@ void export_pol3_bgl(py::module_& m) {
   add_dereference_iterator<Vafi, Vafi, Vertex&>("Vertex_around_face_iterator", m);
   m.def("Vertex_around_face", &cgalpy::pol3::vertices_around_face_iterator,
         py::arg("h"), py::arg("g"), bgl_doc::vertices_around_face,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   using Vafc = CGAL::Vertex_around_face_circulator<Prn>;
   export_dereference_circulator<Vafc, Vertex&>(m, "Vertex_around_face_circulator");
   m.def("vertices_around_face_circulator", &cgalpy::pol3::vertices_around_face_circulator,
         py::arg("h"), py::arg("g"), bgl_doc::Vertex_around_face_circulator_class,
-        py::keep_alive<0, 1>(),
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        py::keep_alive<0, 1>()
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 }

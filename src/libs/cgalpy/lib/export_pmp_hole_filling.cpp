@@ -695,12 +695,12 @@ void export_pmp_hole_filling(py::module_& m) {
   m.def("triangulate_and_refine_hole",
         &cgalpy::pmp::triangulate_and_refine_hole_halfedge<Pm>,
         py::arg("pm"), py::arg("hole_boundary"), py::arg("np") = py::dict(),
-        "Triangulates and refines a hole of a polygon mesh.",
-        py::call_policy<cgalpy::pol3::lifetime::Require_lifetime_checks_disabled>());
+        "Triangulates and refines a hole of a polygon mesh."
+        CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Require_lifetime_checks_disabled));
   m.def("triangulate_hole", &cgalpy::pmp::triangulate_hole_halfedge<Pm>,
         py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict(),
-        "Triangulates a hole of a polygon mesh.",
-        py::call_policy<cgalpy::pol3::lifetime::Require_lifetime_checks_disabled>());
+        "Triangulates a hole of a polygon mesh."
+        CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Require_lifetime_checks_disabled));
 #else
   m.def("triangulate_and_refine_hole", &cgalpy::pmp::triangulate_and_refine_hole<Pm>,
         py::arg("pm"), py::arg("hole_boundary"), py::arg("np") = py::dict(),
@@ -731,8 +731,8 @@ void export_pmp_hole_filling(py::module_& m) {
   m.def("triangulate_refine_and_fair_hole",
         &cgalpy::pmp::triangulate_refine_and_fair_hole_halfedge<Pm>,
         py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict(),
-        "Triangulates, refines, and fairs a hole of a polygon mesh.",
-        py::call_policy<cgalpy::pol3::lifetime::Require_lifetime_checks_disabled>());
+        "Triangulates, refines, and fairs a hole of a polygon mesh."
+        CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Require_lifetime_checks_disabled));
 #else
   m.def("triangulate_refine_and_fair_hole", &cgalpy::pmp::triangulate_refine_and_fair_hole<Pm>,
         py::arg("pmesh"), py::arg("border_halfedge"), py::arg("np") = py::dict(),

@@ -18,6 +18,7 @@ set_property(CACHE CGALPY_POL3_GEOMETRY_TRAITS_NAME PROPERTY STRINGS kernel with
 option(CGALPY_POL3_VERTEX_EXTENDED "Extend the Vertex record")
 option(CGALPY_POL3_HALFEDGE_EXTENDED "Extend the Halfedge record")
 option(CGALPY_POL3_FACE_EXTENDED "Extend the Facet record")
+option(CGALPY_POL3_LIFETIME_POLICIES "Compile Polyhedron_3 dependent-handle lifetime call policies" ON)
 
 # Selection
 function(select_pol3_geometry_traits)
@@ -45,6 +46,9 @@ function(select_polyhedron_3)
   if(${CGALPY_POLYHEDRON_3_BINDINGS})
     select_pol3_geometry_traits()
     select_pol3_hds()
+    if(NOT CGALPY_POL3_LIFETIME_POLICIES)
+      add_definitions(-DCGALPY_POL3_LIFETIME_POLICIES=0)
+    endif()
     add_definitions(-DCGALPY_POLYHEDRON_3_BINDINGS=)
   endif()
 endfunction()

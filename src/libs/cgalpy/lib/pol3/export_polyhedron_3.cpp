@@ -510,46 +510,46 @@ void export_polyhedron_3(py::module_& m) {
            "Constructs a polyhedron with the given traits object.")
       .def("add_facet_to_border", [](Prn& p, Prn::Halfedge& h, Prn::Halfedge& g) -> Prn::Halfedge& { return *p.add_facet_to_border(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h), cgalpy::pol3::lifetime::checked_halfedge_handle(p, g)); },
            py::arg("h"), py::arg("g"),
-           pol3_doc::Polyhedron_3_add_facet_to_border,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
+           pol3_doc::Polyhedron_3_add_facet_to_border
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
       .def("add_vertex_and_facet_to_border", [](Prn& p, Prn::Halfedge& h, Prn::Halfedge& g) -> Prn::Halfedge& { return *p.add_vertex_and_facet_to_border(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h), cgalpy::pol3::lifetime::checked_halfedge_handle(p, g)); },
            py::arg("h"), py::arg("g"),
-           pol3_doc::Polyhedron_3_add_vertex_and_facet_to_border,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
+           pol3_doc::Polyhedron_3_add_vertex_and_facet_to_border
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
       .def("bytes", &Prn::bytes, pol3_doc::Polyhedron_3_bytes)
       .def("bytes_reserved", &Prn::bytes_reserved, pol3_doc::Polyhedron_3_bytes_reserved)
       .def("capacity_of_facets", &Prn::capacity_of_facets, pol3_doc::Polyhedron_3_capacity_of_facets)
       .def("capacity_of_halfedges", &Prn::capacity_of_halfedges, pol3_doc::Polyhedron_3_capacity_of_halfedges)
       .def("capacity_of_vertices", &Prn::capacity_of_vertices, pol3_doc::Polyhedron_3_capacity_of_vertices)
-      .def("clear", &Prn::clear, pol3_doc::Polyhedron_3_clear,
-      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_from<1>>())
+      .def("clear", &Prn::clear, pol3_doc::Polyhedron_3_clear
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Guard_no_active_leases_from<1>))
       .def("create_center_vertex", [](Prn& p, Prn::Halfedge& h) -> Prn::Halfedge& { return *p.create_center_vertex(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h)); },
            py::arg("h"),
-           pol3_doc::Polyhedron_3_create_center_vertex,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
+           pol3_doc::Polyhedron_3_create_center_vertex
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
       .def("erase_all", &Prn::erase_all,
-           "Erases all vertices, halfedges, and facets.",
-      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_from<1>>())
+           "Erases all vertices, halfedges, and facets."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Guard_no_active_leases_from<1>))
       .def("erase_center_vertex", [](Prn& p, Prn::Halfedge& h) -> Prn::Halfedge& { return *p.erase_center_vertex(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h)); },
            py::arg("h"),
-           pol3_doc::Polyhedron_3_erase_center_vertex,
-      py::call_policy<cgalpy::pol3::lifetime::Require_lifetime_checks_disabled>())
+           pol3_doc::Polyhedron_3_erase_center_vertex
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Require_lifetime_checks_disabled))
       .def("erase_connected_component", [](Prn& p, Prn::Halfedge& h) { p.erase_connected_component(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h)); },
            py::arg("h"),
-           pol3_doc::Polyhedron_3_erase_connected_component,
-      py::call_policy<cgalpy::pol3::lifetime::Require_lifetime_checks_disabled>())
+           pol3_doc::Polyhedron_3_erase_connected_component
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Require_lifetime_checks_disabled))
       .def("erase_facet", [](Prn& p, Prn::Halfedge& h) { p.erase_facet(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h)); },
            py::arg("h"),
-           pol3_doc::Polyhedron_3_erase_facet,
-      py::call_policy<cgalpy::pol3::lifetime::Require_lifetime_checks_disabled>())
+           pol3_doc::Polyhedron_3_erase_facet
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Require_lifetime_checks_disabled))
       .def("fill_hole", [](Prn& p, Prn::Halfedge& h) -> Prn::Halfedge& { return *p.fill_hole(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h)); },
            py::arg("h"),
-           pol3_doc::Polyhedron_3_fill_hole,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
+           pol3_doc::Polyhedron_3_fill_hole
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
       .def("flip_edge", [](Prn& p, Prn::Halfedge& h) -> Prn::Halfedge& { return *p.flip_edge(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h)); },
            py::arg("h"),
-           pol3_doc::Polyhedron_3_flip_edge,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
+           pol3_doc::Polyhedron_3_flip_edge
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
       .def("inside_out", &Prn::inside_out, pol3_doc::Polyhedron_3_inside_out)
       .def("is_closed", &Prn::is_closed, pol3_doc::Polyhedron_3_is_closed)
       .def("is_empty", &Prn::is_empty, pol3_doc::Polyhedron_3_empty)
@@ -560,28 +560,28 @@ void export_polyhedron_3(py::module_& m) {
       .def("is_valid", &Prn::is_valid, py::arg("verbose") = false, py::arg("level") = 0, pol3_doc::Polyhedron_3_is_valid)
       .def("join_facet", [](Prn& p, Prn::Halfedge& h) -> Prn::Halfedge& { return *p.join_facet(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h)); },
            py::arg("h"),
-           pol3_doc::Polyhedron_3_join_facet,
-      py::call_policy<cgalpy::pol3::lifetime::Require_lifetime_checks_disabled>())
+           pol3_doc::Polyhedron_3_join_facet
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Require_lifetime_checks_disabled))
       .def("join_loop", [](Prn& p, Prn::Halfedge& h, Prn::Halfedge& g) -> Prn::Halfedge& { return *p.join_loop(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h), cgalpy::pol3::lifetime::checked_halfedge_handle(p, g)); },
            py::arg("h"), py::arg("g"),
-           pol3_doc::Polyhedron_3_join_loop,
-      py::call_policy<cgalpy::pol3::lifetime::Require_lifetime_checks_disabled>())
+           pol3_doc::Polyhedron_3_join_loop
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Require_lifetime_checks_disabled))
       .def("join_vertex", [](Prn& p, Prn::Halfedge& h) -> Prn::Halfedge& { return *p.join_vertex(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h)); },
            py::arg("h"),
-           pol3_doc::Polyhedron_3_join_vertex,
-      py::call_policy<cgalpy::pol3::lifetime::Require_lifetime_checks_disabled>())
+           pol3_doc::Polyhedron_3_join_vertex
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Require_lifetime_checks_disabled))
       .def("keep_largest_connected_components", &Prn::keep_largest_connected_components,
            py::arg("nb_components_to_keep"),
-           pol3_doc::Polyhedron_3_keep_largest_connected_components,
-      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_from<1>>())
+           pol3_doc::Polyhedron_3_keep_largest_connected_components
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Guard_no_active_leases_from<1>))
       .def("make_hole", [](Prn& p, Prn::Halfedge& h) -> Prn::Halfedge& { return *p.make_hole(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h)); },
            py::arg("h"),
-           pol3_doc::Polyhedron_3_make_hole,
-      py::call_policy<cgalpy::pol3::lifetime::Require_lifetime_checks_disabled>())
-      .def("make_tetrahedron", &cgalpy::pol3::make_tetrahedron1, ri, py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"), pol3_doc::Polyhedron_3_make_tetrahedron_1,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
-      .def("make_tetrahedron", &cgalpy::pol3::make_tetrahedron2, ri, pol3_doc::Polyhedron_3_make_tetrahedron,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
+           pol3_doc::Polyhedron_3_make_hole
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Require_lifetime_checks_disabled))
+      .def("make_tetrahedron", &cgalpy::pol3::make_tetrahedron1, ri, py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"), pol3_doc::Polyhedron_3_make_tetrahedron_1
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
+      .def("make_tetrahedron", &cgalpy::pol3::make_tetrahedron2, ri, pol3_doc::Polyhedron_3_make_tetrahedron
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
       .def("normalize_border", &Prn::normalize_border, pol3_doc::Polyhedron_3_normalize_border)
       .def("normalized_border_is_valid", &Prn::normalized_border_is_valid, pol3_doc::Polyhedron_3_normalized_border_is_valid)
       .def("size_of_border_edges", &Prn::size_of_border_edges, pol3_doc::Polyhedron_3_size_of_border_edges)
@@ -591,24 +591,24 @@ void export_polyhedron_3(py::module_& m) {
       .def("size_of_vertices", &Prn::size_of_vertices, pol3_doc::Polyhedron_3_size_of_vertices)
       .def("split_facet", [](Prn& p, Prn::Halfedge& h, Prn::Halfedge& g) -> Prn::Halfedge& { return *p.split_facet(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h), cgalpy::pol3::lifetime::checked_halfedge_handle(p, g)); },
            py::arg("h"), py::arg("g"),
-           pol3_doc::Polyhedron_3_split_facet,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
+           pol3_doc::Polyhedron_3_split_facet
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
       .def("split_loop", [](Prn& p, Prn::Halfedge& h, Prn::Halfedge& i, Prn::Halfedge& j) -> Prn::Halfedge& { return *p.split_loop(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h), cgalpy::pol3::lifetime::checked_halfedge_handle(p, i), cgalpy::pol3::lifetime::checked_halfedge_handle(p, j)); },
            py::arg("h"), py::arg("i"), py::arg("j"),
-           pol3_doc::Polyhedron_3_split_loop,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
+           pol3_doc::Polyhedron_3_split_loop
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
       .def("split_vertex", [](Prn& p, Prn::Halfedge& h, Prn::Halfedge& g) -> Prn::Halfedge& { return *p.split_vertex(cgalpy::pol3::lifetime::checked_halfedge_handle(p, h), cgalpy::pol3::lifetime::checked_halfedge_handle(p, g)); },
            py::arg("h"), py::arg("g"),
-           pol3_doc::Polyhedron_3_split_vertex,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
-      .def("make_triangle", &cgalpy::pol3::make_triangle_empty, ri, pol3_doc::Polyhedron_3_make_triangle,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
-      .def("make_triangle", &cgalpy::pol3::make_triangle, ri, py::arg("p1"), py::arg("p2"), py::arg("p3"), pol3_doc::Polyhedron_3_make_triangle_1,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
+           pol3_doc::Polyhedron_3_split_vertex
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
+      .def("make_triangle", &cgalpy::pol3::make_triangle_empty, ri, pol3_doc::Polyhedron_3_make_triangle
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
+      .def("make_triangle", &cgalpy::pol3::make_triangle, ri, py::arg("p1"), py::arg("p2"), py::arg("p3"), pol3_doc::Polyhedron_3_make_triangle_1
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
       .def("delegate", &cgalpy::pol3::delegate_with_owner,
            py::arg("modifier"),
-           pol3_doc::Polyhedron_3_delegate,
-      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_from<1>>())
+           pol3_doc::Polyhedron_3_delegate
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Guard_no_active_leases_from<1>))
       .def("is_pure_quad", py::overload_cast<>(&Prn::is_pure_quad, py::const_), pol3_doc::Polyhedron_3_is_pure_quad)
       .def("is_pure_bivalent", py::overload_cast<>(&Prn::is_pure_bivalent, py::const_), pol3_doc::Polyhedron_3_is_pure_bivalent)
       .def("is_pure_trivalent", py::overload_cast<>(&Prn::is_pure_trivalent, py::const_), pol3_doc::Polyhedron_3_is_pure_trivalent)
@@ -629,18 +629,18 @@ void export_polyhedron_3(py::module_& m) {
     add_iterator<Pnt_ci, Pnt_ci>("Point_iterator", prn_c);
     add_iterator<Pln_ci, Pln_ci>("Plane_iterator", prn_c);
 
-    prn_c.def("vertices", &cgalpy::pol3::polyhedron_vertices, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_vertices_begin,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
-      .def("halfedges", &cgalpy::pol3::polyhedron_halfedges, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_halfedges_begin,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
-      .def("edges", &cgalpy::pol3::polyhedron_edges, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_edges,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
-      .def("faces", &cgalpy::pol3::polyhedron_faces, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_facets_begin,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
-      .def("points", &cgalpy::pol3::polyhedron_points, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_points,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
-      .def("planes", &cgalpy::pol3::polyhedron_planes, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_planes,
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from<1>>())
+    prn_c.def("vertices", &cgalpy::pol3::polyhedron_vertices, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_vertices_begin
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
+      .def("halfedges", &cgalpy::pol3::polyhedron_halfedges, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_halfedges_begin
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
+      .def("edges", &cgalpy::pol3::polyhedron_edges, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_edges
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
+      .def("faces", &cgalpy::pol3::polyhedron_faces, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_facets_begin
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
+      .def("points", &cgalpy::pol3::polyhedron_points, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_points
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
+      .def("planes", &cgalpy::pol3::polyhedron_planes, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_planes
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
       ;
 
     export_pol3_vertex(prn_c);
@@ -721,8 +721,8 @@ void export_polyhedron_3(py::module_& m) {
   // Free functions
   m.def("clear", &CGAL::clear<Prn>,
         py::arg("graph"),
-        "Removes all elements from the graph.",
-      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
+        "Removes all elements from the graph."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument));
   m.def("is_triangle_mesh", &CGAL::is_triangle_mesh<Prn>,
         py::arg("graph"), bgl_doc::is_triangle_mesh);
   m.def("is_closed", &CGAL::is_closed<Prn>,
@@ -732,20 +732,20 @@ void export_polyhedron_3(py::module_& m) {
   // Iterators
   m.def("edges", &cgalpy::pol3::my_edges<Prn>,
         py::arg("graph"), py::keep_alive<0, 1>(),
-        "Returns an iterator range over graph edges.",
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        "Returns an iterator range over graph edges."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   m.def("faces", &cgalpy::pol3::my_faces<Prn>,
         py::arg("graph"), py::keep_alive<0, 1>(),
-        "Returns an iterator range over graph faces.",
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        "Returns an iterator range over graph faces."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   m.def("halfedges", &cgalpy::pol3::my_halfedges<Prn>,
         py::arg("graph"), py::keep_alive<0, 1>(),
-        "Returns an iterator range over graph halfedges.",
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        "Returns an iterator range over graph halfedges."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   m.def("vertices", &cgalpy::pol3::my_vertices<Prn>,
         py::arg("graph"), py::keep_alive<0, 1>(),
-        "Returns an iterator range over graph vertices.",
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        "Returns an iterator range over graph vertices."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
 
   // Functions that do not involve handlers
   m.def("add_edge", &cgalpy::bgl::my_add_edge<Prn>,
@@ -764,8 +764,8 @@ void export_polyhedron_3(py::module_& m) {
         py::arg("graph"), bgl_doc::VertexListGraph_num_vertices);
   m.def("remove_all_elements", &cgalpy::bgl::my_remove_all_elements<Prn>,
         py::arg("graph"),
-        "Removes all vertices, edges, halfedges, and faces from the graph.",
-      py::call_policy<cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument>());
+        "Removes all vertices, edges, halfedges, and faces from the graph."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument));
   m.def("reserve", &cgalpy::bgl::my_reserve<Prn>,
         py::arg("graph"), py::arg("num_vertices"), py::arg("num_edges"),
         py::arg("num_faces"), bgl_doc::MutableFaceGraph_reserve);
@@ -782,16 +782,16 @@ void export_polyhedron_3(py::module_& m) {
   // m.def("edge", &cgalpy::pol3::edge);
   m.def("face", &cgalpy::pol3::face_h, ref,
         py::arg("halfedge"), py::arg("graph"),
-        "Returns the face incident to a halfedge.",
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        "Returns the face incident to a halfedge."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   m.def("halfedge", &cgalpy::pol3::halfedge_v, ref,
         py::arg("vertex"), py::arg("graph"),
-        "Returns a halfedge incident to a vertex.",
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        "Returns a halfedge incident to a vertex."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   m.def("halfedge", &cgalpy::pol3::halfedge_f, ref,
         py::arg("face"), py::arg("graph"),
-        "Returns a halfedge incident to a face.",
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        "Returns a halfedge incident to a face."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   // m.def("halfedge", &cgalpy::pol3::halfedge_vv);
   // m.def("in_degree", &cgalpy::pol3::in_degree);
   // m.def("is_valid_vertex_descriptor",
@@ -808,29 +808,29 @@ void export_polyhedron_3(py::module_& m) {
   //       py::arg("f"), py::arg("g"), py::arg("verbose") = false);
   m.def("next", &cgalpy::pol3::next_h, ref,
         py::arg("halfedge"), py::arg("graph"),
-        "Returns the next halfedge.",
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        "Returns the next halfedge."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   m.def("opposite", &cgalpy::pol3::opposite_h, ref,
         py::arg("halfedge"), py::arg("graph"),
-        "Returns the opposite halfedge.",
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        "Returns the opposite halfedge."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   // m.def("out_degree", &cgalpy::bgl::out_degree<Prn>);
   m.def("prev", &cgalpy::pol3::prev_h, ref,
         py::arg("halfedge"), py::arg("graph"),
-        "Returns the previous halfedge.",
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        "Returns the previous halfedge."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   // m.def("remove_edge", &cgalpy::bgl::remove_edge_vv<Prn>);
   // m.def("remove_edge", &cgalpy::bgl::remove_edge_e<Prn>);
   // m.def("remove_face", &cgalpy::bgl::remove_face<Prn>);
   // m.def("remove_vertex", &cgalpy::bgl::remove_vertex<Prn>);
   m.def("source", &cgalpy::pol3::source_h, ref,
         py::arg("halfedge"), py::arg("graph"),
-        "Returns the source vertex of a halfedge.",
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        "Returns the source vertex of a halfedge."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   m.def("target", &cgalpy::pol3::target_h, ref,
         py::arg("halfedge"), py::arg("graph"),
-        "Returns the target vertex of a halfedge.",
-      py::call_policy<cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument>());
+        "Returns the target vertex of a halfedge."
+      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from_owner_argument));
   // m.def("set_face", &cgalpy::bgl::set_face<Prn>);
   // m.def("set_halfedge", &cgalpy::bgl::set_halfedge_vh<Prn>);
   // m.def("set_halfedge", &cgalpy::bgl::set_halfedge_fh<Prn>);
