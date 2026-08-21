@@ -1324,34 +1324,55 @@ jobs:
             [regex]::Escape($oldSha512)
           )).Count
 
-          if ($oldPackageCount -ne 1) {
-            throw "Expected exactly one stale GMP Autoconf package reference, found $oldPackageCount; inspect upstream vcpkg."
-          }
-
-          if ($oldShaCount -ne 1) {
-            throw "Expected exactly one stale GMP Autoconf SHA512, found $oldShaCount; inspect upstream vcpkg."
-          }
-
-          $content = $content.Replace($oldPackage, $newPackage)
-          $content = $content.Replace($oldSha512, $newSha512)
-
-          [System.IO.File]::WriteAllText(
-            $portfile,
+          $newPackageCount = ([regex]::Matches(
             $content,
-            [System.Text.UTF8Encoding]::new($false)
-          )
+            [regex]::Escape($newPackage)
+          )).Count
 
-          $patched = Get-Content -Raw $portfile
+          $newShaCount = ([regex]::Matches(
+            $content,
+            [regex]::Escape($newSha512)
+          )).Count
 
-          if ($patched.Contains($oldPackage) -or $patched.Contains($oldSha512)) {
-            throw "Stale GMP Autoconf reference remains after patch."
+          if (
+            $oldPackageCount -eq 1 -and
+            $oldShaCount -eq 1 -and
+            $newPackageCount -eq 0 -and
+            $newShaCount -eq 0
+          ) {
+            $content = $content.Replace($oldPackage, $newPackage)
+            $content = $content.Replace($oldSha512, $newSha512)
+
+            [System.IO.File]::WriteAllText(
+              $portfile,
+              $content,
+              [System.Text.UTF8Encoding]::new($false)
+            )
+
+            $patched = Get-Content -Raw $portfile
+
+            if ($patched.Contains($oldPackage) -or $patched.Contains($oldSha512)) {
+              throw "Stale GMP Autoconf reference remains after patch."
+            }
+
+            if (
+              -not $patched.Contains($newPackage) -or
+              -not $patched.Contains($newSha512)
+            ) {
+              throw "Verified GMP Autoconf replacement was not written correctly."
+            }
+
+            Write-Host "Patched runner vcpkg GMP port to use $newPackage"
+          } elseif (
+            $oldPackageCount -eq 0 -and
+            $oldShaCount -eq 0 -and
+            $newPackageCount -eq 1 -and
+            $newShaCount -eq 1
+          ) {
+            Write-Host "Runner vcpkg GMP port already uses $newPackage; no patch needed."
+          } else {
+            throw "Unexpected GMP Autoconf package state: old package=$oldPackageCount, old SHA512=$oldShaCount, new package=$newPackageCount, new SHA512=$newShaCount; inspect upstream vcpkg."
           }
-
-          if (-not $patched.Contains($newPackage) -or -not $patched.Contains($newSha512)) {
-            throw "Verified GMP Autoconf replacement was not written correctly."
-          }
-
-          Write-Host "Patched runner vcpkg GMP port to use $newPackage"
 
       - name: Install system dependencies
         shell: pwsh
