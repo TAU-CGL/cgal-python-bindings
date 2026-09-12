@@ -36,7 +36,29 @@ include_directories(${${component}_GENERATED_INC_DIR})
 ##########
 
 set(${component}_GEN_DOCSTRINGS "${CMAKE_SOURCE_DIR}/src/scripts/cpp_docstrings_from_json.py")
+set(${component}_JSON_FROM_DOC_OUTPUT "${CMAKE_SOURCE_DIR}/src/scripts/json_from_doc_output.py")
 set(${component}_DOCSTRINGS_JSON_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/docstrings/json")
+
+set(CGALPY_DOC_OUTPUT_DIR "" CACHE PATH
+    "Path to the CGAL documentation doc_output directory generated with CGAL_GENERATE_XML=ON")
+
+if (CGALPY_DOC_OUTPUT_DIR)
+  add_custom_target(docstrings
+    COMMAND ${Python_EXECUTABLE} ${${component}_JSON_FROM_DOC_OUTPUT}
+      --doc-output "${CGALPY_DOC_OUTPUT_DIR}"
+      --output-dir "${${component}_DOCSTRINGS_JSON_DIR}"
+    DEPENDS
+      ${${component}_JSON_FROM_DOC_OUTPUT}
+      "${CMAKE_SOURCE_DIR}/src/scripts/json_from_xml.py"
+    COMMENT "Regenerating docstring JSON from CGAL Doxygen XML"
+    VERBATIM)
+else ()
+  add_custom_target(docstrings
+    COMMAND ${CMAKE_COMMAND} -E echo
+      "CGALPY_DOC_OUTPUT_DIR is not set. Configure with -DCGALPY_DOC_OUTPUT_DIR=/path/to/CGAL/documentation/build/doc_output"
+    COMMAND ${CMAKE_COMMAND} -E false
+    VERBATIM)
+endif ()
 
 # Short binding module names mapped to CGAL documentation package names.
 set(LONG_NAME_Ker "Kernel_23")
