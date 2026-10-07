@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "bso2_cs_epec",
+  "description": "Build variant defined by cmake/tests/bso2_cs_epec.cmake",
+  "cmake_tests": [
+    "cmake/tests/bso2_cs_epec.cmake"
+  ]
+}

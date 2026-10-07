@@ -1,9 +1,10 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 if (NOT POINT_SET_PROCESSING_OPTIONS_FILE_INCLUDED)
 set(POINT_SET_PROCESSING_OPTIONS_FILE_INCLUDED)
 
 function(select_point_set_processing)
   if (CGALPY_POINT_SET_PROCESSING_BINDINGS)
-    set(CGALPY_3D_POINT_SET_BINDINGS ON CACHE BOOL "" FORCE)
     add_definitions(-DCGALPY_POINT_SET_PROCESSING_BINDINGS=)
   endif()
 endfunction()

@@ -1,0 +1,3327 @@
+{
+  "schema_version": 1,
+  "package": "Interpolation",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 19,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Data_access": {
+      "kind": "struct",
+      "name": "CGAL::Data_access",
+      "brief": "The struct Data_access implements a functor that allows to retrieve data from an associative container.",
+      "detailed": "The functor keeps a reference to the container. Given an instance of the container's key type, it returns a pair of the container's value type and a Boolean indicating whether the retrieval was successful. This class can be used to provide the values and gradients of the interpolation functions. Parameters The class Data_access has the container type Map as template parameter.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Data_type",
+          "qualified_name": "CGAL::Data_access::Data_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Map::mapped_type",
+          "definition": "typedef Map::mapped_type CGAL::Data_access< Map >::Data_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/interpolation_functions.h",
+          "line": "35"
+        },
+        {
+          "kind": "typedef",
+          "name": "Key_type",
+          "qualified_name": "CGAL::Data_access::Key_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Map::key_type",
+          "definition": "typedef Map::key_type CGAL::Data_access< Map >::Key_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/interpolation_functions.h",
+          "line": "40"
+        },
+        {
+          "kind": "function",
+          "name": "Data_access",
+          "qualified_name": "CGAL::Data_access::Data_access",
+          "brief": "Introduces a Data_access to the container map .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Data_access< Map >::Data_access",
+          "argsstring": "(const Map &map)",
+          "params": [
+            {
+              "type": "const Map &",
+              "name": "map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/interpolation_functions.h",
+          "line": "50"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Data_access::operator()",
+          "brief": "If there is an entry for p in the container map , then the pair of map.find(p) and true is returned.",
+          "detailed": "Otherwise, the Boolean value of the pair is false .",
+          "return_type": "std::pair< Data_type , bool >",
+          "definition": "std::pair< Data_type, bool > CGAL::Data_access< Map >::operator()",
+          "argsstring": "(const Key_type &p)",
+          "params": [
+            {
+              "type": "const Key_type &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/interpolation_functions.h",
+          "line": "57"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_data__access.xml",
+      "file": "CGAL/interpolation_functions.h",
+      "line": "23"
+    },
+    "CGAL::Interpolation_gradient_fitting_traits_2": {
+      "kind": "class",
+      "name": "CGAL::Interpolation_gradient_fitting_traits_2",
+      "brief": "Interpolation_gradient_fitting_traits_2 is a model for the concepts InterpolationTraits and GradientFittingTraits .",
+      "detailed": "It can be used to instantiate the geometric traits class of interpolation functions and of Sibson's gradient fitting function when applied on a function defined over a two-dimensional domain. The traits class is templated by a kernel class K . Is model of GradientFittingTraits InterpolationTraits InterpolationTraits GradientFittingTraits CGAL::Interpolation_traits_2 <K>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::FT",
+          "definition": "typedef K::FT CGAL::Interpolation_gradient_fitting_traits_2< K >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "32"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_d",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::Point_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Point_2",
+          "definition": "typedef K::Point_2 CGAL::Interpolation_gradient_fitting_traits_2< K >::Point_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "37"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_d",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::Vector_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Vector_2",
+          "definition": "typedef K::Vector_2 CGAL::Interpolation_gradient_fitting_traits_2< K >::Vector_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "42"
+        },
+        {
+          "kind": "typedef",
+          "name": "Aff_transformation_d",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::Aff_transformation_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Aff_transformation_2",
+          "definition": "typedef K::Aff_transformation_2 CGAL::Interpolation_gradient_fitting_traits_2< K >::Aff_transformation_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "47"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vector_d",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::Construct_vector_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Construct_vector_2",
+          "definition": "typedef K::Construct_vector_2 CGAL::Interpolation_gradient_fitting_traits_2< K >::Construct_vector_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "52"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_scaled_vector_d",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::Construct_scaled_vector_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Construct_scaled_vector_2",
+          "definition": "typedef K::Construct_scaled_vector_2 CGAL::Interpolation_gradient_fitting_traits_2< K >::Construct_scaled_vector_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "57"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_distance_d",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::Compute_squared_distance_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Compute_squared_distance_2",
+          "definition": "typedef K::Compute_squared_distance_2 CGAL::Interpolation_gradient_fitting_traits_2< K >::Compute_squared_distance_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "62"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_null_matrix_d",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::Construct_null_matrix_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_null_matrix_2< Aff_transformation_d >",
+          "definition": "typedef Construct_null_matrix_2<Aff_transformation_d> CGAL::Interpolation_gradient_fitting_traits_2< K >::Construct_null_matrix_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "67"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_scaling_matrix_d",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::Construct_scaling_matrix_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_scaling_matrix_2< Aff_transformation_d >",
+          "definition": "typedef Construct_scaling_matrix_2<Aff_transformation_d> CGAL::Interpolation_gradient_fitting_traits_2< K >::Construct_scaling_matrix_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "72"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_sum_matrix_d",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::Construct_sum_matrix_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_sum_matrix_2< Aff_transformation_d >",
+          "definition": "typedef Construct_sum_matrix_2<Aff_transformation_d> CGAL::Interpolation_gradient_fitting_traits_2< K >::Construct_sum_matrix_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "77"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_outer_product_d",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::Construct_outer_product_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_outer_product_2< K >",
+          "definition": "typedef Construct_outer_product_2<K> CGAL::Interpolation_gradient_fitting_traits_2< K >::Construct_outer_product_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "82"
+        },
+        {
+          "kind": "function",
+          "name": "construct_scaled_vector_d_object",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::construct_scaled_vector_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_scaled_vector_d",
+          "definition": "Construct_scaled_vector_d CGAL::Interpolation_gradient_fitting_traits_2< K >::construct_scaled_vector_d_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "92"
+        },
+        {
+          "kind": "function",
+          "name": "construct_vector_d_object",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::construct_vector_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_vector_d",
+          "definition": "Construct_vector_d CGAL::Interpolation_gradient_fitting_traits_2< K >::construct_vector_d_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "97"
+        },
+        {
+          "kind": "function",
+          "name": "compute_squared_distance_d_object",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::compute_squared_distance_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_squared_distance_d",
+          "definition": "Compute_squared_distance_d CGAL::Interpolation_gradient_fitting_traits_2< K >::compute_squared_distance_d_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "102"
+        },
+        {
+          "kind": "function",
+          "name": "construct_null_matrix_d_object",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::construct_null_matrix_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_null_matrix_d",
+          "definition": "Construct_null_matrix_d CGAL::Interpolation_gradient_fitting_traits_2< K >::construct_null_matrix_d_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "107"
+        },
+        {
+          "kind": "function",
+          "name": "construct_scaling_matrix_d_object",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::construct_scaling_matrix_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_scaling_matrix_d",
+          "definition": "Construct_scaling_matrix_d CGAL::Interpolation_gradient_fitting_traits_2< K >::construct_scaling_matrix_d_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "112"
+        },
+        {
+          "kind": "function",
+          "name": "construct_sum_matrix_d_object",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::construct_sum_matrix_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_sum_matrix_d",
+          "definition": "Construct_sum_matrix_d CGAL::Interpolation_gradient_fitting_traits_2< K >::construct_sum_matrix_d_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "117"
+        },
+        {
+          "kind": "function",
+          "name": "construct_outer_product_d_object",
+          "qualified_name": "CGAL::Interpolation_gradient_fitting_traits_2::construct_outer_product_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_outer_product_d",
+          "definition": "Construct_outer_product_d CGAL::Interpolation_gradient_fitting_traits_2< K >::construct_outer_product_d_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+          "line": "122"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_interpolation__gradient__fitting__traits__2.xml",
+      "file": "CGAL/Interpolation_gradient_fitting_traits_2.h",
+      "line": "22"
+    },
+    "CGAL::Interpolation_traits_2": {
+      "kind": "class",
+      "name": "CGAL::Interpolation_traits_2",
+      "brief": "Interpolation_traits_2 is a model for the concept InterpolationTraits and can be used to instantiate the geometric traits class of interpolation methods applied on a bivariate function over a two-dimensional domain.",
+      "detailed": "The traits class is templated by a kernel class K . Is model of InterpolationTraits InterpolationTraits GradientFittingTraits CGAL::Interpolation_gradient_fitting_traits_2 <K>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Interpolation_traits_2::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::FT",
+          "definition": "typedef K::FT CGAL::Interpolation_traits_2< K >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_traits_2.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_d",
+          "qualified_name": "CGAL::Interpolation_traits_2::Point_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Point_2",
+          "definition": "typedef K::Point_2 CGAL::Interpolation_traits_2< K >::Point_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_traits_2.h",
+          "line": "36"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_d",
+          "qualified_name": "CGAL::Interpolation_traits_2::Vector_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Vector_2",
+          "definition": "typedef K::Vector_2 CGAL::Interpolation_traits_2< K >::Vector_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_traits_2.h",
+          "line": "41"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vector_d",
+          "qualified_name": "CGAL::Interpolation_traits_2::Construct_vector_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Construct_vector_2",
+          "definition": "typedef K::Construct_vector_2 CGAL::Interpolation_traits_2< K >::Construct_vector_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_traits_2.h",
+          "line": "46"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_scaled_vector_d",
+          "qualified_name": "CGAL::Interpolation_traits_2::Construct_scaled_vector_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Construct_scaled_vector_2",
+          "definition": "typedef K::Construct_scaled_vector_2 CGAL::Interpolation_traits_2< K >::Construct_scaled_vector_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_traits_2.h",
+          "line": "51"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_distance_d",
+          "qualified_name": "CGAL::Interpolation_traits_2::Compute_squared_distance_d",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Compute_squared_distance_2",
+          "definition": "typedef K::Compute_squared_distance_2 CGAL::Interpolation_traits_2< K >::Compute_squared_distance_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interpolation_traits_2.h",
+          "line": "56"
+        },
+        {
+          "kind": "function",
+          "name": "construct_scaled_vector_d_object",
+          "qualified_name": "CGAL::Interpolation_traits_2::construct_scaled_vector_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_scaled_vector_d",
+          "definition": "Construct_scaled_vector_d CGAL::Interpolation_traits_2< K >::construct_scaled_vector_d_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interpolation_traits_2.h",
+          "line": "66"
+        },
+        {
+          "kind": "function",
+          "name": "construct_vector_d_object",
+          "qualified_name": "CGAL::Interpolation_traits_2::construct_vector_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_vector_d",
+          "definition": "Construct_vector_d CGAL::Interpolation_traits_2< K >::construct_vector_d_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interpolation_traits_2.h",
+          "line": "71"
+        },
+        {
+          "kind": "function",
+          "name": "compute_squared_distance_d_object",
+          "qualified_name": "CGAL::Interpolation_traits_2::compute_squared_distance_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_squared_distance_d",
+          "definition": "Compute_squared_distance_d CGAL::Interpolation_traits_2< K >::compute_squared_distance_d_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interpolation_traits_2.h",
+          "line": "76"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_interpolation__traits__2.xml",
+      "file": "CGAL/Interpolation_traits_2.h",
+      "line": "21"
+    },
+    "CGAL::Voronoi_intersection_2_traits_3": {
+      "kind": "class",
+      "name": "CGAL::Voronoi_intersection_2_traits_3",
+      "brief": "Voronoi_intersection_2_traits_3 is a model for the concept RegularTriangulationTraits_2 .",
+      "detailed": "It can be used to instantiate the geometric traits class of a two-dimensional regular triangulation. A three-dimensional plane is defined by a point and a vector that are members of the traits class. The triangulation is defined on 3D points. It is the regular triangulation of the input points projected onto the plane and each weighted with the negative squared distance of the input point to the plane. It can be shown that it is dual to the power diagram obtained by intersecting the three-dimensional Voronoi diagram of the input points with the plane. All predicates and constructions used in the computation of the regular triangulation are formulated on the three dimensional points without explicitly constructing the projected points and the weights. This reduces the arithmetic demands. The traits class is templated by a kernel class K and inherits from it. Is model of RegularTriangulationTraits_2 CGAL::Regular_triangulation_2<Gt, Tds> CGAL::regular_neighbor_coordinates_2() 3D Surface Neighbor Coordinates Functions",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Point_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Point_3",
+          "definition": "typedef K::Point_3 CGAL::Voronoi_intersection_2_traits_3< K >::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "42"
+        },
+        {
+          "kind": "typedef",
+          "name": "Weighted_point_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Weighted_point_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Weighted_point_3",
+          "definition": "typedef K::Weighted_point_3 CGAL::Voronoi_intersection_2_traits_3< K >::Weighted_point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "47"
+        },
+        {
+          "kind": "typedef",
+          "name": "Segment_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Segment_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Segment_3",
+          "definition": "typedef K::Segment_3 CGAL::Voronoi_intersection_2_traits_3< K >::Segment_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "52"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangle_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Triangle_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Triangle_3",
+          "definition": "typedef K::Triangle_3 CGAL::Voronoi_intersection_2_traits_3< K >::Triangle_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "57"
+        },
+        {
+          "kind": "typedef",
+          "name": "Line_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Line_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Line_3",
+          "definition": "typedef K::Line_3 CGAL::Voronoi_intersection_2_traits_3< K >::Line_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "62"
+        },
+        {
+          "kind": "typedef",
+          "name": "Ray_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Ray_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Ray_3",
+          "definition": "typedef K::Ray_3 CGAL::Voronoi_intersection_2_traits_3< K >::Ray_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "67"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Vector_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Vector_3",
+          "definition": "typedef K::Vector_3 CGAL::Voronoi_intersection_2_traits_3< K >::Vector_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "72"
+        },
+        {
+          "kind": "typedef",
+          "name": "Circle_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Circle_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Circle_3",
+          "definition": "typedef K::Circle_3 CGAL::Voronoi_intersection_2_traits_3< K >::Circle_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "77"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_point_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Construct_point_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Construct_point_3",
+          "definition": "typedef K::Construct_point_3 CGAL::Voronoi_intersection_2_traits_3< K >::Construct_point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "82"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_weighted_point_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Construct_weighted_point_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Construct_weighted_point_3",
+          "definition": "typedef K::Construct_weighted_point_3 CGAL::Voronoi_intersection_2_traits_3< K >::Construct_weighted_point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "87"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_segment_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Construct_segment_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Construct_segment_3",
+          "definition": "typedef K::Construct_segment_3 CGAL::Voronoi_intersection_2_traits_3< K >::Construct_segment_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "92"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vector_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Construct_vector_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Construct_vector_3",
+          "definition": "typedef K::Construct_vector_3 CGAL::Voronoi_intersection_2_traits_3< K >::Construct_vector_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "97"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_ray_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Construct_ray_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Construct_ray_3",
+          "definition": "typedef K::Construct_ray_3 CGAL::Voronoi_intersection_2_traits_3< K >::Construct_ray_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "102"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_triangle_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Construct_triangle_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Construct_triangle_3",
+          "definition": "typedef K::Construct_triangle_3 CGAL::Voronoi_intersection_2_traits_3< K >::Construct_triangle_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "107"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_distance_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Compare_distance_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Compare_distance_3",
+          "definition": "typedef K::Compare_distance_3 CGAL::Voronoi_intersection_2_traits_3< K >::Compare_distance_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "112"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_distance_to_point_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Less_distance_to_point_2",
+          "brief": "Necessary for certificated coordinates / neighbors computation.",
+          "detailed": "",
+          "return_type": "K::Less_distance_to_point_3",
+          "definition": "typedef K::Less_distance_to_point_3 CGAL::Voronoi_intersection_2_traits_3< K >::Less_distance_to_point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "117"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_distance_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Compute_squared_distance_2",
+          "brief": "Necessary for certificated coordinates / neighbors computation.",
+          "detailed": "",
+          "return_type": "K::Compute_squared_distance_3",
+          "definition": "typedef K::Compute_squared_distance_3 CGAL::Voronoi_intersection_2_traits_3< K >::Compute_squared_distance_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "122"
+        },
+        {
+          "kind": "typedef",
+          "name": "Equal_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Equal_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Equal_3",
+          "definition": "typedef K::Equal_3 CGAL::Voronoi_intersection_2_traits_3< K >::Equal_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "127"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_circumcenter_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Construct_circumcenter_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::Construct_circumcenter_3",
+          "definition": "typedef K::Construct_circumcenter_3 CGAL::Voronoi_intersection_2_traits_3< K >::Construct_circumcenter_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "3D types camouflaged as 2D types",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "132"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_area_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Compute_area_2",
+          "brief": "An instance of this function object class computes the square root of the result of K::Compute_squared_area_3 .",
+          "detailed": "If the number type FT does not support the square root operation, the result is cast to double before computing the square root.",
+          "return_type": "Compute_area_3< K >",
+          "definition": "typedef Compute_area_3<K> CGAL::Voronoi_intersection_2_traits_3< K >::Compute_area_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Custom predicates and constructions",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "146"
+        },
+        {
+          "kind": "typedef",
+          "name": "Orientation_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Orientation_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Orientation_with_normal_plane_2_3< K >",
+          "definition": "typedef Orientation_with_normal_plane_2_3<K> CGAL::Voronoi_intersection_2_traits_3< K >::Orientation_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Custom predicates and constructions",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "151"
+        },
+        {
+          "kind": "typedef",
+          "name": "Power_side_of_oriented_power_circle_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Power_side_of_oriented_power_circle_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Side_of_plane_centered_sphere_2_3< K >",
+          "definition": "typedef Side_of_plane_centered_sphere_2_3<K> CGAL::Voronoi_intersection_2_traits_3< K >::Power_side_of_oriented_power_circle_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Custom predicates and constructions",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "156"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_weighted_circumcenter_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Construct_weighted_circumcenter_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_plane_centered_circumcenter_3< K >",
+          "definition": "typedef Construct_plane_centered_circumcenter_3<K> CGAL::Voronoi_intersection_2_traits_3< K >::Construct_weighted_circumcenter_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Custom predicates and constructions",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "161"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_radical_axis_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Construct_radical_axis_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_plane_intersected_bisector_3< Point_2 >",
+          "definition": "typedef Construct_plane_intersected_bisector_3<Point_2> CGAL::Voronoi_intersection_2_traits_3< K >::Construct_radical_axis_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Custom predicates and constructions",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "166"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_x_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Compare_x_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compare_first_projection_3< K >",
+          "definition": "typedef Compare_first_projection_3<K> CGAL::Voronoi_intersection_2_traits_3< K >::Compare_x_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Custom predicates and constructions",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "171"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_y_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Compare_y_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compare_second_projection_3< K >",
+          "definition": "typedef Compare_second_projection_3<K> CGAL::Voronoi_intersection_2_traits_3< K >::Compare_y_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Custom predicates and constructions",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "176"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_x_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Compare_x_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compare_to_less< Compare_x_2 >",
+          "definition": "typedef Compare_to_less<Compare_x_2> CGAL::Voronoi_intersection_2_traits_3< K >::Compare_x_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Custom predicates and constructions",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "181"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_y_2",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Compare_y_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compare_to_less< Compare_y_2 >",
+          "definition": "typedef Compare_to_less<Compare_y_2> CGAL::Voronoi_intersection_2_traits_3< K >::Compare_y_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Custom predicates and constructions",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "186"
+        },
+        {
+          "kind": "function",
+          "name": "Voronoi_intersection_2_traits_3",
+          "qualified_name": "CGAL::Voronoi_intersection_2_traits_3::Voronoi_intersection_2_traits_3",
+          "brief": "The plane associated to the traits class contains point and has as normal vector normal .",
+          "detailed": "The optional kernel parameter k is the base class of the traits class.",
+          "return_type": "",
+          "definition": "CGAL::Voronoi_intersection_2_traits_3< K >::Voronoi_intersection_2_traits_3",
+          "argsstring": "(const typename K::Point_3 &point=typename K::Point_3(), const typename K::Vector_3 &normal=NULL_VECTOR, const K &k=K())",
+          "params": [
+            {
+              "type": "const typename K::Point_3 &",
+              "name": "point",
+              "default": "typename K::Point_3()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename K::Vector_3 &",
+              "name": "normal",
+              "default": "NULL_VECTOR",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const K &",
+              "name": "k",
+              "default": "K()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+          "line": "198"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_voronoi__intersection__2__traits__3.xml",
+      "file": "CGAL/Voronoi_intersection_2_traits_3.h",
+      "line": "31"
+    },
+    "GradientFittingTraits": {
+      "kind": "class",
+      "name": "GradientFittingTraits",
+      "brief": "Sibson Gradient Fitting Functions are parameterized by a traits class that defines the primitives used by the algorithm. The concept GradientFittingTraits defines this common set of requirements.",
+      "detailed": "Has models CGAL::Interpolation_gradient_fitting_traits_2 <K> InterpolationTraits CGAL::Interpolation_traits_2 <K> Sibson Gradient Fitting Functions CGAL::sibson_c1_interpolation() CGAL::farin_c1_interpolation() CGAL::quadratic_interpolation()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "GradientFittingTraits::FT",
+          "brief": "The number type must follow the model FieldNumberType .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_d",
+          "qualified_name": "GradientFittingTraits::Point_d",
+          "brief": "The (weightless) point type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::Point_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "36"
+        },
+        {
+          "kind": "typedef",
+          "name": "Weighted_point_d",
+          "qualified_name": "GradientFittingTraits::Weighted_point_d",
+          "brief": "The weighted point type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::Weighted_point_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "41"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_d",
+          "qualified_name": "GradientFittingTraits::Vector_d",
+          "brief": "The corresponding vector type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::Vector_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "46"
+        },
+        {
+          "kind": "typedef",
+          "name": "Aff_transformation_d",
+          "qualified_name": "GradientFittingTraits::Aff_transformation_d",
+          "brief": "defines a matrix type.",
+          "detailed": "Must provide the following member functions : Aff_transformation tr.inverse () , which gives the inverse transformation, and Aff_transformation tr.transform(Vector v) , which returns the multiplication of tr with v .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::Aff_transformation_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "56"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_point_d",
+          "qualified_name": "GradientFittingTraits::Construct_point_d",
+          "brief": "A constructor object for Point_d .",
+          "detailed": "Provides : Point_d operator() ( Point_d p) , which simply returns p Point_d operator() ( Weighted_point_d wp) , which returns the bare point contained in wp .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::Construct_point_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "66"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vector_d",
+          "qualified_name": "GradientFittingTraits::Construct_vector_d",
+          "brief": "A constructor object for Vector_d .",
+          "detailed": "Provides : Vector_d operator() ( Point_d p, Point_d q) , which produces the vector q - p and Vector_d operator() (Null_vector NULL_VECTOR) , which introduces the null vector.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::Construct_vector_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "77"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_scaled_vector_d",
+          "qualified_name": "GradientFittingTraits::Construct_scaled_vector_d",
+          "brief": "Constructor object for Vector_d .",
+          "detailed": "Provides : Vector_d operator() ( Vector_d v, FT scale) , which produces the vector v scaled by a factor scale .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::Construct_scaled_vector_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "86"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_distance_d",
+          "qualified_name": "GradientFittingTraits::Compute_squared_distance_d",
+          "brief": "Constructor object for FT .",
+          "detailed": "Provides the operator: FT operator() ( Point_d p, Point_d q) , which returns the squared distance between p and q .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::Compute_squared_distance_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "93"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_null_matrix_d",
+          "qualified_name": "GradientFittingTraits::Construct_null_matrix_d",
+          "brief": "Constructor object for Aff_transformation_d .",
+          "detailed": "Provides : Aff_transformation_d operator()() , which introduces an affine transformation whose matrix has only zero entries.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::Construct_null_matrix_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "101"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_scaling_matrix_d",
+          "qualified_name": "GradientFittingTraits::Construct_scaling_matrix_d",
+          "brief": "Constructor object for Aff_transformation_d .",
+          "detailed": "Provides : Aff_transformation_d operator()(FT scale) , which introduces a scaling by a scale factor scale .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::Construct_scaling_matrix_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "108"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_sum_matrix_d",
+          "qualified_name": "GradientFittingTraits::Construct_sum_matrix_d",
+          "brief": "Constructor object for Aff_transformation_d .",
+          "detailed": "Provides : Aff_transformation_d operator()(Aff_transformation_d tr1, Aff_transformation_d tr2) , which returns the sum of the two matrices representing tr1 and tr2 .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::Construct_sum_matrix_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "116"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_outer_product_d",
+          "qualified_name": "GradientFittingTraits::Construct_outer_product_d",
+          "brief": "Constructor object for Aff_transformation_d .",
+          "detailed": "Provides : Aff_transformation_d operator()(Vector v) , which returns the outer product, i.e. the quadratic matrix v $ ^t$ v .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type GradientFittingTraits::Construct_outer_product_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "124"
+        },
+        {
+          "kind": "function",
+          "name": "GradientFittingTraits",
+          "qualified_name": "GradientFittingTraits::GradientFittingTraits",
+          "brief": "default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "GradientFittingTraits::GradientFittingTraits",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "134"
+        },
+        {
+          "kind": "function",
+          "name": "construct_point_d_object",
+          "qualified_name": "GradientFittingTraits::construct_point_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_vector_d",
+          "definition": "Construct_vector_d GradientFittingTraits::construct_point_d_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "146"
+        },
+        {
+          "kind": "function",
+          "name": "construct_vector_d_object",
+          "qualified_name": "GradientFittingTraits::construct_vector_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_vector_d",
+          "definition": "Construct_vector_d GradientFittingTraits::construct_vector_d_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "151"
+        },
+        {
+          "kind": "function",
+          "name": "construct_scaled_vector_d_object",
+          "qualified_name": "GradientFittingTraits::construct_scaled_vector_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_scaled_vector_d",
+          "definition": "Construct_scaled_vector_d GradientFittingTraits::construct_scaled_vector_d_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "156"
+        },
+        {
+          "kind": "function",
+          "name": "compute_squared_distance_d_object",
+          "qualified_name": "GradientFittingTraits::compute_squared_distance_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_squared_distance_d",
+          "definition": "Compute_squared_distance_d GradientFittingTraits::compute_squared_distance_d_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "161"
+        },
+        {
+          "kind": "function",
+          "name": "construct_null_matrix_d_object",
+          "qualified_name": "GradientFittingTraits::construct_null_matrix_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_null_matrix_d",
+          "definition": "Construct_null_matrix_d GradientFittingTraits::construct_null_matrix_d_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "166"
+        },
+        {
+          "kind": "function",
+          "name": "construct_scaling_matrix_d_object",
+          "qualified_name": "GradientFittingTraits::construct_scaling_matrix_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_scaling_matrix_d",
+          "definition": "Construct_scaling_matrix_d GradientFittingTraits::construct_scaling_matrix_d_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "171"
+        },
+        {
+          "kind": "function",
+          "name": "construct_sum_matrix_d_object",
+          "qualified_name": "GradientFittingTraits::construct_sum_matrix_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_sum_matrix_d",
+          "definition": "Construct_sum_matrix_d GradientFittingTraits::construct_sum_matrix_d_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "177"
+        },
+        {
+          "kind": "function",
+          "name": "construct_outer_product_d_object",
+          "qualified_name": "GradientFittingTraits::construct_outer_product_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_outer_product_d",
+          "definition": "Construct_outer_product_d GradientFittingTraits::construct_outer_product_d_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/GradientFittingTraits.h",
+          "line": "182"
+        }
+      ],
+      "xml_file": "class_gradient_fitting_traits.xml",
+      "file": "Concepts/GradientFittingTraits.h",
+      "line": "21"
+    },
+    "InterpolationTraits": {
+      "kind": "class",
+      "name": "InterpolationTraits",
+      "brief": "Most interpolation functions are parameterized by a traits class that defines the primitives used in the interpolation algorithms. The concept InterpolationTraits defines this common set of requirements.",
+      "detailed": "Has models CGAL::Interpolation_traits_2 <K> CGAL::Interpolation_gradient_fitting_traits_2 <K> GradientFittingTraits CGAL::sibson_c1_interpolation() Sibson Gradient Fitting Functions CGAL::farin_c1_interpolation() CGAL::quadratic_interpolation()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "InterpolationTraits::FT",
+          "brief": "The number type must follow the model FieldNumberType .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type InterpolationTraits::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "32"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_d",
+          "qualified_name": "InterpolationTraits::Point_d",
+          "brief": "The (weightless) point type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type InterpolationTraits::Point_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "37"
+        },
+        {
+          "kind": "typedef",
+          "name": "Weighted_point_d",
+          "qualified_name": "InterpolationTraits::Weighted_point_d",
+          "brief": "The weighted point type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type InterpolationTraits::Weighted_point_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "42"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_d",
+          "qualified_name": "InterpolationTraits::Vector_d",
+          "brief": "The corresponding vector type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type InterpolationTraits::Vector_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "47"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_point_d",
+          "qualified_name": "InterpolationTraits::Construct_point_d",
+          "brief": "A constructor object for Point_d .",
+          "detailed": "Provides : Point_d operator() ( Point_d p) which returns the point itself. Point_d operator() ( Weighted_point_d wp) which extracts the bare point from the weighted point.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type InterpolationTraits::Construct_point_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "56"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vector_d",
+          "qualified_name": "InterpolationTraits::Construct_vector_d",
+          "brief": "A constructor object for Vector_d .",
+          "detailed": "Provides : Vector_d operator() ( Point_d p, Point_d q) which produces the vector q - p and Vector_d operator() (Null_vector NULL_VECTOR) which introduces the null vector.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type InterpolationTraits::Construct_vector_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "67"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_scaled_vector_d",
+          "qualified_name": "InterpolationTraits::Construct_scaled_vector_d",
+          "brief": "Constructor object for Vector_d .",
+          "detailed": "Provides : Vector_d operator() ( Vector_d v, FT scale) which produces the vector v scaled by a factor scale .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type InterpolationTraits::Construct_scaled_vector_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "75"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_distance_d",
+          "qualified_name": "InterpolationTraits::Compute_squared_distance_d",
+          "brief": "Constructor object for FT .",
+          "detailed": "Provides the operator: FT operator() ( Point_d p, Point_d q) returning the squared distance between p and q .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type InterpolationTraits::Compute_squared_distance_d",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "83"
+        },
+        {
+          "kind": "function",
+          "name": "InterpolationTraits",
+          "qualified_name": "InterpolationTraits::InterpolationTraits",
+          "brief": "default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "InterpolationTraits::InterpolationTraits",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "88"
+        },
+        {
+          "kind": "function",
+          "name": "construct_point_d_object",
+          "qualified_name": "InterpolationTraits::construct_point_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_vector_d",
+          "definition": "Construct_vector_d InterpolationTraits::construct_point_d_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Construction objects",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "100"
+        },
+        {
+          "kind": "function",
+          "name": "construct_vector_d_object",
+          "qualified_name": "InterpolationTraits::construct_vector_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_vector_d",
+          "definition": "Construct_vector_d InterpolationTraits::construct_vector_d_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Construction objects",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "105"
+        },
+        {
+          "kind": "function",
+          "name": "construct_scaled_vector_d_object",
+          "qualified_name": "InterpolationTraits::construct_scaled_vector_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_scaled_vector_d",
+          "definition": "Construct_scaled_vector_d InterpolationTraits::construct_scaled_vector_d_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Construction objects",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "110"
+        },
+        {
+          "kind": "function",
+          "name": "compute_squared_distance_d_object",
+          "qualified_name": "InterpolationTraits::compute_squared_distance_d_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_squared_distance_d",
+          "definition": "Compute_squared_distance_d InterpolationTraits::compute_squared_distance_d_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Construction objects",
+          "file": "Concepts/InterpolationTraits.h",
+          "line": "115"
+        }
+      ],
+      "xml_file": "class_interpolation_traits.xml",
+      "file": "Concepts/InterpolationTraits.h",
+      "line": "22"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/interpolation_functions.h",
+      "line": "2"
+    },
+    "CGAL::cpp98": {
+      "kind": "namespace",
+      "name": "CGAL::cpp98",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1cpp98.xml",
+      "file": "[generated]",
+      "line": "1"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgInterpolationNaturalNeighborCoordinates2": {
+      "kind": "group",
+      "name": "PkgInterpolationNaturalNeighborCoordinates2",
+      "brief": "The functions natural_neighbor_coordinates_2() compute natural neighbor coordinates, also called Sibson's coordinates, for 2D points provided a two-dimensional triangulation and a query point in the convex hull of the vertices of the triangulation.",
+      "detailed": "Implementation This function computes the area of the sub-cells stolen from the Voronoi cells of the points in dt when inserting p . The total area of the Voronoi cell of p is also computed and returned by the function, as second value of a triple. If p lies outside the convex hull, the coordinate values cannot be computed, and the third value of the resulting triple is set to false (the other values of the triple are then meaningless). Output Format The return type is identical for all overloads of CGAL::natural_neighbor_coordinates_2() : it is CGAL::Triple<CoordinateOutputIterator, Dt::Geom_traits::FT, bool > Natural neighbor coordinates are output in the first value of the triple, using an output iterator (see the concept OutputIterator ). Internally, these coordinates are associated to some of the vertices of the triangulation, and a natural value type for the output iterator would thus be std::pair<Dt::Vertex_handle, Dt::Geom_traits::FT> . However, to allow flexibility in the format of the output, a functor passed as argument can be used to format the output as desired: this functor must have argument type std::pair<Dt::Vertex_handle, Dt::Geom_traits::FT> and its result type and the value type of the output iterator must be identical. For example, we can use a functor of type CGAL::Identity<std::pair<Dt::Vertex_handle, Dt::Geom_traits::FT> > and an output iterator with value type std::pair<Dt::Vertex_handle, Dt::Geom_traits::FT> or we could extract the bare point and use a value type: std::pair<Dt::Point, Dt::Geom_traits::FT> , or simply the coordinates, etc. This functor can be omitted and will default, for backward compatibility reasons, to a functor that extracts the point from the vertex, and the output iterator must then have value type std::pair<Dt::Point, Dt::Geom_traits::FT> . CGAL::regular_neighbor_coordinates_2() 3D Surface Neighbor Coordinates Functions Interpolation Functions",
+      "members": [
+        {
+          "kind": "function",
+          "name": "natural_neighbor_coordinates_2",
+          "qualified_name": "CGAL::natural_neighbor_coordinates_2",
+          "brief": "Computes the natural neighbor coordinates for p with respect to the points in the two-dimensional Delaunay triangulation dt .",
+          "detailed": "Dt must be of type Delaunay_triangulation_2<Traits, Tds> . Traits must be a model of the concepts DelaunayTriangulationTraits_2 and PolygonTraits_2 . CoordinateOutputIterator must be a model of OutputIterator and have the value type OutputFunctor::result_type . The output computed by the function is placed starting at out . OutputFunctor must be a functor with argument type std::pair<Dt::Vertex_handle, Dt::Geom_traits::FT> . See above for a detailed explanation on the usage of OutputFunctor . dt is the Delaunay triangulation. p is the query point. out is an object of type CoordinateOutputIterator . fct is an object of type OutputFunctor . start is an optional argument that is used as a hint of where the locate process has to start its search. A triple consisting of: a sequence of objects of types OutputFunctor::result_type , starting at out . the normalization factor of the coordinates. a Boolean value which is set to true if the coordinate computation was successful, and false otherwise.",
+          "return_type": "CGAL::Triple< CoordinateOutputIterator, typename Dt::Geom_traits::FT, bool >",
+          "definition": "CGAL::Triple< CoordinateOutputIterator, typename Dt::Geom_traits::FT, bool > CGAL::natural_neighbor_coordinates_2",
+          "argsstring": "(const Dt &dt, const typename Dt::Geom_traits::Point_2 &p, CoordinateOutputIterator out, OutputFunctor fct, typename Dt::Face_handle start=typename Dt::Face_handle())",
+          "params": [
+            {
+              "type": "const Dt &",
+              "name": "dt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Dt::Geom_traits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CoordinateOutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputFunctor",
+              "name": "fct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Dt::Face_handle",
+              "name": "start",
+              "default": "typename Dt::Face_handle()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/natural_neighbor_coordinates_2.h",
+          "line": "78"
+        },
+        {
+          "kind": "function",
+          "name": "natural_neighbor_coordinates_2",
+          "qualified_name": "CGAL::natural_neighbor_coordinates_2",
+          "brief": "Computes the natural neighbor coordinates for p with respect to the points in the two-dimensional Delaunay triangulation dt .",
+          "detailed": "The iterator range [hole_begin, hole_end) determines the boundary edges of the conflict zone of p in the triangulation. It can, for example, be computed using the function: dt.get_boundary_of_conflicts(p, std::back_inserter(hole), start) . Requirements Same as above.",
+          "return_type": "CGAL::Triple< CoordinateOutputIterator, typename Dt::Geom_traits::FT, bool >",
+          "definition": "CGAL::Triple< CoordinateOutputIterator, typename Dt::Geom_traits::FT, bool > CGAL::natural_neighbor_coordinates_2",
+          "argsstring": "(const Dt &dt, const typename Dt::Geom_traits::Point_2 &p, CoordinateOutputIterator out, OutputFunctor fct, EdgeIterator hole_begin, EdgeIterator hole_end)",
+          "params": [
+            {
+              "type": "const Dt &",
+              "name": "dt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Dt::Geom_traits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CoordinateOutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputFunctor",
+              "name": "fct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "EdgeIterator",
+              "name": "hole_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "EdgeIterator",
+              "name": "hole_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/natural_neighbor_coordinates_2.h",
+          "line": "98"
+        },
+        {
+          "kind": "function",
+          "name": "natural_neighbor_coordinates_2",
+          "qualified_name": "CGAL::natural_neighbor_coordinates_2",
+          "brief": "Computes the natural neighbor coordinates of the point vh->point() with respect to the vertices of dt excluding vh->point() .",
+          "detailed": "Requirements Same as above.",
+          "return_type": "CGAL::Triple< CoordinateOutputIterator, typename Dt::Geom_traits::FT, bool >",
+          "definition": "CGAL::Triple< CoordinateOutputIterator, typename Dt::Geom_traits::FT, bool > CGAL::natural_neighbor_coordinates_2",
+          "argsstring": "(const Dt &dt, typename Dt::Vertex_handle vh, CoordinateOutputIterator out, OutputFunctor fct)",
+          "params": [
+            {
+              "type": "const Dt &",
+              "name": "dt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Dt::Vertex_handle",
+              "name": "vh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CoordinateOutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputFunctor",
+              "name": "fct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/natural_neighbor_coordinates_2.h",
+          "line": "113"
+        }
+      ],
+      "xml_file": "group___pkg_interpolation_natural_neighbor_coordinates2.xml"
+    },
+    "PkgInterpolationRegularNeighborCoordinates2": {
+      "kind": "group",
+      "name": "PkgInterpolationRegularNeighborCoordinates2",
+      "brief": "The functions regular_neighbor_coordinates_2() compute natural neighbor coordinates, also called Sibson's coordinates, for weighted 2D points provided a two-dimensional regular triangulation and a (weighted) query point inside the convex hull of the vertices of the triangulation.",
+      "detailed": "We call these coordinates regular neighbor coordinates . Implementation This function computes the areas stolen from the power cells of points in the regular triangulation rt by the insertion of the query point p . The total area of the power cell of p is also computed and returned by the function. If p lies outside the convex hull, the coordinate values cannot be computed and the third value of the result triple is set to false . Output Format The return type is identical for all overloads of CGAL::regular_neighbor_coordinates_2() : it is CGAL::Triple<CoordinateOutputIterator, Rt::Geom_traits::FT, bool > Regular neighbor coordinates are output in the first value of the triple, using an output iterator (see the concept OutputIterator ). Internally, these coordinates are associated to some of the vertices of the triangulation, and a natural value type for the output iterator would thus be std::pair<Rt::Vertex_handle, Rt::Geom_traits::FT> . However, to allow flexibility in the format of the output, a functor passed as argument can be used to format the output as desired: this functor must have argument type std::pair<Rt::Vertex_handle, Rt::Geom_traits::FT> and its result type and the value type of the output iterator must be identical. For example, we can use a functor of type CGAL::Identity<std::pair<Rt::Vertex_handle, Rt::Geom_traits::FT> > and an output iterator with value type std::pair<Rt::Vertex_handle, Rt::Geom_traits::FT> or we could extract the bare point and use a value type: std::pair<Rt::Weighted_point, Rt::Geom_traits::FT> , or simply the coordinates, etc. This functor can be omitted and will default, for backward compatibility reasons, to a functor that extracts the point from the vertex, and the output iterator must then have value type std::pair<Rt::Weighted_point, Rt::Geom_traits::FT> . CGAL::natural_neighbor_coordinates_2() 3D Surface Neighbor Coordinates Functions Interpolation Functions",
+      "members": [
+        {
+          "kind": "function",
+          "name": "regular_neighbor_coordinates_2",
+          "qualified_name": "CGAL::regular_neighbor_coordinates_2",
+          "brief": "Computes the regular neighbor coordinates for p with respect to the weighted points in the two-dimensional regular triangulation rt .",
+          "detailed": "Rt must be a Regular_triangulation_2<Traits, Tds> . Traits must be a model of the concepts RegularTriangulationTraits_2 and PolygonTraits_2 . CoordinateOutputIterator must be a model of OutputIterator and have the value type OutputFunctor::result_type . The output computed by the function is placed starting at out . OutputFunctor must be a functor with argument type std::pair<Rt::Vertex_handle, Rt::Geom_traits::FT> . See above for a detailed explanation on the usage of OutputFunctor . rt is the regular triangulation. p is the query point. out is an object of type CoordinateOutputIterator . fct is an object of type OutputFunctor . start is an optional argument that is used as a hint of where the locate process has to start its search. A triple consisting of: a sequence of objects of types OutputFunctor::result_type , starting at out . the normalization factor of the coordinates. a Boolean value which is set to true if the coordinate computation was successful, and false otherwise. If the weight of p is so small that the point p would not have any power cell if it were inserted in the power diagram, then the resulting triple will be (out, 0, true) with no additional entry in out (compared to its state in input).",
+          "return_type": "CGAL::Triple< CoordinateOutputIterator, typename Rt::Geom_traits::FT, bool >",
+          "definition": "CGAL::Triple< CoordinateOutputIterator, typename Rt::Geom_traits::FT, bool > CGAL::regular_neighbor_coordinates_2",
+          "argsstring": "(const Rt &rt, const typename Rt::Weighted_point &p, CoordinateOutputIterator out, OutputFunctor fct, typename Rt::Face_handle start=typename Rt::Face_handle())",
+          "params": [
+            {
+              "type": "const Rt &",
+              "name": "rt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Rt::Weighted_point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CoordinateOutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputFunctor",
+              "name": "fct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Rt::Face_handle",
+              "name": "start",
+              "default": "typename Rt::Face_handle()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/regular_neighbor_coordinates_2.h",
+          "line": "85"
+        },
+        {
+          "kind": "function",
+          "name": "regular_neighbor_coordinates_2",
+          "qualified_name": "CGAL::regular_neighbor_coordinates_2",
+          "brief": "Computes the regular neighbor coordinates for p with respect to the weighted points in the two-dimensional regular triangulation rt .",
+          "detailed": "The iterator range [hole_begin, hole_end) determines the boundary edges of the conflict zone of p in the triangulation rt . rt.hidden_vertices_begin() and rt.hidden_vertices_end() determines the iterator range over the hidden vertices of the conflict zone of p in rt . Those ranges can, for example, be computed using the function rt.get_boundary_of_conflicts_and_hidden_vertices(p,std::back_inserter(hole), std::back_inserter(hidden_vertices), start) . Requirements Same as above.",
+          "return_type": "CGAL::Triple< CoordinateOutputIterator, typename Traits::FT, bool >",
+          "definition": "CGAL::Triple< CoordinateOutputIterator, typename Traits::FT, bool > CGAL::regular_neighbor_coordinates_2",
+          "argsstring": "(const Rt &rt, const typename Traits::Weighted_point &p, CoordinateOutputIterator out, OutputFunctor fct, EdgeIterator hole_begin, EdgeIterator hole_end, VertexIterator hidden_vertices_begin, VertexIterator hidden_vertices_end)",
+          "params": [
+            {
+              "type": "const Rt &",
+              "name": "rt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Traits::Weighted_point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CoordinateOutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputFunctor",
+              "name": "fct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "EdgeIterator",
+              "name": "hole_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "EdgeIterator",
+              "name": "hole_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "VertexIterator",
+              "name": "hidden_vertices_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "VertexIterator",
+              "name": "hidden_vertices_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/regular_neighbor_coordinates_2.h",
+          "line": "110"
+        },
+        {
+          "kind": "function",
+          "name": "regular_neighbor_coordinates_2",
+          "qualified_name": "CGAL::regular_neighbor_coordinates_2",
+          "brief": "Computes the regular neighbor coordinates of the point vh->point() with respect to the vertices of rt excluding vh->point() .",
+          "detailed": "Requirements Same as above.",
+          "return_type": "CGAL::Triple< CoordinateOutputIterator, typename Rt::Geom_traits::FT, bool >",
+          "definition": "CGAL::Triple< CoordinateOutputIterator, typename Rt::Geom_traits::FT, bool > CGAL::regular_neighbor_coordinates_2",
+          "argsstring": "(const Rt &rt, typename Rt::Vertex_handle vh, CoordinateOutputIterator out, OutputFunctor fct)",
+          "params": [
+            {
+              "type": "const Rt &",
+              "name": "rt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Rt::Vertex_handle",
+              "name": "vh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CoordinateOutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputFunctor",
+              "name": "fct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/regular_neighbor_coordinates_2.h",
+          "line": "126"
+        }
+      ],
+      "xml_file": "group___pkg_interpolation_regular_neighbor_coordinates2.xml"
+    },
+    "PkgInterpolationSibsonGradientFitting": {
+      "kind": "group",
+      "name": "PkgInterpolationSibsonGradientFitting",
+      "brief": "The first function implements Sibson's gradient estimation method based on natural neighbor coordinates [9] .",
+      "detailed": "Further functions are provided to fit the gradient for all data points that lie inside the convex hull of the data points. One function exists for each type of neighbor coordinates (natural and regular). Output Format The output format of the functions CGAL::sibson_gradient_fitting_nn_2() and CGAL::sibson_gradient_fitting_rn_2() can be customized using the functor parameter of type OutputFunctor : this functor must have argument type std::pair<Tr::Vertex_handle, Traits::Vector_d> (where Tr and Traits are the types of the triangulation and traits passed in arguments) but its result type is set as desired by the user. See also natural neighbor coordinates functions , which use the same mechanism to allow flexible output. CGAL::Interpolation_gradient_fitting_traits_2 <K> CGAL::natural_neighbor_coordinates_2() CGAL::regular_neighbor_coordinates_2() 3D Surface Neighbor Coordinates Functions Interpolation Functions",
+      "members": [
+        {
+          "kind": "function",
+          "name": "sibson_gradient_fitting",
+          "qualified_name": "CGAL::sibson_gradient_fitting",
+          "brief": "Estimates the gradient of a function at a query point.",
+          "detailed": "CoordinateInputIterator must be a model of ForwardIterator and must have as value type a pair associating an entity to a (non-normalized) barycentric coordinate. More precisely, std::iterator_traits<CoordinateInputIterator>::value_type::first_type can be of the following types: a type equivalent to Traits::Point_d or Traits::Weighted_point_d an iterator type providing a point() function returning a type equivalent to Traits::Point_d or Traits::Weighted_point_d ; and std::iterator_traits<CoordinateInputIterator>::value_type::second_type must be equivalent to Traits::FT . ValueFunctor must be a functor where ValueFunctor::argument_type must be equivalent to std::iterator_traits<CoordinateInputIterator>::value_type::first_type and ValueFunctor::result_type is a pair of the function value type and a Boolean. The function value type must provide a multiplication and addition operation with the type Traits::FT as well as a constructor with argument 0 . Traits must be a model of the concept GradientFittingTraits . Point must be equivalent to Traits::Point_d or Traits::Weighted_point_d . An example of compatible types for CoordinateInputIterator and ValueFunctor is a forward iterator with value type std::pair<Vertex_handle, Traits::FT> and a functor with argument type Vertex_handle . first beyond is the iterator range of the neighbor coordinates for the query point p . norm is the normalization factor. p is the query point value_function is a functor that allows to access values of the interpolated function. fn is the value of the function at p . traits is an instance of the gradient fitting traits class. the gradient at the point p .",
+          "return_type": "Traits::Vector_d",
+          "definition": "Traits::Vector_d CGAL::sibson_gradient_fitting",
+          "argsstring": "(CoordinateInputIterator first, CoordinateInputIterator beyond, const typename std::iterator_traits< CoordinateInputIterator >::value_type::second_type &norm, const Point &p, ValueFunctor value_function, const typename ValueFunctor::result_type::first_type fn, const Traits &traits)",
+          "params": [
+            {
+              "type": "CoordinateInputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CoordinateInputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename std::iterator_traits< CoordinateInputIterator >::value_type::second_type &",
+              "name": "norm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ValueFunctor",
+              "name": "value_function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ValueFunctor::result_type::first_type",
+              "name": "fn",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/sibson_gradient_fitting.h",
+          "line": "70"
+        },
+        {
+          "kind": "function",
+          "name": "sibson_gradient_fitting_nn_2",
+          "qualified_name": "CGAL::sibson_gradient_fitting_nn_2",
+          "brief": "Estimates the function gradients at all vertices of the Delaunay triangulation dt that lie inside the convex hull, using the coordinates computed by the function CGAL::natural_neighbor_coordinates_2() .",
+          "detailed": "Dt must be of type Delaunay_triangulation_2<Dt_Traits, Tds> . Dt_Traits must be a model of the concepts DelaunayTriangulationTraits_2 and PolygonTraits_2 . GradientOutputIterator must be a model of OutputIterator with value type OutputFunctor::result_type . OutputFunctor must be a functor with argument type std::pair<Dt::Vertex_handle, Traits::Vector_d> . Note that the result type of the functor is not specified and is chosen by users to fit their needs. ValueFunctor must be a functor where: ValueFunctor::argument_type must be either Dt::Vertex_handle or Dt::Point . ValueFunctor::result_type is a pair of the function value type and a Boolean. The function value type must provide a multiplication and addition operation with the type Traits::FT as well as a constructor with argument 0 . Traits must be a model of GradientFittingTraits . dt is the Delaunay triangulation. out is an object of type GradientOutputIterator . fct is an object of type OutputFunctor . value_function is a functor of type ValueFunctor that gives access to the values of the function at points of the triangulation. traits is an instance of the gradient fitting traits class. An output iterator with value type OutputFunctor::result_type . The sequence is written starting at out . The function returns an iterator that is placed past-the-end of the resulting sequence.",
+          "return_type": "GradientOutputIterator",
+          "definition": "GradientOutputIterator CGAL::sibson_gradient_fitting_nn_2",
+          "argsstring": "(const Dt &dt, GradientOutputIterator out, OutputFunctor fct, ValueFunctor value_function, const Traits &traits)",
+          "params": [
+            {
+              "type": "const Dt &",
+              "name": "dt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "GradientOutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputFunctor",
+              "name": "fct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ValueFunctor",
+              "name": "value_function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/sibson_gradient_fitting.h",
+          "line": "108"
+        },
+        {
+          "kind": "function",
+          "name": "sibson_gradient_fitting_rn_2",
+          "qualified_name": "CGAL::sibson_gradient_fitting_rn_2",
+          "brief": "Estimates the function gradients at all vertices of rt that lie inside the convex hull using the coordinates computed by the functions CGAL::regular_neighbor_coordinates_2() .",
+          "detailed": "Rt must be of type Regular_triangulation_2<Rt_Traits, Tds> . Rt_Traits must be a model of the concepts RegularTriangulationTraits_2 and PolygonTraits_2 . GradientOutputIterator must be a model of OutputIterator with value type OutputFunctor::result_type . OutputFunctor must be a functor with argument type std::pair<Rt::Vertex_handle, Traits::Vector_d> . Note that the result type of the functor is not specified and is chosen by users to fit their needs. ValueFunctor must be a functor where: ValueFunctor::argument_type must be either Rt::Vertex_handle or Rt::Weighted_point . ValueFunctor::result_type is a pair of the function value type and a Boolean. The function value type must provide a multiplication and addition operation with the type Traits::FT as well as a constructor with argument 0 . Traits must be a model of GradientFittingTraits . rt is the regular triangulation. out is an object of type GradientOutputIterator . fct is an object of type OutputFunctor . value_function is a functor of type ValueFunctor that gives access to the values of the function at points of the triangulation. traits is an instance of the gradient fitting traits class. An output iterator with value type OutputFunctor::result_type . The sequence is written starting at out . The function returns an iterator that is placed past-the-end of the resulting sequence.",
+          "return_type": "GradientOutputIterator",
+          "definition": "GradientOutputIterator CGAL::sibson_gradient_fitting_rn_2",
+          "argsstring": "(const Rt &rt, GradientOutputIterator out, OutputFunctor fct, ValueFunctor value_function, const Traits &traits)",
+          "params": [
+            {
+              "type": "const Rt &",
+              "name": "rt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "GradientOutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputFunctor",
+              "name": "fct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ValueFunctor",
+              "name": "value_function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/sibson_gradient_fitting.h",
+          "line": "145"
+        }
+      ],
+      "xml_file": "group___pkg_interpolation_sibson_gradient_fitting.xml"
+    },
+    "PkgInterpolationSurfaceNeighborCoordinates3": {
+      "kind": "group",
+      "name": "PkgInterpolationSurfaceNeighborCoordinates3",
+      "brief": "The functions surface_neighbor_coordinates_3() compute natural neighbor coordinates for surface points associated to a finite set of sample points issued from the surface.",
+      "detailed": "The coordinates are computed from the intersection of the Voronoi cell of the query point p with the tangent plane to the surface at p . If the sampling is sufficiently dense, the coordinate system meets the properties described in the manual pages and in [2] , [5] . The query point p needs to lie inside the convex hull of the projection of the sample points onto the tangent plane at p . The functions surface_neighbor_coordinates_certified_3() return, in addition, a second Boolean value (the fourth value of the quadruple) that certifies whether or not, the Voronoi cell of p can be affected by points that lie outside the input range, i.e. outside the ball centered on p passing through the furthest sample point from p in the range [first, beyond) . If the sample points are collected by a k -nearest neighbor or a range search query, this permits to check whether the neighborhood which has been considered is large enough. Requirements Dt is equivalent to the class Delaunay_triangulation_3 . The value type of OutputIterator is equivalent to std::pair<Dt::Point_3, Dt::Geom_traits::FT> , i.e. a pair associating a point and its natural neighbor coordinate. ITraits is equivalent to the class Voronoi_intersection_2_traits_3 <K> . CGAL::linear_interpolation() CGAL::sibson_c1_interpolation() CGAL::farin_c1_interpolation() CGAL::Voronoi_intersection_2_traits_3 <K> 3D Surface Neighbors Functions Implementation This functions construct the regular triangulation of the input points instantiated with Voronoi_intersection_2_traits_3 <Kernel> or ITraits if provided. They return the result of the function call CGAL::regular_neighbor_coordinates_2() with the regular triangulation and p as arguments.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "surface_neighbor_coordinates_3",
+          "qualified_name": "CGAL::surface_neighbor_coordinates_3",
+          "brief": "The sample points $ \\mathcal{P}$ are provided in the range [first, beyond) .",
+          "detailed": "The value type of InputIterator is the point type Kernel::Point_3 . The tangent plane is defined by the point p and the vector normal . The parameter K determines the kernel type that will instantiate the template parameter of Voronoi_intersection_2_traits_3 <K> . The natural neighbor coordinates for p are computed in the power diagram that results from the intersection of the 3D Voronoi diagram of $ \\mathcal{P}$ with the tangent plane. The sequence of point/coordinate pairs that is computed by the function is placed starting at out . The function returns a triple with an iterator that is placed past-the-end of the resulting sequence of point/coordinate pairs, the normalization factor of the coordinates and a Boolean value which is set to true iff the coordinate computation was successful, i.e. if p lies inside the convex hull of the projection of the points $ \\mathcal{P}$ onto the tangent plane.",
+          "return_type": "CGAL::Triple< OutputIterator, typename Kernel::FT, bool >",
+          "definition": "CGAL::Triple< OutputIterator, typename Kernel::FT, bool > CGAL::surface_neighbor_coordinates_3",
+          "argsstring": "(InputIterator first, InputIterator beyond, const typename Kernel::Point_3 &p, const typename Kernel::Vector_3 &normal, OutputIterator out, const Kernel &K)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::Vector_3 &",
+              "name": "normal",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Kernel &",
+              "name": "K",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbor_coordinates_3.h",
+          "line": "77"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbor_coordinates_3",
+          "qualified_name": "CGAL::surface_neighbor_coordinates_3",
+          "brief": "Same as above only that the traits class must be instantiated by the user.",
+          "detailed": "ITraits must be equivalent to Voronoi_intersection_2_traits_3 <K> .",
+          "return_type": "CGAL::Triple< OutputIterator, typename ITraits::FT, bool >",
+          "definition": "CGAL::Triple< OutputIterator, typename ITraits::FT, bool > CGAL::surface_neighbor_coordinates_3",
+          "argsstring": "(InputIterator first, InputIterator beyond, const typename ITraits::Point_2 &p, OutputIterator out, const ITraits &traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ITraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ITraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbor_coordinates_3.h",
+          "line": "89"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbor_coordinates_certified_3",
+          "qualified_name": "CGAL::surface_neighbor_coordinates_certified_3",
+          "brief": "Similar to the first function.",
+          "detailed": "The additional fourth return value is true if the furthest point in the range [first, beyond) is further away from p than twice the distance from p to the furthest vertex of the intersection of the Voronoi cell of p with the tangent plane defined by (p,normal) . It is false otherwise.",
+          "return_type": "CGAL::Quadruple< OutputIterator, typename Kernel::FT, bool, bool >",
+          "definition": "CGAL::Quadruple< OutputIterator, typename Kernel::FT, bool, bool > CGAL::surface_neighbor_coordinates_certified_3",
+          "argsstring": "(InputIterator first, InputIterator beyond, const typename Kernel::Point_3 &p, const typename Kernel::Vector_3 &normal, OutputIterator out, const Kernel &K)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::Vector_3 &",
+              "name": "normal",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Kernel &",
+              "name": "K",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbor_coordinates_3.h",
+          "line": "105"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbor_coordinates_certified_3",
+          "qualified_name": "CGAL::surface_neighbor_coordinates_certified_3",
+          "brief": "Same as above except that this function takes the maximal distance from p to the points in the range [first, beyond) as additional parameter.",
+          "detailed": "",
+          "return_type": "CGAL::Quadruple< OutputIterator, typename Kernel::FT, bool, bool >",
+          "definition": "CGAL::Quadruple< OutputIterator, typename Kernel::FT, bool, bool > CGAL::surface_neighbor_coordinates_certified_3",
+          "argsstring": "(InputIterator first, InputIterator beyond, const typename Kernel::Point_3 &p, const typename Kernel::FT &max_distance, OutputIterator out, const Kernel &kernel)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::FT &",
+              "name": "max_distance",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Kernel &",
+              "name": "kernel",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbor_coordinates_3.h",
+          "line": "118"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbor_coordinates_certified_3",
+          "qualified_name": "CGAL::surface_neighbor_coordinates_certified_3",
+          "brief": "Same as above only that the traits class must be instantiated by the user and without the parameter max_distance .",
+          "detailed": "ITraits must be equivalent to Voronoi_intersection_2_traits_3 <K> .",
+          "return_type": "CGAL::Quadruple< OutputIterator, typename ITraits::FT, bool, bool >",
+          "definition": "CGAL::Quadruple< OutputIterator, typename ITraits::FT, bool, bool > CGAL::surface_neighbor_coordinates_certified_3",
+          "argsstring": "(InputIterator first, InputIterator beyond, const typename ITraits::Point_2 &p, OutputIterator out, const ITraits &traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ITraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ITraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbor_coordinates_3.h",
+          "line": "131"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbor_coordinates_certified_3",
+          "qualified_name": "CGAL::surface_neighbor_coordinates_certified_3",
+          "brief": "Same as above with the parameter max_distance .",
+          "detailed": "",
+          "return_type": "CGAL::Quadruple< OutputIterator, typename ITraits::FT, bool, bool >",
+          "definition": "CGAL::Quadruple< OutputIterator, typename ITraits::FT, bool, bool > CGAL::surface_neighbor_coordinates_certified_3",
+          "argsstring": "(InputIterator first, InputIterator beyond, const typename ITraits::Point_2 &p, const typename ITraits::FT &max_distance, OutputIterator out, const ITraits &traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ITraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ITraits::FT &",
+              "name": "max_distance",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ITraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbor_coordinates_3.h",
+          "line": "141"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbor_coordinates_3",
+          "qualified_name": "CGAL::surface_neighbor_coordinates_3",
+          "brief": "Computes the surface neighbor coordinates with respect to the points that are vertices of the Delaunay triangulation dt .",
+          "detailed": "The type Dt must be equivalent to Delaunay_triangulation_3<Gt, Tds> . The optional parameter start is used as a starting place for the search of the conflict zone. It may be the result of the call dt.locate(p) . This function instantiates the template parameter ITraits to be Voronoi_intersection_2_traits_3 <Dt::Geom_traits> . This function allows to filter some potential neighbors of the query point p from $ \\mathcal{P}$ via its three-dimensional Delaunay triangulation. All surface neighbors of p are necessarily neighbors in the Delaunay triangulation of $ \\mathcal{P} \\cup \\{p\\}$ .",
+          "return_type": "CGAL::Triple< OutputIterator, typename Dt::Geom_traits::FT, bool >",
+          "definition": "CGAL::Triple< OutputIterator, typename Dt::Geom_traits::FT, bool > CGAL::surface_neighbor_coordinates_3",
+          "argsstring": "(const Dt &dt, const typename Dt::Geom_traits::Point_3 &p, const typename Dt::Geom_traits::Vector_3 &normal, OutputIterator out, typename Dt::Cell_handle start=typename Dt::Cell_handle())",
+          "params": [
+            {
+              "type": "const Dt &",
+              "name": "dt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Dt::Geom_traits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Dt::Geom_traits::Vector_3 &",
+              "name": "normal",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Dt::Cell_handle",
+              "name": "start",
+              "default": "typename Dt::Cell_handle()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbor_coordinates_3.h",
+          "line": "164"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbor_coordinates_3",
+          "qualified_name": "CGAL::surface_neighbor_coordinates_3",
+          "brief": "Same as above only that the parameter traits instantiates the geometric traits class.",
+          "detailed": "Its type ITraits must be equivalent to Voronoi_intersection_2_traits_3 <K> .",
+          "return_type": "CGAL::Triple< OutputIterator, typename Dt::Geom_traits::FT, bool >",
+          "definition": "CGAL::Triple< OutputIterator, typename Dt::Geom_traits::FT, bool > CGAL::surface_neighbor_coordinates_3",
+          "argsstring": "(const Dt &dt, const typename Dt::Geom_traits::Point_3 &p, OutputIterator out, const ITraits &traits, typename Dt::Cell_handle start=typename Dt::Cell_handle())",
+          "params": [
+            {
+              "type": "const Dt &",
+              "name": "dt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Dt::Geom_traits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ITraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Dt::Cell_handle",
+              "name": "start",
+              "default": "typename Dt::Cell_handle()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbor_coordinates_3.h",
+          "line": "177"
+        }
+      ],
+      "xml_file": "group___pkg_interpolation_surface_neighbor_coordinates3.xml"
+    },
+    "PkgInterpolationSurfaceNeighbors3": {
+      "kind": "group",
+      "name": "PkgInterpolationSurfaceNeighbors3",
+      "brief": "Given a set of sample points issued from a surface and a query point p , the functions surface_neighbors_3() compute the neighbors of p on the surface within the sample points.",
+      "detailed": "If the sampling is sufficiently dense, the neighbors are provably close to the point p on the surface (cf. the manual pages and [2] , [5] ). They are defined to be the neighbors of p in the regular triangulation dual to the power diagram which is equivalent to the intersection of the Voronoi cell of the query point p with the tangent plane to the surface at p . The functions surface_neighbors_certified_3() also return, in addition, a Boolean value that certifies whether or not, the Voronoi cell of p can be affected by points that lie outside the input range, i.e. outside the ball centered on p passing through the furthest sample point from p in the range [first, beyond) . If the sample points are collected by a k-nearest neighbor or a range search query, this permits to verify that a large enough neighborhood has been considered. Requirements Dt is equivalent to the class Delaunay_triangulation_3 . OutputIterator::value_type is equivalent to Dt::Point_3 , i.e. a point type. ITraits is equivalent to the class Voronoi_intersection_2_traits_3 <K> . CGAL::Voronoi_intersection_2_traits_3 <K> 3D Surface Neighbor Coordinates Functions Implementation These functions compute the regular triangulation of the sample points and the point p using a traits class equivalent to Voronoi_intersection_2_traits_3 <K> . They determine the neighbors of p in this triangulation. The functions which certify the result need to compute, in addition, the Voronoi vertices of the cell of p in this diagram.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "surface_neighbors_3",
+          "qualified_name": "CGAL::surface_neighbors_3",
+          "brief": "The sample points $ \\mathcal{P}$ are provided in the range [first, beyond) .",
+          "detailed": "InputIterator::value_type is the point type Kernel::Point_3 . The tangent plane is defined by the point p and the vector normal . The parameter K determines the kernel type that will instantiate the template parameter of Voronoi_intersection_2_traits_3 <K> . The surface neighbors of p are computed which are the neighbors of p in the regular triangulation that is dual to the intersection of the 3D Voronoi diagram of $ \\mathcal{P}$ with the tangent plane. The point sequence that is computed by the function is placed starting at out . The function returns an iterator that is placed past-the-end of the resulting point sequence.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::surface_neighbors_3",
+          "argsstring": "(InputIterator first, InputIterator beyond, const typename Kernel::Point_3 &p, const typename Kernel::Vector_3 &normal, OutputIterator out, const Kernel &K)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::Vector_3 &",
+              "name": "normal",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Kernel &",
+              "name": "K",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbors_3.h",
+          "line": "69"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbors_3",
+          "qualified_name": "CGAL::surface_neighbors_3",
+          "brief": "Same as above only that the traits class must be instantiated with the user.",
+          "detailed": "ITraits must be equivalent to Voronoi_intersection_2_traits_3 <K> .",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::surface_neighbors_3",
+          "argsstring": "(InputIterator first, InputIterator beyond, const typename ITraits::Point_2 &p, OutputIterator out, const ITraits &traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ITraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ITraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbors_3.h",
+          "line": "81"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbors_certified_3",
+          "qualified_name": "CGAL::surface_neighbors_certified_3",
+          "brief": "Similar to the first function.",
+          "detailed": "The additional third return value is true if the furthest point in the range [first, beyond) is further away from p than twice the distance from p to the furthest vertex of the intersection of the Voronoi cell of p with the tangent plane defined be (p,normal) . It is false otherwise.",
+          "return_type": "std::pair< OutputIterator, bool >",
+          "definition": "std::pair< OutputIterator, bool > CGAL::surface_neighbors_certified_3",
+          "argsstring": "(InputIterator first, InputIterator beyond, const typename Kernel::Point_3 &p, const typename Kernel::Vector_3 &normal, OutputIterator out, const Kernel &K)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::Vector_3 &",
+              "name": "normal",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Kernel &",
+              "name": "K",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbors_3.h",
+          "line": "97"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbors_certified_3",
+          "qualified_name": "CGAL::surface_neighbors_certified_3",
+          "brief": "Same as above except that this function takes the maximal distance from p to the points in the range [first, beyond) as additional parameter.",
+          "detailed": "",
+          "return_type": "std::pair< OutputIterator, bool >",
+          "definition": "std::pair< OutputIterator, bool > CGAL::surface_neighbors_certified_3",
+          "argsstring": "(InputIterator first, InputIterator beyond, const typename Kernel::Point_3 &p, const typename Kernel::Vector_3 &normal, const typename Kernel::FT &max_distance, OutputIterator out, const Kernel &kernel)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::Vector_3 &",
+              "name": "normal",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::FT &",
+              "name": "max_distance",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Kernel &",
+              "name": "kernel",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbors_3.h",
+          "line": "110"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbors_certified_3",
+          "qualified_name": "CGAL::surface_neighbors_certified_3",
+          "brief": "Same as above only that the traits class must be instantiated with the user.",
+          "detailed": "ITraits must be equivalent to Voronoi_intersection_2_traits_3 <K> . There is no parameter max_distance .",
+          "return_type": "std::pair< OutputIterator, bool >",
+          "definition": "std::pair< OutputIterator, bool > CGAL::surface_neighbors_certified_3",
+          "argsstring": "(InputIterator first, InputIterator beyond, const typename ITraits::Point_2 &p, OutputIterator out, const ITraits &traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ITraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ITraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbors_3.h",
+          "line": "124"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbors_certified_3",
+          "qualified_name": "CGAL::surface_neighbors_certified_3",
+          "brief": "Same as above with the parameter max_distance .",
+          "detailed": "",
+          "return_type": "std::pair< OutputIterator, bool >",
+          "definition": "std::pair< OutputIterator, bool > CGAL::surface_neighbors_certified_3",
+          "argsstring": "(InputIterator first, InputIterator beyond, const typename ITraits::Point_2 &p, const typename ITraits::FT &max_distance, OutputIterator out, const ITraits &traits)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ITraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ITraits::FT &",
+              "name": "max_distance",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ITraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbors_3.h",
+          "line": "134"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbors_3",
+          "qualified_name": "CGAL::surface_neighbors_3",
+          "brief": "Computes the surface neighbor coordinates with respect to the points that are vertices of the Delaunay triangulation dt .",
+          "detailed": "The type Dt must be equivalent to Delaunay_triangulation_3<Gt, Tds> . The optional parameter start is used for the used as a starting place for the search of the conflict zone. It may be the result of the call dt.locate(p) . This function instantiates the template parameter ITraits to be Voronoi_intersection_2_traits_3 <Dt::Geom_traits> . This function allows to filter some potential neighbors of the query point p from $ \\mathcal{P}$ via its three-dimensional Delaunay triangulation. All surface neighbors of p are necessarily neighbors in the Delaunay triangulation of $ \\mathcal{P} \\cup \\{p\\}$ .",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::surface_neighbors_3",
+          "argsstring": "(const Dt &dt, const typename Dt::Geom_traits::Point_3 &p, const typename Dt::Geom_traits::Vector_3 &normal, OutputIterator out, typename Dt::Cell_handle start=typename Dt::Cell_handle())",
+          "params": [
+            {
+              "type": "const Dt &",
+              "name": "dt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Dt::Geom_traits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Dt::Geom_traits::Vector_3 &",
+              "name": "normal",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Dt::Cell_handle",
+              "name": "start",
+              "default": "typename Dt::Cell_handle()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbors_3.h",
+          "line": "157"
+        },
+        {
+          "kind": "function",
+          "name": "surface_neighbors_3",
+          "qualified_name": "CGAL::surface_neighbors_3",
+          "brief": "Same as above only that the parameter traits instantiates the geometric traits class.",
+          "detailed": "Its type ITraits must be equivalent to Voronoi_intersection_2_traits_3 <K> .",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::surface_neighbors_3",
+          "argsstring": "(const Dt &dt, const typename ITraits::Point_2 &p, OutputIterator out, const ITraits &traits, typename Dt::Cell_handle start=typename Dt::Cell_handle())",
+          "params": [
+            {
+              "type": "const Dt &",
+              "name": "dt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ITraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ITraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Dt::Cell_handle",
+              "name": "start",
+              "default": "typename Dt::Cell_handle()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/surface_neighbors_3.h",
+          "line": "169"
+        }
+      ],
+      "xml_file": "group___pkg_interpolation_surface_neighbors3.xml"
+    },
+    "PkgInterpolation2Ref": {
+      "kind": "group",
+      "name": "PkgInterpolation2Ref",
+      "brief": "",
+      "detailed": "Julia Flötotto This package implements different methods for scattered data interpolation: Given measures of a function on a set of discrete data points, the task is to interpolate this function on an arbitrary query point. The package further offers functions for natural neighbor interpolation. Introduced in: CGAL 3.1 BibTeX: cgal:f-i-26a License: GPL Scattered data interpolation solves the following problem: given measures of a function on a set of discrete data points, the task is to interpolate this function on an arbitrary query point. If the function is a linear function and given barycentric coordinates that allow to express the query point as the convex combination of some data points, the function can be exactly interpolated. If the function gradients are known, we can exactly interpolate quadratic functions given barycentric coordinates. Any further properties of these interpolation functions depend on the properties of the barycentric coordinates. They are provided in this package under the names linear_interpolation() and quadratic_interpolation() . Natural Neighbor Interpolation Natural neighbor coordinates are defined by Sibson in 1980 and are based on the Voronoi diagram of the data points. Interpolation methods based on natural neighbor coordinates are particularly interesting because they adapt easily to non-uniform and highly anisotropic data. This package contains Sibson's $ C^1$ continuous interpolation method which interpolates exactly spherical quadrics (of the form $ \\Phi(\\mathbf{x})= a + \\mathbf{b}^t \\mathbf{x} +\\gamma\\ \\mathbf{x}^t\\mathbf{x}$ ) and Farin's $ C^1$ continuous interpolation method based on Bernstein-B zier techniques and interpolating exactly quadratic functions - assuming that the function gradient is known. In addition, Sibson defines a method to approximate the function gradients for data points that are in the interior of the convex hull. This method is exact for spherical quadrics. This CGAL package provides functions to compute the natural neighbor coordinates with respect to a two-dimensional Voronoi diagram (i. e., from the Delaunay triangulation of the data points) and to a two-dimensional power diagram for weighted points (i. e., from their regular triangulation). Natural neighbor coordinates on closed and well-sampled surfaces can also be computed if the normal to the surface at the query point is known. The latter coordinates are only approximately barycentric, see [2] . Furthermore, it implements Sibson's and Farin's interpolation functions as well as Sibson's function gradient fitting method. For a more thorough introduction, see the User Manual . Classified Reference Pages Concepts InterpolationTraits GradientFittingTraits Interpolation Functions CGAL::linear_interpolation() CGAL::sibson_c1_interpolation() CGAL::farin_c1_interpolation() CGAL::quadratic_interpolation() CGAL::sibson_gradient_fitting() CGAL::Interpolation_traits_2 <K> CGAL::Interpolation_gradient_fitting_traits_2 <K> Natural Neighbor Coordinate Computation CGAL::natural_neighbor_coordinates_2() CGAL::regular_neighbor_coordinates_2() Surface Neighbor and Surface Neighbor Coordinate Computation CGAL::Voronoi_intersection_2_traits_3 <K> CGAL::surface_neighbor_coordinates_3() CGAL::surface_neighbors_3()",
+      "members": [],
+      "xml_file": "group___pkg_interpolation2_ref.xml"
+    },
+    "PkgInterpolation2Concepts": {
+      "kind": "group",
+      "name": "PkgInterpolation2Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_interpolation2_concepts.xml"
+    },
+    "PkgInterpolation2Interpolation": {
+      "kind": "group",
+      "name": "PkgInterpolation2Interpolation",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "linear_interpolation",
+          "qualified_name": "CGAL::linear_interpolation",
+          "brief": "The function linear_interpolation() computes the weighted sum of the function values which must be provided via a functor.",
+          "detailed": "CoordinateInputIterator must be a model of ForwardIterator and must have as value type a pair associating an entity, e.g. the Vertex_handle or Point types of a triangulation, to a (non-normalized) barycentric coordinate. ValueFunctor must be a functor where ValueFunctor::argument_type must be equivalent to std::iterator_traits<CoordinateInputIterator>::value_type::first_type and ValueFunctor::result_type is a pair of the function value type and a Boolean. The function value type VT must provide an addition operator, and a multiplication operator with the type Traits::FT . A model of the functor ValueFunctor is provided by the struct CGAL::Data_access instantiated with an associative container (e.g. std::map ) and having: std::iterator_traits<CoordinateInputIterator>::value_type::first_type (the entity type) as key_type std::iterator_traits<CoordinateInputIterator>::value_type::second_type (the coordinate type) as mapped_type . The two template parameters must satisfy the following conditions: std::iterator_traits<CoordinateInputIterator>::value_type::first_type (the entity type) is equivalent to a ValueFunctor::argument_type . std::iterator_traits<CoordinateInputIterator>::value_type::second_type (the coordinate type) is a field number type that is equivalent to ValueFunctor::result_type::first_type . For example, if CoordinateInputIterator is an iterator with value type std::pair<Vertex_handle, double> , then the ValueFunctor must have argument type Vertex_handle (or convertible to) and return type std::pair<double, bool> . first beyond is the iterator range for the coordinates. norm is the normalization factor. value_function is a functor of type ValueFunctor that allows to access a pair of a function value and a Boolean at a given entity. The Boolean indicates whether the function value could be retrieved correctly. This function generates the interpolated function value as the weighted sum of the values corresponding to each entry of the entity/coordinate pairs in the range [first, beyond) . norm $ \\neq0$ . first != beyond . value_function(p.first).second == true for all pairs p in the range [first, beyond) . CGAL::quadratic_interpolation() CGAL::natural_neighbor_coordinates_2() CGAL::regular_neighbor_coordinates_2() 3D Surface Neighbor Coordinates Functions",
+          "return_type": "ValueFunctor::result_type::first_type",
+          "definition": "ValueFunctor::result_type::first_type CGAL::linear_interpolation",
+          "argsstring": "(CoordinateInputIterator first, CoordinateInputIterator beyond, const typename std::iterator_traits< CoordinateInputIterator >::value_type::second_type &norm, ValueFunctor value_function)",
+          "params": [
+            {
+              "type": "CoordinateInputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CoordinateInputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename std::iterator_traits< CoordinateInputIterator >::value_type::second_type &",
+              "name": "norm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ValueFunctor",
+              "name": "value_function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/interpolation_functions.h",
+          "line": "112"
+        },
+        {
+          "kind": "function",
+          "name": "quadratic_interpolation",
+          "qualified_name": "CGAL::quadratic_interpolation",
+          "brief": "The function quadratic_interpolation() generates the interpolated function value as the weighted sum of the values plus a linear term in the gradient for each entity of the entity/coordinate pairs in the range [first, beyond) .",
+          "detailed": "If the interpolation was successful, the pair contains the interpolated function value as first and true as second value. Otherwise, the second value will be false . Traits must be a model of InterpolationTraits . Note that, contrary to some other interpolation methods, the number type FT provided by Traits does not need to provide the square root operation. CoordinateInputIterator must be a model of ForwardIterator and must have as value type a pair associating an entity to a (non-normalized) barycentric coordinate. More precisely, std::iterator_traits<CoordinateInputIterator>::value_type::first_type can be of the following types: a type equivalent to Traits::Point_d or Traits::Weighted_point_d an iterator type providing a point() function returning a type equivalent to Traits::Point_d or Traits::Weighted_point_d ; and std::iterator_traits<CoordinateInputIterator>::value_type::second_type must be equivalent to Traits::FT . ValueFunctor must be a functor where ValueFunctor::argument_type must be equivalent to std::iterator_traits<CoordinateInputIterator>::value_type::first_type and ValueFunctor::result_type is a pair of the function value type and a Boolean. The function value type must provide a multiplication and addition operation with the type Traits::FT as well as a constructor with argument 0 . GradFunctor must be a functor where GradFunctor::argument_type must be equivalent to std::iterator_traits<CoordinateInputIterator>::value_type::first_type and Functor::result_type is a pair of the function's gradient type and a Boolean. The function gradient type must provide a multiplication operation with Traits::Vector_d . Point must be equivalent to Traits::Point_d or Traits::Weighted_point_d . A model of the functor types ValueFunctor (resp. GradFunctor ) is provided by the struct CGAL::Data_access . It must be instantiated accordingly with an associative container (e.g. std::map ) having std::iterator_traits<CoordinateInputIterator>::value_type::first_type as key_type and the function value type (resp. the function gradient type) as mapped_type . first beyond is the iterator range of the barycentric coordinates for the query point p . norm is the normalization factor. p is the point at which the interpolated function value is computed. value_function is a functor that allows to access values of the interpolated function. gradient_function is a functor that allows to access the function gradients. If the functor gradient_function cannot supply the gradient of a point, the function returns a pair where the Boolean is set to false . traits is an instance of the traits class. norm $ \\neq0$ . first != beyond . value_function(p.first).second == true for pairs p in the range [first, beyond) CGAL::linear_interpolation() CGAL::Interpolation_traits_2 <K> CGAL::natural_neighbor_coordinates_2() CGAL::regular_neighbor_coordinates_2() 3D Surface Neighbor Coordinates Functions",
+          "return_type": "ValueFunctor::result_type",
+          "definition": "ValueFunctor::result_type CGAL::quadratic_interpolation",
+          "argsstring": "(CoordinateInputIterator first, CoordinateInputIterator beyond, const typename std::iterator_traits< CoordinateInputIterator >::value_type::second_type &norm, const Point &p, ValueFunctor value_function, GradFunctor gradient_function, const Traits &traits)",
+          "params": [
+            {
+              "type": "CoordinateInputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CoordinateInputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename std::iterator_traits< CoordinateInputIterator >::value_type::second_type &",
+              "name": "norm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ValueFunctor",
+              "name": "value_function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "GradFunctor",
+              "name": "gradient_function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/interpolation_functions.h",
+          "line": "178"
+        },
+        {
+          "kind": "function",
+          "name": "sibson_c1_interpolation",
+          "qualified_name": "CGAL::sibson_c1_interpolation",
+          "brief": "The function sibson_c1_interpolation() generates the interpolated function value at the point p , using functors for the function values and the gradients, by applying Sibson's $ Z^1$ interpolant.",
+          "detailed": "If the interpolation was successful, the pair contains the interpolated function value as first and true as second value. Otherwise, false is returned as second value. Traits must be a model of InterpolationTraits . The number type FT provided by Traits must support the square root operation sqrt() . CoordinateInputIterator must be a model of ForwardIterator and must have as value type a pair associating an entity to a (non-normalized) barycentric coordinate. More precisely, std::iterator_traits<CoordinateInputIterator>::value_type::first_type can be of the following types: a type equivalent to Traits::Point_d or Traits::Weighted_point_d an iterator type providing a point() function returning a type equivalent to Traits::Point_d or Traits::Weighted_point_d ; and std::iterator_traits<CoordinateInputIterator>::value_type::second_type must be equivalent to Traits::FT . ValueFunctor must be a functor where ValueFunctor::argument_type must be equivalent to std::iterator_traits<CoordinateInputIterator>::value_type::first_type and ValueFunctor::result_type is a pair of the function value type and a Boolean. The function value type must provide a multiplication and addition operation with the type Traits::FT as well as a constructor with argument 0 . GradFunctor must be a functor where GradFunctor::argument_type must be equivalent to std::iterator_traits<CoordinatetCoordinateInputIteratorIterator>::value_type::first_type and Functor::result_type is a pair of the function's gradient type and a Boolean. The function gradient type must provide a multiplication operation with Traits::Vector_d . Point must be equivalent to Traits::Point_d or Traits::Weighted_point_d . A model of the functor types ValueFunctor (resp. GradFunctor ) is provided by the struct CGAL::Data_access . It must be instantiated accordingly with an associative container (e.g. std::map ) having std::iterator_traits<CoordinateInputIterator>::value_type::first_type as key_type and the function value type (resp. the function gradient type) as mapped_type . first beyond is the iterator range of the barycentric coordinates for the query point p . norm is the normalization factor. p is the point at which the interpolated function value is computed. value_function is a functor that allows to access values of the interpolated function. gradient_function is a functor that allows to access the function gradients. If the functor gradient_function cannot supply the gradient of a point, the function returns a pair where the Boolean is set to false . traits is an instance of the traits class. norm $ \\neq0$ . first != beyond . value_function(q).second == true for all points q of the point/coordinate pairs in the range [first, beyond) CGAL::Interpolation_traits_2 <K> CGAL::sibson_c1_interpolation_square() CGAL::natural_neighbor_coordinates_2() CGAL::regular_neighbor_coordinates_2() 3D Surface Neighbor Coordinates Functions",
+          "return_type": "std::pair< typename ValueFunctor::result_type, bool >",
+          "definition": "std::pair< typename ValueFunctor::result_type, bool > CGAL::sibson_c1_interpolation",
+          "argsstring": "(CoordinateInputIterator first, CoordinateInputIterator beyond, const typename std::iterator_traits< CoordinateInputIterator >::value_type::second_type &norm, const Point &p, ValueFunctor value_function, GradFunctor gradient_function, const Traits &traits)",
+          "params": [
+            {
+              "type": "CoordinateInputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CoordinateInputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename std::iterator_traits< CoordinateInputIterator >::value_type::second_type &",
+              "name": "norm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ValueFunctor",
+              "name": "value_function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "GradFunctor",
+              "name": "gradient_function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/interpolation_functions.h",
+          "line": "245"
+        },
+        {
+          "kind": "function",
+          "name": "sibson_c1_interpolation_square",
+          "qualified_name": "CGAL::sibson_c1_interpolation_square",
+          "brief": "Same as sibson_c1_interpolation() , except that no square root operation is required for the number type Traits::FT .",
+          "detailed": "CGAL::sibson_c1_interpolation()",
+          "return_type": "ValueFunctor::result_type",
+          "definition": "ValueFunctor::result_type CGAL::sibson_c1_interpolation_square",
+          "argsstring": "(CoordinateInputIterator first, CoordinateInputIterator beyond, const typename std::iterator_traits< CoordinateInputIterator >::value_type::second_type &norm, const Point &p, ValueFunctor value_function, GradFunctor gradient_function, const Traits &traits)",
+          "params": [
+            {
+              "type": "CoordinateInputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CoordinateInputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename std::iterator_traits< CoordinateInputIterator >::value_type::second_type &",
+              "name": "norm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ValueFunctor",
+              "name": "value_function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "GradFunctor",
+              "name": "gradient_function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/interpolation_functions.h",
+          "line": "262"
+        },
+        {
+          "kind": "function",
+          "name": "farin_c1_interpolation",
+          "qualified_name": "CGAL::farin_c1_interpolation",
+          "brief": "Generates the interpolated function value computed by Farin's interpolant.",
+          "detailed": "Requirements Same requirements as the function sibson_c1_interpolation() , but the input iterator must provide random access (be a model of RandomAccessIterator ) and Traits::FT does not need to provide the square root operation. The range [first, beyond) contains either one or more than three elements. The function farin_c1_interpolation() interpolates the function values and the gradients that are provided by functors using the method described in [4] . CGAL::sibson_c1_interpolation()",
+          "return_type": "ValueFunctor::result_type",
+          "definition": "ValueFunctor::result_type CGAL::farin_c1_interpolation",
+          "argsstring": "(CoordinateInputIterator first, CoordinateInputIterator beyond, const typename std::iterator_traits< CoordinateInputIterator >::value_type::second_type &norm, const Point &p, ValueFunctor value_function, GradFunctor gradient_function, const Traits &traits)",
+          "params": [
+            {
+              "type": "CoordinateInputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CoordinateInputIterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename std::iterator_traits< CoordinateInputIterator >::value_type::second_type &",
+              "name": "norm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ValueFunctor",
+              "name": "value_function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "GradFunctor",
+              "name": "gradient_function",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Traits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/interpolation_functions.h",
+          "line": "288"
+        }
+      ],
+      "xml_file": "group___pkg_interpolation2_interpolation.xml"
+    },
+    "PkgInterpolation2NatNeighbor": {
+      "kind": "group",
+      "name": "PkgInterpolation2NatNeighbor",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_interpolation2_nat_neighbor.xml"
+    },
+    "PkgInterpolation2SurfaceNeighbor": {
+      "kind": "group",
+      "name": "PkgInterpolation2SurfaceNeighbor",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_interpolation2_surface_neighbor.xml"
+    }
+  }
+}

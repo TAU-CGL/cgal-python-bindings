@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "aos2_geodesic_pol3_epec",
+  "description": "Build variant defined by cmake/tests/aos2_geodesic_pol3_epec.cmake",
+  "cmake_tests": [
+    "cmake/tests/aos2_geodesic_pol3_epec.cmake"
+  ]
+}

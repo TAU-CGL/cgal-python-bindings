@@ -1,0 +1,1830 @@
+{
+  "schema_version": 1,
+  "package": "SearchStructures",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 21,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Range_segment_tree_set_traits_2": {
+      "kind": "class",
+      "name": "CGAL::Range_segment_tree_set_traits_2",
+      "brief": "The class Range_segment_tree_set_traits_2 is a range and segment tree traits class for the 2-dimensional point class from the CGAL kernel.",
+      "detailed": "The class is parameterized with a representation class R . Is model of RangeSegmentTreeTraits_k",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Key",
+          "qualified_name": "CGAL::Range_segment_tree_set_traits_2::Key",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Point_2",
+          "definition": "typedef R::Point_2 CGAL::Range_segment_tree_set_traits_2< R >::Key",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_segment_tree_traits.h",
+          "line": "24"
+        },
+        {
+          "kind": "typedef",
+          "name": "Interval",
+          "qualified_name": "CGAL::Range_segment_tree_set_traits_2::Interval",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::pair< Key , Key >",
+          "definition": "typedef std::pair<Key, Key> CGAL::Range_segment_tree_set_traits_2< R >::Interval",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_segment_tree_traits.h",
+          "line": "29"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_range__segment__tree__set__traits__2.xml",
+      "file": "CGAL/Range_segment_tree_traits.h",
+      "line": "15"
+    },
+    "CGAL::Range_segment_tree_set_traits_3": {
+      "kind": "class",
+      "name": "CGAL::Range_segment_tree_set_traits_3",
+      "brief": "The class Range_segment_tree_set_traits_3 is a range and segment tree traits class for the 3-dimensional point class from the CGAL kernel.",
+      "detailed": "The class is parameterized with a representation class R . Is model of RangeSegmentTreeTraits_k",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Key",
+          "qualified_name": "CGAL::Range_segment_tree_set_traits_3::Key",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Point_3",
+          "definition": "typedef R::Point_3 CGAL::Range_segment_tree_set_traits_3< R >::Key",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_segment_tree_traits.h",
+          "line": "58"
+        },
+        {
+          "kind": "typedef",
+          "name": "Interval",
+          "qualified_name": "CGAL::Range_segment_tree_set_traits_3::Interval",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::pair< Key , Key >",
+          "definition": "typedef std::pair<Key, Key> CGAL::Range_segment_tree_set_traits_3< R >::Interval",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_segment_tree_traits.h",
+          "line": "63"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_range__segment__tree__set__traits__3.xml",
+      "file": "CGAL/Range_segment_tree_traits.h",
+      "line": "49"
+    },
+    "CGAL::Range_tree_d": {
+      "kind": "class",
+      "name": "CGAL::Range_tree_d",
+      "brief": "A $ d$ -dimensional range tree stores points and can be used to determine all points that lie inside a given $ d$ -dimensional interval.",
+      "detailed": "Implementation The construction of a $ d$ -dimensional range tree takes $O(n\\log n^{d-1})$ time. The points in the query window are reported in time $O(k+{\\log}^d n )$ , where $ k$ is the number of reported points. The tree uses $O(n\\log n^{d-1})$ storage.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Data",
+          "qualified_name": "CGAL::Range_tree_d::Data",
+          "brief": "container Data .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Range_tree_d< Data, Window, Traits >::Data",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_tree_d.h",
+          "line": "29"
+        },
+        {
+          "kind": "typedef",
+          "name": "Window",
+          "qualified_name": "CGAL::Range_tree_d::Window",
+          "brief": "container Window .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Range_tree_d< Data, Window, Traits >::Window",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_tree_d.h",
+          "line": "34"
+        },
+        {
+          "kind": "function",
+          "name": "r",
+          "qualified_name": "CGAL::Range_tree_d::r",
+          "brief": "A range tree is constructed, such that the subtree of each vertex is of the same type prototype sublayer_tree is.",
+          "detailed": "We assume that the dimension of the tree is $ d$ . This means, that sublayer_tree is a prototype of a $ d-1$ -dimensional tree. All data items of the $ d$ -dimensional range tree have container type Data . The query window of the tree has container type Window . Traits provides access to the corresponding data slots of container Data and Window for the $ d$ -th dimension. The traits class Traits must at least provide all functions and type definitions as described in, for example, the reference page for tree_point_traits . The template class described there is fully generic and should fulfill the most requirements one can have. In order to generate a one-dimensional range tree instantiate Tree_anchor < Data , Window > sublayer_tree with the same template parameters ( Data and Window ) Range_tree_d is defined. In order to construct a two-dimensional range tree, create Range_tree_d with a one-dimensional Range_tree_d with the corresponding Traits class of the first dimension. Traits::Data== Data and Traits::Window== Window .",
+          "return_type": "Range_tree_d < Data , Window , Traits >",
+          "definition": "Range_tree_d< Data, Window, Traits > CGAL::Range_tree_d< Data, Window, Traits >::r",
+          "argsstring": "(Tree_base< Data, Window > sublayer_tree)",
+          "params": [
+            {
+              "type": "Tree_base< Data , Window >",
+              "name": "sublayer_tree",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Range_tree_d.h",
+          "line": "79"
+        },
+        {
+          "kind": "function",
+          "name": "make_tree",
+          "qualified_name": "CGAL::Range_tree_d::make_tree",
+          "brief": "The tree is constructed according to the data items in the sequence between the element pointed by iterator first and iterator last .",
+          "detailed": "The data items of the iterator must have type Data . This function can only be called once. If it is the first call the tree is built and true is returned. Otherwise, nothing is done but a CGAL warning is given and false returned.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Range_tree_d< Data, Window, Traits >::make_tree",
+          "argsstring": "(ForwardIterator first, ForwardIterator last)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Range_tree_d.h",
+          "line": "94"
+        },
+        {
+          "kind": "function",
+          "name": "window_query",
+          "qualified_name": "CGAL::Range_tree_d::window_query",
+          "brief": "All elements that lay inside the $ d$ -dimensional interval defined through win are placed in the sequence container of OutputIterator ; the output iterator that points to the last location the function wrote to is returned.",
+          "detailed": "",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Range_tree_d< Data, Window, Traits >::window_query",
+          "argsstring": "(Window win, OutputIterator result)",
+          "params": [
+            {
+              "type": "Window",
+              "name": "win",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Range_tree_d.h",
+          "line": "105"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "CGAL::Range_tree_d::is_valid",
+          "brief": "The tree structure is checked.",
+          "detailed": "For each vertex the subtree is checked on being valid and it is checked whether the value of the Key_type of a vertex corresponds to the highest Key_type value of the left subtree.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Range_tree_d< Data, Window, Traits >::is_valid",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Range_tree_d.h",
+          "line": "114"
+        },
+        {
+          "kind": "function",
+          "name": "is_inside",
+          "qualified_name": "CGAL::Range_tree_d::is_inside",
+          "brief": "returns true , if the data of object lies between the start and endpoint of interval win .",
+          "detailed": "Returns false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Range_tree_d< Data, Window, Traits >::is_inside",
+          "argsstring": "(Window win, Data object)",
+          "params": [
+            {
+              "type": "Window",
+              "name": "win",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Data",
+              "name": "object",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Range_tree_d.h",
+          "line": "123"
+        },
+        {
+          "kind": "function",
+          "name": "is_anchor",
+          "qualified_name": "CGAL::Range_tree_d::is_anchor",
+          "brief": "returns false.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Range_tree_d< Data, Window, Traits >::is_anchor",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Range_tree_d.h",
+          "line": "129"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_range__tree__d.xml",
+      "file": "CGAL/Range_tree_d.h",
+      "line": "20"
+    },
+    "CGAL::Range_tree_k": {
+      "kind": "class",
+      "name": "CGAL::Range_tree_k",
+      "brief": "An object of the class Range_tree_k is a $ k$ -dimensional range tree that can store k-dimensional keys of type Key .",
+      "detailed": "The class allows to perform window queries on the keys. The class Range_tree_k is parameterized with a range tree traits class Traits that defines, among other things, the type of the Key . CGAL provides traits class implementations that allow to use the range tree with point classes from the CGAL kernel as keys. These classes are CGAL::Range_segment_tree_traits_set_2<R> , CGAL::Range_segment_tree_traits_set_3<R> , CGAL::Range_tree_traits_map_2<R> and CGAL::Range_tree_traits_map_3<R> . The concept RangeSegmentTreeTraits_d defines the requirements that range tree traits classes must fulfill. This allows the advanced user to develop further range tree traits classes. Example The following example program uses the predefined Range_tree_2 data structure together with the predefined traits class Range_tree_map_traits_2 which has two template arguments specifying the type of the point data in each dimension ( CGAL::Cartesian<double> ) and the value type of the 2-dimensional point data ( char ). Therefore the Range_tree_2 is defined on 2-dimensional point data ( CGAL::Point_2<Cartesian<double> > ) each of which is associated with a character. Then, a few data items are created and put into a list. After that the tree is constructed according to that list, a window query is performed, and the query elements are given out. #include <CGAL/Cartesian.h> #include <CGAL/Range_segment_tree_traits.h> #include <CGAL/Range_tree_k.h> typedef CGAL::Cartesian<double> K; typedef CGAL::Range_tree_map_traits_2<K, char> Traits; typedef CGAL::Range_tree_2<Traits> Range_tree_2_type; int main() { typedef Traits::Key Key ; typedef Traits::Interval Interval ; std::vector<Key> InputList, OutputList; InputList.push_back( Key (K::Point_2(8,5.1), 'a' )); InputList.push_back( Key (K::Point_2(1,1.1), 'b' )); InputList.push_back( Key (K::Point_2(3,2.1), 'c' )); Range_tree_2_type Range_tree_2(InputList.begin(),InputList.end()); Interval win( Interval (K::Point_2(4,8.1), K::Point_2(5,8.2))); std::cout << \"\\n Window Query:\\n \" ; Range_tree_2.window_query(win, std::back_inserter(OutputList)); std::vector<Key>::iterator current=OutputList.begin(); while (current!=OutputList.end()){ std::cout << (*current).first.x() << \",\" << (*current).first.y() << \":\" << (*current++).second << std::endl; } }",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Key",
+          "qualified_name": "CGAL::Range_tree_k::Key",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Key",
+          "definition": "typedef Traits::Key CGAL::Range_tree_k< Traits >::Key",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_tree_k.h",
+          "line": "84"
+        },
+        {
+          "kind": "typedef",
+          "name": "Interval",
+          "qualified_name": "CGAL::Range_tree_k::Interval",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Interval",
+          "definition": "typedef Traits::Interval CGAL::Range_tree_k< Traits >::Interval",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_tree_k.h",
+          "line": "89"
+        },
+        {
+          "kind": "function",
+          "name": "Range_tree_k",
+          "qualified_name": "CGAL::Range_tree_k::Range_tree_k",
+          "brief": "Introduces an empty range tree R .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Range_tree_k< Traits >::Range_tree_k",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Range_tree_k.h",
+          "line": "99"
+        },
+        {
+          "kind": "function",
+          "name": "Range_tree_k",
+          "qualified_name": "CGAL::Range_tree_k::Range_tree_k",
+          "brief": "Introduces a range tree R and initializes it with the data in the range [first, last) .",
+          "detailed": "value_type(first) == Traits::Key .",
+          "return_type": "",
+          "definition": "CGAL::Range_tree_k< Traits >::Range_tree_k",
+          "argsstring": "(ForwardIterator first, ForwardIterator last)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Range_tree_k.h",
+          "line": "107"
+        },
+        {
+          "kind": "function",
+          "name": "make_tree",
+          "qualified_name": "CGAL::Range_tree_k::make_tree",
+          "brief": "Introduces a range tree R and initializes it with the data in the range [first, last) .",
+          "detailed": "This function can only be applied once on an empty range tree. value_type(first) == Traits::Key .",
+          "return_type": "void",
+          "definition": "void CGAL::Range_tree_k< Traits >::make_tree",
+          "argsstring": "(ForwardIterator first, ForwardIterator last)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Range_tree_k.h",
+          "line": "123"
+        },
+        {
+          "kind": "function",
+          "name": "window_query",
+          "qualified_name": "CGAL::Range_tree_k::window_query",
+          "brief": "writes all data that are in the interval window to the container where out points to, and returns an output iterator that points to the last location the function wrote to.",
+          "detailed": "value_type(out) == Traits::Key .",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Range_tree_k< Traits >::window_query",
+          "argsstring": "(Interval window, OutputIterator out)",
+          "params": [
+            {
+              "type": "Interval",
+              "name": "window",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Range_tree_k.h",
+          "line": "134"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_range__tree__k.xml",
+      "file": "CGAL/Range_tree_k.h",
+      "line": "70"
+    },
+    "CGAL::Range_tree_map_traits_2": {
+      "kind": "class",
+      "name": "CGAL::Range_tree_map_traits_2",
+      "brief": "The class Range_tree_map_traits_2 is a range tree traits class for the 2-dimensional point class from the CGAL kernel, where data of type T is associated to each key.",
+      "detailed": "The class is parameterized with a representation class R and the type of the associated data T . Is model of RangeSegmentTreeTraits_k",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Key",
+          "qualified_name": "CGAL::Range_tree_map_traits_2::Key",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::pair< R::Point_2, T >",
+          "definition": "typedef std::pair<R::Point_2,T> CGAL::Range_tree_map_traits_2< R, T >::Key",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_segment_tree_traits.h",
+          "line": "94"
+        },
+        {
+          "kind": "typedef",
+          "name": "Interval",
+          "qualified_name": "CGAL::Range_tree_map_traits_2::Interval",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::pair< R::Point_2, R::Point_2 >",
+          "definition": "typedef std::pair<R::Point_2, R::Point_2 > CGAL::Range_tree_map_traits_2< R, T >::Interval",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_segment_tree_traits.h",
+          "line": "99"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_range__tree__map__traits__2.xml",
+      "file": "CGAL/Range_segment_tree_traits.h",
+      "line": "85"
+    },
+    "CGAL::Range_tree_map_traits_3": {
+      "kind": "class",
+      "name": "CGAL::Range_tree_map_traits_3",
+      "brief": "The class Range_tree_map_traits_3 is a range and segment tree traits class for the 3-dimensional point class from the CGAL kernel, where data of type T is associated to each key.",
+      "detailed": "The class is parameterized with a representation class R and the type of the associated data T . Is model of RangeSegmentTreeTraits_k",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Key",
+          "qualified_name": "CGAL::Range_tree_map_traits_3::Key",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::pair< R::Point_3, T >",
+          "definition": "typedef std::pair<R::Point_3,T> CGAL::Range_tree_map_traits_3< R, T >::Key",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_segment_tree_traits.h",
+          "line": "130"
+        },
+        {
+          "kind": "typedef",
+          "name": "Interval",
+          "qualified_name": "CGAL::Range_tree_map_traits_3::Interval",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::pair< R::Point_3, R::Point_3 >",
+          "definition": "typedef std::pair<R::Point_3, R::Point_3> CGAL::Range_tree_map_traits_3< R, T >::Interval",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_segment_tree_traits.h",
+          "line": "135"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_range__tree__map__traits__3.xml",
+      "file": "CGAL/Range_segment_tree_traits.h",
+      "line": "121"
+    },
+    "CGAL::Segment_tree_d": {
+      "kind": "class",
+      "name": "CGAL::Segment_tree_d",
+      "brief": "A $ d$ -dimensional segment tree stores $ d$ -dimensional intervals and can be used to find all intervals that enclose, partially overlap, or contain a query interval, which may be a point.",
+      "detailed": "Implementation A $ d$ -dimensional segment tree is constructed in $O(n\\log n^d)$ time. An inverse range query is performed in time $O(k+{\\log}^d n )$ , where $ k$ is the number of reported intervals. The tree uses $O(n\\log n^d)$ storage.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Data",
+          "qualified_name": "CGAL::Segment_tree_d::Data",
+          "brief": "container Data .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Segment_tree_d< Data, Window, Traits >::Data",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Segment_tree_d.h",
+          "line": "27"
+        },
+        {
+          "kind": "typedef",
+          "name": "Window",
+          "qualified_name": "CGAL::Segment_tree_d::Window",
+          "brief": "container Window .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Segment_tree_d< Data, Window, Traits >::Window",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Segment_tree_d.h",
+          "line": "32"
+        },
+        {
+          "kind": "function",
+          "name": "s",
+          "qualified_name": "CGAL::Segment_tree_d::s",
+          "brief": "A segment tree is defined, such that the subtree of each vertex is of the same type prototype sublayer_tree is.",
+          "detailed": "We assume that the dimension of the tree is $ d$ . This means, that sublayer_tree is a prototype of a $ d-1$ -dimensional tree. All data items of the $ d$ -dimensional segment tree have container type Data . The query window of the tree has container type Window . Traits provides access to the corresponding data slots of container Data and Window for the $ d$ -th dimension. The traits class Traits must at least provide all functions and type definitions described, for example, in the reference page for tree_point_traits . The template class described there is fully generic and should fulfill the most requirements one can have. In order to generate a one-dimensional segment tree instantiate Tree_anchor < Data , Window > sublayer_tree with the same template parameters Data and Window Segment_tree_d is defined. In order to construct a two-dimensional segment tree, create Segment_tree_d with a one-dimensional Segment_tree_d with the corresponding Traits of the first dimension. Traits::Data== Data and Traits::Window== Window .",
+          "return_type": "Segment_tree_d < Data , Window , Traits >",
+          "definition": "Segment_tree_d< Data, Window, Traits > CGAL::Segment_tree_d< Data, Window, Traits >::s",
+          "argsstring": "(Tree_base< Data, Window > sublayer_tree)",
+          "params": [
+            {
+              "type": "Tree_base< Data , Window >",
+              "name": "sublayer_tree",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Segment_tree_d.h",
+          "line": "75"
+        },
+        {
+          "kind": "function",
+          "name": "make_tree",
+          "qualified_name": "CGAL::Segment_tree_d::make_tree",
+          "brief": "The tree is constructed according to the data items in the sequence between the element pointed by iterator first and iterator last .",
+          "detailed": "This function can only be called once. If it is the first call the tree is built and true is returned. Otherwise, nothing is done but a CGAL warning is given and false returned.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Segment_tree_d< Data, Window, Traits >::make_tree",
+          "argsstring": "(In_it first, In_it last)",
+          "params": [
+            {
+              "type": "In_it",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "In_it",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Segment_tree_d.h",
+          "line": "88"
+        },
+        {
+          "kind": "function",
+          "name": "window_query",
+          "qualified_name": "CGAL::Segment_tree_d::window_query",
+          "brief": "win $ =[a_1,b_1),\\ldots, [a_d,b_d)$ , $ a_i,b_i\\in T_i$ , $ 1\\le i\\le d$ .",
+          "detailed": "All elements that intersect the associated $ d$ -dimensional interval of win are placed in the associated sequence container of OutputIterator and returns an output iterator that points to the last location the function wrote to. In order to perform an inverse range query, a range query of $ \\epsilon$ width has to be performed.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Segment_tree_d< Data, Window, Traits >::window_query",
+          "argsstring": "(Window win, OutputIterator result)",
+          "params": [
+            {
+              "type": "Window",
+              "name": "win",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Segment_tree_d.h",
+          "line": "102"
+        },
+        {
+          "kind": "function",
+          "name": "enclosing_query",
+          "qualified_name": "CGAL::Segment_tree_d::enclosing_query",
+          "brief": "All elements that enclose the associated $ d$ -dimensional interval of win are placed in the associated sequence container of OutputIterator and returns an output iterator that points to the last location the function wrote to.",
+          "detailed": "",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Segment_tree_d< Data, Window, Traits >::enclosing_query",
+          "argsstring": "(Window win, OutputIterator result)",
+          "params": [
+            {
+              "type": "Window",
+              "name": "win",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Segment_tree_d.h",
+          "line": "111"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "CGAL::Segment_tree_d::is_valid",
+          "brief": "The tree structure is checked.",
+          "detailed": "For each vertex either the sublayer tree is a tree anchor, or it stores a (possibly empty) list of data items. In the first case, the sublayer tree of the vertex is checked on being valid. In the second case, each data item is checked whether it contains the associated interval of the vertex and does not contain the associated interval of the parent vertex or not. true is returned if the tree structure is valid, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Segment_tree_d< Data, Window, Traits >::is_valid",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Segment_tree_d.h",
+          "line": "124"
+        },
+        {
+          "kind": "function",
+          "name": "is_inside",
+          "qualified_name": "CGAL::Segment_tree_d::is_inside",
+          "brief": "returns true , if the interval of object is contained in the interval of win , false otherwise.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Segment_tree_d< Data, Window, Traits >::is_inside",
+          "argsstring": "(Window win, Data object)",
+          "params": [
+            {
+              "type": "Window",
+              "name": "win",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Data",
+              "name": "object",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Segment_tree_d.h",
+          "line": "133"
+        },
+        {
+          "kind": "function",
+          "name": "is_anchor",
+          "qualified_name": "CGAL::Segment_tree_d::is_anchor",
+          "brief": "returns false.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Segment_tree_d< Data, Window, Traits >::is_anchor",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Segment_tree_d.h",
+          "line": "138"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_segment__tree__d.xml",
+      "file": "CGAL/Segment_tree_d.h",
+      "line": "18"
+    },
+    "CGAL::Segment_tree_k": {
+      "kind": "class",
+      "name": "CGAL::Segment_tree_k",
+      "brief": "An object of the class Segment_tree_k is a $ k$ -dimensional segment tree that can store k-dimensional intervals of type Interval .",
+      "detailed": "The class allows to perform window queries, enclosing queries, and inverse range queries on the keys. The class Segment_tree_k is parameterized with a segment tree traits class Traits that defines, among other things, the type of the Interval . In order to perform an inverse range query, a range query of $ \\epsilon$ width has to be performed. We preferred not to offer an extra function for this sort of query, since the inverse range query is a special case of the range query. Furthermore, offering an inverse range query in the segment tree class implies offering this function also in the range tree class and having an extra item in the traits class that accesses the inverse range query point. CGAL provides traits class implementations that allow to use the segment tree with point classes from the CGAL kernel as keys. These classes are CGAL::Range_segment_tree_traits_set_2<R> , CGAL::Range_segment_tree_traits_set_3<R> , CGAL::Segment_tree_traits_map_2<R> and CGAL::Segment_tree_traits_map_3<R> . The concept RangeSegmentTreeTraits_d defines the requirements that segment tree traits classes must fulfill. This allows the advanced user to develop further segment tree traits classes. Example This example illustrates the use of the predefined segment tree on 3-dimensional interval data (with no value associated). After the definition of the traits type and tree type, some intervals are constructed and the tree is built according to the intervals. Then, a window query is performed and the query elements are given out. #include <CGAL/Cartesian.h> #include <CGAL/Segment_tree_k.h> #include <CGAL/Range_segment_tree_traits.h> typedef CGAL::Cartesian<int> K; typedef CGAL::Range_segment_tree_set_traits_3<K> Traits; typedef CGAL::Segment_tree_3<Traits> Segment_tree_3_type; int main() { typedef Traits::Interval Interval ; typedef Traits::Key Key ; std::list<Interval> InputList, OutputList; InputList.push_back( Interval ( Key (1,5,7), Key (2,7,9))); InputList.push_back( Interval ( Key (2,7,6), Key (3,8,9))); InputList.push_back( Interval ( Key (6,9,5), Key (9,13,8))); InputList.push_back( Interval ( Key (1,3,4), Key (3,9,8))); Segment_tree_3_type Segment_tree_3(InputList.begin(),InputList.end()); Interval a( Key (3,6,5), Key (7,12,8)); Segment_tree_3.window_query(a,std::back_inserter(OutputList)); std::list<Interval>::iterator j = OutputList1.begin(); std::cout << \"\\n window_query (3,6,5),(7,12,8) \\n\" ; while (j!=OutputList.end()){ std::cout << (*j).first.x() << \",\" << (*j).first.y() << \",\" ; std::cout << (*j).first.z() << \", \" << (*j).second.x() << \",\" ; std::cout << (*j).second.y() << \",\" << (*j).second.z() << std::endl; j++; } }",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Key",
+          "qualified_name": "CGAL::Segment_tree_k::Key",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Key",
+          "definition": "typedef Traits::Key CGAL::Segment_tree_k< Traits >::Key",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Segment_tree_k.h",
+          "line": "90"
+        },
+        {
+          "kind": "typedef",
+          "name": "Interval",
+          "qualified_name": "CGAL::Segment_tree_k::Interval",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Interval",
+          "definition": "typedef Traits::Interval CGAL::Segment_tree_k< Traits >::Interval",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Segment_tree_k.h",
+          "line": "95"
+        },
+        {
+          "kind": "function",
+          "name": "Segment_tree_k",
+          "qualified_name": "CGAL::Segment_tree_k::Segment_tree_k",
+          "brief": "Introduces an empty segment tree S .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Segment_tree_k< Traits >::Segment_tree_k",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Segment_tree_k.h",
+          "line": "105"
+        },
+        {
+          "kind": "function",
+          "name": "Segment_tree_k",
+          "qualified_name": "CGAL::Segment_tree_k::Segment_tree_k",
+          "brief": "Introduces a segment tree S and initializes it with the data in the range [first, last) .",
+          "detailed": "value_type(first) == Traits::Interval .",
+          "return_type": "",
+          "definition": "CGAL::Segment_tree_k< Traits >::Segment_tree_k",
+          "argsstring": "(ForwardIterator first, ForwardIterator last)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Segment_tree_k.h",
+          "line": "113"
+        },
+        {
+          "kind": "function",
+          "name": "make_tree",
+          "qualified_name": "CGAL::Segment_tree_k::make_tree",
+          "brief": "Introduces a segment tree S and initializes it with the data in the range [first, last) .",
+          "detailed": "This function can only be applied once on an empty segment tree. value_type(first) == Traits::Interval .",
+          "return_type": "void",
+          "definition": "void CGAL::Segment_tree_k< Traits >::make_tree",
+          "argsstring": "(ForwardIterator first, ForwardIterator last)",
+          "params": [
+            {
+              "type": "ForwardIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ForwardIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Segment_tree_k.h",
+          "line": "129"
+        },
+        {
+          "kind": "function",
+          "name": "window_query",
+          "qualified_name": "CGAL::Segment_tree_k::window_query",
+          "brief": "writes all intervals that have non empty intersection with interval window to the container where out points to, and returns an output iterator that points to the last location the function wrote to.",
+          "detailed": "value_type(out) == Traits::Interval .",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Segment_tree_k< Traits >::window_query",
+          "argsstring": "(Interval window, OutputIterator out)",
+          "params": [
+            {
+              "type": "Interval",
+              "name": "window",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Segment_tree_k.h",
+          "line": "140"
+        },
+        {
+          "kind": "function",
+          "name": "enclosing_query",
+          "qualified_name": "CGAL::Segment_tree_k::enclosing_query",
+          "brief": "writes all intervals that enclose in the interval window to the container where out points to, and returns an output iterator that points to the last location the function wrote to.",
+          "detailed": "value_type(out) == Traits::Interval .",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Segment_tree_k< Traits >::enclosing_query",
+          "argsstring": "(Interval window, OutputIterator out)",
+          "params": [
+            {
+              "type": "Interval",
+              "name": "window",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Segment_tree_k.h",
+          "line": "151"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_segment__tree__k.xml",
+      "file": "CGAL/Segment_tree_k.h",
+      "line": "76"
+    },
+    "CGAL::Segment_tree_map_traits_2": {
+      "kind": "class",
+      "name": "CGAL::Segment_tree_map_traits_2",
+      "brief": "The class Segment_tree_map_traits_2 is a segment tree traits class for the 2-dimensional point class from the CGAL kernel, where data of type T is associated to each interval.",
+      "detailed": "The class is parameterized with a representation class R and the type of the associated data T . Is model of RangeSegmentTreeTraits_k",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Key",
+          "qualified_name": "CGAL::Segment_tree_map_traits_2::Key",
+          "brief": "",
+          "detailed": "",
+          "return_type": "R::Point_2",
+          "definition": "typedef R::Point_2 CGAL::Segment_tree_map_traits_2< R, T >::Key",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_segment_tree_traits.h",
+          "line": "166"
+        },
+        {
+          "kind": "typedef",
+          "name": "Interval",
+          "qualified_name": "CGAL::Segment_tree_map_traits_2::Interval",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::pair< std::pair< Key , Key >, T >",
+          "definition": "typedef std::pair<std::pair<Key,Key>,T> CGAL::Segment_tree_map_traits_2< R, T >::Interval",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_segment_tree_traits.h",
+          "line": "171"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_segment__tree__map__traits__2.xml",
+      "file": "CGAL/Range_segment_tree_traits.h",
+      "line": "157"
+    },
+    "CGAL::Segment_tree_map_traits_3": {
+      "kind": "class",
+      "name": "CGAL::Segment_tree_map_traits_3",
+      "brief": "The class Segment_tree_map_traits_3 is a segment tree traits class for the 3-dimensional point class from the CGAL kernel, where data of type T is associated to each interval.",
+      "detailed": "The class is parameterized with a representation class R and the type of the associated data T . Is model of RangeSegmentTreeTraits_k",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Key",
+          "qualified_name": "CGAL::Segment_tree_map_traits_3::Key",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::pair< R::Point_3 >",
+          "definition": "typedef std::pair<R::Point_3 > CGAL::Segment_tree_map_traits_3< R, T >::Key",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_segment_tree_traits.h",
+          "line": "202"
+        },
+        {
+          "kind": "typedef",
+          "name": "Interval",
+          "qualified_name": "CGAL::Segment_tree_map_traits_3::Interval",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::pair< std::pair< Key , Key >, T >",
+          "definition": "typedef std::pair<std::pair<Key, Key>,T> CGAL::Segment_tree_map_traits_3< R, T >::Interval",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Range_segment_tree_traits.h",
+          "line": "207"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_segment__tree__map__traits__3.xml",
+      "file": "CGAL/Range_segment_tree_traits.h",
+      "line": "193"
+    },
+    "CGAL::Tree_anchor": {
+      "kind": "class",
+      "name": "CGAL::Tree_anchor",
+      "brief": "Tree_anchor is also derived from Tree_base .",
+      "detailed": "Therefore, it provides the same methods as Range_tree_d and Segment_tree_d , but does nothing; it can be used as a recursion anchor for those classes. Therefore, instantiate Sublayer_type of Range_tree_d ( Segment_tree_d respectively) with Tree_anchor and the container classes for the data items ( Data and Window ). Example The following figures show a number of rectangles and a 2-dimensional segment tree built on them. Two dimensional interval data and the corresponding segment tree. Two dimensional interval data and the corresponding segment tree.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Data",
+          "qualified_name": "CGAL::Tree_anchor::Data",
+          "brief": "container Data .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Tree_anchor< Data, Window >::Data",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_base.h",
+          "line": "32"
+        },
+        {
+          "kind": "typedef",
+          "name": "Window",
+          "qualified_name": "CGAL::Tree_anchor::Window",
+          "brief": "container Window .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Tree_anchor< Data, Window >::Window",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_base.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "a",
+          "qualified_name": "CGAL::Tree_anchor::a",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Tree_anchor < Data , Window >",
+          "definition": "Tree_anchor< Data, Window > CGAL::Tree_anchor< Data, Window >::a",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Tree_base.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "window_query",
+          "qualified_name": "CGAL::Tree_anchor::window_query",
+          "brief": "",
+          "detailed": "",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Tree_anchor< Data, Window >::window_query",
+          "argsstring": "(Window win, OutputIterator result)",
+          "params": [
+            {
+              "type": "Window",
+              "name": "win",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_base.h",
+          "line": "58"
+        },
+        {
+          "kind": "function",
+          "name": "enclosing_query",
+          "qualified_name": "CGAL::Tree_anchor::enclosing_query",
+          "brief": "",
+          "detailed": "",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Tree_anchor< Data, Window >::enclosing_query",
+          "argsstring": "(Window win, OutputIterator result)",
+          "params": [
+            {
+              "type": "Window",
+              "name": "win",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_base.h",
+          "line": "64"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "CGAL::Tree_anchor::is_valid",
+          "brief": "returns true;",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Tree_anchor< Data, Window >::is_valid",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_base.h",
+          "line": "69"
+        },
+        {
+          "kind": "function",
+          "name": "is_inside",
+          "qualified_name": "CGAL::Tree_anchor::is_inside",
+          "brief": "returns true.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Tree_anchor< Data, Window >::is_inside",
+          "argsstring": "(Window win, Data object)",
+          "params": [
+            {
+              "type": "Window",
+              "name": "win",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Data",
+              "name": "object",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_base.h",
+          "line": "76"
+        },
+        {
+          "kind": "function",
+          "name": "is_anchor",
+          "qualified_name": "CGAL::Tree_anchor::is_anchor",
+          "brief": "returns true.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Tree_anchor< Data, Window >::is_anchor",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_base.h",
+          "line": "82"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_tree__anchor.xml",
+      "file": "CGAL/Tree_base.h",
+      "line": "23"
+    },
+    "CGAL::tree_interval_traits": {
+      "kind": "class",
+      "name": "CGAL::tree_interval_traits",
+      "brief": "tree_interval_traits is a template class that provides an interface to data items.",
+      "detailed": "It is similar to tree_point_traits , except that it provides access to two data slots of the same type of each container class ( Data , Window ) instead of providing access to one data slot of container class Data and two data slots of class Window .",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Data",
+          "qualified_name": "CGAL::tree_interval_traits::Data",
+          "brief": "the container Data - the data type.",
+          "detailed": "It may consist of several data slots. Two of these data slots have to be of type Key .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::Data",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "33"
+        },
+        {
+          "kind": "typedef",
+          "name": "Window",
+          "qualified_name": "CGAL::tree_interval_traits::Window",
+          "brief": "the container Window - the query window type.",
+          "detailed": "It may consist of several data slots. Two of these data slots have to be of type Key .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::Window",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "41"
+        },
+        {
+          "kind": "typedef",
+          "name": "Key",
+          "qualified_name": "CGAL::tree_interval_traits::Key",
+          "brief": "the type Key of the data slot this traits class provides access to.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::Key",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "48"
+        },
+        {
+          "kind": "typedef",
+          "name": "Data_left_func",
+          "qualified_name": "CGAL::tree_interval_traits::Data_left_func",
+          "brief": "Data_left_func is a function object providing an operator() that takes an argument of type Data and returns a (the left) component of type Key .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::Data_left_func",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "58"
+        },
+        {
+          "kind": "typedef",
+          "name": "Data_right_func",
+          "qualified_name": "CGAL::tree_interval_traits::Data_right_func",
+          "brief": "Data_right_func is a function object providing an operator() that takes an argument of type Data and returns a (the right) component of type Key .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::Data_right_func",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "68"
+        },
+        {
+          "kind": "typedef",
+          "name": "Window_left_func",
+          "qualified_name": "CGAL::tree_interval_traits::Window_left_func",
+          "brief": "Window_left_func is a function objects that allow to access the left data slot of container Window which has type Key",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::Window_left_func",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "77"
+        },
+        {
+          "kind": "typedef",
+          "name": "Window_right_func",
+          "qualified_name": "CGAL::tree_interval_traits::Window_right_func",
+          "brief": "Window_right_func is a function objects that allow to access the right data slot of container Window which has type Key",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::Window_right_func",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "86"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare",
+          "qualified_name": "CGAL::tree_interval_traits::Compare",
+          "brief": "defines a comparison relation which must define a strict ordering of the objects of type Key .",
+          "detailed": "If defined, less< Key > is sufficient.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::Compare",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "94"
+        },
+        {
+          "kind": "function",
+          "name": "get_left",
+          "qualified_name": "CGAL::tree_interval_traits::get_left",
+          "brief": "The data slot of the data item of d of type Key is accessed by function object Data_left_func .",
+          "detailed": "",
+          "return_type": "Key",
+          "definition": "Key CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::get_left",
+          "argsstring": "(Data d)",
+          "params": [
+            {
+              "type": "Data",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_traits.h",
+          "line": "107"
+        },
+        {
+          "kind": "function",
+          "name": "get_right",
+          "qualified_name": "CGAL::tree_interval_traits::get_right",
+          "brief": "The data slot of the data item of d of type Key is accessed by function object Data_right_func .",
+          "detailed": "",
+          "return_type": "Key",
+          "definition": "Key CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::get_right",
+          "argsstring": "(Data d)",
+          "params": [
+            {
+              "type": "Data",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_traits.h",
+          "line": "115"
+        },
+        {
+          "kind": "function",
+          "name": "get_left_win",
+          "qualified_name": "CGAL::tree_interval_traits::get_left_win",
+          "brief": "The data slot of the data item of w of type Key is accessed by function object Window_left_func .",
+          "detailed": "",
+          "return_type": "Key",
+          "definition": "Key CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::get_left_win",
+          "argsstring": "(Window w)",
+          "params": [
+            {
+              "type": "Window",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_traits.h",
+          "line": "123"
+        },
+        {
+          "kind": "function",
+          "name": "get_right_win",
+          "qualified_name": "CGAL::tree_interval_traits::get_right_win",
+          "brief": "The data slot of the data item of w of type Key is accessed by function object Window_right_func .",
+          "detailed": "",
+          "return_type": "Key",
+          "definition": "Key CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::get_right_win",
+          "argsstring": "(Window w)",
+          "params": [
+            {
+              "type": "Window",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_traits.h",
+          "line": "130"
+        },
+        {
+          "kind": "function",
+          "name": "comp",
+          "qualified_name": "CGAL::tree_interval_traits::comp",
+          "brief": "returns Compare(key1, key2) .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "static bool CGAL::tree_interval_traits< Data, Window, Key, Data_left_func, Data_right_func, Window_left_func, Window_right_func, Compare >::comp",
+          "argsstring": "(Key &key1, Key &key2)",
+          "params": [
+            {
+              "type": "Key &",
+              "name": "key1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Key &",
+              "name": "key2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_traits.h",
+          "line": "135"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1tree__interval__traits.xml",
+      "file": "CGAL/Tree_traits.h",
+      "line": "19"
+    },
+    "CGAL::tree_point_traits": {
+      "kind": "class",
+      "name": "CGAL::tree_point_traits",
+      "brief": "tree_point_traits is a template class that provides an interface to data items.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Data",
+          "qualified_name": "CGAL::tree_point_traits::Data",
+          "brief": "the container Data - defines the Data type.",
+          "detailed": "It may consist of several data slots. One of these data slots has to be of type Key .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_point_traits< Data, Window, Key, Data_func, Window_left_func, Window_right_func, Compare >::Data",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "166"
+        },
+        {
+          "kind": "typedef",
+          "name": "Window",
+          "qualified_name": "CGAL::tree_point_traits::Window",
+          "brief": "the container Window - defines the type of the query rectangle.",
+          "detailed": "It may consist of several data slots. Two of these data slots has to be of type Key",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_point_traits< Data, Window, Key, Data_func, Window_left_func, Window_right_func, Compare >::Window",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "175"
+        },
+        {
+          "kind": "typedef",
+          "name": "Key",
+          "qualified_name": "CGAL::tree_point_traits::Key",
+          "brief": "the type Key of the data slot this traits class provides access to.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_point_traits< Data, Window, Key, Data_func, Window_left_func, Window_right_func, Compare >::Key",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "182"
+        },
+        {
+          "kind": "typedef",
+          "name": "Data_func",
+          "qualified_name": "CGAL::tree_point_traits::Data_func",
+          "brief": "Data_func is a function object providing an operator() that takes an argument of type Data and returns a component of type Key .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_point_traits< Data, Window, Key, Data_func, Window_left_func, Window_right_func, Compare >::Data_func",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "191"
+        },
+        {
+          "kind": "typedef",
+          "name": "Window_left_func",
+          "qualified_name": "CGAL::tree_point_traits::Window_left_func",
+          "brief": "Window_left_func is a function objects that allow to access the left data slot of container Window which has type Key",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_point_traits< Data, Window, Key, Data_func, Window_left_func, Window_right_func, Compare >::Window_left_func",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "200"
+        },
+        {
+          "kind": "typedef",
+          "name": "Window_right_func",
+          "qualified_name": "CGAL::tree_point_traits::Window_right_func",
+          "brief": "Window_right_func is a function objects that allow to access the right data slot of container Window which has type Key",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_point_traits< Data, Window, Key, Data_func, Window_left_func, Window_right_func, Compare >::Window_right_func",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "209"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare",
+          "qualified_name": "CGAL::tree_point_traits::Compare",
+          "brief": "defines a comparison relation which must define a strict ordering of the objects of type Key .",
+          "detailed": "If defined, less< Key > is sufficient.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::tree_point_traits< Data, Window, Key, Data_func, Window_left_func, Window_right_func, Compare >::Compare",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Tree_traits.h",
+          "line": "217"
+        },
+        {
+          "kind": "function",
+          "name": "get_key",
+          "qualified_name": "CGAL::tree_point_traits::get_key",
+          "brief": "The data slot of the data item of d of type Key is accessed by function object Data_func .",
+          "detailed": "",
+          "return_type": "Key",
+          "definition": "Key CGAL::tree_point_traits< Data, Window, Key, Data_func, Window_left_func, Window_right_func, Compare >::get_key",
+          "argsstring": "(Data d)",
+          "params": [
+            {
+              "type": "Data",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_traits.h",
+          "line": "229"
+        },
+        {
+          "kind": "function",
+          "name": "get_left",
+          "qualified_name": "CGAL::tree_point_traits::get_left",
+          "brief": "The data slot of the data item of w of type Key is accessed by function object Window_left_func .",
+          "detailed": "",
+          "return_type": "Key",
+          "definition": "Key CGAL::tree_point_traits< Data, Window, Key, Data_func, Window_left_func, Window_right_func, Compare >::get_left",
+          "argsstring": "(Window w)",
+          "params": [
+            {
+              "type": "Window",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_traits.h",
+          "line": "237"
+        },
+        {
+          "kind": "function",
+          "name": "get_right",
+          "qualified_name": "CGAL::tree_point_traits::get_right",
+          "brief": "The data slot of the data item of w of type Key is accessed by function object Window_right_func .",
+          "detailed": "",
+          "return_type": "Key",
+          "definition": "Key CGAL::tree_point_traits< Data, Window, Key, Data_func, Window_left_func, Window_right_func, Compare >::get_right",
+          "argsstring": "(Window w)",
+          "params": [
+            {
+              "type": "Window",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_traits.h",
+          "line": "244"
+        },
+        {
+          "kind": "function",
+          "name": "comp",
+          "qualified_name": "CGAL::tree_point_traits::comp",
+          "brief": "returns Compare(key1, key2) .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "static bool CGAL::tree_point_traits< Data, Window, Key, Data_func, Window_left_func, Window_right_func, Compare >::comp",
+          "argsstring": "(Key &key1, Key &key2)",
+          "params": [
+            {
+              "type": "Key &",
+              "name": "key1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Key &",
+              "name": "key2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_traits.h",
+          "line": "249"
+        },
+        {
+          "kind": "function",
+          "name": "key_comp",
+          "qualified_name": "CGAL::tree_point_traits::key_comp",
+          "brief": "returns Compare (get_key(data1), get_key(data2)) .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "static bool CGAL::tree_point_traits< Data, Window, Key, Data_func, Window_left_func, Window_right_func, Compare >::key_comp",
+          "argsstring": "(Data &data1, Data &data2)",
+          "params": [
+            {
+              "type": "Data &",
+              "name": "data1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Data &",
+              "name": "data2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Tree_traits.h",
+          "line": "255"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1tree__point__traits.xml",
+      "file": "CGAL/Tree_traits.h",
+      "line": "154"
+    },
+    "RangeSegmentTreeTraits_k": {
+      "kind": "class",
+      "name": "RangeSegmentTreeTraits_k",
+      "brief": "A tree traits class gives the range tree and segment tree class the necessary type information of the keys and intervals. Further more, they define function objects that allow to access the keys and intervals, and provide comparison functions that are needed for window queries.",
+      "detailed": "Has models CGAL::Range_segment_tree_set_traits_2 CGAL::Range_segment_tree_set_traits_3 CGAL::Range_tree_map_traits_2 CGAL::Range_tree_map_traits_3 CGAL::Segment_tree_map_traits_2 CGAL::Segment_tree_map_traits_3 Example The following piece of code gives an example of how a traits class might look like, if you have keys that are of the type int in the first and that are of the type double in the second dimension. class Int_double_tree_traits_2{ public : typedef std::pair<int, double> Key; typedef int Key_1; typedef double Key_2; typedef std::pair<Key,Key> Interval; class C_Key_1{ public : Key_1 operator()( const Key& k) { return k.first;} }; class C_Key_2{ public : Key_2 operator()( const Key& k) { return k.second;} }; class C_Low_1{ public : Key_1 operator()( const Interval& i) { return i.first.first;} }; class C_High_1{ public : Key_1 operator()( const Interval& i) { return i.second.first;} }; class C_Low_2{ public : Key_2 operator()( const Interval& i) { return i.first.second;} }; class C_High_2{ public : Key_2 operator()( const Interval& i) { return i.second.second;} }; class C_Compare_1{ public : bool operator()(Key_1 k1, Key_1 k2) { return less<int>()(k1,k2);} }; class C_Compare_2{ public : bool operator()(Key_2 k1, Key_2 k2) { return less<double>()(k1,k2);} }; typedef C_Compare_1 compare_1; typedef C_Compare_2 compare_2; typedef C_Low_1 low_1; typedef C_High_1 high_1; typedef C_Key_1 key_1; typedef C_Low_2 low_2; typedef C_High_2 high_2; typedef C_Key_2 key_2; };",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Key",
+          "qualified_name": "RangeSegmentTreeTraits_k::Key",
+          "brief": "The k-dimensional key type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RangeSegmentTreeTraits_k::Key",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RangeSegmentTreeTraits_k.h",
+          "line": "98"
+        },
+        {
+          "kind": "typedef",
+          "name": "Interval",
+          "qualified_name": "RangeSegmentTreeTraits_k::Interval",
+          "brief": "The k-dimensional interval type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RangeSegmentTreeTraits_k::Interval",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RangeSegmentTreeTraits_k.h",
+          "line": "103"
+        },
+        {
+          "kind": "typedef",
+          "name": "Key_i",
+          "qualified_name": "RangeSegmentTreeTraits_k::Key_i",
+          "brief": "The type in dimension $ i$ , with $ 1\\leq i \\leq k$ .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RangeSegmentTreeTraits_k::Key_i",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RangeSegmentTreeTraits_k.h",
+          "line": "109"
+        },
+        {
+          "kind": "typedef",
+          "name": "key_i",
+          "qualified_name": "RangeSegmentTreeTraits_k::key_i",
+          "brief": "function object providing an operator() that takes an argument of type Key and returns a component of type Key_i .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RangeSegmentTreeTraits_k::key_i",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RangeSegmentTreeTraits_k.h",
+          "line": "116"
+        },
+        {
+          "kind": "typedef",
+          "name": "low_i",
+          "qualified_name": "RangeSegmentTreeTraits_k::low_i",
+          "brief": "function object providing an operator() that takes an argument of type Interval and returns a component of type Key_i .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RangeSegmentTreeTraits_k::low_i",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RangeSegmentTreeTraits_k.h",
+          "line": "123"
+        },
+        {
+          "kind": "typedef",
+          "name": "high_i",
+          "qualified_name": "RangeSegmentTreeTraits_k::high_i",
+          "brief": "function object providing an operator() that takes an argument of type Interval and returns a component of type Key_i .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RangeSegmentTreeTraits_k::high_i",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RangeSegmentTreeTraits_k.h",
+          "line": "130"
+        },
+        {
+          "kind": "typedef",
+          "name": "compare_i",
+          "qualified_name": "RangeSegmentTreeTraits_k::compare_i",
+          "brief": "function object providing an operator() that takes two arguments argument $ a$ , $ b$ of type Key_i and returns true if $ a<b$ , false otherwise.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RangeSegmentTreeTraits_k::compare_i",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RangeSegmentTreeTraits_k.h",
+          "line": "137"
+        }
+      ],
+      "xml_file": "class_range_segment_tree_traits__k.xml",
+      "file": "Concepts/RangeSegmentTreeTraits_k.h",
+      "line": "89"
+    },
+    "Sublayer": {
+      "kind": "class",
+      "name": "Sublayer",
+      "brief": "Defines the requirements that a Sublayer_type of class CGAL::Range_tree_d or CGAL::Segment_tree_d has to fulfill.",
+      "detailed": "First of all, the class has to be derived from the abstract base class CGAL::Tree_base and therefore has to provide methods make_tree , window_query , enclosing_query and is_inside with the same parameter types as the instantiated class Range_tree_d or Segment_tree_d , respectively. Furthermore a method bool is_anchor() has to be provided. If the Sublayer_type class builds a recursion anchor for class Segment_tree_d , this function is expected to return true , false otherwise. Such a recursion anchor class is provided by the class class. CGAL::Tree_anchor <Data, Window> .",
+      "members": [],
+      "xml_file": "class_sublayer.xml",
+      "file": "Concepts/Sublayer.h",
+      "line": "29"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/Range_segment_tree_traits.h",
+      "line": "2"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgSearchStructuresRef": {
+      "kind": "group",
+      "name": "PkgSearchStructuresRef",
+      "brief": "",
+      "detailed": "Gabriele Neyer Range and segment trees allow to perform window queries on point sets, and to enumerate all ranges enclosing a query point. The provided data structures are static and they are optimized for fast queries. Introduced in: CGAL 0.9 BibTeX: cgal:n-rstd-26a License: GPL This chapter presents the CGAL range tree and segment tree data structures. The range tree is theoretically superior to the $ Kd$ -tree, but the latter often seems to perform better. However, the range tree as implemented in CGAL is more flexible than the $ Kd$ -tree implementation, in that it enables to layer together range trees and segment trees in the same data structure. Classified Reference Pages Concepts RangeSegmentTreeTraits_k Sublayer Traits Classes CGAL::Range_segment_tree_set_traits_2 <R> CGAL::Range_segment_tree_set_traits_3 <R> CGAL::Range_tree_map_traits_2 <R,T> CGAL::Range_tree_map_traits_3 <R,T> CGAL::Segment_tree_map_traits_2 <R,T> CGAL::Segment_tree_map_traits_3 <R,T> CGAL::tree_interval_traits CGAL::tree_point_traits Search Structure Classes CGAL::Range_tree_d <Data, Window, Traits> CGAL::Range_tree_k <Traits> CGAL::Segment_tree_d <Data, Window, Traits> CGAL::Segment_tree_k <Traits> CGAL::Tree_anchor <Data, Window>",
+      "members": [],
+      "xml_file": "group___pkg_search_structures_ref.xml"
+    },
+    "PkgSearchStructuresConcepts": {
+      "kind": "group",
+      "name": "PkgSearchStructuresConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_search_structures_concepts.xml"
+    },
+    "PkgSearchStructuresTraitsClasses": {
+      "kind": "group",
+      "name": "PkgSearchStructuresTraitsClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_search_structures_traits_classes.xml"
+    },
+    "PkgSearchStructuresSearchStructure": {
+      "kind": "group",
+      "name": "PkgSearchStructuresSearchStructure",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_search_structures_search_structure.xml"
+    }
+  }
+}

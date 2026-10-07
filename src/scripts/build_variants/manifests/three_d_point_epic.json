@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "three_d_point_epic",
+  "description": "Build variant defined by cmake/tests/three_d_point_epic.cmake",
+  "cmake_tests": [
+    "cmake/tests/three_d_point_epic.cmake"
+  ]
+}

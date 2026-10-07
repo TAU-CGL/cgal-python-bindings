@@ -1,0 +1,1164 @@
+{
+  "schema_version": 1,
+  "package": "Envelope_3",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 14,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Env_plane_traits_3": {
+      "kind": "class",
+      "name": "CGAL::Env_plane_traits_3",
+      "brief": "The traits class template Env_plane_traits_3 models the EnvelopeTraits_3 concept, and is used for the construction of lower and upper envelopes of planes and half planes in the space.",
+      "detailed": "When the template is instantiated, the template parameter Kernel must be substituted by a CGAL-kernel model, the number type of which should support exact rational arithmetic, to avoid numerical errors and robustness problems. In particular, the number type should support the arithmetic operations $ +$ , $ -$ , $ \\times$ , and $ \\div$ without loss of precision. For optimal performance, we recommend instantiating the traits class with the predefined Exact_predicates_exact_constructions_kernel provided by CGAL. Using this kernel guarantees exactness and robustness, while it incurs only a minor overhead (in comparison to working with a fast, inexact number type) for most inputs. The second template parameter, namely ArrLinearTraits , should be substituted by a 2D arrangement geometry traits class that supports unbounded linear objects, i.e, lines, rays, and segments. By default it is substituted by Arr_linear_traits_2 <Kernel> . Note that an entire plane has no boundaries, and the projection of a halfplane is an (unbounded) line. Naturally, rays and segments may occur as a result of overlaying projections of several half planes. Indeed, Env_plane_traits_3 inherits from the traits class that substitutes ArrLinearTraits , and extends it by adding operations on planes and half planes. The nested Xy_monotone_surface_3 and Surface_3 types refer to the same type. They are constructible from a Kernel::Plane_3 in case of an entire plane, or from Kernel::Plane_3 and Kernel::Line_2 in case of a halfplane. The line orientation determines which half is considered. Is model of EnvelopeTraits_3",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_env__plane__traits__3.xml",
+      "file": "CGAL/Env_plane_traits_3.h",
+      "line": "38"
+    },
+    "CGAL::Env_sphere_traits_3": {
+      "kind": "class",
+      "name": "CGAL::Env_sphere_traits_3",
+      "brief": "The traits class Env_sphere_traits_3 models the EnvelopeTraits_3 concept, and is used for the construction of lower and upper envelopes of spheres.",
+      "detailed": "Note that when projecting the intersection curve of two spheres (a circle in 3D) onto the $ xy$ -plane, the resulting curve is an ellipse. The traits class is therefore parameterized by an arrangement-traits class that is capable of handling conic curves - namely an instantiation of the Arr_conic_traits_2 class-template - and inherits from it. The conic-traits class defines a nested type named Rat_kernel , which is a geometric kernel parameterized by an exact rational type. Env_sphere_traits_3 defines its Surface_3 type to be constructible from Rat_kernel::Sphere_3 . Namely, it can handle spheres whose center points have rational coordinates (i.e., of the type Rat_kernel::FT ), and whose squared radius is also rational. The Surface_3 type is also convertible to a Rat_kernel::Sphere_3 object. The Xy_monotone_surface_3 type is the same as the nested Surface_3 type. The traits-class simply ignores the upper hemisphere when it computes lower envelopes, and ignores the lower hemisphere when it computes upper envelopes. Is model of EnvelopeTraits_3",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_env__sphere__traits__3.xml",
+      "file": "CGAL/Env_sphere_traits_3.h",
+      "line": "32"
+    },
+    "CGAL::Env_surface_data_traits_3": {
+      "kind": "class",
+      "name": "CGAL::Env_surface_data_traits_3",
+      "brief": "The class Env_surface_data_traits_3 is a model of the EnvelopeTraits_3 concept and serves as a decorator class that allows the extension of the surfaces defined by the base traits-class (the Traits parameter), which serves as a geometric traits-class (a model of the EnvelopeTraits_3 concept), with extraneous (non-geometric) data fields.",
+      "detailed": "The traits-class decorator extends the Surface_3 and the Xy_monotone_surface_3 types as detailed below. Each Surface_3 object is associated with a single data field of type SData , and each Xy_monotone_surface_3 object is associated with a single data field of type XyData . When a surface is subdivided into $ xy$ -monotone surfaces, its data field is converted using the conversion functor, which is specified by the Cnv template-parameter, and the resulting objects is copied to all Xy_monotone_surface_3 objects induced by this surface. The conversion functor should provide an operator with the following prototype: XyData operator() (const SData& d) const; By default, the two data types are the same, so the conversion operator is trivial and just copies the data object: SData = XyData Cnv = _Default_convert_functor<SData,XyData> Is model of EnvelopeTraits_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Base_traits_3",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Base_traits_3",
+          "brief": "the base traits-class.",
+          "detailed": "",
+          "return_type": "Traits",
+          "definition": "typedef Traits CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Base_traits_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "46"
+        },
+        {
+          "kind": "typedef",
+          "name": "Base_surface_3",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Base_surface_3",
+          "brief": "the base surface.",
+          "detailed": "",
+          "return_type": "Base_traits_3::Surface_3",
+          "definition": "typedef Base_traits_3::Surface_3 CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Base_surface_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "49"
+        },
+        {
+          "kind": "typedef",
+          "name": "Base_xy_monotone_surface_3",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Base_xy_monotone_surface_3",
+          "brief": "the base $ xy$ -monotone surface surface.",
+          "detailed": "",
+          "return_type": "Base_traits_3::Xy_monotone_surface_3",
+          "definition": "typedef Base_traits_3::Xy_monotone_surface_3 CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Base_xy_monotone_surface_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "52"
+        },
+        {
+          "kind": "typedef",
+          "name": "Convert",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Convert",
+          "brief": "the conversion functor.",
+          "detailed": "",
+          "return_type": "Cnv",
+          "definition": "typedef Cnv CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Convert",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "55"
+        },
+        {
+          "kind": "typedef",
+          "name": "Surface_data",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Surface_data",
+          "brief": "the type of data associated with surfaces.",
+          "detailed": "",
+          "return_type": "SData",
+          "definition": "typedef SData CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Surface_data",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "58"
+        },
+        {
+          "kind": "typedef",
+          "name": "Xy_monotone_surface_data",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Xy_monotone_surface_data",
+          "brief": "the type of data associated with $ xy$ -monotone surfaces.",
+          "detailed": "",
+          "return_type": "XyData",
+          "definition": "typedef XyData CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Xy_monotone_surface_data",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "61"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_env__surface__data__traits__3.xml",
+      "file": "CGAL/Env_surface_data_traits_3.h",
+      "line": "39"
+    },
+    "CGAL::Env_surface_data_traits_3::Surface_3": {
+      "kind": "class",
+      "name": "CGAL::Env_surface_data_traits_3::Surface_3",
+      "brief": "The Surface_3 class nested within the surface-data traits extends the Base_traits_3::Surface_3 type with an extra data field.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Surface_3",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Surface_3::Surface_3",
+          "brief": "default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Surface_3::Surface_3",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "72"
+        },
+        {
+          "kind": "function",
+          "name": "Surface_3",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Surface_3::Surface_3",
+          "brief": "constructs surface from the given base surface with uninitialized data field.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Surface_3::Surface_3",
+          "argsstring": "(const Base_surface_3 &base)",
+          "params": [
+            {
+              "type": "const Base_surface_3 &",
+              "name": "base",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "77"
+        },
+        {
+          "kind": "function",
+          "name": "Surface_3",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Surface_3::Surface_3",
+          "brief": "constructs surface from the given base surface with an attached data field.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Surface_3::Surface_3",
+          "argsstring": "(const Base_surface_3 &base, const Surface_data &data)",
+          "params": [
+            {
+              "type": "const Base_surface_3 &",
+              "name": "base",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Surface_data &",
+              "name": "data",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "82"
+        },
+        {
+          "kind": "function",
+          "name": "data",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Surface_3::data",
+          "brief": "returns the data field (a non-const version, which returns a reference to the data object, is also available).",
+          "detailed": "",
+          "return_type": "const Surface_data &",
+          "definition": "const Surface_data & CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Surface_3::data",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "92"
+        },
+        {
+          "kind": "function",
+          "name": "set_env_data",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Surface_3::set_env_data",
+          "brief": "sets the data field.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Surface_3::set_env_data",
+          "argsstring": "(const Surface_data &data)",
+          "params": [
+            {
+              "type": "const Surface_data &",
+              "name": "data",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "96"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_env__surface__data__traits__3_1_1_surface__3.xml",
+      "file": "CGAL/Env_surface_data_traits_3.h",
+      "line": "65"
+    },
+    "CGAL::Env_surface_data_traits_3::Xy_monotone_surface_3": {
+      "kind": "class",
+      "name": "CGAL::Env_surface_data_traits_3::Xy_monotone_surface_3",
+      "brief": "The Xy_monotone_surface_3 class nested within the surface-data traits extends the Base_traits_3::Xy_monotone_surface_3 type with an extra data field.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Xy_monotone_surface_3",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Xy_monotone_surface_3::Xy_monotone_surface_3",
+          "brief": "default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Xy_monotone_surface_3::Xy_monotone_surface_3",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "111"
+        },
+        {
+          "kind": "function",
+          "name": "Xy_monotone_surface_3",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Xy_monotone_surface_3::Xy_monotone_surface_3",
+          "brief": "constructs an $ xy$ -monotone surface from the given base surface with uninitialized data field.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Xy_monotone_surface_3::Xy_monotone_surface_3",
+          "argsstring": "(const Base_xy_monotone_surface_3 &base)",
+          "params": [
+            {
+              "type": "const Base_xy_monotone_surface_3 &",
+              "name": "base",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "116"
+        },
+        {
+          "kind": "function",
+          "name": "Xy_monotone_surface_3",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Xy_monotone_surface_3::Xy_monotone_surface_3",
+          "brief": "constructs an $ x$ -monotone surface from the given base $ x$ -monotone surface with an attached data field.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Xy_monotone_surface_3::Xy_monotone_surface_3",
+          "argsstring": "(const Base_xy_monotone_surface_3 &base, const Xy_monotone_surface_data &data)",
+          "params": [
+            {
+              "type": "const Base_xy_monotone_surface_3 &",
+              "name": "base",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Xy_monotone_surface_data &",
+              "name": "data",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "121"
+        },
+        {
+          "kind": "function",
+          "name": "data",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Xy_monotone_surface_3::data",
+          "brief": "returns the field (a non-const version, which returns a reference to the data object, is also available).",
+          "detailed": "",
+          "return_type": "const Xy_monotone_surface_data &",
+          "definition": "const Xy_monotone_surface_data & CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Xy_monotone_surface_3::data",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "132"
+        },
+        {
+          "kind": "function",
+          "name": "set_env_data",
+          "qualified_name": "CGAL::Env_surface_data_traits_3::Xy_monotone_surface_3::set_env_data",
+          "brief": "sets the data field.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Env_surface_data_traits_3< Traits, XyData, SData, Cnv >::Xy_monotone_surface_3::set_env_data",
+          "argsstring": "(const Xy_monotone_surface_data &data)",
+          "params": [
+            {
+              "type": "const Xy_monotone_surface_data &",
+              "name": "data",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/Env_surface_data_traits_3.h",
+          "line": "136"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_env__surface__data__traits__3_1_1_xy__monotone__surface__3.xml",
+      "file": "CGAL/Env_surface_data_traits_3.h",
+      "line": "104"
+    },
+    "CGAL::Env_triangle_traits_3": {
+      "kind": "class",
+      "name": "CGAL::Env_triangle_traits_3",
+      "brief": "The traits class template Env_triangle_traits_3 models the EnvelopeTraits_3 concept, and is used for the construction of lower and upper envelopes of triangles in the space.",
+      "detailed": "When the template is instantiated, the template parameter Kernel must be substituted by a CGAL-kernel model, the number type of which should support exact rational arithmetic, to avoid numerical errors and robustness problems. In particular, the number type should support the arithmetic operations $ +$ , $ -$ , $ \\times$ , and $ \\div$ without loss of precision. For optimal performance, we recommend instantiating the traits class with the predefined Exact_predicates_exact_constructions_kernel provided by CGAL. Using this kernel guarantees exactness and robustness, while it incurs only a minor overhead (in comparison to working with a fast, inexact number type) for most inputs. The second template parameter, namely ArrSegmentTraits , should be substituted by a 2D arrangement geometry traits class that supports segments. By default it is substituted by Arr_segment_traits_2 <Kernel> . Note that when we project the boundary of a triangle, or the intersection of two triangles, onto the $ xy$ -plane, we obtain line segments. Indeed, Env_triangle_traits_3 inherits from the traits class that substitutes ArrSegmentTraits , and extends it by adding operations on 3D objects, namely spatial triangles. Note that the traits class does not define Kernel::Triangle_3 as its surface (and $ xy$ -monotone surface) type, as one may expect. This is because the traits class needs to store extra data with the triangles in order to efficiently operate on them. Nevertheless, the nested Xy_monotone_surface_3 and Surface_3 types are however constructible from a Kernel::Triangle_3 instance and are also convertible to a Kernel::Triangle_3 object. Both types, Xy_monotone_surface_3 and Surface_3 , refer to the same class, as every triangle is (weakly) $ xy$ -monotone). Is model of EnvelopeTraits_3",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_env__triangle__traits__3.xml",
+      "file": "CGAL/Env_triangle_traits_3.h",
+      "line": "41"
+    },
+    "CGAL::Envelope_diagram_2": {
+      "kind": "class",
+      "name": "CGAL::Envelope_diagram_2",
+      "brief": "The class-template Envelope_diagram_2 represents the minimization diagram that corresponds to the lower envelope of a set of curves, or the maximization diagram that corresponds to their upper envelope.",
+      "detailed": "It is parameterized by a traits class that must be a model of the EnvelopeTraits_3 concept, and is basically a planar arrangement of $ x$ -monotone curves, as defined by this traits class. These $ x$ -monotone curves are the projections of boundary curves of $ xy$ -monotone surfaces, or the intersection curves between such surfaces, onto the $ xy$ -plane. Thus, it is possible to traverse the envelope diagram using the methods inherited from the Arrangement_2 class. The envelope diagram extends the arrangement features (namely the vertices, halfedges, and faces), such that each feature stores a container of originators - namely, the $ xy$ -monotone surfaces (instances of the type EnvTraits::Xy_monotone_surface_3 ) that induce the lower envelope (or the upper envelope, in case of a maximization diagram) over this feature. The envelope diagram provides access methods to these originators.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Self",
+          "qualified_name": "CGAL::Envelope_diagram_2::Self",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Envelope_diagram_2 < EnvTraits >",
+          "definition": "typedef Envelope_diagram_2<EnvTraits> CGAL::Envelope_diagram_2< EnvTraits >::Self",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/envelope_3.h",
+          "line": "35"
+        },
+        {
+          "kind": "typedef",
+          "name": "Base",
+          "qualified_name": "CGAL::Envelope_diagram_2::Base",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Arrangement_2 < EnvTraits >",
+          "definition": "typedef Arrangement_2<EnvTraits> CGAL::Envelope_diagram_2< EnvTraits >::Base",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/envelope_3.h",
+          "line": "40"
+        },
+        {
+          "kind": "typedef",
+          "name": "Surface_const_iterator",
+          "qualified_name": "CGAL::Envelope_diagram_2::Surface_const_iterator",
+          "brief": "an iterator for the $ xy$ -monotone surfaces that induce a diagram feature.",
+          "detailed": "Its value-type is EnvTraits::Xy_monotone_surface_3 .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Envelope_diagram_2< EnvTraits >::Surface_const_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/envelope_3.h",
+          "line": "46"
+        },
+        {
+          "kind": "function",
+          "name": "Envelope_diagram_2",
+          "qualified_name": "CGAL::Envelope_diagram_2::Envelope_diagram_2",
+          "brief": "constructs an empty diagram containing one unbounded face, which corresponds to the entire plane and has no originators.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Envelope_diagram_2< EnvTraits >::Envelope_diagram_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/envelope_3.h",
+          "line": "57"
+        },
+        {
+          "kind": "function",
+          "name": "Envelope_diagram_2",
+          "qualified_name": "CGAL::Envelope_diagram_2::Envelope_diagram_2",
+          "brief": "copy constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Envelope_diagram_2< EnvTraits >::Envelope_diagram_2",
+          "argsstring": "(const Self &other)",
+          "params": [
+            {
+              "type": "const Self &",
+              "name": "other",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/envelope_3.h",
+          "line": "62"
+        },
+        {
+          "kind": "function",
+          "name": "Envelope_diagram_2",
+          "qualified_name": "CGAL::Envelope_diagram_2::Envelope_diagram_2",
+          "brief": "constructs an empty diagram that uses the given traits instance for performing the geometric predicates.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Envelope_diagram_2< EnvTraits >::Envelope_diagram_2",
+          "argsstring": "(EnvTraits *traits)",
+          "params": [
+            {
+              "type": "EnvTraits *",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/envelope_3.h",
+          "line": "68"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_envelope__diagram__2.xml",
+      "file": "CGAL/envelope_3.h",
+      "line": "26"
+    },
+    "CGAL::Envelope_diagram_2::Face": {
+      "kind": "class",
+      "name": "CGAL::Envelope_diagram_2::Face",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "number_of_surfaces",
+          "qualified_name": "CGAL::Envelope_diagram_2::Face::number_of_surfaces",
+          "brief": "returns the number of $ xy$ -monotone surfaces that induce the face.",
+          "detailed": "",
+          "return_type": "size_t",
+          "definition": "size_t CGAL::Envelope_diagram_2< EnvTraits >::Face::number_of_surfaces",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/envelope_3.h",
+          "line": "139"
+        },
+        {
+          "kind": "function",
+          "name": "surfaces_begin",
+          "qualified_name": "CGAL::Envelope_diagram_2::Face::surfaces_begin",
+          "brief": "returns an iterator for the first $ xy$ -monotone surface that induces the face.",
+          "detailed": "",
+          "return_type": "Surface_const_iterator",
+          "definition": "Surface_const_iterator CGAL::Envelope_diagram_2< EnvTraits >::Face::surfaces_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/envelope_3.h",
+          "line": "144"
+        },
+        {
+          "kind": "function",
+          "name": "surfaces_end",
+          "qualified_name": "CGAL::Envelope_diagram_2::Face::surfaces_end",
+          "brief": "returns a past-the-end iterator for the $ xy$ -monotone surfaces that induce the face.",
+          "detailed": "",
+          "return_type": "Surface_const_iterator",
+          "definition": "Surface_const_iterator CGAL::Envelope_diagram_2< EnvTraits >::Face::surfaces_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/envelope_3.h",
+          "line": "150"
+        },
+        {
+          "kind": "function",
+          "name": "surface",
+          "qualified_name": "CGAL::Envelope_diagram_2::Face::surface",
+          "brief": "returns the first $ xy$ -monotone surface that induce the face.",
+          "detailed": "The number of surfaces is not 0.",
+          "return_type": "Xy_monotone_surface_3",
+          "definition": "Xy_monotone_surface_3 CGAL::Envelope_diagram_2< EnvTraits >::Face::surface",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/envelope_3.h",
+          "line": "156"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_envelope__diagram__2_1_1_face.xml",
+      "file": "CGAL/envelope_3.h",
+      "line": "131"
+    },
+    "CGAL::Envelope_diagram_2::Halfedge": {
+      "kind": "class",
+      "name": "CGAL::Envelope_diagram_2::Halfedge",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "number_of_surfaces",
+          "qualified_name": "CGAL::Envelope_diagram_2::Halfedge::number_of_surfaces",
+          "brief": "returns the number of $ xy$ -monotone surfaces that induce the halfedge.",
+          "detailed": "",
+          "return_type": "size_t",
+          "definition": "size_t CGAL::Envelope_diagram_2< EnvTraits >::Halfedge::number_of_surfaces",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/envelope_3.h",
+          "line": "110"
+        },
+        {
+          "kind": "function",
+          "name": "surfaces_begin",
+          "qualified_name": "CGAL::Envelope_diagram_2::Halfedge::surfaces_begin",
+          "brief": "returns an iterator for the first $ xy$ -monotone surface that induces the halfedge.",
+          "detailed": "",
+          "return_type": "Surface_const_iterator",
+          "definition": "Surface_const_iterator CGAL::Envelope_diagram_2< EnvTraits >::Halfedge::surfaces_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/envelope_3.h",
+          "line": "115"
+        },
+        {
+          "kind": "function",
+          "name": "surfaces_end",
+          "qualified_name": "CGAL::Envelope_diagram_2::Halfedge::surfaces_end",
+          "brief": "returns a past-the-end iterator for the $ xy$ -monotone surfaces that induce the halfedge.",
+          "detailed": "",
+          "return_type": "Surface_const_iterator",
+          "definition": "Surface_const_iterator CGAL::Envelope_diagram_2< EnvTraits >::Halfedge::surfaces_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/envelope_3.h",
+          "line": "121"
+        },
+        {
+          "kind": "function",
+          "name": "surface",
+          "qualified_name": "CGAL::Envelope_diagram_2::Halfedge::surface",
+          "brief": "returns the first $ xy$ -monotone surface that induce e .",
+          "detailed": "The number of surfaces is not 0.",
+          "return_type": "Xy_monotone_surface_3",
+          "definition": "Xy_monotone_surface_3 CGAL::Envelope_diagram_2< EnvTraits >::Halfedge::surface",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/envelope_3.h",
+          "line": "127"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_envelope__diagram__2_1_1_halfedge.xml",
+      "file": "CGAL/envelope_3.h",
+      "line": "102"
+    },
+    "CGAL::Envelope_diagram_2::Vertex": {
+      "kind": "class",
+      "name": "CGAL::Envelope_diagram_2::Vertex",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "number_of_surfaces",
+          "qualified_name": "CGAL::Envelope_diagram_2::Vertex::number_of_surfaces",
+          "brief": "returns the number of $ xy$ -monotone surfaces that induce v .",
+          "detailed": "",
+          "return_type": "size_t",
+          "definition": "size_t CGAL::Envelope_diagram_2< EnvTraits >::Vertex::number_of_surfaces",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/envelope_3.h",
+          "line": "80"
+        },
+        {
+          "kind": "function",
+          "name": "surfaces_begin",
+          "qualified_name": "CGAL::Envelope_diagram_2::Vertex::surfaces_begin",
+          "brief": "returns an iterator for the first $ xy$ -monotone surface that induces v .",
+          "detailed": "",
+          "return_type": "Surface_const_iterator",
+          "definition": "Surface_const_iterator CGAL::Envelope_diagram_2< EnvTraits >::Vertex::surfaces_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/envelope_3.h",
+          "line": "85"
+        },
+        {
+          "kind": "function",
+          "name": "surfaces_end",
+          "qualified_name": "CGAL::Envelope_diagram_2::Vertex::surfaces_end",
+          "brief": "returns a past-the-end iterator for the $ xy$ -monotone surfaces that induce v .",
+          "detailed": "",
+          "return_type": "Surface_const_iterator",
+          "definition": "Surface_const_iterator CGAL::Envelope_diagram_2< EnvTraits >::Vertex::surfaces_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/envelope_3.h",
+          "line": "91"
+        },
+        {
+          "kind": "function",
+          "name": "surface",
+          "qualified_name": "CGAL::Envelope_diagram_2::Vertex::surface",
+          "brief": "returns the first $ xy$ -monotone surface that induce v .",
+          "detailed": "The number of surfaces is not 0.",
+          "return_type": "Xy_monotone_surface_3",
+          "definition": "Xy_monotone_surface_3 CGAL::Envelope_diagram_2< EnvTraits >::Vertex::surface",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/envelope_3.h",
+          "line": "97"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_envelope__diagram__2_1_1_vertex.xml",
+      "file": "CGAL/envelope_3.h",
+      "line": "72"
+    },
+    "EnvelopeTraits_3": {
+      "kind": "class",
+      "name": "EnvelopeTraits_3",
+      "brief": "This concept defines the minimal set of geometric predicates and operations needed to compute the envelope of a set of arbitrary surfaces in $\\mathbb{R}^3$ . It refines the AosXMonotoneTraits_2 concept. In addition to the Point_2 and X_monotone_curve_2 types and the Has_boundary_category category tag listed in the base concept, it also lists the Surface_3 and Xy_monotone_surface_3 types, which represent arbitrary surfaces and $ xy$ -monotone surfaces, respectively, and some constructions and predicates on these types. Note however, that these operations usually involve the projection of 3D objects onto the $xy$ -plane.",
+      "detailed": "Refines AosXMonotoneTraits_2 Has models CGAL::Env_triangle_traits_3 <Kernel, ArrLinearTraits> CGAL::Env_sphere_traits_3 <ConicTraits> CGAL::Env_plane_traits_3 <Kernel, ArrLinearTraits> CGAL::Env_surface_data_traits_3 <Traits,XyData,SData,Cnv>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Surface_3",
+          "qualified_name": "EnvelopeTraits_3::Surface_3",
+          "brief": "represents an arbitrary surface in $ \\mathbb{R}^3$ .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type EnvelopeTraits_3::Surface_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "33"
+        },
+        {
+          "kind": "typedef",
+          "name": "Xy_monotone_surface_3",
+          "qualified_name": "EnvelopeTraits_3::Xy_monotone_surface_3",
+          "brief": "represents a weakly $ xy$ -monotone surface in $ \\mathbb{R}^3$ .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type EnvelopeTraits_3::Xy_monotone_surface_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "37"
+        },
+        {
+          "kind": "typedef",
+          "name": "Make_xy_monotone_3",
+          "qualified_name": "EnvelopeTraits_3::Make_xy_monotone_3",
+          "brief": "provides the operator (templated by the OutputIterator type) :",
+          "detailed": "OutputIterator operator() ( Surface_3 S, bool is_lower, OutputIterator oi) which subdivides the given surface S into $ xy$ -monotone parts and inserts them into the output iterator. The value of is_lower indicates whether we compute the lower or the upper envelope, so that $ xy$ -monotone surfaces that are irrelevant to the lower-envelope (resp. upper-envelope) computation may be discarded. The value-type of OutputIterator is Xy_monotone_surface_3 . The operator returns a past-the-end iterator for the output sequence.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type EnvelopeTraits_3::Make_xy_monotone_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functor Types",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "57"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_projected_boundary_2",
+          "qualified_name": "EnvelopeTraits_3::Construct_projected_boundary_2",
+          "brief": "provides the operator (templated by the OutputIterator type) :",
+          "detailed": "OutputIterator operator() ( Xy_monotone_surface_3 s, OutputIterator oi) which computes all planar $ x$ -monotone curves and possibly isolated planar points that form the projection of the boundary of the given $ xy$ -monotone surface $ s$ onto the $ xy$ -plane, and inserts them into the output iterator. The value-type of OutputIterator is Object , where Object wraps either a Point_2 , or a pair<X_monotone_curve_2, Oriented_side> . In the former case, the object represents an isolated point of the projected boundary. In the latter, more general, case the object represents an $ x$ -monotone boundary curve along with an enumeration value which is either ON_NEGATIVE_SIDE or ON_POSITIVE_SIDE , indicating whether the projection of the surface onto the $ xy$ -plane lies below or above this $ x$ -monotone curve, respectively. In degenerate case, namely when the surface itself is vertical, and its projection onto the plane is $ 1$ -dimensional, the Oriented_side value is ON_ORIENTED_BOUNDARY . The operator returns a past-the-end iterator for the output sequence.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type EnvelopeTraits_3::Construct_projected_boundary_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functor Types",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "80"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_projected_intersections_2",
+          "qualified_name": "EnvelopeTraits_3::Construct_projected_intersections_2",
+          "brief": "provides the operator (templated by the OutputIterator type) :",
+          "detailed": "OutputIterator operator() ( Xy_monotone_surface_3 s1, Xy_monotone_surface_3 s2, OutputIterator oi) which computes the projection of the intersections of the $ xy$ -monotone surfaces s1 and s2 onto the $ xy$ -plane, and inserts them into the output iterator. The value-type of OutputIterator is Object , where each Object either wraps a pair<X_monotone_curve_2,Multiplicity> instance, which represents a projected intersection curve with its multiplicity (in case the multiplicity is undefined or not known, it should be set to $ 0$ ) or an Point_2 instance, representing the projected image of a degenerate intersection (the projection of an isolated intersection point, or of a vertical intersection curve). The operator returns a past-the-end iterator for the output sequence.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type EnvelopeTraits_3::Construct_projected_intersections_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functor Types",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "99"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_z_at_xy_3",
+          "qualified_name": "EnvelopeTraits_3::Compare_z_at_xy_3",
+          "brief": "provides the operators :",
+          "detailed": "Comparison_result operator() (Point_2 p, Xy_monotone_surface_3 s1, Xy_monotone_surface_3 s2) which determines the relative $ z$ -order of the two given $ xy$ -monotone surfaces at the $ xy$ -coordinates of the point p , with the precondition that both surfaces are defined over p . Namely, it returns the comparison result of $ s_1(p)$ and $ s_2(p)$ . Comparison_result operator() (X_monotone_curve_2 c, Xy_monotone_surface_3 s1, Xy_monotone_surface_3 s2) which determines the relative $ z$ -order of the two given $ xy$ -monotone surfaces over the interior of a given $ x$ -monotone curve $ c$ , with the precondition that $ c$ is fully contained in the $ xy$ -definition range of both $ s_1$ and $ s_2$ , and that the surfaces do not intersect over $ c$ . The functor should therefore return the comparison result of $ s_1(p')$ and $ s_2(p')$ for some point $ p'$ in the interior of $ c$ . Comparison_result operator() ( Xy_monotone_surface_3 s1, Xy_monotone_surface_3 s2) which determines the relative $ z$ -order of the two given unbounded $ xy$ -monotone surfaces, which are defined over the entire $ xy$ -plane and have no boundary, with the precondition that the surfaces do not intersect at all. The functor should therefore return the comparison result of $ s_1(p)$ and $ s_2(p)$ for some planar point $ p \\in\\mathbb{R}^2$ . This operator is required iff the category tag Has_boundary_category is defined as Tag_true .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type EnvelopeTraits_3::Compare_z_at_xy_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functor Types",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "129"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_z_at_xy_above_3",
+          "qualified_name": "EnvelopeTraits_3::Compare_z_at_xy_above_3",
+          "brief": "provides the operator :",
+          "detailed": "Comparison_result operator() (X_monotone_curve_2 c, Xy_monotone_surface_3 s1, Xy_monotone_surface_3 s2) which determines the relative $ z$ -order of the two given $ xy$ -monotone surfaces immediately above their projected intersection curve $ c$ (a planar point $ p$ is above an $ x$ -monotone curve $ c$ if it is in the $ x$ -range of $ c$ , and lies to its left when the curve is traversed from its $ xy$ -lexicographically smaller endpoint to its larger endpoint). We have the precondition that both surfaces are defined \"above\" $ c$ , and their relative $ z$ -order is the same for some small enough neighborhood of points above $ c$ .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type EnvelopeTraits_3::Compare_z_at_xy_above_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functor Types",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "146"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_z_at_xy_below_3",
+          "qualified_name": "EnvelopeTraits_3::Compare_z_at_xy_below_3",
+          "brief": "provides the operator :",
+          "detailed": "Comparison_result operator() (X_monotone_curve_2 c, Xy_monotone_surface_3 s1, Xy_monotone_surface_3 s2) which determines the relative $ z$ -order of the two given $ xy$ -monotone surfaces immediately below their projected intersection curve $ c$ (a planar point $ p$ is below an $ x$ -monotone curve $ c$ if it is in the $ x$ -range of $ c$ , and lies to its right when the curve is traversed from its $ xy$ -lexicographically smaller endpoint to its larger endpoint). We have the precondition that both surfaces are defined \"below\" $ c$ , and their relative $ z$ -order is the same for some small enough neighborhood of points below $ c$ .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type EnvelopeTraits_3::Compare_z_at_xy_below_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functor Types",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "163"
+        },
+        {
+          "kind": "function",
+          "name": "EnvelopeTraits_3",
+          "qualified_name": "EnvelopeTraits_3::EnvelopeTraits_3",
+          "brief": "default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "EnvelopeTraits_3::EnvelopeTraits_3",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "172"
+        },
+        {
+          "kind": "function",
+          "name": "EnvelopeTraits_3",
+          "qualified_name": "EnvelopeTraits_3::EnvelopeTraits_3",
+          "brief": "copy constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "EnvelopeTraits_3::EnvelopeTraits_3",
+          "argsstring": "(EnvelopeTraits_3 other)",
+          "params": [
+            {
+              "type": "EnvelopeTraits_3",
+              "name": "other",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "176"
+        },
+        {
+          "kind": "function",
+          "name": "operator=",
+          "qualified_name": "EnvelopeTraits_3::operator=",
+          "brief": "assignment operator.",
+          "detailed": "",
+          "return_type": "EnvelopeTraits_3",
+          "definition": "EnvelopeTraits_3 EnvelopeTraits_3::operator=",
+          "argsstring": "(other)",
+          "params": [
+            {
+              "type": "other",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "180"
+        },
+        {
+          "kind": "function",
+          "name": "make_xy_monotone_3_object",
+          "qualified_name": "EnvelopeTraits_3::make_xy_monotone_3_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Make_xy_monotone_3",
+          "definition": "Make_xy_monotone_3 EnvelopeTraits_3::make_xy_monotone_3_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Accessing Functor Objects",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "189"
+        },
+        {
+          "kind": "function",
+          "name": "construct_projected_boundary_2_object",
+          "qualified_name": "EnvelopeTraits_3::construct_projected_boundary_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_projected_boundary_2",
+          "definition": "Construct_projected_boundary_2 EnvelopeTraits_3::construct_projected_boundary_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Accessing Functor Objects",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "193"
+        },
+        {
+          "kind": "function",
+          "name": "construct_projected_intersections_2_object",
+          "qualified_name": "EnvelopeTraits_3::construct_projected_intersections_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_projected_intersections_2",
+          "definition": "Construct_projected_intersections_2 EnvelopeTraits_3::construct_projected_intersections_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Accessing Functor Objects",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "197"
+        },
+        {
+          "kind": "function",
+          "name": "compare_z_at_xy_3_object",
+          "qualified_name": "EnvelopeTraits_3::compare_z_at_xy_3_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compare_z_at_xy_3",
+          "definition": "Compare_z_at_xy_3 EnvelopeTraits_3::compare_z_at_xy_3_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Accessing Functor Objects",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "201"
+        },
+        {
+          "kind": "function",
+          "name": "compare_z_at_xy_above_3_object",
+          "qualified_name": "EnvelopeTraits_3::compare_z_at_xy_above_3_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compare_z_at_xy_above_3",
+          "definition": "Compare_z_at_xy_above_3 EnvelopeTraits_3::compare_z_at_xy_above_3_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Accessing Functor Objects",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "205"
+        },
+        {
+          "kind": "function",
+          "name": "compare_z_at_xy_below_3_object",
+          "qualified_name": "EnvelopeTraits_3::compare_z_at_xy_below_3_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compare_z_at_xy_below_3",
+          "definition": "Compare_z_at_xy_below_3 EnvelopeTraits_3::compare_z_at_xy_below_3_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Accessing Functor Objects",
+          "file": "Concepts/EnvelopeTraits_3.h",
+          "line": "209"
+        }
+      ],
+      "xml_file": "class_envelope_traits__3.xml",
+      "file": "Concepts/EnvelopeTraits_3.h",
+      "line": "25"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgEnvelope3Ref": {
+      "kind": "group",
+      "name": "PkgEnvelope3Ref",
+      "brief": "",
+      "detailed": "Dan Halperin, Michal Meyerovitch, Ron Wein, and Baruch Zukerman This package consists of functions that compute the lower (or upper) envelope of a set of arbitrary surfaces in 3D. The output is represented as an 2D envelope diagram, namely a planar subdivision such that the identity of the surfaces that induce the envelope over each diagram cell is unique. Introduced in: CGAL 3.3 Depends on: PkgArrangementOnSurface2 BibTeX: cgal:mwz-e3-26a License: GPL This package consists of functions that compute the lower (or upper) envelope of a set of arbitrary surfaces in 3D. The output is represented as an 2D envelope diagram - a planar subdivision such that the identity of the surfaces that induce the envelope over each diagram cell is unique. Classified Reference Pages Functions CGAL::lower_envelope_3 CGAL::upper_envelope_3 CGAL::lower_envelope_xy_monotone_3 CGAL::upper_envelope_xy_monotone_3 Concepts EnvelopeTraits_3 Classes CGAL::Envelope_diagram_2 <EnvTraits> CGAL::Env_triangle_traits_3 <Kernel, ArrLinearTraits> CGAL::Env_sphere_traits_3 <ConicTraits> CGAL::Env_plane_traits_3 <Kernel, ArrLinearTraits> CGAL::Env_surface_data_traits_3 <Traits,XyData,SData,Cnv>",
+      "members": [
+        {
+          "kind": "function",
+          "name": "lower_envelope_3",
+          "qualified_name": "CGAL::lower_envelope_3",
+          "brief": "Computes the lower envelope of a set of surfaces in $ \\mathbb{R}^3$ , as given by the range [begin, end) .",
+          "detailed": "The lower envelope is represented using the output minimization diagram diag . Traits must be a model of EnvelopeTraits_3 . InputIterator must be an input iterator with value type Traits::Surface_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::lower_envelope_3",
+          "argsstring": "(InputIterator begin, InputIterator end, Envelope_diagram_2< Traits > &diag)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Envelope_diagram_2< Traits > &",
+              "name": "diag",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/envelope_3.h",
+          "line": "175"
+        },
+        {
+          "kind": "function",
+          "name": "lower_envelope_xy_monotone_3",
+          "qualified_name": "CGAL::lower_envelope_xy_monotone_3",
+          "brief": "Computes the lower envelope of a set of $ xy$ -monotone surfaces in $ \\mathbb{R}^3$ , as given by the range [begin, end) .",
+          "detailed": "The lower envelope is represented using the output minimization diagram diag . Traits must be a model of EnvelopeTraits_3 . InputIterator must be an input iterator with value type Traits::Xy_monotone_surface_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::lower_envelope_xy_monotone_3",
+          "argsstring": "(InputIterator begin, InputIterator end, Envelope_diagram_2< Traits > &diag)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Envelope_diagram_2< Traits > &",
+              "name": "diag",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/envelope_3.h",
+          "line": "192"
+        },
+        {
+          "kind": "function",
+          "name": "upper_envelope_3",
+          "qualified_name": "CGAL::upper_envelope_3",
+          "brief": "Computes the upper envelope of a set of surfaces in $ \\mathbb{R}^3$ , as given by the range [begin, end) .",
+          "detailed": "The upper envelope is represented using the output maximization diagram diag . Traits must be a model of EnvelopeTraits_3 . InputIterator must be an input iterator with value type Traits::Surface_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::upper_envelope_3",
+          "argsstring": "(InputIterator begin, InputIterator end, Envelope_diagram_2< Traits > &diag)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Envelope_diagram_2< Traits > &",
+              "name": "diag",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/envelope_3.h",
+          "line": "209"
+        },
+        {
+          "kind": "function",
+          "name": "upper_envelope_xy_monotone_3",
+          "qualified_name": "CGAL::upper_envelope_xy_monotone_3",
+          "brief": "Computes the upper envelope of a set of $ xy$ -monotone surfaces in $ \\mathbb{R}^3$ , as given by the range [begin, end) .",
+          "detailed": "The lower envelope is represented using the output maximization diagram diag . Traits must be a model of EnvelopeTraits_3 . InputIterator must be an input iterator with value type Traits::Xy_monotone_surface_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::upper_envelope_xy_monotone_3",
+          "argsstring": "(InputIterator begin, InputIterator end, Envelope_diagram_2< Traits > &diag)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Envelope_diagram_2< Traits > &",
+              "name": "diag",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/envelope_3.h",
+          "line": "226"
+        }
+      ],
+      "xml_file": "group___pkg_envelope3_ref.xml"
+    },
+    "PkgEnvelope3Concepts": {
+      "kind": "group",
+      "name": "PkgEnvelope3Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_envelope3_concepts.xml"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "ksr_epec",
+  "description": "Build variant defined by cmake/tests/ksr_epec.cmake",
+  "cmake_tests": [
+    "cmake/tests/ksr_epec.cmake"
+  ]
+}

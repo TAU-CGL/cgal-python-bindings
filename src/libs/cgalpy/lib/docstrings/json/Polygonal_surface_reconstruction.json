@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "package": "Polygonal_surface_reconstruction",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 4,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Polygonal_surface_reconstruction": {
+      "kind": "class",
+      "name": "CGAL::Polygonal_surface_reconstruction",
+      "brief": "Implementation of the Polygonal Surface Reconstruction method.",
+      "detailed": "Given a set of 3D points with unoriented normals sampled from the outer boundary of a piecewise planar object, the Polygonal Surface Reconstruction method [1] outputs a simplified and watertight surface mesh interpolating the input point set. The method first generates a set of face candidates by intersecting the planar primitives. Then an optimal subset of the candidate faces is selected through optimization under hard constraints that enforce the final model to be manifold and watertight. The reconstruction assumes the planar segmentation of the point cloud is provided in the input. GeomTraits a geometric traits class, model of Kernel",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::FT",
+          "brief": "number type.",
+          "detailed": "",
+          "return_type": "GeomTraits::FT",
+          "definition": "typedef GeomTraits::FT CGAL::Polygonal_surface_reconstruction< GeomTraits >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "63"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::Point",
+          "brief": "point type.",
+          "detailed": "",
+          "return_type": "GeomTraits::Point_3",
+          "definition": "typedef GeomTraits::Point_3 CGAL::Polygonal_surface_reconstruction< GeomTraits >::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "64"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::Vector",
+          "brief": "vector type.",
+          "detailed": "",
+          "return_type": "GeomTraits::Vector_3",
+          "definition": "typedef GeomTraits::Vector_3 CGAL::Polygonal_surface_reconstruction< GeomTraits >::Vector",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "65"
+        },
+        {
+          "kind": "typedef",
+          "name": "Plane",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::Plane",
+          "brief": "plane type.",
+          "detailed": "",
+          "return_type": "GeomTraits::Plane_3",
+          "definition": "typedef GeomTraits::Plane_3 CGAL::Polygonal_surface_reconstruction< GeomTraits >::Plane",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "66"
+        },
+        {
+          "kind": "typedef",
+          "name": "Polygon_mesh",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::Polygon_mesh",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::Surface_mesh< Point >",
+          "definition": "typedef CGAL::Surface_mesh<Point> CGAL::Polygonal_surface_reconstruction< GeomTraits >::Polygon_mesh",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "71"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_descriptor",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::Face_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Polygon_mesh::Face_index",
+          "definition": "typedef Polygon_mesh::Face_index CGAL::Polygonal_surface_reconstruction< GeomTraits >::Face_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "73"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_descriptor",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::Vertex_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Polygon_mesh::Vertex_index",
+          "definition": "typedef Polygon_mesh::Vertex_index CGAL::Polygonal_surface_reconstruction< GeomTraits >::Vertex_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "74"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge_descriptor",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::Edge_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Polygon_mesh::Edge_index",
+          "definition": "typedef Polygon_mesh::Edge_index CGAL::Polygonal_surface_reconstruction< GeomTraits >::Edge_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "75"
+        },
+        {
+          "kind": "typedef",
+          "name": "Halfedge_descriptor",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::Halfedge_descriptor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Polygon_mesh::Halfedge_index",
+          "definition": "typedef Polygon_mesh::Halfedge_index CGAL::Polygonal_surface_reconstruction< GeomTraits >::Halfedge_descriptor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "76"
+        },
+        {
+          "kind": "variable",
+          "name": "hypothesis_",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::hypothesis_",
+          "brief": "",
+          "detailed": "",
+          "return_type": "internal::Hypothesis< GeomTraits >",
+          "definition": "internal::Hypothesis<GeomTraits> CGAL::Polygonal_surface_reconstruction< GeomTraits >::hypothesis_",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "143"
+        },
+        {
+          "kind": "variable",
+          "name": "candidate_faces_",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::candidate_faces_",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Polygon_mesh",
+          "definition": "Polygon_mesh CGAL::Polygonal_surface_reconstruction< GeomTraits >::candidate_faces_",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "146"
+        },
+        {
+          "kind": "variable",
+          "name": "error_message_",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::error_message_",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::string",
+          "definition": "std::string CGAL::Polygonal_surface_reconstruction< GeomTraits >::error_message_",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "148"
+        },
+        {
+          "kind": "function",
+          "name": "reconstruct",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::reconstruct",
+          "brief": "Reconstructs a watertight polygonal mesh model.",
+          "detailed": "MixedIntegerProgramTraits a model of MixedIntegerProgramTraits PolygonMesh a model of MutableFaceGraph true if the reconstruction succeeded, false otherwise.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygonal_surface_reconstruction< GeomTraits >::reconstruct",
+          "argsstring": "(PolygonMesh &output_mesh, double wt_fitting=0.43, double wt_coverage=0.27, double wt_complexity=0.30)",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "output_mesh",
+              "default": "",
+              "brief": "the final reconstruction result",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "wt_fitting",
+              "default": "0.43",
+              "brief": "weight for the data fitting term.",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "wt_coverage",
+              "default": "0.27",
+              "brief": "weight for the point coverage term.",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "wt_complexity",
+              "default": "0.30",
+              "brief": "weight for the model complexity term.",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "124"
+        },
+        {
+          "kind": "function",
+          "name": "output_candidate_faces",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::output_candidate_faces",
+          "brief": "Gives the user the possibility to access the intermediate candidate faces (i.e., the faces induced by the intersection of the supporting planes).",
+          "detailed": "PolygonMesh a model of MutableFaceGraph .",
+          "return_type": "void",
+          "definition": "void CGAL::Polygonal_surface_reconstruction< GeomTraits >::output_candidate_faces",
+          "argsstring": "(PolygonMesh &candidate_faces) const",
+          "params": [
+            {
+              "type": "PolygonMesh &",
+              "name": "candidate_faces",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "136"
+        },
+        {
+          "kind": "function",
+          "name": "error_message",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::error_message",
+          "brief": "Gets the error message (if reconstruction failed).",
+          "detailed": "",
+          "return_type": "const std::string &",
+          "definition": "const std::string & CGAL::Polygonal_surface_reconstruction< GeomTraits >::error_message",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "139"
+        },
+        {
+          "kind": "function",
+          "name": "Polygonal_surface_reconstruction",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::Polygonal_surface_reconstruction",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Polygonal_surface_reconstruction< GeomTraits >::Polygonal_surface_reconstruction",
+          "argsstring": "(const Polygonal_surface_reconstruction &psr)",
+          "params": [
+            {
+              "type": "const Polygonal_surface_reconstruction &",
+              "name": "psr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "151"
+        },
+        {
+          "kind": "function",
+          "name": "Polygonal_surface_reconstruction",
+          "qualified_name": "CGAL::Polygonal_surface_reconstruction::Polygonal_surface_reconstruction",
+          "brief": "Creates a Polygonal Surface Reconstruction object.",
+          "detailed": "After construction, candidate faces are generated and point/face confidence values are computed, allowing to reuse them in the subsequent reconstruction step with different parameters. PointRange is the range of input points, model of ConstRange . PointMap is a model of ReadablePropertyMap with value type GeomTraits::Point_3 . NormalMap is a model of ReadablePropertyMap with value type GeomTraits::Vector_3 . IndexMap is a model of ReadablePropertyMap with value type int . points range of input points. point_map property map: value_type of typename PointRange::const_iterator -> Point_3 normal_map property map: value_type of typename PointRange::const_iterator -> Vector_3 index_map property map: value_type of typename PointRange::const_iterator -> int , denoting the index of the plane it belongs to (-1 if the point is not assigned to a plane)",
+          "return_type": "",
+          "definition": "CGAL::Polygonal_surface_reconstruction< GeomTraits >::Polygonal_surface_reconstruction",
+          "argsstring": "(const PointRange &points, PointMap point_map, NormalMap normal_map, IndexMap index_map)",
+          "params": [
+            {
+              "type": "const PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PointMap",
+              "name": "point_map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "NormalMap",
+              "name": "normal_map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IndexMap",
+              "name": "index_map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Polygonal_surface_reconstruction.h",
+          "line": "105"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_polygonal__surface__reconstruction.xml",
+      "file": "CGAL/Polygonal_surface_reconstruction.h",
+      "line": "57"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Polygonal_surface_reconstruction.txt",
+      "line": "1"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgPolygonalSurfaceReconstructionRef": {
+      "kind": "group",
+      "name": "PkgPolygonalSurfaceReconstructionRef",
+      "brief": "",
+      "detailed": "Liangliang Nan This package provides a method for piecewise planar object reconstruction from point clouds. The method takes as input an unordered point set (and optionally planar segments) of a piecewise planar object and outputs a lightweight and watertight surface mesh interpolating the input point set. The method can handle arbitrary piecewise planar objects and is capable of recovering sharp features and is robust to noise and outliers. Introduced in: CGAL 4.14 Depends on: PkgAlphaShapes2 and PkgSolverInterface BibTeX: cgal:x-x-26a License: GPL Classified Reference Pages Classes CGAL::Polygonal_surface_reconstruction <Gt>",
+      "members": [],
+      "xml_file": "group___pkg_polygonal_surface_reconstruction_ref.xml"
+    }
+  }
+}

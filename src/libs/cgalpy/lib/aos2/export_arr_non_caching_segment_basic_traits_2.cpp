@@ -1,0 +1,109 @@
+// Copyright (c) 2023 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
+
+#include <nanobind/nanobind.h>
+
+#include <CGAL/Arr_non_caching_segment_basic_traits_2.h>
+
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/Kernel/export_point_2.hpp"
+#include "cgalpy/Kernel/export_segment_2.hpp"
+#include "cgalpy/Aos2_docstrings.hpp"
+
+namespace py = nanobind;
+namespace aos2_doc = cgalpy::aos2::docstrings;
+
+//
+void export_arr_non_caching_segment_basic_traits_2(py::module_& m) {
+  using Bgt = CGAL::Arr_non_caching_segment_basic_traits_2<Kernel>;
+
+  if (add_attr<Bgt>(m, "Arr_non_caching_segment_basic_traits_2")) return;
+
+  py::class_<Bgt, Kernel> bt_c(m,
+                               "Arr_non_caching_segment_basic_traits_2",
+                               "Basic traits for arrangements of non-caching segments.");
+
+  /// \name AosBasicTraits
+  /// @{
+  using Pnt = Bgt::Point_2;
+  using Xcv = Bgt::X_monotone_curve_2;
+  using Ctr_xcv = Bgt::Construct_x_monotone_curve_2;
+  using Compare_x_2 = Bgt::Compare_x_2;
+  using Compare_xy_2 = Bgt::Compare_xy_2;
+  using Construct_min_vertex_2 = Bgt::Construct_min_vertex_2;
+  using Construct_max_vertex_2 = Bgt::Construct_max_vertex_2;
+  using Is_vertical_2 = Bgt::Is_vertical_2;
+  using Compare_y_at_x_2 = Bgt::Compare_y_at_x_2;
+  using Compare_y_at_x_right_2 = Bgt::Compare_y_at_x_right_2;
+  using Compare_y_at_x_left_2 = Bgt::Compare_y_at_x_left_2;
+  using Equal_2 = Bgt::Equal_2;
+
+  // Point
+  if (! add_attr<Pnt>(bt_c, "Point_2")) {
+    py::class_<Pnt> pnt_c(bt_c, "Point_2");
+    export_point_2<Kernel>(pnt_c);
+  }
+
+  // X-monotone curve
+  if (! add_attr<Xcv>(bt_c, "X_monotone_curve_2")) {
+    py::class_<Xcv> xcv_c(bt_c, "X_monotone_curve_2");
+    export_segment_2<Kernel>(xcv_c);
+  }
+
+  add_attr<Ctr_xcv>(bt_c, "Construct_x_monotone_curve_2");
+
+  py::class_<Compare_y_at_x_right_2>(
+    bt_c, "Compare_y_at_x_right_2",
+    aos2_doc::AosTraits_CompareYAtXRight_2_class)
+    .def("__call__", &Compare_y_at_x_right_2::operator(),
+         py::arg("xcv1"), py::arg("xcv2"), py::arg("point"),
+         aos2_doc::AosTraits_CompareYAtXRight_2_operator_call)
+    ;
+
+  py::class_<Compare_y_at_x_left_2>(
+    bt_c, "Compare_y_at_x_left_2",
+    aos2_doc::AosTraits_CompareYAtXLeft_2_class)
+    .def("__call__", &Compare_y_at_x_left_2::operator(),
+         py::arg("xcv1"), py::arg("xcv2"), py::arg("point"),
+         aos2_doc::AosTraits_CompareYAtXLeft_2_operator_call)
+    ;
+
+  using Approx = Bgt::Approximate_2;
+#if CGAL_VERSION_NR >= 1060300900
+  using Ant = Approx::Approximate_number_type;
+#else
+  using Ant = Bgt::Approximate_number_type;
+#endif
+  using ovld1 = Ant(Approx::*)(const Pnt&, int i) const;
+  py::class_<Approx>(bt_c, "Approximate_2",
+                     aos2_doc::AosTraits_Approximate_2_class)
+    .def("__call__", static_cast<ovld1>(&Approx::operator()),
+         py::arg("point"), py::arg("i"),
+         aos2_doc::AosTraits_Approximate_2_operator_call)
+    ;
+
+  bt_c.def(py::init<>(),
+             "Construct a default non-caching segment basic traits object.")
+    .def(py::init<const Bgt&>(), py::arg("traits"),
+         "Copy-construct a non-caching segment basic traits object.")
+    .def("compare_y_at_x_right_2_object", &Bgt::compare_y_at_x_right_2_object,
+         aos2_doc::AosBasicTraits_2_compare_y_at_x_right_2_object)
+    .def("compare_y_at_x_left_2_object", &Bgt::compare_y_at_x_left_2_object,
+         aos2_doc::AosBasicTraits_2_compare_y_at_x_left_2_object)
+    .def("construct_x_monotone_curve_2_object",
+         &Bgt::construct_x_monotone_curve_2_object,
+         aos2_doc::AosConstructXMonotoneCurveTraits_2_construct_x_monotone_curve_2_object)
+    .def("approximate_2_object", &Bgt::approximate_2_object,
+         aos2_doc::AosApproximateTraits_2_approximate_2_object)
+    ;
+
+  /// @}
+}

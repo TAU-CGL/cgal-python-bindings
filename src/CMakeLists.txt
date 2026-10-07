@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 set(CGALPY_PY_MIN_VERSION 3.7)
 set(CGALPY_BOOST_MIN_VERSION 1.72.0)
 
@@ -23,6 +25,10 @@ if (CGALPY_WITH_VISUAL)
 else()
   find_package(CGAL REQUIRED COMPONENTS)
 endif()
+
+# Provide CGAL::TBB_support when TBB is available.
+find_package(TBB QUIET)
+include(CGAL_TBB_support)
 
 if (NOT CGAL_FOUND AND NOT DEFINED ENV{CGALPY_PYPI})
   message(FATAL_ERROR "This library cannot be compiled, as it requires CGAL.")
@@ -61,6 +67,20 @@ if (SKBUILD)
 else ()
     find_package(Python ${CGALPY_PY_MIN_VERSION} COMPONENTS Interpreter Development)
     set(CGALPY_PY_MAJOR_MINOR_VERSION "${Python_VERSION_MAJOR}${Python_VERSION_MINOR}")
+endif ()
+
+if (NOT SKBUILD)
+  execute_process(
+    COMMAND ${Python_EXECUTABLE} -c "import build"
+    RESULT_VARIABLE CGALPY_PYTHON_BUILD_MODULE_RESULT
+    OUTPUT_QUIET
+    ERROR_QUIET)
+  if (NOT CGALPY_PYTHON_BUILD_MODULE_RESULT EQUAL 0)
+    message(FATAL_ERROR
+      "The Python module 'build' is required for the non-SKBUILD wheel build. "
+      "Install it for the Python interpreter selected by CMake: "
+      "${Python_EXECUTABLE} -m pip install build")
+  endif ()
 endif ()
 
 # Find required Boost library
@@ -146,7 +166,6 @@ if (Qt6_FOUND AND NOT SKBUILD)
   include_directories(${Qt6OpenGL_INCLUDE_DIRS})
 endif()
 include_directories(${PYTHON_INCLUDE_DIRS})
-include_directories(${Boost_INCLUDE_DIR})
 
 # Add some compiler options
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
@@ -197,9 +216,15 @@ select_nef_3()
 select_polyhedron_3()
 select_polygon_2()
 select_polygon_mesh_processing()
-select_triangulated_surface_mesh_segmentation()
-select_triangulated_surface_mesh_simplification()
-select_triangulated_surface_mesh_skeletonization()
+select_surface_mesh_approximation()
+select_surface_mesh_decomposition()
+select_surface_mesh_deformation()
+select_surface_mesh_parameterization()
+select_surface_mesh_shortest_path()
+select_surface_mesh_segmentation()
+select_surface_mesh_simplification()
+select_surface_mesh_skeletonization()
+select_surface_mesh_topology()
 select_polygon_partitioning()
 select_spatial_searching()
 select_spatial_sorting()

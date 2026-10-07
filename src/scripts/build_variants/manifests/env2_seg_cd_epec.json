@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "env2_seg_cd_epec",
+  "description": "Build variant defined by cmake/tests/env2_seg_cd_epec.cmake",
+  "cmake_tests": [
+    "cmake/tests/env2_seg_cd_epec.cmake"
+  ]
+}

@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <string>
@@ -18,7 +19,7 @@
 #include <CGAL/GMP/Gmpz_type.h>
 #include <CGAL/GMP/Gmpq_type.h>
 
-#include "CGALPY/to_string.hpp"
+#include "cgalpy/to_string.hpp"
 
 namespace py = nanobind;
 

@@ -1,0 +1,990 @@
+{
+  "schema_version": 1,
+  "package": "Cone_spanners_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 11,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Compute_cone_boundaries_2": {
+      "kind": "class",
+      "name": "CGAL::Compute_cone_boundaries_2",
+      "brief": "The functor for computing the directions of cone boundaries with a given cone number and a given initial direction.",
+      "detailed": "This computation can be either inexact by simply dividing an approximate $ \\pi $ by the cone number (which is quick), or exact by using roots of polynomials (requiring number types such as CORE::Expr or leda_real , which are slow). The inexact computation is done by the general functor definition, while the exact computation is done by a specialization of this functor. In the construction of cone-based spanners such as Yao graph and Theta graph implemented by this package, this functor is called first to compute the cone boundaries. Of course, this functor can also be used in other applications where the plane needs to be divided into equally-angled cones. Traits_ Must be either CGAL::Exact_predicates_exact_constructions_kernel_with_root_of or CGAL::Exact_predicates_inexact_constructions_kernel .",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Direction_2",
+          "qualified_name": "CGAL::Compute_cone_boundaries_2::Direction_2",
+          "brief": "the direction type.",
+          "detailed": "",
+          "return_type": "Traits::Direction_2",
+          "definition": "typedef Traits::Direction_2 CGAL::Compute_cone_boundaries_2< Traits_ >::Direction_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Compute_cone_boundaries_2.h",
+          "line": "67"
+        },
+        {
+          "kind": "typedef",
+          "name": "Transformation",
+          "qualified_name": "CGAL::Compute_cone_boundaries_2::Transformation",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Aff_transformation_2",
+          "definition": "typedef Traits::Aff_transformation_2 CGAL::Compute_cone_boundaries_2< Traits_ >::Transformation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Compute_cone_boundaries_2.h",
+          "line": "71"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Compute_cone_boundaries_2::operator()",
+          "brief": "The operator().",
+          "detailed": "The direction of the first ray can be specified by the parameter initial_direction , which allows the first ray to start at any direction. This operator first places the initial_direction at the position pointed by result . Then, it calculates the remaining directions (cone boundaries) and output them to result in the counterclockwise order. Finally, the past-the-end iterator for the resulting directions is returned. DirectionOutputIterator an OutputIterator with value type Direction_2 . cone_number The number of cones initial_direction The direction of the first ray result The output iterator",
+          "return_type": "DirectionOutputIterator",
+          "definition": "DirectionOutputIterator CGAL::Compute_cone_boundaries_2< Traits_ >::operator()",
+          "argsstring": "(const unsigned int cone_number, const Direction_2 &initial_direction, DirectionOutputIterator result)",
+          "params": [
+            {
+              "type": "const unsigned int",
+              "name": "cone_number",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Direction_2 &",
+              "name": "initial_direction",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "DirectionOutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Compute_cone_boundaries_2.h",
+          "line": "91"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_compute__cone__boundaries__2.xml",
+      "file": "CGAL/Compute_cone_boundaries_2.h",
+      "line": "60"
+    },
+    "CGAL::Construct_theta_graph_2": {
+      "kind": "class",
+      "name": "CGAL::Construct_theta_graph_2",
+      "brief": "A template functor for constructing Theta graphs with a given set of 2D points and a given initial direction for the cone boundaries.",
+      "detailed": "Traits_ Must be either CGAL::Exact_predicates_exact_constructions_kernel_with_root_of or CGAL::Exact_predicates_inexact_constructions_kernel . Graph_ The graph type to store the constructed cone based spanner. It must be boost::adjacency_list with Traits_::Point_2 as VertexProperties .",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Graph",
+          "qualified_name": "CGAL::Construct_theta_graph_2::Graph",
+          "brief": "the specific type of boost::adjacency_list .",
+          "detailed": "",
+          "return_type": "Graph_",
+          "definition": "typedef Graph_ CGAL::Construct_theta_graph_2< Traits_, Graph_ >::Graph",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "60"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "CGAL::Construct_theta_graph_2::Point_2",
+          "brief": "the point type",
+          "detailed": "",
+          "return_type": "Traits::Point_2",
+          "definition": "typedef Traits::Point_2 CGAL::Construct_theta_graph_2< Traits_, Graph_ >::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "63"
+        },
+        {
+          "kind": "typedef",
+          "name": "Direction_2",
+          "qualified_name": "CGAL::Construct_theta_graph_2::Direction_2",
+          "brief": "the direction type",
+          "detailed": "",
+          "return_type": "Traits::Direction_2",
+          "definition": "typedef Traits::Direction_2 CGAL::Construct_theta_graph_2< Traits_, Graph_ >::Direction_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "66"
+        },
+        {
+          "kind": "typedef",
+          "name": "Line_2",
+          "qualified_name": "CGAL::Construct_theta_graph_2::Line_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Line_2",
+          "definition": "typedef Traits::Line_2 CGAL::Construct_theta_graph_2< Traits_, Graph_ >::Line_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "71"
+        },
+        {
+          "kind": "typedef",
+          "name": "Transformation",
+          "qualified_name": "CGAL::Construct_theta_graph_2::Transformation",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Aff_transformation_2",
+          "definition": "typedef Traits::Aff_transformation_2 CGAL::Construct_theta_graph_2< Traits_, Graph_ >::Transformation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "72"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_by_direction",
+          "qualified_name": "CGAL::Construct_theta_graph_2::Less_by_direction",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_by_direction_2< Traits, Graph_ >",
+          "definition": "typedef Less_by_direction_2<Traits, Graph_> CGAL::Construct_theta_graph_2< Traits_, Graph_ >::Less_by_direction",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "73"
+        },
+        {
+          "kind": "variable",
+          "name": "cone_number",
+          "qualified_name": "CGAL::Construct_theta_graph_2::cone_number",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int CGAL::Construct_theta_graph_2< Traits_, Graph_ >::cone_number",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "76"
+        },
+        {
+          "kind": "variable",
+          "name": "cones_choice",
+          "qualified_name": "CGAL::Construct_theta_graph_2::cones_choice",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Cones_selected",
+          "definition": "Cones_selected CGAL::Construct_theta_graph_2< Traits_, Graph_ >::cones_choice",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "79"
+        },
+        {
+          "kind": "variable",
+          "name": "rays",
+          "qualified_name": "CGAL::Construct_theta_graph_2::rays",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< Direction_2 >",
+          "definition": "std::vector<Direction_2> CGAL::Construct_theta_graph_2< Traits_, Graph_ >::rays",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "84"
+        },
+        {
+          "kind": "function",
+          "name": "Construct_theta_graph_2",
+          "qualified_name": "CGAL::Construct_theta_graph_2::Construct_theta_graph_2",
+          "brief": "Constructor.",
+          "detailed": "k Number of cones to divide space into initial_direction A direction denoting one of the rays dividing the cones. This allows arbitrary rotations of the rays that divide the plane. (default: positive x-axis) cones_selected Indicates whether even, odd or all cones are selected to construct graph.",
+          "return_type": "",
+          "definition": "CGAL::Construct_theta_graph_2< Traits_, Graph_ >::Construct_theta_graph_2",
+          "argsstring": "(unsigned int k, Direction_2 initial_direction=Direction_2(1, 0), Cones_selected cones_selected=ALL_CONES)",
+          "params": [
+            {
+              "type": "unsigned int",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Direction_2",
+              "name": "initial_direction",
+              "default": "Direction_2 (1, 0)",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cones_selected",
+              "name": "cones_selected",
+              "default": "ALL_CONES",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "96"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Construct_theta_graph_2::operator()",
+          "brief": "Function operator to construct a Theta graph.",
+          "detailed": "For the details of this algorithm, please refer to the User Manual. PointInputIterator an InputIterator with value type Point_2 . start An iterator pointing to the first vertex of the input. end An iterator pointing to the past-the-end location of the input. g The constructed graph object.",
+          "return_type": "Graph_ &",
+          "definition": "Graph_ & CGAL::Construct_theta_graph_2< Traits_, Graph_ >::operator()",
+          "argsstring": "(const PointInputIterator &start, const PointInputIterator &end, Graph_ &g)",
+          "params": [
+            {
+              "type": "const PointInputIterator &",
+              "name": "start",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PointInputIterator &",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Graph_ &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "125"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_cones",
+          "qualified_name": "CGAL::Construct_theta_graph_2::number_of_cones",
+          "brief": "returns the number of cones.",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int CGAL::Construct_theta_graph_2< Traits_, Graph_ >::number_of_cones",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "149"
+        },
+        {
+          "kind": "function",
+          "name": "directions",
+          "qualified_name": "CGAL::Construct_theta_graph_2::directions",
+          "brief": "outputs the set of directions to the iterator result .",
+          "detailed": "DirectionOutputIterator an OutputIterator with value type Direction_2 . result",
+          "return_type": "DirectionOutputIterator",
+          "definition": "DirectionOutputIterator CGAL::Construct_theta_graph_2< Traits_, Graph_ >::directions",
+          "argsstring": "(DirectionOutputIterator result)",
+          "params": [
+            {
+              "type": "DirectionOutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "159"
+        },
+        {
+          "kind": "function",
+          "name": "add_edges_in_cone",
+          "qualified_name": "CGAL::Construct_theta_graph_2::add_edges_in_cone",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Construct_theta_graph_2< Traits_, Graph_ >::add_edges_in_cone",
+          "argsstring": "(const Direction_2 &cwBound, const Direction_2 &ccwBound, Graph_ &g)",
+          "params": [
+            {
+              "type": "const Direction_2 &",
+              "name": "cwBound",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Direction_2 &",
+              "name": "ccwBound",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Graph_ &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "protected-func",
+          "section": "",
+          "file": "CGAL/Construct_theta_graph_2.h",
+          "line": "175"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_construct__theta__graph__2.xml",
+      "file": "CGAL/Construct_theta_graph_2.h",
+      "line": "52"
+    },
+    "CGAL::Construct_yao_graph_2": {
+      "kind": "class",
+      "name": "CGAL::Construct_yao_graph_2",
+      "brief": "A template functor for constructing Yao graphs with a given set of 2D points and a given initial direction for the cone boundaries.",
+      "detailed": "Traits_ Must be either CGAL::Exact_predicates_exact_constructions_kernel_with_root_of or CGAL::Exact_predicates_inexact_constructions_kernel . Graph_ The graph type to store the constructed cone based spanner. It must be boost::adjacency_list with Traits_::Point_2 as VertexProperties",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Graph",
+          "qualified_name": "CGAL::Construct_yao_graph_2::Graph",
+          "brief": "the specific type of boost::adjacency_list .",
+          "detailed": "",
+          "return_type": "Graph_",
+          "definition": "typedef Graph_ CGAL::Construct_yao_graph_2< Traits_, Graph_ >::Graph",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "55"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "CGAL::Construct_yao_graph_2::Point_2",
+          "brief": "the point type",
+          "detailed": "",
+          "return_type": "Traits::Point_2",
+          "definition": "typedef Traits::Point_2 CGAL::Construct_yao_graph_2< Traits_, Graph_ >::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "58"
+        },
+        {
+          "kind": "typedef",
+          "name": "Direction_2",
+          "qualified_name": "CGAL::Construct_yao_graph_2::Direction_2",
+          "brief": "the direction type",
+          "detailed": "",
+          "return_type": "Traits::Direction_2",
+          "definition": "typedef Traits::Direction_2 CGAL::Construct_yao_graph_2< Traits_, Graph_ >::Direction_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "61"
+        },
+        {
+          "kind": "typedef",
+          "name": "Line_2",
+          "qualified_name": "CGAL::Construct_yao_graph_2::Line_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits::Line_2",
+          "definition": "typedef Traits::Line_2 CGAL::Construct_yao_graph_2< Traits_, Graph_ >::Line_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "64"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_by_direction",
+          "qualified_name": "CGAL::Construct_yao_graph_2::Less_by_direction",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Less_by_direction_2< Traits, Graph_ >",
+          "definition": "typedef Less_by_direction_2<Traits, Graph_> CGAL::Construct_yao_graph_2< Traits_, Graph_ >::Less_by_direction",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "65"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_set",
+          "qualified_name": "CGAL::Construct_yao_graph_2::Point_set",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::set< typename Graph_::vertex_descriptor, Less_by_direction >",
+          "definition": "typedef std::set<typename Graph_::vertex_descriptor, Less_by_direction> CGAL::Construct_yao_graph_2< Traits_, Graph_ >::Point_set",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "67"
+        },
+        {
+          "kind": "variable",
+          "name": "cone_number",
+          "qualified_name": "CGAL::Construct_yao_graph_2::cone_number",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int CGAL::Construct_yao_graph_2< Traits_, Graph_ >::cone_number",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "70"
+        },
+        {
+          "kind": "variable",
+          "name": "cones_choice",
+          "qualified_name": "CGAL::Construct_yao_graph_2::cones_choice",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Cones_selected",
+          "definition": "Cones_selected CGAL::Construct_yao_graph_2< Traits_, Graph_ >::cones_choice",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "73"
+        },
+        {
+          "kind": "variable",
+          "name": "rays",
+          "qualified_name": "CGAL::Construct_yao_graph_2::rays",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< Direction_2 >",
+          "definition": "std::vector<Direction_2> CGAL::Construct_yao_graph_2< Traits_, Graph_ >::rays",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "77"
+        },
+        {
+          "kind": "function",
+          "name": "Construct_yao_graph_2",
+          "qualified_name": "CGAL::Construct_yao_graph_2::Construct_yao_graph_2",
+          "brief": "Constructor.",
+          "detailed": "k Number of cones to divide space into initial_direction A direction denoting one of the rays dividing the cones. This allows arbitrary rotations of the rays that divide the plane. (default: positive x-axis) cones_selected Indicates whether even, odd or all cones are selected to construct graph.",
+          "return_type": "",
+          "definition": "CGAL::Construct_yao_graph_2< Traits_, Graph_ >::Construct_yao_graph_2",
+          "argsstring": "(unsigned int k, Direction_2 initial_direction=Direction_2(1, 0), Cones_selected cones_selected=ALL_CONES)",
+          "params": [
+            {
+              "type": "unsigned int",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Direction_2",
+              "name": "initial_direction",
+              "default": "Direction_2 (1, 0)",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cones_selected",
+              "name": "cones_selected",
+              "default": "ALL_CONES",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "90"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Construct_yao_graph_2::operator()",
+          "brief": "Function operator to construct a Yao graph.",
+          "detailed": "For the details of this algorithm, please refer to the User Manual. PointInputIterator an InputIterator with value type Point_2 . start An iterator pointing to the first vertex of the input. end An iterator pointing to the past-the-end location of the input. g The constructed graph object.",
+          "return_type": "Graph_ &",
+          "definition": "Graph_ & CGAL::Construct_yao_graph_2< Traits_, Graph_ >::operator()",
+          "argsstring": "(const PointInputIterator &start, const PointInputIterator &end, Graph_ &g)",
+          "params": [
+            {
+              "type": "const PointInputIterator &",
+              "name": "start",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PointInputIterator &",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Graph_ &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "120"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_cones",
+          "qualified_name": "CGAL::Construct_yao_graph_2::number_of_cones",
+          "brief": "returns the number of cones.",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int CGAL::Construct_yao_graph_2< Traits_, Graph_ >::number_of_cones",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "144"
+        },
+        {
+          "kind": "function",
+          "name": "directions",
+          "qualified_name": "CGAL::Construct_yao_graph_2::directions",
+          "brief": "outputs the set of directions to the iterator result .",
+          "detailed": "DirectionOutputIterator an OutputIterator with value type Direction_2 . result",
+          "return_type": "DirectionOutputIterator",
+          "definition": "DirectionOutputIterator CGAL::Construct_yao_graph_2< Traits_, Graph_ >::directions",
+          "argsstring": "(DirectionOutputIterator result)",
+          "params": [
+            {
+              "type": "DirectionOutputIterator",
+              "name": "result",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "154"
+        },
+        {
+          "kind": "function",
+          "name": "add_edges_in_cone",
+          "qualified_name": "CGAL::Construct_yao_graph_2::add_edges_in_cone",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Construct_yao_graph_2< Traits_, Graph_ >::add_edges_in_cone",
+          "argsstring": "(const Direction_2 &cwBound, const Direction_2 &ccwBound, Graph_ &g)",
+          "params": [
+            {
+              "type": "const Direction_2 &",
+              "name": "cwBound",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Direction_2 &",
+              "name": "ccwBound",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Graph_ &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "protected-func",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "170"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_construct__yao__graph__2.xml",
+      "file": "CGAL/Construct_yao_graph_2.h",
+      "line": "49"
+    },
+    "CGAL::Construct_yao_graph_2::Less_euclidean_distance": {
+      "kind": "struct",
+      "name": "CGAL::Construct_yao_graph_2::Less_euclidean_distance",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "p",
+          "qualified_name": "CGAL::Construct_yao_graph_2::Less_euclidean_distance::p",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Point_2 &",
+          "definition": "const Point_2& CGAL::Construct_yao_graph_2< Traits_, Graph_ >::Less_euclidean_distance::p",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "222"
+        },
+        {
+          "kind": "variable",
+          "name": "g",
+          "qualified_name": "CGAL::Construct_yao_graph_2::Less_euclidean_distance::g",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Graph_ &",
+          "definition": "const Graph_& CGAL::Construct_yao_graph_2< Traits_, Graph_ >::Less_euclidean_distance::g",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "223"
+        },
+        {
+          "kind": "function",
+          "name": "Less_euclidean_distance",
+          "qualified_name": "CGAL::Construct_yao_graph_2::Less_euclidean_distance::Less_euclidean_distance",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Construct_yao_graph_2< Traits_, Graph_ >::Less_euclidean_distance::Less_euclidean_distance",
+          "argsstring": "(const Point_2 &p, const Graph_ &g)",
+          "params": [
+            {
+              "type": "const Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Graph_ &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "226"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Construct_yao_graph_2::Less_euclidean_distance::operator()",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Construct_yao_graph_2< Traits_, Graph_ >::Less_euclidean_distance::operator()",
+          "argsstring": "(const typename Point_set::iterator::value_type &i, const typename Point_set::iterator::value_type &j)",
+          "params": [
+            {
+              "type": "const typename Point_set::iterator::value_type &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Point_set::iterator::value_type &",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Construct_yao_graph_2.h",
+          "line": "229"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_construct__yao__graph__2_1_1_less__euclidean__distance.xml",
+      "file": "CGAL/Construct_yao_graph_2.h",
+      "line": "221"
+    },
+    "CGAL::Gnuplot_edges_2": {
+      "kind": "struct",
+      "name": "CGAL::Gnuplot_edges_2",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_gnuplot__edges__2.xml",
+      "file": "CGAL/gnuplot_output_2.h",
+      "line": "100"
+    },
+    "CGAL::Gnuplot_edges_2< Graph, boost::bidirectionalS >": {
+      "kind": "struct",
+      "name": "CGAL::Gnuplot_edges_2< Graph, boost::bidirectionalS >",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_gnuplot__edges__2_3_01_graph_00_01boost_1_1bidirectional_s_01_4.xml",
+      "file": "CGAL/gnuplot_output_2.h",
+      "line": "218"
+    },
+    "CGAL::Gnuplot_edges_2< Graph, boost::directedS >": {
+      "kind": "struct",
+      "name": "CGAL::Gnuplot_edges_2< Graph, boost::directedS >",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "gnuplot_edge_script",
+          "qualified_name": "CGAL::Gnuplot_edges_2< Graph, boost::directedS >::gnuplot_edge_script",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::string",
+          "definition": "static std::string CGAL::Gnuplot_edges_2< Graph, boost::directedS >::gnuplot_edge_script",
+          "argsstring": "(const Graph &g)",
+          "params": [
+            {
+              "type": "const Graph &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-static-func",
+          "section": "",
+          "file": "CGAL/gnuplot_output_2.h",
+          "line": "201"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_gnuplot__edges__2_3_01_graph_00_01boost_1_1directed_s_01_4.xml",
+      "file": "CGAL/gnuplot_output_2.h",
+      "line": "197"
+    },
+    "CGAL::Gnuplot_edges_2< Graph, boost::undirectedS >": {
+      "kind": "struct",
+      "name": "CGAL::Gnuplot_edges_2< Graph, boost::undirectedS >",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "gnuplot_edge_script",
+          "qualified_name": "CGAL::Gnuplot_edges_2< Graph, boost::undirectedS >::gnuplot_edge_script",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::string",
+          "definition": "static std::string CGAL::Gnuplot_edges_2< Graph, boost::undirectedS >::gnuplot_edge_script",
+          "argsstring": "(const Graph &g)",
+          "params": [
+            {
+              "type": "const Graph &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-static-func",
+          "section": "",
+          "file": "CGAL/gnuplot_output_2.h",
+          "line": "225"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_gnuplot__edges__2_3_01_graph_00_01boost_1_1undirected_s_01_4.xml",
+      "file": "CGAL/gnuplot_output_2.h",
+      "line": "223"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "gnuplot_edge_list",
+          "qualified_name": "CGAL::gnuplot_edge_list",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::string",
+          "definition": "std::string CGAL::gnuplot_edge_list",
+          "argsstring": "(const Graph &g)",
+          "params": [
+            {
+              "type": "const Graph &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/gnuplot_output_2.h",
+          "line": "105"
+        },
+        {
+          "kind": "function",
+          "name": "gnuplot_vertex_list",
+          "qualified_name": "CGAL::gnuplot_vertex_list",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::string",
+          "definition": "std::string CGAL::gnuplot_vertex_list",
+          "argsstring": "(const Graph &g)",
+          "params": [
+            {
+              "type": "const Graph &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/gnuplot_output_2.h",
+          "line": "126"
+        }
+      ],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Cone_spanners_2.txt",
+      "line": "1"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgConeSpanners2Ref": {
+      "kind": "group",
+      "name": "PkgConeSpanners2Ref",
+      "brief": "",
+      "detailed": "Weisheng Si, Quincy Tse, and Frédérik Paradis This package provides functors for constructing two kinds of cone-based spanners: Yao graph and Theta graph, given a set of vertices on the plane and the directions of cone boundaries. Both exact and inexact constructions are supported. In exact construction, the cone boundaries are calculated using the roots of polynomials, thus avoiding the use of $ \\pi $ , which cannot be represented exactly. In inexact construction, the cone boundaries are calculated using the approximate $ \\pi $ value defined in CGAL, which is still accurate enough for most applications. Moreover, for visualization purpose, this package provides a global function to generate the data and script files used by Gnuplot to plot the constructed graphs. This package also provides options for the Half Yao graph and the Half Theta graph. Introduced in: CGAL 4.9 BibTeX: cgal:st-cbs-26a License: GPL Classified Reference Pages Functors CGAL::Compute_cone_boundaries_2 CGAL::Construct_yao_graph_2 CGAL::Construct_theta_graph_2 Functions CGAL::gnuplot_output_2() Enumerations CGAL::Cones_selected",
+      "members": [
+        {
+          "kind": "enum",
+          "name": "Cones_selected",
+          "qualified_name": "CGAL::Cones_selected",
+          "brief": "An enum of the choice of cones in cone spanners.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "enum",
+          "section": "",
+          "file": "CGAL/Cone_spanners_enum_2.h",
+          "line": "29"
+        },
+        {
+          "kind": "function",
+          "name": "gnuplot_output_2",
+          "qualified_name": "CGAL::gnuplot_output_2",
+          "brief": "outputs a set of files used by Gnuplot to plot g .",
+          "detailed": "The files that are generated for Gnuplot are: (1) prefix.v (vertex list) (2) prefix.plt (Gnuplot script), This script will read prefix.v as input to plot the vertex list. The edge list is also included in this script. Notes: (1) If these files already exists, this function will overwrite these files. (2) Parallel and self-edges cannot be plotted. Graph The type of the graph to be plotted. For this function to work, the graph type must be boost::adjacency_list with CGAL::Point_2 as the VertexProperties . g A boost::adjacency_list graph with CGAL::Point_2 as the VertexProperties to be plotted prefix The prefix of the output files names",
+          "return_type": "void",
+          "definition": "void CGAL::gnuplot_output_2",
+          "argsstring": "(const Graph &g, const std::string &prefix)",
+          "params": [
+            {
+              "type": "const Graph &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const std::string &",
+              "name": "prefix",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/gnuplot_output_2.h",
+          "line": "139"
+        }
+      ],
+      "xml_file": "group___pkg_cone_spanners2_ref.xml"
+    }
+  }
+}

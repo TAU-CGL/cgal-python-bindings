@@ -1,0 +1,1489 @@
+{
+  "schema_version": 1,
+  "package": "Miscellany",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 13,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Handle_hash_function": {
+      "kind": "struct",
+      "name": "CGAL::Handle_hash_function",
+      "brief": "The class Handle_hash_function is a model for the UniqueHashFunction concept.",
+      "detailed": "It is applicable for all key types with pointer-like functionality, such as handles, iterators, and circulators. Specifically, for a key value the expression &*key must return a unique address. Is model of UniqueHashFunction CGAL::Unique_hash_map <Key,Data, UniqueHashFunction > Implementation Plain type cast of &*key to std::size_t and divided by the size of the std::iterator_traits<Handle>::value_type to avoid correlations with the internal table size, which is a power of two.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Handle_hash_function",
+          "qualified_name": "CGAL::Handle_hash_function::Handle_hash_function",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Handle_hash_function::Handle_hash_function",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Handle_hash_function.h",
+          "line": "35"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Handle_hash_function::operator()",
+          "brief": "Returns unique hash value for any Handle type for which &*key gives a unique address.",
+          "detailed": "The type std::iterator_traits<Handle>::value_type has to be defined (which it is already for pointers, handles, iterators, and circulators).",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Handle_hash_function::operator()",
+          "argsstring": "(const Handle &key)",
+          "params": [
+            {
+              "type": "const Handle &",
+              "name": "key",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Handle_hash_function.h",
+          "line": "52"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_handle__hash__function.xml",
+      "file": "CGAL/Handle_hash_function.h",
+      "line": "26"
+    },
+    "CGAL::Memory_sizer": {
+      "kind": "struct",
+      "name": "CGAL::Memory_sizer",
+      "brief": "The class Memory_sizer allows to measure the memory size used by the process.",
+      "detailed": "Both the virtual memory size and the resident size are available (the resident size does not account for swapped out memory nor for the memory which is not yet paged-in). Implementation Accessing this information requires the use of non-portable code. Currently, there is support for Linux platforms, the Microsoft and Intel compiler on Windows, as well as Mac OS X. If a platform is not supported, the two member functions return 0.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "size_type",
+          "qualified_name": "CGAL::Memory_sizer::size_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "typedef std::size_t CGAL::Memory_sizer::size_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Memory_sizer.h",
+          "line": "29"
+        },
+        {
+          "kind": "function",
+          "name": "Memory_sizer",
+          "qualified_name": "CGAL::Memory_sizer::Memory_sizer",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Memory_sizer::Memory_sizer",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Memory_sizer.h",
+          "line": "39"
+        },
+        {
+          "kind": "function",
+          "name": "virtual_size",
+          "qualified_name": "CGAL::Memory_sizer::virtual_size",
+          "brief": "Returns the virtual memory size in bytes.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type CGAL::Memory_sizer::virtual_size",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Memory_sizer.h",
+          "line": "49"
+        },
+        {
+          "kind": "function",
+          "name": "resident_size",
+          "qualified_name": "CGAL::Memory_sizer::resident_size",
+          "brief": "Returns the resident memory size in bytes.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type CGAL::Memory_sizer::resident_size",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Memory_sizer.h",
+          "line": "54"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_memory__sizer.xml",
+      "file": "CGAL/Memory_sizer.h",
+      "line": "21"
+    },
+    "CGAL::Modifier_base": {
+      "kind": "class",
+      "name": "CGAL::Modifier_base",
+      "brief": "Modifier_base is an abstract base class providing the interface for any modifier.",
+      "detailed": "A modifier is a function object derived from Modifier_base that implements the pure virtual member function operator() , which accepts a single reference parameter R& on which the modifier is allowed to work. R is the type of the internal representation that is to be modified. Example The following fragment defines a class A with an internal representation i of type int . It provides a member function delegate() , which gives a modifier access to the internal variable and checks validity thereafter. The example modifier sets the internal variable to 42. The example function applies the modifier to an instance of class A . class A { int i; // protected internal representation public : void delegate( CGAL::Modifier_base<int>& modifier) { modifier(i); CGAL_postcondition( i > 0); // check validity } }; struct Modifier : public CGAL::Modifier_base<int> { void operator() ( int & rep) { rep = 42;} }; void use_it() { A a; Modifier m; a.delegate(m); // a.i == 42 and A has checked that A::i > 0. }",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Representation",
+          "qualified_name": "CGAL::Modifier_base::Representation",
+          "brief": "the internal representation type.",
+          "detailed": "",
+          "return_type": "R",
+          "definition": "typedef R CGAL::Modifier_base< R >::Representation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Modifier_base.h",
+          "line": "55"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Modifier_base::operator()",
+          "brief": "",
+          "detailed": "rep is a valid representation.",
+          "return_type": "void",
+          "definition": "virtual void CGAL::Modifier_base< R >::operator()",
+          "argsstring": "(R &rep)",
+          "params": [
+            {
+              "type": "R &",
+              "name": "rep",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Modifier_base.h",
+          "line": "65"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_modifier__base.xml",
+      "file": "CGAL/Modifier_base.h",
+      "line": "46"
+    },
+    "CGAL::Profile_counter": {
+      "kind": "struct",
+      "name": "CGAL::Profile_counter",
+      "brief": "The class Profile_counter provides a way to count the number of times a given line of code is executed during the execution of a program, and print this number at the end of the execution of the program.",
+      "detailed": "Such counters can be added at critical places in the code, and at the end of the execution of a program, the count is printed on std::cerr , together with an identification string passed to the constructor. The macro ::CGAL_PROFILER can be used to conveniently place these counters anywhere. They are disabled by default and activated by the global macro ::CGAL_PROFILE. Operations If ::CGAL_PROFILE is not defined, then ::CGAL_PROFILER is defined to an empty statement. Otherwise, it is defined to { static CGAL::Profile_counter tmp(MSG); ++tmp; } Example: Profiling_tools/Profile_counter.cpp Show / Hide #define CGAL_PROFILE #include <CGAL/Profile_counter.h> int main() { for ( int i=0; i<10000; ++i) { CGAL_PROFILER ( \"iterations of the for-loop\" ); } return 0; } will print at exit: [CGAL::Profile_counter] 10 iterations of the for -loop",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Profile_counter",
+          "qualified_name": "CGAL::Profile_counter::Profile_counter",
+          "brief": "The internal counter is initialized to 0, and the string s is stored for further printing by the destructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Profile_counter::Profile_counter",
+          "argsstring": "(std::string s)",
+          "params": [
+            {
+              "type": "std::string",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Profile_counter.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "~Profile_counter",
+          "qualified_name": "CGAL::Profile_counter::~Profile_counter",
+          "brief": "The value of the counter is printed to std::cerr together with the string.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Profile_counter::~Profile_counter",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Profile_counter.h",
+          "line": "53"
+        },
+        {
+          "kind": "function",
+          "name": "operator++",
+          "qualified_name": "CGAL::Profile_counter::operator++",
+          "brief": "Increments the internal counter.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Profile_counter::operator++",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Profile_counter.h",
+          "line": "63"
+        },
+        {
+          "kind": "define",
+          "name": "CGAL_PROFILE",
+          "qualified_name": "CGAL::Profile_counter::CGAL_PROFILE",
+          "brief": "Macro to enable and disable profiling statements.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "related",
+          "section": "",
+          "file": "CGAL/Profile_counter.h",
+          "line": "75"
+        },
+        {
+          "kind": "define",
+          "name": "CGAL_PROFILER",
+          "qualified_name": "CGAL::Profile_counter::CGAL_PROFILER",
+          "brief": "Profiling macro that uses CGAL::Profile_counter .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [
+            {
+              "type": "",
+              "name": "MSG",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "related",
+          "section": "",
+          "file": "CGAL/Profile_counter.h",
+          "line": "82"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_profile__counter.xml",
+      "file": "CGAL/Profile_counter.h",
+      "line": "37"
+    },
+    "CGAL::Real_timer": {
+      "kind": "class",
+      "name": "CGAL::Real_timer",
+      "brief": "The class Real_timer is a timer class for measuring real time.",
+      "detailed": "A timer t of type Real_timer is an object with a state. It is either running or it is stopped . The state is controlled with Real_timer::start() and Real_timer::stop() . The timer counts the time elapsed since its creation or last reset. It counts only the time where it is in the running state. The time information is given in seconds. The timer counts also the number of intervals it was running, i.e. it counts the number of calls of the Real_timer::start() member function since the last reset. If the reset occurs while the timer is running it counts as the first interval. Implementation The timer class is based on the C function gettimeofday() on POSIX systems and the C function _ftime() on MS Visual C++. The system calls to these timers might fail, in which case a warning message will be issued through the CGAL error handler and the functions return with the error codes indicated above. The Real_timer::precision() method computes the precision dynamically at runtime at its first invocation.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Real_timer",
+          "qualified_name": "CGAL::Real_timer::Real_timer",
+          "brief": "state is stopped .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Real_timer::Real_timer",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Real_timer.h",
+          "line": "39"
+        },
+        {
+          "kind": "function",
+          "name": "start",
+          "qualified_name": "CGAL::Real_timer::start",
+          "brief": "",
+          "detailed": "state is stopped .",
+          "return_type": "void",
+          "definition": "void CGAL::Real_timer::start",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Real_timer.h",
+          "line": "49"
+        },
+        {
+          "kind": "function",
+          "name": "stop",
+          "qualified_name": "CGAL::Real_timer::stop",
+          "brief": "",
+          "detailed": "state is running .",
+          "return_type": "void",
+          "definition": "void CGAL::Real_timer::stop",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Real_timer.h",
+          "line": "54"
+        },
+        {
+          "kind": "function",
+          "name": "reset",
+          "qualified_name": "CGAL::Real_timer::reset",
+          "brief": "reset timer to zero.",
+          "detailed": "The state is unaffected.",
+          "return_type": "void",
+          "definition": "void CGAL::Real_timer::reset",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Real_timer.h",
+          "line": "59"
+        },
+        {
+          "kind": "function",
+          "name": "is_running",
+          "qualified_name": "CGAL::Real_timer::is_running",
+          "brief": "true if the current state is running.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Real_timer::is_running",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Real_timer.h",
+          "line": "64"
+        },
+        {
+          "kind": "function",
+          "name": "time",
+          "qualified_name": "CGAL::Real_timer::time",
+          "brief": "real time in seconds, or 0 if the underlying system call failed.",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Real_timer::time",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Real_timer.h",
+          "line": "70"
+        },
+        {
+          "kind": "function",
+          "name": "intervals",
+          "qualified_name": "CGAL::Real_timer::intervals",
+          "brief": "number of start/stop-intervals since the last reset.",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::Real_timer::intervals",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Real_timer.h",
+          "line": "76"
+        },
+        {
+          "kind": "function",
+          "name": "precision",
+          "qualified_name": "CGAL::Real_timer::precision",
+          "brief": "smallest possible time step in seconds, or -1 if the system call failed.",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Real_timer::precision",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Real_timer.h",
+          "line": "82"
+        },
+        {
+          "kind": "function",
+          "name": "const",
+          "qualified_name": "CGAL::Real_timer::const",
+          "brief": "maximal representable time in seconds.",
+          "detailed": "",
+          "return_type": "double max",
+          "definition": "double max CGAL::Real_timer::const",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Real_timer.h",
+          "line": "87"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_real__timer.xml",
+      "file": "CGAL/Real_timer.h",
+      "line": "30"
+    },
+    "CGAL::Timer": {
+      "kind": "class",
+      "name": "CGAL::Timer",
+      "brief": "The class Timer is a timer class for measuring user process time.",
+      "detailed": "When used to profile a multithreaded algorithm, this timer will add up the process time of each thread, which may be unexpected. To compute the wall-clock time of an algorithm, please consider using CGAL::Real_timer . A timer t of type Timer is an object with a state. It is either running or it is stopped . The state is controlled with Timer::start() and Timer::stop() . The timer counts the time elapsed since its creation or last reset. It counts only the time where it is in the running state. The time information is given in seconds. The timer counts also the number of intervals it was running, i.e. it counts the number of calls of the Timer::start() member function since the last reset. If the reset occurs while the timer is running it counts as the first interval. Implementation The timer class is based on the C function std::clock() on PC systems and the C function getrusage() on standard POSIX systems. The counter for the std::clock() based solution might wrap around (overflow) after only about 36 minutes. This won't happen on POSIX systems. The system calls to these timers might fail, in which case a warning message will be issued through the CGAL error handler and the functions return with the error codes indicated above. The Timer::precision() method computes the precision dynamically at runtime at its first invocation.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Timer",
+          "qualified_name": "CGAL::Timer::Timer",
+          "brief": "state is stopped .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Timer::Timer",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Timer.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "start",
+          "qualified_name": "CGAL::Timer::start",
+          "brief": "",
+          "detailed": "state is stopped .",
+          "return_type": "void",
+          "definition": "void CGAL::Timer::start",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Timer.h",
+          "line": "57"
+        },
+        {
+          "kind": "function",
+          "name": "stop",
+          "qualified_name": "CGAL::Timer::stop",
+          "brief": "",
+          "detailed": "state is running .",
+          "return_type": "void",
+          "definition": "void CGAL::Timer::stop",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Timer.h",
+          "line": "62"
+        },
+        {
+          "kind": "function",
+          "name": "reset",
+          "qualified_name": "CGAL::Timer::reset",
+          "brief": "reset timer to zero.",
+          "detailed": "The state is unaffected.",
+          "return_type": "void",
+          "definition": "void CGAL::Timer::reset",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Timer.h",
+          "line": "67"
+        },
+        {
+          "kind": "function",
+          "name": "is_running",
+          "qualified_name": "CGAL::Timer::is_running",
+          "brief": "true if the current state is running.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Timer::is_running",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Timer.h",
+          "line": "72"
+        },
+        {
+          "kind": "function",
+          "name": "time",
+          "qualified_name": "CGAL::Timer::time",
+          "brief": "user process time in seconds, or 0 if the underlying system call failed.",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Timer::time",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Timer.h",
+          "line": "78"
+        },
+        {
+          "kind": "function",
+          "name": "intervals",
+          "qualified_name": "CGAL::Timer::intervals",
+          "brief": "number of start/stop-intervals since the last reset.",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::Timer::intervals",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Timer.h",
+          "line": "84"
+        },
+        {
+          "kind": "function",
+          "name": "precision",
+          "qualified_name": "CGAL::Timer::precision",
+          "brief": "smallest possible time step in seconds, or -1 if the system call failed.",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Timer::precision",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Timer.h",
+          "line": "90"
+        },
+        {
+          "kind": "function",
+          "name": "max",
+          "qualified_name": "CGAL::Timer::max",
+          "brief": "maximal representable time in seconds.",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Timer::max",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Timer.h",
+          "line": "95"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_timer.xml",
+      "file": "CGAL/Timer.h",
+      "line": "38"
+    },
+    "CGAL::Union_find": {
+      "kind": "class",
+      "name": "CGAL::Union_find",
+      "brief": "An instance P of the data type Union_find <T,A> is a partition of values of type T into disjoint sets.",
+      "detailed": "The template parameter A has to be a model of the allocator concept as defined in the C++ standard. It has a default argument CGAL_ALLOCATOR(T) . Implementation Union_find <T,A> is implemented with union by rank and path compression. The running time for $ m$ set operations on $ n$ elements is $O(n \\alpha(m,n))$ where $ \\alpha(m,n)$ is the extremely slow growing inverse of Ackermann's function.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::Union_find::value_type",
+          "brief": "values stored in items (equal to T ).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Union_find< T, A >::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Union_find.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "handle",
+          "qualified_name": "CGAL::Union_find::handle",
+          "brief": "handle to values.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Union_find< T, A >::handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Union_find.h",
+          "line": "36"
+        },
+        {
+          "kind": "typedef",
+          "name": "iterator",
+          "qualified_name": "CGAL::Union_find::iterator",
+          "brief": "iterator over values.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Union_find< T, A >::iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Union_find.h",
+          "line": "41"
+        },
+        {
+          "kind": "typedef",
+          "name": "allocator",
+          "qualified_name": "CGAL::Union_find::allocator",
+          "brief": "allocator.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Union_find< T, A >::allocator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Union_find.h",
+          "line": "46"
+        },
+        {
+          "kind": "function",
+          "name": "Union_find",
+          "qualified_name": "CGAL::Union_find::Union_find",
+          "brief": "creates an instance P of type Union_find <T,A> and initializes it to the empty partition.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Union_find< T, A >::Union_find",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Union_find.h",
+          "line": "46"
+        },
+        {
+          "kind": "function",
+          "name": "get_allocator",
+          "qualified_name": "CGAL::Union_find::get_allocator",
+          "brief": "the allocator of the partition.",
+          "detailed": "",
+          "return_type": "allocator",
+          "definition": "allocator CGAL::Union_find< T, A >::get_allocator",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "67"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_sets",
+          "qualified_name": "CGAL::Union_find::number_of_sets",
+          "brief": "returns the number of disjoint sets of the partition.",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Union_find< T, A >::number_of_sets",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "72"
+        },
+        {
+          "kind": "function",
+          "name": "size",
+          "qualified_name": "CGAL::Union_find::size",
+          "brief": "returns the number of values of the partition.",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Union_find< T, A >::size",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "77"
+        },
+        {
+          "kind": "function",
+          "name": "bytes",
+          "qualified_name": "CGAL::Union_find::bytes",
+          "brief": "returns the memory consumed by the partition.",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Union_find< T, A >::bytes",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "82"
+        },
+        {
+          "kind": "function",
+          "name": "size",
+          "qualified_name": "CGAL::Union_find::size",
+          "brief": "returns the size of the set containing h .",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Union_find< T, A >::size",
+          "argsstring": "(const_handle h) const",
+          "params": [
+            {
+              "type": "const_handle",
+              "name": "h",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "88"
+        },
+        {
+          "kind": "function",
+          "name": "clear",
+          "qualified_name": "CGAL::Union_find::clear",
+          "brief": "reinitializes to an empty partition.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Union_find< T, A >::clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "93"
+        },
+        {
+          "kind": "function",
+          "name": "make_set",
+          "qualified_name": "CGAL::Union_find::make_set",
+          "brief": "creates a new singleton set containing x and returns a handle to it.",
+          "detailed": "",
+          "return_type": "handle",
+          "definition": "handle CGAL::Union_find< T, A >::make_set",
+          "argsstring": "(const T &x)",
+          "params": [
+            {
+              "type": "const T &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "99"
+        },
+        {
+          "kind": "function",
+          "name": "push_back",
+          "qualified_name": "CGAL::Union_find::push_back",
+          "brief": "same as make_set() .",
+          "detailed": "",
+          "return_type": "handle",
+          "definition": "handle CGAL::Union_find< T, A >::push_back",
+          "argsstring": "(const T &x)",
+          "params": [
+            {
+              "type": "const T &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "104"
+        },
+        {
+          "kind": "function",
+          "name": "insert",
+          "qualified_name": "CGAL::Union_find::insert",
+          "brief": "inserts the range of values referenced by [first,beyond) .",
+          "detailed": "Forward_iterator must be a forward iterator with value type T .",
+          "return_type": "void",
+          "definition": "void CGAL::Union_find< T, A >::insert",
+          "argsstring": "(Forward_iterator first, Forward_iterator beyond)",
+          "params": [
+            {
+              "type": "Forward_iterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Forward_iterator",
+              "name": "beyond",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "111"
+        },
+        {
+          "kind": "function",
+          "name": "find",
+          "qualified_name": "CGAL::Union_find::find",
+          "brief": "",
+          "detailed": "",
+          "return_type": "handle",
+          "definition": "handle CGAL::Union_find< T, A >::find",
+          "argsstring": "(handle h) const",
+          "params": [
+            {
+              "type": "handle",
+              "name": "h",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "116"
+        },
+        {
+          "kind": "function",
+          "name": "find",
+          "qualified_name": "CGAL::Union_find::find",
+          "brief": "returns a canonical handle of the set that contains h , i.e., P.same_set(h,h2) iff P.find(h) == P.find(h2) .",
+          "detailed": "h is a handle in P .",
+          "return_type": "const_handle",
+          "definition": "const_handle CGAL::Union_find< T, A >::find",
+          "argsstring": "(const_handle p) const",
+          "params": [
+            {
+              "type": "const_handle",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "124"
+        },
+        {
+          "kind": "function",
+          "name": "unify_sets",
+          "qualified_name": "CGAL::Union_find::unify_sets",
+          "brief": "unites the sets of partition P containing h1 and h2 .",
+          "detailed": "h1 and h2 are in P .",
+          "return_type": "void",
+          "definition": "void CGAL::Union_find< T, A >::unify_sets",
+          "argsstring": "(handle h1, handle h2)",
+          "params": [
+            {
+              "type": "handle",
+              "name": "h1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "handle",
+              "name": "h2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "131"
+        },
+        {
+          "kind": "function",
+          "name": "same_set",
+          "qualified_name": "CGAL::Union_find::same_set",
+          "brief": "returns true iff h1 and h2 belong to the same set of P .",
+          "detailed": "h1 and h2 are in P .",
+          "return_type": "bool",
+          "definition": "bool CGAL::Union_find< T, A >::same_set",
+          "argsstring": "(const_handle h1, const_handle h2) const",
+          "params": [
+            {
+              "type": "const_handle",
+              "name": "h1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const_handle",
+              "name": "h2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "138"
+        },
+        {
+          "kind": "function",
+          "name": "begin",
+          "qualified_name": "CGAL::Union_find::begin",
+          "brief": "returns an iterator pointing to the first value of the partition.",
+          "detailed": "",
+          "return_type": "iterator",
+          "definition": "iterator CGAL::Union_find< T, A >::begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "144"
+        },
+        {
+          "kind": "function",
+          "name": "end",
+          "qualified_name": "CGAL::Union_find::end",
+          "brief": "returns an iterator pointing beyond the last value of the partition.",
+          "detailed": "",
+          "return_type": "iterator",
+          "definition": "iterator CGAL::Union_find< T, A >::end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Union_find.h",
+          "line": "150"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_union__find.xml",
+      "file": "CGAL/Union_find.h",
+      "line": "21"
+    },
+    "CGAL::Unique_hash_map": {
+      "kind": "class",
+      "name": "CGAL::Unique_hash_map",
+      "brief": "An instance of the class template Unique_hash_map is an injective mapping from the set of keys of type Key to the set of variables of type Data .",
+      "detailed": "New keys can be inserted at any time, however keys cannot be individually deleted. An object hash of the type UniqueHashFunction returns a unique integer index hash(key) of type std::size_t for all objects $ key$ stored in map . The template parameter has as default the Handle_hash_function that hashes all types of pointers, handles, iterators, and circulators. The parameter Allocator has to match the standard allocator requirements, with value type Data . This parameter has the default value CGAL_ALLOCATOR(Data) . All variables are initialized to default_data , a value of type Data specified in the definition of map . UniqueHashFunction CGAL::Handle_hash_function Implementation Unique_hash_map is implemented via a chained hashing scheme. Access operations map[i] take expected time $O(1)$ . The table_size parameter passed to chained hashing can be used to avoid unnecessary rehashing when set to the number of expected elements in the map. The design is derived from the STL hash_map and the LEDA type map . Its specialization on insertion only and unique hash values allow for a more time- and space-efficient implementation, see also [2] , Chapter 5. This implementation makes also use of sentinels that lead to defined keys that have not been inserted.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Key",
+          "qualified_name": "CGAL::Unique_hash_map::Key",
+          "brief": "the Key type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::Key",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "52"
+        },
+        {
+          "kind": "typedef",
+          "name": "Data",
+          "qualified_name": "CGAL::Unique_hash_map::Data",
+          "brief": "the Data type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::Data",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "57"
+        },
+        {
+          "kind": "typedef",
+          "name": "Hash_function",
+          "qualified_name": "CGAL::Unique_hash_map::Hash_function",
+          "brief": "the unique hash function type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::Hash_function",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "62"
+        },
+        {
+          "kind": "function",
+          "name": "Unique_hash_map",
+          "qualified_name": "CGAL::Unique_hash_map::Unique_hash_map",
+          "brief": "creates an injective function from Key to the set of unused variables of type Data , sets default_data to default , passes the table_size as argument to the internal implementation, and initializes the hash function with fct .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::Unique_hash_map",
+          "argsstring": "(const Data &default=Data(), std::size_t table_size=1, const Hash_function &fct=Hash_function())",
+          "params": [
+            {
+              "type": "const Data &",
+              "name": "default",
+              "default": "Data ()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "table_size",
+              "default": "1",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hash_function &",
+              "name": "fct",
+              "default": "Hash_function ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "62"
+        },
+        {
+          "kind": "function",
+          "name": "Unique_hash_map",
+          "qualified_name": "CGAL::Unique_hash_map::Unique_hash_map",
+          "brief": "creates an injective function from Key to the set of unused variables of type Data , sets default_data to default , passes the table_size as argument to the internal implementation, initializes the hash function with fct , and inserts all keys from the range [first1,beyond1) .",
+          "detailed": "The data variable for each inserted key is initialized with the corresponding value from the range [first2, first2 + (beyond1-first1)) . The increment operator must be defined for values of type Key and for values of type Data . beyond1 must be reachable from first1 using increments.",
+          "return_type": "",
+          "definition": "CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::Unique_hash_map",
+          "argsstring": "(Key first1, Key beyond1, Data first2, const Data &default=Data(), std::size_t table_size=1, const Hash_function &fct=Hash_function())",
+          "params": [
+            {
+              "type": "Key",
+              "name": "first1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Key",
+              "name": "beyond1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Data",
+              "name": "first2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Data &",
+              "name": "default",
+              "default": "Data ()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "table_size",
+              "default": "1",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hash_function &",
+              "name": "fct",
+              "default": "Hash_function ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "62"
+        },
+        {
+          "kind": "function",
+          "name": "default_value",
+          "qualified_name": "CGAL::Unique_hash_map::default_value",
+          "brief": "the current default_value .",
+          "detailed": "",
+          "return_type": "Data",
+          "definition": "Data CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::default_value",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "108"
+        },
+        {
+          "kind": "function",
+          "name": "hash_function",
+          "qualified_name": "CGAL::Unique_hash_map::hash_function",
+          "brief": "the current hash function.",
+          "detailed": "",
+          "return_type": "Hash_function",
+          "definition": "Hash_function CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::hash_function",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "113"
+        },
+        {
+          "kind": "function",
+          "name": "is_defined",
+          "qualified_name": "CGAL::Unique_hash_map::is_defined",
+          "brief": "returns true if $ key$ is defined in *this .",
+          "detailed": "Note that there can be keys defined that have not been inserted explicitly. Their variables are initialized to default_value .",
+          "return_type": "bool",
+          "definition": "bool CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::is_defined",
+          "argsstring": "(const Key &key) const",
+          "params": [
+            {
+              "type": "const Key &",
+              "name": "key",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "121"
+        },
+        {
+          "kind": "function",
+          "name": "reserve",
+          "qualified_name": "CGAL::Unique_hash_map::reserve",
+          "brief": "sets the table size.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::reserve",
+          "argsstring": "(std::size_t table_size)",
+          "params": [
+            {
+              "type": "std::size_t",
+              "name": "table_size",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "127"
+        },
+        {
+          "kind": "function",
+          "name": "clear",
+          "qualified_name": "CGAL::Unique_hash_map::clear",
+          "brief": "resets *this to the injective function from Key to the set of unused variables of type Data .",
+          "detailed": "The default_data remains unchanged.",
+          "return_type": "void",
+          "definition": "void CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "135"
+        },
+        {
+          "kind": "function",
+          "name": "clear",
+          "qualified_name": "CGAL::Unique_hash_map::clear",
+          "brief": "resets *this to the injective function from Key to the set of unused variables of type Data and sets default_data to default .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::clear",
+          "argsstring": "(const Data &default)",
+          "params": [
+            {
+              "type": "const Data &",
+              "name": "default",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "143"
+        },
+        {
+          "kind": "function",
+          "name": "operator[]",
+          "qualified_name": "CGAL::Unique_hash_map::operator[]",
+          "brief": "returns a reference to the variable map(key) .",
+          "detailed": "If key has not been inserted into map before, key is inserted and initialized with default_value .",
+          "return_type": "Data &",
+          "definition": "Data & CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::operator[]",
+          "argsstring": "(const Key &key)",
+          "params": [
+            {
+              "type": "const Key &",
+              "name": "key",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "151"
+        },
+        {
+          "kind": "function",
+          "name": "operator[]",
+          "qualified_name": "CGAL::Unique_hash_map::operator[]",
+          "brief": "returns a const reference to the variable *this(key) .",
+          "detailed": "If key has not been inserted into *this before, a const reference to the default_value is returned. However, key is not inserted into *this .",
+          "return_type": "const Data &",
+          "definition": "const Data & CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::operator[]",
+          "argsstring": "(const Key &key) const",
+          "params": [
+            {
+              "type": "const Key &",
+              "name": "key",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "160"
+        },
+        {
+          "kind": "function",
+          "name": "insert",
+          "qualified_name": "CGAL::Unique_hash_map::insert",
+          "brief": "inserts all keys from the range [first1,beyond1) .",
+          "detailed": "The data variable for each inserted key is initialized with the corresponding value from the range [first2, first2 + (beyond1-first1)) . Returns first2 + (beyond1-first1) . The increment operator must be defined for values of type Key and for values of type Data . beyond1 must be reachable from first1 using increments.",
+          "return_type": "Data",
+          "definition": "Data CGAL::Unique_hash_map< Key, Data, UniqueHashFunction, Allocator >::insert",
+          "argsstring": "(Key first1, Key beyond1, Data first2)",
+          "params": [
+            {
+              "type": "Key",
+              "name": "first1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Key",
+              "name": "beyond1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Data",
+              "name": "first2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Unique_hash_map.h",
+          "line": "172"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_unique__hash__map.xml",
+      "file": "CGAL/Unique_hash_map.h",
+      "line": "42"
+    },
+    "UniqueHashFunction": {
+      "kind": "class",
+      "name": "UniqueHashFunction",
+      "brief": "UniqueHashFunction is a concept for a hash function with unique hash values. An instance hash for a model of the UniqueHashFunction concept is a function object. It maps objects of its domain type Key to the integral image type std::size_t . The image values have to be unique for all keys in the domain type Key .",
+      "detailed": "Has models CGAL::Handle_hash_function CGAL::Unique_hash_map <Key,Data, UniqueHashFunction >",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "UniqueHashFunction::result_type",
+          "brief": "type of the hash value.",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "typedef std::size_t UniqueHashFunction::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/UniqueHashFunction.h",
+          "line": "29"
+        },
+        {
+          "kind": "function",
+          "name": "UniqueHashFunction",
+          "qualified_name": "UniqueHashFunction::UniqueHashFunction",
+          "brief": "copy constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "UniqueHashFunction::UniqueHashFunction",
+          "argsstring": "(const UniqueHashFunction &hash2)",
+          "params": [
+            {
+              "type": "const UniqueHashFunction &",
+              "name": "hash2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/UniqueHashFunction.h",
+          "line": "40"
+        },
+        {
+          "kind": "function",
+          "name": "operator=",
+          "qualified_name": "UniqueHashFunction::operator=",
+          "brief": "assignment.",
+          "detailed": "",
+          "return_type": "UniqueHashFunction &",
+          "definition": "UniqueHashFunction & UniqueHashFunction::operator=",
+          "argsstring": "(const UniqueHashFunction &hash2)",
+          "params": [
+            {
+              "type": "const UniqueHashFunction &",
+              "name": "hash2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/UniqueHashFunction.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "UniqueHashFunction::operator()",
+          "brief": "returns a unique hash value for the key value.",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t UniqueHashFunction::operator()",
+          "argsstring": "(const Key &key)",
+          "params": [
+            {
+              "type": "const Key &",
+              "name": "key",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/UniqueHashFunction.h",
+          "line": "56"
+        }
+      ],
+      "xml_file": "class_unique_hash_function.xml",
+      "file": "Concepts/UniqueHashFunction.h",
+      "line": "20"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "define",
+          "name": "CGAL_PROFILE",
+          "qualified_name": "CGAL::Profile_counter::CGAL_PROFILE",
+          "brief": "Macro to enable and disable profiling statements.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "define",
+          "section": "",
+          "file": "CGAL/Profile_counter.h",
+          "line": "75"
+        },
+        {
+          "kind": "define",
+          "name": "CGAL_PROFILER",
+          "qualified_name": "CGAL::Profile_counter::CGAL_PROFILER",
+          "brief": "Profiling macro that uses CGAL::Profile_counter .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [
+            {
+              "type": "",
+              "name": "MSG",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "define",
+          "section": "",
+          "file": "CGAL/Profile_counter.h",
+          "line": "82"
+        }
+      ],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/Handle_hash_function.h",
+      "line": "2"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "MiscellanyRef": {
+      "kind": "group",
+      "name": "MiscellanyRef",
+      "brief": "",
+      "detailed": "Lutz Kettner, Sylvain Pion, and Michael Seel This package provides classes for profiling time and memory consumption, profiling macros, a hash map, a union find data structure and a modifier. Introduced in: CGAL 3.2 BibTeX: cgal:kps-pthum-26a License: LGPL Classified Reference Pages Concepts UniqueHashFunction Classes CGAL::Timer CGAL::Real_timer CGAL::Memory_sizer CGAL::Profile_counter CGAL::Unique_hash_map <Key,Data, UniqueHashFunction > CGAL::Handle_hash_function CGAL::Union_find <T,A> CGAL::Modifier_base <R>",
+      "members": [],
+      "xml_file": "group___miscellany_ref.xml"
+    },
+    "MiscellanyConcepts": {
+      "kind": "group",
+      "name": "MiscellanyConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___miscellany_concepts.xml"
+    }
+  }
+}

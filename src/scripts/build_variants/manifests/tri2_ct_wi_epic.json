@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "tri2_ct_wi_epic",
+  "description": "Build variant defined by cmake/tests/tri2_ct_wi_epic.cmake",
+  "cmake_tests": [
+    "cmake/tests/tri2_ct_wi_epic.cmake"
+  ]
+}

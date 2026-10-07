@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 //            Efi Fogel         <efifogel@gmail.com>
 
 #include <nanobind/nanobind.h>
@@ -12,8 +13,8 @@
 #include <CGAL/Cartesian.h>
 #include <CGAL/Simple_cartesian.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/Kernel/export_kernel.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/Kernel/export_kernel.hpp"
 
 namespace py = nanobind;
 

@@ -1,0 +1,980 @@
+{
+  "schema_version": 1,
+  "package": "Periodic_3_mesh_3",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 15,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Implicit_to_labeled_subdomains_function_wrapper": {
+      "kind": "class",
+      "name": "CGAL::Implicit_to_labeled_subdomains_function_wrapper",
+      "brief": "The class Implicit_to_labeled_subdomains_function_wrapper is a helper class designed to wrap an implicit function which describes a domain by [ p is inside if f(p)<0 ] to a function that takes its values into {1, 2} and thus describes a multidomain: the subspace described by f(p)<0 is attributed the subdomain index 1 and the subspace described by f(p)>0 is attributed the subdomain index 2 .",
+      "detailed": "Note that for the 3D mesh generator [ f(p)=0 ] means that p is outside the domain. Since this wrapper has values into {1, 2} , both the interior and the exterior of the periodic domain described by the input implicit function are meshed, thus yielding a periodic mesh of the entire canonical cuboid. Function provides the definition of the function. This parameter stands for a model of the concept ImplicitFunction described in the surface mesh generation package. The number types Function::FT and BGT::FT are required to match. BGT is a geometric traits class that provides the basic operations to implement intersection tests and intersection computations through a bisection method. This parameter must be instantiated with a model of the concept BisectionGeometricTraits_3 . Implicit_multi_domain_to_labeling_function_wrapper .",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Implicit_to_labeled_subdomains_function_wrapper::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "BGT::Point_3",
+          "definition": "typedef BGT::Point_3 CGAL::Implicit_to_labeled_subdomains_function_wrapper< Function, BGT >::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Implicit_to_labeled_subdomains_function_wrapper.h",
+          "line": "38"
+        },
+        {
+          "kind": "function",
+          "name": "Implicit_to_labeled_subdomains_function_wrapper",
+          "qualified_name": "CGAL::Implicit_to_labeled_subdomains_function_wrapper::Implicit_to_labeled_subdomains_function_wrapper",
+          "brief": "Construction from an implicit function.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Implicit_to_labeled_subdomains_function_wrapper< Function, BGT >::Implicit_to_labeled_subdomains_function_wrapper",
+          "argsstring": "(Function f)",
+          "params": [
+            {
+              "type": "Function",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Implicit_to_labeled_subdomains_function_wrapper.h",
+          "line": "46"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Implicit_to_labeled_subdomains_function_wrapper::operator()",
+          "brief": "Returns 1 or 2 , depending on whether $ f(p) $ is negative or not.",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::Implicit_to_labeled_subdomains_function_wrapper< Function, BGT >::operator()",
+          "argsstring": "(const Point_3 &p) const",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Implicit_to_labeled_subdomains_function_wrapper.h",
+          "line": "55"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_implicit__to__labeled__subdomains__function__wrapper.xml",
+      "file": "CGAL/Implicit_to_labeled_subdomains_function_wrapper.h",
+      "line": "32"
+    },
+    "CGAL::Periodic_3_function_wrapper": {
+      "kind": "class",
+      "name": "CGAL::Periodic_3_function_wrapper",
+      "brief": "The class Periodic_3_function_wrapper is a helper class designed to wrap an (a priori non-periodic) implicit function describing a domain through the relationship [ p is inside if f(p)<0 ] and defined over the canonical cuboid to a function defined over the whole Euclidean space and periodic, with the same period as the canonical cuboid.",
+      "detailed": "More precisely, if f is the real function defined either over $ \\mathbb R^3$ or over the canonical cuboid, we construct the periodic real function $ f^{\\ast} $ defined over $ \\mathbb R^3$ as follows: For any point $(x,y,z)$ in the canonical cuboid, $ f^{\\ast}(x,y,z) = f(x,y,z)$ For any point $(x,y,z)$ outside the canonical cuboid, there is a unique canonical representative $(x_0,y_0,z_0)$ of $(x,y,z)$ in the canonical cuboid, i.e., $(x,y,z)=(x_0 + k_x c, y_0 + k_y c, z_0 + k_z c)$ with $(k_x,k_y,k_z)$ in $ \\mathbb Z^3$ , and $ f^{\\ast}(x,y,z) = f(x_0,y_0,z_0) $ . For example, if considering the unit cube as canonical cuboid, an oracle answering a query such as \"what is the value of the implicit function at this point?\" at the point (2.5, 2.5, 2.5) will be in fact evaluated at the canonical representative, that is (0.5, 0.5, 0.5) . Consequently, it is then not required to provide an input domain that is defined over the whole space or periodic, but only defined over the canonical cuboid. fig__Periodic_3_mesh_3FromCanonicalToWhole Illustration in 2D (cut view) of a domain defined by an implicit function that is transformed into a periodic implicit function. Only the values of the implicit function that are in the canonical cuboid are used: the values of the implicit function at $ P $ and $ Q $ are obtained by evaluating instead at $ P' $ and $ Q' $ , as shown on the right. In practice, the implicit function provided by the user is likely defined over a larger domain than the canonical cuboid (in general, it is $ \\mathbb R^3$ ). Note that when constructing artificially periodic functions all the values of the implicit function for points outside this canonical cuboid are unused since queries are always answered by looking at the canonical representative. fig__Periodic_3_mesh_3FromCanonicalToWholeDiscard gives an example of such domain where some information is discarded. fig__Periodic_3_mesh_3FromCanonicalToWholeDiscard Illustration in 2D (cut view) of a domain defined by an implicit function artificially made periodic. Any value of the function outside of the canonical cuboid is ignored. Note also that when constructing artificially periodic functions, it is the responsibility of the user to provide an input function that is compatible with the canonical cuboid (that is, whose isovalues are periodically continuous and without intersections). fig__Periodic_3_mesh_3ContinuityIssue is an example of a bad choice of input function and canonical cuboid: there is no continuity of the isovalues at the border of the canonical cuboid. In such configuration, the mesher might or might not finish and the result is likely to be non-manifold and to contain self-intersections. fig__Periodic_3_mesh_3ContinuityIssue Illustration in 2D (cut view) of a domain defined by an implicit function artificially made periodic. The zero isovalue of the implicit function does not form a continuous curve. Function provides the definition of the function. This parameter stands for a model of the concept ImplicitFunction described in the surface mesh generation package. The number types Function::FT and BGT::FT are required to match. BGT is a geometric traits class that provides the basic operations to implement intersection tests and intersection computations through a bisection method. This parameter must be instantiated with a model of the concept BisectionGeometricTraits_3 .",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Periodic_3_function_wrapper::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "BGT::FT",
+          "definition": "typedef BGT::FT CGAL::Periodic_3_function_wrapper< Function, BGT >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Periodic_3_function_wrapper.h",
+          "line": "77"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "CGAL::Periodic_3_function_wrapper::Point_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "BGT::Point_3",
+          "definition": "typedef BGT::Point_3 CGAL::Periodic_3_function_wrapper< Function, BGT >::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Periodic_3_function_wrapper.h",
+          "line": "78"
+        },
+        {
+          "kind": "typedef",
+          "name": "Iso_cuboid_3",
+          "qualified_name": "CGAL::Periodic_3_function_wrapper::Iso_cuboid_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "BGT::Iso_cuboid_3",
+          "definition": "typedef BGT::Iso_cuboid_3 CGAL::Periodic_3_function_wrapper< Function, BGT >::Iso_cuboid_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Periodic_3_function_wrapper.h",
+          "line": "79"
+        },
+        {
+          "kind": "function",
+          "name": "Periodic_3_function_wrapper",
+          "qualified_name": "CGAL::Periodic_3_function_wrapper::Periodic_3_function_wrapper",
+          "brief": "Construction from an implicit function and the canonical cuboid.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Periodic_3_function_wrapper< Function, BGT >::Periodic_3_function_wrapper",
+          "argsstring": "(Function f, const Iso_cuboid_3 &domain)",
+          "params": [
+            {
+              "type": "Function",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Iso_cuboid_3 &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Periodic_3_function_wrapper.h",
+          "line": "87"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Periodic_3_function_wrapper::operator()",
+          "brief": "Evaluates the function $ f $ passed in input at the canonical representative of $ p $ .",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Periodic_3_function_wrapper< Function, BGT >::operator()",
+          "argsstring": "(const Point_3 &p) const",
+          "params": [
+            {
+              "type": "const Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Periodic_3_function_wrapper.h",
+          "line": "96"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_periodic__3__function__wrapper.xml",
+      "file": "CGAL/Periodic_3_function_wrapper.h",
+      "line": "71"
+    },
+    "CGAL::Periodic_3_mesh_triangulation_3": {
+      "kind": "class",
+      "name": "CGAL::Periodic_3_mesh_triangulation_3",
+      "brief": "The class Periodic_3_mesh_triangulation_3 is a class template which provides the triangulation type to be used for the 3D periodic triangulation embedding the mesh.",
+      "detailed": "MD must be a model of Periodic_3MeshDomain_3 or Periodic_3MeshDomainWithFeatures_3 . GT must be a model of MeshTriangulationTraits_3 . Default may be used, with default value Kernel_traits<MD>::Kernel . Vertex_base must be a model of MeshVertexBase_3 and Periodic_3TriangulationDSVertexBase_3 . Default may be used, with default value Mesh_vertex_base_3<GT, MD, Regular_triangulation_vertex_base_3<Gt, Periodic_3_triangulation_ds_vertex_base_3> > . Cell_base must be a model of MeshCellBase_3 and Periodic_3TriangulationDSCellBase_3 . Default may be used, with default value Mesh_cell_base_3<GT, MD, Regular_triangulation_cell_base_with_weighted_circumcenter_3<Gt, Regular_triangulation_cell_base_3<Gt, Periodic_3_triangulation_ds_cell_base_3> > > . The input traits GT are wrapped multiple times to handle periodicity and to improve the robustness of the meshing process: for example, wrapping GT with Robust_weighted_circumcenter_filtered_traits_3<GT> allows the functors models of Kernel::ConstructWeightedCircumcenter_3 , Kernel::ComputeSquaredRadius_3 , and Kernel::ComputeSquaredRadiusSmallestOrthogonalSphere_3 that are provided by GT to use exact computations when the geometric configuration is close to degenerate (e.g. almost coplanar points). Users should therefore be aware that the type of the traits class of the triangulation will not be GT . make_periodic_3_mesh_3() refine_periodic_3_mesh_3() Mesh_triangulation_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "type",
+          "qualified_name": "CGAL::Periodic_3_mesh_triangulation_3::type",
+          "brief": "The triangulation type to be used for the 3D triangulation embedding the mesh.",
+          "detailed": "This type is a wrapper around the type CGAL::Periodic_3_regular_triangulation_3 , whose vertex and cell base classes are respectively Vertex_base and Cell_base .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Periodic_3_mesh_triangulation_3< MD, GT, Vertex_base, Cell_base >::type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Periodic_3_mesh_triangulation_3.h",
+          "line": "49"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_periodic__3__mesh__triangulation__3.xml",
+      "file": "CGAL/Periodic_3_mesh_triangulation_3.h",
+      "line": "37"
+    },
+    "Periodic_3MeshDomain_3": {
+      "kind": "class",
+      "name": "Periodic_3MeshDomain_3",
+      "brief": "",
+      "detailed": "Refines MeshDomain_3 The concept Periodic_3MeshDomain_3 describes the knowledge required on the object to be discretized. The concept Periodic_3MeshDomain_3 is the concept to be used when the input domain is defined over the three-dimensional flat torus. From a syntactic point of view, it defines almost the same requirements as the concept MeshDomain_3 and thus Periodic_3MeshDomain_3 refines MeshDomain_3 : the concept Periodic_3MeshDomain_3 additionally requires an access to the user-defined canonical cuboid via the function bounding_box . However, the oracle must take into account the periodicity of the domain (see Section Input Domain ). The class CGAL::Labeled_mesh_domain_3<BGT> paired with a periodic labeling function is a model of this concept. It is possible to create artificially periodic functions through the class CGAL::Periodic_3_function_wrapper <Function,BGT> . Has models CGAL::Labeled_mesh_domain_3<BGT> CGAL::Labeled_mesh_domain_3<BG> CGAL::make_periodic_3_mesh_3() CGAL::refine_periodic_3_mesh_3()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Iso_cuboid_3",
+          "qualified_name": "Periodic_3MeshDomain_3::Iso_cuboid_3",
+          "brief": "The canonical cuboid type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type Periodic_3MeshDomain_3::Iso_cuboid_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/Periodic_3MeshDomain_3.h",
+          "line": "39"
+        },
+        {
+          "kind": "function",
+          "name": "bounding_box",
+          "qualified_name": "Periodic_3MeshDomain_3::bounding_box",
+          "brief": "returns the user-chosen cuboid that is the canonical instance of the flat torus.",
+          "detailed": "",
+          "return_type": "const Iso_cuboid_3 &",
+          "definition": "const Iso_cuboid_3 & Periodic_3MeshDomain_3::bounding_box",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/Periodic_3MeshDomain_3.h",
+          "line": "44"
+        }
+      ],
+      "xml_file": "class_periodic__3_mesh_domain__3.xml",
+      "file": "Concepts/Periodic_3MeshDomain_3.h",
+      "line": "33"
+    },
+    "Periodic_3MeshDomainWithFeatures_3": {
+      "kind": "class",
+      "name": "Periodic_3MeshDomainWithFeatures_3",
+      "brief": "",
+      "detailed": "Refines MeshDomainWithFeatures_3 Periodic_3MeshDomain_3 The concept Periodic_3MeshDomainWithFeatures_3 describes the knowledge required on the object to be discretized. While the concept Periodic_3MeshDomain_3 only exposes the 2-dimensional and 3-dimensional features of the periodic domain through different queries, the concept Periodic_3MeshDomainWithFeatures_3 also exposes 0 and 1-dimensional features. The exposed features of the domain are respectively called subdomains, surface patches, curves, and corners according to their respective dimensions 3, 2, 1, and 0. From a syntactic point of view, Periodic_3MeshDomainWithFeatures_3 refines MeshDomainWithFeatures_3 . However, the various requirements from MeshDomainWithFeatures_3 must also take into account the periodicity of the domain (see Section Input Domain ). Wrapping any model of Periodic_3MeshDomain_3 with the class CGAL::Mesh_domain_with_polyline_features_3 gives a model of Periodic_3MeshDomainWithFeatures_3 . Has models CGAL::Mesh_domain_with_polyline_features_3<CGAL::Labeled_mesh_domain_3<BGT> > CGAL::Periodic_3_function_wrapper <Function,BGT> CGAL::make_periodic_3_mesh_3() CGAL::refine_periodic_3_mesh_3()",
+      "members": [
+        {
+          "kind": "function",
+          "name": "get_corner_incident_curves",
+          "qualified_name": "Periodic_3MeshDomainWithFeatures_3::get_corner_incident_curves",
+          "brief": "Returns the indices of the curves incident to the corner id , if any.",
+          "detailed": "IndicesOutputIterator must meet the requirements of OutputIterator , with value type MeshDomainWithFeatures_3::Curve_index .",
+          "return_type": "IndicesOutputIterator",
+          "definition": "IndicesOutputIterator Periodic_3MeshDomainWithFeatures_3::get_corner_incident_curves",
+          "argsstring": "(Corner_index id, IndicesOutputIterator out)",
+          "params": [
+            {
+              "type": "Corner_index",
+              "name": "id",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IndicesOutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/Periodic_3MeshDomainWithFeatures_3.h",
+          "line": "46"
+        }
+      ],
+      "xml_file": "class_periodic__3_mesh_domain_with_features__3.xml",
+      "file": "Concepts/Periodic_3MeshDomainWithFeatures_3.h",
+      "line": "35"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "perturb_periodic_3_mesh_3",
+          "qualified_name": "CGAL::perturb_periodic_3_mesh_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Mesh_optimization_return_code",
+          "definition": "Mesh_optimization_return_code CGAL::perturb_periodic_3_mesh_3",
+          "argsstring": "(C3T3 &c3t3, const MeshDomain &domain, const NamedParameters1 &np1, const NamedParameters2 &np2, const NP &... nps)",
+          "params": [
+            {
+              "type": "C3T3 &",
+              "name": "c3t3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const MeshDomain &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters1 &",
+              "name": "np1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters2 &",
+              "name": "np2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NP &...",
+              "name": "nps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/optimize_periodic_3_mesh_3.h",
+          "line": "53"
+        },
+        {
+          "kind": "function",
+          "name": "perturb_periodic_3_mesh_3",
+          "qualified_name": "CGAL::perturb_periodic_3_mesh_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Mesh_optimization_return_code",
+          "definition": "Mesh_optimization_return_code CGAL::perturb_periodic_3_mesh_3",
+          "argsstring": "(const NamedParameters1 &np1, const NamedParameters2 &np2, const NP &... nps)",
+          "params": [
+            {
+              "type": "const NamedParameters1 &",
+              "name": "np1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters2 &",
+              "name": "np2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NP &...",
+              "name": "nps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/optimize_periodic_3_mesh_3.h",
+          "line": "64"
+        },
+        {
+          "kind": "function",
+          "name": "exude_periodic_3_mesh_3",
+          "qualified_name": "CGAL::exude_periodic_3_mesh_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Mesh_optimization_return_code",
+          "definition": "Mesh_optimization_return_code CGAL::exude_periodic_3_mesh_3",
+          "argsstring": "(C3T3 &c3t3, const NamedParameters1 &np1, const NamedParameters2 &np2, const NP &... nps)",
+          "params": [
+            {
+              "type": "C3T3 &",
+              "name": "c3t3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters1 &",
+              "name": "np1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters2 &",
+              "name": "np2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NP &...",
+              "name": "nps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/optimize_periodic_3_mesh_3.h",
+          "line": "103"
+        },
+        {
+          "kind": "function",
+          "name": "exude_periodic_3_mesh_3",
+          "qualified_name": "CGAL::exude_periodic_3_mesh_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Mesh_optimization_return_code",
+          "definition": "Mesh_optimization_return_code CGAL::exude_periodic_3_mesh_3",
+          "argsstring": "(const NamedParameters1 &np1, const NamedParameters2 &np2, const NP &... nps)",
+          "params": [
+            {
+              "type": "const NamedParameters1 &",
+              "name": "np1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters2 &",
+              "name": "np2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NP &...",
+              "name": "nps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/optimize_periodic_3_mesh_3.h",
+          "line": "114"
+        },
+        {
+          "kind": "function",
+          "name": "odt_optimize_periodic_3_mesh_3",
+          "qualified_name": "CGAL::odt_optimize_periodic_3_mesh_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Mesh_optimization_return_code",
+          "definition": "Mesh_optimization_return_code CGAL::odt_optimize_periodic_3_mesh_3",
+          "argsstring": "(C3T3 &c3t3, const MeshDomain &domain, const NamedParameters1 &np1, const NamedParameters2 &np2, const NP &... nps)",
+          "params": [
+            {
+              "type": "C3T3 &",
+              "name": "c3t3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const MeshDomain &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters1 &",
+              "name": "np1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters2 &",
+              "name": "np2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NP &...",
+              "name": "nps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/optimize_periodic_3_mesh_3.h",
+          "line": "151"
+        },
+        {
+          "kind": "function",
+          "name": "odt_optimize_periodic_3_mesh_3",
+          "qualified_name": "CGAL::odt_optimize_periodic_3_mesh_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Mesh_optimization_return_code",
+          "definition": "Mesh_optimization_return_code CGAL::odt_optimize_periodic_3_mesh_3",
+          "argsstring": "(const NamedParameters1 &np1, const NamedParameters2 &np2, const NP &... nps)",
+          "params": [
+            {
+              "type": "const NamedParameters1 &",
+              "name": "np1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters2 &",
+              "name": "np2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NP &...",
+              "name": "nps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/optimize_periodic_3_mesh_3.h",
+          "line": "162"
+        },
+        {
+          "kind": "function",
+          "name": "lloyd_optimize_periodic_3_mesh_3",
+          "qualified_name": "CGAL::lloyd_optimize_periodic_3_mesh_3",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Mesh_optimization_return_code",
+          "definition": "Mesh_optimization_return_code CGAL::lloyd_optimize_periodic_3_mesh_3",
+          "argsstring": "(C3T3 &c3t3, const MeshDomain &domain, const NamedParameters1 &np1, const NamedParameters2 &np2, const NP &... nps)",
+          "params": [
+            {
+              "type": "C3T3 &",
+              "name": "c3t3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const MeshDomain &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters1 &",
+              "name": "np1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters2 &",
+              "name": "np2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NP &...",
+              "name": "nps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/optimize_periodic_3_mesh_3.h",
+          "line": "200"
+        }
+      ],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/Implicit_to_labeled_subdomains_function_wrapper.h",
+      "line": "1"
+    },
+    "CGAL::Mesh_3": {
+      "kind": "namespace",
+      "name": "CGAL::Mesh_3",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_mesh__3.xml",
+      "file": "[generated]",
+      "line": "1"
+    },
+    "CGAL::Periodic_3_mesh_3": {
+      "kind": "namespace",
+      "name": "CGAL::Periodic_3_mesh_3",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_periodic__3__mesh__3.xml",
+      "file": "CGAL/make_periodic_3_mesh_3.h",
+      "line": "37"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgPeriodic3Mesh3Ref": {
+      "kind": "group",
+      "name": "PkgPeriodic3Mesh3Ref",
+      "brief": "",
+      "detailed": "Mikhail Bogdanov, Aymeric Pellé, Mael Rouxel-Labbé, and Monique Teillaud This package is devoted to the generation of isotropic simplicial meshes discretizing periodic 3D domains. The domain to be meshed is a region of the three-dimensional flat torus. The periodic mesh generator provides users with the same flexibility that is offered in the PkgMesh3 package. Introduced in: CGAL 4.13 Depends on: PkgPeriodic3Triangulation3, PkgMesh3, and thirdpartyEigen BibTeX: cgal:btprl-p3m3-26a License: GPL Relation to the 3D Mesh Generation and 3D Periodic Triangulations Packages A periodic mesh extends, by definition, infinitely in space. To avoid storing and manipulating duplicate points, well-chosen \"dummy\" points are inserted at the beginning of the meshing process, thus ensuring that the underlying periodic triangulation forms at all times a simplicial complex within a single copy of the periodic space $ \\mathbb T_c^3$ (see Sections P3Triangulation3secspace and P3Triangulation3secintro of the package PkgPeriodic3Triangulation3). By identifying a single copy of the flat torus $ \\mathbb T_{c_x,c_y,c_y}^3$ (where c_x , c_y , and c_z denote the period along the canonical axes) with a cuboid of side lengths c_x , c_y , and c_z in $ \\mathbb R^3$ , the meshing process can be exclusively conducted within a cuboid. The mesh within a single copy is created using CGAL's PkgMesh3 package, but because CGAL's PkgMesh3 package aims to mesh traditional (non-periodic) domains, an interface is necessary between CGAL's PkgMesh3 package and CGAL's PkgPeriodic3Triangulation3. This package offers these interfaces. Classified Reference Pages Concepts This package relies entirely on the PkgMesh3Concepts and the PkgMesh3SecondaryConcepts described in the PkgMesh3 package. The following concepts are essentially identical to the concepts MeshDomain_3 and MeshDomainWithFeatures_3 in the package PkgMesh3 : Periodic_3MeshDomain_3 Periodic_3MeshDomainWithFeatures_3 Classes The following class provides the interface between CGAL's periodic triangulation and CGAL's three-dimensional mesh generator: CGAL::Periodic_3_mesh_triangulation_3 <MD, K, Vertex_base, Cell_base> The following class allows to construct a periodic implicit function from an implicit function that is not periodic: CGAL::Periodic_3_function_wrapper <Function,BGT> The following class allows to split the canonical cuboid in two subdomains, separated by the zero-level of an implicit function: CGAL::Implicit_to_labeled_subdomains_function_wrapper <Function,BGT> Function Templates The following functions handle the generation of a periodic mesh: CGAL::make_periodic_3_mesh_3() CGAL::refine_periodic_3_mesh_3() CGAL::exude_periodic_3_mesh_3() CGAL::perturb_periodic_3_mesh_3() CGAL::lloyd_optimize_periodic_3_mesh_3() CGAL::odt_optimize_periodic_3_mesh_3() Classes and Functions of Mesh_3 Many classes and functions used by this package are defined within the package PkgMesh3, see PkgMesh3MeshClasses, PkgMesh3Domains, and PkgMesh3Parameters. Input/Output Functions CGAL::IO::output_periodic_mesh_to_medit()",
+      "members": [],
+      "xml_file": "group___pkg_periodic3_mesh3_ref.xml"
+    },
+    "PkgPeriodic3Mesh3Concepts": {
+      "kind": "group",
+      "name": "PkgPeriodic3Mesh3Concepts",
+      "brief": "The concepts of this package.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_periodic3_mesh3_concepts.xml"
+    },
+    "PkgPeriodic3Mesh3MeshClasses": {
+      "kind": "group",
+      "name": "PkgPeriodic3Mesh3MeshClasses",
+      "brief": "The classes in this group are the main classes involved in the mesh generation process.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_periodic3_mesh3_mesh_classes.xml"
+    },
+    "PkgPeriodic3Mesh3Domains": {
+      "kind": "group",
+      "name": "PkgPeriodic3Mesh3Domains",
+      "brief": "The classes in this group are models of domain concepts and their associated classes.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_periodic3_mesh3_domains.xml"
+    },
+    "PkgPeriodic3Mesh3Functions": {
+      "kind": "group",
+      "name": "PkgPeriodic3Mesh3Functions",
+      "brief": "The two main functions to generate a periodic mesh are make_periodic_3_mesh_3() and refine_periodic_3_mesh_3() .",
+      "detailed": "Other functions are provided to optimize an existing periodic mesh.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "make_periodic_3_mesh_3",
+          "qualified_name": "CGAL::make_periodic_3_mesh_3",
+          "brief": "The function make_periodic_3_mesh_3() is a 3D periodic mesh generator.",
+          "detailed": "It produces simplicial meshes which discretize 3D periodic domains. The periodic mesh generation algorithm is a Delaunay refinement process followed by an optimization phase. The criteria driving the Delaunay refinement process may be tuned to achieve the user needs with respect to the size of mesh elements, the accuracy of boundaries approximation, etc. The optimization phase is a sequence of optimization processes, amongst the following available optimizers: an ODT-smoothing, a Lloyd smoothing, a sliver perturber, and a sliver exuder. Each optimization process can be activated or not, according to the user requirements and available time. By default, only the perturber and the exuder are activated. Note that the benefits of the exuder will be lost if the mesh is further refined afterward, and that ODT-smoothing, Lloyd-smoothing, and sliver perturber should never be called after the sliver exuder. In the case of further refinement, only the sliver exuder can be used. The function outputs the mesh to an object which provides iterators to traverse the resulting mesh data structure or can be written to a file (see Examples ). C3T3 is required to be a model of the concept MeshComplex_3InTriangulation_3 . This is the return type. The type C3T3 is in particular required to provide a nested type C3T3::Triangulation for the 3D triangulation embedding the mesh. The vertex and cell base classes of the triangulation C3T3::Triangulation are required to be models of the concepts MeshVertexBase_3 and MeshCellBase_3 respectively. MD is required to be a model of the concept MeshDomain_3 , or of the refined concept MeshDomainWithFeatures_3 if the domain has corners and curves that need to be accurately represented in the mesh. The argument domain is the sole link through which the domain to be discretized is known by the mesh generation algorithm. MC has to be a model of the concept MeshCriteria_3 , or a model of the refined concept MeshCriteriaWithFeatures_3 if the domain has exposed features. The argument criteria of type MC specifies the size and shape requirements for mesh tetrahedra and surface facets. These criteria form the rules which drive the refinement process. All mesh elements satisfy those criteria at the end of the refinement process. In addition, if the domain has features, the argument criteria provides a sizing field to guide the discretization of 1-dimensional exposed features. NamedParameters a sequence of Named Parameters domain the domain to be discretized criteria the criteria np an optional sequence of Named Parameters among the ones listed below: Optional Named Parameters <button class=\"collapsible\"> Feature preservation options </button> If the domain is a model of MeshDomainWithFeatures_3 , 0 and 1-dimensional features can be taken into account while generating the mesh. The following two named parameters control this option: parameters::features(domain) parameters::no_features() Default: parameters::features(domain) <button class=\"collapsible\"> Topological options (manifoldness) </button> In order to drive the meshing algorithm and ensure that the output mesh follows a desired topological criterion, three named parameters control this option: parameters::manifold() parameters::manifold_with_boundary() parameters::non_manifold() Note that the meshing algorithm cannot generate a manifold surface if the input surface is not manifold. Default: parameters::non_manifold() <button class=\"collapsible\"> Lloyd optimization </button> lloyd_optimize_mesh_3() can optionally be called after the meshing process. Two named parameters control this behavior: parameters::no_lloyd() parameters::lloyd_optimize_mesh_3() Default: parameters::no_lloyd() <button class=\"collapsible\"> ODT optimization </button> odt_optimize_mesh_3() can optionally be called after the meshing process. Two named parameters control this behavior: parameters::no_odt() parameters::odt() Default: parameters::no_odt() <button class=\"collapsible\"> Mesh perturbation </button> perturb_mesh_3() can optionally be called after the meshing process. Two named parameters control this behavior: parameters::no_perturb() parameters::perturb() Default: parameters::perturb() <button class=\"collapsible\"> Mesh exudation </button> exude_mesh_3() can optionally be called after the meshing process. Two named parameters control this behavior: parameters::exude() parameters::no_exude() Default: parameters::exude() The optimization parameters can be passed in an arbitrary order. If one parameter is not passed, its default value is used. The default values are no_lloyd() , no_odt() , perturb() and exude() . Note that regardless of which optimization processes are activated, they are always launched in the order that is a suborder of the following (see user manual for further details): ODT-smoother , Lloyd-smoother , perturber , and exuder . Beware that optimization of the mesh is obtained by perturbing mesh vertices and modifying the mesh connectivity and that this has an impact on the strict compliance to the refinement criteria. Though a strict compliance to mesh criteria is guaranteed at the end of the Delaunay refinement, this may no longer be true after some optimization processes. Also beware that the default behavior does involve some optimization processes. refine_periodic_3_mesh_3() make_mesh_3() exude_mesh_3() perturb_mesh_3() lloyd_optimize_mesh_3() odt_optimize_mesh_3()",
+          "return_type": "C3T3",
+          "definition": "C3T3 CGAL::make_periodic_3_mesh_3",
+          "argsstring": "(const MeshDomain &domain, const MeshCriteria &criteria, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const MeshDomain &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const MeshCriteria &",
+              "name": "criteria",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/make_periodic_3_mesh_3.h",
+          "line": "355"
+        },
+        {
+          "kind": "function",
+          "name": "refine_periodic_3_mesh_3",
+          "qualified_name": "CGAL::refine_periodic_3_mesh_3",
+          "brief": "The function refine_periodic_3_mesh_3() is a 3D periodic mesh generator.",
+          "detailed": "It produces periodic simplicial meshes which discretize 3D periodic domains. The periodic mesh generation algorithm is a Delaunay refinement process followed by an optimization phase. The criteria driving the Delaunay refinement process may be tuned to achieve the user needs with respect to the size of mesh elements, the accuracy of boundaries approximation, etc. The optimization phase is a sequence of optimization processes, amongst the following available optimizers: an ODT-smoothing, a Lloyd smoothing, a sliver perturber, and a sliver exuder. Each optimization process can be activated or not, according to the user requirements and available time. By default, only the perturber and the exuder are activated. Note that the benefits of the exuder will be lost if the mesh is further refined afterward. The function template refine_periodic_3_mesh_3() may be used to refine a previously computed mesh, e.g.: C3T3 c3t3 = CGAL::make_periodic_3_mesh_3<C3T3> (domain,criteria); CGAL::refine_periodic_3_mesh_3 (c3t3, domain, new_criteria); Note that the triangulation must form at all times a simplicial complex within a single copy of the domain (see Sections P3Triangulation3secspace and P3Triangulation3secintro of the manual of 3D periodic triangulations). It is the responsibility of the user to provide a triangulation that satisfies this condition when calling the refinement function refine_periodic_3_mesh_3 . The underlying triangulation of a mesh complex obtained through make_periodic_3_mesh_3() or refine_periodic_3_mesh_3() will always satisfy this condition. C3T3 is required to be a model of the concept MeshComplex_3InTriangulation_3 . The argument c3t3 is passed by reference as this object is modified by the refinement process. As the refinement process only adds points to the triangulation, all vertices of the triangulation of c3t3 remain in the mesh during the refinement process. Object c3t3 can be used to insert specific points in the domain to ensure that they will be contained in the final triangulation. The type C3T3 is in particular required to provide a nested type C3T3::Triangulation for the 3D triangulation embedding the mesh. The vertex and cell base classes of the triangulation C3T3::Triangulation are required to be models of the concepts MeshVertexBase_3 and MeshCellBase_3 respectively. MD is required to be a model of the concept Periodic_3MeshDomain_3 or of the refined concept Periodic_3MeshDomainWithFeatures_3 if 0 and 1-dimensional features of the input complex have to be accurately represented in the mesh. The argument domain is the sole link through which the domain to be discretized is known by the mesh generation algorithm. MC is required to be a model of the concept MeshCriteria_3 , or a model of the refined concept MeshCriteriaWithFeatures_3 if the domain has exposed features. The argument criteria of type MC specifies the size and shape requirements for mesh tetrahedra and surface facets. These criteria form the rules which drive the refinement process. All mesh elements satisfy those criteria at the end of the refinement process. In addition, if the domain has features, the argument criteria provides a sizing field to guide the discretization of 1-dimensional exposed features. NamedParameters a sequence of Named Parameters c3t3 the mesh to be refined. domain the domain to be discretized criteria the criteria np an optional sequence of Named Parameters among the ones listed below: The following four parameters are optional optimization parameters. They control which optimization processes are performed and allow the user to tune the parameters of the optimization processes. Individual optimization parameters are not described here as they are internal types (see instead the documentation page of each optimizer). For each optimization algorithm, there exist two global functions that allow to enable or disable the optimizer: Optional Named Parameters <button class=\"collapsible\"> Topological options (manifoldness) </button> In order to drive the meshing algorithm and ensure that the output mesh follows a desired topological criterion, three named parameters control this option: parameters::manifold() parameters::manifold_with_boundary() parameters::non_manifold() Note that the meshing algorithm cannot generate a manifold surface if the input surface is not manifold. Default: parameters::non_manifold() <button class=\"collapsible\"> Lloyd optimization </button> lloyd_optimize_mesh_3() can optionally be called after the meshing process. Two named parameters control this behavior: parameters::no_lloyd() parameters::lloyd_optimize_mesh_3() Default: parameters::no_lloyd() <button class=\"collapsible\"> ODT optimization </button> odt_optimize_mesh_3() can optionally be called after the meshing process. Two named parameters control this behavior: parameters::no_odt() parameters::odt() Default: parameters::no_odt() <button class=\"collapsible\"> Mesh perturbation </button> perturb_mesh_3() can optionally be called after the meshing process. Two named parameters control this behavior: parameters::no_perturb() parameters::perturb() Default: parameters::perturb() <button class=\"collapsible\"> Mesh exudation </button> exude_mesh_3() can optionally be called after the meshing process. Two named parameters control this behavior: parameters::exude() parameters::no_exude() Default: parameters::exude() The optimization parameters can be passed in arbitrary order. If one parameter is not passed, its default value is used. The default values are no_lloyd() , no_odt() , perturb() and exude() . Note that whatever may be the optimization processes activated, they are always launched in the order that is a suborder of the following (see user manual for further details): ODT-smoother , Lloyd-smoother , perturber , and exuder . Beware that optimization of the mesh is obtained by perturbing mesh vertices and modifying the mesh connectivity and that this has an impact on the strict compliance to the refinement criteria. Though a strict compliance to mesh criteria is guaranteed at the end of the Delaunay refinement, this may no longer be true after some optimization processes. Also beware that the default behavior does involve some optimization processes. make_periodic_3_mesh_3() refine_mesh_3() exude_periodic_3_mesh_3() perturb_periodic_3_mesh_3() lloyd_optimize_periodic_3_mesh_3() odt_optimize_periodic_3_mesh_3()",
+          "return_type": "void",
+          "definition": "void CGAL::refine_periodic_3_mesh_3",
+          "argsstring": "(C3T3 &c3t3, const MeshDomain &domain, const MeshCriteria &criteria, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "C3T3 &",
+              "name": "c3t3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const MeshDomain &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const MeshCriteria &",
+              "name": "criteria",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/refine_periodic_3_mesh_3.h",
+          "line": "363"
+        },
+        {
+          "kind": "function",
+          "name": "perturb_periodic_3_mesh_3",
+          "qualified_name": "CGAL::perturb_periodic_3_mesh_3",
+          "brief": "The function perturb_periodic_3_mesh_3() is a mesh optimizer that improves the quality of a Delaunay mesh by changing the positions of some vertices of the mesh.",
+          "detailed": "This function directly calls perturb_mesh_3() , but is provided for convenience. Further information can be found in the documentation of the function perturb_mesh_3() .",
+          "return_type": "Mesh_optimization_return_code",
+          "definition": "Mesh_optimization_return_code CGAL::perturb_periodic_3_mesh_3",
+          "argsstring": "(C3T3 &c3t3, const MeshDomain &domain, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "C3T3 &",
+              "name": "c3t3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const MeshDomain &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/optimize_periodic_3_mesh_3.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "exude_periodic_3_mesh_3",
+          "qualified_name": "CGAL::exude_periodic_3_mesh_3",
+          "brief": "The function exude_periodic_3_mesh_3() performs a sliver exudation process on a periodic Delaunay mesh.",
+          "detailed": "The sliver exudation process consists in optimizing the weights of vertices of the periodic weighted Delaunay triangulation in such a way that slivers disappear and the quality of the mesh improves. This optimizer modifies the weight of vertices of the periodic triangulation and, if called, must be the last optimizer to be called. If the mesh is refined after this optimization has been performed, all improvements will be lost. This function directly calls exude_mesh_3() , but is provided for convenience. Further information can be found in the documentation of the function exude_mesh_3() .",
+          "return_type": "Mesh_optimization_return_code",
+          "definition": "Mesh_optimization_return_code CGAL::exude_periodic_3_mesh_3",
+          "argsstring": "(C3T3 &c3t3, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "C3T3 &",
+              "name": "c3t3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/optimize_periodic_3_mesh_3.h",
+          "line": "90"
+        },
+        {
+          "kind": "function",
+          "name": "odt_optimize_periodic_3_mesh_3",
+          "qualified_name": "CGAL::odt_optimize_periodic_3_mesh_3",
+          "brief": "The function odt_optimize_periodic_3_mesh_3() is a periodic mesh optimization process based on the minimization of a global energy function.",
+          "detailed": "This function directly calls odt_optimize_mesh_3() , but is provided for convenience. Further information can be found in the documentation of the function odt_optimize_mesh_3() .",
+          "return_type": "Mesh_optimization_return_code",
+          "definition": "Mesh_optimization_return_code CGAL::odt_optimize_periodic_3_mesh_3",
+          "argsstring": "(C3T3 &c3t3, const MeshDomain &domain, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "C3T3 &",
+              "name": "c3t3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const MeshDomain &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/optimize_periodic_3_mesh_3.h",
+          "line": "134"
+        },
+        {
+          "kind": "function",
+          "name": "lloyd_optimize_periodic_3_mesh_3",
+          "qualified_name": "CGAL::lloyd_optimize_periodic_3_mesh_3",
+          "brief": "The function lloyd_optimize_periodic_3_mesh_3() is a periodic mesh optimization process based on the minimization of a global energy function.",
+          "detailed": "This function directly calls lloyd_optimize_mesh_3() , but is provided for convenience. Further information can be found in the documentation of the function lloyd_optimize_mesh_3() . This function requires the thirdpartyEigen library.",
+          "return_type": "Mesh_optimization_return_code",
+          "definition": "Mesh_optimization_return_code CGAL::lloyd_optimize_periodic_3_mesh_3",
+          "argsstring": "(C3T3 &c3t3, const MeshDomain &domain, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "C3T3 &",
+              "name": "c3t3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const MeshDomain &",
+              "name": "domain",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/optimize_periodic_3_mesh_3.h",
+          "line": "183"
+        }
+      ],
+      "xml_file": "group___pkg_periodic3_mesh3_functions.xml"
+    },
+    "PkgPeriodic3Mesh3IOFunctions": {
+      "kind": "group",
+      "name": "PkgPeriodic3Mesh3IOFunctions",
+      "brief": "The free functions that can be used to read and write periodic meshes.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "output_periodic_mesh_to_medit",
+          "qualified_name": "CGAL::output_periodic_mesh_to_medit",
+          "brief": "outputs a periodic mesh to the medit ( .mesh ) file format.",
+          "detailed": "See [5] for a comprehensive description of this file format. os the output stream c3t3 the mesh complex occurrence_count the number of copies that are drawn distinguish_copies if set to true , each copy is assigned a unique color. Otherwise, all domains are drawn with subdomain index-based colors. rebind if set to true , labels of cells are rebinded into [1..nb_of_labels] show_patches if set to true , patches are labeled with different labels than cells. If false , each surface facet is written twice, using the label of each adjacent cell.",
+          "return_type": "void",
+          "definition": "void CGAL::output_periodic_mesh_to_medit",
+          "argsstring": "(std::ostream &os, const C3T3 &c3t3, int occurrence_count=8, bool distinguish_copies=true, bool rebind=false, bool show_patches=false)",
+          "params": [
+            {
+              "type": "std::ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const C3T3 &",
+              "name": "c3t3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "occurrence_count",
+              "default": "8",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "distinguish_copies",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "rebind",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "show_patches",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Periodic_3_mesh_3/IO/File_medit.h",
+          "line": "19"
+        }
+      ],
+      "xml_file": "group___pkg_periodic3_mesh3_i_o_functions.xml"
+    }
+  }
+}

@@ -1,0 +1,1408 @@
+{
+  "schema_version": 1,
+  "package": "Alpha_shapes_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 11,
+  "skipped_count": 0,
+  "compounds": {
+    "AlphaShapeFace_2": {
+      "kind": "class",
+      "name": "AlphaShapeFace_2",
+      "brief": "The concept AlphaShapeFace_2 describes the requirements for the base face of an alpha shape.",
+      "detailed": "Refines TriangulationFaceBase_2 if the underlying triangulation of the alpha shape is a Delaunay triangulation RegularTriangulationFaceBase_2 if the underlying triangulation of the alpha shape is a regular triangulation Periodic_2TriangulationFaceBase_2 if the underlying triangulation of the alpha shape is a periodic triangulation Has models CGAL::Alpha_shape_face_base_2 (templated with the appropriate triangulation face base class)",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Interval_3",
+          "qualified_name": "AlphaShapeFace_2::Interval_3",
+          "brief": "A container type to get (and put) the three special values ( $ \\alpha_1, \\alpha_2, \\alpha_3$ ) associated with an alpha shape edge.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlphaShapeFace_2::Interval_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlphaShapeFace_2.h",
+          "line": "27"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "AlphaShapeFace_2::FT",
+          "brief": "A coordinate type.",
+          "detailed": "The type must provide a copy constructor, assignment, comparison operators, negation, multiplication, division and allow the declaration and initialization with a small integer constant (cf. requirements for number types). An obvious choice would be coordinate type of the point class",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlphaShapeFace_2::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlphaShapeFace_2.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "AlphaShapeFace_2",
+          "qualified_name": "AlphaShapeFace_2::AlphaShapeFace_2",
+          "brief": "default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "AlphaShapeFace_2::AlphaShapeFace_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/AlphaShapeFace_2.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "AlphaShapeFace_2",
+          "qualified_name": "AlphaShapeFace_2::AlphaShapeFace_2",
+          "brief": "constructor setting the incident vertices.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "AlphaShapeFace_2::AlphaShapeFace_2",
+          "argsstring": "(const Vertex_handle &v0, const Vertex_handle &v1, const Vertex_handle &v2)",
+          "params": [
+            {
+              "type": "const Vertex_handle &",
+              "name": "v0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vertex_handle &",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vertex_handle &",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/AlphaShapeFace_2.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "AlphaShapeFace_2",
+          "qualified_name": "AlphaShapeFace_2::AlphaShapeFace_2",
+          "brief": "constructor setting the incident vertices and the neighboring faces.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "AlphaShapeFace_2::AlphaShapeFace_2",
+          "argsstring": "(const Vertex_handle &v0, const Vertex_handle &v1, const Vertex_handle &v2, const Face_handle &n0, const Face_handle &n1, const Face_handle &n2)",
+          "params": [
+            {
+              "type": "const Vertex_handle &",
+              "name": "v0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vertex_handle &",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vertex_handle &",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Face_handle &",
+              "name": "n0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Face_handle &",
+              "name": "n1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Face_handle &",
+              "name": "n2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/AlphaShapeFace_2.h",
+          "line": "57"
+        },
+        {
+          "kind": "function",
+          "name": "get_ranges",
+          "qualified_name": "AlphaShapeFace_2::get_ranges",
+          "brief": "returns the interval associated with the edge indexed with $ i$ , which contains three alpha values $ \\alpha_1 \\leq\\alpha_2 \\leq\\alpha_3$ , such as for $ \\alpha$ between $ \\alpha_1$ and $ \\alpha_2$ , the edge indexed with $ i$ is attached but singular, for $ \\alpha$ between $ \\alpha_2$ and $ \\alpha_3$ , the edge is regular, and for $ \\alpha$ greater than $ \\alpha_3$ , the edge is interior.",
+          "detailed": "",
+          "return_type": "Interval_3",
+          "definition": "Interval_3 AlphaShapeFace_2::get_ranges",
+          "argsstring": "(const int &i)",
+          "params": [
+            {
+              "type": "const int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/AlphaShapeFace_2.h",
+          "line": "73"
+        },
+        {
+          "kind": "function",
+          "name": "get_alpha",
+          "qualified_name": "AlphaShapeFace_2::get_alpha",
+          "brief": "return the alpha value, under which the alpha shape contains the face.",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT AlphaShapeFace_2::get_alpha",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/AlphaShapeFace_2.h",
+          "line": "79"
+        },
+        {
+          "kind": "function",
+          "name": "set_ranges",
+          "qualified_name": "AlphaShapeFace_2::set_ranges",
+          "brief": "sets the interval associated with the edge indexed with $ i$ , which contains three alpha values $ \\alpha_1 \\leq\\alpha_2 \\leq\\alpha_3$ , such as for $ \\alpha$ between $ \\alpha_1$ and $ \\alpha_2$ , the edge indexed with $ i$ is attached but singular, for $ \\alpha$ between $ \\alpha_2$ and $ \\alpha_3$ , the edge is regular, and for $ \\alpha$ greater than $ \\alpha_3$ , the edge is interior.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void AlphaShapeFace_2::set_ranges",
+          "argsstring": "(const int &i, const Interval_3 &V)",
+          "params": [
+            {
+              "type": "const int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Interval_3 &",
+              "name": "V",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/AlphaShapeFace_2.h",
+          "line": "95"
+        },
+        {
+          "kind": "function",
+          "name": "set_alpha",
+          "qualified_name": "AlphaShapeFace_2::set_alpha",
+          "brief": "sets the alpha value, under which the alpha shape contains the face.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void AlphaShapeFace_2::set_alpha",
+          "argsstring": "(FT A)",
+          "params": [
+            {
+              "type": "FT",
+              "name": "A",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/AlphaShapeFace_2.h",
+          "line": "101"
+        }
+      ],
+      "xml_file": "class_alpha_shape_face__2.xml",
+      "file": "Concepts/AlphaShapeFace_2.h",
+      "line": "17"
+    },
+    "AlphaShapeTraits_2": {
+      "kind": "class",
+      "name": "AlphaShapeTraits_2",
+      "brief": "The concept AlphaShapeTraits_2 describes the requirements for the geometric traits class of the underlying Delaunay triangulation of a basic alpha shape.",
+      "detailed": "Refines DelaunayTriangulationTraits_2 if the underlying triangulation of the alpha shape is a Delaunay triangulation Periodic_2DelaunayTriangulationTraits_2 if the underlying triangulation of the alpha shape is a periodic Delaunay triangulation Has models All models of Kernel Projection traits such as CGAL::Projection_traits_xy_3<K> CGAL::Exact_predicates_inexact_constructions_kernel (recommended kernel)",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "AlphaShapeTraits_2::FT",
+          "brief": "A coordinate type.",
+          "detailed": "The type must provide a copy constructor, assignment, comparison operators, negation, multiplication, division and allow the declaration and initialization with a small integer constant (cf. requirements for number types). An obvious choice would be coordinate type of the point class.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlphaShapeTraits_2::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlphaShapeTraits_2.h",
+          "line": "34"
+        },
+        {
+          "kind": "function",
+          "name": "AlphaShapeTraits_2",
+          "qualified_name": "AlphaShapeTraits_2::AlphaShapeTraits_2",
+          "brief": "A default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "AlphaShapeTraits_2::AlphaShapeTraits_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/AlphaShapeTraits_2.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "compute_squared_radius_2_object",
+          "qualified_name": "AlphaShapeTraits_2::compute_squared_radius_2_object",
+          "brief": "Returns an object, which has to be able to compute the squared radius of the circle of the points p0, p1, p2 or the squared radius of smallest circle of the points p0, p1 , as FT associated with the metric used by Dt .",
+          "detailed": "",
+          "return_type": "Compute_squared_radius_2",
+          "definition": "Compute_squared_radius_2 AlphaShapeTraits_2::compute_squared_radius_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions by function objects",
+          "file": "Concepts/AlphaShapeTraits_2.h",
+          "line": "58"
+        },
+        {
+          "kind": "function",
+          "name": "side_of_bounded_circle_2_object",
+          "qualified_name": "AlphaShapeTraits_2::side_of_bounded_circle_2_object",
+          "brief": "Returns an object, which has to be able to compute the relative position of point test to the smallest circle of the points p0, p1 , using the same metric as Dt .",
+          "detailed": "",
+          "return_type": "Side_of_bounded_circle_2",
+          "definition": "Side_of_bounded_circle_2 AlphaShapeTraits_2::side_of_bounded_circle_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Predicate by function object",
+          "file": "Concepts/AlphaShapeTraits_2.h",
+          "line": "70"
+        }
+      ],
+      "xml_file": "class_alpha_shape_traits__2.xml",
+      "file": "Concepts/AlphaShapeTraits_2.h",
+      "line": "20"
+    },
+    "AlphaShapeVertex_2": {
+      "kind": "class",
+      "name": "AlphaShapeVertex_2",
+      "brief": "The concept AlphaShapeVertex_2 describes the requirements for the base vertex of an alpha shape.",
+      "detailed": "Refines TriangulationVertexBase_2 if the underlying triangulation of the alpha shape is a Delaunay triangulation RegularTriangulationVertexBase_2 if the underlying triangulation of the alpha shape is a regular triangulation Periodic_2TriangulationVertexBase_2 if the underlying triangulation of the alpha shape is a periodic triangulation Has models CGAL::Alpha_shape_vertex_base_2 (templated with the appropriate triangulation vertex base class)",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "AlphaShapeVertex_2::FT",
+          "brief": "A coordinate type.",
+          "detailed": "The type must provide a copy constructor, assignment, comparison operators, negation, multiplication, division and allow the declaration and initialization with a small integer constant (cf. requirements for number types). An obvious choice would be coordinate type of the point class.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlphaShapeVertex_2::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlphaShapeVertex_2.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "AlphaShapeVertex_2",
+          "qualified_name": "AlphaShapeVertex_2::AlphaShapeVertex_2",
+          "brief": "default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "AlphaShapeVertex_2::AlphaShapeVertex_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/AlphaShapeVertex_2.h",
+          "line": "40"
+        },
+        {
+          "kind": "function",
+          "name": "AlphaShapeVertex_2",
+          "qualified_name": "AlphaShapeVertex_2::AlphaShapeVertex_2",
+          "brief": "constructor setting the point.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "AlphaShapeVertex_2::AlphaShapeVertex_2",
+          "argsstring": "(Point p)",
+          "params": [
+            {
+              "type": "Point",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/AlphaShapeVertex_2.h",
+          "line": "46"
+        },
+        {
+          "kind": "function",
+          "name": "AlphaShapeVertex_2",
+          "qualified_name": "AlphaShapeVertex_2::AlphaShapeVertex_2",
+          "brief": "constructor setting the point associated to and an incident face.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "AlphaShapeVertex_2::AlphaShapeVertex_2",
+          "argsstring": "(Point p, const Face_handle &ff)",
+          "params": [
+            {
+              "type": "Point",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Face_handle &",
+              "name": "ff",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/AlphaShapeVertex_2.h",
+          "line": "51"
+        },
+        {
+          "kind": "function",
+          "name": "get_range",
+          "qualified_name": "AlphaShapeVertex_2::get_range",
+          "brief": "returns two alpha values $ \\alpha_1 \\leq\\alpha_2$ , such as for $ \\alpha$ between $ \\alpha_1$ and $ \\alpha_2$ , the vertex is attached but singular, and for $ \\alpha$ upper $ \\alpha_2$ , the vertex is regular.",
+          "detailed": "",
+          "return_type": "std::pair< FT , FT >",
+          "definition": "std::pair< FT, FT > AlphaShapeVertex_2::get_range",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/AlphaShapeVertex_2.h",
+          "line": "63"
+        },
+        {
+          "kind": "function",
+          "name": "set_range",
+          "qualified_name": "AlphaShapeVertex_2::set_range",
+          "brief": "sets the alpha values $ \\alpha_1 \\leq\\alpha_2$ , such as for $ \\alpha$ between $ \\alpha_1$ and $ \\alpha_2$ , the vertex is attached but singular, and for $ \\alpha$ upper $ \\alpha_2$ , the vertex is regular.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void AlphaShapeVertex_2::set_range",
+          "argsstring": "(std::pair< FT, FT > I)",
+          "params": [
+            {
+              "type": "std::pair< FT , FT >",
+              "name": "I",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/AlphaShapeVertex_2.h",
+          "line": "75"
+        }
+      ],
+      "xml_file": "class_alpha_shape_vertex__2.xml",
+      "file": "Concepts/AlphaShapeVertex_2.h",
+      "line": "16"
+    },
+    "CGAL::Alpha_shape_2": {
+      "kind": "class",
+      "name": "CGAL::Alpha_shape_2",
+      "brief": "The class Alpha_shape_2 represents the family of $ \\alpha$ -shapes of points in a plane for all positive $ \\alpha$ .",
+      "detailed": "It maintains the underlying triangulation Dt which represents connectivity and order among its faces. Each $ k$ -dimensional face of the Dt is associated with an interval that specifies for which values of $ \\alpha$ the face belongs to the $ \\alpha$ -shape. There are links between the intervals and the $ k$ -dimensional faces of the triangulation. Note that this class is at the same time used for basic and for weighted Alpha Shapes. The modifying functions Alpha_shape_2::insert() and Alpha_shape_2::remove() will overwrite the one inherited from the underlying triangulation class Dt . At the moment, only the static version is implemented. Dt must be either Delaunay_triangulation_2 or Regular_triangulation_2 . Note that Dt::Geom_traits , Dt::Vertex , and Dt::Face must be model the concepts AlphaShapeTraits_2 , AlphaShapeVertex_2 and AlphaShapeFace_2 , respectively. ExactAlphaComparisonTag is a tag that, when set to Tag_true , triggers exact comparisons between alpha values. This is useful when the underlying triangulation is instantiated with an exact predicates inexact constructions kernel. By default the ExactAlphaComparisonTag is set to Tag_false as it induces a small overhead. Note that the tag ExactAlphaComparisonTag is currently ignored (meaning that the code will behave as if ExactAlphaComparisonTag were set to Tag_false ) if Dt::Geom_traits::FT is not a floating point number type as this strategy does not make sense if the traits class already provides exact constructions. When the tag ExactAlphaComparisonTag is set to Tag_true , the class Cartesian_converter is used internally to switch between the traits class and the CGAL kernel CGAL::Simple_cartesian<NT> , where NT can be either CGAL::Interval_nt or CGAL::Exact_rational . Cartesian_converter must thus offer the necessary functors to convert a two-dimensional point of the traits class to a two-dimensional point of CGAL::Simple_cartesian<NT> . However, these functors are not necessarily provided by the basic Cartesian_converter . For example when using the traits class CGAL::Projection_traits_xy_3 , a CGAL::Point_3 is camouflaged as a Point_2 and the basic Cartesian_converter does not know how to convert from the camouflaged CGAL::Point_3 to the two-dimensional point of CGAL::Simple_cartesian<NT> . In this case, a partial specialization of Cartesian_converter must be provided by the user. An example of such specialization is given in the example ex_alpha_projection_traits.cpp . The tag ExactAlphaComparisonTag cannot be used in conjunction with periodic triangulations. When the tag ExactAlphaComparisonTag is set to Tag_true , the evaluations of predicates such as Side_of_oriented_circle_2 are done lazily. Consequently, the predicates store pointers to the geometrical positions of the points passed as arguments of the predicates. It is thus important that these points are not temporary objects. Points of the triangulation are accessed using the function point(Face_handle, int) of the underlying triangulation. In the case of periodic triangulations, the point(Face_handle, int) function is actually a construction that returns a temporary, which thus cannot be used along with a lazy predicate evaluation. I/O The I/O operators are defined for std::iostream . The format for the iostream is an internal format. Implementation The set of intervals associated with the $ k$ -dimensional faces of the underlying triangulation are stored in multimaps . The cross links between the intervals and the $ k$ -dimensional faces of the triangulation are realized using methods in the $ k$ -dimensional faces themselves. Alpha_shape_2::alpha_find() uses linear search, while Alpha_shape_2::alpha_lower_bound() and Alpha_shape_2::alpha_upper_bound() use binary search. Alpha_shape_2::number_of_solid_components() performs a graph traversal and takes time linear in the number of faces of the underlying triangulation. Alpha_shape_2::find_optimal_alpha() uses binary search and takes time $O(n \\log n)$ , where $ n$ is the number of points.",
+      "members": [
+        {
+          "kind": "enum",
+          "name": "Classification_type",
+          "qualified_name": "CGAL::Alpha_shape_2::Classification_type",
+          "brief": "Distinguishes the different cases for classifying a $ k$ -dimensional face of the underlying triangulation of the $ \\alpha$ -shape.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "160"
+        },
+        {
+          "kind": "enum",
+          "name": "Mode",
+          "qualified_name": "CGAL::Alpha_shape_2::Mode",
+          "brief": "In general, an alpha shape can be disconnected and contain many singular edges or vertices.",
+          "detailed": "Its regularized version is formed by the set of regular edges and their vertices.",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "174"
+        },
+        {
+          "kind": "typedef",
+          "name": "Gt",
+          "qualified_name": "CGAL::Alpha_shape_2::Gt",
+          "brief": "the alpha shape traits type.",
+          "detailed": "it has to derive from a triangulation traits class. For example Dt::Point is a point class.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::Gt",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "97"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Alpha_shape_2::FT",
+          "brief": "the number type of alpha values.",
+          "detailed": "In case ExactAlphaComparisonTag is CGAL::Tag_false , it is Gt::FT. In case ExactAlphaComparisonTag is CGAL::Tag_true , it is a number type allowing filtered exact comparisons (that is, interval arithmetic is first used before resorting to exact arithmetic). Access to the interval containing the exact value is provided through the function FT::Approximate_nt approx() const where FT::Approximate_nt is CGAL::Interval_nt<Protected> with Protected=true . Access to the exact value is provided through the function FT::Exact_nt exact() const where FT::Exact_nt depends on the configuration of CGAL (it is Gmpq if gmp is available and Quotient<CGAL::MP_Float> otherwise). An overload for the function double to_double(FT) is also available. Its precision is controlled through FT::set_relative_precision_of_to_double() in exactly the same way as with Lazy_exact_nt<NT> , so a call to to_double may trigger an exact evaluation. It must be noted that an object of type FT is valid as long as the alpha shapes class that creates it is valid and has not been modified. For convenience, classical comparison operators are provided for the type FT .",
+          "return_type": "Gt::FT",
+          "definition": "typedef Gt::FT CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "120"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "CGAL::Alpha_shape_2::Point",
+          "brief": "The point type.",
+          "detailed": "For basic alpha shapes, Point will be equal to Gt::Point_2 . For weighted alpha shapes, Point will be equal to Gt::Weighted_point_2 .",
+          "return_type": "Dt::Point",
+          "definition": "typedef Dt::Point CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "128"
+        },
+        {
+          "kind": "typedef",
+          "name": "size_type",
+          "qualified_name": "CGAL::Alpha_shape_2::size_type",
+          "brief": "The size type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::size_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "133"
+        },
+        {
+          "kind": "typedef",
+          "name": "Alpha_iterator",
+          "qualified_name": "CGAL::Alpha_shape_2::Alpha_iterator",
+          "brief": "A bidirectional and non-mutable iterator that allow to traverse the increasing sequence of different $ \\alpha$ -values.",
+          "detailed": "Its value_type is FT .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::Alpha_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "140"
+        },
+        {
+          "kind": "typedef",
+          "name": "Alpha_shape_vertices_iterator",
+          "qualified_name": "CGAL::Alpha_shape_2::Alpha_shape_vertices_iterator",
+          "brief": "A bidirectional and non-mutable iterator that allow to traverse the vertices which belongs to the $ \\alpha$ -shape for the current $ \\alpha$ .",
+          "detailed": "Its value_type is Dt::Vertex_handle .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::Alpha_shape_vertices_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "147"
+        },
+        {
+          "kind": "typedef",
+          "name": "Alpha_shape_edges_iterator",
+          "qualified_name": "CGAL::Alpha_shape_2::Alpha_shape_edges_iterator",
+          "brief": "A bidirectional and non-mutable iterator that allow to traverse the edges which belongs to the $ \\alpha$ -shape for the current $ \\alpha$ .",
+          "detailed": "Its value_type is Dt::Edge .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::Alpha_shape_edges_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "154"
+        },
+        {
+          "kind": "function",
+          "name": "Alpha_shape_2",
+          "qualified_name": "CGAL::Alpha_shape_2::Alpha_shape_2",
+          "brief": "Introduces an empty alpha-shape for a positive $ \\alpha$ -value alpha .",
+          "detailed": "alpha $ \\geq~0$ .",
+          "return_type": "",
+          "definition": "CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::Alpha_shape_2",
+          "argsstring": "(FT alpha=0, Mode m=GENERAL)",
+          "params": [
+            {
+              "type": "FT",
+              "name": "alpha",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Mode",
+              "name": "m",
+              "default": "GENERAL",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "187"
+        },
+        {
+          "kind": "function",
+          "name": "Alpha_shape_2",
+          "qualified_name": "CGAL::Alpha_shape_2::Alpha_shape_2",
+          "brief": "Builds an alpha shape of mode m from the triangulation dt for a positive $ \\alpha$ -value alpha .",
+          "detailed": "This operation destroys the triangulation. alpha $ \\geq~0$ .",
+          "return_type": "",
+          "definition": "CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::Alpha_shape_2",
+          "argsstring": "(Dt &dt, FT alpha=0, Mode m=GENERAL)",
+          "params": [
+            {
+              "type": "Dt &",
+              "name": "dt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FT",
+              "name": "alpha",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Mode",
+              "name": "m",
+              "default": "GENERAL",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "196"
+        },
+        {
+          "kind": "function",
+          "name": "Alpha_shape_2",
+          "qualified_name": "CGAL::Alpha_shape_2::Alpha_shape_2",
+          "brief": "Initializes the family of alpha-shapes with the points in the range [first,last) and introduces an $ \\alpha$ -shape for a positive $ \\alpha$ -value alpha .",
+          "detailed": "InputIterator must be an input iterator with the value type Point . alpha $ \\geq0$ .",
+          "return_type": "",
+          "definition": "CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::Alpha_shape_2",
+          "argsstring": "(InputIterator first, InputIterator last, const FT &alpha=0, Mode m=GENERAL)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT &",
+              "name": "alpha",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Mode",
+              "name": "m",
+              "default": "GENERAL",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "210"
+        },
+        {
+          "kind": "function",
+          "name": "make_alpha_shape",
+          "qualified_name": "CGAL::Alpha_shape_2::make_alpha_shape",
+          "brief": "Initialize the family of alpha-shapes with the points in the range [first,last) .",
+          "detailed": "Returns the number of inserted points. If the function is applied to an non-empty family of alpha-shape, it is cleared before initialization. InputIterator must be an input iterator with the value type Point .",
+          "return_type": "std::ptrdiff_t",
+          "definition": "std::ptrdiff_t CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::make_alpha_shape",
+          "argsstring": "(InputIterator first, InputIterator last)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "230"
+        },
+        {
+          "kind": "function",
+          "name": "clear",
+          "qualified_name": "CGAL::Alpha_shape_2::clear",
+          "brief": "Clears the structure.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "238"
+        },
+        {
+          "kind": "function",
+          "name": "set_alpha",
+          "qualified_name": "CGAL::Alpha_shape_2::set_alpha",
+          "brief": "Sets the $ \\alpha$ -value to alpha .",
+          "detailed": "Returns the previous $ \\alpha$ -value. alpha $ \\geq0$ .",
+          "return_type": "FT",
+          "definition": "FT CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::set_alpha",
+          "argsstring": "(const FT &alpha)",
+          "params": [
+            {
+              "type": "const FT &",
+              "name": "alpha",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "246"
+        },
+        {
+          "kind": "function",
+          "name": "get_alpha",
+          "qualified_name": "CGAL::Alpha_shape_2::get_alpha",
+          "brief": "Returns the current $ \\alpha$ -value.",
+          "detailed": "",
+          "return_type": "const FT &",
+          "definition": "const FT & CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::get_alpha",
+          "argsstring": "(void) const",
+          "params": [
+            {
+              "type": "void",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "252"
+        },
+        {
+          "kind": "function",
+          "name": "get_nth_alpha",
+          "qualified_name": "CGAL::Alpha_shape_2::get_nth_alpha",
+          "brief": "Returns the n -th $\\alpha$ -value, sorted in an increasing order.",
+          "detailed": "n $ <$ number of alphas.",
+          "return_type": "const FT &",
+          "definition": "const FT & CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::get_nth_alpha",
+          "argsstring": "(size_type n) const",
+          "params": [
+            {
+              "type": "size_type",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "258"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_alphas",
+          "qualified_name": "CGAL::Alpha_shape_2::number_of_alphas",
+          "brief": "Returns the number of different alpha-values.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::number_of_alphas",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "263"
+        },
+        {
+          "kind": "function",
+          "name": "set_mode",
+          "qualified_name": "CGAL::Alpha_shape_2::set_mode",
+          "brief": "Sets the mode to its general or regularized version.",
+          "detailed": "Returns the previous mode.",
+          "return_type": "Mode",
+          "definition": "Mode CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::set_mode",
+          "argsstring": "(Mode m=GENERAL)",
+          "params": [
+            {
+              "type": "Mode",
+              "name": "m",
+              "default": "GENERAL",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "270"
+        },
+        {
+          "kind": "function",
+          "name": "get_mode",
+          "qualified_name": "CGAL::Alpha_shape_2::get_mode",
+          "brief": "Returns the mode, that is either GENERAL or REGULARIZED .",
+          "detailed": "",
+          "return_type": "Mode",
+          "definition": "Mode CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::get_mode",
+          "argsstring": "(void) const",
+          "params": [
+            {
+              "type": "void",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "276"
+        },
+        {
+          "kind": "function",
+          "name": "alpha_shape_vertices_begin",
+          "qualified_name": "CGAL::Alpha_shape_2::alpha_shape_vertices_begin",
+          "brief": "Starts at an arbitrary finite vertex which belongs to the $ \\alpha$ -shape for the current $ \\alpha$ .",
+          "detailed": "",
+          "return_type": "Alpha_shape_vertices_iterator",
+          "definition": "Alpha_shape_vertices_iterator CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::alpha_shape_vertices_begin",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "282"
+        },
+        {
+          "kind": "function",
+          "name": "alpha_shape_vertices_end",
+          "qualified_name": "CGAL::Alpha_shape_2::alpha_shape_vertices_end",
+          "brief": "Past-the-end iterator.",
+          "detailed": "",
+          "return_type": "Alpha_shape_vertices_iterator",
+          "definition": "Alpha_shape_vertices_iterator CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::alpha_shape_vertices_end",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "287"
+        },
+        {
+          "kind": "function",
+          "name": "alpha_shape_edges_begin",
+          "qualified_name": "CGAL::Alpha_shape_2::alpha_shape_edges_begin",
+          "brief": "Starts at an arbitrary finite edge which belongs to the $ \\alpha$ -shape for the current $ \\alpha$ .",
+          "detailed": "In regularized mode, edges are represented as a pair (f,i), where f is an interior face of the $ \\alpha$ -shape.",
+          "return_type": "Alpha_shape_edges_iterator",
+          "definition": "Alpha_shape_edges_iterator CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::alpha_shape_edges_begin",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "295"
+        },
+        {
+          "kind": "function",
+          "name": "alpha_shape_edges_end",
+          "qualified_name": "CGAL::Alpha_shape_2::alpha_shape_edges_end",
+          "brief": "Past-the-end iterator.",
+          "detailed": "",
+          "return_type": "Alpha_shape_edges_iterator",
+          "definition": "Alpha_shape_edges_iterator CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::alpha_shape_edges_end",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "300"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_solid_components",
+          "qualified_name": "CGAL::Alpha_shape_2::number_of_solid_components",
+          "brief": "Returns the number of solid components of the alpha shape, that is, the number of components of its regularized version.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::number_of_solid_components",
+          "argsstring": "(const FT &alpha=get_alpha()) const",
+          "params": [
+            {
+              "type": "const FT &",
+              "name": "alpha",
+              "default": "get_alpha ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "385"
+        },
+        {
+          "kind": "function",
+          "name": "find_optimal_alpha",
+          "qualified_name": "CGAL::Alpha_shape_2::find_optimal_alpha",
+          "brief": "Returns an iterator pointing to the first element with $ \\alpha$ -value such that the alpha shape satisfies the following two properties:",
+          "detailed": "All data points are either on the boundary or in the interior of the regularized version of the alpha shape. The number of solid component of the alpha shape is equal to or smaller than nb_components . If no such value is found, the iterator points to the first element with $ \\alpha$ -value such that the alpha shape satisfies the second property.",
+          "return_type": "Alpha_iterator",
+          "definition": "Alpha_iterator CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::find_optimal_alpha",
+          "argsstring": "(size_type nb_components) const",
+          "params": [
+            {
+              "type": "size_type",
+              "name": "nb_components",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "400"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Alpha_shape_2::operator<<",
+          "brief": "Inserts the alpha shape for the current $ \\alpha$ -value into the stream os .",
+          "detailed": "CGAL/IO/io.h must be included. The insert operator must be defined for Point .",
+          "return_type": "ostream &",
+          "definition": "ostream & operator<<",
+          "argsstring": "(std::ostream &os, const Alpha_shape_2< Dt > &A)",
+          "params": [
+            {
+              "type": "std::ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Alpha_shape_2 < Dt > &",
+              "name": "A",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "410"
+        },
+        {
+          "kind": "function",
+          "name": "classify",
+          "qualified_name": "CGAL::Alpha_shape_2::classify",
+          "brief": "Locates a point p in the underlying triangulation and Classifies the associated k-face with respect to the alpha shape.",
+          "detailed": "",
+          "return_type": "Classification_type",
+          "definition": "Classification_type CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::classify",
+          "argsstring": "(const Point &p, const FT &alpha=get_alpha()) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT &",
+              "name": "alpha",
+              "default": "get_alpha ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Predicates",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "312"
+        },
+        {
+          "kind": "function",
+          "name": "classify",
+          "qualified_name": "CGAL::Alpha_shape_2::classify",
+          "brief": "Classifies the face f of the underlying triangulation with respect to the alpha shape.",
+          "detailed": "",
+          "return_type": "Classification_type",
+          "definition": "Classification_type CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::classify",
+          "argsstring": "(Face_handle f, const FT &alpha=get_alpha()) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT &",
+              "name": "alpha",
+              "default": "get_alpha ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Predicates",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "319"
+        },
+        {
+          "kind": "function",
+          "name": "classify",
+          "qualified_name": "CGAL::Alpha_shape_2::classify",
+          "brief": "Classifies the edge e of the underlying triangulation with respect to the alpha shape.",
+          "detailed": "",
+          "return_type": "Classification_type",
+          "definition": "Classification_type CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::classify",
+          "argsstring": "(Edge e, const FT &alpha=get_alpha()) const",
+          "params": [
+            {
+              "type": "Edge",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT &",
+              "name": "alpha",
+              "default": "get_alpha ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Predicates",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "325"
+        },
+        {
+          "kind": "function",
+          "name": "classify",
+          "qualified_name": "CGAL::Alpha_shape_2::classify",
+          "brief": "Classifies the edge of the face f opposite to the vertex with index i of the underlying triangulation with respect to the alpha shape.",
+          "detailed": "",
+          "return_type": "Classification_type",
+          "definition": "Classification_type CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::classify",
+          "argsstring": "(Face_handle f, int i, const FT &alpha=get_alpha()) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT &",
+              "name": "alpha",
+              "default": "get_alpha ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Predicates",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "333"
+        },
+        {
+          "kind": "function",
+          "name": "classify",
+          "qualified_name": "CGAL::Alpha_shape_2::classify",
+          "brief": "Classifies the vertex v of the underlying triangulation with respect to the alpha shape.",
+          "detailed": "",
+          "return_type": "Classification_type",
+          "definition": "Classification_type CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::classify",
+          "argsstring": "(Vertex_handle v, const FT &alpha=get_alpha()) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT &",
+              "name": "alpha",
+              "default": "get_alpha ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Predicates",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "339"
+        },
+        {
+          "kind": "function",
+          "name": "alpha_begin",
+          "qualified_name": "CGAL::Alpha_shape_2::alpha_begin",
+          "brief": "Returns an iterator that allows to traverse the sorted sequence of $ \\alpha$ -values of the family of alpha shapes.",
+          "detailed": "",
+          "return_type": "Alpha_iterator",
+          "definition": "Alpha_iterator CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::alpha_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversal of the alpha-Values",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "350"
+        },
+        {
+          "kind": "function",
+          "name": "alpha_end",
+          "qualified_name": "CGAL::Alpha_shape_2::alpha_end",
+          "brief": "Returns the corresponding past-the-end iterator.",
+          "detailed": "",
+          "return_type": "Alpha_iterator",
+          "definition": "Alpha_iterator CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::alpha_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversal of the alpha-Values",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "355"
+        },
+        {
+          "kind": "function",
+          "name": "alpha_find",
+          "qualified_name": "CGAL::Alpha_shape_2::alpha_find",
+          "brief": "Returns an iterator pointing to an element with $ \\alpha$ -value alpha , or the corresponding past-the-end iterator if such an element is not found.",
+          "detailed": "",
+          "return_type": "Alpha_iterator",
+          "definition": "Alpha_iterator CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::alpha_find",
+          "argsstring": "(const FT &alpha) const",
+          "params": [
+            {
+              "type": "const FT &",
+              "name": "alpha",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal of the alpha-Values",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "362"
+        },
+        {
+          "kind": "function",
+          "name": "alpha_lower_bound",
+          "qualified_name": "CGAL::Alpha_shape_2::alpha_lower_bound",
+          "brief": "Returns an iterator pointing to the first element with $ \\alpha$ -value not less than alpha .",
+          "detailed": "",
+          "return_type": "Alpha_iterator",
+          "definition": "Alpha_iterator CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::alpha_lower_bound",
+          "argsstring": "(const FT &alpha) const",
+          "params": [
+            {
+              "type": "const FT &",
+              "name": "alpha",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal of the alpha-Values",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "368"
+        },
+        {
+          "kind": "function",
+          "name": "alpha_upper_bound",
+          "qualified_name": "CGAL::Alpha_shape_2::alpha_upper_bound",
+          "brief": "Returns an iterator pointing to the first element with $ \\alpha$ -value greater than alpha .",
+          "detailed": "",
+          "return_type": "Alpha_iterator",
+          "definition": "Alpha_iterator CGAL::Alpha_shape_2< Dt, ExactAlphaComparisonTag >::alpha_upper_bound",
+          "argsstring": "(const FT &alpha) const",
+          "params": [
+            {
+              "type": "const FT &",
+              "name": "alpha",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal of the alpha-Values",
+          "file": "CGAL/Alpha_shape_2.h",
+          "line": "374"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_alpha__shape__2.xml",
+      "file": "CGAL/Alpha_shape_2.h",
+      "line": "87"
+    },
+    "CGAL::Alpha_shape_face_base_2": {
+      "kind": "class",
+      "name": "CGAL::Alpha_shape_face_base_2",
+      "brief": "The class Alpha_shape_face_base_2 is the default model for the concept AlphaShapeFace_2 .",
+      "detailed": "Traits has to be a model of AlphaShapeTraits_2 . Fb has to be a model of TriangulationFaceBase_2 (or RegularTriangulationFaceBase_2 ) if Alpha_shape_face_base_2 is intended to be used with an alpha-shape class based on a Delaunay_triangulation_2 (or a Regular_triangulation_2 ). ExactAlphaComparisonTag is a tag that, when set to Tag_true , triggers exact comparisons between alpha values. See the description provided in the documentation of Alpha_shape_2 for more details. The default value is Tag_false . Is model of AlphaShapeFace_2 Triangulation_face_base_2 Regular_triangulation_face_base_2 Periodic_2_triangulation_face_base_2",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_alpha__shape__face__base__2.xml",
+      "file": "CGAL/Alpha_shape_face_base_2.h",
+      "line": "26"
+    },
+    "CGAL::Alpha_shape_vertex_base_2": {
+      "kind": "class",
+      "name": "CGAL::Alpha_shape_vertex_base_2",
+      "brief": "The class Alpha_shape_vertex_base_2 is the default model for the concept AlphaShapeVertex_2 .",
+      "detailed": "Traits has to be a model of AlphaShapeTraits_2 . Vb has to be a model of TriangulationVertexBase_2 (or RegularTriangulationVertexBase_2 ) if Alpha_shape_vertex_base_2 is intended to be used with an alpha-shape class based on a Delaunay_triangulation_2 (or a Regular_triangulation_2 ). ExactAlphaComparisonTag is a tag that, when set to Tag_true , triggers exact comparisons between alpha values. See the description provided in the documentation of Alpha_shape_2 for more details. The default value is Tag_false . Is model of AlphaShapeVertex_2 Triangulation_vertex_base_2 Regular_triangulation_vertex_base_2 Periodic_2_triangulation_vertex_base_2",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_alpha__shape__vertex__base__2.xml",
+      "file": "CGAL/Alpha_shape_vertex_base_2.h",
+      "line": "27"
+    },
+    "WeightedAlphaShapeTraits_2": {
+      "kind": "class",
+      "name": "WeightedAlphaShapeTraits_2",
+      "brief": "The concept WeightedAlphaShapeTraits_2 describes the requirements for the geometric traits class of the underlying regular triangulation of a weighted alpha shape.",
+      "detailed": "Refines RegularTriangulationTraits_2 if the underlying triangulation of the alpha shape is a regular triangulation. Has models All models of Kernel , Projection traits such as CGAL::Projection_traits_xy_3<K> CGAL::Exact_predicates_inexact_constructions_kernel (recommended kernel)",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "WeightedAlphaShapeTraits_2::FT",
+          "brief": "A coordinate type.",
+          "detailed": "The type must provide a copy constructor, assignment, comparison operators, negation, multiplication, division and allow the declaration and initialization with a small integer constant (cf. requirements for number types). An obvious choice would be coordinate type of the point class.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type WeightedAlphaShapeTraits_2::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/WeightedAlphaShapeTraits_2.h",
+          "line": "34"
+        },
+        {
+          "kind": "function",
+          "name": "WeightedAlphaShapeTraits_2",
+          "qualified_name": "WeightedAlphaShapeTraits_2::WeightedAlphaShapeTraits_2",
+          "brief": "A default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "WeightedAlphaShapeTraits_2::WeightedAlphaShapeTraits_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/WeightedAlphaShapeTraits_2.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "compute_squared_radius_smallest_orthogonal_circle_2_object",
+          "qualified_name": "WeightedAlphaShapeTraits_2::compute_squared_radius_smallest_orthogonal_circle_2_object",
+          "brief": "Returns an object, which has to be able to compute the squared radius of the orthogonal circle of the points p0, p1, p2 or the squared radius of the smallest orthogonal circle of the points p0, p1 , as FT .",
+          "detailed": "",
+          "return_type": "Compute_squared_radius_smallest_orthogonal_circle_2",
+          "definition": "Compute_squared_radius_smallest_orthogonal_circle_2 WeightedAlphaShapeTraits_2::compute_squared_radius_smallest_orthogonal_circle_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions by function objects",
+          "file": "Concepts/WeightedAlphaShapeTraits_2.h",
+          "line": "58"
+        },
+        {
+          "kind": "function",
+          "name": "power_side_of_bounded_power_circle_2_object",
+          "qualified_name": "WeightedAlphaShapeTraits_2::power_side_of_bounded_power_circle_2_object",
+          "brief": "Returns an object, which has to be able to compute the relative position of the point test to the smallest orthogonal circle of the points p0, p1 .",
+          "detailed": "",
+          "return_type": "Power_side_of_bounded_power_circle_2",
+          "definition": "Power_side_of_bounded_power_circle_2 WeightedAlphaShapeTraits_2::power_side_of_bounded_power_circle_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Predicate by function object",
+          "file": "Concepts/WeightedAlphaShapeTraits_2.h",
+          "line": "70"
+        }
+      ],
+      "xml_file": "class_weighted_alpha_shape_traits__2.xml",
+      "file": "Concepts/WeightedAlphaShapeTraits_2.h",
+      "line": "20"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Alpha_shapes_2.txt",
+      "line": "2"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgAlphaShapes2Ref": {
+      "kind": "group",
+      "name": "PkgAlphaShapes2Ref",
+      "brief": "",
+      "detailed": "Tran Kai Frank Da This package offers a data structure encoding the whole family of alpha-complexes related to a given 2D Delaunay or regular triangulation. In particular, the data structure allows to retrieve the alpha-complex for any alpha value, the whole spectrum of critical alpha values and a filtration on the triangulation faces (this filtration is based on the first alpha value for which each face is included on the alpha-complex). Introduced in: CGAL 2.1 Depends on: PkgTriangulation2 BibTeX: cgal:d-as2-26a License: GPL Windows Demo: 2D Alpha Shapes This chapter presents a framework for alpha shapes. The description is based on the articles [2] , [3] . Alpha shapes are the generalization of the convex hull of a point set. Let $ S$ be a finite set of points in $ \\mathbb{R}^d$ , $ d = 2,3$ and $ \\alpha$ a parameter with $ 0 \\leq \\alpha \\leq \\infty$ . For $ \\alpha = \\infty$ , the $ \\alpha$ -shape is the convex hull of $ S$ . As $ \\alpha$ decreases, the $ \\alpha$ -shape shrinks and develops cavities, as soon as a sphere of radius $ \\sqrt{\\alpha}$ can be put inside. Finally, for $ \\alpha = 0$ , the $ \\alpha$ -shape is the set $ S$ itself. We distinguish two versions of alpha shapes, one is based on the Delaunay triangulation and the other on its generalization, the regular triangulation, replacing the natural distance by the power to weighted points. The metric used determines an underlying triangulation of the alpha shape and thus, the version computed. The basic alpha shape (cf. Example for Basic Alpha Shapes ) is associated with the Delaunay triangulation (cf. Section Delaunay Triangulations). The weighted alpha shape (cf. Example for Weighted Alpha Shapes ) is associated with the regular triangulation (cf. Section Regular Triangulations). There is a close connection between alpha shapes and the underlying triangulations. More precisely, the $ \\alpha$ -complex of $ S$ is a subcomplex of this triangulation of $ S$ , containing the $ \\alpha$ -exposed $ k$ -simplices, $ 0 \\leq k \\leq d$ . A simplex is $ \\alpha$ -exposed, if there is an open disk (resp. ball) of radius $ \\sqrt{\\alpha}$ through the vertices of the simplex that does not contain any other point of $ S$ , for the metric used in the computation of the underlying triangulation. The corresponding $ \\alpha$ -shape is defined as the underlying interior space of the $ \\alpha$ -complex. In general, an $ \\alpha$ -complex is a non-connected and non-pure polytope, meaning that a $ k$ -simplex, with $ 0 \\leq k \\leq d-1$ , is not necessarily adjacent to a $ (k+1)$ -simplex. The $ \\alpha$ -shapes of $ S$ form a discrete family, even though they are defined for all real numbers $ \\alpha$ with $ 0 \\leq \\alpha \\leq \\infty$ . Thus, we can represent the entire family of $ \\alpha$ -shapes of $ S$ by the underlying triangulation of $ S$ . In this representation each $ k$ -simplex of the underlying triangulation is associated with an interval that specifies for which values of $ \\alpha$ the $ k$ -simplex belongs to the $ \\alpha$ -shape. Relying on this result, the family of $ \\alpha$ -shapes can be computed efficiently and relatively easily. Furthermore, we can select an appropriate $ \\alpha$ -shape from a finite number of different $ \\alpha$ -shapes and corresponding $ \\alpha$ -values. Classified Reference Pages Concepts AlphaShapeTraits_2 WeightedAlphaShapeTraits_2 AlphaShapeFace_2 AlphaShapeVertex_2 Classes CGAL::Alpha_shape_2 <Dt> CGAL::Alpha_shape_vertex_base_2 < AlphaShapeTraits_2 > CGAL::Alpha_shape_face_base_2 < AlphaShapeTraits_2 , TriangulationFaceBase_2>",
+      "members": [],
+      "xml_file": "group___pkg_alpha_shapes2_ref.xml"
+    },
+    "PkgAlphaShapes2Concepts": {
+      "kind": "group",
+      "name": "PkgAlphaShapes2Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_alpha_shapes2_concepts.xml"
+    }
+  }
+}

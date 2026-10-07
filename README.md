@@ -1,3 +1,5 @@
+<!-- Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com> -->
+
 # cgalpy: CGAL Python Bindings
 
 We introduce bindings that enable the convenient, efficient, and
@@ -105,13 +107,13 @@ Assuming you have all dependencies installed, type:
     pip install src/libs/cgalpy/dist/*.whl
 
 Then, you should be able to execute the program
-`<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`
+`<CGALPY_SRC_DIR>/src/python_examples/cgalpy_examples/aos2.py`
 where `<CGALPY_SRC_DIR>` is the root of your clone.
 
 The cmake script `<CGALPY_SRC_DIR>/cmake/tests/release/aos2_epec_fixed_release.cmake` sets the flags
 that are needed for the generation of bindings used in the Python script
-`<CGALPY_SRC_DIR>/src/python_scripts/cgalpy_examples/aos2.py`. Additional python programs that exploit
-the bindings reside under `<CGALPY_SRC_DIR>/src/python_scripts`. Naturally, different bindings are
+`<CGALPY_SRC_DIR>/src/python_examples/cgalpy_examples/aos2.py`. Additional Python example programs that exploit
+the bindings reside under `<CGALPY_SRC_DIR>/src/python_examples/cgalpy_examples`. Naturally, different bindings are
 needed for different Python scripts.
 
 ### Notes
@@ -132,26 +134,28 @@ At some point you will need bindings for additional instances (I
 assume); see Section [**Details**](markdown-header-details) for the
 relevant instructions.
 
-If you are a developer and would like to build the *cpp*
-documentation, type:
+Configure with `CGALPY_BUILD_DEV_DOC=ON` to enable the C++
+binding-code documentation. Build it from the detached build directory with:
 
-    make CGALPY_CPP_DOC
+    cmake --build <build-dir> --target CGALPY_CPP_DOC
 
-If you would like to build the Python documentation, type:
+Configure with `CGALPY_BUILD_DOC=ON` to enable the Python API
+documentation. Build it with:
 
-    make CGALPY_DOC
+    cmake --build <build-dir> --target <binding-library>_DOC
 
-The Python html manual pages are generated under
-`src/libs/cgalpy/CGALPY/build/html/`. The pdf single file is generated
-under `src/libs/cgalpy/CGALPY/build/latex/`.
+The Python HTML pages are generated under
+`<build-dir>/src/libs/cgalpy/<binding-library>/build/html/`. When
+PdfLaTeX is available, the PDF is generated under
+`<build-dir>/src/libs/cgalpy/<binding-library>/build/latex/`.
 
-Observe that the `CGALPY` prefix in the target of the above `make` is the binding library based name;
-this name can be different then `CGALPY`, and depends on your selections;
-see Section [**CGAL** Bindings](#markdown-header-cgal-bindings).
+`<binding-library>` is the configured binding-library name. It may be
+`CGALPY` or a computed name based on the selected binding options; see
+Section [**CGAL** Bindings](#markdown-header-cgal-bindings).
 
-If you would like to build the documentation for both, type:
+To build every enabled documentation target, use:
 
-    make doc
+    cmake --build <build-dir> --target doc
 
 ## Details
 

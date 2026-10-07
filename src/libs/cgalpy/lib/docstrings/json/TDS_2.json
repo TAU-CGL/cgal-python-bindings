@@ -1,0 +1,3745 @@
+{
+  "schema_version": 1,
+  "package": "TDS_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 13,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Triangulation_data_structure_2": {
+      "kind": "class",
+      "name": "CGAL::Triangulation_data_structure_2",
+      "brief": "The class Triangulation_data_structure_2 is a model for the TriangulationDataStructure_2 concept.",
+      "detailed": "It can be used to represent an orientable 2D triangulation embedded in a space of any dimension. The vertices and faces are stored in two nested containers, which are implemented using Compact_container . The class may offer some flexibility for the choice of container in the future, in the form of additional template parameters. VertexBase must be a model of TriangulationDSVertexBase_2 . The default is Triangulation_ds_vertex_base_2 <TDS> . FaceBase must be a model of TriangulationDSFaceBase_2 . The default is Triangulation_ds_face_base_2 <TDS> . Is model of TriangulationDataStructure_2 Modifiers In addition to the modifiers required by the TriangulationDataStructure_2 concept, the Triangulation_data_structure_2 class supports also the modifiers below. Note also that the modifiers below guarantee the combinatorial validity of the resulting data structure. Illustrations The join and split operations. The join and split operations. Insertion and removal of degree 2 vertices. Insertion and removal of degree 2 vertices.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Tds",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::Tds",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure_2 < VertexBase, FaceBase >",
+          "definition": "typedef Triangulation_data_structure_2<VertexBase,FaceBase> CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::Tds",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "47"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::Vertex",
+          "brief": "The vertex type.",
+          "detailed": "Section The Rebind Mechanism",
+          "return_type": "VertexBase::template Rebind_TDS< Tds >::Other",
+          "definition": "typedef VertexBase::template Rebind_TDS<Tds>::Other CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::Vertex",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "52"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::Face",
+          "brief": "The face type.",
+          "detailed": "Section The Rebind Mechanism",
+          "return_type": "FaceBase::template Rebind_TDS< Tds >::Other",
+          "definition": "typedef FaceBase::template Rebind_TDS<Tds>::Other CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::Face",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "57"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_range",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::Vertex_range",
+          "brief": "Vertex container type.",
+          "detailed": "",
+          "return_type": "Compact_container< Vertex >",
+          "definition": "typedef Compact_container<Vertex> CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::Vertex_range",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Ranges",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "70"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_range",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::Face_range",
+          "brief": "Face container type.",
+          "detailed": "",
+          "return_type": "Compact_container< Face >",
+          "definition": "typedef Compact_container<Face> CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::Face_range",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Ranges",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "75"
+        },
+        {
+          "kind": "function",
+          "name": "faces",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::faces",
+          "brief": "returns a reference to the container of faces.",
+          "detailed": "",
+          "return_type": "Face_range &",
+          "definition": "Face_range & CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::faces",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "89"
+        },
+        {
+          "kind": "function",
+          "name": "faces",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::faces",
+          "brief": "returns a reference to the container of faces.",
+          "detailed": "",
+          "return_type": "Face_range &",
+          "definition": "Face_range & CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::faces",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "94"
+        },
+        {
+          "kind": "function",
+          "name": "vertices",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::vertices",
+          "brief": "returns a reference to the container of vertices.",
+          "detailed": "",
+          "return_type": "Vertex_range &",
+          "definition": "Vertex_range & CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::vertices",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "99"
+        },
+        {
+          "kind": "function",
+          "name": "vertices",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::vertices",
+          "brief": "returns a reference to the container of vertices.",
+          "detailed": "",
+          "return_type": "Vertex_range &",
+          "definition": "Vertex_range & CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::vertices",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "104"
+        },
+        {
+          "kind": "function",
+          "name": "join_vertices",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::join_vertices",
+          "brief": "joins the vertices that are endpoints of the edge (f,i) , and returns a vertex handle to common vertex (see Fig. figtdssplitjoin ).",
+          "detailed": "f must be different from Face_handle() and i must be 0 , 1 or 2 .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::join_vertices",
+          "argsstring": "(Face_handle f, int i)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "117"
+        },
+        {
+          "kind": "function",
+          "name": "join_vertices",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::join_vertices",
+          "brief": "joins the vertices that are endpoints of the edge e , and returns a vertex handle to common vertex.",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::join_vertices",
+          "argsstring": "(Edge e)",
+          "params": [
+            {
+              "type": "Edge",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "122"
+        },
+        {
+          "kind": "function",
+          "name": "join_vertices",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::join_vertices",
+          "brief": "joins the vertices that are endpoints of the edge *eit , and returns a vertex handle to common vertex.",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::join_vertices",
+          "argsstring": "(Edge_iterator eit)",
+          "params": [
+            {
+              "type": "Edge_iterator",
+              "name": "eit",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "127"
+        },
+        {
+          "kind": "function",
+          "name": "join_vertices",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::join_vertices",
+          "brief": "joins the vertices that are endpoints of the edge *ec , and returns a vertex handle to common vertex.",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::join_vertices",
+          "argsstring": "(Edges_circulator ec)",
+          "params": [
+            {
+              "type": "Edges_circulator",
+              "name": "ec",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "132"
+        },
+        {
+          "kind": "function",
+          "name": "split_vertex",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::split_vertex",
+          "brief": "splits the vertex v into two vertices v1 and v2 .",
+          "detailed": "The common faces f and g of v1 and v2 are created after (in the counterclockwise sense) the faces f1 and f2 . The 4-tuple (v1,v2,f,g) is returned (see Fig. figtdssplitjoin ). dimension() must be equal to 2 , f1 and f2 must be different from Face_handle() and v must be a vertex of both f1 and f2 .",
+          "return_type": "boost::tuples::tuple< Vertex_handle, Vertex_handle, Face_handle, Face_handle >",
+          "definition": "boost::tuples::tuple< Vertex_handle, Vertex_handle, Face_handle, Face_handle > CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::split_vertex",
+          "argsstring": "(Vertex_handle v, Face_handle f1, Face_handle f2)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "143"
+        },
+        {
+          "kind": "function",
+          "name": "insert_degree_2",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::insert_degree_2",
+          "brief": "inserts a degree two vertex and two faces adjacent to it that have two common edges.",
+          "detailed": "The edge defined by the face handle f and the integer i is duplicated. It returns a handle to the vertex created (see Fig. figtdsirdeg2 ).",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::insert_degree_2",
+          "argsstring": "(Face_handle f, int i)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "151"
+        },
+        {
+          "kind": "function",
+          "name": "remove_degree_2",
+          "qualified_name": "CGAL::Triangulation_data_structure_2::remove_degree_2",
+          "brief": "removes a degree 2 vertex and the two faces adjacent to it.",
+          "detailed": "The two edges of the star of v that are not incident to it are collapsed (see Fig. figtdsirdeg2 ). The degree of v must be equal to 2.",
+          "return_type": "void",
+          "definition": "void CGAL::Triangulation_data_structure_2< VertexBase, FaceBase >::remove_degree_2",
+          "argsstring": "(Vertex_handle v)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "CGAL/Triangulation_data_structure_2.h",
+          "line": "160"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_triangulation__data__structure__2.xml",
+      "file": "CGAL/Triangulation_data_structure_2.h",
+      "line": "41"
+    },
+    "CGAL::Triangulation_ds_face_base_2": {
+      "kind": "class",
+      "name": "CGAL::Triangulation_ds_face_base_2",
+      "brief": "The class Triangulation_ds_face_base_2 is a model for the concept TriangulationDSFaceBase_2 to be used by Triangulation_data_structure_2 .",
+      "detailed": "Is model of TriangulationDSFaceBase_2 TDS should not be specified (see Section The Rebind Mechanism and examples) CGAL::Triangulation_face_base_2<Traits,Fb> CGAL::Triangulation_ds_vertex_base_2 <Tds>",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_triangulation__ds__face__base__2.xml",
+      "file": "CGAL/Triangulation_ds_face_base_2.h",
+      "line": "20"
+    },
+    "CGAL::Triangulation_ds_vertex_base_2": {
+      "kind": "class",
+      "name": "CGAL::Triangulation_ds_vertex_base_2",
+      "brief": "The class Triangulation_ds_vertex_base_2 can be used as the base vertex for a Triangulation_data_structure_2 , it is a model of the concept TriangulationDSVertexBase_2 .",
+      "detailed": "This base class can be used directly or can serve as a base to derive other base classes with some additional attributes (a color for example) tuned for a specific application. Note that if the Triangulation_data_structure_2 is used as a parameter of a geometric triangulation, there are additional geometric requirements to be fulfilled by the vertex base class, and Triangulation_ds_vertex_base_2 cannot be plugged in. TDS should not be specified (see Section The Rebind Mechanism and examples) Is model of TriangulationDSVertexBase_2 CGAL::Triangulation_vertex_base_2<Traits,Vb> CGAL::Triangulation_ds_face_base_2 <TDS>",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_triangulation__ds__vertex__base__2.xml",
+      "file": "CGAL/Triangulation_ds_vertex_base_2.h",
+      "line": "30"
+    },
+    "TriangulationDataStructure_2": {
+      "kind": "class",
+      "name": "TriangulationDataStructure_2",
+      "brief": "The concept TriangulationDataStructure_2 describes the requirements for the second template parameter of the basic triangulation class Triangulation_2<Traits,Tds> and of all other 2D triangulation classes.",
+      "detailed": "The concept can be seen as a container for the faces and vertices of the triangulation. The concept TriangulationDataStructure_2 includes two sub-concepts TriangulationDataStructure_2::Vertex and TriangulationDataStructure_2::Face . The TriangulationDataStructure_2 maintains incidence and adjacency relations among vertices and faces. Each triangular face gives access to its three incident vertices and to its three adjacent faces. Each vertex gives access to one of its incident faces and through that face to the circular list of its incident faces. The three vertices of a face are indexed with 0, 1, and 2. The neighbors of a face are also indexed with 0, 1, and 2 in such a way that the neighbor indexed by i is opposite to the vertex with the same index. Each edge has two implicit representations : the edge of a face f which is opposed to the vertex indexed i , can be represented as well as an edge of the neighbor(i) of f . See fig__TDS_2D_Fig_neighbors1 . The triangulation data structure is responsible for the combinatorial integrity of the triangulation. This means that the triangulation data structure allows to perform some combinatorial operations on the triangulation and guarantees the maintenance on proper incidence and adjacency relations among the vertices and faces. The term combinatorial operations means that those operations are purely topological and do not depend on the geometric embedding. Insertion of a new vertex in a given face, or in a given edge, suppression of a vertex of degree three, flip of two edges are examples of combinatorial operations. I/O The information output in the iostream is: the dimension, the number of (finite) vertices, the number of (finite) faces. Then comes for each vertex, the non combinatorial information stored in that vertex if any. Then comes for each faces, the indices of its vertices and the non combinatorial information (if any) stored in this face. Then comes for each face again the indices of the neighboring faces. The index of an item (vertex of face) the rank of this item in the output order. When dimension $ <$ 2, the same information is output for faces of maximal dimension instead of faces. Has models CGAL::Triangulation_data_structure_2 <Vb,Fb> TriangulationDataStructure_2::Face TriangulationDataStructure_2::Vertex CGAL::Triangulation_2",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "size_type",
+          "qualified_name": "TriangulationDataStructure_2::size_type",
+          "brief": "Size type (unsigned integral type).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::size_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "86"
+        },
+        {
+          "kind": "typedef",
+          "name": "difference_type",
+          "qualified_name": "TriangulationDataStructure_2::difference_type",
+          "brief": "Difference type (signed integral type).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::difference_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "91"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex",
+          "qualified_name": "TriangulationDataStructure_2::Vertex",
+          "brief": "The vertex type, requirements for this type are described in concept TriangulationDataStructure_2::Vertex .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::Vertex",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "96"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face",
+          "qualified_name": "TriangulationDataStructure_2::Face",
+          "brief": "The face type, requirements for this type are described in concept TriangulationDataStructure_2::Face .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::Face",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "101"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_data",
+          "qualified_name": "TriangulationDataStructure_2::Face_data",
+          "brief": "Face data type, requirements are described in TriangulationDataStructure_2::Face_data .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::Face_data",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "106"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle",
+          "qualified_name": "TriangulationDataStructure_2::Vertex_handle",
+          "brief": "Handle to a vertex.",
+          "detailed": "Is model of Handle",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::Vertex_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "112"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_handle",
+          "qualified_name": "TriangulationDataStructure_2::Face_handle",
+          "brief": "Handle to a face.",
+          "detailed": "Is model of Handle",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::Face_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "118"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge",
+          "qualified_name": "TriangulationDataStructure_2::Edge",
+          "brief": "The edge type.",
+          "detailed": "The Edge(f,i) is edge common to faces f and f.neighbor(i) . It is also the edge joining the vertices vertex(cw(i)) and vertex(ccw(i)) of f .",
+          "return_type": "std::pair< Face_handle , int >",
+          "definition": "typedef std::pair<Face_handle,int> TriangulationDataStructure_2::Edge",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "126"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_iterator",
+          "qualified_name": "TriangulationDataStructure_2::Face_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::Face_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Iterators and Circulators",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "156"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge_iterator",
+          "qualified_name": "TriangulationDataStructure_2::Edge_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::Edge_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Iterators and Circulators",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "161"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_iterator",
+          "qualified_name": "TriangulationDataStructure_2::Vertex_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::Vertex_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Iterators and Circulators",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "166"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_circulator",
+          "qualified_name": "TriangulationDataStructure_2::Face_circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::Face_circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Iterators and Circulators",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "171"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge_circulator",
+          "qualified_name": "TriangulationDataStructure_2::Edge_circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::Edge_circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Iterators and Circulators",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "176"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_circulator",
+          "qualified_name": "TriangulationDataStructure_2::Vertex_circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::Vertex_circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Iterators and Circulators",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "181"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDataStructure_2",
+          "qualified_name": "TriangulationDataStructure_2::TriangulationDataStructure_2",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "TriangulationDataStructure_2::TriangulationDataStructure_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "191"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDataStructure_2",
+          "qualified_name": "TriangulationDataStructure_2::TriangulationDataStructure_2",
+          "brief": "Copy constructor, performing a deep copy, that is all vertices and faces are duplicated.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "TriangulationDataStructure_2::TriangulationDataStructure_2",
+          "argsstring": "(const TriangulationDataStructure_2 &tds1)",
+          "params": [
+            {
+              "type": "const TriangulationDataStructure_2 &",
+              "name": "tds1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "196"
+        },
+        {
+          "kind": "function",
+          "name": "operator=",
+          "qualified_name": "TriangulationDataStructure_2::operator=",
+          "brief": "Assignment.",
+          "detailed": "All the vertices and faces of tds1 are duplicated in the triangulation data structure. Former faces and vertices of the triangulation data structure , if any, are deleted.",
+          "return_type": "TriangulationDataStructure_2 &",
+          "definition": "TriangulationDataStructure_2 & TriangulationDataStructure_2::operator=",
+          "argsstring": "(const TriangulationDataStructure_2 &tds1)",
+          "params": [
+            {
+              "type": "const TriangulationDataStructure_2 &",
+              "name": "tds1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "205"
+        },
+        {
+          "kind": "function",
+          "name": "copy_tds",
+          "qualified_name": "TriangulationDataStructure_2::copy_tds",
+          "brief": "tds1 is copied into the triangulation data structure.",
+          "detailed": "If v != Vertex_handle() , the vertex of the triangulation data structure corresponding to v is returned, otherwise Vertex_handle() is returned. The optional argument v is a vertex of tds1 .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::copy_tds",
+          "argsstring": "(const TriangulationDataStructure_2 &tds1, Vertex_handle v=Vertex_handle())",
+          "params": [
+            {
+              "type": "const TriangulationDataStructure_2 &",
+              "name": "tds1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "Vertex_handle ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "216"
+        },
+        {
+          "kind": "function",
+          "name": "copy_tds",
+          "qualified_name": "TriangulationDataStructure_2::copy_tds",
+          "brief": "tds_src is copied into this .",
+          "detailed": "As the vertex and face types might be different and incompatible, the creation of new faces and vertices is made thanks to the functors convert_vertex and convert_face , that convert vertex and face types. For each vertex v_src in tds_src , the corresponding vertex v_tgt in this is a copy of the vertex returned by convert_vertex(v_src) . The same operations are done for faces with the functor convert_face. If v != TDS_src::Vertex_handle() , a handle to the vertex created in this that is the copy of v is returned, otherwise Vertex_handle() is returned. A model of ConvertVertex must provide two operator()'s that are responsible for converting the source vertex v_src into the target vertex: Vertex operator()(const TDS_src::Vertex& v_src); This operator is used to create the vertex from v_src . void operator()(const TDS_src::Vertex& v_src, Vertex & v_tgt); This operator is meant to be used in case heavy data should transferred to v_tgt . A model of ConvertFace must provide two operator()'s that are responsible for converting the source face f_src into the target face: Face operator()(const TDS_src::Face& f_src); This operator is used to create the face from f_src . void operator()(const TDS_src::Face& f_src, Face & f_tgt); This operator is meant to be used in case heavy data should transferred to f_tgt . The optional argument v is a vertex of tds_src or is Vertex_handle() .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::copy_tds",
+          "argsstring": "(const TDS_src &tds_src, typename TDS_src::Vertex_handle v, const ConvertVertex &convert_vertex, const ConvertFace &convert_face)",
+          "params": [
+            {
+              "type": "const TDS_src &",
+              "name": "tds_src",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename TDS_src::Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ConvertVertex &",
+              "name": "convert_vertex",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ConvertFace &",
+              "name": "convert_face",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "239"
+        },
+        {
+          "kind": "function",
+          "name": "swap",
+          "qualified_name": "TriangulationDataStructure_2::swap",
+          "brief": "Swaps the triangulation data structure and tds1 .",
+          "detailed": "Should be preferred to an assignment or copy constructor when tds1 is deleted after that.",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::swap",
+          "argsstring": "(TriangulationDataStructure_2 &tds1)",
+          "params": [
+            {
+              "type": "TriangulationDataStructure_2 &",
+              "name": "tds1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "246"
+        },
+        {
+          "kind": "function",
+          "name": "clear",
+          "qualified_name": "TriangulationDataStructure_2::clear",
+          "brief": "Deletes all faces and all finite vertices.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "251"
+        },
+        {
+          "kind": "function",
+          "name": "dimension",
+          "qualified_name": "TriangulationDataStructure_2::dimension",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced returns the dimension of the triangulation data structure.",
+          "return_type": "int",
+          "definition": "int TriangulationDataStructure_2::dimension",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "264"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_vertices",
+          "qualified_name": "TriangulationDataStructure_2::number_of_vertices",
+          "brief": "returns the number of vertices in the triangulation data structure.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type TriangulationDataStructure_2::number_of_vertices",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "269"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_faces",
+          "qualified_name": "TriangulationDataStructure_2::number_of_faces",
+          "brief": "returns the number of two dimensional faces in the triangulation data structure.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type TriangulationDataStructure_2::number_of_faces",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "274"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_edges",
+          "qualified_name": "TriangulationDataStructure_2::number_of_edges",
+          "brief": "returns the number of edges in the triangulation data structure.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type TriangulationDataStructure_2::number_of_edges",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "279"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_full_dim_faces",
+          "qualified_name": "TriangulationDataStructure_2::number_of_full_dim_faces",
+          "brief": "returns the number of full dimensional faces, i.e. faces of dimension equal to the dimension of the triangulation data structure.",
+          "detailed": "This is the actual number of faces stored in the triangulation data structure.",
+          "return_type": "size_type",
+          "definition": "size_type TriangulationDataStructure_2::number_of_full_dim_faces",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "287"
+        },
+        {
+          "kind": "function",
+          "name": "set_dimension",
+          "qualified_name": "TriangulationDataStructure_2::set_dimension",
+          "brief": "sets the dimension.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::set_dimension",
+          "argsstring": "(int n)",
+          "params": [
+            {
+              "type": "int",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "297"
+        },
+        {
+          "kind": "function",
+          "name": "is_vertex",
+          "qualified_name": "TriangulationDataStructure_2::is_vertex",
+          "brief": "returns true if v is a vertex of the triangulation data structure.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::is_vertex",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "308"
+        },
+        {
+          "kind": "function",
+          "name": "is_edge",
+          "qualified_name": "TriangulationDataStructure_2::is_edge",
+          "brief": "returns true if (fh,i) is an edge of the triangulation data structure.",
+          "detailed": "Returns false when dimension() < 1 .",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::is_edge",
+          "argsstring": "(Face_handle fh, int i) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "fh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "314"
+        },
+        {
+          "kind": "function",
+          "name": "is_edge",
+          "qualified_name": "TriangulationDataStructure_2::is_edge",
+          "brief": "returns true if (va, vb) is an edge of the triangulation data structure.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::is_edge",
+          "argsstring": "(Vertex_handle va, Vertex_handle vb) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "va",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "vb",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "320"
+        },
+        {
+          "kind": "function",
+          "name": "is_edge",
+          "qualified_name": "TriangulationDataStructure_2::is_edge",
+          "brief": "returns true if (va, vb) is an edge of the triangulation data structure.",
+          "detailed": "In addition, if true is returned fr and i are set such that the pair (fr,i) is the description of the ordered edge (va, vb) .",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::is_edge",
+          "argsstring": "(Vertex_handle va, Vertex_handle vb, Face_handle &fr, int &i) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "va",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "vb",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle &",
+              "name": "fr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "330"
+        },
+        {
+          "kind": "function",
+          "name": "is_face",
+          "qualified_name": "TriangulationDataStructure_2::is_face",
+          "brief": "returns true if fh is a face of the triangulation data structure.",
+          "detailed": "Returns false when dimension() < 2 .",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::is_face",
+          "argsstring": "(Face_handle fh) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "fh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "337"
+        },
+        {
+          "kind": "function",
+          "name": "is_face",
+          "qualified_name": "TriangulationDataStructure_2::is_face",
+          "brief": "true if there is a face having v1 , v2 , and v3 as vertices.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::is_face",
+          "argsstring": "(Vertex_handle v1, Vertex_handle v2, Vertex_handle v3) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "343"
+        },
+        {
+          "kind": "function",
+          "name": "is_face",
+          "qualified_name": "TriangulationDataStructure_2::is_face",
+          "brief": "true if there is a face having v1 , v2 , and v3 as vertices.",
+          "detailed": "In addition, if true is returned, fr is a handle to the face with v1 , v2 and v3 as vertices.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::is_face",
+          "argsstring": "(Vertex_handle v1, Vertex_handle v2, Vertex_handle v3, Face_handle &fr) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle &",
+              "name": "fr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "354"
+        },
+        {
+          "kind": "function",
+          "name": "faces_begin",
+          "qualified_name": "TriangulationDataStructure_2::faces_begin",
+          "brief": "visits all faces.",
+          "detailed": "",
+          "return_type": "Face_iterator",
+          "definition": "Face_iterator TriangulationDataStructure_2::faces_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the Triangulation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "366"
+        },
+        {
+          "kind": "function",
+          "name": "faces_end",
+          "qualified_name": "TriangulationDataStructure_2::faces_end",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Face_iterator",
+          "definition": "Face_iterator TriangulationDataStructure_2::faces_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the Triangulation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "371"
+        },
+        {
+          "kind": "function",
+          "name": "vertices_begin",
+          "qualified_name": "TriangulationDataStructure_2::vertices_begin",
+          "brief": "visits all vertices.",
+          "detailed": "",
+          "return_type": "Vertex_iterator",
+          "definition": "Vertex_iterator TriangulationDataStructure_2::vertices_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the Triangulation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "376"
+        },
+        {
+          "kind": "function",
+          "name": "vertices_end",
+          "qualified_name": "TriangulationDataStructure_2::vertices_end",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vertex_iterator",
+          "definition": "Vertex_iterator TriangulationDataStructure_2::vertices_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the Triangulation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "381"
+        },
+        {
+          "kind": "function",
+          "name": "edges_begin",
+          "qualified_name": "TriangulationDataStructure_2::edges_begin",
+          "brief": "visits all edges.",
+          "detailed": "",
+          "return_type": "Edge_iterator",
+          "definition": "Edge_iterator TriangulationDataStructure_2::edges_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the Triangulation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "386"
+        },
+        {
+          "kind": "function",
+          "name": "edges_end",
+          "qualified_name": "TriangulationDataStructure_2::edges_end",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Edge_iterator",
+          "definition": "Edge_iterator TriangulationDataStructure_2::edges_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the Triangulation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "391"
+        },
+        {
+          "kind": "function",
+          "name": "incident_vertices",
+          "qualified_name": "TriangulationDataStructure_2::incident_vertices",
+          "brief": "",
+          "detailed": "If the face f is given, it has to be incident to be a face incident to v and the circulator begins with the vertex f->vertex(ccw(i)) if i is the index of v in f .",
+          "return_type": "Vertex_circulator",
+          "definition": "Vertex_circulator TriangulationDataStructure_2::incident_vertices",
+          "argsstring": "(Vertex_handle v, Face_handle f=Face_handle()) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "Face_handle ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversing the Triangulation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "397"
+        },
+        {
+          "kind": "function",
+          "name": "incident_edges",
+          "qualified_name": "TriangulationDataStructure_2::incident_edges",
+          "brief": "",
+          "detailed": "If the face f is given, it has to be a face of incident to v and the circulator begins with the edge (f,cw(i)) of f if i is the index of v in f .",
+          "return_type": "Edge_circulator",
+          "definition": "Edge_circulator TriangulationDataStructure_2::incident_edges",
+          "argsstring": "(Vertex_handle v, Face_handle f=Face_handle()) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "Face_handle ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversing the Triangulation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "404"
+        },
+        {
+          "kind": "function",
+          "name": "incident_faces",
+          "qualified_name": "TriangulationDataStructure_2::incident_faces",
+          "brief": "",
+          "detailed": "If the face f is given, it has to be a face of incident to v and the circulator begins with the face f .",
+          "return_type": "Face_circulator",
+          "definition": "Face_circulator TriangulationDataStructure_2::incident_faces",
+          "argsstring": "(Vertex_handle v, Face_handle f=Face_handle()) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "Face_handle ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversing the Triangulation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "410"
+        },
+        {
+          "kind": "function",
+          "name": "mirror_vertex",
+          "qualified_name": "TriangulationDataStructure_2::mirror_vertex",
+          "brief": "returns vertex of f->neighbor(i) .",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::mirror_vertex",
+          "argsstring": "(Face_handle f, int i) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversing the Triangulation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "415"
+        },
+        {
+          "kind": "function",
+          "name": "mirror_index",
+          "qualified_name": "TriangulationDataStructure_2::mirror_index",
+          "brief": "returns the index of f as a neighbor of f->neighbor(i) .",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int TriangulationDataStructure_2::mirror_index",
+          "argsstring": "(Face_handle f, int i) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversing the Triangulation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "420"
+        },
+        {
+          "kind": "function",
+          "name": "mirror_edge",
+          "qualified_name": "TriangulationDataStructure_2::mirror_edge",
+          "brief": "returns the same edge seen from the other adjacent face.",
+          "detailed": "",
+          "return_type": "Edge",
+          "definition": "Edge TriangulationDataStructure_2::mirror_edge",
+          "argsstring": "(Edge e) const",
+          "params": [
+            {
+              "type": "Edge",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversing the Triangulation",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "425"
+        },
+        {
+          "kind": "function",
+          "name": "flip",
+          "qualified_name": "TriangulationDataStructure_2::flip",
+          "brief": "exchanges the edge incident to f and f->neighbor(i) with the other diagonal of the quadrilateral formed by f and f->neighbor(i) .",
+          "detailed": "Flip Flip",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::flip",
+          "argsstring": "(Face_handle f, int i)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "441"
+        },
+        {
+          "kind": "function",
+          "name": "insert_first",
+          "qualified_name": "TriangulationDataStructure_2::insert_first",
+          "brief": "creates the first vertex and returns a handle to it.",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::insert_first",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "447"
+        },
+        {
+          "kind": "function",
+          "name": "insert_second",
+          "qualified_name": "TriangulationDataStructure_2::insert_second",
+          "brief": "creates the second vertex and returns a handle to it.",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::insert_second",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "453"
+        },
+        {
+          "kind": "function",
+          "name": "insert_in_edge",
+          "qualified_name": "TriangulationDataStructure_2::insert_in_edge",
+          "brief": "adds a vertex v splitting edge i of face f .",
+          "detailed": "Return a handle to v .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::insert_in_edge",
+          "argsstring": "(Face_handle f, int i)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "460"
+        },
+        {
+          "kind": "function",
+          "name": "insert_in_face",
+          "qualified_name": "TriangulationDataStructure_2::insert_in_face",
+          "brief": "adds a vertex v splitting face f in three.",
+          "detailed": "Face f is modified, two new faces are created. Return a handle to v",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::insert_in_face",
+          "argsstring": "(Face_handle f)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "468"
+        },
+        {
+          "kind": "function",
+          "name": "insert_dim_up",
+          "qualified_name": "TriangulationDataStructure_2::insert_dim_up",
+          "brief": "adds a vertex v , increasing by one the dimension of the triangulation data structure.",
+          "detailed": "Vertex v and the existing vertex w are linked to all the vertices of the triangulation data structure. The Boolean orient decides the final orientation of all faces. A handle to vertex v is returned.",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::insert_dim_up",
+          "argsstring": "(Vertex_handle w, bool orient=true)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "orient",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "479"
+        },
+        {
+          "kind": "function",
+          "name": "remove_degree_3",
+          "qualified_name": "TriangulationDataStructure_2::remove_degree_3",
+          "brief": "removes a vertex of degree 3.",
+          "detailed": "Two of the incident faces are destroyed, the third one is modified. If parameter f is specified, it has to be a face incident to v and will be the modified face. Vertex v is a finite vertex with degree 3 and, if specified, face f is incident to v . Insertion Insertion",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::remove_degree_3",
+          "argsstring": "(Vertex_handle v, Face_handle f=Face_handle())",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "Face_handle ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "492"
+        },
+        {
+          "kind": "function",
+          "name": "remove_second",
+          "qualified_name": "TriangulationDataStructure_2::remove_second",
+          "brief": "removes the before last vertex.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::remove_second",
+          "argsstring": "(Vertex_handle v)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "498"
+        },
+        {
+          "kind": "function",
+          "name": "remove_first",
+          "qualified_name": "TriangulationDataStructure_2::remove_first",
+          "brief": "removes the last vertex.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::remove_first",
+          "argsstring": "(Vertex_handle v)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "503"
+        },
+        {
+          "kind": "function",
+          "name": "remove_dim_down",
+          "qualified_name": "TriangulationDataStructure_2::remove_dim_down",
+          "brief": "removes vertex v incident to all other vertices and decreases by one the dimension of the triangulation data structure.",
+          "detailed": "If the dimension is 2, the number of vertices is more than 3, if the dimension is 1, the number of vertices is 2.",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::remove_dim_down",
+          "argsstring": "(Vertex_handle v)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "510"
+        },
+        {
+          "kind": "function",
+          "name": "dim_down",
+          "qualified_name": "TriangulationDataStructure_2::dim_down",
+          "brief": "must be called when the displacement of a vertex decreases the dimension of the triangulation data structure.",
+          "detailed": "The link of a vertex v is formed by the edges disjoint from v that are included in the faces incident to v . When the link of v = f->vertex(i) contains all the other vertices of the two-dimensional triangulation data structure ( $ \\mathbb{S}^2$ ), dim_down() crushes the two-dimensional data-structure ( $ \\mathbb{S}^2$ ) onto the one-dimensional data structure ( $ \\mathbb{S}^1$ ) formed by the link of v augmented with the vertex v itself; this one is placed on the edge (f, i) (see Figure figtdsdim_down_2 ). dimension() must be equal to 2 , the degree of f->vertex(i) must be equal to the total number of vertices minus 1. From a two-dimensional data structure to a one-dimensional data structure. From a two-dimensional data structure to a one-dimensional data structure.",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::dim_down",
+          "argsstring": "(Face_handle f, int i)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "529"
+        },
+        {
+          "kind": "function",
+          "name": "insert_in_hole",
+          "qualified_name": "TriangulationDataStructure_2::insert_in_hole",
+          "brief": "creates a new vertex v and uses it to star a hole.",
+          "detailed": "Given a set of faces 'F' describing a simply connected hole (i.e., a topological disk), the function deletes all the faces in F , creates a new vertex v and for each edge on the boundary of the hole creates a new face with v as a vertex. The input is an iterator range [face_begin, face_end[ of Face_handle s over the connected faces in F . The handle to the new vertex v is returned. tds.dimension() = 2 and the set of faces has the topology of a disk.",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::insert_in_hole",
+          "argsstring": "(FaceIt face_begin, FaceIt face_end)",
+          "params": [
+            {
+              "type": "FaceIt",
+              "name": "face_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceIt",
+              "name": "face_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "552"
+        },
+        {
+          "kind": "function",
+          "name": "insert_in_hole",
+          "qualified_name": "TriangulationDataStructure_2::insert_in_hole",
+          "brief": "same as above, except that new_v will be used as the new vertex, which must have been allocated previously, for example with create_vertex .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::insert_in_hole",
+          "argsstring": "(Vertex_handle new_v, FaceIt face_begin, FaceIt face_end)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "new_v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceIt",
+              "name": "face_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceIt",
+              "name": "face_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "559"
+        },
+        {
+          "kind": "function",
+          "name": "star_hole",
+          "qualified_name": "TriangulationDataStructure_2::star_hole",
+          "brief": "creates a new vertex v and use it to star the hole whose boundary is described by the sequence of edges [edge_begin, edge_end) .",
+          "detailed": "Returns a handle to the vertex.",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::star_hole",
+          "argsstring": "(EdgeIt edge_begin, EdgeIt edge_end)",
+          "params": [
+            {
+              "type": "EdgeIt",
+              "name": "edge_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "EdgeIt",
+              "name": "edge_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "567"
+        },
+        {
+          "kind": "function",
+          "name": "star_hole",
+          "qualified_name": "TriangulationDataStructure_2::star_hole",
+          "brief": "same as above, except that, to build the new faces, the algorithm first recycles faces in the sequence [face_begin, face_end) and create new ones when the sequence is exhausted.",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::star_hole",
+          "argsstring": "(EdgeIt edge_begin, EdgeIt edge_end, FaceIt face_begin, FaceIt face_end)",
+          "params": [
+            {
+              "type": "EdgeIt",
+              "name": "edge_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "EdgeIt",
+              "name": "edge_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceIt",
+              "name": "face_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceIt",
+              "name": "face_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "574"
+        },
+        {
+          "kind": "function",
+          "name": "star_hole",
+          "qualified_name": "TriangulationDataStructure_2::star_hole",
+          "brief": "uses vertex v to star the hole whose boundary is described by the sequence of edges [edge_begin, edge_end) .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::star_hole",
+          "argsstring": "(Vertex_handle v, EdgeIt edge_begin, EdgeIt edge_end)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "EdgeIt",
+              "name": "edge_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "EdgeIt",
+              "name": "edge_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "585"
+        },
+        {
+          "kind": "function",
+          "name": "star_hole",
+          "qualified_name": "TriangulationDataStructure_2::star_hole",
+          "brief": "same as above, recycling faces in the sequence [face_begin, face_end) .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::star_hole",
+          "argsstring": "(Vertex_handle v, EdgeIt edge_begin, EdgeIt edge_end, FaceIt face_begin, FaceIt face_end)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "EdgeIt",
+              "name": "edge_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "EdgeIt",
+              "name": "edge_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceIt",
+              "name": "face_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FaceIt",
+              "name": "face_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "591"
+        },
+        {
+          "kind": "function",
+          "name": "make_hole",
+          "qualified_name": "TriangulationDataStructure_2::make_hole",
+          "brief": "removes the vertex v, and store in hole the list of edges on the boundary of the hole.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::make_hole",
+          "argsstring": "(Vertex_handle v, List_edges &hole)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "List_edges &",
+              "name": "hole",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "601"
+        },
+        {
+          "kind": "function",
+          "name": "create_vertex",
+          "qualified_name": "TriangulationDataStructure_2::create_vertex",
+          "brief": "adds a new vertex.",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::create_vertex",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "606"
+        },
+        {
+          "kind": "function",
+          "name": "create_face",
+          "qualified_name": "TriangulationDataStructure_2::create_face",
+          "brief": "adds a face which is the neighbor i1 of f1 , i2 of f2 and i3 of f3 .",
+          "detailed": "",
+          "return_type": "Face_handle",
+          "definition": "Face_handle TriangulationDataStructure_2::create_face",
+          "argsstring": "(Face_handle f1, int i1, Face_handle f2, int i2, Face_handle f3, int i3)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "612"
+        },
+        {
+          "kind": "function",
+          "name": "create_face",
+          "qualified_name": "TriangulationDataStructure_2::create_face",
+          "brief": "adds a face which is the neighbor i1 of f1 , and the neighbor i2 of f2 .",
+          "detailed": "",
+          "return_type": "Face_handle",
+          "definition": "Face_handle TriangulationDataStructure_2::create_face",
+          "argsstring": "(Face_handle f1, int i1, Face_handle f2, int i2)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "619"
+        },
+        {
+          "kind": "function",
+          "name": "create_face",
+          "qualified_name": "TriangulationDataStructure_2::create_face",
+          "brief": "adds a face which is the neighbor i1 of f1 , and has v as vertex.",
+          "detailed": "",
+          "return_type": "Face_handle",
+          "definition": "Face_handle TriangulationDataStructure_2::create_face",
+          "argsstring": "(Face_handle f1, int i1, Vertex_handle v)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "625"
+        },
+        {
+          "kind": "function",
+          "name": "create_face",
+          "qualified_name": "TriangulationDataStructure_2::create_face",
+          "brief": "adds a face with vertices v1 , v2 and v3 .",
+          "detailed": "",
+          "return_type": "Face_handle",
+          "definition": "Face_handle TriangulationDataStructure_2::create_face",
+          "argsstring": "(Vertex_handle v1, Vertex_handle v2, Vertex_handle v3)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "630"
+        },
+        {
+          "kind": "function",
+          "name": "create_face",
+          "qualified_name": "TriangulationDataStructure_2::create_face",
+          "brief": "adds a face with vertices v1 , v2 and v3 , and neighbors f1 , f2 , f3 .",
+          "detailed": "",
+          "return_type": "Face_handle",
+          "definition": "Face_handle TriangulationDataStructure_2::create_face",
+          "argsstring": "(Vertex_handle v1, Vertex_handle v2, Vertex_handle v3, Face_handle f1, Face_handle f2, Face_handle f3)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "636"
+        },
+        {
+          "kind": "function",
+          "name": "create_face",
+          "qualified_name": "TriangulationDataStructure_2::create_face",
+          "brief": "adds a face whose vertices and neighbors are set to Vertex_handle() and Face_handle() .",
+          "detailed": "",
+          "return_type": "Face_handle",
+          "definition": "Face_handle TriangulationDataStructure_2::create_face",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "642"
+        },
+        {
+          "kind": "function",
+          "name": "delete_face",
+          "qualified_name": "TriangulationDataStructure_2::delete_face",
+          "brief": "deletes a face.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::delete_face",
+          "argsstring": "(Face_handle)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "647"
+        },
+        {
+          "kind": "function",
+          "name": "delete_vertex",
+          "qualified_name": "TriangulationDataStructure_2::delete_vertex",
+          "brief": "deletes a vertex.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::delete_vertex",
+          "argsstring": "(Vertex_handle)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Advanced Modifiers",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "652"
+        },
+        {
+          "kind": "function",
+          "name": "ccw",
+          "qualified_name": "TriangulationDataStructure_2::ccw",
+          "brief": "returns $ i+1$ modulo 3, with $ 0\\leq i \\leq2$ .",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int TriangulationDataStructure_2::ccw",
+          "argsstring": "(int i) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Miscellaneous",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "662"
+        },
+        {
+          "kind": "function",
+          "name": "cw",
+          "qualified_name": "TriangulationDataStructure_2::cw",
+          "brief": "returns $ i+2$ modulo 3, with $ 0\\leq i \\leq2$ .",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int TriangulationDataStructure_2::cw",
+          "argsstring": "(int i) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Miscellaneous",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "667"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "TriangulationDataStructure_2::is_valid",
+          "brief": "checks the combinatorial validity of the triangulation data structure: call the is_valid() member function for each vertex and each face, checks the number of vertices and the Euler relation between numbers of vertices, faces and edges.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::is_valid",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Miscellaneous",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "675"
+        },
+        {
+          "kind": "function",
+          "name": "degree",
+          "qualified_name": "TriangulationDataStructure_2::degree",
+          "brief": "Returns the degree of v in the triangulation data structure.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type TriangulationDataStructure_2::degree",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Miscellaneous",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "680"
+        },
+        {
+          "kind": "function",
+          "name": "file_output",
+          "qualified_name": "TriangulationDataStructure_2::file_output",
+          "brief": "writes the triangulation data structure into the stream os .",
+          "detailed": "If v is not Vertex_handle() , vertex v is output first or skipped if skip_first is true.",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::file_output",
+          "argsstring": "(ostream &os, Vertex_handle v=Vertex_handle(), bool skip_first=false)",
+          "params": [
+            {
+              "type": "ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "Vertex_handle ()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "skip_first",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Miscellaneous",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "687"
+        },
+        {
+          "kind": "function",
+          "name": "file_input",
+          "qualified_name": "TriangulationDataStructure_2::file_input",
+          "brief": "inputs the triangulation data structure from file and returns a handle to the first input vertex.",
+          "detailed": "If skip_first is true, it is assumed that the first vertex has been omitted when output.",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::file_input",
+          "argsstring": "(istream &is, bool skip_first=false)",
+          "params": [
+            {
+              "type": "istream &",
+              "name": "is",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "skip_first",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Miscellaneous",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "694"
+        },
+        {
+          "kind": "function",
+          "name": "operator>>",
+          "qualified_name": "TriangulationDataStructure_2::operator>>",
+          "brief": "reads a combinatorial triangulation data structure from is and assigns it to the triangulation data structure.",
+          "detailed": "",
+          "return_type": "istream &",
+          "definition": "istream & TriangulationDataStructure_2::operator>>",
+          "argsstring": "(istream &is, TriangulationDataStructure_2 &tds)",
+          "params": [
+            {
+              "type": "istream &",
+              "name": "is",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangulationDataStructure_2 &",
+              "name": "tds",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Miscellaneous",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "699"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "TriangulationDataStructure_2::operator<<",
+          "brief": "writes tds into the stream os .",
+          "detailed": "",
+          "return_type": "ostream &",
+          "definition": "ostream & TriangulationDataStructure_2::operator<<",
+          "argsstring": "(ostream &os, const TriangulationDataStructure_2 &tds)",
+          "params": [
+            {
+              "type": "ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const TriangulationDataStructure_2 &",
+              "name": "tds",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Miscellaneous",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "704"
+        }
+      ],
+      "xml_file": "class_triangulation_data_structure__2.xml",
+      "file": "Concepts/TriangulationDataStructure_2.h",
+      "line": "77"
+    },
+    "TriangulationDataStructure_2::Face": {
+      "kind": "class",
+      "name": "TriangulationDataStructure_2::Face",
+      "brief": "The concept TriangulationDataStructure_2::Face describes the types used to store the faces face class of a TriangulationDataStructure_2 . A TriangulationDataStructure_2::Face stores three handles to its three vertices and three handles to its three neighbors. The vertices are indexed 0,1, and 2 in counterclockwise order. The neighbor indexed i lies opposite to vertex i .",
+      "detailed": "In degenerate cases, when the triangulation data structure stores a simplicial complex of dimension 0 and 1 , the type TriangulationDataStructure_2::Face is used to store the faces of maximal dimension of the complex, i.e., a vertex in dimension 0 , an edge in dimension 1 . Only vertices and neighbors with index 0 are set in the first case, only vertices and neighbors with index 0 or 1 are set in the second case. Types The class TriangulationDataStructure_2::Face defines the same types as the triangulation data structure except the iterators and the circulators. Creation The methods create_face() and delete_face() have to be used to define new faces and to delete no longer used faces. Has models CGAL::Triangulation_ds_face_base_2 <Tds> TriangulationDSFaceBase_2 TriangulationDataStructure_2 TriangulationDataStructure_2::Vertex",
+      "members": [
+        {
+          "kind": "function",
+          "name": "vertex",
+          "qualified_name": "TriangulationDataStructure_2::Face::vertex",
+          "brief": "returns the vertex i of the face.",
+          "detailed": "$ 0\\leq i \\leq2$ .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_2::Face::vertex",
+          "argsstring": "(int i) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Vertex Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "873"
+        },
+        {
+          "kind": "function",
+          "name": "index",
+          "qualified_name": "TriangulationDataStructure_2::Face::index",
+          "brief": "returns the index of vertex v in the face.",
+          "detailed": "v is a vertex of the face.",
+          "return_type": "int",
+          "definition": "int TriangulationDataStructure_2::Face::index",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Vertex Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "878"
+        },
+        {
+          "kind": "function",
+          "name": "has_vertex",
+          "qualified_name": "TriangulationDataStructure_2::Face::has_vertex",
+          "brief": "returns true if v is a vertex of the face.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::Face::has_vertex",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Vertex Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "883"
+        },
+        {
+          "kind": "function",
+          "name": "has_vertex",
+          "qualified_name": "TriangulationDataStructure_2::Face::has_vertex",
+          "brief": "returns true if v is a vertex of the face, and computes the index i of v in the face.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::Face::has_vertex",
+          "argsstring": "(Vertex_handle v, int &i) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Vertex Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "889"
+        },
+        {
+          "kind": "function",
+          "name": "neighbor",
+          "qualified_name": "TriangulationDataStructure_2::Face::neighbor",
+          "brief": "returns the neighbor i of the face.",
+          "detailed": "$ 0\\leq i \\leq2$ .",
+          "return_type": "Face_handle",
+          "definition": "Face_handle TriangulationDataStructure_2::Face::neighbor",
+          "argsstring": "(int i) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Neighbor Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "903"
+        },
+        {
+          "kind": "function",
+          "name": "index",
+          "qualified_name": "TriangulationDataStructure_2::Face::index",
+          "brief": "returns the index of face n .",
+          "detailed": "n is a neighbor of the face.",
+          "return_type": "int",
+          "definition": "int TriangulationDataStructure_2::Face::index",
+          "argsstring": "(Face_handle n) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Neighbor Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "909"
+        },
+        {
+          "kind": "function",
+          "name": "has_neighbor",
+          "qualified_name": "TriangulationDataStructure_2::Face::has_neighbor",
+          "brief": "returns true if n is a neighbor of the face.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::Face::has_neighbor",
+          "argsstring": "(Face_handle n) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Neighbor Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "914"
+        },
+        {
+          "kind": "function",
+          "name": "has_neighbor",
+          "qualified_name": "TriangulationDataStructure_2::Face::has_neighbor",
+          "brief": "returns true if n is a neighbor of the face, and compute the index i of n .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::Face::has_neighbor",
+          "argsstring": "(Face_handle n, int &i) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Neighbor Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "920"
+        },
+        {
+          "kind": "function",
+          "name": "set_vertex",
+          "qualified_name": "TriangulationDataStructure_2::Face::set_vertex",
+          "brief": "sets vertex i to be v .",
+          "detailed": "$ 0\\leq i \\leq2$ .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::Face::set_vertex",
+          "argsstring": "(int i, Vertex_handle v)",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "932"
+        },
+        {
+          "kind": "function",
+          "name": "set_neighbor",
+          "qualified_name": "TriangulationDataStructure_2::Face::set_neighbor",
+          "brief": "sets neighbor i to be n .",
+          "detailed": "$ 0\\leq i \\leq2$ .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::Face::set_neighbor",
+          "argsstring": "(int i, Face_handle n)",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "939"
+        },
+        {
+          "kind": "function",
+          "name": "set_vertices",
+          "qualified_name": "TriangulationDataStructure_2::Face::set_vertices",
+          "brief": "sets the vertex handles to Vertex_handle() .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::Face::set_vertices",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "944"
+        },
+        {
+          "kind": "function",
+          "name": "set_vertices",
+          "qualified_name": "TriangulationDataStructure_2::Face::set_vertices",
+          "brief": "sets the vertex handles.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::Face::set_vertices",
+          "argsstring": "(Vertex_handle v0, Vertex_handle v1, Vertex_handle v2)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "949"
+        },
+        {
+          "kind": "function",
+          "name": "set_neighbors",
+          "qualified_name": "TriangulationDataStructure_2::Face::set_neighbors",
+          "brief": "sets the neighbors handles to Face_handle() .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::Face::set_neighbors",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "954"
+        },
+        {
+          "kind": "function",
+          "name": "set_neighbors",
+          "qualified_name": "TriangulationDataStructure_2::Face::set_neighbors",
+          "brief": "sets the neighbors handles.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::Face::set_neighbors",
+          "argsstring": "(Face_handle n0, Face_handle n1, Face_handle n2)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "n0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "n1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "n2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "959"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "TriangulationDataStructure_2::Face::is_valid",
+          "brief": "returns true if the function is_valid() of the base class returns true and if, for each index $ i$ , $ 0 \\le i < 3$ , the face is a neighbor of its neighboring face neighbor(i) and shares with this neighbor the vertices cw(i) and ccw(i) in correct reverse order.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::Face::is_valid",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "976"
+        },
+        {
+          "kind": "function",
+          "name": "ccw",
+          "qualified_name": "TriangulationDataStructure_2::Face::ccw",
+          "brief": "Returns $ i+1$ modulo 3, with $ 0\\leq i \\leq2$ .",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int TriangulationDataStructure_2::Face::ccw",
+          "argsstring": "(int i) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Miscellaneous",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "986"
+        },
+        {
+          "kind": "function",
+          "name": "cw",
+          "qualified_name": "TriangulationDataStructure_2::Face::cw",
+          "brief": "Returns $ i+2$ modulo 3, with $ 0\\leq i \\leq2$ .",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int TriangulationDataStructure_2::Face::cw",
+          "argsstring": "(int i) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Miscellaneous",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "991"
+        },
+        {
+          "kind": "function",
+          "name": "operator>>",
+          "qualified_name": "TriangulationDataStructure_2::Face::operator>>",
+          "brief": "Inputs any non combinatorial information possibly stored in the face.",
+          "detailed": "",
+          "return_type": "std::istream &",
+          "definition": "std::istream & TriangulationDataStructure_2::Face::operator>>",
+          "argsstring": "(std::istream &is, TriangulationDataStructure_2::Face &f)",
+          "params": [
+            {
+              "type": "std::istream &",
+              "name": "is",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangulationDataStructure_2::Face &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Miscellaneous",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "996"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "TriangulationDataStructure_2::Face::operator<<",
+          "brief": "Outputs any non combinatorial information possibly stored in the face.",
+          "detailed": "",
+          "return_type": "std::ostream &",
+          "definition": "std::ostream & TriangulationDataStructure_2::Face::operator<<",
+          "argsstring": "(std::ostream &os, const TriangulationDataStructure_2::Face &f)",
+          "params": [
+            {
+              "type": "std::ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const TriangulationDataStructure_2::Face &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Miscellaneous",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "1001"
+        }
+      ],
+      "xml_file": "class_triangulation_data_structure__2_1_1_face.xml",
+      "file": "Concepts/TriangulationDataStructure_2.h",
+      "line": "863"
+    },
+    "TriangulationDataStructure_2::Face_data": {
+      "kind": "class",
+      "name": "TriangulationDataStructure_2::Face_data",
+      "brief": "Various algorithms using a triangulation data structure, such as Delaunay triangulations or Alpha Shapes, must be able to associate a state to a face elemental. For efficiency, this information must be stored directly within the face.",
+      "detailed": "This class is only meant to store a state (Boolean). Consequently, the state must be the default value (i.e. false ) unless a setting function ( mark_in_conflict() , etc.) has been called. The three states are \"in conflict\", \"on boundary\", and \"processed\". By default, a face is not in conflict, not on boundary, and not processed. TriangulationDataStructure_2::Face",
+      "members": [
+        {
+          "kind": "function",
+          "name": "clear",
+          "qualified_name": "TriangulationDataStructure_2::Face_data::clear",
+          "brief": "Clears all flags: the face is neither in conflict, nor on the boundary, nor processed.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::Face_data::clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "1032"
+        },
+        {
+          "kind": "function",
+          "name": "mark_in_conflict",
+          "qualified_name": "TriangulationDataStructure_2::Face_data::mark_in_conflict",
+          "brief": "Sets the \"in conflict\" state to true .",
+          "detailed": "is_in_conflict() returns true",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::Face_data::mark_in_conflict",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "1037"
+        },
+        {
+          "kind": "function",
+          "name": "mark_on_boundary",
+          "qualified_name": "TriangulationDataStructure_2::Face_data::mark_on_boundary",
+          "brief": "Sets the \"on boundary\" state to true .",
+          "detailed": "is_on_boundary() returns true",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::Face_data::mark_on_boundary",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "1042"
+        },
+        {
+          "kind": "function",
+          "name": "mark_processed",
+          "qualified_name": "TriangulationDataStructure_2::Face_data::mark_processed",
+          "brief": "Sets the \"processed\" state to true .",
+          "detailed": "processed() returns true",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::Face_data::mark_processed",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "1047"
+        },
+        {
+          "kind": "function",
+          "name": "is_clear",
+          "qualified_name": "TriangulationDataStructure_2::Face_data::is_clear",
+          "brief": "Checks whether the face has default state (not in conflict, not on boundary, not processed).",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::Face_data::is_clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "1055"
+        },
+        {
+          "kind": "function",
+          "name": "is_in_conflict",
+          "qualified_name": "TriangulationDataStructure_2::Face_data::is_in_conflict",
+          "brief": "Returns whether the face has been marked as \"in conflict\".",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::Face_data::is_in_conflict",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "1058"
+        },
+        {
+          "kind": "function",
+          "name": "is_on_boundary",
+          "qualified_name": "TriangulationDataStructure_2::Face_data::is_on_boundary",
+          "brief": "Returns whether the face has been marked as \"on boundary\".",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::Face_data::is_on_boundary",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "1061"
+        },
+        {
+          "kind": "function",
+          "name": "processed",
+          "qualified_name": "TriangulationDataStructure_2::Face_data::processed",
+          "brief": "Returns whether the face has been marked as \"processed\".",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::Face_data::processed",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "1064"
+        }
+      ],
+      "xml_file": "class_triangulation_data_structure__2_1_1_face__data.xml",
+      "file": "Concepts/TriangulationDataStructure_2.h",
+      "line": "1025"
+    },
+    "TriangulationDataStructure_2::Vertex": {
+      "kind": "class",
+      "name": "TriangulationDataStructure_2::Vertex",
+      "brief": "The concept TriangulationDataStructure_2::Vertex describes the type used by a TriangulationDataStructure_2 to store the vertices.",
+      "detailed": "Some of the requirements listed below are of geometric nature and are optional when using the triangulation data structure class alone. They became required when the triangulation data structure is plugged into a triangulation. Creation In order to obtain new vertices or destruct unused vertices, the user must call the create_vertex() and delete_vertex() methods of the triangulation data structure. Has models CGAL::Triangulation_ds_vertex_base_2 <Tds> TriangulationDSVertexBase_2 TriangulationDataStructure_2::Face TriangulationDataStructure_2",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "TriangulationDataStructure_2::Vertex::Point",
+          "brief": "Optional for the triangulation data structure used alone .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_2::Vertex::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "752"
+        },
+        {
+          "kind": "function",
+          "name": "point",
+          "qualified_name": "TriangulationDataStructure_2::Vertex::point",
+          "brief": "returns the geometric information of the vertex.",
+          "detailed": "",
+          "return_type": "Point",
+          "definition": "Point TriangulationDataStructure_2::Vertex::point",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "762"
+        },
+        {
+          "kind": "function",
+          "name": "face",
+          "qualified_name": "TriangulationDataStructure_2::Vertex::face",
+          "brief": "returns a face of the triangulation having *this as a vertex.",
+          "detailed": "",
+          "return_type": "Face_handle",
+          "definition": "Face_handle TriangulationDataStructure_2::Vertex::face",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "767"
+        },
+        {
+          "kind": "function",
+          "name": "set_point",
+          "qualified_name": "TriangulationDataStructure_2::Vertex::set_point",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced sets the geometric information to p .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::Vertex::set_point",
+          "argsstring": "(const Point &p)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "780"
+        },
+        {
+          "kind": "function",
+          "name": "set_face",
+          "qualified_name": "TriangulationDataStructure_2::Vertex::set_face",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced sets the incident face to f .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_2::Vertex::set_face",
+          "argsstring": "(Face_handle f)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "788"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "TriangulationDataStructure_2::Vertex::is_valid",
+          "brief": "Checks the validity of the vertex.",
+          "detailed": "Must check that its incident face has this vertex. The validity of the base vertex is also checked. When verbose is set to true , messages are printed to give a precise indication on the kind of invalidity encountered.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_2::Vertex::is_valid",
+          "argsstring": "(bool verbose=false) const",
+          "params": [
+            {
+              "type": "bool",
+              "name": "verbose",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "802"
+        },
+        {
+          "kind": "function",
+          "name": "operator>>",
+          "qualified_name": "TriangulationDataStructure_2::Vertex::operator>>",
+          "brief": "Inputs the non-combinatorial information possibly stored in the vertex.",
+          "detailed": "",
+          "return_type": "std::istream &",
+          "definition": "std::istream & TriangulationDataStructure_2::Vertex::operator>>",
+          "argsstring": "(std::istream &is, TriangulationDataStructure_2::Vertex &v)",
+          "params": [
+            {
+              "type": "std::istream &",
+              "name": "is",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangulationDataStructure_2::Vertex &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "807"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "TriangulationDataStructure_2::Vertex::operator<<",
+          "brief": "Outputs the non combinatorial operation possibly stored in the vertex.",
+          "detailed": "",
+          "return_type": "std::ostream &",
+          "definition": "std::ostream & TriangulationDataStructure_2::Vertex::operator<<",
+          "argsstring": "(std::ostream &os, const TriangulationDataStructure_2::Vertex &v)",
+          "params": [
+            {
+              "type": "std::ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const TriangulationDataStructure_2::Vertex &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "Concepts/TriangulationDataStructure_2.h",
+          "line": "813"
+        }
+      ],
+      "xml_file": "class_triangulation_data_structure__2_1_1_vertex.xml",
+      "file": "Concepts/TriangulationDataStructure_2.h",
+      "line": "740"
+    },
+    "TriangulationDSFaceBase_2": {
+      "kind": "class",
+      "name": "TriangulationDSFaceBase_2",
+      "brief": "",
+      "detailed": "Refines TriangulationDataStructure_2::Face The concept TriangulationDSFaceBase_2 describes the requirements for the face base class of a CGAL::Triangulation_data_structure_2 <Vb,Fb> . Note that if the CGAL::Triangulation_data_structure_2 is plugged into a triangulation class, the face base class may have additional geometric requirements depending on the triangulation class. At the base level, (see Sections Section_2D_Triangulations_Software_Design and The Default Triangulation Data Structure ), a face stores handles on its three vertices and on the three neighboring faces. The vertices and neighbors are indexed 0,1 and 2. Neighbor i lies opposite to vertex i . Since the CGAL::Triangulation_data_structure_2 is the class which defines the handle types, the face base class has to be somehow parameterized by the triangulation data structure. But since the CGAL::Triangulation_data_structure_2 itself is parameterized by the face and vertex base classes, there is a cycle in the definition of these classes. In order to break the cycle, the base classes for faces and vertices which are plugged in to instantiate a CGAL::Triangulation_data_structure_2 use void as triangulation data structure parameter. Then, the CGAL::Triangulation_data_structure_2 uses a rebind mechanism (similar to the one specified in std::allocator ) in order to plug itself as parameter in the face and vertex base classes. This mechanism requires that the base class provides a templated nested class Rebind_TDS that itself provides the subtype Rebind_TDS::Other which is the rebound version of the base class. This rebound base class is the class that the CGAL::Triangulation_data_structure_2 actually uses as a base class for the class CGAL::Triangulation_data_structure_2::Face . Has models CGAL::Triangulation_ds_face_base_2 <TDS> TriangulationDSVertexBase_2 CGAL::Triangulation_data_structure_2 <Vb,Fb>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Rebind_TDS",
+          "qualified_name": "TriangulationDSFaceBase_2::Rebind_TDS",
+          "brief": "This template class has to define a type Rebind_TDS <TDS_2>::Other which is the rebound face base, where the CGAL::Triangulation_data_structure_2 is actually plugged in.",
+          "detailed": "This type Other will be the actual base of the class CGAL::Triangulation_data_structure_2::Face . It can be implemented using a nested template class. Section The Rebind Mechanism",
+          "return_type": "unspecified_type",
+          "definition": "using TriangulationDSFaceBase_2::Rebind_TDS = unspecified_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "79"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangulation_data_structure",
+          "qualified_name": "TriangulationDSFaceBase_2::Triangulation_data_structure",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_2",
+          "definition": "typedef TriangulationDataStructure_2 TriangulationDSFaceBase_2::Triangulation_data_structure",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "84"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle",
+          "qualified_name": "TriangulationDSFaceBase_2::Vertex_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_2::Vertex_handle",
+          "definition": "typedef TriangulationDataStructure_2::Vertex_handle TriangulationDSFaceBase_2::Vertex_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "89"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_handle",
+          "qualified_name": "TriangulationDSFaceBase_2::Face_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_2::Face_handle",
+          "definition": "typedef TriangulationDataStructure_2::Face_handle TriangulationDSFaceBase_2::Face_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "94"
+        },
+        {
+          "kind": "typedef",
+          "name": "TDS_data",
+          "qualified_name": "TriangulationDSFaceBase_2::TDS_data",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_2::Face_data",
+          "definition": "typedef TriangulationDataStructure_2::Face_data TriangulationDSFaceBase_2::TDS_data",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "99"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDSFaceBase_2",
+          "qualified_name": "TriangulationDSFaceBase_2::TriangulationDSFaceBase_2",
+          "brief": "default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "TriangulationDSFaceBase_2::TriangulationDSFaceBase_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "109"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDSFaceBase_2",
+          "qualified_name": "TriangulationDSFaceBase_2::TriangulationDSFaceBase_2",
+          "brief": "Initializes the vertices with v0, v1, v2 and the neighbors with Face_handle() .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "TriangulationDSFaceBase_2::TriangulationDSFaceBase_2",
+          "argsstring": "(Vertex_handle v0, Vertex_handle v1, Vertex_handle v2)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "115"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDSFaceBase_2",
+          "qualified_name": "TriangulationDSFaceBase_2::TriangulationDSFaceBase_2",
+          "brief": "initializes the vertices with v0,v1, v2 and the neighbors with n0, n1, n2 .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "TriangulationDSFaceBase_2::TriangulationDSFaceBase_2",
+          "argsstring": "(Vertex_handle v0, Vertex_handle v1, Vertex_handle v2, Face_handle n0, Face_handle n1, Face_handle n2)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "n0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "n1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "n2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "123"
+        },
+        {
+          "kind": "function",
+          "name": "dimension",
+          "qualified_name": "TriangulationDSFaceBase_2::dimension",
+          "brief": "returns the dimension.",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int TriangulationDSFaceBase_2::dimension",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "138"
+        },
+        {
+          "kind": "function",
+          "name": "reorient",
+          "qualified_name": "TriangulationDSFaceBase_2::reorient",
+          "brief": "Changes the orientation of the face by exchanging vertex(0) with vertex(1) and neighbor(0) with neighbor(1) .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDSFaceBase_2::reorient",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Orientation",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "149"
+        },
+        {
+          "kind": "function",
+          "name": "ccw_permute",
+          "qualified_name": "TriangulationDSFaceBase_2::ccw_permute",
+          "brief": "performs a counterclockwise permutation of the vertices and neighbors of the face.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDSFaceBase_2::ccw_permute",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Orientation",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "155"
+        },
+        {
+          "kind": "function",
+          "name": "cw_permute",
+          "qualified_name": "TriangulationDSFaceBase_2::cw_permute",
+          "brief": "performs a clockwise permutation of the vertices and neighbors of the face.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDSFaceBase_2::cw_permute",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Orientation",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "161"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "TriangulationDSFaceBase_2::is_valid",
+          "brief": "performs any required test on a face.",
+          "detailed": "If verbose is set to true , messages are printed to give a precise indication of the kind of invalidity encountered.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDSFaceBase_2::is_valid",
+          "argsstring": "(bool verbose=false) const",
+          "params": [
+            {
+              "type": "bool",
+              "name": "verbose",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "174"
+        },
+        {
+          "kind": "function",
+          "name": "for_compact_container",
+          "qualified_name": "TriangulationDSFaceBase_2::for_compact_container",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void *",
+          "definition": "void * TriangulationDSFaceBase_2::for_compact_container",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Various",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "188"
+        },
+        {
+          "kind": "function",
+          "name": "for_compact_container",
+          "qualified_name": "TriangulationDSFaceBase_2::for_compact_container",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDSFaceBase_2::for_compact_container",
+          "argsstring": "(void *p)",
+          "params": [
+            {
+              "type": "void *",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Various",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "193"
+        },
+        {
+          "kind": "function",
+          "name": "tds_data",
+          "qualified_name": "TriangulationDSFaceBase_2::tds_data",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TDS_data &",
+          "definition": "TDS_data & TriangulationDSFaceBase_2::tds_data",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Internal",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "208"
+        },
+        {
+          "kind": "function",
+          "name": "tds_data",
+          "qualified_name": "TriangulationDSFaceBase_2::tds_data",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const TDS_data &",
+          "definition": "const TDS_data & TriangulationDSFaceBase_2::tds_data",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Internal",
+          "file": "Concepts/TriangulationDSFaceBase_2.h",
+          "line": "213"
+        }
+      ],
+      "xml_file": "class_triangulation_d_s_face_base__2.xml",
+      "file": "Concepts/TriangulationDSFaceBase_2.h",
+      "line": "60"
+    },
+    "TriangulationDSVertexBase_2": {
+      "kind": "class",
+      "name": "TriangulationDSVertexBase_2",
+      "brief": "",
+      "detailed": "Refines TriangulationDataStructure_2::Vertex The concept TriangulationDSVertexBase_2 describes the requirements for the vertex base class of a CGAL::Triangulation_data_structure_2 <Vb,Fb> . Note that if the CGAL::Triangulation_data_structure_2 is plugged into a triangulation class, the vertex base class may have additional geometric requirements depending on the triangulation class. At the base level, provides access to one of its incident faces through a Face_handle . Since the CGAL::Triangulation_data_structure_2 is the class which defines the handle types, the vertex base class has to be somehow parameterized by the triangulation data structure. But since the CGAL::Triangulation_data_structure_2 itself is parameterized by the face and vertex base classes, there is a cycle in the definition of these classes. In order to break the cycle, the base classes for faces and vertices which are plugged in to instantiate a Triangulation_data_structure_2 use void as triangulation data structure parameter. Then, the CGAL::Triangulation_data_structure_2 uses a rebind mechanism (similar to the one specified in std::allocator ) in order to plug itself as parameter in the face and vertex base classes. This mechanism requires that the base class provides a templated nested class Rebind_TDS that itself provides the subtype Rebind_TDS::Other which is the rebound version of the base class. This rebound base class is the class that the CGAL::Triangulation_data_structure_2 actually uses as a base class for the class of CGAL::Triangulation_data_structure_2::Vertex . Has models CGAL::Triangulation_ds_vertex_base_2 <Tds> TriangulationDSFaceBase_2 CGAL::Triangulation_data_structure_2 <Vb,Fb>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Rebind_TDS",
+          "qualified_name": "TriangulationDSVertexBase_2::Rebind_TDS",
+          "brief": "This template class has to define a type Rebind_TDS <TDS2>::Other which is the rebound vertex base , where the actual CGAL::Triangulation_data_structure_2 is plugged in.",
+          "detailed": "This type Other will be the actual base of the class CGAL::Triangulation_data_structure_2::Vertex . It can be implemented using a nested template class. Section The Rebind Mechanism",
+          "return_type": "unspecified_type",
+          "definition": "using TriangulationDSVertexBase_2::Rebind_TDS = unspecified_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSVertexBase_2.h",
+          "line": "74"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangulation_data_structure",
+          "qualified_name": "TriangulationDSVertexBase_2::Triangulation_data_structure",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_2",
+          "definition": "typedef TriangulationDataStructure_2 TriangulationDSVertexBase_2::Triangulation_data_structure",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSVertexBase_2.h",
+          "line": "79"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle",
+          "qualified_name": "TriangulationDSVertexBase_2::Vertex_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_2::Vertex_handle",
+          "definition": "typedef TriangulationDataStructure_2::Vertex_handle TriangulationDSVertexBase_2::Vertex_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSVertexBase_2.h",
+          "line": "84"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_handle",
+          "qualified_name": "TriangulationDSVertexBase_2::Face_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_2::Face_handle",
+          "definition": "typedef TriangulationDataStructure_2::Face_handle TriangulationDSVertexBase_2::Face_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSVertexBase_2.h",
+          "line": "89"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDSVertexBase_2",
+          "qualified_name": "TriangulationDSVertexBase_2::TriangulationDSVertexBase_2",
+          "brief": "default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "TriangulationDSVertexBase_2::TriangulationDSVertexBase_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDSVertexBase_2.h",
+          "line": "99"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDSVertexBase_2",
+          "qualified_name": "TriangulationDSVertexBase_2::TriangulationDSVertexBase_2",
+          "brief": "Constructs a vertex pointing to face f .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "TriangulationDSVertexBase_2::TriangulationDSVertexBase_2",
+          "argsstring": "(Face_handle f)",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDSVertexBase_2.h",
+          "line": "104"
+        },
+        {
+          "kind": "function",
+          "name": "for_compact_container",
+          "qualified_name": "TriangulationDSVertexBase_2::for_compact_container",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void *",
+          "definition": "void * TriangulationDSVertexBase_2::for_compact_container",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Various",
+          "file": "Concepts/TriangulationDSVertexBase_2.h",
+          "line": "118"
+        },
+        {
+          "kind": "function",
+          "name": "for_compact_container",
+          "qualified_name": "TriangulationDSVertexBase_2::for_compact_container",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDSVertexBase_2::for_compact_container",
+          "argsstring": "(void *p)",
+          "params": [
+            {
+              "type": "void *",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Various",
+          "file": "Concepts/TriangulationDSVertexBase_2.h",
+          "line": "123"
+        }
+      ],
+      "xml_file": "class_triangulation_d_s_vertex_base__2.xml",
+      "file": "Concepts/TriangulationDSVertexBase_2.h",
+      "line": "56"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/Triangulation_data_structure_2.h",
+      "line": "2"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgTDS2Ref": {
+      "kind": "group",
+      "name": "PkgTDS2Ref",
+      "brief": "",
+      "detailed": "Sylvain Pion and Mariette Yvinec This package provides a data structure to store a two-dimensional triangulation that has the topology of a two-dimensional sphere. The package acts as a container for the vertices and faces of the triangulation and provides basic combinatorial operation on the triangulation. Introduced in: CGAL 2.2 BibTeX: cgal:py-tds2-26a License: GPL The triangulation data structure can be seen as a container for the faces and vertices of a triangulation. This class also takes care of all the combinatorial operations performed on the triangulation. The class CGAL::Triangulation_data_structure_2 <Vb,Fb> is a model of the concept TriangulationDataStructure_2 . which includes the sub-concepts TriangulationDataStructure_2::Face and TriangulationDataStructure_2::Vertex . To ensure all the flexibility of the triangulation classes, described and in Section Flexibility of Chapter 2D Triangulations, the model CGAL::Triangulation_data_structure_2 <Vb,Fb> has two template parameters. The class CGAL::Triangulation_data_structure_2 <Vb,Fb> derives its Vertex and Face types from the two template parameters Vb and Fb respectively. If the triangulation data structure is used alone, these parameters have to be instantiated with models of the concepts TriangulationDSFaceBase_2 and TriangulationDSVertexBase_2 . These concepts are described in this chapter together with their default models CGAL::Triangulation_ds_face_base_2 <Tds> and CGAL::Triangulation_ds_vertex_base_2 <Tds> . If the triangulation data structure is plugged into a triangulation class, the parameters have to be instantiated with models of different refining concepts according to the actual type of the triangulation. These refining concepts and their models are described in Chapter 2D Triangulations. Classified Reference Pages Concepts TriangulationDataStructure_2 TriangulationDataStructure_2::Face TriangulationDataStructure_2::Face_data TriangulationDataStructure_2::Vertex TriangulationDSFaceBase_2 TriangulationDSVertexBase_2 Classes CGAL::Triangulation_data_structure_2 <Vb,Fb> CGAL::Triangulation_ds_face_base_2 <Tds> CGAL::Triangulation_ds_vertex_base_2 <Tds> CGAL::Triangulation_cw_ccw_2",
+      "members": [],
+      "xml_file": "group___pkg_t_d_s2_ref.xml"
+    },
+    "PkgTDS2Concepts": {
+      "kind": "group",
+      "name": "PkgTDS2Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_t_d_s2_concepts.xml"
+    }
+  }
+}

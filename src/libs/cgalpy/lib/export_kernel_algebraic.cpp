@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <boost/iterator/function_output_iterator.hpp>
 
@@ -15,8 +16,8 @@
 #include <CGAL/Algebraic_kernel_d_1.h>
 #include <CGAL/Get_arithmetic_kernel.h>
 
-#include "CGALPY/add_insertion.hpp"
-#include "CGALPY/add_attr.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/add_attr.hpp"
 
 namespace py = nanobind;
 

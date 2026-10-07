@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "ss_2_cdlg",
+  "description": "Build variant defined by cmake/tests/ss_2_cdlg.cmake",
+  "cmake_tests": [
+    "cmake/tests/ss_2_cdlg.cmake"
+  ]
+}

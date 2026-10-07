@@ -1,0 +1,1716 @@
+{
+  "schema_version": 1,
+  "package": "Mesh_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 20,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Delaunay_mesh_criteria_2": {
+      "kind": "class",
+      "name": "CGAL::Delaunay_mesh_criteria_2",
+      "brief": "The class Delaunay_mesh_criteria_2 is a model for the MeshingCriteria_2 concept.",
+      "detailed": "The shape criterion on triangles is given by a bound $ B$ such that for good triangles $ \\frac{r}{l} \\le B$ where $ l$ is the shortest edge length and $ r$ is the circumradius of the triangle. By default, $ B=\\sqrt{2}$ , which is the best bound one can use with the guarantee that the refinement algorithm will terminate. The upper bound $ B$ is related to a lower bound $ \\alpha_{min}$ on the minimum angle in the triangle: \\[\\sin{ \\alpha_{min} } = \\frac{1}{2 B} \\] so $ B=\\sqrt{2}$ corresponds to $ \\alpha_{min} \\ge 20.7$ degrees. CDT must be a 2D constrained Delaunay triangulation. Is model of MeshingCriteria_2",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Delaunay_mesh_criteria_2",
+          "qualified_name": "CGAL::Delaunay_mesh_criteria_2::Delaunay_mesh_criteria_2",
+          "brief": "Default constructor with bound $ B=\\sqrt{2}$ .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Delaunay_mesh_criteria_2< CDT >::Delaunay_mesh_criteria_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Delaunay_mesh_criteria_2.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "Delaunay_mesh_criteria_2",
+          "qualified_name": "CGAL::Delaunay_mesh_criteria_2::Delaunay_mesh_criteria_2",
+          "brief": "Construct a traits class with bound $ B=\\sqrt{\\frac{1}{4 b}}$ .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Delaunay_mesh_criteria_2< CDT >::Delaunay_mesh_criteria_2",
+          "argsstring": "(double b=0.125)",
+          "params": [
+            {
+              "type": "double",
+              "name": "b",
+              "default": "0.125",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Delaunay_mesh_criteria_2.h",
+          "line": "47"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_delaunay__mesh__criteria__2.xml",
+      "file": "CGAL/Delaunay_mesh_criteria_2.h",
+      "line": "28"
+    },
+    "CGAL::Delaunay_mesh_face_base_2": {
+      "kind": "class",
+      "name": "CGAL::Delaunay_mesh_face_base_2",
+      "brief": "The class Delaunay_mesh_face_base_2 is a model for the concept DelaunayMeshFaceBase_2 .",
+      "detailed": "This class can be used directly or it can serve as a base to derive other classes with some additional attributes (a color for example) tuned to a specific application. Traits is the geometric traits class. It must be the same as the one used for the Delaunay mesh. Fb is the base class from which Delaunay_mesh_face_base_2 derives. It must be a model of the ConstrainedTriangulationFaceBase_2 concept. Is model of DelaunayMeshFaceBase_2",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_delaunay__mesh__face__base__2.xml",
+      "file": "CGAL/Delaunay_mesh_face_base_2.h",
+      "line": "29"
+    },
+    "CGAL::Delaunay_mesh_size_criteria_2": {
+      "kind": "class",
+      "name": "CGAL::Delaunay_mesh_size_criteria_2",
+      "brief": "The class Delaunay_mesh_size_criteria_2 is a model for the MeshingCriteria_2 concept.",
+      "detailed": "The shape criterion on triangles is given by a bound $ B$ such that for good triangles $ \\frac{r}{l} \\le B$ where $ l$ is the shortest edge length and $ r$ is the circumradius of the triangle. By default, $ B=\\sqrt{2}$ , which is the best bound one can use with the guarantee that the refinement algorithm will terminate. The upper bound $ B$ is related to a lower bound $ \\alpha_{min}$ on the minimum angle in the triangle: \\[\\sin{ \\alpha_{min} } = \\frac{1}{2 B} \\] so $ B=\\sqrt{2}$ corresponds to $ \\alpha_{min} \\ge 20.7$ degrees. This traits class defines also a size criteria: all segments of all triangles must be shorter than a bound $ S$ . CDT must be a 2D constrained Delaunay triangulation. Is model of MeshingCriteria_2",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Delaunay_mesh_size_criteria_2",
+          "qualified_name": "CGAL::Delaunay_mesh_size_criteria_2::Delaunay_mesh_size_criteria_2",
+          "brief": "Default constructor with $ B=\\sqrt{2}$ .",
+          "detailed": "No bound on size.",
+          "return_type": "",
+          "definition": "CGAL::Delaunay_mesh_size_criteria_2< CDT >::Delaunay_mesh_size_criteria_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Delaunay_mesh_size_criteria_2.h",
+          "line": "40"
+        },
+        {
+          "kind": "function",
+          "name": "Delaunay_mesh_size_criteria_2",
+          "qualified_name": "CGAL::Delaunay_mesh_size_criteria_2::Delaunay_mesh_size_criteria_2",
+          "brief": "Construct a traits class with bound $ B=\\sqrt{\\frac{1}{4 b}}$ .",
+          "detailed": "If $ S \\neq0$ , the size bound is $ S$ . If $ S = 0$ , there is no bound on size.",
+          "return_type": "",
+          "definition": "CGAL::Delaunay_mesh_size_criteria_2< CDT >::Delaunay_mesh_size_criteria_2",
+          "argsstring": "(double b=0.125, double S=0)",
+          "params": [
+            {
+              "type": "double",
+              "name": "b",
+              "default": "0.125",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "S",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Delaunay_mesh_size_criteria_2.h",
+          "line": "51"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_delaunay__mesh__size__criteria__2.xml",
+      "file": "CGAL/Delaunay_mesh_size_criteria_2.h",
+      "line": "31"
+    },
+    "CGAL::Delaunay_mesh_vertex_base_2": {
+      "kind": "class",
+      "name": "CGAL::Delaunay_mesh_vertex_base_2",
+      "brief": "The class Delaunay_mesh_vertex_base_2 is a model for the concept DelaunayMeshVertexBase_2 .",
+      "detailed": "This class can be used directly or it can serve as a base to derive other classes with some additional attributes tuned to a specific application. Traits is the geometric traits class. It must be the same as the one used for the Delaunay mesh. Vb is the base class from which Delaunay_mesh_vertex_base_2 derives. It must be a model of the TriangulationVertexBase_2 concept. Is model of DelaunayMeshVertexBase_2",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_delaunay__mesh__vertex__base__2.xml",
+      "file": "CGAL/Delaunay_mesh_vertex_base_2.h",
+      "line": "24"
+    },
+    "CGAL::Delaunay_mesher_2": {
+      "kind": "class",
+      "name": "CGAL::Delaunay_mesher_2",
+      "brief": "This class implements a 2D mesh generator.",
+      "detailed": "CDT must be a 2D constrained Delaunay triangulation, and type CDT::Face should be a model of the concept DelaunayMeshFaceBase_2 . The geometric traits class of the instance of CDT has to be a model of the concept DelaunayMeshTraits_2 . Criteria must be a model of the concept MeshingCriteria_2 . This traits class defines the shape and size criteria for the triangles of the mesh. Criteria::Face_handle has to be the same as CDT::Face_handle . Using This Class The constructor of the class Delaunay_mesher_2 takes a reference to a CDT as an argument. A call to the refinement method refine_mesh() will refine the constrained Delaunay triangulation into a mesh satisfying the size and shape criteria specified in the traits class. Note that if, during the life time of the Delaunay_mesher_2 object, the triangulation is externally modified, any further call to its member methods may crash. Consider constructing a new Delaunay_mesher_2 object if the triangulation has been modified. Meshing Domain The domain to be mesh is defined by the constrained edges and a set of seed points. The constrained edges divides the plane into several connected components. The mesh domain is either the union of the bounded connected components including at least one seed, or the union of the bounded connected components that do no contain any seed. Note that the unbounded component of the plane is never meshed. CGAL::lloyd_optimize_mesh_2",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "CGAL::Delaunay_mesher_2::Geom_traits",
+          "brief": "the geometric traits class.",
+          "detailed": "",
+          "return_type": "CDT::Geom_traits",
+          "definition": "typedef CDT::Geom_traits CGAL::Delaunay_mesher_2< CDT, Criteria >::Geom_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "54"
+        },
+        {
+          "kind": "typedef",
+          "name": "Seeds_iterator",
+          "qualified_name": "CGAL::Delaunay_mesher_2::Seeds_iterator",
+          "brief": "const iterator over defined seeds.",
+          "detailed": "Its value type is Geom_traits::Point_2 .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Delaunay_mesher_2< CDT, Criteria >::Seeds_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "65"
+        },
+        {
+          "kind": "function",
+          "name": "Delaunay_mesher_2",
+          "qualified_name": "CGAL::Delaunay_mesher_2::Delaunay_mesher_2",
+          "brief": "creates a new mesher, working on t , with meshing criteria criteria .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Delaunay_mesher_2< CDT, Criteria >::Delaunay_mesher_2",
+          "argsstring": "(CDT &t, Criteria criteria=Criteria())",
+          "params": [
+            {
+              "type": "CDT &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Criteria",
+              "name": "criteria",
+              "default": "Criteria()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "77"
+        },
+        {
+          "kind": "function",
+          "name": "clear_seeds",
+          "qualified_name": "CGAL::Delaunay_mesher_2::clear_seeds",
+          "brief": "sets seeds to the empty set.",
+          "detailed": "All finite connected components of the constrained triangulation will be refined.",
+          "return_type": "void",
+          "definition": "void CGAL::Delaunay_mesher_2< CDT, Criteria >::clear_seeds",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Seeds functions",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "95"
+        },
+        {
+          "kind": "function",
+          "name": "set_seeds",
+          "qualified_name": "CGAL::Delaunay_mesher_2::set_seeds",
+          "brief": "sets seeds to the sequence [begin, end) .",
+          "detailed": "If mark==true , the mesh domain is the union of the bounded connected components including at least one seed. If mark==false , the domain is the union of the bounded components including no seed. Note that the unbounded component of the plane is never meshed. InputIterator must be an input iterator with value type Geom_traits::Point_2 .",
+          "return_type": "void",
+          "definition": "void CGAL::Delaunay_mesher_2< CDT, Criteria >::set_seeds",
+          "argsstring": "(InputIterator begin, InputIterator end, const bool mark=false)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const bool",
+              "name": "mark",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Seeds functions",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "113"
+        },
+        {
+          "kind": "function",
+          "name": "seeds_begin",
+          "qualified_name": "CGAL::Delaunay_mesher_2::seeds_begin",
+          "brief": "Start of the seeds sequence.",
+          "detailed": "",
+          "return_type": "Seeds_const_iterator",
+          "definition": "Seeds_const_iterator CGAL::Delaunay_mesher_2< CDT, Criteria >::seeds_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Seeds functions",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "123"
+        },
+        {
+          "kind": "function",
+          "name": "seeds_end",
+          "qualified_name": "CGAL::Delaunay_mesher_2::seeds_end",
+          "brief": "Past the end of the seeds sequence.",
+          "detailed": "",
+          "return_type": "Seeds_const_iterator",
+          "definition": "Seeds_const_iterator CGAL::Delaunay_mesher_2< CDT, Criteria >::seeds_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Seeds functions",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "132"
+        },
+        {
+          "kind": "function",
+          "name": "refine_mesh",
+          "qualified_name": "CGAL::Delaunay_mesher_2::refine_mesh",
+          "brief": "refines the constrained Delaunay triangulation into a mesh satisfying the criteria defined by the traits.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Delaunay_mesher_2< CDT, Criteria >::refine_mesh",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Meshing methods",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "155"
+        },
+        {
+          "kind": "function",
+          "name": "get_criteria",
+          "qualified_name": "CGAL::Delaunay_mesher_2::get_criteria",
+          "brief": "returns a const reference to the criteria traits object.",
+          "detailed": "",
+          "return_type": "const Criteria &",
+          "definition": "const Criteria & CGAL::Delaunay_mesher_2< CDT, Criteria >::get_criteria",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Meshing methods",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "164"
+        },
+        {
+          "kind": "function",
+          "name": "set_criteria",
+          "qualified_name": "CGAL::Delaunay_mesher_2::set_criteria",
+          "brief": "assigns criteria to the criteria traits object.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Delaunay_mesher_2< CDT, Criteria >::set_criteria",
+          "argsstring": "(Criteria criteria)",
+          "params": [
+            {
+              "type": "Criteria",
+              "name": "criteria",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Meshing methods",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "173"
+        },
+        {
+          "kind": "function",
+          "name": "set_criteria",
+          "qualified_name": "CGAL::Delaunay_mesher_2::set_criteria",
+          "brief": "assigns criteria to the criteria traits object.",
+          "detailed": "If recalculate_bad_faces is false , the list of bad faces is let empty and the function set_bad_faces() should be called before refine_mesh .",
+          "return_type": "void",
+          "definition": "void CGAL::Delaunay_mesher_2< CDT, Criteria >::set_criteria",
+          "argsstring": "(Criteria criteria, bool recalculate_bad_faces)",
+          "params": [
+            {
+              "type": "Criteria",
+              "name": "criteria",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "recalculate_bad_faces",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Meshing methods",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "185"
+        },
+        {
+          "kind": "function",
+          "name": "set_bad_faces",
+          "qualified_name": "CGAL::Delaunay_mesher_2::set_bad_faces",
+          "brief": "This method permits to set the list of bad triangles directly, from the sequence [begin, end) , so that the algorithm will not scan the whole set of triangles to find bad ones.",
+          "detailed": "To use if there is a non-naive way to find bad triangles. InputIterator must be an input iterator with value type Face_handle .",
+          "return_type": "void",
+          "definition": "void CGAL::Delaunay_mesher_2< CDT, Criteria >::set_bad_faces",
+          "argsstring": "(InputIterator begin, InputIterator end)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Meshing methods",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "202"
+        },
+        {
+          "kind": "function",
+          "name": "init",
+          "qualified_name": "CGAL::Delaunay_mesher_2::init",
+          "brief": "This method must be called just before the first call to the following step by step refinement method, that is when all vertices and constrained edges have been inserted into the constrained Delaunay triangulation.",
+          "detailed": "It must be called again before any subsequent calls to the step by step refinement method if new vertices or constrained edges have been inserted since the last call.",
+          "return_type": "void",
+          "definition": "void CGAL::Delaunay_mesher_2< CDT, Criteria >::init",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Step by Step Operations",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "226"
+        },
+        {
+          "kind": "function",
+          "name": "is_refinement_done",
+          "qualified_name": "CGAL::Delaunay_mesher_2::is_refinement_done",
+          "brief": "Tests if the step by step refinement algorithm is done.",
+          "detailed": "If it returns true , the following calls to step_by_step_refine_mesh will not insert any points, until some new constrained segments or points are inserted in the triangulation and init is called again.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Delaunay_mesher_2< CDT, Criteria >::is_refinement_done",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Step by Step Operations",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "238"
+        },
+        {
+          "kind": "function",
+          "name": "step_by_step_refine_mesh",
+          "qualified_name": "CGAL::Delaunay_mesher_2::step_by_step_refine_mesh",
+          "brief": "Applies one step of the algorithm, by inserting one point, if the algorithm is not done.",
+          "detailed": "Returns false iff no point has been inserted because the algorithm is done.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Delaunay_mesher_2< CDT, Criteria >::step_by_step_refine_mesh",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Step by Step Operations",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "249"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_delaunay__mesher__2.xml",
+      "file": "CGAL/Delaunay_mesher_2.h",
+      "line": "45"
+    },
+    "CGAL::Triangulation_conformer_2": {
+      "kind": "class",
+      "name": "CGAL::Triangulation_conformer_2",
+      "brief": "The class Triangulation_conformer_2 is an auxiliary class of Delaunay_mesher_2 <CDT> .",
+      "detailed": "It permits to refine a constrained Delaunay triangulation into a conforming Delaunay or conforming Gabriel triangulation. For standard needs, consider using the global functions make_conforming_Gabriel_2() and make_conforming_Delaunay_2() . CDT must be a 2D constrained Delaunay triangulation and its geometric traits class must be a model of the concept ConformingDelaunayTriangulationTraits_2 . Using This Class The constructor of the class Triangulation_conformer_2 takes a reference to a CDT as an argument. A call to the method make_conforming_Delaunay() or make_conforming_Gabriel() will refine this constrained Delaunay triangulation into a conforming Delaunay or conforming Gabriel triangulation. Note that if, during the life time of the Triangulation_conformer_2 object, the triangulation is externally modified, any further call to its member methods may lead to undefined behavior. Consider reconstructing a new Triangulation_conformer_2 object if the triangulation has been modified. The conforming methods insert points into constrained edges, thereby splitting them into several sub-constraints. You have access to the initial inserted constraints if you instantiate the template parameter by a Constrained_triangulation_plus_2<CDT> .",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Triangulation_conformer_2",
+          "qualified_name": "CGAL::Triangulation_conformer_2::Triangulation_conformer_2",
+          "brief": "Create a new conforming maker, working on t .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Triangulation_conformer_2< CDT >::Triangulation_conformer_2",
+          "argsstring": "(CDT &t)",
+          "params": [
+            {
+              "type": "CDT &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Triangulation_conformer_2.h",
+          "line": "84"
+        },
+        {
+          "kind": "function",
+          "name": "make_conforming_Delaunay",
+          "qualified_name": "CGAL::Triangulation_conformer_2::make_conforming_Delaunay",
+          "brief": "Refines the triangulation into a conforming Delaunay triangulation.",
+          "detailed": "After a call to this method, all triangles fulfill the Delaunay property, that is the empty circle property.",
+          "return_type": "void",
+          "definition": "void CGAL::Triangulation_conformer_2< CDT >::make_conforming_Delaunay",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Conforming methods",
+          "file": "CGAL/Triangulation_conformer_2.h",
+          "line": "102"
+        },
+        {
+          "kind": "function",
+          "name": "make_conforming_Gabriel",
+          "qualified_name": "CGAL::Triangulation_conformer_2::make_conforming_Gabriel",
+          "brief": "Refines the triangulation into a conforming Gabriel triangulation.",
+          "detailed": "After a call to this method, all constrained edges $ e$ have the Gabriel property : the circle with diameter $ e$ does not contain any vertex of the triangulation.",
+          "return_type": "void",
+          "definition": "void CGAL::Triangulation_conformer_2< CDT >::make_conforming_Gabriel",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Conforming methods",
+          "file": "CGAL/Triangulation_conformer_2.h",
+          "line": "114"
+        },
+        {
+          "kind": "function",
+          "name": "is_conforming_Delaunay",
+          "qualified_name": "CGAL::Triangulation_conformer_2::is_conforming_Delaunay",
+          "brief": "Returns true iff all triangles fulfill the Delaunay property.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Triangulation_conformer_2< CDT >::is_conforming_Delaunay",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "CGAL/Triangulation_conformer_2.h",
+          "line": "135"
+        },
+        {
+          "kind": "function",
+          "name": "is_conforming_Gabriel",
+          "qualified_name": "CGAL::Triangulation_conformer_2::is_conforming_Gabriel",
+          "brief": "Returns true iff all constrained edges have the Gabriel property: their circumsphere is empty.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Triangulation_conformer_2< CDT >::is_conforming_Gabriel",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "CGAL/Triangulation_conformer_2.h",
+          "line": "145"
+        },
+        {
+          "kind": "function",
+          "name": "init_Delaunay",
+          "qualified_name": "CGAL::Triangulation_conformer_2::init_Delaunay",
+          "brief": "The method must be called after all points and constrained segments are inserted and before any call to the following methods.",
+          "detailed": "If some points or segments are then inserted in the triangulation, this method must be called again.",
+          "return_type": "void",
+          "definition": "void CGAL::Triangulation_conformer_2< CDT >::init_Delaunay",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Step by Step Operations",
+          "file": "CGAL/Triangulation_conformer_2.h",
+          "line": "172"
+        },
+        {
+          "kind": "function",
+          "name": "step_by_step_conforming_Delaunay",
+          "qualified_name": "CGAL::Triangulation_conformer_2::step_by_step_conforming_Delaunay",
+          "brief": "Applies one step of the algorithm, by inserting one point, if the algorithm is not done.",
+          "detailed": "Returns false iff no point has been inserted because the algorithm is done.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Triangulation_conformer_2< CDT >::step_by_step_conforming_Delaunay",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Step by Step Operations",
+          "file": "CGAL/Triangulation_conformer_2.h",
+          "line": "183"
+        },
+        {
+          "kind": "function",
+          "name": "init_Gabriel",
+          "qualified_name": "CGAL::Triangulation_conformer_2::init_Gabriel",
+          "brief": "Analog to init_Delaunay for Gabriel conforming.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Triangulation_conformer_2< CDT >::init_Gabriel",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Step by Step Operations",
+          "file": "CGAL/Triangulation_conformer_2.h",
+          "line": "193"
+        },
+        {
+          "kind": "function",
+          "name": "step_by_step_conforming_Gabriel",
+          "qualified_name": "CGAL::Triangulation_conformer_2::step_by_step_conforming_Gabriel",
+          "brief": "Analog to step_by_step_conforming_Delaunay() for Gabriel conforming.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Triangulation_conformer_2< CDT >::step_by_step_conforming_Gabriel",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Step by Step Operations",
+          "file": "CGAL/Triangulation_conformer_2.h",
+          "line": "203"
+        },
+        {
+          "kind": "function",
+          "name": "is_conforming_done",
+          "qualified_name": "CGAL::Triangulation_conformer_2::is_conforming_done",
+          "brief": "Tests if the step by step conforming algorithm is done.",
+          "detailed": "If it returns true , the following calls to step_by_step_conforming_XX will not insert any points, until some new constrained segments or points are inserted in the triangulation and init_XX is called again.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Triangulation_conformer_2< CDT >::is_conforming_done",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Step by Step Operations",
+          "file": "CGAL/Triangulation_conformer_2.h",
+          "line": "216"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_triangulation__conformer__2.xml",
+      "file": "CGAL/Triangulation_conformer_2.h",
+      "line": "75"
+    },
+    "ConformingDelaunayTriangulationTraits_2": {
+      "kind": "class",
+      "name": "ConformingDelaunayTriangulationTraits_2",
+      "brief": "The concept ConformingDelaunayTriangulationTraits_2 refines the concept ConstrainedDelaunayTriangulationTraits_2 by providing a numeric field type FT , a type Vector_2 and several constructors on Vector_2 , Point_2 , and a predicate on angles. The field type has to be a model of the concept ::FieldWithSqrt . This field type and the constructors are used by the conforming algorithm to compute Steiner points on constrained edges.",
+      "detailed": "Refines DelaunayTriangulationTraits_2 Has models All models of the CGAL concept Kernel CGAL::Projection_traits_xy_3<K>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::FT",
+          "brief": "The field type.",
+          "detailed": "It must be a model of FieldWithSqrt , that is must be a number type supporting the operations $ +$ , $ -$ , $ *$ , $ /$ , and $ \\sqrt{\\cdot}$ .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConformingDelaunayTriangulationTraits_2::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "40"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_2",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::Vector_2",
+          "brief": "The vector type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConformingDelaunayTriangulationTraits_2::Vector_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "46"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vector_2",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::Construct_vector_2",
+          "brief": "Constructor object.",
+          "detailed": "Must provide the operator Vector_2 operator()(Point a, Point b) that computes the vector b-a .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConformingDelaunayTriangulationTraits_2::Construct_vector_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "54"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_scaled_vector_2",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::Construct_scaled_vector_2",
+          "brief": "Constructor object.",
+          "detailed": "Must provide the operator Vector_2 operator()(Vector_2 v, FT scale) that computes the vector scale $\\cdot$ v .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConformingDelaunayTriangulationTraits_2::Construct_scaled_vector_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "62"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_translated_point_2",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::Construct_translated_point_2",
+          "brief": "Constructor object.",
+          "detailed": "Must provide the operator Point_2 operator()(Point_2 p, Vector_2 v) that computes the point p+v .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConformingDelaunayTriangulationTraits_2::Construct_translated_point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "70"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_midpoint_2",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::Construct_midpoint_2",
+          "brief": "Constructor object.",
+          "detailed": "Must provide the operator Point_2 operator()(Point_2 a, Point_2 b) that computes the midpoint of the segment $ ab$ .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConformingDelaunayTriangulationTraits_2::Construct_midpoint_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "78"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_distance_2",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::Compute_squared_distance_2",
+          "brief": "Constructor object.",
+          "detailed": "Must provide the operator FT operator()(Point_2 a, Point_2 b) that computes the squared distance between a and b .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConformingDelaunayTriangulationTraits_2::Compute_squared_distance_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "86"
+        },
+        {
+          "kind": "typedef",
+          "name": "Angle_2",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::Angle_2",
+          "brief": "Predicate object.",
+          "detailed": "Must provide the operator CGAL::Angle operator()(Point_2 p, Point_2 q, Point_2 r) that returns OBTUSE, RIGHT or ACUTE depending on the angle formed by the three points p , q , r ( q being the vertex of the angle).",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConformingDelaunayTriangulationTraits_2::Angle_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "95"
+        },
+        {
+          "kind": "typedef",
+          "name": "Oriented_side_2",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::Oriented_side_2",
+          "brief": "Predicate object.",
+          "detailed": "Must provide the operator CGAL::Oriented_side operator()(Segment_2 s, Triangle_2 t) that returns CGAL::ON_ORIENTED_BOUNDARY, CGAL::ON_NEGATIVE_SIDE, or CGAL::ON_POSITIVE_SIDE, depending on the position of the circumcenter of t relative to the oriented supporting line of s . The orientation of the supporting line is the same as the orientation of s .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type ConformingDelaunayTriangulationTraits_2::Oriented_side_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "106"
+        },
+        {
+          "kind": "function",
+          "name": "construct_vector_2_object",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::construct_vector_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_vector_2",
+          "definition": "Construct_vector_2 ConformingDelaunayTriangulationTraits_2::construct_vector_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to predicate and constructor objects",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "117"
+        },
+        {
+          "kind": "function",
+          "name": "construct_scaled_vector_2_object",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::construct_scaled_vector_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_scaled_vector_2",
+          "definition": "Construct_scaled_vector_2 ConformingDelaunayTriangulationTraits_2::construct_scaled_vector_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to predicate and constructor objects",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "126"
+        },
+        {
+          "kind": "function",
+          "name": "construct_translated_point_2_object",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::construct_translated_point_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_translated_point_2",
+          "definition": "Construct_translated_point_2 ConformingDelaunayTriangulationTraits_2::construct_translated_point_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to predicate and constructor objects",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "136"
+        },
+        {
+          "kind": "function",
+          "name": "construct_midpoint_2_object",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::construct_midpoint_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_midpoint_2",
+          "definition": "Construct_midpoint_2 ConformingDelaunayTriangulationTraits_2::construct_midpoint_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to predicate and constructor objects",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "145"
+        },
+        {
+          "kind": "function",
+          "name": "compute_squared_distance_2_object",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::compute_squared_distance_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_squared_distance_2",
+          "definition": "Compute_squared_distance_2 ConformingDelaunayTriangulationTraits_2::compute_squared_distance_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to predicate and constructor objects",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "155"
+        },
+        {
+          "kind": "function",
+          "name": "angle_2_object",
+          "qualified_name": "ConformingDelaunayTriangulationTraits_2::angle_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Angle_2",
+          "definition": "Angle_2 ConformingDelaunayTriangulationTraits_2::angle_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to predicate and constructor objects",
+          "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+          "line": "164"
+        }
+      ],
+      "xml_file": "class_conforming_delaunay_triangulation_traits__2.xml",
+      "file": "Concepts/ConformingDelaunayTriangulationTraits_2.h",
+      "line": "28"
+    },
+    "DelaunayMeshFaceBase_2": {
+      "kind": "class",
+      "name": "DelaunayMeshFaceBase_2",
+      "brief": "The concept DelaunayMeshFaceBase_2 refines the concept TriangulationFaceBase_2 . It adds two functions giving access to a Boolean marker, that indicates if the face is in the meshing domain or not.",
+      "detailed": "Refines ConstrainedTriangulationFaceBase_2 Has models CGAL::Delaunay_mesh_face_base_2 <Traits, Fb>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Edge",
+          "qualified_name": "DelaunayMeshFaceBase_2::Edge",
+          "brief": "A typedef to describe an edge.",
+          "detailed": "",
+          "return_type": "std::pair< DelaunayMeshFaceBase_2 , int >",
+          "definition": "typedef std::pair<DelaunayMeshFaceBase_2, int> DelaunayMeshFaceBase_2::Edge",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Typedef",
+          "file": "Concepts/DelaunayMeshFaceBase_2.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "is_in_domain",
+          "qualified_name": "DelaunayMeshFaceBase_2::is_in_domain",
+          "brief": "returns true if this face is in the domain to be refined.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool DelaunayMeshFaceBase_2::is_in_domain",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functions",
+          "file": "Concepts/DelaunayMeshFaceBase_2.h",
+          "line": "39"
+        },
+        {
+          "kind": "function",
+          "name": "set_in_domain",
+          "qualified_name": "DelaunayMeshFaceBase_2::set_in_domain",
+          "brief": "sets if this face is in the domain.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void DelaunayMeshFaceBase_2::set_in_domain",
+          "argsstring": "(const bool b)",
+          "params": [
+            {
+              "type": "const bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Functions",
+          "file": "Concepts/DelaunayMeshFaceBase_2.h",
+          "line": "43"
+        },
+        {
+          "kind": "function",
+          "name": "is_blind",
+          "qualified_name": "DelaunayMeshFaceBase_2::is_blind",
+          "brief": "returns true if this face has its circumcenter hidden by a constrained edge.",
+          "detailed": "It does not \"see\" it, following the Constrained Delaunay triangulation visibility criterion.",
+          "return_type": "bool",
+          "definition": "bool DelaunayMeshFaceBase_2::is_blind",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functions",
+          "file": "Concepts/DelaunayMeshFaceBase_2.h",
+          "line": "51"
+        },
+        {
+          "kind": "function",
+          "name": "set_blind",
+          "qualified_name": "DelaunayMeshFaceBase_2::set_blind",
+          "brief": "sets if this face is blind or not.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void DelaunayMeshFaceBase_2::set_blind",
+          "argsstring": "(const bool b)",
+          "params": [
+            {
+              "type": "const bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Functions",
+          "file": "Concepts/DelaunayMeshFaceBase_2.h",
+          "line": "55"
+        },
+        {
+          "kind": "function",
+          "name": "blinding_constraint",
+          "qualified_name": "DelaunayMeshFaceBase_2::blinding_constraint",
+          "brief": "If this face is blind, this function returns the first constrained edge that prevents it from \"seeing\" its circumcenter.",
+          "detailed": "is_blind() returns true",
+          "return_type": "Edge",
+          "definition": "Edge DelaunayMeshFaceBase_2::blinding_constraint",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functions",
+          "file": "Concepts/DelaunayMeshFaceBase_2.h",
+          "line": "63"
+        },
+        {
+          "kind": "function",
+          "name": "set_blinding_constraint",
+          "qualified_name": "DelaunayMeshFaceBase_2::set_blinding_constraint",
+          "brief": "sets the edge that makes this face blind.",
+          "detailed": "is_blind() returns true e is a constrained edge",
+          "return_type": "void",
+          "definition": "void DelaunayMeshFaceBase_2::set_blinding_constraint",
+          "argsstring": "(const Edge &e)",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Functions",
+          "file": "Concepts/DelaunayMeshFaceBase_2.h",
+          "line": "70"
+        }
+      ],
+      "xml_file": "class_delaunay_mesh_face_base__2.xml",
+      "file": "Concepts/DelaunayMeshFaceBase_2.h",
+      "line": "23"
+    },
+    "DelaunayMeshTraits_2": {
+      "kind": "class",
+      "name": "DelaunayMeshTraits_2",
+      "brief": "The concept DelaunayMeshTraits_2 refines the concept ConformingDelaunayTriangulationTraits_2 . It provides a construction object Construct_circumcenter_2 .",
+      "detailed": "Refines ConformingDelaunayTriangulationTraits_2 Has models All models of the CGAL concept Kernel CGAL::Projection_traits_xy_3<K>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Construct_circumcenter_2",
+          "qualified_name": "DelaunayMeshTraits_2::Construct_circumcenter_2",
+          "brief": "Constructor object.",
+          "detailed": "Must provide an operator Point_2 operator()(Point_2 p, Point_2 q, Point_2 r); that constructs the center of the circle passing through the points p , q , and r . p , q , and r are not collinear.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type DelaunayMeshTraits_2::Construct_circumcenter_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/DelaunayMeshTraits_2.h",
+          "line": "36"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_area_2",
+          "qualified_name": "DelaunayMeshTraits_2::Compute_area_2",
+          "brief": "Constructor object.",
+          "detailed": "Must provide an operator FT operator()(Point_2 p, Point_2 q, Point_2 r); that computes the signed area of the triangle defined by the points p , q , and r .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type DelaunayMeshTraits_2::Compute_area_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/DelaunayMeshTraits_2.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "construct_circumcenter_2_object",
+          "qualified_name": "DelaunayMeshTraits_2::construct_circumcenter_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_circumcenter_2",
+          "definition": "Construct_circumcenter_2 DelaunayMeshTraits_2::construct_circumcenter_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to predicate and constructor objects",
+          "file": "Concepts/DelaunayMeshTraits_2.h",
+          "line": "62"
+        },
+        {
+          "kind": "function",
+          "name": "compute_area_2_object",
+          "qualified_name": "DelaunayMeshTraits_2::compute_area_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_area_2",
+          "definition": "Compute_area_2 DelaunayMeshTraits_2::compute_area_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to predicate and constructor objects",
+          "file": "Concepts/DelaunayMeshTraits_2.h",
+          "line": "71"
+        },
+        {
+          "kind": "function",
+          "name": "construct_bbox_2_object",
+          "qualified_name": "DelaunayMeshTraits_2::construct_bbox_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_bbox_2",
+          "definition": "Construct_bbox_2 DelaunayMeshTraits_2::construct_bbox_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to predicate and constructor objects",
+          "file": "Concepts/DelaunayMeshTraits_2.h",
+          "line": "75"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_bbox_2",
+          "qualified_name": "DelaunayMeshTraits_2::Construct_bbox_2",
+          "brief": "Constructor object.",
+          "detailed": "Must provide an operator CGAL::Bbox_2 operator()(Point_2 p); that constructs the bounding box of the point p .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type DelaunayMeshTraits_2::Construct_bbox_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/DelaunayMeshTraits_2.h",
+          "line": "54"
+        }
+      ],
+      "xml_file": "class_delaunay_mesh_traits__2.xml",
+      "file": "Concepts/DelaunayMeshTraits_2.h",
+      "line": "22"
+    },
+    "DelaunayMeshVertexBase_2": {
+      "kind": "class",
+      "name": "DelaunayMeshVertexBase_2",
+      "brief": "The concept DelaunayMeshVertexBase_2 refines the concept TriangulationVertexBase_2 . It adds two functions giving access to a double marker, that is useful for the mesh optimizers to keep the mesh density everywhere while modifying the mesh.",
+      "detailed": "Refines TriangulationVertexBase_2 Has models CGAL::Delaunay_mesh_vertex_base_2 <Traits, Vb>",
+      "members": [
+        {
+          "kind": "function",
+          "name": "sizing_info",
+          "qualified_name": "DelaunayMeshVertexBase_2::sizing_info",
+          "brief": "returns the size requested locally around the vertex",
+          "detailed": "",
+          "return_type": "const double &",
+          "definition": "const double & DelaunayMeshVertexBase_2::sizing_info",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/DelaunayMeshVertexBase_2.h",
+          "line": "32"
+        },
+        {
+          "kind": "function",
+          "name": "set_sizing_info",
+          "qualified_name": "DelaunayMeshVertexBase_2::set_sizing_info",
+          "brief": "sets the size requested locally around the vertex",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void DelaunayMeshVertexBase_2::set_sizing_info",
+          "argsstring": "(const double &s)",
+          "params": [
+            {
+              "type": "const double &",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/DelaunayMeshVertexBase_2.h",
+          "line": "37"
+        }
+      ],
+      "xml_file": "class_delaunay_mesh_vertex_base__2.xml",
+      "file": "Concepts/DelaunayMeshVertexBase_2.h",
+      "line": "23"
+    },
+    "MeshingCriteria_2": {
+      "kind": "class",
+      "name": "MeshingCriteria_2",
+      "brief": "The concept MeshingCriteria_2 defines the meshing criteria to be used in the algorithm. It provides a predicate Is_bad that tests a triangle according to criteria. The return type of Is_bad is an enum Mesh_2::Face_badness .",
+      "detailed": "The possible values of CGAL::Mesh_2::Face_badness are CGAL::Mesh_2::NOT_BAD , CGAL::Mesh_2::BAD and CGAL::Mesh_2::IMPERATIVELY_BAD . If the predicate returns BAD , the triangle is marked as bad and the algorithm will try to destroy it. If the predicates returns CGAL::Mesh_2::IMPERATIVELY_BAD , the algorithm will destroy the triangle unconditionally during its execution. The termination of the algorithm is guaranteed when criteria are shape criteria corresponding to a bound on smallest angles not less than $ 20.7$ degrees (this corresponds to a radius-edge ratio bound not less than $ \\sqrt{2}$ ). Any size criteria that are satisfied by small enough triangle can be added to the set of criteria without compromising the termination. Note that, in the presence of input angles smaller than $ 60$ degrees, some bad shaped triangles can appear in the final mesh in the neighboring of small angles. To achieve termination and the respect of size criteria everywhere, the Is_bad predicate has to return CGAL::Mesh_2::IMPERATIVELY_BAD when size criteria are not satisfied, and CGAL::Mesh_2::BAD when shape criteria are not satisfied. MeshingCriteria_2 also provides a type Quality designed to code a quality measure for triangles. The type Quality must be less-than comparable as the meshing algorithm will order bad triangles by quality, to split those with smallest quality first. The predicate Is_bad computes the quality of the triangle as a by-product. Has models CGAL::Delaunay_mesh_criteria_2 <CDT> CGAL::Delaunay_mesh_size_criteria_2 <CDT>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Face_handle",
+          "qualified_name": "MeshingCriteria_2::Face_handle",
+          "brief": "Handle to a face of the triangulation.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type MeshingCriteria_2::Face_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/MeshingCriteria_2.h",
+          "line": "58"
+        },
+        {
+          "kind": "typedef",
+          "name": "Quality",
+          "qualified_name": "MeshingCriteria_2::Quality",
+          "brief": "Default constructible, copy constructible, assignable, and less-than comparable type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type MeshingCriteria_2::Quality",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/MeshingCriteria_2.h",
+          "line": "65"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_bad",
+          "qualified_name": "MeshingCriteria_2::Is_bad",
+          "brief": "Predicate object.",
+          "detailed": "Must provide two operators. The first operator Mesh_2::Face_badness operator()( Face_handle fh, Quality & q) returns CGAL::Mesh_2::NOT_BAD if it satisfies the desired criteria for mesh triangles, CGAL::Mesh_2::BAD if it does not, and CGAL::Mesh_2::IMPERATIVELY_BAD if it does not and should be refined unconditionally. In addition, this operator assigns to q a value measuring the quality of the triangle pointed by fh . The second operator Mesh_2::Face_badness operator()(Quality q) returns CGAL::Mesh_2::NOT_BAD if q is the quality of a good triangle, CGAL::Mesh_2::BAD if the q represents a poor quality, and CGAL::Mesh_2::IMPERATIVELY_BAD if q represents the quality of a bad triangle that should be refined unconditionally.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type MeshingCriteria_2::Is_bad",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/MeshingCriteria_2.h",
+          "line": "88"
+        },
+        {
+          "kind": "function",
+          "name": "is_bad_object",
+          "qualified_name": "MeshingCriteria_2::is_bad_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Is_bad",
+          "definition": "Is_bad MeshingCriteria_2::is_bad_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to predicate and constructor objects",
+          "file": "Concepts/MeshingCriteria_2.h",
+          "line": "99"
+        }
+      ],
+      "xml_file": "class_meshing_criteria__2.xml",
+      "file": "Concepts/MeshingCriteria_2.h",
+      "line": "48"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "write_vtu",
+          "qualified_name": "CGAL::write_vtu",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::write_vtu",
+          "argsstring": "(std::ostream &os, const CDT &tr, IO::Mode mode=IO::BINARY)",
+          "params": [
+            {
+              "type": "std::ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CDT &",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IO::Mode",
+              "name": "mode",
+              "default": "IO::BINARY",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/IO/write_VTU.h",
+          "line": "474"
+        }
+      ],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/Delaunay_mesh_criteria_2.h",
+      "line": "2"
+    },
+    "CGAL::IO": {
+      "kind": "namespace",
+      "name": "CGAL::IO",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "write_VTU",
+          "qualified_name": "CGAL::IO::write_VTU",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::IO::write_VTU",
+          "argsstring": "(std::string filename, const CDT &tr, InDomainPmap ipm, Mode mode=BINARY)",
+          "params": [
+            {
+              "type": "std::string",
+              "name": "filename",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CDT &",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InDomainPmap",
+              "name": "ipm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Mode",
+              "name": "mode",
+              "default": "BINARY",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/IO/write_VTU.h",
+          "line": "449"
+        },
+        {
+          "kind": "function",
+          "name": "write_VTU",
+          "qualified_name": "CGAL::IO::write_VTU",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::IO::write_VTU",
+          "argsstring": "(std::string filename, const CDT &tr, Mode mode=BINARY)",
+          "params": [
+            {
+              "type": "std::string",
+              "name": "filename",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CDT &",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Mode",
+              "name": "mode",
+              "default": "BINARY",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/IO/write_VTU.h",
+          "line": "461"
+        }
+      ],
+      "xml_file": "namespace_c_g_a_l_1_1_i_o.xml",
+      "file": "CGAL/IO/write_VTU.h",
+      "line": "34"
+    },
+    "CGAL::Mesh_2": {
+      "kind": "namespace",
+      "name": "CGAL::Mesh_2",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_mesh__2.xml",
+      "file": "CGAL/Mesh_2/Face_badness.h",
+      "line": "2"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgMesh2Ref": {
+      "kind": "group",
+      "name": "PkgMesh2Ref",
+      "brief": "",
+      "detailed": "Laurent Rineau This package implements a Delaunay refinement algorithm to construct conforming triangulations and 2D meshes. Conforming Delaunay triangulations are obtained from constrained Delaunay triangulations by refining constrained edges until they are Delaunay edges. Conforming Gabriel triangulations are obtained by further refining constrained edges until they become Gabriel edges. The package provides also a 2D mesh generator that refines triangles and constrained edges until user defined size and shape criteria on triangles are satisfied. The generated meshes can be optimized using the Lloyd algorithm, also provided in this package. The package can handle intersecting input constraints and set no restriction on the angle formed by two constraints sharing an endpoint. Introduced in: CGAL 3.1 Depends on: PkgTriangulation2 BibTeX: cgal:r-ctm2-26a License: GPL Windows Demo: 2D Mesh Generator Classified Reference Pages Concepts ConformingDelaunayTriangulationTraits_2 DelaunayMeshTraits_2 MeshingCriteria_2 DelaunayMeshFaceBase_2 DelaunayMeshVertexBase_2 Classes CGAL::Triangulation_conformer_2 <CDT> CGAL::Delaunay_mesher_2 <CDT, Criteria> CGAL::Delaunay_mesh_face_base_2 <Traits, Fb> CGAL::Delaunay_mesh_vertex_base_2 <Traits, Vb> CGAL::Delaunay_mesh_criteria_2 <CDT> CGAL::Delaunay_mesh_size_criteria_2 <CDT> CGAL::Mesh_2::Face_badness Global Functions CGAL::make_conforming_Delaunay_2 CGAL::make_conforming_Gabriel_2 CGAL::refine_Delaunay_mesh_2 CGAL::lloyd_optimize_mesh_2 I/O Functions CGAL::IO::write_VTU() Enumerations CGAL::Mesh_optimization_return_code",
+      "members": [
+        {
+          "kind": "enum",
+          "name": "Face_badness",
+          "qualified_name": "CGAL::Mesh_2::Face_badness",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "enum",
+          "section": "",
+          "file": "CGAL/Mesh_2/Face_badness.h",
+          "line": "6"
+        }
+      ],
+      "xml_file": "group___pkg_mesh2_ref.xml"
+    },
+    "PkgMesh2Concepts": {
+      "kind": "group",
+      "name": "PkgMesh2Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_mesh2_concepts.xml"
+    },
+    "PkgMesh2Functions": {
+      "kind": "group",
+      "name": "PkgMesh2Functions",
+      "brief": "The main function to generate a mesh is refine_Delaunay_mesh_2() .",
+      "detailed": "The function lloyd_optimize_mesh_2() allows to optimize an existing mesh.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "refine_Delaunay_mesh_2",
+          "qualified_name": "CGAL::refine_Delaunay_mesh_2",
+          "brief": "refines the domain defined by a constrained Delaunay triangulation into a mesh satisfying the criteria defined by the traits criteria .",
+          "detailed": "Note that the unbounded component of the plane is never meshed. CDT must be a 2D constrained Delaunay triangulation and its geometric traits class must be a model of DelaunayMeshTraits_2 . The face of the constrained Delaunay triangulation must be a model of the concept DelaunayMeshFaceBase_2 . NamedParameters a sequence of Named Parameters t the constrained Delaunay triangulation that will be refined np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> seeds </button> 2D points used to define the domain to mesh. If seeds_are_in_domain==true , the mesh domain is the union of the bounded connected components including at least one seed. If seeds_are_in_domain==false , the domain is the union of the bounded components including no seed. Type: a class model of ConstRange with iterator being a model of InputIterator with CDT::Point as value type. Default: No seed. <button class=\"collapsible\"> criteria </button> The meshing criteria Type: a class model of a model of the concept MeshingCriteria_2 with Criteria::Face_handle being the same as CDT::Face_handle . Default: CGAL::Delaunay_mesh_size_criteria_2 <button class=\"collapsible\"> domain_is_initialized </button> If true the domain is considered as already initialized (see DelaunayMeshFaceBase_2::is_in_domain() ). If false and no seeds are provided, the domain of the mesh covers all the connected components of the plane defined by the constrained edges of t , except for the unbounded component. Type: bool Default: false <button class=\"collapsible\"> seeds_are_in_domain </button> specified if seeds indicates bounded connected components inside or outside of the domain. Type: bool Default: false",
+          "return_type": "void",
+          "definition": "void CGAL::refine_Delaunay_mesh_2",
+          "argsstring": "(CDT &t, const NamedParameters &np)",
+          "params": [
+            {
+              "type": "CDT &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "311"
+        },
+        {
+          "kind": "function",
+          "name": "refine_Delaunay_mesh_2",
+          "qualified_name": "CGAL::refine_Delaunay_mesh_2",
+          "brief": "",
+          "detailed": "Deprecated This function is deprecated since CGAL 5.6 refines the default domain defined by a constrained Delaunay triangulation without seeds into a mesh satisfying the criteria defined by the traits criteria . The domain of the mesh covers all the connected components of the plane defined by the constrained edges of t , except for the unbounded component. CDT must be a 2D constrained Delaunay triangulation and its geometric traits class must be a model of DelaunayMeshTraits_2 . The face of the constrained Delaunay triangulation must be a model of the concept DelaunayMeshFaceBase_2 . Criteria must be a model of the concept MeshingCriteria_2 . Criteria::Face_handle must be the same as CDT::Face_handle .",
+          "return_type": "void",
+          "definition": "void CGAL::refine_Delaunay_mesh_2",
+          "argsstring": "(CDT &t, const Criteria &criteria=Criteria())",
+          "params": [
+            {
+              "type": "CDT &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Criteria &",
+              "name": "criteria",
+              "default": "Criteria()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "332"
+        },
+        {
+          "kind": "function",
+          "name": "refine_Delaunay_mesh_2",
+          "qualified_name": "CGAL::refine_Delaunay_mesh_2",
+          "brief": "",
+          "detailed": "Deprecated This function is deprecated since CGAL 5.6 refines the default domain defined by a constrained Delaunay triangulation into a mesh satisfying the criteria defined by the traits criteria .The sequence [begin, end) gives a set of seeds points, that defines the domain to be meshed as follows. The constrained edges of t partition the plane into connected components. If mark==true , the mesh domain is the union of the bounded connected components including at least one seed. If mark==false , the domain is the union of the bounded components including no seed. Note that the unbounded component of the plane is never meshed. CDT must be 2D constrained Delaunay triangulation and its geometric traits class must be a model of DelaunayMeshTraits_2 . The face of the constrained Delaunay triangulation must be a model of the concept DelaunayMeshFaceBase_2 . Criteria must be a model of the concept MeshingCriteria_2 . Criteria::Face_handle must be the same as CDT::Face_handle . InputIterator must be an input iterator with value type CDT::Geom_traits::Point_2 .",
+          "return_type": "void",
+          "definition": "void CGAL::refine_Delaunay_mesh_2",
+          "argsstring": "(CDT &t, InputIterator begin, InputIterator end, const Criteria &criteria=Criteria(), bool mark=false)",
+          "params": [
+            {
+              "type": "CDT &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Criteria &",
+              "name": "criteria",
+              "default": "Criteria()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "mark",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Delaunay_mesher_2.h",
+          "line": "366"
+        },
+        {
+          "kind": "function",
+          "name": "make_conforming_Delaunay_2",
+          "qualified_name": "CGAL::make_conforming_Delaunay_2",
+          "brief": "Refines the constrained Delaunay triangulation t into a conforming Delaunay triangulation.",
+          "detailed": "After a call to this function, all edges of t are Delaunay edges. CDT must be a 2D constrained Delaunay triangulation and its geometric traits class must be a model of ConformingDelaunayTriangulationTraits_2 .",
+          "return_type": "void",
+          "definition": "void CGAL::make_conforming_Delaunay_2",
+          "argsstring": "(CDT &t)",
+          "params": [
+            {
+              "type": "CDT &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Triangulation_conformer_2.h",
+          "line": "15"
+        },
+        {
+          "kind": "function",
+          "name": "make_conforming_Gabriel_2",
+          "qualified_name": "CGAL::make_conforming_Gabriel_2",
+          "brief": "Refines the constrained Delaunay triangulation t into a conforming Gabriel triangulation.",
+          "detailed": "After a call to this function, all constrained edges of t have the Gabriel property : the circle that has $ e$ as diameter does not contain any vertex from the triangulation. CDT must be a 2D constrained Delaunay triangulation and its geometric traits class must be a model of ConformingDelaunayTriangulationTraits_2 .",
+          "return_type": "void",
+          "definition": "void CGAL::make_conforming_Gabriel_2",
+          "argsstring": "(CDT &t)",
+          "params": [
+            {
+              "type": "CDT &",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Triangulation_conformer_2.h",
+          "line": "35"
+        },
+        {
+          "kind": "function",
+          "name": "lloyd_optimize_mesh_2",
+          "qualified_name": "CGAL::lloyd_optimize_mesh_2",
+          "brief": "The function lloyd_optimize_mesh_2() is a mesh optimization process based on the minimization of a global energy function.",
+          "detailed": "In lloyd_optimize_mesh_2() , the minimized global energy may be interpreted as the $ L^1$ -norm of the error achieved when the function $ x^2$ is interpolated on the mesh domain using a piecewise linear function which is linear in each cell of the Voronoi diagram of the mesh vertices. The optimizer lloyd_optimize_mesh_2() works in iterative steps. At each iteration, mesh vertices are moved into positions that bring to zero the energy gradient and the Delaunay triangulation is updated. Vertices on the mesh boundaries are not moved. CDT is required to be or derive from CGAL::Constrained_Delaunay_triangulation_2 , with vertex base and face base of its underlying TriangulationDataStructure_2 being models of DelaunayMeshVertexBase_2 and DelaunayMeshFaceBase_2 , respectively. NamedParameters a sequence of Named Parameters cdt the initial mesh that will be modified by the algorithm to represent the final optimized mesh. np an optional sequence of Named Parameters among the ones listed below: Optional Named Parameters <button class=\"collapsible\"> seeds </button> 2D points used to define the domain to mesh. If seeds_are_in_domain==true , the mesh domain is the union of the bounded connected components including at least one seed. If seeds_are_in_domain==false , the domain is the union of the bounded components including no seed. Type: a class model of ConstRange whose iterator is a model of InputIterator with CDT::Point_2 as value type. Default: No seed. <button class=\"collapsible\"> seeds_are_in_domain </button> specified if seeds indicate bounded connected components inside or outside of the domain. Type: bool Default: false <button class=\"collapsible\"> max_iteration_number </button> limit on the number of performed iterations. 0 means that there is no limit on the number of performed iterations. Precondition: max_iteration_number >=0 Type: int Default: 0 <button class=\"collapsible\"> time_limit </button> CPU time limit (in seconds) after which the optimization process is stopped. This time is measured using CGAL::Real_timer . 0 means that there is no time limit. Type: double Precondition: time_limit $ \\geq$ 0 Default: 0 <button class=\"collapsible\"> freeze_bound </button> designed to reduce running time of each optimization iteration. Any vertex that has a displacement less than a given fraction of the length of its shortest incident edge, is frozen (i.e. is not relocated). The parameter freeze_bound gives the threshold ratio. If it is set to 0, freezing of vertices is disabled. Precondition: 0<= freeze_bound <=1 Type: double Default: 0.001 <button class=\"collapsible\"> convergence </button> threshold ratio of stopping criterion based on convergence: the optimization process is stopped when at the last iteration the displacement of any vertex is less than a given fraction of the length of the shortest edge incident to that vertex. Precondition: 0 <=convergence <= 1 Type: double Default: 0.001 an enum value providing some information about the outcome of the algorithm. CGAL::Mesh_optimization_return_code CGAL::refine_Delaunay_mesh_2()",
+          "return_type": "Mesh_optimization_return_code",
+          "definition": "Mesh_optimization_return_code CGAL::lloyd_optimize_mesh_2",
+          "argsstring": "(CDT &cdt, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "CDT &",
+              "name": "cdt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/lloyd_optimize_mesh_2.h",
+          "line": "119"
+        }
+      ],
+      "xml_file": "group___pkg_mesh2_functions.xml"
+    },
+    "PkgMesh2Enum": {
+      "kind": "group",
+      "name": "PkgMesh2Enum",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "enum",
+          "name": "Mesh_optimization_return_code",
+          "qualified_name": "CGAL::Mesh_optimization_return_code",
+          "brief": "The enum Mesh_optimization_return_code is the output of the global mesh optimization functions.",
+          "detailed": "This output corresponds to mesh optimization process termination reasons. Note that depending on what parameters have been set to the optimizer, each return value may represent a failure or a success. CGAL::lloyd_optimize_mesh_2",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "enum",
+          "section": "",
+          "file": "CGAL/Mesh_optimization_return_code.h",
+          "line": "14"
+        }
+      ],
+      "xml_file": "group___pkg_mesh2_enum.xml"
+    },
+    "PkgMesh2IO": {
+      "kind": "group",
+      "name": "PkgMesh2IO",
+      "brief": "In addition to the stream extraction and insertion operators for CGAL 2D triangulations, the following functions can be used.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "write_VTU",
+          "qualified_name": "CGAL::IO::write_VTU",
+          "brief": "writes the faces of a domain and its constrained edges embedded in a 2D constrained Delaunay triangulation using the PolyData XML format.",
+          "detailed": "The faces output are those for which get(ipm, f) returns true where f is a CDT::Face_handle , the edges are those for which ConstrainedTriangulationFaceBase_2::is_constrained() returns true . To read a binary file, the flag std::ios::binary must be set during the creation of os . CDT a Constrained_Delaunay_triangulation_2 with face type model of DelaunayMeshFaceBase_2 . InDomainPmap a class model of ReadWritePropertyMap with CDT::Face_handle as key type and bool as value type. os the stream used for writing. tr the triangulated domain to be written. ipm the property map storing if a face is in the domain. mode decides if the data should be written in binary ( BINARY ) or in ASCII ( ASCII ).",
+          "return_type": "void",
+          "definition": "void CGAL::IO::write_VTU",
+          "argsstring": "(std::ostream &os, const CDT &tr, InDomainPmap ipm, Mode mode=BINARY)",
+          "params": [
+            {
+              "type": "std::ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CDT &",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InDomainPmap",
+              "name": "ipm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Mode",
+              "name": "mode",
+              "default": "BINARY",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/IO/write_VTU.h",
+          "line": "415"
+        },
+        {
+          "kind": "function",
+          "name": "write_VTU",
+          "qualified_name": "CGAL::IO::write_VTU",
+          "brief": "writes the faces of a domain and its constrained edges embedded in a 2D constrained Delaunay triangulation using the PolyData XML format.",
+          "detailed": "The faces output are those for which DelaunayMeshFaceBase_2::is_in_domain() returns true , the edges are those for which ConstrainedTriangulationFaceBase_2::is_constrained() returns true . To read a binary file, the flag std::ios::binary must be set during the creation of os . CDT a Constrained_Delaunay_triangulation_2 with face type model of DelaunayMeshFaceBase_2 . os the stream used for writing. tr the triangulated domain to be written. mode decides if the data should be written in binary ( BINARY ) or in ASCII ( ASCII ).",
+          "return_type": "void",
+          "definition": "void CGAL::IO::write_VTU",
+          "argsstring": "(std::ostream &os, const CDT &tr, Mode mode=BINARY)",
+          "params": [
+            {
+              "type": "std::ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CDT &",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Mode",
+              "name": "mode",
+              "default": "BINARY",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/IO/write_VTU.h",
+          "line": "440"
+        }
+      ],
+      "xml_file": "group___pkg_mesh2_i_o.xml"
+    }
+  }
+}

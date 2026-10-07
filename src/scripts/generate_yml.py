@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 import click
 
 def generate_yml(path_to_cmakes: str, compile_mode: str, cmake2example: dict) -> str:
@@ -36,8 +38,8 @@ pipelines:
                 - cmake -C ../{path_to_cmakes}/{cmake_name}_{compile_mode}.cmake ../
                 - make
                 - pip install src/libs/cgalpy/dist/*.whl
-                - cd ../src/python_scripts # go to examples
-                - ./compare_examples.sh ../../cgal {" ".join(examples)} # run examples
+                - cd ../src/python_examples # go to examples
+                - ../scripts/compare_examples.sh ../../cgal {" ".join(examples)} # run examples
       """
   
   return yml

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "sd_epic",
+  "description": "Build variant defined by cmake/tests/sd_epic.cmake",
+  "cmake_tests": [
+    "cmake/tests/sd_epic.cmake"
+  ]
+}

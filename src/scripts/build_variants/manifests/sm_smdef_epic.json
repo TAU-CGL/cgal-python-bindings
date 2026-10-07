@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "sm_smdef_epic",
+  "description": "Build variant defined by cmake/tests/sm_smdef_epic.cmake",
+  "cmake_tests": [
+    "cmake/tests/sm_smdef_epic.cmake"
+  ]
+}

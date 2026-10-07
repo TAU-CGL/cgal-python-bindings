@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "default",
+  "description": "Build variant defined by cmake/tests/default.cmake",
+  "cmake_tests": [
+    "cmake/tests/default.cmake"
+  ]
+}

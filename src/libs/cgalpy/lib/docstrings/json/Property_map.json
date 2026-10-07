@@ -1,0 +1,2256 @@
+{
+  "schema_version": 1,
+  "package": "Property_map",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 17,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Boolean_property_map": {
+      "kind": "struct",
+      "name": "CGAL::Boolean_property_map",
+      "brief": "Read-write property map turning a set (such a std::set , boost::unordered_set , std::unordered_set ) into a property map associating a Boolean to the value type of the set.",
+      "detailed": "The function get will return true if the key is inside the set and false otherwise. The put function will insert an element in the set if true is passed and erase it otherwise. Is model of ReadWritePropertyMap",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "key_type",
+          "qualified_name": "CGAL::Boolean_property_map::key_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Set::value_type",
+          "definition": "typedef Set::value_type CGAL::Boolean_property_map< Set >::key_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "653"
+        },
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::Boolean_property_map::value_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "typedef bool CGAL::Boolean_property_map< Set >::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "654"
+        },
+        {
+          "kind": "typedef",
+          "name": "reference",
+          "qualified_name": "CGAL::Boolean_property_map::reference",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "typedef bool CGAL::Boolean_property_map< Set >::reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "655"
+        },
+        {
+          "kind": "typedef",
+          "name": "category",
+          "qualified_name": "CGAL::Boolean_property_map::category",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::read_write_property_map_tag",
+          "definition": "typedef boost::read_write_property_map_tag CGAL::Boolean_property_map< Set >::category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "656"
+        },
+        {
+          "kind": "variable",
+          "name": "set_ptr",
+          "qualified_name": "CGAL::Boolean_property_map::set_ptr",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Set *",
+          "definition": "Set* CGAL::Boolean_property_map< Set >::set_ptr",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "658"
+        },
+        {
+          "kind": "function",
+          "name": "Boolean_property_map",
+          "qualified_name": "CGAL::Boolean_property_map::Boolean_property_map",
+          "brief": "Constructor taking a copy of the set.",
+          "detailed": "Note that set_ must be valid while the property map is in use.",
+          "return_type": "",
+          "definition": "CGAL::Boolean_property_map< Set >::Boolean_property_map",
+          "argsstring": "(Set &set_)",
+          "params": [
+            {
+              "type": "Set &",
+              "name": "set_",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "661"
+        },
+        {
+          "kind": "function",
+          "name": "Boolean_property_map",
+          "qualified_name": "CGAL::Boolean_property_map::Boolean_property_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Boolean_property_map< Set >::Boolean_property_map",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "662"
+        },
+        {
+          "kind": "friend",
+          "name": "get",
+          "qualified_name": "CGAL::Boolean_property_map::get",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool get",
+          "argsstring": "(const Boolean_property_map< Set > &pm, const key_type &k)",
+          "params": [
+            {
+              "type": "const Boolean_property_map < Set > &",
+              "name": "pm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const key_type &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "friend",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "664"
+        },
+        {
+          "kind": "friend",
+          "name": "put",
+          "qualified_name": "CGAL::Boolean_property_map::put",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void put",
+          "argsstring": "(Boolean_property_map< Set > pm, const key_type &k, bool v)",
+          "params": [
+            {
+              "type": "Boolean_property_map < Set >",
+              "name": "pm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const key_type &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "friend",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "670"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_boolean__property__map.xml",
+      "file": "CGAL/property_map.h",
+      "line": "651"
+    },
+    "CGAL::Cartesian_converter_property_map": {
+      "kind": "struct",
+      "name": "CGAL::Cartesian_converter_property_map",
+      "brief": "Read-write property map doing on-the-fly conversions between two default constructible CGAL Cartesian kernels.",
+      "detailed": "Its value type is GeomObject and its key type is the same as Vpm . GeomObject must be a geometric object from a CGAL kernel. Vpm is a model of ReadWritePropertyMap and its value type must be a geometric object of the same type as GeomObject but possibly from another kernel. Conversions between the two geometric objects are done using Cartesian_converter . Is model of ReadWritePropertyMap",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "key_type",
+          "qualified_name": "CGAL::Cartesian_converter_property_map::key_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::property_traits< Vpm >::key_type",
+          "definition": "typedef boost::property_traits<Vpm>::key_type CGAL::Cartesian_converter_property_map< GeomObject, Vpm >::key_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "702"
+        },
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::Cartesian_converter_property_map::value_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomObject",
+          "definition": "typedef GeomObject CGAL::Cartesian_converter_property_map< GeomObject, Vpm >::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "703"
+        },
+        {
+          "kind": "typedef",
+          "name": "reference",
+          "qualified_name": "CGAL::Cartesian_converter_property_map::reference",
+          "brief": "",
+          "detailed": "",
+          "return_type": "value_type",
+          "definition": "typedef value_type CGAL::Cartesian_converter_property_map< GeomObject, Vpm >::reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "704"
+        },
+        {
+          "kind": "typedef",
+          "name": "category",
+          "qualified_name": "CGAL::Cartesian_converter_property_map::category",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::read_write_property_map_tag",
+          "definition": "typedef boost::read_write_property_map_tag CGAL::Cartesian_converter_property_map< GeomObject, Vpm >::category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "705"
+        },
+        {
+          "kind": "typedef",
+          "name": "K2",
+          "qualified_name": "CGAL::Cartesian_converter_property_map::K2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Kernel_traits< GeomObject >::type",
+          "definition": "typedef Kernel_traits<GeomObject>::type CGAL::Cartesian_converter_property_map< GeomObject, Vpm >::K2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "708"
+        },
+        {
+          "kind": "typedef",
+          "name": "K1",
+          "qualified_name": "CGAL::Cartesian_converter_property_map::K1",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Kernel_traits< typenameboost::property_traits< Vpm > ::value_type >::type",
+          "definition": "typedef Kernel_traits<typenameboost::property_traits<Vpm>::value_type>::type CGAL::Cartesian_converter_property_map< GeomObject, Vpm >::K1",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "709"
+        },
+        {
+          "kind": "variable",
+          "name": "vpm",
+          "qualified_name": "CGAL::Cartesian_converter_property_map::vpm",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vpm",
+          "definition": "Vpm CGAL::Cartesian_converter_property_map< GeomObject, Vpm >::vpm",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "706"
+        },
+        {
+          "kind": "function",
+          "name": "Cartesian_converter_property_map",
+          "qualified_name": "CGAL::Cartesian_converter_property_map::Cartesian_converter_property_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Cartesian_converter_property_map< GeomObject, Vpm >::Cartesian_converter_property_map",
+          "argsstring": "(Vpm vpm)",
+          "params": [
+            {
+              "type": "Vpm",
+              "name": "vpm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "711"
+        },
+        {
+          "kind": "friend",
+          "name": "get",
+          "qualified_name": "CGAL::Cartesian_converter_property_map::get",
+          "brief": "",
+          "detailed": "",
+          "return_type": "value_type",
+          "definition": "value_type get",
+          "argsstring": "(const Cartesian_converter_property_map< GeomObject, Vpm > &pm, const key_type &k)",
+          "params": [
+            {
+              "type": "const Cartesian_converter_property_map < GeomObject, Vpm > &",
+              "name": "pm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const key_type &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "friend",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "713"
+        },
+        {
+          "kind": "friend",
+          "name": "put",
+          "qualified_name": "CGAL::Cartesian_converter_property_map::put",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void put",
+          "argsstring": "(Cartesian_converter_property_map< GeomObject, Vpm > &pm, const key_type &k, const value_type &v)",
+          "params": [
+            {
+              "type": "Cartesian_converter_property_map < GeomObject, Vpm > &",
+              "name": "pm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const key_type &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const value_type &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "friend",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "717"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_cartesian__converter__property__map.xml",
+      "file": "CGAL/property_map.h",
+      "line": "700"
+    },
+    "CGAL::Compose_property_map": {
+      "kind": "struct",
+      "name": "CGAL::Compose_property_map",
+      "brief": "Property map that composes two property maps, that is a call on an instance Compose_property_map compose_property_map(key_map, value_map) of get(compose_property_map, k) returns get(value_map, get(key_map, k)) .",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "key_type",
+          "qualified_name": "CGAL::Compose_property_map::key_type",
+          "brief": "< Use the key type of KeyMap as keytype",
+          "detailed": "Use the value type of ValueMap as value type",
+          "return_type": "boost::property_traits< KeyMap >::key_type",
+          "definition": "typedef boost::property_traits<KeyMap>::key_type CGAL::Compose_property_map< KeyMap, ValueMap >::key_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "131"
+        },
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::Compose_property_map::value_type",
+          "brief": "Use the reference type of ValueMap as reference.",
+          "detailed": "",
+          "return_type": "boost::property_traits< ValueMap >::value_type",
+          "definition": "typedef boost::property_traits<ValueMap>::value_type CGAL::Compose_property_map< KeyMap, ValueMap >::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "133"
+        },
+        {
+          "kind": "typedef",
+          "name": "reference",
+          "qualified_name": "CGAL::Compose_property_map::reference",
+          "brief": "Use the category of the ValueMap .",
+          "detailed": "",
+          "return_type": "boost::property_traits< ValueMap >::reference",
+          "definition": "typedef boost::property_traits<ValueMap>::reference CGAL::Compose_property_map< KeyMap, ValueMap >::reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "135"
+        },
+        {
+          "kind": "typedef",
+          "name": "category",
+          "qualified_name": "CGAL::Compose_property_map::category",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::property_traits< ValueMap >::category",
+          "definition": "typedef boost::property_traits<ValueMap>::category CGAL::Compose_property_map< KeyMap, ValueMap >::category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "137"
+        },
+        {
+          "kind": "function",
+          "name": "Compose_property_map",
+          "qualified_name": "CGAL::Compose_property_map::Compose_property_map",
+          "brief": "Constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Compose_property_map< KeyMap, ValueMap >::Compose_property_map",
+          "argsstring": "(KeyMap key_map=KeyMap(), ValueMap value_map=ValueMap())",
+          "params": [
+            {
+              "type": "KeyMap",
+              "name": "key_map",
+              "default": "KeyMap()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ValueMap",
+              "name": "value_map",
+              "default": "ValueMap()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "140"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_compose__property__map.xml",
+      "file": "CGAL/property_map.h",
+      "line": "128"
+    },
+    "CGAL::Constant_property_map": {
+      "kind": "struct",
+      "name": "CGAL::Constant_property_map",
+      "brief": "Property map that returns a fixed value.",
+      "detailed": "Note that this value is chosen when the map is constructed and cannot be changed afterwards. Specifically, the free function put() does nothing. Is model of ReadWritePropertyMap",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "key_type",
+          "qualified_name": "CGAL::Constant_property_map::key_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "KeyType",
+          "definition": "typedef KeyType CGAL::Constant_property_map< KeyType, ValueType >::key_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "625"
+        },
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::Constant_property_map::value_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "ValueType",
+          "definition": "typedef ValueType CGAL::Constant_property_map< KeyType, ValueType >::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "626"
+        },
+        {
+          "kind": "typedef",
+          "name": "reference",
+          "qualified_name": "CGAL::Constant_property_map::reference",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const value_type &",
+          "definition": "typedef const value_type& CGAL::Constant_property_map< KeyType, ValueType >::reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "627"
+        },
+        {
+          "kind": "typedef",
+          "name": "category",
+          "qualified_name": "CGAL::Constant_property_map::category",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::read_write_property_map_tag",
+          "definition": "typedef boost::read_write_property_map_tag CGAL::Constant_property_map< KeyType, ValueType >::category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "628"
+        },
+        {
+          "kind": "variable",
+          "name": "default_value",
+          "qualified_name": "CGAL::Constant_property_map::default_value",
+          "brief": "",
+          "detailed": "",
+          "return_type": "ValueType",
+          "definition": "ValueType CGAL::Constant_property_map< KeyType, ValueType >::default_value",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "623"
+        },
+        {
+          "kind": "function",
+          "name": "Constant_property_map",
+          "qualified_name": "CGAL::Constant_property_map::Constant_property_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Constant_property_map< KeyType, ValueType >::Constant_property_map",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "630"
+        },
+        {
+          "kind": "function",
+          "name": "Constant_property_map",
+          "qualified_name": "CGAL::Constant_property_map::Constant_property_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Constant_property_map< KeyType, ValueType >::Constant_property_map",
+          "argsstring": "(const value_type &default_value)",
+          "params": [
+            {
+              "type": "const value_type &",
+              "name": "default_value",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "631"
+        },
+        {
+          "kind": "friend",
+          "name": "get",
+          "qualified_name": "CGAL::Constant_property_map::get",
+          "brief": "Free function that returns pm.default_value .",
+          "detailed": "",
+          "return_type": "reference",
+          "definition": "reference get",
+          "argsstring": "(const Constant_property_map &pm, const key_type &)",
+          "params": [
+            {
+              "type": "const Constant_property_map &",
+              "name": "pm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const key_type &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "friend",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "635"
+        },
+        {
+          "kind": "friend",
+          "name": "put",
+          "qualified_name": "CGAL::Constant_property_map::put",
+          "brief": "Free function that does nothing.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void put",
+          "argsstring": "(const Constant_property_map &, const key_type &, const value_type &)",
+          "params": [
+            {
+              "type": "const Constant_property_map &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const key_type &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const value_type &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "friend",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "639"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_constant__property__map.xml",
+      "file": "CGAL/property_map.h",
+      "line": "621"
+    },
+    "CGAL::Dereference_property_map": {
+      "kind": "struct",
+      "name": "CGAL::Dereference_property_map",
+      "brief": "Property map that converts a T* pointer (or in general an iterator over T elements) to the T object.",
+      "detailed": "Is model of LvaluePropertyMap",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "key_type",
+          "qualified_name": "CGAL::Dereference_property_map::key_type",
+          "brief": "typedef to 'T*'",
+          "detailed": "",
+          "return_type": "Iter",
+          "definition": "typedef Iter CGAL::Dereference_property_map< T, Iter >::key_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "296"
+        },
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::Dereference_property_map::value_type",
+          "brief": "typedef to 'T'",
+          "detailed": "",
+          "return_type": "std::remove_const_t< T >",
+          "definition": "typedef std::remove_const_t<T> CGAL::Dereference_property_map< T, Iter >::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "297"
+        },
+        {
+          "kind": "typedef",
+          "name": "reference",
+          "qualified_name": "CGAL::Dereference_property_map::reference",
+          "brief": "typedef to 'T&'",
+          "detailed": "",
+          "return_type": "std::iterator_traits< Iter >::reference",
+          "definition": "typedef std::iterator_traits<Iter>::reference CGAL::Dereference_property_map< T, Iter >::reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "298"
+        },
+        {
+          "kind": "typedef",
+          "name": "category",
+          "qualified_name": "CGAL::Dereference_property_map::category",
+          "brief": "boost::lvalue_property_map_tag",
+          "detailed": "",
+          "return_type": "boost::lvalue_property_map_tag",
+          "definition": "typedef boost::lvalue_property_map_tag CGAL::Dereference_property_map< T, Iter >::category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "299"
+        },
+        {
+          "kind": "function",
+          "name": "operator[]",
+          "qualified_name": "CGAL::Dereference_property_map::operator[]",
+          "brief": "Access a property map element.",
+          "detailed": "Iter Type convertible to key_type .",
+          "return_type": "reference",
+          "definition": "reference CGAL::Dereference_property_map< T, Iter >::operator[]",
+          "argsstring": "(const Iter_ &it) const",
+          "params": [
+            {
+              "type": "const Iter_ &",
+              "name": "it",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "305"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_dereference__property__map.xml",
+      "file": "CGAL/property_map.h",
+      "line": "293"
+    },
+    "CGAL::First_of_pair_property_map": {
+      "kind": "struct",
+      "name": "CGAL::First_of_pair_property_map",
+      "brief": "Property map that accesses the first item of a std::pair .",
+      "detailed": "Pair Instance of std::pair . Is model of LvaluePropertyMap CGAL::Second_of_pair_property_map <Pair>",
+      "members": [
+        {
+          "kind": "friend",
+          "name": "get",
+          "qualified_name": "CGAL::First_of_pair_property_map::get",
+          "brief": "",
+          "detailed": "",
+          "return_type": "reference",
+          "definition": "reference get",
+          "argsstring": "(const Self &, const key_type &k)",
+          "params": [
+            {
+              "type": "const Self &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const key_type &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Put/get free functions",
+          "file": "CGAL/property_map.h",
+          "line": "408"
+        },
+        {
+          "kind": "friend",
+          "name": "put",
+          "qualified_name": "CGAL::First_of_pair_property_map::put",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void put",
+          "argsstring": "(const Self &, key_type &k, const value_type &v)",
+          "params": [
+            {
+              "type": "const Self &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "key_type &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const value_type &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Put/get free functions",
+          "file": "CGAL/property_map.h",
+          "line": "409"
+        },
+        {
+          "kind": "typedef",
+          "name": "Self",
+          "qualified_name": "CGAL::First_of_pair_property_map::Self",
+          "brief": "",
+          "detailed": "",
+          "return_type": "First_of_pair_property_map < Pair >",
+          "definition": "typedef First_of_pair_property_map<Pair> CGAL::First_of_pair_property_map< Pair >::Self",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "395"
+        },
+        {
+          "kind": "typedef",
+          "name": "key_type",
+          "qualified_name": "CGAL::First_of_pair_property_map::key_type",
+          "brief": "typedef to Pair",
+          "detailed": "",
+          "return_type": "Pair",
+          "definition": "typedef Pair CGAL::First_of_pair_property_map< Pair >::key_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "397"
+        },
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::First_of_pair_property_map::value_type",
+          "brief": "typedef to Pair::first_type",
+          "detailed": "",
+          "return_type": "Pair::first_type",
+          "definition": "typedef Pair::first_type CGAL::First_of_pair_property_map< Pair >::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "398"
+        },
+        {
+          "kind": "typedef",
+          "name": "reference",
+          "qualified_name": "CGAL::First_of_pair_property_map::reference",
+          "brief": "typedef to const value_type &",
+          "detailed": "",
+          "return_type": "const value_type &",
+          "definition": "typedef const value_type& CGAL::First_of_pair_property_map< Pair >::reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "399"
+        },
+        {
+          "kind": "typedef",
+          "name": "category",
+          "qualified_name": "CGAL::First_of_pair_property_map::category",
+          "brief": "boost::lvalue_property_map_tag",
+          "detailed": "",
+          "return_type": "boost::lvalue_property_map_tag",
+          "definition": "typedef boost::lvalue_property_map_tag CGAL::First_of_pair_property_map< Pair >::category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "400"
+        },
+        {
+          "kind": "function",
+          "name": "operator[]",
+          "qualified_name": "CGAL::First_of_pair_property_map::operator[]",
+          "brief": "Access a property map element.",
+          "detailed": "pair a key whose first item is accessed",
+          "return_type": "const value_type &",
+          "definition": "const value_type & CGAL::First_of_pair_property_map< Pair >::operator[]",
+          "argsstring": "(const key_type &pair) const",
+          "params": [
+            {
+              "type": "const key_type &",
+              "name": "pair",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "404"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_first__of__pair__property__map.xml",
+      "file": "CGAL/property_map.h",
+      "line": "393"
+    },
+    "CGAL::Identity_property_map": {
+      "kind": "struct",
+      "name": "CGAL::Identity_property_map",
+      "brief": "A LvaluePropertyMap property map mapping a key to itself (by reference).",
+      "detailed": "It is mutable if T is not const and non-mutable otherwise. Is model of LvaluePropertyMap",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_identity__property__map.xml",
+      "file": "CGAL/property_map.h",
+      "line": "325"
+    },
+    "CGAL::Nth_of_tuple_property_map": {
+      "kind": "struct",
+      "name": "CGAL::Nth_of_tuple_property_map",
+      "brief": "Property map that accesses the Nth item of a boost::tuple or a std::tuple .",
+      "detailed": "N Index of the item to access. Tuple Instance of boost::tuple or std::tuple . Is model of LvaluePropertyMap",
+      "members": [
+        {
+          "kind": "friend",
+          "name": "get",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map::get",
+          "brief": "",
+          "detailed": "",
+          "return_type": "reference",
+          "definition": "reference get",
+          "argsstring": "(const Self &, const key_type &k)",
+          "params": [
+            {
+              "type": "const Self &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const key_type &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Put/get free functions",
+          "file": "CGAL/property_map.h",
+          "line": "491"
+        },
+        {
+          "kind": "friend",
+          "name": "put",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map::put",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void put",
+          "argsstring": "(const Self &, key_type &k, const value_type &v)",
+          "params": [
+            {
+              "type": "const Self &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "key_type &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const value_type &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Put/get free functions",
+          "file": "CGAL/property_map.h",
+          "line": "492"
+        },
+        {
+          "kind": "typedef",
+          "name": "Self",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map::Self",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Nth_of_tuple_property_map < N, Tuple >",
+          "definition": "typedef Nth_of_tuple_property_map<N,Tuple> CGAL::Nth_of_tuple_property_map< N, Tuple >::Self",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "474"
+        },
+        {
+          "kind": "typedef",
+          "name": "key_type",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map::key_type",
+          "brief": "typedef to Tuple",
+          "detailed": "",
+          "return_type": "Tuple",
+          "definition": "typedef Tuple CGAL::Nth_of_tuple_property_map< N, Tuple >::key_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "476"
+        },
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map::value_type",
+          "brief": "typedef to the N-th type of the tuple",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Nth_of_tuple_property_map< N, Tuple >::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "478"
+        },
+        {
+          "kind": "typedef",
+          "name": "reference",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map::reference",
+          "brief": "typedef to const value_type &",
+          "detailed": "",
+          "return_type": "const value_type &",
+          "definition": "typedef const value_type& CGAL::Nth_of_tuple_property_map< N, Tuple >::reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "482"
+        },
+        {
+          "kind": "typedef",
+          "name": "category",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map::category",
+          "brief": "boost::lvalue_property_map_tag",
+          "detailed": "",
+          "return_type": "boost::lvalue_property_map_tag",
+          "definition": "typedef boost::lvalue_property_map_tag CGAL::Nth_of_tuple_property_map< N, Tuple >::category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "483"
+        },
+        {
+          "kind": "function",
+          "name": "operator[]",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map::operator[]",
+          "brief": "Access a property map element.",
+          "detailed": "tuple a key whose Nth item is accessed",
+          "return_type": "const value_type &",
+          "definition": "const value_type & CGAL::Nth_of_tuple_property_map< N, Tuple >::operator[]",
+          "argsstring": "(const key_type &tuple) const",
+          "params": [
+            {
+              "type": "const key_type &",
+              "name": "tuple",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "487"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_nth__of__tuple__property__map.xml",
+      "file": "CGAL/property_map.h",
+      "line": "472"
+    },
+    "CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >": {
+      "kind": "struct",
+      "name": "CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Tuple",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::Tuple",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::tuple< T... >",
+          "definition": "typedef std::tuple<T...> CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::Tuple",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "499"
+        },
+        {
+          "kind": "typedef",
+          "name": "Self",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::Self",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Nth_of_tuple_property_map < N, Tuple >",
+          "definition": "typedef Nth_of_tuple_property_map<N,Tuple> CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::Self",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "500"
+        },
+        {
+          "kind": "typedef",
+          "name": "key_type",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::key_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Tuple",
+          "definition": "typedef Tuple CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::key_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "502"
+        },
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::value_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::tuple_element< N, Tuple >::type",
+          "definition": "typedef std::tuple_element<N,Tuple>::type CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "503"
+        },
+        {
+          "kind": "typedef",
+          "name": "reference",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::reference",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const value_type &",
+          "definition": "typedef const value_type& CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "504"
+        },
+        {
+          "kind": "typedef",
+          "name": "category",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::category",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::lvalue_property_map_tag",
+          "definition": "typedef boost::lvalue_property_map_tag CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "505"
+        },
+        {
+          "kind": "function",
+          "name": "operator[]",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::operator[]",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const value_type &",
+          "definition": "const value_type & CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::operator[]",
+          "argsstring": "(const key_type &tuple) const",
+          "params": [
+            {
+              "type": "const key_type &",
+              "name": "tuple",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "507"
+        },
+        {
+          "kind": "friend",
+          "name": "get",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::get",
+          "brief": "",
+          "detailed": "",
+          "return_type": "reference",
+          "definition": "reference get",
+          "argsstring": "(const Self &, const key_type &k)",
+          "params": [
+            {
+              "type": "const Self &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const key_type &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "friend",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "509"
+        },
+        {
+          "kind": "friend",
+          "name": "put",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::put",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void put",
+          "argsstring": "(const Self &, key_type &k, const value_type &v)",
+          "params": [
+            {
+              "type": "const Self &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "key_type &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const value_type &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "friend",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "510"
+        },
+        {
+          "kind": "function",
+          "name": "make_nth_of_tuple_property_map",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map< N, std::tuple< T... > >::make_nth_of_tuple_property_map",
+          "brief": "Free function to create a Nth_of_tuple_property_map property map.",
+          "detailed": "",
+          "return_type": "Nth_of_tuple_property_map < N, std::tuple< T... > >",
+          "definition": "Nth_of_tuple_property_map< N, std::tuple< T... > > make_nth_of_tuple_property_map",
+          "argsstring": "(std::tuple< T... >)",
+          "params": [
+            {
+              "type": "std::tuple< T... >",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "related",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "518"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_nth__of__tuple__property__map_3_01_n_00_01std_1_1tuple_3_01_t_8_8_8_01_4_01_4.xml",
+      "file": "CGAL/property_map.h",
+      "line": "497"
+    },
+    "CGAL::Pointer_property_map": {
+      "kind": "struct",
+      "name": "CGAL::Pointer_property_map",
+      "brief": "Utility class providing shortcuts to property maps based on raw pointers.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "type",
+          "qualified_name": "CGAL::Pointer_property_map::type",
+          "brief": "mutable LvaluePropertyMap",
+          "detailed": "",
+          "return_type": "boost::iterator_property_map< T *, boost::typed_identity_property_map< std::size_t >, T, T & >",
+          "definition": "typedef boost::iterator_property_map< T*, boost::typed_identity_property_map<std::size_t>, T, T&> CGAL::Pointer_property_map< T >::type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "555"
+        },
+        {
+          "kind": "typedef",
+          "name": "const_type",
+          "qualified_name": "CGAL::Pointer_property_map::const_type",
+          "brief": "non-mutable LvaluePropertyMap",
+          "detailed": "",
+          "return_type": "boost::iterator_property_map< const T *, boost::typed_identity_property_map< std::size_t >, T, const T & >",
+          "definition": "typedef boost::iterator_property_map< const T*, boost::typed_identity_property_map<std::size_t>, T, const T&> CGAL::Pointer_property_map< T >::const_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "559"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_pointer__property__map.xml",
+      "file": "CGAL/property_map.h",
+      "line": "551"
+    },
+    "CGAL::Property_map_to_unary_function": {
+      "kind": "struct",
+      "name": "CGAL::Property_map_to_unary_function",
+      "brief": "Struct that turns a property map into a unary functor with operator()(key k) calling the get function with k .",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "CGAL::Property_map_to_unary_function::argument_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::property_traits< PropertyMap >::key_type",
+          "definition": "typedef boost::property_traits<PropertyMap>::key_type CGAL::Property_map_to_unary_function< PropertyMap >::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "528"
+        },
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "CGAL::Property_map_to_unary_function::result_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::property_traits< PropertyMap >::reference",
+          "definition": "typedef boost::property_traits<PropertyMap>::reference CGAL::Property_map_to_unary_function< PropertyMap >::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "529"
+        },
+        {
+          "kind": "variable",
+          "name": "map",
+          "qualified_name": "CGAL::Property_map_to_unary_function::map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PropertyMap",
+          "definition": "PropertyMap CGAL::Property_map_to_unary_function< PropertyMap >::map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "531"
+        },
+        {
+          "kind": "function",
+          "name": "Property_map_to_unary_function",
+          "qualified_name": "CGAL::Property_map_to_unary_function::Property_map_to_unary_function",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Property_map_to_unary_function< PropertyMap >::Property_map_to_unary_function",
+          "argsstring": "(PropertyMap m=PropertyMap())",
+          "params": [
+            {
+              "type": "PropertyMap",
+              "name": "m",
+              "default": "PropertyMap()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "532"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Property_map_to_unary_function::operator()",
+          "brief": "",
+          "detailed": "",
+          "return_type": "decltype(auto)",
+          "definition": "decltype(auto) CGAL::Property_map_to_unary_function< PropertyMap >::operator()",
+          "argsstring": "(const KeyType &a) const",
+          "params": [
+            {
+              "type": "const KeyType &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "542"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_property__map__to__unary__function.xml",
+      "file": "CGAL/property_map.h",
+      "line": "527"
+    },
+    "CGAL::Random_access_property_map": {
+      "kind": "class",
+      "name": "CGAL::Random_access_property_map",
+      "brief": "A property map with std::size_t as key-type that can be used to access the i-th element in a container with random access.",
+      "detailed": "Is model of LvaluePropertyMap constness being than of Container .",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Iterator",
+          "qualified_name": "CGAL::Random_access_property_map::Iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::conditional_t< std::is_const< Container >::value, typename Container::const_iterator, typename Container::iterator >",
+          "definition": "using CGAL::Random_access_property_map< Container >::Iterator = std::conditional_t<std::is_const<Container>::value, typename Container::const_iterator, typename Container::iterator>",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "743"
+        },
+        {
+          "kind": "typedef",
+          "name": "key_type",
+          "qualified_name": "CGAL::Random_access_property_map::key_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "typedef std::size_t CGAL::Random_access_property_map< Container >::key_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "746"
+        },
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::Random_access_property_map::value_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::iterator_traits< Iterator >::value_type",
+          "definition": "typedef std::iterator_traits<Iterator>::value_type CGAL::Random_access_property_map< Container >::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "747"
+        },
+        {
+          "kind": "typedef",
+          "name": "reference",
+          "qualified_name": "CGAL::Random_access_property_map::reference",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::iterator_traits< Iterator >::reference",
+          "definition": "typedef std::iterator_traits<Iterator>::reference CGAL::Random_access_property_map< Container >::reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "748"
+        },
+        {
+          "kind": "typedef",
+          "name": "category",
+          "qualified_name": "CGAL::Random_access_property_map::category",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::lvalue_property_map_tag",
+          "definition": "typedef boost::lvalue_property_map_tag CGAL::Random_access_property_map< Container >::category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "749"
+        },
+        {
+          "kind": "variable",
+          "name": "m_container",
+          "qualified_name": "CGAL::Random_access_property_map::m_container",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Container &",
+          "definition": "Container& CGAL::Random_access_property_map< Container >::m_container",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "740"
+        },
+        {
+          "kind": "function",
+          "name": "Random_access_property_map",
+          "qualified_name": "CGAL::Random_access_property_map::Random_access_property_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Random_access_property_map< Container >::Random_access_property_map",
+          "argsstring": "(Container &container)",
+          "params": [
+            {
+              "type": "Container &",
+              "name": "container",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "752"
+        },
+        {
+          "kind": "function",
+          "name": "operator[]",
+          "qualified_name": "CGAL::Random_access_property_map::operator[]",
+          "brief": "",
+          "detailed": "",
+          "return_type": "decltype(auto)",
+          "definition": "decltype(auto) CGAL::Random_access_property_map< Container >::operator[]",
+          "argsstring": "(key_type index) const",
+          "params": [
+            {
+              "type": "key_type",
+              "name": "index",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "768"
+        },
+        {
+          "kind": "friend",
+          "name": "get",
+          "qualified_name": "CGAL::Random_access_property_map::get",
+          "brief": "",
+          "detailed": "",
+          "return_type": "reference",
+          "definition": "reference get",
+          "argsstring": "(Random_access_property_map map, key_type index)",
+          "params": [
+            {
+              "type": "Random_access_property_map",
+              "name": "map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "key_type",
+              "name": "index",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "friend",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "755"
+        },
+        {
+          "kind": "friend",
+          "name": "put",
+          "qualified_name": "CGAL::Random_access_property_map::put",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void put",
+          "argsstring": "(Random_access_property_map map, Key index, const value_type &value, std::enable_if_t<!std::is_const< Container >::value > *=0)",
+          "params": [
+            {
+              "type": "Random_access_property_map",
+              "name": "map",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Key",
+              "name": "index",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const value_type &",
+              "name": "value",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::enable_if_t<!std::is_const< Container >::value > *",
+              "name": "",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "friend",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "761"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_random__access__property__map.xml",
+      "file": "CGAL/property_map.h",
+      "line": "738"
+    },
+    "CGAL::Second_of_pair_property_map": {
+      "kind": "struct",
+      "name": "CGAL::Second_of_pair_property_map",
+      "brief": "Property map that accesses the second item of a std::pair .",
+      "detailed": "Pair Instance of std::pair . Is model of LvaluePropertyMap CGAL::First_of_pair_property_map <Pair>",
+      "members": [
+        {
+          "kind": "friend",
+          "name": "get",
+          "qualified_name": "CGAL::Second_of_pair_property_map::get",
+          "brief": "",
+          "detailed": "",
+          "return_type": "reference",
+          "definition": "reference get",
+          "argsstring": "(const Self &, const key_type &k)",
+          "params": [
+            {
+              "type": "const Self &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const key_type &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Put/get free functions",
+          "file": "CGAL/property_map.h",
+          "line": "448"
+        },
+        {
+          "kind": "friend",
+          "name": "put",
+          "qualified_name": "CGAL::Second_of_pair_property_map::put",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void put",
+          "argsstring": "(const Self &, key_type &k, const value_type &v)",
+          "params": [
+            {
+              "type": "const Self &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "key_type &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const value_type &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Put/get free functions",
+          "file": "CGAL/property_map.h",
+          "line": "449"
+        },
+        {
+          "kind": "typedef",
+          "name": "Self",
+          "qualified_name": "CGAL::Second_of_pair_property_map::Self",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Second_of_pair_property_map < Pair >",
+          "definition": "typedef Second_of_pair_property_map<Pair> CGAL::Second_of_pair_property_map< Pair >::Self",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "435"
+        },
+        {
+          "kind": "typedef",
+          "name": "key_type",
+          "qualified_name": "CGAL::Second_of_pair_property_map::key_type",
+          "brief": "typedef to Pair",
+          "detailed": "",
+          "return_type": "Pair",
+          "definition": "typedef Pair CGAL::Second_of_pair_property_map< Pair >::key_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "437"
+        },
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::Second_of_pair_property_map::value_type",
+          "brief": "typedef to Pair::second_type",
+          "detailed": "",
+          "return_type": "Pair::second_type",
+          "definition": "typedef Pair::second_type CGAL::Second_of_pair_property_map< Pair >::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "438"
+        },
+        {
+          "kind": "typedef",
+          "name": "reference",
+          "qualified_name": "CGAL::Second_of_pair_property_map::reference",
+          "brief": "typedef to const value_type &",
+          "detailed": "",
+          "return_type": "const value_type &",
+          "definition": "typedef const value_type& CGAL::Second_of_pair_property_map< Pair >::reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "439"
+        },
+        {
+          "kind": "typedef",
+          "name": "category",
+          "qualified_name": "CGAL::Second_of_pair_property_map::category",
+          "brief": "boost::lvalue_property_map_tag",
+          "detailed": "",
+          "return_type": "boost::lvalue_property_map_tag",
+          "definition": "typedef boost::lvalue_property_map_tag CGAL::Second_of_pair_property_map< Pair >::category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "440"
+        },
+        {
+          "kind": "function",
+          "name": "operator[]",
+          "qualified_name": "CGAL::Second_of_pair_property_map::operator[]",
+          "brief": "Access a property map element.",
+          "detailed": "pair a key whose second item is accessed",
+          "return_type": "const value_type &",
+          "definition": "const value_type & CGAL::Second_of_pair_property_map< Pair >::operator[]",
+          "argsstring": "(const key_type &pair) const",
+          "params": [
+            {
+              "type": "const key_type &",
+              "name": "pair",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "444"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_second__of__pair__property__map.xml",
+      "file": "CGAL/property_map.h",
+      "line": "433"
+    },
+    "boost": {
+      "kind": "namespace",
+      "name": "boost",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespaceboost.xml",
+      "file": "[generated]",
+      "line": "1"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Property_map.txt",
+      "line": "1"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgPropertyMapRef": {
+      "kind": "group",
+      "name": "PkgPropertyMapRef",
+      "brief": "",
+      "detailed": "Andreas Fabri and Laurent Saboret This package provides a framework for interfacing CGAL data structures with algorithms expecting Boost Property Maps. Introduced in: CGAL 3.5 BibTeX: cgal:fs-cbpm-26a License: LGPL",
+      "members": [
+        {
+          "kind": "function",
+          "name": "make_compose_property_map",
+          "qualified_name": "CGAL::Compose_property_map::make_compose_property_map",
+          "brief": "returns Compose_property_maps<KeyMap, ValueMap>(km,vm)",
+          "detailed": "",
+          "return_type": "Compose_property_map< KeyMap, ValueMap >",
+          "definition": "Compose_property_map< KeyMap, ValueMap > make_compose_property_map",
+          "argsstring": "(const KeyMap &km, const ValueMap &vm)",
+          "params": [
+            {
+              "type": "const KeyMap &",
+              "name": "km",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ValueMap &",
+              "name": "vm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "282"
+        },
+        {
+          "kind": "function",
+          "name": "make_dereference_property_map",
+          "qualified_name": "CGAL::Dereference_property_map::make_dereference_property_map",
+          "brief": "Free function to create a Dereference_property_map property map.",
+          "detailed": "",
+          "return_type": "Dereference_property_map< typename CGAL::value_type_traits< Iter >::type >",
+          "definition": "Dereference_property_map< typename CGAL::value_type_traits< Iter >::type > make_dereference_property_map",
+          "argsstring": "(Iter)",
+          "params": [
+            {
+              "type": "Iter",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "313"
+        },
+        {
+          "kind": "function",
+          "name": "make_identity_property_map",
+          "qualified_name": "CGAL::Identity_property_map::make_identity_property_map",
+          "brief": "Free function to create a Identity_property_map property map.",
+          "detailed": "",
+          "return_type": "Identity_property_map< T >",
+          "definition": "Identity_property_map< T > make_identity_property_map",
+          "argsstring": "(T)",
+          "params": [
+            {
+              "type": "T",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "380"
+        },
+        {
+          "kind": "function",
+          "name": "make_first_of_pair_property_map",
+          "qualified_name": "CGAL::First_of_pair_property_map::make_first_of_pair_property_map",
+          "brief": "Free function to create a First_of_pair_property_map property map.",
+          "detailed": "",
+          "return_type": "First_of_pair_property_map< Pair >",
+          "definition": "First_of_pair_property_map< Pair > make_first_of_pair_property_map",
+          "argsstring": "(Pair)",
+          "params": [
+            {
+              "type": "Pair",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "418"
+        },
+        {
+          "kind": "function",
+          "name": "make_second_of_pair_property_map",
+          "qualified_name": "CGAL::Second_of_pair_property_map::make_second_of_pair_property_map",
+          "brief": "Free function to create a Second_of_pair_property_map property map.",
+          "detailed": "",
+          "return_type": "Second_of_pair_property_map< Pair >",
+          "definition": "Second_of_pair_property_map< Pair > make_second_of_pair_property_map",
+          "argsstring": "(Pair)",
+          "params": [
+            {
+              "type": "Pair",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "458"
+        },
+        {
+          "kind": "function",
+          "name": "make_nth_of_tuple_property_map",
+          "qualified_name": "CGAL::Nth_of_tuple_property_map::make_nth_of_tuple_property_map",
+          "brief": "Free function to create a Nth_of_tuple_property_map property map.",
+          "detailed": "",
+          "return_type": "Nth_of_tuple_property_map< N, Tuple >",
+          "definition": "Nth_of_tuple_property_map< N, Tuple > make_nth_of_tuple_property_map",
+          "argsstring": "(Tuple)",
+          "params": [
+            {
+              "type": "Tuple",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "518"
+        },
+        {
+          "kind": "function",
+          "name": "make_property_map",
+          "qualified_name": "CGAL::Pointer_property_map::make_property_map",
+          "brief": "Starting from boost 1.55, the use of raw pointers as property maps has been deprecated.",
+          "detailed": "This function is a shortcut to the recommended replacement: boost::make_iterator_property_map(<pointer>, boost::typed_identity_property_map<std::size_t>()) Note that the property map is a mutable LvaluePropertyMap with std::size_t as key.",
+          "return_type": "Pointer_property_map< T >::type",
+          "definition": "Pointer_property_map< T >::type make_property_map",
+          "argsstring": "(T *pointer)",
+          "params": [
+            {
+              "type": "T *",
+              "name": "pointer",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "571"
+        },
+        {
+          "kind": "function",
+          "name": "make_property_map",
+          "qualified_name": "CGAL::Pointer_property_map::make_property_map",
+          "brief": "equivalent to make_property_map (&v[0]) Note that v must not be modified while using the property map created",
+          "detailed": "",
+          "return_type": "Pointer_property_map< T >::type",
+          "definition": "Pointer_property_map< T >::type make_property_map",
+          "argsstring": "(std::vector< T > &v)",
+          "params": [
+            {
+              "type": "std::vector< T > &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "583"
+        },
+        {
+          "kind": "function",
+          "name": "make_property_map",
+          "qualified_name": "CGAL::Pointer_property_map::make_property_map",
+          "brief": "Non-mutable version.",
+          "detailed": "",
+          "return_type": "Pointer_property_map< T >::const_type",
+          "definition": "Pointer_property_map< T >::const_type make_property_map",
+          "argsstring": "(const T *pointer)",
+          "params": [
+            {
+              "type": "const T *",
+              "name": "pointer",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "597"
+        },
+        {
+          "kind": "function",
+          "name": "make_property_map",
+          "qualified_name": "CGAL::Pointer_property_map::make_property_map",
+          "brief": "equivalent to make_property_map (&v[0]) Note that v must not be modified while using the property map created",
+          "detailed": "",
+          "return_type": "Pointer_property_map< T >::const_type",
+          "definition": "Pointer_property_map< T >::const_type make_property_map",
+          "argsstring": "(const std::vector< T > &v)",
+          "params": [
+            {
+              "type": "const std::vector< T > &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "609"
+        },
+        {
+          "kind": "function",
+          "name": "make_boolean_property_map",
+          "qualified_name": "CGAL::Boolean_property_map::make_boolean_property_map",
+          "brief": "returns Boolean_property_map <Set>(set_)",
+          "detailed": "",
+          "return_type": "Boolean_property_map< Set >",
+          "definition": "Boolean_property_map< Set > make_boolean_property_map",
+          "argsstring": "(Set &set_)",
+          "params": [
+            {
+              "type": "Set &",
+              "name": "set_",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "685"
+        },
+        {
+          "kind": "function",
+          "name": "make_cartesian_converter_property_map",
+          "qualified_name": "CGAL::Cartesian_converter_property_map::make_cartesian_converter_property_map",
+          "brief": "returns Cartesian_converter_property_map <GeomObject, Vpm>( vpm )",
+          "detailed": "",
+          "return_type": "Cartesian_converter_property_map< GeomObject, Vpm >",
+          "definition": "Cartesian_converter_property_map< GeomObject, Vpm > make_cartesian_converter_property_map",
+          "argsstring": "(Vpm vpm)",
+          "params": [
+            {
+              "type": "Vpm",
+              "name": "vpm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "728"
+        },
+        {
+          "kind": "function",
+          "name": "make_random_access_property_map",
+          "qualified_name": "CGAL::Random_access_property_map::make_random_access_property_map",
+          "brief": "returns Random_access_property_map <Container>(container)",
+          "detailed": "",
+          "return_type": "Random_access_property_map< Container >",
+          "definition": "Random_access_property_map< Container > make_random_access_property_map",
+          "argsstring": "(Container &container)",
+          "params": [
+            {
+              "type": "Container &",
+              "name": "container",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/property_map.h",
+          "line": "779"
+        }
+      ],
+      "xml_file": "group___pkg_property_map_ref.xml"
+    }
+  }
+}

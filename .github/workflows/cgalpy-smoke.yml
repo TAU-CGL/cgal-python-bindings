@@ -1,0 +1,1612 @@
+name: CGALPY smoke
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - gsoc2026
+  push:
+    branches:
+      - gsoc2026
+
+jobs:
+  kernel-linux:
+    name: ${{ matrix.label }} kernel smoke on Linux (${{ matrix.compiler_label }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - config: epec
+            label: EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/epec.cmake
+            module_name: CGALPY_kerEpecInt
+            package_name: CGALPY_kerEpecInt
+            wheel_pattern: cgalpy_kerepecint-*.whl
+            extra_submodule: ""
+          - config: epec_gcc
+            label: EPEC
+            compiler_label: GCC
+            cc: gcc
+            cxx: g++
+            cmake_config: cmake/tests/epec.cmake
+            module_name: CGALPY_kerEpecInt
+            package_name: CGALPY_kerEpecInt
+            wheel_pattern: cgalpy_kerepecint-*.whl
+            extra_submodule: ""
+          - config: epic
+            label: EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/epic.cmake
+            module_name: CGALPY_kerEpic
+            package_name: CGALPY_kerEpic
+            wheel_pattern: cgalpy_kerepic-*.whl
+            extra_submodule: ""
+          - config: aos2_seg_epec
+            label: AOS2 segment EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/aos2_seg_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2SegPl
+            package_name: CGALPY_kerEpecInt_aos2SegPl
+            wheel_pattern: cgalpy_kerepecint_aos2segpl-*.whl
+            extra_submodule: Aos2
+          - config: aos2_seg_bvr_epec
+            label: AOS2 segment BVR EPEC visual
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/aos2_seg_bvr_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2SegPl_bvAos2
+            package_name: CGALPY_kerEpecInt_aos2SegPl_bvAos2
+            wheel_pattern: cgalpy_kerepecint_aos2segpl_bvaos2-*.whl
+            extra_submodule: Bvr
+          - config: bso2_seg_epec
+            label: BSO2 segment EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/bso2_seg_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+            package_name: CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+            wheel_pattern: cgalpy_kerepecint_aos2seg_bso2_pol2-*.whl
+            extra_submodule: Bso2
+          - config: bso2_cs_epec
+            label: BSO2 circle-segment EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/bso2_cs_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2Cs_bso2
+            package_name: CGALPY_kerEpecInt_aos2Cs_bso2
+            wheel_pattern: cgalpy_kerepecint_aos2cs_bso2-*.whl
+            extra_submodule: Bso2
+          - config: bso2_conic_epec
+            label: BSO2 conic EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/bso2_conic_epec.cmake
+            module_name: CGALPY_kerEpec_aos2Conic_bso2
+            package_name: CGALPY_kerEpec_aos2Conic_bso2
+            wheel_pattern: cgalpy_kerepec_aos2conic_bso2-*.whl
+            extra_submodule: Bso2
+          - config: bso2_bezier_ccr
+            label: BSO2 Bezier CCR
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/bso2_bezier_ccr.cmake
+            module_name: CGALPY_kerCcrInt_aos2Bez_bso2
+            package_name: CGALPY_kerCcrInt_aos2Bez_bso2
+            wheel_pattern: cgalpy_kerccrint_aos2bez_bso2-*.whl
+            extra_submodule: Bso2
+          - config: ss2_seg_epec
+            label: SS2 segment EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/ss2_seg_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2SegPl_ss2
+            package_name: CGALPY_kerEpecInt_aos2SegPl_ss2
+            wheel_pattern: cgalpy_kerepecint_aos2segpl_ss2-*.whl
+            extra_submodule: Ss2
+          - config: ms2_seg_epec
+            label: MS2 segment EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/ms2_seg_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2SegPl_bso2_ms2_pol2_pp
+            package_name: CGALPY_kerEpecInt_aos2SegPl_bso2_ms2_pol2_pp
+            wheel_pattern: cgalpy_kerepecint_aos2segpl_bso2_ms2_pol2_pp-*.whl
+            extra_submodule: Ms2
+          - config: env2_seg_cd_epec
+            label: ENV2 segment-data EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/env2_seg_cd_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2SegCdPl_env2
+            package_name: CGALPY_kerEpecInt_aos2SegCdPl_env2
+            wheel_pattern: cgalpy_kerepecint_aos2segcdpl_env2-*.whl
+            extra_submodule: Env2
+          - config: env2_linear_cd_epec
+            label: ENV2 linear-data EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/env2_linear_cd_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2LinearCdPl_env2
+            package_name: CGALPY_kerEpecInt_aos2LinearCdPl_env2
+            wheel_pattern: cgalpy_kerepecint_aos2linearcdpl_env2-*.whl
+            extra_submodule: Env2
+          - config: env3_sphere_ccr
+            label: ENV3 sphere CCR
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/env3_sphere_ccr.cmake
+            module_name: CGALPY_kerCcrInt_aos2ConicPl_env3Sphere
+            package_name: CGALPY_kerCcrInt_aos2ConicPl_env3Sphere
+            wheel_pattern: cgalpy_kerccrint_aos2conicpl_env3sphere-*.whl
+            extra_submodule: Env3
+          - config: env3_tri_sd_epec
+            label: ENV3 triangle surface-data EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/env3_tri_sd_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2SegPl_env3TriSd
+            package_name: CGALPY_kerEpecInt_aos2SegPl_env3TriSd
+            wheel_pattern: cgalpy_kerepecint_aos2segpl_env3trisd-*.whl
+            extra_submodule: Env3
+          - config: vis2_rg_epec
+            label: VIS2 regularized EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/vis2_rg_epec.cmake
+            module_name: CGALPY_kerEpec_aos2SegPl_vis2Rg
+            package_name: CGALPY_kerEpec_aos2SegPl_vis2Rg
+            wheel_pattern: cgalpy_kerepec_aos2segpl_vis2rg-*.whl
+            extra_submodule: Vis2
+          - config: ss_2_cdlg
+            label: SS 2D Cartesian dynamic linear-search
+            compiler_label: Clang
+            os: ubuntu-24.04
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/ss_2_cdlg.cmake
+            module_name: CGALPY_kerdCdlgDyn_ss2
+            package_name: CGALPY_kerdCdlgDyn_ss2
+            wheel_pattern: cgalpy_kerdcdlgdyn_ss2-*.whl
+            extra_submodule: Ss
+          - config: carl
+            label: ST Cartesian dynamic
+            compiler_label: Clang
+            os: ubuntu-24.04
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/carl.cmake
+            module_name: CGALPY_kerEpicInt_kerdEpicdDyn_ch2_ch3Sm_stSeqHsmed_tri2DelNciWiWi_tri3DelViCiComSeq_tridDelVdFcdDefDyn_gog
+            package_name: CGALPY_kerEpicInt_kerdEpicdDyn_ch2_ch3Sm_stSeqHsmed_tri2DelNciWiWi_tri3DelViCiComSeq_tridDelVdFcdDefDyn_gog
+            wheel_pattern: cgalpy_kerepicint_kerdepicddyn_ch2_ch3sm_stseqhsmed_tri2delnciwiwi_tri3delvicicomseq_triddelvdfcddefdyn_gog-*.whl
+            extra_submodule: St
+          - config: sn2_epic
+            label: SN2 EPIC
+            compiler_label: Clang
+            os: ubuntu-24.04
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/sn2_epic.cmake
+            module_name: CGALPY_kerEpic_pol2_sn2
+            package_name: CGALPY_kerEpic_pol2_sn2
+            wheel_pattern: cgalpy_kerepic_pol2_sn2-*.whl
+            extra_submodule: Sn2
+          - config: ch2_epec
+            label: CH2 EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/ch2_epec.cmake
+            module_name: CGALPY_kerEpecInt_ch2
+            package_name: CGALPY_kerEpecInt_ch2
+            wheel_pattern: cgalpy_kerepecint_ch2-*.whl
+            extra_submodule: Ch2
+          - config: sm_ch3_pmp_epec
+            label: SM CH3 PMP EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/sm_ch3_pmp_epec.cmake
+            module_name: CGALPY_kerEpecInt_bgl_ch3Sm_sm_pmpSmNcOriIo
+            package_name: CGALPY_kerEpecInt_bgl_ch3Sm_sm_pmpSmNcOriIo
+            wheel_pattern: cgalpy_kerepecint_bgl_ch3sm_sm_pmpsmncoriio-*.whl
+            extra_submodule: Ch3
+          - config: sm_smsk_epic
+            label: SM SMSK EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/sm_smsk_epic.cmake
+            module_name: CGALPY_kerEpic_bgl_sm_pmpSmIo_smskSm
+            package_name: CGALPY_kerEpic_bgl_sm_pmpSmIo_smskSm
+            wheel_pattern: cgalpy_kerepic_bgl_sm_pmpsmio_smsksm-*.whl
+            extra_submodule: Smsk
+          - config: sm_all9_epic
+            label: SM all-nine EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/sm_all9_epic.cmake
+            module_name: CGALPY_kerEpic_bgl_sm_pmpSm_smaSm_smdecSm_smdefSm_smpSm_smshSm_smtSm_smseSm_smsiSm_smskSm
+            package_name: CGALPY_kerEpic_bgl_sm_pmpSm_smaSm_smdecSm_smdefSm_smpSm_smshSm_smtSm_smseSm_smsiSm_smskSm
+            wheel_pattern: cgalpy_kerepic_bgl_sm_pmpsm_smasm_smdecsm_smdefsm_smpsm_smshsm_smtsm_smsesm_smsism_smsksm-*.whl
+            extra_submodule: Sm
+          - config: tri2_ct_wi_epic
+            label: TRI2 constrained-Delaunay EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/tri2_ct_wi_epic.cmake
+            module_name: CGALPY_kerEpic_tri2CdelNciWiWi
+            package_name: CGALPY_kerEpic_tri2CdelNciWiWi
+            wheel_pattern: cgalpy_kerepic_tri2cdelnciwiwi-*.whl
+            extra_submodule: Tri2
+          - config: tri3_del_epic
+            label: TRI3 Delaunay EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/tri3_del_epic.cmake
+            module_name: CGALPY_kerEpic_tri3DelComSeq
+            package_name: CGALPY_kerEpic_tri3DelComSeq
+            wheel_pattern: cgalpy_kerepic_tri3delcomseq-*.whl
+            extra_submodule: Tri3
+          - config: as3_del_fast_epic
+            label: AS3 fast-location Delaunay EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/as3_del_fast_epic.cmake
+            module_name: CGALPY_kerEpic_as3Plain_tri3DelFasSeq
+            package_name: CGALPY_kerEpic_as3Plain_tri3DelFasSeq
+            wheel_pattern: cgalpy_kerepic_as3plain_tri3delfasseq-*.whl
+            extra_submodule: As3
+          - config: trid_del_epicd_4
+            label: TRID Delaunay EPICD static-4
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/trid_del_epicd_4.cmake
+            module_name: CGALPY_kerEpic_kerdEpicd4_tridDelDef4
+            package_name: CGALPY_kerEpic_kerdEpicd4_tridDelDef4
+            wheel_pattern: cgalpy_kerepic_kerdepicd4_triddeldef4-*.whl
+            extra_submodule: Trid
+          - config: trid_del_epicd_7
+            label: TRID Delaunay EPICD static-7
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/trid_del_epicd_7.cmake
+            module_name: CGALPY_kerEpic_kerdEpicd7_tridDelDef7
+            package_name: CGALPY_kerEpic_kerdEpicd7_tridDelDef7
+            wheel_pattern: cgalpy_kerepic_kerdepicd7_triddeldef7-*.whl
+            extra_submodule: Trid
+          - config: sm_pmp_epic
+            label: SM PMP EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/sm_pmp_epic.cmake
+            module_name: CGALPY_kerEpic_bgl_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOriIo
+            package_name: CGALPY_kerEpic_bgl_sm_pmpSmCrCcCorCccDisFdGmGrHfIntLocMesNcOriIo
+            wheel_pattern: cgalpy_kerepic_bgl_sm_pmpsmcrcccorcccdisfdgmgrhfintlocmesncoriio-*.whl
+            extra_submodule: Sm
+          - config: pol2_bso2_seg_epec
+            label: POL2 via BSO2 segment EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/bso2_seg_epec.cmake
+            module_name: CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+            package_name: CGALPY_kerEpecInt_aos2Seg_bso2_pol2
+            wheel_pattern: cgalpy_kerepecint_aos2seg_bso2_pol2-*.whl
+            extra_submodule: Pol2
+          - config: pol3_bso2_epec
+            label: POL3 BSO2 EPEC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/pol3_bso2_epec.cmake
+            module_name: CGALPY_kerEpecInt_bgl_pol3Wn_pol2
+            package_name: CGALPY_kerEpecInt_bgl_pol3Wn_pol2
+            wheel_pattern: cgalpy_kerepecint_bgl_pol3wn_pol2-*.whl
+            extra_submodule: Pol3
+          - config: pol3_pmp_epic
+            label: PMP POL3 EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/pol3_pmp_epic.cmake
+            module_name: CGALPY_kerEpic_bgl_pol3Ker_pmpPol3CrCcCorCccDisFdGmGrHfIntLocMesNcOriIo
+            package_name: CGALPY_kerEpic_bgl_pol3Ker_pmpPol3CrCcCorCccDisFdGmGrHfIntLocMesNcOriIo
+            wheel_pattern: cgalpy_kerepic_bgl_pol3ker_pmppol3crcccorcccdisfdgmgrhfintlocmesncoriio-*.whl
+            extra_submodule: Pmp
+          - config: psp_epic
+            label: PSP EPIC
+            compiler_label: Clang
+            cc: clang
+            cxx: clang++
+            cmake_config: cmake/tests/psp_epic.cmake
+            module_name: CGALPY_kerEpic_psp
+            package_name: CGALPY_kerEpic_psp
+            wheel_pattern: cgalpy_kerepic_psp-*.whl
+            extra_submodule: Psp
+
+    env:
+      CGAL_BRANCH: gsoc2026-python_bindings
+      CGAL_REPOSITORY: https://github.com/CGAL/cgal-public-dev.git
+      BUILD_DIR: ${{ github.workspace }}/build/cgalpy/${{ matrix.config }}
+      CGAL_BUILD_DIR: ${{ github.workspace }}/build/cgal/dev_release
+
+    steps:
+      - name: Check out cgal-python-bindings
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          set -euxo pipefail
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            git \
+            ninja-build \
+            clang \
+            libboost-dev \
+            libeigen3-dev \
+            libgmp-dev \
+            libmpfr-dev \
+            libmetis-dev
+
+          if [ "${{ matrix.config }}" = "aos2_seg_bvr_epec" ]; then
+            sudo apt-get install -y \
+              qt6-base-dev \
+              libqt6opengl6-dev \
+              libqt6svg6-dev \
+              libgl1-mesa-dev
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python build dependencies
+        run: |
+          set -euxo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install "nanobind>=2.3.0,<=2.10.2" build
+
+      - name: Select compiler
+        run: |
+          set -euxo pipefail
+          echo "CC=${{ matrix.cc }}" >> "${GITHUB_ENV}"
+          echo "CXX=${{ matrix.cxx }}" >> "${GITHUB_ENV}"
+          "${{ matrix.cxx }}" --version
+
+      - name: Check out CGAL development branch
+        run: |
+          set -euxo pipefail
+          git clone --depth 1 --branch "${CGAL_BRANCH}" "${CGAL_REPOSITORY}" "${{ github.workspace }}/cgal"
+
+      - name: Configure CGAL
+        run: |
+          set -euxo pipefail
+          cmake \
+            -S "${{ github.workspace }}/cgal" \
+            -B "${CGAL_BUILD_DIR}" \
+            -G Ninja \
+            -DCMAKE_C_COMPILER="${{ matrix.cc }}" \
+            -DCMAKE_CXX_COMPILER="${{ matrix.cxx }}" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCGAL_WITH_tests=OFF \
+            -DCGAL_WITH_examples=OFF \
+            -DCGAL_WITH_demos=OFF \
+            -DCGAL_WITH_benchmarks=OFF
+          grep -E '^CGAL_FULL_VERSION:INTERNAL=' "${CGAL_BUILD_DIR}/CMakeCache.txt" || true
+
+      - name: Build CGAL configure targets
+        run: |
+          set -euxo pipefail
+          cmake --build "${CGAL_BUILD_DIR}" --parallel 2
+
+      - name: Locate nanobind CMake package
+        id: nanobind
+        run: |
+          set -euxo pipefail
+          NANOBIND_DIR="$(python - <<'PY'
+          import pathlib
+          import nanobind
+          print(pathlib.Path(nanobind.__file__).resolve().parent / "cmake")
+          PY
+          )"
+          test -f "${NANOBIND_DIR}/nanobind-config.cmake"
+          echo "dir=${NANOBIND_DIR}" >> "${GITHUB_OUTPUT}"
+
+      - name: Configure cgal-python-bindings kernel smoke
+        run: |
+          set -euxo pipefail
+          visual_flag=OFF
+          if [ "${{ matrix.config }}" = "aos2_seg_bvr_epec" ]; then
+            visual_flag=ON
+          fi
+
+          cmake \
+            -S "${{ github.workspace }}" \
+            -B "${BUILD_DIR}" \
+            -G Ninja \
+            -DCMAKE_C_COMPILER="${{ matrix.cc }}" \
+            -DCMAKE_CXX_COMPILER="${{ matrix.cxx }}" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCGALPY_WITH_VISUAL:BOOL="${visual_flag}" \
+            -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF \
+            -DPython_EXECUTABLE="$(command -v python)" \
+            -Dnanobind_DIR="${{ steps.nanobind.outputs.dir }}" \
+            -DCGAL_DIR="${CGAL_BUILD_DIR}" \
+            -C "${{ github.workspace }}/${{ matrix.cmake_config }}"
+
+      - name: Build extension, stubs, and package
+        run: |
+          set -euxo pipefail
+          cmake --build "${BUILD_DIR}" --target BUILD --parallel 2
+
+      - name: Import from build tree
+        run: |
+          set -euxo pipefail
+          PYTHONPATH="${BUILD_DIR}/src/libs" python - <<'PY'
+          import importlib
+          import os
+
+          module_name = os.environ["MODULE_NAME"]
+
+          pkg = importlib.import_module("cgalpy")
+          print("cgalpy:", pkg.__file__)
+
+          mod = importlib.import_module(f"cgalpy.{module_name}")
+          print("extension:", mod.__file__)
+
+          extra_submodule = os.environ.get("EXTRA_SUBMODULE", "")
+
+          if extra_submodule == "Ss":
+              kerd = getattr(mod, "Kerd", None)
+              assert kerd is not None
+              assert hasattr(kerd, "Point_d")
+          else:
+              ker = getattr(mod, "Ker", None)
+              assert ker is not None
+              assert hasattr(ker, "Point_2")
+              assert hasattr(ker, "area")
+
+          if extra_submodule:
+              submodule = getattr(mod, extra_submodule, None)
+              assert submodule is not None
+              if extra_submodule == "Aos2":
+                  assert hasattr(submodule, "Arrangement_2")
+              elif extra_submodule == "Bvr":
+                  assert hasattr(submodule, "Graphics_scene")
+                  assert hasattr(submodule, "Graphics_scene_options")
+                  assert hasattr(submodule, "add_to_graphics_scene")
+                  assert hasattr(submodule, "draw_graphics_scene")
+              elif extra_submodule == "Bso2":
+                  assert hasattr(submodule, "join")
+                  assert (
+                      hasattr(submodule, "Polygon_set_2")
+                      or hasattr(submodule, "General_polygon_set_2")
+                  )
+              elif extra_submodule == "Ss2":
+                  assert hasattr(submodule, "compute_intersection_points")
+                  assert hasattr(submodule, "do_intersect")
+              elif extra_submodule == "Ms2":
+                  assert hasattr(submodule, "minkowski_sum_2")
+                  assert hasattr(submodule, "offset_polygon_2")
+              elif extra_submodule == "Tri2":
+                  assert hasattr(submodule, "Triangulation_2")
+                  assert hasattr(submodule, "Triangulation_data_structure_2")
+              elif extra_submodule == "Tri3":
+                  assert hasattr(submodule, "Delaunay_triangulation_3")
+                  assert hasattr(submodule, "Triangulation_data_structure_3")
+              elif extra_submodule == "Trid":
+                  assert hasattr(submodule, "Delaunay_triangulation")
+                  assert hasattr(submodule, "Triangulation_ds")
+              elif extra_submodule == "Sm":
+                  assert hasattr(submodule, "Surface_mesh_3")
+                  assert hasattr(submodule, "add_vertex")
+              elif extra_submodule == "Pol2":
+                  assert hasattr(submodule, "Polygon_2")
+                  assert hasattr(submodule, "Polygon_with_holes_2")
+              elif extra_submodule == "Pol3":
+                  assert hasattr(submodule, "Polyhedron_3")
+                  assert hasattr(submodule, "make_tetrahedron")
+              elif extra_submodule == "Pmp":
+                  assert hasattr(submodule, "area")
+                  assert hasattr(submodule, "triangulate_faces")
+              elif extra_submodule == "Psp":
+                  assert hasattr(submodule, "compute_average_spacing")
+                  assert hasattr(submodule, "compute_average_spacing_with_normals")
+                  assert hasattr(submodule, "bilateral_smooth_point_set")
+              elif extra_submodule == "Ss":
+                  assert hasattr(submodule, "Kd_tree")
+                  assert hasattr(submodule, "K_neighbor_search")
+              elif extra_submodule == "St":
+                  assert hasattr(submodule, "spatial_sort")
+              elif extra_submodule == "Sn2":
+                  assert hasattr(submodule, "create_offset_polygons_2")
+              elif extra_submodule == "Smsk":
+                  assert hasattr(submodule, "Mean_curvature_flow_skeletonization")
+                  assert hasattr(submodule, "extract_mean_curvature_flow_skeleton")
+
+          print("build-tree import smoke: OK")
+          PY
+        env:
+          MODULE_NAME: ${{ matrix.module_name }}
+          EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
+
+      - name: Run PSP NumPy smoke
+        if: matrix.config == 'psp_epic'
+        run: |
+          set -euxo pipefail
+          python -m pip install numpy
+          PYTHONPATH="${BUILD_DIR}/src/libs" python - <<'PY'
+          import importlib
+          import os
+          import tempfile
+          from pathlib import Path
+
+          import numpy as np
+
+          module_name = os.environ["MODULE_NAME"]
+          mod = importlib.import_module(f"cgalpy.{module_name}")
+          Psp = mod.Psp
+
+          points = np.array([
+              [0.0, 0.0, 0.0],
+              [1.0, 0.0, 0.0],
+              [0.0, 1.0, 0.0],
+              [0.0, 0.0, 1.0],
+              [1.0, 1.0, 0.0],
+              [1.0, 0.0, 1.0],
+          ], dtype=np.float64)
+          normals = np.array([
+              [0.0, 0.0, 1.0],
+              [0.0, 0.0, 1.0],
+              [0.0, 0.0, 1.0],
+              [0.0, 1.0, 0.0],
+              [1.0, 0.0, 0.0],
+              [1.0, 1.0, 1.0],
+          ], dtype=np.float64)
+
+          queries = points[:3].copy()
+
+          assert isinstance(Psp.compute_average_spacing(points, 2), float)
+          assert isinstance(Psp.estimate_global_k_neighbor_scale(points), int)
+          assert isinstance(Psp.estimate_global_range_scale(points), float)
+          assert isinstance(Psp.estimate_local_k_neighbor_scales(points, queries), list)
+          assert isinstance(Psp.estimate_local_range_scales(points, queries), list)
+          assert isinstance(Psp.grid_simplify_point_set(points, 0.75), tuple)
+          assert isinstance(Psp.random_simplify_point_set(points, 25.0), tuple)
+          assert isinstance(Psp.hierarchy_simplify_point_set(points, {"size": 3}), tuple)
+          assert isinstance(Psp.jet_smooth_point_set(points, 3, {"degree_fitting": 1, "degree_monge": 1}), list)
+          assert isinstance(Psp.remove_outliers(points, 2, {"threshold_percent": 25.0}), tuple)
+          assert isinstance(Psp.compute_vcm(points, 1.0, 0.5), list)
+          assert isinstance(Psp.wlop_simplify_and_regularize_point_set(
+              points, {"select_percentage": 50.0, "number_of_iterations": 2, "neighbor_radius": 2.0}), list)
+
+          for bad_points in (points.astype(np.float32), points.reshape(3, 6)):
+              try:
+                  Psp.compute_average_spacing(bad_points, 2)
+              except RuntimeError:
+                  pass
+              else:
+                  raise AssertionError("invalid NumPy point array accepted")
+
+          assert isinstance(Psp.compute_average_spacing_with_normals(points, normals, 2), float)
+          assert isinstance(Psp.grid_simplify_point_set_with_normals(points, normals, 0.75), tuple)
+          assert isinstance(Psp.compute_vcm_with_normals(points, normals, 1.0, 0.5), list)
+          assert isinstance(Psp.vcm_estimate_normals(points, normals, 1.0, 0.5), list)
+          assert isinstance(Psp.vcm_estimate_normals_neighbors(points, normals, 1.0, 2), list)
+          assert isinstance(Psp.bilateral_smooth_point_set(points, normals, 2), tuple)
+          assert isinstance(Psp.edge_aware_upsample_point_set(points, normals, {"number_of_output_points": 8}), list)
+
+          with tempfile.TemporaryDirectory() as td:
+              points_out = Path(td) / "points.xyz"
+              assert Psp.write_points(str(points_out), points)
+              assert points_out.exists()
+              assert points_out.stat().st_size > 0
+
+              normals_out = Path(td) / "points_with_normals.xyz"
+              assert Psp.write_points_with_normals(str(normals_out), points, normals)
+              assert normals_out.exists()
+              assert normals_out.stat().st_size > 0
+
+          try:
+              Psp.vcm_estimate_normals(points, normals[:-1], 1.0, 0.5)
+          except RuntimeError as exc:
+              assert "same number of rows" in str(exc)
+          else:
+              raise AssertionError("mismatched point/normal rows were accepted")
+
+          print("PSP point-only + point-normal NumPy smoke: OK")
+          PY
+        env:
+          MODULE_NAME: ${{ matrix.module_name }}
+
+      - name: Run PMP NumPy soup smoke
+        if: matrix.config == 'sm_pmp_epic'
+        run: |
+          set -euxo pipefail
+          python -m pip install numpy
+          PYTHONPATH="${BUILD_DIR}/src/libs" python - <<'PY'
+          import importlib
+          import os
+
+          import numpy as np
+
+          module_name = os.environ["MODULE_NAME"]
+          mod = importlib.import_module(f"cgalpy.{module_name}")
+          Pmp = mod.Pmp
+
+          points = np.array([
+              [0.0, 0.0, 0.0],
+              [1.0, 0.0, 0.0],
+              [0.0, 1.0, 0.0],
+              [0.0, 0.0, 1.0],
+          ], dtype=np.float64)
+
+          triangles_i64 = np.array([
+              [0, 1, 2],
+              [0, 1, 3],
+              [0, 2, 3],
+              [1, 2, 3],
+          ], dtype=np.int64)
+          triangles_u64 = np.array([
+              [0, 1, 2],
+              [0, 1, 3],
+              [0, 2, 3],
+              [1, 2, 3],
+          ], dtype=np.uint64)
+          quad_i64 = np.array([[0, 1, 2, 3]], dtype=np.int64)
+
+          duplicate_points = np.array([
+              [0.0, 0.0, 0.0],
+              [0.0, 0.0, 0.0],
+              [1.0, 0.0, 0.0],
+              [0.0, 1.0, 0.0],
+          ], dtype=np.float64)
+          duplicate_triangles = np.array([
+              [0, 2, 3],
+              [1, 2, 3],
+          ], dtype=np.int64)
+
+          assert isinstance(Pmp.is_polygon_soup_a_polygon_mesh(triangles_i64), bool)
+          assert isinstance(Pmp.merge_duplicate_points_in_polygon_soup(duplicate_points, duplicate_triangles), tuple)
+          assert isinstance(Pmp.merge_duplicate_polygons_in_polygon_soup(points, triangles_i64), tuple)
+          assert isinstance(Pmp.remove_isolated_points_in_polygon_soup(points, triangles_i64), tuple)
+          assert isinstance(Pmp.repair_polygon_soup(points, triangles_i64), tuple)
+          assert isinstance(Pmp.orient_polygon_soup(points, triangles_i64), tuple)
+          assert isinstance(Pmp.duplicate_non_manifold_edges_in_polygon_soup(points, triangles_i64), tuple)
+          assert isinstance(Pmp.sample_triangle_soup(points, triangles_i64), list)
+          assert isinstance(Pmp.sample_triangle_soup(points, triangles_u64), list)
+          assert isinstance(Pmp.triangulate_polygons(points, quad_i64), tuple)
+          assert isinstance(Pmp.autorefine_triangle_soup(points, triangles_i64), tuple)
+          mesh = Pmp.polygon_soup_to_polygon_mesh(points, triangles_i64)[0]
+          assert isinstance(Pmp.polygon_soup_to_polygon_mesh(points, triangles_i64), tuple)
+          assert isinstance(Pmp.polygon_soup_to_polygon_mesh(points, triangles_u64), tuple)
+          assert isinstance(Pmp.orient_triangle_soup_with_reference_triangle_mesh(mesh, points, triangles_i64), tuple)
+          assert isinstance(Pmp.orient_triangle_soup_with_reference_triangle_mesh(mesh, points, triangles_u64), tuple)
+          assert isinstance(Pmp.orient_triangle_soup_with_reference_triangle_soup(
+              points, triangles_i64, points, triangles_i64), tuple)
+          assert isinstance(Pmp.orient_triangle_soup_with_reference_triangle_soup(
+              points, triangles_u64, points, triangles_u64), tuple)
+
+          envelope_i64 = Pmp.Polyhedral_envelope(points, triangles_i64, 0.1)
+          envelope_u64 = Pmp.Polyhedral_envelope(points, triangles_u64, 0.1)
+          assert not envelope_i64.is_empty()
+          assert not envelope_u64.is_empty()
+
+          for bad_points in (points.astype(np.float32), points.reshape(2, 6)):
+              try:
+                  Pmp.Polyhedral_envelope(bad_points, triangles_i64, 0.1)
+              except RuntimeError:
+                  pass
+              else:
+                  raise AssertionError("invalid NumPy point array accepted")
+
+          assert isinstance(Pmp.does_triangle_soup_self_intersect(points, triangles_i64), bool)
+          assert isinstance(Pmp.does_triangle_soup_self_intersect(points, triangles_u64), bool)
+          assert isinstance(Pmp.triangle_soup_self_intersections(points, triangles_i64), list)
+
+          print("PMP NumPy soup smoke: OK")
+          PY
+        env:
+          MODULE_NAME: ${{ matrix.module_name }}
+
+      - name: Compare curated examples with CGAL C++
+        if: matrix.config == 'epec' || matrix.config == 'aos2_seg_epec' || matrix.config == 'aos2_seg_bvr_epec' || matrix.config == 'bso2_seg_epec' || matrix.config == 'bso2_cs_epec' || matrix.config == 'bso2_conic_epec' || matrix.config == 'bso2_bezier_ccr' || matrix.config == 'pol2_bso2_seg_epec' || matrix.config == 'ms2_seg_epec' || matrix.config == 'ss2_seg_epec' || matrix.config == 'env2_seg_cd_epec' || matrix.config == 'env2_linear_cd_epec' || matrix.config == 'env3_sphere_ccr' || matrix.config == 'env3_tri_sd_epec' || matrix.config == 'vis2_rg_epec' || matrix.config == 'sm_pmp_epic' || matrix.config == 'pol3_pmp_epic' || matrix.config == 'tri2_ct_wi_epic' || matrix.config == 'tri3_del_epic' || matrix.config == 'trid_del_epicd_7' || matrix.config == 'as3_del_fast_epic' || matrix.config == 'ch2_epec' || matrix.config == 'sm_ch3_pmp_epec' || matrix.config == 'sm_smsk_epic' || matrix.config == 'ss_2_cdlg' || matrix.config == 'carl' || matrix.config == 'sn2_epic'
+        run: |
+          set -euxo pipefail
+          WORK_DIR="${{ github.workspace }}/build/cgalpy/example_compare/${{ matrix.config }}"
+          rm -rf "${WORK_DIR}"
+
+          case "${{ matrix.config }}" in
+            epec)
+              pairs=(
+                ker_exact
+                ker_points_and_segment
+                ker_intersection_get
+                ker_intersection_visitor
+              )
+              ;;
+            aos2_seg_epec)
+              pairs=(
+                aos2_aggregated_insertion
+              )
+              ;;
+            aos2_seg_bvr_epec)
+              pairs=(
+                aos2_visual_buffer_summary
+                aos2_visual_buffer_raster
+              )
+              ;;
+            vis2_rg_epec)
+              pairs=(
+                vis2_general_polygon_example
+              )
+              ;;
+            ch2_epec)
+              pairs=(
+                ch2_vector_convex_hull_2
+                ch2_array_convex_hull_2
+              )
+              ;;
+            sm_ch3_pmp_epec)
+              pairs=(
+                ch3_graph_hull_3
+              )
+              ;;
+            pol3_pmp_epic)
+              pairs=(
+                pol3_polyhedron_prog_tetra
+                pol3_polyhedron_prog_vector
+              )
+              ;;
+            sm_pmp_epic)
+              pairs=(
+                sm_iterators
+                sm_circulators
+                pmp_sample_example
+                bgl_normals
+              )
+              ;;
+            ss_2_cdlg)
+              pairs=(
+                ss_nearest_neighbor_searching
+                kerd_intersection_test
+              )
+              ;;
+            carl)
+              pairs=(
+                st_my_point
+                gog_cube_d
+              )
+              ;;
+            sn2_epic)
+              pairs=(
+                sn2_create_offset_polygons_2
+              )
+              ;;
+            sm_smsk_epic)
+              pairs=(
+                smsk_simple_mcfskel_sm_example
+              )
+              ;;
+            tri2_ct_wi_epic)
+              pairs=(
+                tri2_for_loop_2
+              )
+              ;;
+            tri3_del_epic)
+              pairs=(
+                tri3_for_loop
+              )
+              ;;
+            trid_del_epicd_7)
+              pairs=(
+                trid_delaunay_triangulation
+              )
+              ;;
+            as3_del_fast_epic)
+              pairs=(
+                as3_alpha_shapes_exact_alpha
+              )
+              ;;
+            bso2_seg_epec)
+              pairs=(
+                bso2_simple_join_intersect
+                bso2_symmetric_difference
+                bso2_sequence
+                bso2_do_intersect
+                bso2_oriented_side
+                bso2_connect_polygon
+              )
+              ;;
+            bso2_cs_epec)
+              pairs=(
+                bso2_circle_segment
+                bso2_set_union
+              )
+              ;;
+            bso2_conic_epec)
+              pairs=(
+                bso2_conic_traits_adapter
+              )
+              ;;
+            bso2_bezier_ccr)
+              pairs=(
+                bso2_bezier_traits_adapter
+                bso2_bezier_traits_adapter2
+              )
+              ;;
+            pol2_bso2_seg_epec)
+              pairs=(
+                pol2_polygon
+                pol2_polygon_algorithms
+                pol2_ranges
+                pol2_example
+              )
+              ;;
+            ms2_seg_epec)
+              pairs=(
+                ms2_sum_triangle_square
+                ms2_sum_with_holes
+                ms2_sum_by_decomposition
+                ms2_sum_of_holes
+                ms2_approx_offset
+                ms2_approx_inset
+              )
+              ;;
+            ss2_seg_epec)
+              pairs=(
+                ss2_plane_sweep
+              )
+              ;;
+            env2_seg_cd_epec)
+              pairs=(
+                env2_envelope_segments
+              )
+              ;;
+            env2_linear_cd_epec)
+              pairs=(
+                env2_convex_hull_2
+              )
+              ;;
+            env3_sphere_ccr)
+              pairs=(
+                env3_envelope_spheres
+              )
+              ;;
+            env3_tri_sd_epec)
+              pairs=(
+                env3_envelope_triangles
+              )
+              ;;
+            *)
+              echo "No curated comparisons for ${{ matrix.config }}"
+              exit 0
+              ;;
+          esac
+
+          for pair in "${pairs[@]}"
+          do
+            python src/python_examples/cgalpy_examples/compare_examples.py \
+              --pair "${pair}" \
+              --cgal-source "${{ github.workspace }}/cgal" \
+              --cgal-dir "${CGAL_BUILD_DIR}" \
+              --python-build "${BUILD_DIR}" \
+              --library "${{ matrix.module_name }}" \
+              --python-executable "$(command -v python)" \
+              --work-dir "${WORK_DIR}" \
+              --build-type Release
+          done
+
+      - name: Upload deterministic visual comparison artifacts
+        if: always() && matrix.config == 'aos2_seg_bvr_epec'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cgalpy-aos2-visual-comparison-linux
+          path: |
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/comparison.json
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/cpp.stdout
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/cpp.stderr
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/python.stdout
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/python.stderr
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/cpp_output/*.ppm
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/python_output/*.ppm
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/raster_diagnostics/*.json
+            ${{ github.workspace }}/build/cgalpy/example_compare/aos2_seg_bvr_epec/aos2_visual_buffer_raster/raster_diagnostics/*.ppm
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Run Surface Mesh all-nine examples
+        if: matrix.config == 'sm_all9_epic'
+        run: |
+          set -euxo pipefail
+
+          export PYTHONPATH="${BUILD_DIR}/src/libs/cgalpy:${BUILD_DIR}/src/libs"
+          export PYTHON="$(command -v python)"
+          LIB="${{ matrix.module_name }}"
+
+          for run_file in \
+            src/python_examples/cgalpy_examples/Surface_mesh_approximation/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_decomposition/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_deformation/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_parameterization/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_segmentation/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_shortest_path/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_simplification/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_skeletonization/run \
+            src/python_examples/cgalpy_examples/Surface_mesh_topology/run
+          do
+            "${run_file}" "${LIB}"
+          done
+
+          rm -f \
+            src/python_examples/cgalpy_examples/Surface_mesh_deformation/deform_1.off \
+            src/python_examples/cgalpy_examples/Surface_mesh_deformation/deform_2.off \
+            src/python_examples/cgalpy_examples/Surface_mesh_parameterization/result.off \
+            src/python_examples/cgalpy_examples/Surface_mesh_shortest_path/shortest_paths_with_id.polylines.txt \
+            src/python_examples/cgalpy_examples/Surface_mesh_simplification/out.off
+          git checkout -- src/python_examples/cgalpy_examples/Surface_mesh_skeletonization/skel-sm.polylines.txt
+
+      - name: Install generated wheel in clean venv
+        run: |
+          set -euxo pipefail
+          WHEEL="$(find "${BUILD_DIR}/src/libs/cgalpy/dist" -maxdepth 1 -type f -name "${WHEEL_PATTERN}" | sort | tail -1)"
+          test -n "${WHEEL}"
+          python -m venv /tmp/cgalpy-wheel-test
+          /tmp/cgalpy-wheel-test/bin/python -m pip install --upgrade pip
+          /tmp/cgalpy-wheel-test/bin/python -m pip install "${WHEEL}"
+          /tmp/cgalpy-wheel-test/bin/python - <<'PY'
+          import importlib
+          import os
+
+          package_name = os.environ["PACKAGE_NAME"]
+          module_name = os.environ["MODULE_NAME"]
+
+          pkg = importlib.import_module(package_name)
+          print("wheel package:", pkg.__file__)
+
+          mod = importlib.import_module(f"{package_name}.{module_name}")
+          print("wheel extension:", mod.__file__)
+
+          extra_submodule = os.environ.get("EXTRA_SUBMODULE", "")
+
+          if extra_submodule == "Ss":
+              kerd = getattr(mod, "Kerd", None)
+              assert kerd is not None
+              assert hasattr(kerd, "Point_d")
+          else:
+              ker = getattr(mod, "Ker", None)
+              assert ker is not None
+              assert hasattr(ker, "Point_2")
+              assert hasattr(ker, "area")
+
+          if extra_submodule:
+              submodule = getattr(mod, extra_submodule, None)
+              assert submodule is not None
+              if extra_submodule == "Aos2":
+                  assert hasattr(submodule, "Arrangement_2")
+              elif extra_submodule == "Bvr":
+                  assert hasattr(submodule, "Graphics_scene")
+                  assert hasattr(submodule, "Graphics_scene_options")
+                  assert hasattr(submodule, "add_to_graphics_scene")
+                  assert hasattr(submodule, "draw_graphics_scene")
+              elif extra_submodule == "Bso2":
+                  assert hasattr(submodule, "join")
+                  assert (
+                      hasattr(submodule, "Polygon_set_2")
+                      or hasattr(submodule, "General_polygon_set_2")
+                  )
+              elif extra_submodule == "Ss2":
+                  assert hasattr(submodule, "compute_intersection_points")
+                  assert hasattr(submodule, "do_intersect")
+              elif extra_submodule == "Ms2":
+                  assert hasattr(submodule, "minkowski_sum_2")
+                  assert hasattr(submodule, "offset_polygon_2")
+              elif extra_submodule == "Tri2":
+                  assert hasattr(submodule, "Triangulation_2")
+                  assert hasattr(submodule, "Triangulation_data_structure_2")
+              elif extra_submodule == "Tri3":
+                  assert hasattr(submodule, "Delaunay_triangulation_3")
+                  assert hasattr(submodule, "Triangulation_data_structure_3")
+              elif extra_submodule == "Trid":
+                  assert hasattr(submodule, "Delaunay_triangulation")
+                  assert hasattr(submodule, "Triangulation_ds")
+              elif extra_submodule == "Sm":
+                  assert hasattr(submodule, "Surface_mesh_3")
+                  assert hasattr(submodule, "add_vertex")
+              elif extra_submodule == "Pol2":
+                  assert hasattr(submodule, "Polygon_2")
+                  assert hasattr(submodule, "Polygon_with_holes_2")
+              elif extra_submodule == "Pol3":
+                  assert hasattr(submodule, "Polyhedron_3")
+                  assert hasattr(submodule, "make_tetrahedron")
+              elif extra_submodule == "Pmp":
+                  assert hasattr(submodule, "area")
+                  assert hasattr(submodule, "triangulate_faces")
+              elif extra_submodule == "Psp":
+                  assert hasattr(submodule, "compute_average_spacing")
+                  assert hasattr(submodule, "compute_average_spacing_with_normals")
+                  assert hasattr(submodule, "bilateral_smooth_point_set")
+              elif extra_submodule == "Ss":
+                  assert hasattr(submodule, "Kd_tree")
+                  assert hasattr(submodule, "K_neighbor_search")
+              elif extra_submodule == "St":
+                  assert hasattr(submodule, "spatial_sort")
+              elif extra_submodule == "Sn2":
+                  assert hasattr(submodule, "create_offset_polygons_2")
+
+          print("wheel import smoke: OK")
+          PY
+        env:
+          MODULE_NAME: ${{ matrix.module_name }}
+          PACKAGE_NAME: ${{ matrix.package_name }}
+          WHEEL_PATTERN: ${{ matrix.wheel_pattern }}
+          EXTRA_SUBMODULE: ${{ matrix.extra_submodule }}
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cgalpy-${{ matrix.config }}-linux-artifacts
+          path: |
+            ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.whl
+            ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.tar.gz
+          if-no-files-found: error
+
+  kernel-macos-minimal:
+    name: EPEC kernel smoke on macOS (AppleClang)
+    runs-on: macos-15
+
+    env:
+      CGAL_BRANCH: gsoc2026-python_bindings
+      CGAL_REPOSITORY: https://github.com/CGAL/cgal-public-dev.git
+      BUILD_DIR: ${{ github.workspace }}/build/cgalpy/epec_macos
+      CGAL_BUILD_DIR: ${{ github.workspace }}/build/cgal/dev_release
+      MODULE_NAME: CGALPY_kerEpecInt
+      PACKAGE_NAME: CGALPY_kerEpecInt
+      WHEEL_PATTERN: cgalpy_kerepecint-*.whl
+
+    steps:
+      - name: Check out cgal-python-bindings
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          set -euxo pipefail
+          brew update
+          brew install cmake ninja boost eigen gmp mpfr metis
+          echo "CMAKE_PREFIX_PATH=$(brew --prefix)" >> "${GITHUB_ENV}"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python build dependencies
+        run: |
+          set -euxo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install "nanobind>=2.3.0,<=2.10.2" build
+
+      - name: Select compiler
+        run: |
+          set -euxo pipefail
+          echo "CC=clang" >> "${GITHUB_ENV}"
+          echo "CXX=clang++" >> "${GITHUB_ENV}"
+          clang++ --version
+
+      - name: Check out CGAL development branch
+        run: |
+          set -euxo pipefail
+          git clone --depth 1 --branch "${CGAL_BRANCH}" "${CGAL_REPOSITORY}" "${{ github.workspace }}/cgal"
+
+      - name: Configure CGAL
+        run: |
+          set -euxo pipefail
+          cmake \
+            -S "${{ github.workspace }}/cgal" \
+            -B "${CGAL_BUILD_DIR}" \
+            -G Ninja \
+            -DCMAKE_C_COMPILER=clang \
+            -DCMAKE_CXX_COMPILER=clang++ \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCGAL_WITH_tests=OFF \
+            -DCGAL_WITH_examples=OFF \
+            -DCGAL_WITH_demos=OFF \
+            -DCGAL_WITH_benchmarks=OFF
+          grep -E '^CGAL_FULL_VERSION:INTERNAL=' "${CGAL_BUILD_DIR}/CMakeCache.txt" || true
+
+      - name: Build CGAL configure targets
+        run: |
+          set -euxo pipefail
+          cmake --build "${CGAL_BUILD_DIR}" --parallel 2
+
+      - name: Locate nanobind CMake package
+        id: nanobind
+        run: |
+          set -euxo pipefail
+          NANOBIND_DIR="$(python - <<'PY'
+          import pathlib
+          import nanobind
+          print(pathlib.Path(nanobind.__file__).resolve().parent / "cmake")
+          PY
+          )"
+          test -f "${NANOBIND_DIR}/nanobind-config.cmake"
+          echo "dir=${NANOBIND_DIR}" >> "${GITHUB_OUTPUT}"
+
+      - name: Configure cgal-python-bindings EPEC smoke
+        run: |
+          set -euxo pipefail
+          cmake \
+            -S "${{ github.workspace }}" \
+            -B "${BUILD_DIR}" \
+            -G Ninja \
+            -DCMAKE_C_COMPILER=clang \
+            -DCMAKE_CXX_COMPILER=clang++ \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCGALPY_WITH_VISUAL:BOOL=OFF \
+            -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF \
+            -DPython_EXECUTABLE="$(command -v python)" \
+            -Dnanobind_DIR="${{ steps.nanobind.outputs.dir }}" \
+            -DCGAL_DIR="${CGAL_BUILD_DIR}" \
+            -C "${{ github.workspace }}/cmake/tests/epec.cmake"
+
+      - name: Build extension, stubs, and package
+        run: |
+          set -euxo pipefail
+          cmake --build "${BUILD_DIR}" --target BUILD --parallel 2
+
+      - name: Import from build tree
+        run: |
+          set -euxo pipefail
+          PYTHONPATH="${BUILD_DIR}/src/libs" python - <<'PY'
+          import importlib
+          import os
+
+          module_name = os.environ["MODULE_NAME"]
+
+          pkg = importlib.import_module("cgalpy")
+          print("cgalpy:", pkg.__file__)
+
+          mod = importlib.import_module(f"cgalpy.{module_name}")
+          print("extension:", mod.__file__)
+
+          ker = getattr(mod, "Ker", None)
+          assert ker is not None
+          assert hasattr(ker, "Point_2")
+          assert hasattr(ker, "area")
+
+          print("macOS build-tree import smoke: OK")
+          PY
+
+      - name: Install generated wheel in clean venv
+        run: |
+          set -euxo pipefail
+          WHEEL="$(find "${BUILD_DIR}/src/libs/cgalpy/dist" -maxdepth 1 -type f -name "${WHEEL_PATTERN}" | sort | tail -1)"
+          test -n "${WHEEL}"
+          python -m venv "${RUNNER_TEMP}/cgalpy-wheel-test"
+          "${RUNNER_TEMP}/cgalpy-wheel-test/bin/python" -m pip install --upgrade pip
+          "${RUNNER_TEMP}/cgalpy-wheel-test/bin/python" -m pip install "${WHEEL}"
+          "${RUNNER_TEMP}/cgalpy-wheel-test/bin/python" - <<'PY'
+          import importlib
+          import os
+
+          package_name = os.environ["PACKAGE_NAME"]
+          module_name = os.environ["MODULE_NAME"]
+
+          pkg = importlib.import_module(package_name)
+          print("wheel package:", pkg.__file__)
+
+          mod = importlib.import_module(f"{package_name}.{module_name}")
+          print("wheel extension:", mod.__file__)
+
+          ker = getattr(mod, "Ker", None)
+          assert ker is not None
+          assert hasattr(ker, "Point_2")
+          assert hasattr(ker, "area")
+
+          print("macOS wheel import smoke: OK")
+          PY
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cgalpy-epec-macos-artifacts
+          path: |
+            ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.whl
+            ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.tar.gz
+          if-no-files-found: error
+
+  kernel-windows-minimal:
+    name: EPEC kernel smoke on Windows (MSVC)
+    runs-on: windows-2022
+
+    env:
+      CGAL_BRANCH: gsoc2026-python_bindings
+      CGAL_REPOSITORY: https://github.com/CGAL/cgal-public-dev.git
+      BUILD_DIR: ${{ github.workspace }}/build/cgalpy/epec_windows
+      CGAL_BUILD_DIR: ${{ github.workspace }}/build/cgal/dev_release
+      MODULE_NAME: CGALPY_kerEpecInt
+      PACKAGE_NAME: CGALPY_kerEpecInt
+      WHEEL_PATTERN: cgalpy_kerepecint-*.whl
+      VCPKG_DEFAULT_TRIPLET: x64-windows
+
+    steps:
+      - name: Check out cgal-python-bindings
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Locate vcpkg
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          if (-not $env:VCPKG_INSTALLATION_ROOT) {
+            if (Test-Path "C:\vcpkg") {
+              $env:VCPKG_INSTALLATION_ROOT = "C:\vcpkg"
+            } elseif (Test-Path "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\vcpkg") {
+              $env:VCPKG_INSTALLATION_ROOT = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\vcpkg"
+            } else {
+              throw "Could not locate vcpkg installation root."
+            }
+          }
+
+          $toolchain = Join-Path $env:VCPKG_INSTALLATION_ROOT "scripts\buildsystems\vcpkg.cmake"
+          if (-not (Test-Path $toolchain)) {
+            throw "vcpkg CMake toolchain file not found: $toolchain"
+          }
+
+          "VCPKG_ROOT=$($env:VCPKG_INSTALLATION_ROOT)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "CMAKE_TOOLCHAIN_FILE=$toolchain" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+          Write-Host "VCPKG_ROOT=$($env:VCPKG_INSTALLATION_ROOT)"
+          Write-Host "CMAKE_TOOLCHAIN_FILE=$toolchain"
+
+      - name: Work around upstream vcpkg GMP MSYS2 package removal
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          # Temporary workaround for microsoft/vcpkg#53394.
+          $portfile = Join-Path $env:VCPKG_ROOT "ports\gmp\portfile.cmake"
+          if (-not (Test-Path $portfile)) {
+            throw "GMP vcpkg portfile not found: $portfile"
+          }
+
+          $oldPackage = "autoconf2.71-2.71-3-any.pkg.tar.zst"
+          $newPackage = "autoconf2.71-2.71-4-any.pkg.tar.zst"
+
+          $oldSha512 = "dd312c428b2e19afd00899eb53ea4255794dea4c19d1d6dea2419cb6a54209ea2130d48abbc20af12196b9f628143436f736fbf889809c2c2291be0c69c0e306"
+          $newSha512 = "c93b791eb55893cbe7c425e764074837355fd165deb7b1775f652c8e25d9d1f0cdd4120ab710d56fb859b7df55c4f971eccda7c112448f60615bff8a2dc81166"
+
+          $content = Get-Content -Raw $portfile
+
+          $oldPackageCount = ([regex]::Matches(
+            $content,
+            [regex]::Escape($oldPackage)
+          )).Count
+
+          $oldShaCount = ([regex]::Matches(
+            $content,
+            [regex]::Escape($oldSha512)
+          )).Count
+
+          $newPackageCount = ([regex]::Matches(
+            $content,
+            [regex]::Escape($newPackage)
+          )).Count
+
+          $newShaCount = ([regex]::Matches(
+            $content,
+            [regex]::Escape($newSha512)
+          )).Count
+
+          if (
+            $oldPackageCount -eq 1 -and
+            $oldShaCount -eq 1 -and
+            $newPackageCount -eq 0 -and
+            $newShaCount -eq 0
+          ) {
+            $content = $content.Replace($oldPackage, $newPackage)
+            $content = $content.Replace($oldSha512, $newSha512)
+
+            [System.IO.File]::WriteAllText(
+              $portfile,
+              $content,
+              [System.Text.UTF8Encoding]::new($false)
+            )
+
+            $patched = Get-Content -Raw $portfile
+
+            if ($patched.Contains($oldPackage) -or $patched.Contains($oldSha512)) {
+              throw "Stale GMP Autoconf reference remains after patch."
+            }
+
+            if (
+              -not $patched.Contains($newPackage) -or
+              -not $patched.Contains($newSha512)
+            ) {
+              throw "Verified GMP Autoconf replacement was not written correctly."
+            }
+
+            Write-Host "Patched runner vcpkg GMP port to use $newPackage"
+          } elseif (
+            $oldPackageCount -eq 0 -and
+            $oldShaCount -eq 0 -and
+            $newPackageCount -eq 1 -and
+            $newShaCount -eq 1
+          ) {
+            Write-Host "Runner vcpkg GMP port already uses $newPackage; no patch needed."
+          } else {
+            throw "Unexpected GMP Autoconf package state: old package=$oldPackageCount, old SHA512=$oldShaCount, new package=$newPackageCount, new SHA512=$newShaCount; inspect upstream vcpkg."
+          }
+
+      - name: Install system dependencies
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          & "$env:VCPKG_ROOT\vcpkg.exe" version
+          & "$env:VCPKG_ROOT\vcpkg.exe" install `
+            boost-headers:x64-windows `
+            boost-config:x64-windows `
+            boost-static-assert:x64-windows `
+            boost-multiprecision:x64-windows `
+            boost-iterator:x64-windows `
+            boost-any:x64-windows `
+            boost-graph:x64-windows `
+            boost-range:x64-windows `
+            boost-property-map:x64-windows `
+            boost-throw-exception:x64-windows `
+            eigen3:x64-windows `
+            gmp:x64-windows `
+            mpfr:x64-windows
+
+      - name: Install Python build dependencies
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          python -m pip install --upgrade pip
+          python -m pip install "nanobind>=2.3.0,<=2.10.2" build
+
+      - name: Check out CGAL development branch
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          git clone --depth 1 --branch "$env:CGAL_BRANCH" "$env:CGAL_REPOSITORY" "$env:GITHUB_WORKSPACE/cgal"
+
+      - name: Configure CGAL
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          cmake `
+            -S "$env:GITHUB_WORKSPACE/cgal" `
+            -B "$env:CGAL_BUILD_DIR" `
+            -G "Visual Studio 17 2022" `
+            -A x64 `
+            -DCMAKE_TOOLCHAIN_FILE="$env:CMAKE_TOOLCHAIN_FILE" `
+            -DCMAKE_BUILD_TYPE=Release `
+            -DCGAL_WITH_tests=OFF `
+            -DCGAL_WITH_examples=OFF `
+            -DCGAL_WITH_demos=OFF `
+            -DCGAL_WITH_benchmarks=OFF
+
+          Select-String -Path "$env:CGAL_BUILD_DIR/CMakeCache.txt" -Pattern "^CGAL_FULL_VERSION:INTERNAL=" -ErrorAction SilentlyContinue
+
+      - name: Build CGAL configure targets
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          cmake --build "$env:CGAL_BUILD_DIR" --config Release --parallel 2
+
+      - name: Locate nanobind CMake package
+        id: nanobind
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $nanobindDir = python -c "import pathlib, nanobind; print(pathlib.Path(nanobind.__file__).resolve().parent / 'cmake')"
+          $config = Join-Path $nanobindDir "nanobind-config.cmake"
+
+          if (-not (Test-Path $config)) {
+            throw "nanobind-config.cmake not found: $config"
+          }
+
+          "dir=$nanobindDir" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          Write-Host "nanobind_DIR=$nanobindDir"
+
+      - name: Configure cgal-python-bindings EPEC smoke
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $pythonExe = (Get-Command python).Source
+
+          cmake `
+            -S "$env:GITHUB_WORKSPACE" `
+            -B "$env:BUILD_DIR" `
+            -G "Visual Studio 17 2022" `
+            -A x64 `
+            -DCMAKE_TOOLCHAIN_FILE="$env:CMAKE_TOOLCHAIN_FILE" `
+            -DCMAKE_BUILD_TYPE=Release `
+            -DCMAKE_C_FLAGS="/I$env:VCPKG_ROOT/installed/x64-windows/include" `
+            -DCMAKE_CXX_FLAGS="/EHsc /I$env:VCPKG_ROOT/installed/x64-windows/include" `
+            -DCGALPY_WITH_VISUAL:BOOL=OFF `
+            -DCGALPY_FIXED_LIBRARY_NAME:BOOL=OFF `
+            -DBoost_INCLUDE_DIR="$env:VCPKG_ROOT/installed/x64-windows/include" `
+            -DBoost_INCLUDE_DIRS="$env:VCPKG_ROOT/installed/x64-windows/include" `
+            -DPython_EXECUTABLE="$pythonExe" `
+            -Dnanobind_DIR="${{ steps.nanobind.outputs.dir }}" `
+            -DCGAL_DIR="$env:CGAL_BUILD_DIR" `
+            -C "$env:GITHUB_WORKSPACE/cmake/tests/epec.cmake"
+
+      - name: Build extension, stubs, and package
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $boostInclude = Join-Path $env:VCPKG_ROOT "installed/x64-windows/include"
+          $requiredBoostHeaders = @(
+            "boost/config.hpp",
+            "boost/static_assert.hpp",
+            "boost/multiprecision/cpp_int.hpp",
+            "boost/iterator/transform_iterator.hpp",
+            "boost/iterator/iterator_facade.hpp",
+            "boost/any.hpp",
+            "boost/graph/graph_traits.hpp",
+            "boost/property_map/property_map.hpp",
+            "boost/range/value_type.hpp",
+            "boost/throw_exception.hpp"
+          )
+
+          foreach ($header in $requiredBoostHeaders) {
+            $path = Join-Path $boostInclude $header
+            if (-not (Test-Path $path)) {
+              throw "Boost header not found at $path"
+            }
+          }
+          $env:INCLUDE = "$boostInclude;$env:INCLUDE"
+          Write-Host "MSVC INCLUDE begins with: $boostInclude"
+          cmake --build "$env:BUILD_DIR" --target BUILD --config Release --parallel 2
+
+          $pyd = Get-ChildItem -Path "$env:BUILD_DIR\src\libs\cgalpy" -Filter "$env:MODULE_NAME*.pyd" | Sort-Object Name | Select-Object -Last 1
+          if (-not $pyd) {
+            throw "No Windows extension matched $env:MODULE_NAME*.pyd"
+          }
+
+          $dumpbinCommand = Get-Command dumpbin.exe -ErrorAction SilentlyContinue
+          $dumpbinPath = if ($dumpbinCommand) { $dumpbinCommand.Source } else { "" }
+          if (-not $dumpbinPath) {
+            $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
+            if (Test-Path $vswhere) {
+              $vsPath = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+              if ($vsPath) {
+                $dumpbinPath = Get-ChildItem -Path (Join-Path $vsPath "VC\Tools\MSVC") -Recurse -Filter dumpbin.exe |
+                  Where-Object { $_.FullName -match "\\bin\\Hostx64\\x64\\dumpbin.exe$" } |
+                  Select-Object -First 1 -ExpandProperty FullName
+              }
+            }
+          }
+
+          if ($dumpbinPath) {
+            Write-Host "dumpbin /DEPENDENTS for $($pyd.FullName)"
+            & $dumpbinPath /DEPENDENTS $pyd.FullName
+          } else {
+            Write-Host "dumpbin.exe not found; skipping Windows dependency diagnostic."
+          }
+
+      - name: Import from build tree
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $env:PYTHONPATH = "$env:BUILD_DIR\src\libs"
+          $scriptPath = Join-Path $env:RUNNER_TEMP "build_tree_smoke.py"
+
+          @'
+          import importlib
+          import os
+
+          module_name = os.environ["MODULE_NAME"]
+
+          pkg = importlib.import_module("cgalpy")
+          print("cgalpy:", pkg.__file__)
+
+          mod = importlib.import_module(f"cgalpy.{module_name}")
+          print("extension:", mod.__file__)
+
+          ker = getattr(mod, "Ker", None)
+          assert ker is not None
+          assert hasattr(ker, "Point_2")
+          assert hasattr(ker, "area")
+
+          print("Windows build-tree import smoke: OK")
+          '@ | Set-Content -Path $scriptPath -Encoding UTF8
+
+          python $scriptPath
+
+      - name: Install generated wheel in clean venv
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+
+          $distDir = Join-Path $env:BUILD_DIR "src\libs\cgalpy\dist"
+          $wheel = Get-ChildItem -Path $distDir -Filter $env:WHEEL_PATTERN | Sort-Object Name | Select-Object -Last 1
+
+          if (-not $wheel) {
+            throw "No wheel matched pattern $env:WHEEL_PATTERN in $distDir"
+          }
+
+          $venv = Join-Path $env:RUNNER_TEMP "cgalpy-wheel-test"
+          python -m venv $venv
+          $venvPython = Join-Path $venv "Scripts\python.exe"
+
+          & $venvPython -m pip install --upgrade pip
+          & $venvPython -m pip install $wheel.FullName
+
+          $scriptPath = Join-Path $env:RUNNER_TEMP "wheel_smoke.py"
+
+          @'
+          import importlib
+          import os
+
+          package_name = os.environ["PACKAGE_NAME"]
+          module_name = os.environ["MODULE_NAME"]
+
+          pkg = importlib.import_module(package_name)
+          print("wheel package:", pkg.__file__)
+
+          mod = importlib.import_module(f"{package_name}.{module_name}")
+          print("wheel extension:", mod.__file__)
+
+          ker = getattr(mod, "Ker", None)
+          assert ker is not None
+          assert hasattr(ker, "Point_2")
+          assert hasattr(ker, "area")
+
+          print("Windows wheel import smoke: OK")
+          '@ | Set-Content -Path $scriptPath -Encoding UTF8
+
+          & $venvPython $scriptPath
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cgalpy-epec-windows-artifacts
+          path: |
+            ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.whl
+            ${{ env.BUILD_DIR }}/src/libs/cgalpy/dist/*.tar.gz
+          if-no-files-found: error

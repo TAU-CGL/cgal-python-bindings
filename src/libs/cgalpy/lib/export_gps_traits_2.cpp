@@ -6,27 +6,30 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <nanobind/nanobind.h>
 
 #include <CGAL/Gps_traits_2.h>
 #include <CGAL/General_polygon_set_2.h>
 
-#include "CGALPY/general_polygon_set_2_types.hpp"
-#include "CGALPY/gps_2_concepts/export_GpsTraits_2.hpp"
-#include "CGALPY/gps_2_concepts/Gps_traits_classes.hpp"
-#include "CGALPY/stl_forward_iterator.hpp"
+#include "cgalpy/general_polygon_set_2_types.hpp"
+#include "cgalpy/gps_2_concepts/export_GpsTraits_2.hpp"
+#include "cgalpy/gps_2_concepts/Gps_traits_classes.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
+
 
 namespace py = nanobind;
 
 //
 void export_gps_traits_2(py::module_& m) {
-  using Agt = aos2::Arr_geometry_traits_2;
+  using Agt = cgalpy::aos2::Arr_geometry_traits_2;
   using Ggt = CGAL::Gps_traits_2<Agt>;
 
   if (add_attr<Ggt>(m, "Gps_traits_2")) return;
 
-  py::class_<Ggt, Agt> traits_c(m, "Gps_traits_2");
+  py::class_<Ggt, Agt> traits_c(
+    m, "Gps_traits_2", bso2_doc::Gps_traits_2_class);
   traits_c.def(py::init<>());
   struct Concepts {
     Gps_traits_classes<Ggt> m_gps_traits_2_classes;

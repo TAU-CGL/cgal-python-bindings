@@ -1,3 +1,5 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 pol3_pmp_sms_*/
 sm_pmp_sms_*/
 three_d_point_*/
@@ -8,3 +10,6 @@ ksr_*/
 *sm_*/
 *sd_*/
 *psp_*/
+
+# Generated build-variant launchers
+build_variants/generated/

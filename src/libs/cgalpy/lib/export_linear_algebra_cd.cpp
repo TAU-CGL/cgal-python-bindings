@@ -5,11 +5,12 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <nanobind/nanobind.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/kernel_d_types.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/kernel_d_types.hpp"
 
 //!
 void export_linear_algebra_cd(py::class_<Linear_algebra_cartesian_d>& lacd_c) {

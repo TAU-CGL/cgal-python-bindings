@@ -1,0 +1,3660 @@
+{
+  "schema_version": 1,
+  "package": "Periodic_4_hyperbolic_triangulation_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 18,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Hyperbolic_octagon_translation": {
+      "kind": "class",
+      "name": "CGAL::Hyperbolic_octagon_translation",
+      "brief": "The class Hyperbolic_octagon_translation defines an object to represent a hyperbolic translation of the fundamental group of the Bolza surface $\\mathcal M$ .",
+      "detailed": "It accepts one template parameter: FT Field number type. Must provide exact computations with algebraic numbers, notably with nested square roots. The default value for this parameter is CORE::Expr . A translation $g$ in $\\mathcal G$ is a mapping acting on the hyperbolic plane $\\mathbb H^2$ . It has the form \\[ g(z) = \\frac{ \\alpha\\cdot z + \\beta }{ \\overline{\\beta}\\cdot z + \\overline{\\alpha} }, \\qquad \\alpha,\\beta \\in \\mathbb C, \\qquad z \\in \\mathbb H^2, \\qquad |\\alpha|^2 - |\\beta|^2 = 1, \\] where $\\overline{\\alpha}$ and $\\overline{\\beta}$ are the complex conjugates of $\\alpha$ and $\\beta$ respectively. In this implementation, the translation $g$ is uniquely defined by its coefficients $\\alpha$ and $\\beta$ . Considering the set of generators $\\mathcal A = [a, \\overline{b}, c, \\overline{d}, \\overline{a}, b, \\overline{c}, d]$ as an alphabet, a translation $g$ in $\\mathcal G$ can be seen as a word on the alphabet $\\mathcal A$ . Each letter of this alphabet is represented as an unsigned integer from 0 to 7, and each word (i.e., translation) is a sequence of letters.",
+      "members": [
+        {
+          "kind": "enum",
+          "name": "Generator",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::Generator",
+          "brief": "Enumeration type for the alphabet $\\mathcal A$ .",
+          "detailed": "This enumeration can be used to recover the generators of the group $\\mathcal G$ . generator()",
+          "return_type": "Word_letter",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "66"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::FT",
+          "brief": "Field number type of the coefficients of $\\alpha$ and $\\beta$ .",
+          "detailed": "This number type must be the same as the field number type FT of the class Periodic_4_hyperbolic_Delaunay_triangulation_2_traits . alpha() beta()",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Hyperbolic_octagon_translation< FT >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "47"
+        },
+        {
+          "kind": "typedef",
+          "name": "Word_letter",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::Word_letter",
+          "brief": "Represents a single letter of the alphabet $\\mathcal A$ .",
+          "detailed": "By extension, represents a generator of the group $\\mathcal G$ .",
+          "return_type": "unsigned short int",
+          "definition": "typedef unsigned short int CGAL::Hyperbolic_octagon_translation< FT >::Word_letter",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "53"
+        },
+        {
+          "kind": "typedef",
+          "name": "Word",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::Word",
+          "brief": "Represents a word on the alphabet $\\mathcal A$ .",
+          "detailed": "By extension, represents a hyperbolic translation in the group $\\mathcal A$ .",
+          "return_type": "std::vector< Word_letter >",
+          "definition": "typedef std::vector<Word_letter> CGAL::Hyperbolic_octagon_translation< FT >::Word",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "59"
+        },
+        {
+          "kind": "function",
+          "name": "Hyperbolic_octagon_translation",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::Hyperbolic_octagon_translation",
+          "brief": "Default constructor. Creates the identity translation of the group $\\mathcal G$ .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Hyperbolic_octagon_translation< FT >::Hyperbolic_octagon_translation",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "88"
+        },
+        {
+          "kind": "function",
+          "name": "Hyperbolic_octagon_translation",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::Hyperbolic_octagon_translation",
+          "brief": "Creates the translation described by the word w .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Hyperbolic_octagon_translation< FT >::Hyperbolic_octagon_translation",
+          "argsstring": "(Word w)",
+          "params": [
+            {
+              "type": "Word",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "91"
+        },
+        {
+          "kind": "function",
+          "name": "Hyperbolic_octagon_translation",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::Hyperbolic_octagon_translation",
+          "brief": "Creates the translation described by the one-letter word l .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Hyperbolic_octagon_translation< FT >::Hyperbolic_octagon_translation",
+          "argsstring": "(Word_letter l)",
+          "params": [
+            {
+              "type": "Word_letter",
+              "name": "l",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "94"
+        },
+        {
+          "kind": "function",
+          "name": "Hyperbolic_octagon_translation",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::Hyperbolic_octagon_translation",
+          "brief": "Creates the translation described by the two-letter word lm .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Hyperbolic_octagon_translation< FT >::Hyperbolic_octagon_translation",
+          "argsstring": "(Word_letter l, Word_letter m)",
+          "params": [
+            {
+              "type": "Word_letter",
+              "name": "l",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Word_letter",
+              "name": "m",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "97"
+        },
+        {
+          "kind": "function",
+          "name": "Hyperbolic_octagon_translation",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::Hyperbolic_octagon_translation",
+          "brief": "Creates the translation described by the three-letter word lmn .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Hyperbolic_octagon_translation< FT >::Hyperbolic_octagon_translation",
+          "argsstring": "(Word_letter l, Word_letter m, Word_letter n)",
+          "params": [
+            {
+              "type": "Word_letter",
+              "name": "l",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Word_letter",
+              "name": "m",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Word_letter",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "100"
+        },
+        {
+          "kind": "function",
+          "name": "Hyperbolic_octagon_translation",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::Hyperbolic_octagon_translation",
+          "brief": "Creates the translation described by the four-letter word lmno .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Hyperbolic_octagon_translation< FT >::Hyperbolic_octagon_translation",
+          "argsstring": "(Word_letter l, Word_letter m, Word_letter n, Word_letter o)",
+          "params": [
+            {
+              "type": "Word_letter",
+              "name": "l",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Word_letter",
+              "name": "m",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Word_letter",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Word_letter",
+              "name": "o",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "103"
+        },
+        {
+          "kind": "function",
+          "name": "operator*",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::operator*",
+          "brief": "Multiplication operator; composes the current translation with other .",
+          "detailed": "",
+          "return_type": "Hyperbolic_octagon_translation",
+          "definition": "Hyperbolic_octagon_translation CGAL::Hyperbolic_octagon_translation< FT >::operator*",
+          "argsstring": "(const Hyperbolic_octagon_translation &other) const",
+          "params": [
+            {
+              "type": "const Hyperbolic_octagon_translation &",
+              "name": "other",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "109"
+        },
+        {
+          "kind": "function",
+          "name": "operator-",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::operator-",
+          "brief": "Difference operator; the difference of two translations $v$ and $w$ is defined as $v * w^{-1}$ .",
+          "detailed": "",
+          "return_type": "Hyperbolic_octagon_translation",
+          "definition": "Hyperbolic_octagon_translation CGAL::Hyperbolic_octagon_translation< FT >::operator-",
+          "argsstring": "(const Hyperbolic_octagon_translation &other) const",
+          "params": [
+            {
+              "type": "const Hyperbolic_octagon_translation &",
+              "name": "other",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "112"
+        },
+        {
+          "kind": "function",
+          "name": "operator=",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::operator=",
+          "brief": "Assignment operator; modifying the translation after the assignment leaves other unaffected.",
+          "detailed": "",
+          "return_type": "Hyperbolic_octagon_translation &",
+          "definition": "Hyperbolic_octagon_translation & CGAL::Hyperbolic_octagon_translation< FT >::operator=",
+          "argsstring": "(const Hyperbolic_octagon_translation &other)",
+          "params": [
+            {
+              "type": "const Hyperbolic_octagon_translation &",
+              "name": "other",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "115"
+        },
+        {
+          "kind": "function",
+          "name": "operator==",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::operator==",
+          "brief": "Equality operator.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Hyperbolic_octagon_translation< FT >::operator==",
+          "argsstring": "(const Hyperbolic_octagon_translation< FT > &other) const",
+          "params": [
+            {
+              "type": "const Hyperbolic_octagon_translation < FT > &",
+              "name": "other",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "118"
+        },
+        {
+          "kind": "function",
+          "name": "operator!=",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::operator!=",
+          "brief": "Inequality operator.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Hyperbolic_octagon_translation< FT >::operator!=",
+          "argsstring": "(const Hyperbolic_octagon_translation< FT > &other) const",
+          "params": [
+            {
+              "type": "const Hyperbolic_octagon_translation < FT > &",
+              "name": "other",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "121"
+        },
+        {
+          "kind": "function",
+          "name": "operator<",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::operator<",
+          "brief": "Comparison operator.",
+          "detailed": "Each translation $g$ of $\\mathcal G$ , when applied to the octagon $\\mathcal D_O$ , produces a copy of $\\mathcal D_O$ labeled by the translation $g$ . The copies of $\\mathcal D_O$ incident to $\\mathcal D_O$ are naturally ordered counterclockwise around $\\mathcal D_O$ . The comparison operator compares two translations based on the ordering of the copies of $\\mathcal D_O$ that they produce. For more details, see Section Representation of the User manual.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Hyperbolic_octagon_translation< FT >::operator<",
+          "argsstring": "(const Hyperbolic_octagon_translation< FT > &other) const",
+          "params": [
+            {
+              "type": "const Hyperbolic_octagon_translation < FT > &",
+              "name": "other",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "132"
+        },
+        {
+          "kind": "function",
+          "name": "inverse",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::inverse",
+          "brief": "Returns the inverse of the current translation.",
+          "detailed": "",
+          "return_type": "Hyperbolic_octagon_translation",
+          "definition": "Hyperbolic_octagon_translation CGAL::Hyperbolic_octagon_translation< FT >::inverse",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "135"
+        },
+        {
+          "kind": "function",
+          "name": "alpha",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::alpha",
+          "brief": "Returns the coefficient $\\alpha$ of the translation.",
+          "detailed": "The first element of the returned pair contains the real part of $\\alpha$ . The second element contains its imaginary part.",
+          "return_type": "std::pair< FT , FT >",
+          "definition": "std::pair< FT, FT > CGAL::Hyperbolic_octagon_translation< FT >::alpha",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "142"
+        },
+        {
+          "kind": "function",
+          "name": "beta",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::beta",
+          "brief": "Returns the coefficient $\\beta$ of the translation.",
+          "detailed": "The first element of the returned pair contains the real part of $\\beta$ . The second element contains its imaginary part.",
+          "return_type": "std::pair< FT , FT >",
+          "definition": "std::pair< FT, FT > CGAL::Hyperbolic_octagon_translation< FT >::beta",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "146"
+        },
+        {
+          "kind": "function",
+          "name": "is_identity",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::is_identity",
+          "brief": "Returns true if the current translation represents the identity element of the group $\\mathcal G$ .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Hyperbolic_octagon_translation< FT >::is_identity",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "149"
+        },
+        {
+          "kind": "function",
+          "name": "to_string",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::to_string",
+          "brief": "Returns a string representation of the translation, containing its Word_letter s.",
+          "detailed": "This function is given as utility for printing/debugging purposes. For example, for the translation $abcd$ , this function returns 0527 , and for the identity it returns _ .",
+          "return_type": "std::string",
+          "definition": "std::string CGAL::Hyperbolic_octagon_translation< FT >::to_string",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Utility Functions",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "180"
+        },
+        {
+          "kind": "function",
+          "name": "generator",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::generator",
+          "brief": "Return the generator wl of the group $\\mathcal G$ .",
+          "detailed": "Note that wl can be an element of the enumeration set Generator . The calls generator(0) and generator(A) will both return the translation $a$ .",
+          "return_type": "Self",
+          "definition": "static Self CGAL::Hyperbolic_octagon_translation< FT >::generator",
+          "argsstring": "(const Word_letter wl)",
+          "params": [
+            {
+              "type": "const Word_letter",
+              "name": "wl",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Static Access Functions",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "159"
+        },
+        {
+          "kind": "function",
+          "name": "generators",
+          "qualified_name": "CGAL::Hyperbolic_octagon_translation::generators",
+          "brief": "Returns the set of generators of $\\mathcal G$ and their inverses in a std::vector .",
+          "detailed": "The generators are given in the order: $ [a, \\overline{b}, c, \\overline{d}, \\overline{a}, b, \\overline{c}, d].$",
+          "return_type": "void",
+          "definition": "static void CGAL::Hyperbolic_octagon_translation< FT >::generators",
+          "argsstring": "(std::vector< Hyperbolic_octagon_translation< FT > > &gens)",
+          "params": [
+            {
+              "type": "std::vector< Hyperbolic_octagon_translation < FT > > &",
+              "name": "gens",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Static Access Functions",
+          "file": "CGAL/Hyperbolic_octagon_translation.h",
+          "line": "168"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_hyperbolic__octagon__translation.xml",
+      "file": "CGAL/Hyperbolic_octagon_translation.h",
+      "line": "33"
+    },
+    "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2": {
+      "kind": "class",
+      "name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2",
+      "brief": "The class Periodic_4_hyperbolic_Delaunay_triangulation_2 enables the construction and handling of Delaunay triangulations of the Bolza surface.",
+      "detailed": "The class expects two template parameters. GT Geometric Traits parameter. Must be a model of the concept Periodic_4HyperbolicDelaunayTriangulationTraits_2 . The default value for this parameter is Periodic_4_hyperbolic_Delaunay_triangulation_traits_2 <> . TDS Triangulation Data Structure parameter. Must be a model of the concept TriangulationDataStructure_2 with some additional functionality in the vertices and faces, following the concepts Periodic_4HyperbolicTriangulationVertexBase_2 and Periodic_4HyperbolicTriangulationFaceBase_2 , respectively. The default value for this parameter is CGAL::Triangulation_data_structure_2< CGAL::Periodic_4_hyperbolic_triangulation_vertex_base_2<GT>, CGAL::Periodic_4_hyperbolic_triangulation_face_base_2<GT> >",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Periodic_4_hyperbolic_Delaunay_triangulation_2",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::Periodic_4_hyperbolic_Delaunay_triangulation_2",
+          "brief": "Default constructor with an optional parameter for the geometric traits object.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::Periodic_4_hyperbolic_Delaunay_triangulation_2",
+          "argsstring": "(const Geom_traits &gt=Geom_traits())",
+          "params": [
+            {
+              "type": "const Geom_traits &",
+              "name": "gt",
+              "default": "Geom_traits()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "40"
+        },
+        {
+          "kind": "function",
+          "name": "Periodic_4_hyperbolic_Delaunay_triangulation_2",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::Periodic_4_hyperbolic_Delaunay_triangulation_2",
+          "brief": "Copy constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::Periodic_4_hyperbolic_Delaunay_triangulation_2",
+          "argsstring": "(const Periodic_4_hyperbolic_Delaunay_triangulation_2 &tr)",
+          "params": [
+            {
+              "type": "const Periodic_4_hyperbolic_Delaunay_triangulation_2 &",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "Periodic_4_hyperbolic_Delaunay_triangulation_2",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::Periodic_4_hyperbolic_Delaunay_triangulation_2",
+          "brief": "Point range constructor.",
+          "detailed": "Initializes a triangulation and then inserts the points in the iterator range [first, last) .",
+          "return_type": "",
+          "definition": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::Periodic_4_hyperbolic_Delaunay_triangulation_2",
+          "argsstring": "(InputIterator first, InputIterator last, const Geom_traits &gt=Geom_traits())",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Geom_traits &",
+              "name": "gt",
+              "default": "Geom_traits()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "53"
+        },
+        {
+          "kind": "function",
+          "name": "clear",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::clear",
+          "brief": "Deletes all faces and vertices of the triangulation, and re-initializes the triangulation data structure with the set of dummy points.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Clearing the triangulation",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "64"
+        },
+        {
+          "kind": "function",
+          "name": "find_conflicts",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::find_conflicts",
+          "brief": "Computes the conflict zone induced by p .",
+          "detailed": "The output iterator it contains all faces in conflict with p . The optional parameters start and ltr , if given, must be such that start translated by ltr is in conflict with p .",
+          "return_type": "void",
+          "definition": "void CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::find_conflicts",
+          "argsstring": "(const Point &p, OutputFaceIterator it, Face_handle start=Face_handle(), Hyperbolic_translation ltr=Hyperbolic_translation()) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputFaceIterator",
+              "name": "it",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "start",
+              "default": "Face_handle ()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Hyperbolic_translation",
+              "name": "ltr",
+              "default": "Hyperbolic_translation ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "79"
+        },
+        {
+          "kind": "function",
+          "name": "is_dummy_vertex",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::is_dummy_vertex",
+          "brief": "Checks if the vertex vh is part of the set of vertices storing dummy points.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::is_dummy_vertex",
+          "argsstring": "(Vertex_handle vh) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "vh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "88"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_dummy_points",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::number_of_dummy_points",
+          "brief": "Returns the number of dummy points currently existing in the triangulation.",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::number_of_dummy_points",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "93"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::is_valid",
+          "brief": "Checks the combinatorial validity of the triangulation, and also the validity of its geometric embedding.",
+          "detailed": "In more detail, this function verifies that: The underlying triangulation data structure, is valid (see the function is_valid ()) Each face of the triangulation is positively oriented and has the Delaunay property. The Euler relation for genus-2 surfaces is satisfied, i.e., $V-E+F = -2$ , where $V, E, F$ are the number of vertices, edges and faces of the triangulation, respectively.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::is_valid",
+          "argsstring": "(bool verbose=false) const",
+          "params": [
+            {
+              "type": "bool",
+              "name": "verbose",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "107"
+        },
+        {
+          "kind": "function",
+          "name": "insert",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::insert",
+          "brief": "Inserts the point p in the triangulation.",
+          "detailed": "The face start , if given, is used as a starting place for the location of the point. Note that this function does not remove unnecessary dummy points. The removal, if desired, should be done by manually calling the function try_to_remove_dummy_vertices() .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::insert",
+          "argsstring": "(const Point &p, Face_handle start=Face_handle())",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "start",
+              "default": "Face_handle ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Point insertion",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "121"
+        },
+        {
+          "kind": "function",
+          "name": "insert",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::insert",
+          "brief": "Inserts all points in the input iterator into the triangulation.",
+          "detailed": "Note that this function by default tries to remove unnecessary dummy points at the end of the insertion process. This behavior is controlled by the optional boolean parameter flag_try_to_remove_dummy_vertices ; if automatic removal of the dummy points is not desired, set the flag to false .",
+          "return_type": "std::ptrdiff_t",
+          "definition": "std::ptrdiff_t CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::insert",
+          "argsstring": "(InputIterator first, InputIterator last, const bool flag_try_to_remove_dummy_vertices=true)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const bool",
+              "name": "flag_try_to_remove_dummy_vertices",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Point insertion",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "132"
+        },
+        {
+          "kind": "function",
+          "name": "remove",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::remove",
+          "brief": "Removes the vertex v from the triangulation.",
+          "detailed": "Note that v is removed from the triangulation only if the resulting triangulation remains a simplicial complex. The function returns true if the vertex v is removed from the triangulation, otherwise it returns false .",
+          "return_type": "bool",
+          "definition": "bool CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::remove",
+          "argsstring": "(Vertex_handle v)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Vertex removal",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "145"
+        },
+        {
+          "kind": "function",
+          "name": "remove",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::remove",
+          "brief": "Removes the vertices in the iterator range [first, last) from the triangulation.",
+          "detailed": "all vertices in [first, last) are vertices of the triangulation.",
+          "return_type": "void",
+          "definition": "void CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::remove",
+          "argsstring": "(VertexRemoveIterator first, VertexRemoveIterator last)",
+          "params": [
+            {
+              "type": "VertexRemoveIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "VertexRemoveIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Vertex removal",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "152"
+        },
+        {
+          "kind": "function",
+          "name": "try_to_remove_dummy_vertices",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::try_to_remove_dummy_vertices",
+          "brief": "Tries to remove the dummy points from the triangulation one by one.",
+          "detailed": "Returns the number of dummy points that could not be removed and are still present in the triangulation.",
+          "return_type": "int",
+          "definition": "int CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::try_to_remove_dummy_vertices",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Removal of dummy points",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "163"
+        },
+        {
+          "kind": "function",
+          "name": "dual",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::dual",
+          "brief": "Returns the dual of face f , i.e., the hyperbolic center of the disk defined by the vertices of f .",
+          "detailed": "If the optional parameter nbtr is given, then this function returns the dual of the periodic triangle (f, nbtr) .",
+          "return_type": "Voronoi_point",
+          "definition": "Voronoi_point CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::dual",
+          "argsstring": "(Face_handle f, Hyperbolic_translation nbtr=Hyperbolic_translation()) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Hyperbolic_translation",
+              "name": "nbtr",
+              "default": "Hyperbolic_translation ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Voronoi diagram",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "175"
+        },
+        {
+          "kind": "function",
+          "name": "dual",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2::dual",
+          "brief": "Returns the hyperbolic segment that is dual to the edge e .",
+          "detailed": "",
+          "return_type": "Segment",
+          "definition": "Segment CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2< GT, TDS >::dual",
+          "argsstring": "(const Edge &e) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Voronoi diagram",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+          "line": "180"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_periodic__4__hyperbolic___delaunay__triangulation__2.xml",
+      "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h",
+      "line": "31"
+    },
+    "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2": {
+      "kind": "class",
+      "name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2",
+      "brief": "The class Periodic_4_hyperbolic_Delaunay_triangulation_traits_2 is the default traits class for the class Periodic_4_hyperbolic_Delaunay_triangulation_2 .",
+      "detailed": "Is model of Periodic_4HyperbolicDelaunayTriangulationTraits_2 Periodic_4_hyperbolic_Delaunay_triangulation_2",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Base",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2::Base",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Hyperbolic_Delaunay_triangulation_traits_2< Kernel >",
+          "definition": "typedef Hyperbolic_Delaunay_triangulation_traits_2<Kernel> CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2< Kernel >::Base",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_traits_2.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::FT",
+          "definition": "typedef Base::FT CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2< Kernel >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_traits_2.h",
+          "line": "27"
+        },
+        {
+          "kind": "typedef",
+          "name": "Hyperbolic_translation",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2::Hyperbolic_translation",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Hyperbolic_octagon_translation < FT >",
+          "definition": "typedef Hyperbolic_octagon_translation<FT> CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2< Kernel >::Hyperbolic_translation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_traits_2.h",
+          "line": "28"
+        },
+        {
+          "kind": "typedef",
+          "name": "Hyperbolic_point_2",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2::Hyperbolic_point_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Hyperbolic_point_2",
+          "definition": "typedef Base::Hyperbolic_point_2 CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2< Kernel >::Hyperbolic_point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_traits_2.h",
+          "line": "30"
+        },
+        {
+          "kind": "typedef",
+          "name": "Hyperbolic_Voronoi_point_2",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2::Hyperbolic_Voronoi_point_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Hyperbolic_point_2",
+          "definition": "typedef Hyperbolic_point_2 CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2< Kernel >::Hyperbolic_Voronoi_point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_traits_2.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "Hyperbolic_segment_2",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2::Hyperbolic_segment_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Hyperbolic_segment_2",
+          "definition": "typedef Base::Hyperbolic_segment_2 CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2< Kernel >::Hyperbolic_segment_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_traits_2.h",
+          "line": "32"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_periodic__4__hyperbolic___delaunay__triangulation__traits__2.xml",
+      "file": "CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_traits_2.h",
+      "line": "18"
+    },
+    "CGAL::Periodic_4_hyperbolic_triangulation_2": {
+      "kind": "class",
+      "name": "CGAL::Periodic_4_hyperbolic_triangulation_2",
+      "brief": "The class Periodic_4_hyperbolic_triangulation_2 offers base functionalities needed by Periodic_4_hyperbolic_Delaunay_triangulation_2 .",
+      "detailed": "Note that this class does not support modification of the triangulation (insertion or removal). The class expects two template parameters. GT Geometric traits parameter. Must be a model of the concept Periodic_4HyperbolicTriangulationTraits_2 . This parameter has no default value. TDS Triangulation data structure parameter. Must be a model of the concept TriangulationDataStructure_2 with some additional functionality in the vertices and faces, following the concepts Periodic_4HyperbolicTriangulationVertexBase_2 and Periodic_4HyperbolicTriangulationFaceBase_2 , respectively. The default value for this parameter is CGAL::Triangulation_data_structure_2< CGAL::Periodic_4_hyperbolic_triangulation_vertex_base_2<GT>, CGAL::Periodic_4_hyperbolic_triangulation_face_base_2<GT> >",
+      "members": [
+        {
+          "kind": "enum",
+          "name": "Locate_type",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Locate_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Enums",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "115"
+        },
+        {
+          "kind": "typedef",
+          "name": "Geometric_traits",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Geometric_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GT",
+          "definition": "typedef GT CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Geometric_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "38"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangulation_data_structure",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Triangulation_data_structure",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TDS",
+          "definition": "typedef TDS CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Triangulation_data_structure",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "39"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Point",
+          "brief": "Represents a point in the hyperbolic plane.",
+          "detailed": "Note that for Delaunay triangulations of the Bolza surface, all points must lie inside the original hyperbolic octagon.",
+          "return_type": "Triangulation_data_structure::Vertex::Point",
+          "definition": "typedef Triangulation_data_structure::Vertex::Point CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "49"
+        },
+        {
+          "kind": "typedef",
+          "name": "Hyperbolic_segment",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Hyperbolic_segment",
+          "brief": "Represents a hyperbolic segment in the hyperbolic plane.",
+          "detailed": "",
+          "return_type": "Geometric_traits::Hyperbolic_segment_2",
+          "definition": "typedef Geometric_traits::Hyperbolic_segment_2 CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Hyperbolic_segment",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "54"
+        },
+        {
+          "kind": "typedef",
+          "name": "Hyperbolic_triangle",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Hyperbolic_triangle",
+          "brief": "Represents a triangle contained in the Poincaré disk.",
+          "detailed": "",
+          "return_type": "Geometric_traits::Hyperbolic_triangle_2",
+          "definition": "typedef Geometric_traits::Hyperbolic_triangle_2 CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Hyperbolic_triangle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "59"
+        },
+        {
+          "kind": "typedef",
+          "name": "Hyperbolic_translation",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Hyperbolic_translation",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geometric_traits::Hyperbolic_translation",
+          "definition": "typedef Geometric_traits::Hyperbolic_translation CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Hyperbolic_translation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "65"
+        },
+        {
+          "kind": "typedef",
+          "name": "Periodic_point",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Periodic_point",
+          "brief": "Represents a periodic point, i.e., a pair of a point in the original octagon and a hyperbolic translation.",
+          "detailed": "",
+          "return_type": "std::pair< Point , Hyperbolic_translation >",
+          "definition": "typedef std::pair<Point, Hyperbolic_translation> CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Periodic_point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "77"
+        },
+        {
+          "kind": "typedef",
+          "name": "Periodic_segment",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Periodic_segment",
+          "brief": "Represents a periodic segment, defined by two periodic points.",
+          "detailed": "",
+          "return_type": "std::array< std::pair< Point , Hyperbolic_translation >, 2 >",
+          "definition": "typedef std::array< std::pair<Point, Hyperbolic_translation>, 2 > CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Periodic_segment",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "82"
+        },
+        {
+          "kind": "typedef",
+          "name": "Periodic_triangle",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Periodic_triangle",
+          "brief": "Represents a periodic triangle, defined by three periodic points.",
+          "detailed": "",
+          "return_type": "std::array< std::pair< Point , Hyperbolic_translation >, 3 >",
+          "definition": "typedef std::array< std::pair<Point, Hyperbolic_translation>, 3 > CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Periodic_triangle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "87"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure::Edge",
+          "definition": "typedef Triangulation_data_structure::Edge CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Edge",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "94"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Face",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure::Face",
+          "definition": "typedef Triangulation_data_structure::Face CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Face",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "95"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Vertex_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure::Vertex_handle",
+          "definition": "typedef Triangulation_data_structure::Vertex_handle CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Vertex_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "96"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_handle",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Face_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure::Face_handle",
+          "definition": "typedef Triangulation_data_structure::Face_handle CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Face_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "97"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_iterator",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Face_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure::Face_iterator",
+          "definition": "typedef Triangulation_data_structure::Face_iterator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Face_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "104"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge_iterator",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Edge_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure::Edge_iterator",
+          "definition": "typedef Triangulation_data_structure::Edge_iterator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Edge_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "105"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_iterator",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Vertex_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure::Vertex_iterator",
+          "definition": "typedef Triangulation_data_structure::Vertex_iterator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Vertex_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "106"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_circulator",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Face_circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure::Face_circulator",
+          "definition": "typedef Triangulation_data_structure::Face_circulator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Face_circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "107"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge_circulator",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Edge_circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure::Edge_circulator",
+          "definition": "typedef Triangulation_data_structure::Edge_circulator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Edge_circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "108"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_circulator",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Vertex_circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure::Vertex_circulator",
+          "definition": "typedef Triangulation_data_structure::Vertex_circulator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Vertex_circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "109"
+        },
+        {
+          "kind": "function",
+          "name": "Periodic_4_hyperbolic_triangulation_2",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Periodic_4_hyperbolic_triangulation_2",
+          "brief": "Default constructor, with an optional parameter for the geometric traits object.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Periodic_4_hyperbolic_triangulation_2",
+          "argsstring": "(const Geometric_traits &gt=Geometric_traits())",
+          "params": [
+            {
+              "type": "const Geometric_traits &",
+              "name": "gt",
+              "default": "Geometric_traits ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "128"
+        },
+        {
+          "kind": "function",
+          "name": "Periodic_4_hyperbolic_triangulation_2",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::Periodic_4_hyperbolic_triangulation_2",
+          "brief": "Copy constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::Periodic_4_hyperbolic_triangulation_2",
+          "argsstring": "(const Periodic_4_hyperbolic_triangulation_2 &tr)",
+          "params": [
+            {
+              "type": "const Periodic_4_hyperbolic_triangulation_2 &",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "133"
+        },
+        {
+          "kind": "function",
+          "name": "operator=",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::operator=",
+          "brief": "The triangulation tr is duplicated, and modifying the copy after the duplication does not modify the original.",
+          "detailed": "",
+          "return_type": "Periodic_4_hyperbolic_triangulation_2 &",
+          "definition": "Periodic_4_hyperbolic_triangulation_2 & CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::operator=",
+          "argsstring": "(Periodic_4_hyperbolic_triangulation_2 tr)",
+          "params": [
+            {
+              "type": "Periodic_4_hyperbolic_triangulation_2",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Assignment",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "142"
+        },
+        {
+          "kind": "function",
+          "name": "swap",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::swap",
+          "brief": "The triangulation is swapped with tr .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::swap",
+          "argsstring": "(Periodic_4_hyperbolic_triangulation_2 &tr)",
+          "params": [
+            {
+              "type": "Periodic_4_hyperbolic_triangulation_2 &",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Assignment",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "147"
+        },
+        {
+          "kind": "function",
+          "name": "clear",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::clear",
+          "brief": "Deletes all faces and vertices of the triangulation.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Assignment",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "152"
+        },
+        {
+          "kind": "function",
+          "name": "geom_traits",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::geom_traits",
+          "brief": "Returns a const reference to the geometric traits object.",
+          "detailed": "",
+          "return_type": "const Geometric_traits &",
+          "definition": "const Geometric_traits & CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::geom_traits",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "163"
+        },
+        {
+          "kind": "function",
+          "name": "tds",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::tds",
+          "brief": "Returns a const reference to the triangulation data structure.",
+          "detailed": "",
+          "return_type": "const Triangulation_data_structure &",
+          "definition": "const Triangulation_data_structure & CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::tds",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "168"
+        },
+        {
+          "kind": "function",
+          "name": "tds",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::tds",
+          "brief": "Returns a reference to the triangulation data structure.",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure &",
+          "definition": "Triangulation_data_structure & CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::tds",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "173"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_vertices",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::number_of_vertices",
+          "brief": "Returns the number of vertices in the triangulation.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::number_of_vertices",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "178"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_edges",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::number_of_edges",
+          "brief": "Returns the number of edges in the triangulation.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::number_of_edges",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "183"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_faces",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::number_of_faces",
+          "brief": "Returns the number of faces in the triangulation.",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::number_of_faces",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "188"
+        },
+        {
+          "kind": "function",
+          "name": "periodic_point",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::periodic_point",
+          "brief": "Returns the periodic point given by the i -th vertex of face f , that is the point in the original domain and the translation of the vertex in f .",
+          "detailed": "$0 \\leq i \\leq 2$",
+          "return_type": "Periodic_point",
+          "definition": "Periodic_point CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::periodic_point",
+          "argsstring": "(const Face_handle f, int i) const",
+          "params": [
+            {
+              "type": "const Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Geometric access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "201"
+        },
+        {
+          "kind": "function",
+          "name": "periodic_segment",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::periodic_segment",
+          "brief": "Returns the periodic segment formed by the two point-translation pairs (p1, tr1) and (p2, tr2) .",
+          "detailed": "",
+          "return_type": "Periodic_segment",
+          "definition": "Periodic_segment CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::periodic_segment",
+          "argsstring": "(const Point &p1, const Point &p2, const Hyperbolic_translation &tr1, const Hyperbolic_translation &tr2) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "tr1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "tr2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Geometric access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "206"
+        },
+        {
+          "kind": "function",
+          "name": "periodic_segment",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::periodic_segment",
+          "brief": "Returns the periodic segment formed by the two point-translation pairs (p1, Id) and (p2, Id) , where Id is the identity translation.",
+          "detailed": "",
+          "return_type": "Periodic_segment",
+          "definition": "Periodic_segment CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::periodic_segment",
+          "argsstring": "(const Point &p1, const Point &p2) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Geometric access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "213"
+        },
+        {
+          "kind": "function",
+          "name": "periodic_segment",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::periodic_segment",
+          "brief": "Returns the periodic segment formed by the endpoints of edge (f,i,j) .",
+          "detailed": "$ 0 \\leq i,j \\leq 2, \\qquad i \\neq j $",
+          "return_type": "Periodic_segment",
+          "definition": "Periodic_segment CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::periodic_segment",
+          "argsstring": "(const Face_handle c, int i, int j) const",
+          "params": [
+            {
+              "type": "const Face_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Geometric access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "219"
+        },
+        {
+          "kind": "function",
+          "name": "periodic_segment",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::periodic_segment",
+          "brief": "Returns the periodic segment formed by the endpoints of edge e .",
+          "detailed": "Note that the translations in the resulting periodic segment are determined by e.first .",
+          "return_type": "Periodic_segment",
+          "definition": "Periodic_segment CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::periodic_segment",
+          "argsstring": "(const Edge &e) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Geometric access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "226"
+        },
+        {
+          "kind": "function",
+          "name": "periodic_segment",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::periodic_segment",
+          "brief": "Returns the periodic segment formed by the endpoints of edge e translated by tr .",
+          "detailed": "Note that the translations in the resulting segment are determined by the translations in e.first , multiplied on the left by tr .",
+          "return_type": "Periodic_segment",
+          "definition": "Periodic_segment CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::periodic_segment",
+          "argsstring": "(const Edge &e, const Hyperbolic_translation &tr) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Geometric access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "233"
+        },
+        {
+          "kind": "function",
+          "name": "periodic_triangle",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::periodic_triangle",
+          "brief": "Returns the periodic triangle formed by the pairs of points and translations corresponding to each vertex of f .",
+          "detailed": "",
+          "return_type": "Periodic_triangle",
+          "definition": "Periodic_triangle CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::periodic_triangle",
+          "argsstring": "(const Face &f) const",
+          "params": [
+            {
+              "type": "const Face &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Geometric access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "239"
+        },
+        {
+          "kind": "function",
+          "name": "periodic_triangle",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::periodic_triangle",
+          "brief": "Returns the periodic triangle formed by the pairs of points and translations corresponding to each vertex of f , translated by tr .",
+          "detailed": "",
+          "return_type": "Periodic_triangle",
+          "definition": "Periodic_triangle CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::periodic_triangle",
+          "argsstring": "(const Face &f, const Hyperbolic_translation &tr) const",
+          "params": [
+            {
+              "type": "const Face &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Geometric access functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "245"
+        },
+        {
+          "kind": "function",
+          "name": "construct_point",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::construct_point",
+          "brief": "Converts the periodic point pp into a point in the hyperbolic plane by applying pp.second to pp.first .",
+          "detailed": "",
+          "return_type": "Point",
+          "definition": "Point CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::construct_point",
+          "argsstring": "(const Periodic_point &pp) const",
+          "params": [
+            {
+              "type": "const Periodic_point &",
+              "name": "pp",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "255"
+        },
+        {
+          "kind": "function",
+          "name": "construct_hyperbolic_segment",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::construct_hyperbolic_segment",
+          "brief": "Constructs the hyperbolic segment formed by the endpoints of edge (fh, idx) .",
+          "detailed": "$ 0 \\leq idx \\leq 2 $",
+          "return_type": "Hyperbolic_segment",
+          "definition": "Hyperbolic_segment CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::construct_hyperbolic_segment",
+          "argsstring": "(const Face_handle &fh, int idx) const",
+          "params": [
+            {
+              "type": "const Face_handle &",
+              "name": "fh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "idx",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "261"
+        },
+        {
+          "kind": "function",
+          "name": "construct_hyperbolic_segment",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::construct_hyperbolic_segment",
+          "brief": "Returns the hyperbolic segment with endpoints p1 and p2 .",
+          "detailed": "",
+          "return_type": "Hyperbolic_segment",
+          "definition": "Hyperbolic_segment CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::construct_hyperbolic_segment",
+          "argsstring": "(const Point &p1, const Point &p2) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "266"
+        },
+        {
+          "kind": "function",
+          "name": "construct_hyperbolic_segment",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::construct_hyperbolic_segment",
+          "brief": "Returns the hyperbolic segment formed by the endpoints of e .",
+          "detailed": "",
+          "return_type": "Hyperbolic_segment",
+          "definition": "Hyperbolic_segment CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::construct_hyperbolic_segment",
+          "argsstring": "(const pair< Face_handle, int > &e) const",
+          "params": [
+            {
+              "type": "const pair< Face_handle , int > &",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "271"
+        },
+        {
+          "kind": "function",
+          "name": "construct_hyperbolic_segment",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::construct_hyperbolic_segment",
+          "brief": "Returns the hyperbolic segment formed by the endpoints of ps .",
+          "detailed": "",
+          "return_type": "Hyperbolic_segment",
+          "definition": "Hyperbolic_segment CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::construct_hyperbolic_segment",
+          "argsstring": "(const Periodic_segment &ps) const",
+          "params": [
+            {
+              "type": "const Periodic_segment &",
+              "name": "ps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "276"
+        },
+        {
+          "kind": "function",
+          "name": "construct_triangle",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::construct_triangle",
+          "brief": "Returns the triangle formed by the vertices of fh .",
+          "detailed": "",
+          "return_type": "Triangle",
+          "definition": "Triangle CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::construct_triangle",
+          "argsstring": "(const Face_handle &fh) const",
+          "params": [
+            {
+              "type": "const Face_handle &",
+              "name": "fh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "281"
+        },
+        {
+          "kind": "function",
+          "name": "construct_triangle",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::construct_triangle",
+          "brief": "Returns the triangle formed by the vertices of pt .",
+          "detailed": "",
+          "return_type": "Triangle",
+          "definition": "Triangle CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::construct_triangle",
+          "argsstring": "(const Periodic_triangle &pt) const",
+          "params": [
+            {
+              "type": "const Periodic_triangle &",
+              "name": "pt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "286"
+        },
+        {
+          "kind": "function",
+          "name": "hyperbolic_periodic_locate",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::hyperbolic_periodic_locate",
+          "brief": "Returns the face rf for which the periodic triangle (rf, lo) contains the query point p .",
+          "detailed": "The parameter start , if provided, is used as a starting point for the location.",
+          "return_type": "Face_handle",
+          "definition": "Face_handle CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::hyperbolic_periodic_locate",
+          "argsstring": "(const Point &p, Hyperbolic_translation &lo, const Face_handle start=Face_handle()) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Hyperbolic_translation &",
+              "name": "lo",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Face_handle",
+              "name": "start",
+              "default": "Face_handle ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Point location",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "299"
+        },
+        {
+          "kind": "function",
+          "name": "hyperbolic_periodic_locate",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::hyperbolic_periodic_locate",
+          "brief": "Same as above.",
+          "detailed": "The value of the variable lt indicates whether p has been located inside the hyperbolic triangle, on one of its sides, or on one of its vertices. If p is located on a side or on a vertex, then li contains the index of the corresponding edge or vertex in the returned face. The parameter start , if provided, is used as a starting point for the location.",
+          "return_type": "Face_handle",
+          "definition": "Face_handle CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::hyperbolic_periodic_locate",
+          "argsstring": "(const Point &p, Locate_type &lt, int &li, Hyperbolic_translation &lo, const Face_handle start=Face_handle()) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Locate_type &",
+              "name": "lt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "li",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Hyperbolic_translation &",
+              "name": "lo",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Face_handle",
+              "name": "start",
+              "default": "Face_handle ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Point location",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "310"
+        },
+        {
+          "kind": "function",
+          "name": "hyperbolic_locate",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::hyperbolic_locate",
+          "brief": "Returns the canonical representative of the face that contains the query point p .",
+          "detailed": "The parameter start , if provided, is used as a starting point for the location.",
+          "return_type": "Face_handle",
+          "definition": "Face_handle CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::hyperbolic_locate",
+          "argsstring": "(const Point &p, Face_handle start=Face_handle()) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "start",
+              "default": "Face_handle ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Point location",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "320"
+        },
+        {
+          "kind": "function",
+          "name": "hyperbolic_locate",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::hyperbolic_locate",
+          "brief": "Same as above.",
+          "detailed": "The value of the variable lt indicates whether p has been located inside the canonical representative, on one of its sides, or on one of its vertices. If p is located on a side or on a vertex, then li contains the index of the corresponding edge or vertex in the returned face. The parameter start , if provided, is used as a starting point for the location.",
+          "return_type": "Face_handle",
+          "definition": "Face_handle CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::hyperbolic_locate",
+          "argsstring": "(const Point &p, Locate_type &lt, int &li, Face_handle start=Face_handle()) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Locate_type &",
+              "name": "lt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "li",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "start",
+              "default": "Face_handle ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Point location",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "330"
+        },
+        {
+          "kind": "function",
+          "name": "orientation",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::orientation",
+          "brief": "Returns the Orientation of the points p1, p2, p3 .",
+          "detailed": "CGAL::orientation()",
+          "return_type": "Orientation",
+          "definition": "Orientation CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::orientation",
+          "argsstring": "(const Point &p1, const Point &p2, const Point &p3) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Predicate functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "345"
+        },
+        {
+          "kind": "function",
+          "name": "orientation",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::orientation",
+          "brief": "Returns the Orientation of the three periodic points (p1, tr1), (p2, tr2) and (p3, tr3) .",
+          "detailed": "",
+          "return_type": "Orientation",
+          "definition": "Orientation CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::orientation",
+          "argsstring": "(const Point &p1, const Point &p2, const Point &p3, const Hyperbolic_translation &tr1, const Hyperbolic_translation &tr2, const Hyperbolic_translation &tr3) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "tr1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "tr2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "tr3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Predicate functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "350"
+        },
+        {
+          "kind": "function",
+          "name": "side_of_oriented_circle",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::side_of_oriented_circle",
+          "brief": "Returns the Oriented_side on which q is located with respect to the circle defined by the points p1,p2,p3 .",
+          "detailed": "CGAL::side_of_oriented_circle()",
+          "return_type": "Oriented_side",
+          "definition": "Oriented_side CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::side_of_oriented_circle",
+          "argsstring": "(const Point &p1, const Point &p2, const Point &p3, const Point &q) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Predicate functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "359"
+        },
+        {
+          "kind": "function",
+          "name": "side_of_oriented_circle",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::side_of_oriented_circle",
+          "brief": "Returns the Oriented_side on which the periodic point (q, trq) is located with respect to the circle defined by the periodic points (p1, tr1), (p2, tr2) and (p3, tr3) .",
+          "detailed": "",
+          "return_type": "Oriented_side",
+          "definition": "Oriented_side CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::side_of_oriented_circle",
+          "argsstring": "(const Point &p1, const Point &p2, const Point &p3, const Point &q, const Hyperbolic_translation &tr1, const Hyperbolic_translation &tr2, const Hyperbolic_translation &tr3, const Hyperbolic_translation &trq) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "p3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "tr1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "tr2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "tr3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "trq",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Predicate functions",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "367"
+        },
+        {
+          "kind": "function",
+          "name": "is_vertex",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::is_vertex",
+          "brief": "Tests whether v is a vertex of the triangulation.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::is_vertex",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "381"
+        },
+        {
+          "kind": "function",
+          "name": "is_edge",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::is_edge",
+          "brief": "Tests whether (u, v) is an edge of the triangulation.",
+          "detailed": "If the edge is found, then it is the i -th edge of fh .",
+          "return_type": "bool",
+          "definition": "bool CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::is_edge",
+          "argsstring": "(Vertex_handle u, Vertex_handle v, Face_handle &fh, int &i) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "u",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle &",
+              "name": "fh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "387"
+        },
+        {
+          "kind": "function",
+          "name": "is_face",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::is_face",
+          "brief": "Tests whether there exists a face in the triangulation with vertices u, v and w .",
+          "detailed": "If the face is found, then it is returned as fh .",
+          "return_type": "bool",
+          "definition": "bool CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::is_face",
+          "argsstring": "(Vertex_handle u, Vertex_handle v, Vertex_handle w, Face_handle &fh) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "u",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle &",
+              "name": "fh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "394"
+        },
+        {
+          "kind": "function",
+          "name": "has_vertex",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::has_vertex",
+          "brief": "Tests whether face f has v as a vertex.",
+          "detailed": "If the answer is true , then i contains the index of v in f .",
+          "return_type": "bool",
+          "definition": "bool CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::has_vertex",
+          "argsstring": "(const Face_handle f, const Vertex_handle v, const int i) const",
+          "params": [
+            {
+              "type": "const Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "401"
+        },
+        {
+          "kind": "function",
+          "name": "vertices_begin",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::vertices_begin",
+          "brief": "Starts at an arbitrary vertex.",
+          "detailed": "Iterates over all the vertices in the triangulation.",
+          "return_type": "Vertex_iterator",
+          "definition": "Vertex_iterator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::vertices_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Vertex, Edge, and Face iterators",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "412"
+        },
+        {
+          "kind": "function",
+          "name": "vertices_end",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::vertices_end",
+          "brief": "Past-the-end iterator.",
+          "detailed": "",
+          "return_type": "Vertex_iterator",
+          "definition": "Vertex_iterator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::vertices_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Vertex, Edge, and Face iterators",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "417"
+        },
+        {
+          "kind": "function",
+          "name": "edges_begin",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::edges_begin",
+          "brief": "Starts at an arbitrary edge.",
+          "detailed": "Iterates over all the edges in the triangulation.",
+          "return_type": "Edge_iterator",
+          "definition": "Edge_iterator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::edges_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Vertex, Edge, and Face iterators",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "422"
+        },
+        {
+          "kind": "function",
+          "name": "edges_end",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::edges_end",
+          "brief": "Past-the-end iterator.",
+          "detailed": "",
+          "return_type": "Edge_iterator",
+          "definition": "Edge_iterator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::edges_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Vertex, Edge, and Face iterators",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "427"
+        },
+        {
+          "kind": "function",
+          "name": "faces_begin",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::faces_begin",
+          "brief": "Starts at an arbitrary face.",
+          "detailed": "Iterates over all the faces of the triangulation.",
+          "return_type": "Face_iterator",
+          "definition": "Face_iterator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::faces_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Vertex, Edge, and Face iterators",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "432"
+        },
+        {
+          "kind": "function",
+          "name": "faces_end",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::faces_end",
+          "brief": "Past-the-end iterator.",
+          "detailed": "",
+          "return_type": "Face_iterator",
+          "definition": "Face_iterator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::faces_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Vertex, Edge, and Face iterators",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "437"
+        },
+        {
+          "kind": "function",
+          "name": "adjacent_vertices",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::adjacent_vertices",
+          "brief": "Starts at an arbitrary vertex incident to v .",
+          "detailed": "",
+          "return_type": "Vertex_circulator",
+          "definition": "Vertex_circulator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::adjacent_vertices",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Vertex, Edge and Face circulators",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "446"
+        },
+        {
+          "kind": "function",
+          "name": "adjacent_vertices",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::adjacent_vertices",
+          "brief": "Starts at the first vertex of f adjacent to v in counterclockwise order around v .",
+          "detailed": "",
+          "return_type": "Vertex_circulator",
+          "definition": "Vertex_circulator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::adjacent_vertices",
+          "argsstring": "(Vertex_handle v, Face_handle f) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Vertex, Edge and Face circulators",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "451"
+        },
+        {
+          "kind": "function",
+          "name": "incident_edges",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::incident_edges",
+          "brief": "Starts at an arbitrary edge incident to v .",
+          "detailed": "",
+          "return_type": "Edge_circulator",
+          "definition": "Edge_circulator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::incident_edges",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Vertex, Edge and Face circulators",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "456"
+        },
+        {
+          "kind": "function",
+          "name": "incident_edges",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::incident_edges",
+          "brief": "Starts at the first edge of f incident to v , in counterclockwise order around v .",
+          "detailed": "",
+          "return_type": "Edge_circulator",
+          "definition": "Edge_circulator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::incident_edges",
+          "argsstring": "(Vertex_handle v, Face_handle f) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Vertex, Edge and Face circulators",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "461"
+        },
+        {
+          "kind": "function",
+          "name": "incident_faces",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::incident_faces",
+          "brief": "Starts at an arbitrary face incident to v .",
+          "detailed": "",
+          "return_type": "Face_circulator",
+          "definition": "Face_circulator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::incident_faces",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Vertex, Edge and Face circulators",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "466"
+        },
+        {
+          "kind": "function",
+          "name": "incident_faces",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::incident_faces",
+          "brief": "Starts at face f .",
+          "detailed": "",
+          "return_type": "Face_circulator",
+          "definition": "Face_circulator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::incident_faces",
+          "argsstring": "(Vertex_handle v, Face_handle f) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Vertex, Edge and Face circulators",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "471"
+        },
+        {
+          "kind": "function",
+          "name": "incident_faces",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::incident_faces",
+          "brief": "Copies the faces incident to v into the output iterator faces .",
+          "detailed": "",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::incident_faces",
+          "argsstring": "(Vertex_handle v, OutputIterator faces) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "faces",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal of the Vertices, Edges and Faces incident to a vertex",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "482"
+        },
+        {
+          "kind": "function",
+          "name": "incident_edges",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::incident_edges",
+          "brief": "Copies the edges incident to v into the output iterator edges .",
+          "detailed": "",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::incident_edges",
+          "argsstring": "(Vertex_handle v, OutputIterator edges) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "edges",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal of the Vertices, Edges and Faces incident to a vertex",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "488"
+        },
+        {
+          "kind": "function",
+          "name": "adjacent_vertices",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::adjacent_vertices",
+          "brief": "Copies the vertices incident to v into the output iterator vertices .",
+          "detailed": "",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::adjacent_vertices",
+          "argsstring": "(Vertex_handle v, OutputIterator vertices) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "vertices",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal of the Vertices, Edges and Faces incident to a vertex",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "494"
+        },
+        {
+          "kind": "function",
+          "name": "degree",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::degree",
+          "brief": "Returns the degree of v , i.e., the number of edges incident to v .",
+          "detailed": "",
+          "return_type": "size_type",
+          "definition": "size_type CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::degree",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal of the Vertices, Edges and Faces incident to a vertex",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "499"
+        },
+        {
+          "kind": "function",
+          "name": "mirror_index",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::mirror_index",
+          "brief": "Returns the index of f in its i -th neighbor.",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::mirror_index",
+          "argsstring": "(Face_handle f, int i) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal between adjacent faces",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "510"
+        },
+        {
+          "kind": "function",
+          "name": "mirror_vertex",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::mirror_vertex",
+          "brief": "Returns the vertex of the i -th neighbor of f that is opposite to f .",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::mirror_vertex",
+          "argsstring": "(Face_handle f, int i) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal between adjacent faces",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "515"
+        },
+        {
+          "kind": "function",
+          "name": "mirror_edge",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::mirror_edge",
+          "brief": "Returns the same edge seen from the other adjacent face.",
+          "detailed": "",
+          "return_type": "Edge",
+          "definition": "Edge CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::mirror_edge",
+          "argsstring": "(Edge e) const",
+          "params": [
+            {
+              "type": "Edge",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal between adjacent faces",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "520"
+        },
+        {
+          "kind": "function",
+          "name": "neighbor_translation",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::neighbor_translation",
+          "brief": "Returns the hyperbolic translation for which the i -th neighbor of fh is adjacent to (the canonical representative of) fh in the hyperbolic plane.",
+          "detailed": "",
+          "return_type": "Hyperbolic_translation",
+          "definition": "Hyperbolic_translation CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::neighbor_translation",
+          "argsstring": "(const Face_handle fh, int i) const",
+          "params": [
+            {
+              "type": "const Face_handle",
+              "name": "fh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal between adjacent faces",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "526"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::is_valid",
+          "brief": "Checks the combinatorial validity of the triangulation, and also the validity of its geometric embedding.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::is_valid",
+          "argsstring": "(bool verbose=false) const",
+          "params": [
+            {
+              "type": "bool",
+              "name": "verbose",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Validity checking",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "537"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "CGAL::Periodic_4_hyperbolic_triangulation_2::is_valid",
+          "brief": "Checks the combinatorial validity of face f .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Periodic_4_hyperbolic_triangulation_2< GT, TDS >::is_valid",
+          "argsstring": "(Face_handle f, bool verbose=false) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "verbose",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Validity checking",
+          "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+          "line": "542"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_periodic__4__hyperbolic__triangulation__2.xml",
+      "file": "CGAL/Periodic_4_hyperbolic_triangulation_2.h",
+      "line": "31"
+    },
+    "CGAL::Periodic_4_hyperbolic_triangulation_face_base_2": {
+      "kind": "class",
+      "name": "CGAL::Periodic_4_hyperbolic_triangulation_face_base_2",
+      "brief": "The class Periodic_4_hyperbolic_triangulation_face_base_2 is the default model for the concept Periodic_4HyperbolicTriangulationFaceBase_2 .",
+      "detailed": "It accepts two template parameters: GT Geometric traits type. This should be the same model of the concept Periodic_4HyperbolicDelaunayTriangulationTraits_2 that is used in the class Periodic_4_hyperbolic_Delaunay_triangulation_2 . This template parameter has no default value. FB Face base type. Should be a model of the concept TriangulationFaceBase_2 . The default value for this template parameter is Triangulation_face_base_2<GT> Periodic_4_hyperbolic_triangulation_face_base_2 can be simply plugged in the triangulation data structure of a periodic hyperbolic triangulation, or used as a base class to derive other base vertex classes tuned for specific applications. Is model of Periodic_4HyperbolicTriangulationFaceBase_2 Periodic_4_hyperbolic_triangulation_vertex_base_2",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_periodic__4__hyperbolic__triangulation__face__base__2.xml",
+      "file": "CGAL/Periodic_4_hyperbolic_triangulation_face_base_2.h",
+      "line": "32"
+    },
+    "CGAL::Periodic_4_hyperbolic_triangulation_vertex_base_2": {
+      "kind": "class",
+      "name": "CGAL::Periodic_4_hyperbolic_triangulation_vertex_base_2",
+      "brief": "The class Periodic_4_hyperbolic_triangulation_vertex_base_2 is the default model for the concept Periodic_4HyperbolicTriangulationVertexBase_2 .",
+      "detailed": "It accepts two template parameters: GT Geometric traits type. This should be the same model of the concept Periodic_4HyperbolicDelaunayTriangulationTraits_2 that is used in the class Periodic_4_hyperbolic_Delaunay_triangulation_2 . This template parameter has no default value. Vb Vertex base type. Should be a model of the concept TriangulationVertexBase_2 . The default value for this template parameter is CGAL::Triangulation_vertex_base_2<GT> Periodic_4_hyperbolic_triangulation_vertex_base_2 can be simply plugged in the triangulation data structure of a periodic hyperbolic triangulation, or used as a base class to derive other base vertex classes tuned for specific applications. Is model of Periodic_4HyperbolicTriangulationVertexBase_2 Periodic_4_hyperbolic_triangulation_face_base_2",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_periodic__4__hyperbolic__triangulation__vertex__base__2.xml",
+      "file": "CGAL/Periodic_4_hyperbolic_triangulation_vertex_base_2.h",
+      "line": "31"
+    },
+    "Periodic_4HyperbolicDelaunayTriangulationTraits_2": {
+      "kind": "class",
+      "name": "Periodic_4HyperbolicDelaunayTriangulationTraits_2",
+      "brief": "",
+      "detailed": "Refines Periodic_4HyperbolicTriangulationTraits_2 The concept Periodic_4HyperbolicDelaunayTriangulationTraits_2 adds a requirement to Periodic_4HyperbolicTriangulationTraits_2 that needs to be fulfilled by any class used to instantiate the first template parameter of the class CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2 . Has models CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Compute_approximate_hyperbolic_diameter",
+          "qualified_name": "Periodic_4HyperbolicDelaunayTriangulationTraits_2::Compute_approximate_hyperbolic_diameter",
+          "brief": "Must provide the function operator.",
+          "detailed": "double operator()(Hyperbolic_point_2 p1, Hyperbolic_point_2 p2, Hyperbolic_point_2 p3), which returns a floating-point approximation of the hyperbolic diameter of the circle defined by the points p1, p2, and p3 .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type Periodic_4HyperbolicDelaunayTriangulationTraits_2::Compute_approximate_hyperbolic_diameter",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Computation Types",
+          "file": "Concepts/Periodic_4HyperbolicDelaunayTriangulationTraits_2.h",
+          "line": "36"
+        },
+        {
+          "kind": "function",
+          "name": "compute_approximate_hyperbolic_diameter_object",
+          "qualified_name": "Periodic_4HyperbolicDelaunayTriangulationTraits_2::compute_approximate_hyperbolic_diameter_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_approximate_hyperbolic_diameter",
+          "definition": "Compute_approximate_hyperbolic_diameter Periodic_4HyperbolicDelaunayTriangulationTraits_2::compute_approximate_hyperbolic_diameter_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/Periodic_4HyperbolicDelaunayTriangulationTraits_2.h",
+          "line": "44"
+        }
+      ],
+      "xml_file": "class_periodic__4_hyperbolic_delaunay_triangulation_traits__2.xml",
+      "file": "Concepts/Periodic_4HyperbolicDelaunayTriangulationTraits_2.h",
+      "line": "22"
+    },
+    "Periodic_4HyperbolicTriangulationFaceBase_2": {
+      "kind": "class",
+      "name": "Periodic_4HyperbolicTriangulationFaceBase_2",
+      "brief": "",
+      "detailed": "Refines TriangulationFaceBase_2 A refinement of the concept TriangulationFaceBase_2 that adds an interface for hyperbolic translations. At the base level, a face stores handles to its incident vertices and to its neighboring faces. Compare with Section Section_2D_Triangulations_Software_Design of the 2D Triangulations package. The vertices and neighbors are indexed counterclockwise 0, 1, and 2. Neighbor i lies opposite to vertex i . For periodic hyperbolic triangulations, the face base class needs to store three hyperbolic translations, one for each vertex. Applying each translation to the point stored in the corresponding vertex produces the canonical representative of the face in the hyperbolic plane. Hyperbolic translations are represented by a nested type which is provided by the concept Periodic_4HyperbolicDelaunayTriangulationTraits_2 . Has models CGAL::Periodic_4_hyperbolic_triangulation_face_base_2 TriangulationDataStructure_2 Periodic_4HyperbolicTriangulationVertexBase_2",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geometric_traits",
+          "qualified_name": "Periodic_4HyperbolicTriangulationFaceBase_2::Geometric_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Periodic_4HyperbolicDelaunayTriangulationTraits_2",
+          "definition": "typedef Periodic_4HyperbolicDelaunayTriangulationTraits_2 Periodic_4HyperbolicTriangulationFaceBase_2::Geometric_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationFaceBase_2.h",
+          "line": "38"
+        },
+        {
+          "kind": "typedef",
+          "name": "Hyperbolic_translation",
+          "qualified_name": "Periodic_4HyperbolicTriangulationFaceBase_2::Hyperbolic_translation",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geometric_traits::Hyperbolic_translation",
+          "definition": "typedef Geometric_traits::Hyperbolic_translation Periodic_4HyperbolicTriangulationFaceBase_2::Hyperbolic_translation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationFaceBase_2.h",
+          "line": "39"
+        },
+        {
+          "kind": "function",
+          "name": "Periodic_4HyperbolicTriangulationFaceBase_2",
+          "qualified_name": "Periodic_4HyperbolicTriangulationFaceBase_2::Periodic_4HyperbolicTriangulationFaceBase_2",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "Periodic_4HyperbolicTriangulationFaceBase_2::Periodic_4HyperbolicTriangulationFaceBase_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationFaceBase_2.h",
+          "line": "49"
+        },
+        {
+          "kind": "function",
+          "name": "Periodic_4HyperbolicTriangulationFaceBase_2",
+          "qualified_name": "Periodic_4HyperbolicTriangulationFaceBase_2::Periodic_4HyperbolicTriangulationFaceBase_2",
+          "brief": "Creates a face with vertices v0, v1 and v1 .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "Periodic_4HyperbolicTriangulationFaceBase_2::Periodic_4HyperbolicTriangulationFaceBase_2",
+          "argsstring": "(const Vertex_handle &v0, const Vertex_handle &v1, const Vertex_handle &v2)",
+          "params": [
+            {
+              "type": "const Vertex_handle &",
+              "name": "v0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vertex_handle &",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vertex_handle &",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationFaceBase_2.h",
+          "line": "54"
+        },
+        {
+          "kind": "function",
+          "name": "Periodic_4HyperbolicTriangulationFaceBase_2",
+          "qualified_name": "Periodic_4HyperbolicTriangulationFaceBase_2::Periodic_4HyperbolicTriangulationFaceBase_2",
+          "brief": "Creates a face with vertices v0, v1 and v1 , setting also neighborhood relations with n0, n1 and n2 .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "Periodic_4HyperbolicTriangulationFaceBase_2::Periodic_4HyperbolicTriangulationFaceBase_2",
+          "argsstring": "(const Vertex_handle &v0, const Vertex_handle &v1, const Vertex_handle &v2, const Face_handle &n0, const Face_handle &n1, const Face_handle &n2)",
+          "params": [
+            {
+              "type": "const Vertex_handle &",
+              "name": "v0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vertex_handle &",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vertex_handle &",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Face_handle &",
+              "name": "n0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Face_handle &",
+              "name": "n1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Face_handle &",
+              "name": "n2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationFaceBase_2.h",
+          "line": "62"
+        },
+        {
+          "kind": "function",
+          "name": "translation",
+          "qualified_name": "Periodic_4HyperbolicTriangulationFaceBase_2::translation",
+          "brief": "Returns the translation corresponding to the vertex i .",
+          "detailed": "$ 0 \\leq i \\leq 2$ .",
+          "return_type": "Hyperbolic_translation",
+          "definition": "Hyperbolic_translation Periodic_4HyperbolicTriangulationFaceBase_2::translation",
+          "argsstring": "(int i) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access functions",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationFaceBase_2.h",
+          "line": "76"
+        },
+        {
+          "kind": "function",
+          "name": "set_translation",
+          "qualified_name": "Periodic_4HyperbolicTriangulationFaceBase_2::set_translation",
+          "brief": "Sets the i -th translation to new_tr .",
+          "detailed": "$ 0 \\leq i \\leq 2$ .",
+          "return_type": "void",
+          "definition": "void Periodic_4HyperbolicTriangulationFaceBase_2::set_translation",
+          "argsstring": "(const int &i, const Hyperbolic_translation &new_tr)",
+          "params": [
+            {
+              "type": "const int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "new_tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access functions",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationFaceBase_2.h",
+          "line": "83"
+        },
+        {
+          "kind": "function",
+          "name": "reorient",
+          "qualified_name": "Periodic_4HyperbolicTriangulationFaceBase_2::reorient",
+          "brief": "Changes the orientation of the face by exchanging vertex(0) with vertex(1) , neighbor(0) with neighbor(1) , and translation(0) with translation(1) .",
+          "detailed": "TriangulationFaceBase_2::reorient()",
+          "return_type": "void",
+          "definition": "void Periodic_4HyperbolicTriangulationFaceBase_2::reorient",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access functions",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationFaceBase_2.h",
+          "line": "92"
+        }
+      ],
+      "xml_file": "class_periodic__4_hyperbolic_triangulation_face_base__2.xml",
+      "file": "Concepts/Periodic_4HyperbolicTriangulationFaceBase_2.h",
+      "line": "32"
+    },
+    "Periodic_4HyperbolicTriangulationTraits_2": {
+      "kind": "class",
+      "name": "Periodic_4HyperbolicTriangulationTraits_2",
+      "brief": "",
+      "detailed": "Refines HyperbolicDelaunayTriangulationTraits_2 The concept Periodic_4HyperbolicTriangulationTraits_2 describes the set of requirements to be fulfilled by any class used to instantiate the first template parameter of the class CGAL::Periodic_4_hyperbolic_triangulation_2 . In addition to the geometric types and the operations defined on them in HyperbolicDelaunayTriangulationTraits_2 , it defines the hyperbolic translations that enable the encoding of the periodicity of the triangulation. The concept requires that the field number type FT defined in the concept HyperbolicDelaunayTriangulationTraits_2 supports exact computations with algebraic numbers, in particular with nested square roots.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Hyperbolic_translation",
+          "qualified_name": "Periodic_4HyperbolicTriangulationTraits_2::Hyperbolic_translation",
+          "brief": "Represents a hyperbolic translation.",
+          "detailed": "",
+          "return_type": "CGAL::Hyperbolic_octagon_translation < FT >",
+          "definition": "typedef CGAL::Hyperbolic_octagon_translation<FT> Periodic_4HyperbolicTriangulationTraits_2::Hyperbolic_translation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationTraits_2.h",
+          "line": "35"
+        },
+        {
+          "kind": "typedef",
+          "name": "Side_of_original_octagon",
+          "qualified_name": "Periodic_4HyperbolicTriangulationTraits_2::Side_of_original_octagon",
+          "brief": "Predicate type.",
+          "detailed": "Must provide the function operator Bounded_side operator()(Hyperbolic_point_2 p), which returns the position of point p relative to the half-open regular hyperbolic octagon.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type Periodic_4HyperbolicTriangulationTraits_2::Side_of_original_octagon",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Predicate Types",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationTraits_2.h",
+          "line": "49"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_hyperbolic_point_2",
+          "qualified_name": "Periodic_4HyperbolicTriangulationTraits_2::Construct_hyperbolic_point_2",
+          "brief": "Construction type.",
+          "detailed": "Must provide the function operator Hyperbolic_point_2 operator() ( const Hyperbolic_point_2& pt, const Hyperbolic_translation & tr ) const, which returns the image of the point pt under the action of the hyperbolic translation tr .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type Periodic_4HyperbolicTriangulationTraits_2::Construct_hyperbolic_point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Construction Types",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationTraits_2.h",
+          "line": "63"
+        },
+        {
+          "kind": "function",
+          "name": "side_of_original_octagon_object",
+          "qualified_name": "Periodic_4HyperbolicTriangulationTraits_2::side_of_original_octagon_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Side_of_original_octagon",
+          "definition": "Side_of_original_octagon Periodic_4HyperbolicTriangulationTraits_2::side_of_original_octagon_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationTraits_2.h",
+          "line": "72"
+        },
+        {
+          "kind": "function",
+          "name": "construct_hyperbolic_point_2_object",
+          "qualified_name": "Periodic_4HyperbolicTriangulationTraits_2::construct_hyperbolic_point_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_hyperbolic_point_2",
+          "definition": "Construct_hyperbolic_point_2 Periodic_4HyperbolicTriangulationTraits_2::construct_hyperbolic_point_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationTraits_2.h",
+          "line": "80"
+        }
+      ],
+      "xml_file": "class_periodic__4_hyperbolic_triangulation_traits__2.xml",
+      "file": "Concepts/Periodic_4HyperbolicTriangulationTraits_2.h",
+      "line": "24"
+    },
+    "Periodic_4HyperbolicTriangulationVertexBase_2": {
+      "kind": "class",
+      "name": "Periodic_4HyperbolicTriangulationVertexBase_2",
+      "brief": "",
+      "detailed": "Refines TriangulationVertexBase_2 A refinement of the concept TriangulationVertexBase_2 that adds an interface for hyperbolic translations. For periodic hyperbolic triangulations, the vertex base class needs to temporarily store a hyperbolic translation during the insertion process. A boolean flag indicates whether the face stores a translation or not. The value of the flag is automatically set when storing or removing a translation. Has models CGAL::Periodic_4_hyperbolic_triangulation_vertex_base_2 TriangulationDataStructure_2 Periodic_4HyperbolicTriangulationFaceBase_2",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Face_handle",
+          "qualified_name": "Periodic_4HyperbolicTriangulationVertexBase_2::Face_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationVertexBase_2::Face_handle",
+          "definition": "typedef TriangulationVertexBase_2::Face_handle Periodic_4HyperbolicTriangulationVertexBase_2::Face_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+          "line": "33"
+        },
+        {
+          "kind": "typedef",
+          "name": "Geom_traits",
+          "qualified_name": "Periodic_4HyperbolicTriangulationVertexBase_2::Geom_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Periodic_4HyperbolicDelaunayTriangulationTraits_2",
+          "definition": "typedef Periodic_4HyperbolicDelaunayTriangulationTraits_2 Periodic_4HyperbolicTriangulationVertexBase_2::Geom_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+          "line": "34"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "Periodic_4HyperbolicTriangulationVertexBase_2::Point",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Hyperbolic_point_2",
+          "definition": "typedef Geom_traits::Hyperbolic_point_2 Periodic_4HyperbolicTriangulationVertexBase_2::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+          "line": "35"
+        },
+        {
+          "kind": "typedef",
+          "name": "Hyperbolic_translation",
+          "qualified_name": "Periodic_4HyperbolicTriangulationVertexBase_2::Hyperbolic_translation",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Geom_traits::Hyperbolic_translation",
+          "definition": "typedef Geom_traits::Hyperbolic_translation Periodic_4HyperbolicTriangulationVertexBase_2::Hyperbolic_translation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+          "line": "36"
+        },
+        {
+          "kind": "function",
+          "name": "Periodic_4HyperbolicTriangulationVertexBase_2",
+          "qualified_name": "Periodic_4HyperbolicTriangulationVertexBase_2::Periodic_4HyperbolicTriangulationVertexBase_2",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "Periodic_4HyperbolicTriangulationVertexBase_2::Periodic_4HyperbolicTriangulationVertexBase_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+          "line": "44"
+        },
+        {
+          "kind": "function",
+          "name": "Periodic_4HyperbolicTriangulationVertexBase_2",
+          "qualified_name": "Periodic_4HyperbolicTriangulationVertexBase_2::Periodic_4HyperbolicTriangulationVertexBase_2",
+          "brief": "Construct a vertex that stores the point p .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "Periodic_4HyperbolicTriangulationVertexBase_2::Periodic_4HyperbolicTriangulationVertexBase_2",
+          "argsstring": "(const Point &p)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+          "line": "49"
+        },
+        {
+          "kind": "function",
+          "name": "Periodic_4HyperbolicTriangulationVertexBase_2",
+          "qualified_name": "Periodic_4HyperbolicTriangulationVertexBase_2::Periodic_4HyperbolicTriangulationVertexBase_2",
+          "brief": "Constructs a vertex that stores the point p and is incident to the face fh .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "Periodic_4HyperbolicTriangulationVertexBase_2::Periodic_4HyperbolicTriangulationVertexBase_2",
+          "argsstring": "(const Point &p, Face_handle fh)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "fh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+          "line": "54"
+        },
+        {
+          "kind": "function",
+          "name": "Periodic_4HyperbolicTriangulationVertexBase_2",
+          "qualified_name": "Periodic_4HyperbolicTriangulationVertexBase_2::Periodic_4HyperbolicTriangulationVertexBase_2",
+          "brief": "Constructs a vertex that is incident to the face fh .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "Periodic_4HyperbolicTriangulationVertexBase_2::Periodic_4HyperbolicTriangulationVertexBase_2",
+          "argsstring": "(const Face_handle &fh)",
+          "params": [
+            {
+              "type": "const Face_handle &",
+              "name": "fh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+          "line": "59"
+        },
+        {
+          "kind": "function",
+          "name": "set_translation",
+          "qualified_name": "Periodic_4HyperbolicTriangulationVertexBase_2::set_translation",
+          "brief": "Stores the translation tr in the vertex, and sets the translation flag to true .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void Periodic_4HyperbolicTriangulationVertexBase_2::set_translation",
+          "argsstring": "(const Hyperbolic_translation &tr)",
+          "params": [
+            {
+              "type": "const Hyperbolic_translation &",
+              "name": "tr",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Hyperbolic translations API",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+          "line": "68"
+        },
+        {
+          "kind": "function",
+          "name": "translation",
+          "qualified_name": "Periodic_4HyperbolicTriangulationVertexBase_2::translation",
+          "brief": "Returns the translation stored in the vertex.",
+          "detailed": "",
+          "return_type": "Hyperbolic_translation",
+          "definition": "Hyperbolic_translation Periodic_4HyperbolicTriangulationVertexBase_2::translation",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Hyperbolic translations API",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+          "line": "73"
+        },
+        {
+          "kind": "function",
+          "name": "clear_translation",
+          "qualified_name": "Periodic_4HyperbolicTriangulationVertexBase_2::clear_translation",
+          "brief": "Removes the translation stored in the vertex, and sets the translation flag to false .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void Periodic_4HyperbolicTriangulationVertexBase_2::clear_translation",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Hyperbolic translations API",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+          "line": "78"
+        },
+        {
+          "kind": "function",
+          "name": "get_translation_flag",
+          "qualified_name": "Periodic_4HyperbolicTriangulationVertexBase_2::get_translation_flag",
+          "brief": "Returns the value of the translation flag.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool Periodic_4HyperbolicTriangulationVertexBase_2::get_translation_flag",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Hyperbolic translations API",
+          "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+          "line": "83"
+        }
+      ],
+      "xml_file": "class_periodic__4_hyperbolic_triangulation_vertex_base__2.xml",
+      "file": "Concepts/Periodic_4HyperbolicTriangulationVertexBase_2.h",
+      "line": "27"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/Hyperbolic_octagon_translation.h",
+      "line": "5"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgPeriodic4HyperbolicTriangulation2Ref": {
+      "kind": "group",
+      "name": "PkgPeriodic4HyperbolicTriangulation2Ref",
+      "brief": "",
+      "detailed": "Iordan Iordanov and Monique Teillaud This package enables building and handling triangulations of point sets on the two dimensional hyperbolic Bolza surface. Triangulations are built incrementally and can be modified by insertion or removal of vertices. Point location facilities are also offered. The package provides Delaunay triangulations and offers primitives to build the dual Voronoi diagrams. Introduced in: CGAL 4.14 Depends on: PkgHyperbolicTriangulation2 BibTeX: cgal:i-p4ht2-17-26a License: GPL Windows Demo: Periodic Hyperbolic Delaunay Triangulation CGAL traditionally represents a triangulation via its faces and vertices. We represent a triangulation of the Bolza surface via the canonical representatives of its faces in the hyperbolic plane. This package provides the necessary objects and functions to work with Delaunay triangulations of the Bolza surface. Each vertex gives access to one of its incident faces, and stores an input point. We additionally allow each vertex to store (temporarily) a hyperbolic translation to facilitate the insertion of new points and the removal of existing vertices. Each face gives access to its three incident vertices and to its three adjacent faces. We enable a face to store additionally three hyperbolic translations. When applied to the three points stored in the vertices of the face, these translations produce the canonical representative of the face in the hyperbolic plane. The three vertices of a face are indexed with 0, 1, and 2 in positive (counterclockwise) orientation. The orientation of faces on the Bolza surface is defined as the orientation of their canonical representatives in the hyperbolic plane. Classified Reference Pages Concepts Periodic_4HyperbolicTriangulationTraits_2 adds supplementary requirements to the concept HyperbolicDelaunayTriangulationTraits_2 that are necessary for periodic hyperbolic triangulations. Periodic_4HyperbolicDelaunayTriangulationTraits_2 refines the concept Periodic_4HyperbolicTriangulationTraits_2 by adding requirements necessary for the computation of periodic hyperbolic Delaunay triangulations. Periodic_4HyperbolicTriangulationFaceBase_2 describes the requirements for faces to store hyperbolic translations. Periodic_4HyperbolicTriangulationVertexBase_2 describes the requirements for vertices to store hyperbolic translations. Classes CGAL::Periodic_4_hyperbolic_triangulation_2 gives access to the elements of the triangulation (vertices, edges, and faces), and functionality common to triangulations in general, such as point location. This class does not support insertion or removal of points. CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_2 enables the construction and modification of Delaunay triangulations of the Bolza surface. CGAL::Periodic_4_hyperbolic_Delaunay_triangulation_traits_2 is a model for the concept Periodic_4HyperbolicDelaunayTriangulationTraits_2 . CGAL::Periodic_4_hyperbolic_triangulation_face_base_2 is a model of the concept Periodic_4HyperbolicTriangulationFaceBase_2 and represents a face of the triangulation. CGAL::Periodic_4_hyperbolic_triangulation_vertex_base_2 is a model of the concept Periodic_4HyperbolicTriangulationVertexBase_2 and represents a vertex of the triangulation. CGAL::Hyperbolic_octagon_translation is a class that represent hyperbolic translations of the fundamental group $\\mathcal G$ of the Bolza surface.",
+      "members": [],
+      "xml_file": "group___pkg_periodic4_hyperbolic_triangulation2_ref.xml"
+    },
+    "PkgPeriodic4HyperbolicTriangulation2Concepts": {
+      "kind": "group",
+      "name": "PkgPeriodic4HyperbolicTriangulation2Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_periodic4_hyperbolic_triangulation2_concepts.xml"
+    },
+    "PkgPeriodic4HyperbolicTriangulation2MainClasses": {
+      "kind": "group",
+      "name": "PkgPeriodic4HyperbolicTriangulation2MainClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_periodic4_hyperbolic_triangulation2_main_classes.xml"
+    },
+    "PkgPeriodic4HyperbolicTriangulation2TraitsClasses": {
+      "kind": "group",
+      "name": "PkgPeriodic4HyperbolicTriangulation2TraitsClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_periodic4_hyperbolic_triangulation2_traits_classes.xml"
+    },
+    "PkgPeriodic4HyperbolicTriangulation2VertexFaceClasses": {
+      "kind": "group",
+      "name": "PkgPeriodic4HyperbolicTriangulation2VertexFaceClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_periodic4_hyperbolic_triangulation2_vertex_face_classes.xml"
+    },
+    "PkgPeriodic4HyperbolicTriangulation2HyperbolicTranslationsClasses": {
+      "kind": "group",
+      "name": "PkgPeriodic4HyperbolicTriangulation2HyperbolicTranslationsClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_periodic4_hyperbolic_triangulation2_hyperbolic_translations_classes.xml"
+    }
+  }
+}

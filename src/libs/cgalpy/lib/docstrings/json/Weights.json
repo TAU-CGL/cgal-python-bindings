@@ -1,0 +1,4673 @@
+{
+  "schema_version": 1,
+  "package": "Weights",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 32,
+  "skipped_count": 0,
+  "compounds": {
+    "AnalyticWeightTraits_2": {
+      "kind": "class",
+      "name": "AnalyticWeightTraits_2",
+      "brief": "A concept that describes the set of requirements of classes used in the computation of analytic weights in 2D.",
+      "detailed": "Has models All models of the CGAL concept Kernel sCGAL:Projection_traits_xy_3<K> CGAL::Projection_traits_yz_3<K> CGAL::Projection_traits_xz_3<K>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "AnalyticWeightTraits_2::FT",
+          "brief": "A model of FieldNumberType .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "Comparison_result",
+          "qualified_name": "AnalyticWeightTraits_2::Comparison_result",
+          "brief": "CGAL::Comparison_result or Uncertain<CGAL::Comparison_result> .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Comparison_result",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "30"
+        },
+        {
+          "kind": "typedef",
+          "name": "Orientation",
+          "qualified_name": "AnalyticWeightTraits_2::Orientation",
+          "brief": "CGAL::Orientation or Uncertain<CGAL::Orientation> .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Orientation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "35"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "AnalyticWeightTraits_2::Point_2",
+          "brief": "2D point type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Geometric Objects",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "45"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_2",
+          "qualified_name": "AnalyticWeightTraits_2::Vector_2",
+          "brief": "2D vector type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Vector_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Geometric Objects",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "50"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_area_2",
+          "qualified_name": "AnalyticWeightTraits_2::Compute_area_2",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "FT operator()(const Point_2 & p, const Point_2 & q, const Point_2 & r) that returns the signed area of the triangle defined by the points p , q , and r .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Compute_area_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "64"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_distance_2",
+          "qualified_name": "AnalyticWeightTraits_2::Compute_squared_distance_2",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "FT operator()(const Point_2 & p, const Point_2 & q) that returns the squared Euclidean distance between the points p and q .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Compute_squared_distance_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "73"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_length_2",
+          "qualified_name": "AnalyticWeightTraits_2::Compute_squared_length_2",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "FT operator()(const Vector_2 & v) that returns the squared length of the vector v .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Compute_squared_length_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "82"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_scalar_product_2",
+          "qualified_name": "AnalyticWeightTraits_2::Compute_scalar_product_2",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "FT operator()(const Vector_2 & v, const Vector_2 & w) that returns the scalar product of the vectors v and w .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Compute_scalar_product_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "91"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_determinant_2",
+          "qualified_name": "AnalyticWeightTraits_2::Compute_determinant_2",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "FT operator()(const Vector_2 & v, const Vector_2 & w) that returns the determinant of the vectors v and w .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Compute_determinant_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "100"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_circumcenter_2",
+          "qualified_name": "AnalyticWeightTraits_2::Construct_circumcenter_2",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "Point_2 operator()(const Point_2 & p, const Point_2 & q, const Point_2 & r) that returns the center of the circle passing through the points p , q , and r . The points p , q , and r are not collinear.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Construct_circumcenter_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "111"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vector_2",
+          "qualified_name": "AnalyticWeightTraits_2::Construct_vector_2",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "Vector_2 operator()(const Point_2 & p, const Point_2 & q) that returns the vector through the points p and q .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Construct_vector_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "120"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_midpoint_2",
+          "qualified_name": "AnalyticWeightTraits_2::Construct_midpoint_2",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "Point_2 operator()(const Point_2 & p, const Point_2 & q) that returns the midpoint between the points p and q .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Construct_midpoint_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "129"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_centroid_2",
+          "qualified_name": "AnalyticWeightTraits_2::Construct_centroid_2",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "Point_2 operator()(const Point_2 & p, const Point_2 & q, const Point_2 & r) that returns the centroid of the points p , q , and r .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Construct_centroid_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "138"
+        },
+        {
+          "kind": "typedef",
+          "name": "Equal_2",
+          "qualified_name": "AnalyticWeightTraits_2::Equal_2",
+          "brief": "A predicate object that must provide the function operator:",
+          "detailed": "bool operator()(const Point_2 & p, const Point_2 & q) that returns true if p = q and false otherwise.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Equal_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Predicates",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "152"
+        },
+        {
+          "kind": "typedef",
+          "name": "Collinear_2",
+          "qualified_name": "AnalyticWeightTraits_2::Collinear_2",
+          "brief": "A predicate object that must provide the function operator:",
+          "detailed": "bool operator()(const Point_2 & p, const Point_2 & q, const Point_2 & r) that returns true if the points p , q , and r are collinear and false otherwise.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Collinear_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Predicates",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "161"
+        },
+        {
+          "kind": "typedef",
+          "name": "Less_xy_2",
+          "qualified_name": "AnalyticWeightTraits_2::Less_xy_2",
+          "brief": "A predicate object that must provide the function operator:",
+          "detailed": "bool operator()(const Point_2 & p, const Point_2 & q) that returns true iff the x-coordinate of p is smaller than the x-coordinate of q or if they are the same and the y-coordinate of p is smaller than the y-coordinate of q .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Less_xy_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Predicates",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "171"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_x_2",
+          "qualified_name": "AnalyticWeightTraits_2::Compare_x_2",
+          "brief": "A predicate object that must provide the function operator:",
+          "detailed": "Comparison_result operator()(const Point_2 & p, const Point_2 & q) that compares the Cartesian x-coordinates of the points p and q .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Compare_x_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Predicates",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "180"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_y_2",
+          "qualified_name": "AnalyticWeightTraits_2::Compare_y_2",
+          "brief": "A predicate object that must provide the function operator:",
+          "detailed": "Comparison_result operator()(const Point_2 & p, const Point_2 & q) that compares the Cartesian y-coordinates of the points p and q .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Compare_y_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Predicates",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "189"
+        },
+        {
+          "kind": "typedef",
+          "name": "Orientation_2",
+          "qualified_name": "AnalyticWeightTraits_2::Orientation_2",
+          "brief": "A predicate object that must provide the function operator:",
+          "detailed": "Orientation operator()(const Point_2 & p, const Point_2 & q, const Point_2 & r) that returns CGAL::LEFT_TURN if r lies to the left of the oriented line l defined by p and q , returns CGAL::RIGHT_TURN if r lies to the right of l , and returns CGAL::COLLINEAR if r lies on l .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_2::Orientation_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Predicates",
+          "file": "Concepts/AnalyticWeightTraits_2.h",
+          "line": "199"
+        }
+      ],
+      "xml_file": "class_analytic_weight_traits__2.xml",
+      "file": "Concepts/AnalyticWeightTraits_2.h",
+      "line": "15"
+    },
+    "AnalyticWeightTraits_3": {
+      "kind": "class",
+      "name": "AnalyticWeightTraits_3",
+      "brief": "A concept that describes the set of requirements of classes used in the computation of analytic weights in 3D.",
+      "detailed": "Has models All models of the CGAL concept Kernel",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "AnalyticWeightTraits_3::FT",
+          "brief": "A model of FieldNumberType .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_3::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AnalyticWeightTraits_3.h",
+          "line": "22"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_3",
+          "qualified_name": "AnalyticWeightTraits_3::Point_3",
+          "brief": "3D point type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_3::Point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Geometric Objects",
+          "file": "Concepts/AnalyticWeightTraits_3.h",
+          "line": "32"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_3",
+          "qualified_name": "AnalyticWeightTraits_3::Vector_3",
+          "brief": "3D vector type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_3::Vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Geometric Objects",
+          "file": "Concepts/AnalyticWeightTraits_3.h",
+          "line": "37"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_distance_3",
+          "qualified_name": "AnalyticWeightTraits_3::Compute_squared_distance_3",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "FT operator()(const Point_3 & p, const Point_3 & q) that returns the squared Euclidean distance between the points p and q .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_3::Compute_squared_distance_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_3.h",
+          "line": "51"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_length_3",
+          "qualified_name": "AnalyticWeightTraits_3::Compute_squared_length_3",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "FT operator()(const Vector_3 & v) that returns the squared length of the vector v .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_3::Compute_squared_length_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_3.h",
+          "line": "60"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_scalar_product_3",
+          "qualified_name": "AnalyticWeightTraits_3::Compute_scalar_product_3",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "FT operator()(const Vector_3 & v, const Vector_3 & w) that returns the scalar product of the vectors v and w .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_3::Compute_scalar_product_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_3.h",
+          "line": "69"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_cross_product_vector_3",
+          "qualified_name": "AnalyticWeightTraits_3::Construct_cross_product_vector_3",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "Vector_3 operator()(const Vector_3 & v, const Vector_3 & w) that returns the cross product of the vectors v and w .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_3::Construct_cross_product_vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_3.h",
+          "line": "78"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_circumcenter_3",
+          "qualified_name": "AnalyticWeightTraits_3::Construct_circumcenter_3",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "Point_3 operator()(const Point_3 & p, const Point_3 & q, const Point_3 & r) that returns the center of the circle passing through the points p , q , and r . The points p , q , and r are not collinear.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_3::Construct_circumcenter_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_3.h",
+          "line": "89"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vector_3",
+          "qualified_name": "AnalyticWeightTraits_3::Construct_vector_3",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "Vector_3 operator()(const Point_3 & p, const Point_3 & q) that returns the vector through the points p and q .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_3::Construct_vector_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_3.h",
+          "line": "98"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_midpoint_3",
+          "qualified_name": "AnalyticWeightTraits_3::Construct_midpoint_3",
+          "brief": "A construction object that must provide the function operator:",
+          "detailed": "Point_3 operator()(const Point_3 & p, const Point_3 & q) that returns the midpoint between the points p and q .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_3::Construct_midpoint_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_3.h",
+          "line": "107"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_centroid_3",
+          "qualified_name": "AnalyticWeightTraits_3::Construct_centroid_3",
+          "brief": "A construction object that must provide two function operators:",
+          "detailed": "Point_3 operator()(const Point_3 & p, const Point_3 & q, const Point_3 & r) that returns the centroid of the points p , q , and r and Point_3 operator()(const Point_3 & p, const Point_3 & q, const Point_3 & r, const Point_3 & s) that returns the centroid of the points p , q , r and s .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AnalyticWeightTraits_3::Construct_centroid_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Constructions",
+          "file": "Concepts/AnalyticWeightTraits_3.h",
+          "line": "120"
+        }
+      ],
+      "xml_file": "class_analytic_weight_traits__3.xml",
+      "file": "Concepts/AnalyticWeightTraits_3.h",
+      "line": "12"
+    },
+    "BarycentricWeights_2": {
+      "kind": "class",
+      "name": "BarycentricWeights_2",
+      "brief": "A concept that describes the set of methods required in all classes used in the computation of 2D generalized barycentric weights.",
+      "detailed": "Has models CGAL::Weights::Wachspress_weights_2 CGAL::Weights::Mean_value_weights_2 CGAL::Weights::Discrete_harmonic_weights_2",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "BarycentricWeights_2::operator()",
+          "brief": "fills a destination range with 2D generalized barycentric weights computed at the query point with respect to the vertices of the input polygon.",
+          "detailed": "OutIterator a model of OutputIterator whose value type is FieldNumberType The number of computed weights is equal to the number of polygon vertices.",
+          "return_type": "OutIterator",
+          "definition": "OutIterator BarycentricWeights_2::operator()",
+          "argsstring": "(const Point_2 &query, OutIterator w_begin)",
+          "params": [
+            {
+              "type": "const Point_2 &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutIterator",
+              "name": "w_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/BarycentricWeights_2.h",
+          "line": "28"
+        }
+      ],
+      "xml_file": "class_barycentric_weights__2.xml",
+      "file": "Concepts/BarycentricWeights_2.h",
+      "line": "14"
+    },
+    "CGAL::Weights::Discrete_harmonic_weights_2": {
+      "kind": "class",
+      "name": "CGAL::Weights::Discrete_harmonic_weights_2",
+      "brief": "2D discrete harmonic weights for polygons.",
+      "detailed": "This class implements 2D discrete harmonic weights ( [1] , [2] , [6] ) which can be computed at any point inside a strictly convex polygon. Discrete harmonic weights are well-defined inside a strictly convex polygon but they are not necessarily positive. These weights are computed analytically using the formulation from the discrete_harmonic_weight() . VertexRange a model of ConstRange whose iterator type is RandomAccessIterator GeomTraits a model of AnalyticWeightTraits_2 PointMap a model of ReadablePropertyMap whose key type is VertexRange::value_type and value type is Point_2 . The default is CGAL::Identity_property_map . Is model of BarycentricWeights_2",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::FT",
+          "brief": "Number type.",
+          "detailed": "",
+          "return_type": "GeomTraits::FT",
+          "definition": "typedef GeomTraits::FT CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "166"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::Point_2",
+          "brief": "Point type.",
+          "detailed": "",
+          "return_type": "GeomTraits::Point_2",
+          "definition": "typedef GeomTraits::Point_2 CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "169"
+        },
+        {
+          "kind": "function",
+          "name": "Discrete_harmonic_weights_2",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::Discrete_harmonic_weights_2",
+          "brief": "initializes all internal data structures.",
+          "detailed": "This class implements the behavior of discrete harmonic weights for 2D query points inside strictly convex polygons. polygon an instance of VertexRange with the vertices of a strictly convex polygon traits a traits class with geometric objects, predicates, and constructions; the default initialization is provided point_map an instance of PointMap that maps a vertex from polygon to Point_2 ; the default initialization is provided polygon.size() >= 3 polygon is simple polygon is strictly convex",
+          "return_type": "",
+          "definition": "CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::Discrete_harmonic_weights_2",
+          "argsstring": "(const VertexRange &polygon, const GeomTraits traits=GeomTraits(), const PointMap point_map=PointMap())",
+          "params": [
+            {
+              "type": "const VertexRange &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits",
+              "name": "traits",
+              "default": "GeomTraits()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PointMap",
+              "name": "point_map",
+              "default": "PointMap()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Initialization",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "192"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::operator()",
+          "brief": "computes 2D discrete harmonic weights.",
+          "detailed": "This function fills a destination range with 2D discrete harmonic weights computed at the query point with respect to the vertices of the input polygon. The number of computed weights is equal to the number of polygon vertices. OutIterator a model of OutputIterator whose value type is FT query a query point w_begin the beginning of the destination range with the computed weights an output iterator to the element in the destination range, one past the last weight stored",
+          "return_type": "OutIterator",
+          "definition": "OutIterator CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::operator()",
+          "argsstring": "(const Point_2 &query, OutIterator w_begin)",
+          "params": [
+            {
+              "type": "const Point_2 &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutIterator",
+              "name": "w_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "229"
+        },
+        {
+          "kind": "variable",
+          "name": "m_polygon",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::m_polygon",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const VertexRange &",
+          "definition": "const VertexRange& CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::m_polygon",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "250"
+        },
+        {
+          "kind": "variable",
+          "name": "m_traits",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::m_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const GeomTraits",
+          "definition": "const GeomTraits CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::m_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "251"
+        },
+        {
+          "kind": "variable",
+          "name": "m_point_map",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::m_point_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const PointMap",
+          "definition": "const PointMap CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::m_point_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "252"
+        },
+        {
+          "kind": "variable",
+          "name": "m_area_2",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::m_area_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Area_2",
+          "definition": "const Area_2 CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::m_area_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "254"
+        },
+        {
+          "kind": "variable",
+          "name": "m_squared_distance_2",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::m_squared_distance_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Squared_distance_2",
+          "definition": "const Squared_distance_2 CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::m_squared_distance_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "255"
+        },
+        {
+          "kind": "variable",
+          "name": "r",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::r",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::r",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "257"
+        },
+        {
+          "kind": "variable",
+          "name": "A",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::A",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::A",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "258"
+        },
+        {
+          "kind": "variable",
+          "name": "B",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::B",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::B",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "259"
+        },
+        {
+          "kind": "variable",
+          "name": "w",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::w",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::w",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "260"
+        },
+        {
+          "kind": "function",
+          "name": "resize",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::resize",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::resize",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "262"
+        },
+        {
+          "kind": "function",
+          "name": "optimal_weights",
+          "qualified_name": "CGAL::Weights::Discrete_harmonic_weights_2::optimal_weights",
+          "brief": "",
+          "detailed": "",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Weights::Discrete_harmonic_weights_2< VertexRange, GeomTraits, PointMap >::optimal_weights",
+          "argsstring": "(const Point_2 &query, OutputIterator weights, const bool normalize)",
+          "params": [
+            {
+              "type": "const Point_2 &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "weights",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const bool",
+              "name": "normalize",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "271"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_weights_1_1_discrete__harmonic__weights__2.xml",
+      "file": "CGAL/Weights/discrete_harmonic_weights.h",
+      "line": "150"
+    },
+    "CGAL::Weights::Mean_value_weights_2": {
+      "kind": "class",
+      "name": "CGAL::Weights::Mean_value_weights_2",
+      "brief": "2D mean value weights for polygons.",
+      "detailed": "This class implements 2D mean value weights ( [2] , [3] , [4] ) which can be computed at any point inside and outside a simple polygon. Mean value weights are well-defined inside and outside a simple polygon and are non-negative in the kernel of a star-shaped polygon. These weights are computed analytically using the formulation from tangent_weight() . VertexRange a model of ConstRange whose iterator type is RandomAccessIterator GeomTraits a model of AnalyticWeightTraits_2 PointMap a model of ReadablePropertyMap whose key type is VertexRange::value_type and value type is Point_2 . The default is CGAL::Identity_property_map . Is model of BarycentricWeights_2",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::FT",
+          "brief": "Number type.",
+          "detailed": "",
+          "return_type": "GeomTraits::FT",
+          "definition": "typedef GeomTraits::FT CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "221"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::Point_2",
+          "brief": "Point type.",
+          "detailed": "",
+          "return_type": "GeomTraits::Point_2",
+          "definition": "typedef GeomTraits::Point_2 CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "224"
+        },
+        {
+          "kind": "function",
+          "name": "Mean_value_weights_2",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::Mean_value_weights_2",
+          "brief": "initializes all internal data structures.",
+          "detailed": "This class implements the behavior of mean value weights for 2D query points inside simple polygons. polygon an instance of VertexRange with the vertices of a simple polygon traits a traits class with geometric objects, predicates, and constructions; the default initialization is provided point_map an instance of PointMap that maps a vertex from polygon to Point_2 ; the default initialization is provided polygon.size() >= 3 polygon is simple",
+          "return_type": "",
+          "definition": "CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::Mean_value_weights_2",
+          "argsstring": "(const VertexRange &polygon, const GeomTraits traits=GeomTraits(), const PointMap point_map=PointMap())",
+          "params": [
+            {
+              "type": "const VertexRange &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits",
+              "name": "traits",
+              "default": "GeomTraits()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PointMap",
+              "name": "point_map",
+              "default": "PointMap()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Initialization",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "246"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::operator()",
+          "brief": "computes 2D mean value weights.",
+          "detailed": "This function fills a destination range with 2D mean value weights computed at the query point with respect to the vertices of the input polygon. The number of computed weights is equal to the number of polygon vertices. OutIterator a model of OutputIterator whose value type is FT query a query point w_begin the beginning of the destination range with the computed weights an output iterator to the element in the destination range, one past the last weight stored",
+          "return_type": "OutIterator",
+          "definition": "OutIterator CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::operator()",
+          "argsstring": "(const Point_2 &query, OutIterator w_begin)",
+          "params": [
+            {
+              "type": "const Point_2 &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutIterator",
+              "name": "w_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "284"
+        },
+        {
+          "kind": "variable",
+          "name": "m_polygon",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_polygon",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const VertexRange &",
+          "definition": "const VertexRange& CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::m_polygon",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "305"
+        },
+        {
+          "kind": "variable",
+          "name": "m_traits",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const GeomTraits",
+          "definition": "const GeomTraits CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::m_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "306"
+        },
+        {
+          "kind": "variable",
+          "name": "m_point_map",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_point_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const PointMap",
+          "definition": "const PointMap CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::m_point_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "307"
+        },
+        {
+          "kind": "variable",
+          "name": "m_area_2",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_area_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Area_2",
+          "definition": "const Area_2 CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::m_area_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "309"
+        },
+        {
+          "kind": "variable",
+          "name": "m_construct_vector_2",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_construct_vector_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Construct_vector_2",
+          "definition": "const Construct_vector_2 CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::m_construct_vector_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "310"
+        },
+        {
+          "kind": "variable",
+          "name": "m_squared_length_2",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_squared_length_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Squared_length_2",
+          "definition": "const Squared_length_2 CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::m_squared_length_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "311"
+        },
+        {
+          "kind": "variable",
+          "name": "m_scalar_product_2",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_scalar_product_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Scalar_product_2",
+          "definition": "const Scalar_product_2 CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::m_scalar_product_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "312"
+        },
+        {
+          "kind": "variable",
+          "name": "m_sqrt",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::m_sqrt",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Sqrt",
+          "definition": "const Sqrt CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::m_sqrt",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "313"
+        },
+        {
+          "kind": "variable",
+          "name": "s",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::s",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< Vector_2 >",
+          "definition": "std::vector<Vector_2> CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::s",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "315"
+        },
+        {
+          "kind": "variable",
+          "name": "r",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::r",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::r",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "316"
+        },
+        {
+          "kind": "variable",
+          "name": "A",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::A",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::A",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "317"
+        },
+        {
+          "kind": "variable",
+          "name": "D",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::D",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::D",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "318"
+        },
+        {
+          "kind": "variable",
+          "name": "t",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::t",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::t",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "319"
+        },
+        {
+          "kind": "variable",
+          "name": "w",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::w",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::w",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "320"
+        },
+        {
+          "kind": "function",
+          "name": "resize",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::resize",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::resize",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "322"
+        },
+        {
+          "kind": "function",
+          "name": "optimal_weights",
+          "qualified_name": "CGAL::Weights::Mean_value_weights_2::optimal_weights",
+          "brief": "",
+          "detailed": "",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Weights::Mean_value_weights_2< VertexRange, GeomTraits, PointMap >::optimal_weights",
+          "argsstring": "(const Point_2 &query, OutputIterator weights, const bool normalize)",
+          "params": [
+            {
+              "type": "const Point_2 &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "weights",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const bool",
+              "name": "normalize",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "333"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_weights_1_1_mean__value__weights__2.xml",
+      "file": "CGAL/Weights/mean_value_weights.h",
+      "line": "198"
+    },
+    "CGAL::Weights::Wachspress_weights_2": {
+      "kind": "class",
+      "name": "CGAL::Weights::Wachspress_weights_2",
+      "brief": "2D Wachspress weights for polygons.",
+      "detailed": "This class implements 2D Wachspress weights ( [2] , [5] , [7] ) which can be computed at any point inside a strictly convex polygon. Wachspress weights are well-defined and non-negative inside a strictly convex polygon. The weights are computed analytically using the formulation from the wachspress_weight() . VertexRange a model of ConstRange whose iterator type is RandomAccessIterator GeomTraits a model of AnalyticWeightTraits_2 PointMap a model of ReadablePropertyMap whose key type is VertexRange::value_type and value type is Point_2 . The default is CGAL::Identity_property_map . Is model of BarycentricWeights_2",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::FT",
+          "brief": "Number type.",
+          "detailed": "",
+          "return_type": "GeomTraits::FT",
+          "definition": "typedef GeomTraits::FT CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "162"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::Point_2",
+          "brief": "Point type.",
+          "detailed": "",
+          "return_type": "GeomTraits::Point_2",
+          "definition": "typedef GeomTraits::Point_2 CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "165"
+        },
+        {
+          "kind": "function",
+          "name": "Wachspress_weights_2",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::Wachspress_weights_2",
+          "brief": "initializes all internal data structures.",
+          "detailed": "This class implements the behavior of Wachspress weights for 2D query points inside strictly convex polygons. polygon an instance of VertexRange with the vertices of a strictly convex polygon traits a traits class with geometric objects, predicates, and constructions; the default initialization is provided point_map an instance of PointMap that maps a vertex from polygon to Point_2 ; the default initialization is provided polygon.size() >= 3 polygon is simple polygon is strictly convex",
+          "return_type": "",
+          "definition": "CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::Wachspress_weights_2",
+          "argsstring": "(const VertexRange &polygon, GeomTraits traits=GeomTraits(), const PointMap point_map=PointMap())",
+          "params": [
+            {
+              "type": "const VertexRange &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "GeomTraits",
+              "name": "traits",
+              "default": "GeomTraits()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PointMap",
+              "name": "point_map",
+              "default": "PointMap()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Initialization",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "188"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::operator()",
+          "brief": "computes 2D Wachspress weights.",
+          "detailed": "This function fills a destination range with 2D Wachspress weights computed at the query point with respect to the vertices of the input polygon. The number of computed weights is equal to the number of polygon vertices. OutIterator a model of OutputIterator whose value type is FT query a query point w_begin the beginning of the destination range with the computed weights an output iterator to the element in the destination range, one past the last weight stored",
+          "return_type": "OutIterator",
+          "definition": "OutIterator CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::operator()",
+          "argsstring": "(const Point_2 &query, OutIterator w_begin)",
+          "params": [
+            {
+              "type": "const Point_2 &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutIterator",
+              "name": "w_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "225"
+        },
+        {
+          "kind": "variable",
+          "name": "m_polygon",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::m_polygon",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const VertexRange &",
+          "definition": "const VertexRange& CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::m_polygon",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "247"
+        },
+        {
+          "kind": "variable",
+          "name": "m_traits",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::m_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "GeomTraits",
+          "definition": "GeomTraits CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::m_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "248"
+        },
+        {
+          "kind": "variable",
+          "name": "m_point_map",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::m_point_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const PointMap",
+          "definition": "const PointMap CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::m_point_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "249"
+        },
+        {
+          "kind": "variable",
+          "name": "m_area_2",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::m_area_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Area_2",
+          "definition": "Area_2 CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::m_area_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "251"
+        },
+        {
+          "kind": "variable",
+          "name": "A",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::A",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::A",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "253"
+        },
+        {
+          "kind": "variable",
+          "name": "C",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::C",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::C",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "254"
+        },
+        {
+          "kind": "variable",
+          "name": "w",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::w",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< FT >",
+          "definition": "std::vector<FT> CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::w",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "255"
+        },
+        {
+          "kind": "function",
+          "name": "resize",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::resize",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::resize",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "257"
+        },
+        {
+          "kind": "function",
+          "name": "optimal_weights",
+          "qualified_name": "CGAL::Weights::Wachspress_weights_2::optimal_weights",
+          "brief": "",
+          "detailed": "",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Weights::Wachspress_weights_2< VertexRange, GeomTraits, PointMap >::optimal_weights",
+          "argsstring": "(const Point_2 &query, OutputIterator weights, const bool normalize)",
+          "params": [
+            {
+              "type": "const Point_2 &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "weights",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const bool",
+              "name": "normalize",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "private-func",
+          "section": "",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "265"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_weights_1_1_wachspress__weights__2.xml",
+      "file": "CGAL/Weights/wachspress_weights.h",
+      "line": "144"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "PackageDescription.txt",
+      "line": "1"
+    },
+    "CGAL::Weights": {
+      "kind": "namespace",
+      "name": "CGAL::Weights",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_weights.xml",
+      "file": "PackageDescription.txt",
+      "line": "2"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgWeightsRef": {
+      "kind": "group",
+      "name": "PkgWeightsRef",
+      "brief": "",
+      "detailed": "Dmitry Anisimov Many geometric algorithms rely on weighted constructions. This package provides a simple and unified interface to different types of weights. In particular, it includes numerous weights with a simple analytic expression, generalized barycentric weights, and weighting regions. All weights are available both in 2D and 3D. Introduced in: CGAL 5.4 BibTeX: cgal:a-wi-26a License: LGPL Windows Demo: CGAL Lab Weight Interface Concepts BarycentricWeights_2 AnalyticWeightTraits_2 AnalyticWeightTraits_3 Analytic Weights Uniform Weight Shepard Weight Inverse Distance Weight Three Point Family Weight Wachspress Weight Authalic Weight Mean Value Weight Tangent Weight Discrete Harmonic Weight Cotangent Weight Barycentric Weights Wachspress Weights Mean Value Weights Discrete Harmonic Weights Weighting Regions Uniform Region Weight Triangular Region Weight Barycentric Region Weight Voronoi Region Weight Mixed Voronoi Region Weight",
+      "members": [],
+      "xml_file": "group___pkg_weights_ref.xml"
+    },
+    "PkgWeightsRefConcepts": {
+      "kind": "group",
+      "name": "PkgWeightsRefConcepts",
+      "brief": "Concepts which are used to parameterize and define the functions and classes of this package.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_weights_ref_concepts.xml"
+    },
+    "PkgWeightsRefAnalytic": {
+      "kind": "group",
+      "name": "PkgWeightsRefAnalytic",
+      "brief": "Models and functions that can be used to compute weights which have a simple analytic expression.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_weights_ref_analytic.xml"
+    },
+    "PkgWeightsRefBarycentric": {
+      "kind": "group",
+      "name": "PkgWeightsRefBarycentric",
+      "brief": "Models and functions that can be used to compute barycentric weights with respect to polygons.",
+      "detailed": "These weights are then normalized in order to obtain barycentric coordinates.",
+      "members": [],
+      "xml_file": "group___pkg_weights_ref_barycentric.xml"
+    },
+    "PkgWeightsRefRegions": {
+      "kind": "group",
+      "name": "PkgWeightsRefRegions",
+      "brief": "Models and functions that can be used to compute weighting regions.",
+      "detailed": "These weights are used to balance other weights.",
+      "members": [],
+      "xml_file": "group___pkg_weights_ref_regions.xml"
+    },
+    "PkgWeightsRefUniformWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefUniformWeights",
+      "brief": "#include<CGAL/Weights/uniform_weights.h>",
+      "detailed": "This weight is always equal to 1. GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points",
+      "members": [
+        {
+          "kind": "function",
+          "name": "uniform_weight",
+          "qualified_name": "CGAL::Weights::uniform_weight",
+          "brief": "returns 1 .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::uniform_weight",
+          "argsstring": "(const typename GeomTraits::Point_2 &, const typename GeomTraits::Point_2 &, const typename GeomTraits::Point_2 &, const typename GeomTraits::Point_2 &, const GeomTraits &)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/uniform_weights.h",
+          "line": "33"
+        },
+        {
+          "kind": "function",
+          "name": "uniform_weight",
+          "qualified_name": "CGAL::Weights::uniform_weight",
+          "brief": "returns 1 .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::uniform_weight",
+          "argsstring": "(const CGAL::Point_2< GeomTraits > &p0, const CGAL::Point_2< GeomTraits > &p1, const CGAL::Point_2< GeomTraits > &p2, const CGAL::Point_2< GeomTraits > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< GeomTraits > &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< GeomTraits > &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< GeomTraits > &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< GeomTraits > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/uniform_weights.h",
+          "line": "48"
+        },
+        {
+          "kind": "function",
+          "name": "uniform_weight",
+          "qualified_name": "CGAL::Weights::uniform_weight",
+          "brief": "returns 1 .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::uniform_weight",
+          "argsstring": "(const typename GeomTraits::Point_3 &, const typename GeomTraits::Point_3 &, const typename GeomTraits::Point_3 &, const typename GeomTraits::Point_3 &, const GeomTraits &)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/uniform_weights.h",
+          "line": "65"
+        },
+        {
+          "kind": "function",
+          "name": "uniform_weight",
+          "qualified_name": "CGAL::Weights::uniform_weight",
+          "brief": "returns 1 .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::uniform_weight",
+          "argsstring": "(const CGAL::Point_3< GeomTraits > &p0, const CGAL::Point_3< GeomTraits > &p1, const CGAL::Point_3< GeomTraits > &p2, const CGAL::Point_3< GeomTraits > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< GeomTraits > &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< GeomTraits > &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< GeomTraits > &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< GeomTraits > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/uniform_weights.h",
+          "line": "80"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_uniform_weights.xml"
+    },
+    "PkgWeightsRefShepardWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefShepardWeights",
+      "brief": "#include<CGAL/Weights/shepard_weights.h>",
+      "detailed": "This weight is computed as $w = \\frac{1}{d^a}$ with notations shown in the figure below and $a$ any real number being the power parameter. Here, the distance is computed between the points p and q . fig__shepard_weight Notation used for the Shepard weight. Specializations For $a = 1$ , this weight is equal to the Inverse Distance Weight . GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points d != 0",
+      "members": [
+        {
+          "kind": "function",
+          "name": "shepard_weight",
+          "qualified_name": "CGAL::Weights::shepard_weight",
+          "brief": "computes the Shepard weight in 2D using the points p and q and the power parameter a .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::shepard_weight",
+          "argsstring": "(const typename GeomTraits::Point_2 &, const typename GeomTraits::Point_2 &p, const typename GeomTraits::Point_2 &, const typename GeomTraits::Point_2 &q, const typename GeomTraits::FT a, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::FT",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/shepard_weights.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "shepard_weight",
+          "qualified_name": "CGAL::Weights::shepard_weight",
+          "brief": "computes the Shepard weight in 2D using the points p and q , and the power parameter a",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::shepard_weight",
+          "argsstring": "(const CGAL::Point_2< Kernel > &, const CGAL::Point_2< Kernel > &p^, const CGAL::Point_2< Kernel > &, const CGAL::Point_2< Kernel > &q, const typename Kernel::FT a={1})",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &p^",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::FT",
+              "name": "a",
+              "default": "{1}",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/shepard_weights.h",
+          "line": "71"
+        },
+        {
+          "kind": "function",
+          "name": "shepard_weight",
+          "qualified_name": "CGAL::Weights::shepard_weight",
+          "brief": "computes the Shepard weight in 2D using the points p and q and the power parameter a .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::shepard_weight",
+          "argsstring": "(const typename GeomTraits::Point_2 &p, const typename GeomTraits::Point_2 &q, const typename GeomTraits::FT a, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::FT",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/shepard_weights.h",
+          "line": "94"
+        },
+        {
+          "kind": "function",
+          "name": "shepard_weight",
+          "qualified_name": "CGAL::Weights::shepard_weight",
+          "brief": "computes the Shepard weight in 2D using the points p and q , and the power parameter a .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::shepard_weight",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p, const CGAL::Point_2< Kernel > &q, const typename Kernel::FT a={1})",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::FT",
+              "name": "a",
+              "default": "{1}",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/shepard_weights.h",
+          "line": "109"
+        },
+        {
+          "kind": "function",
+          "name": "shepard_weight",
+          "qualified_name": "CGAL::Weights::shepard_weight",
+          "brief": "computes the Shepard weight in 3D using the points p and q and the power parameter a .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_3",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::shepard_weight",
+          "argsstring": "(const typename GeomTraits::Point_3 &, const typename GeomTraits::Point_3 &p, const typename GeomTraits::Point_3 &, const typename GeomTraits::Point_3 &q, const typename GeomTraits::FT a, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::FT",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/shepard_weights.h",
+          "line": "125"
+        },
+        {
+          "kind": "function",
+          "name": "shepard_weight",
+          "qualified_name": "CGAL::Weights::shepard_weight",
+          "brief": "computes the Shepard weight in 3D using the points p and q , and the power parameter a .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::shepard_weight",
+          "argsstring": "(const CGAL::Point_3< Kernel > &p, const CGAL::Point_3< Kernel > &, const CGAL::Point_3< Kernel > &q, const CGAL::Point_3< Kernel > &, const typename Kernel::FT a={1})",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::FT",
+              "name": "a",
+              "default": "{1}",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/shepard_weights.h",
+          "line": "144"
+        },
+        {
+          "kind": "function",
+          "name": "shepard_weight",
+          "qualified_name": "CGAL::Weights::shepard_weight",
+          "brief": "computes the Shepard weight in 3D using the points p and q and the power parameter a .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_3",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::shepard_weight",
+          "argsstring": "(const typename GeomTraits::Point_3 &p, const typename GeomTraits::Point_3 &q, const typename GeomTraits::FT a, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::FT",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/shepard_weights.h",
+          "line": "167"
+        },
+        {
+          "kind": "function",
+          "name": "shepard_weight",
+          "qualified_name": "CGAL::Weights::shepard_weight",
+          "brief": "computes the Shepard weight in 3D using the points p and q , and the power parameter a .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::shepard_weight",
+          "argsstring": "(const CGAL::Point_3< Kernel > &p, const CGAL::Point_3< Kernel > &q, const typename Kernel::FT a={1})",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::FT",
+              "name": "a",
+              "default": "{1}",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/shepard_weights.h",
+          "line": "182"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_shepard_weights.xml"
+    },
+    "PkgWeightsRefInverseDistanceWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefInverseDistanceWeights",
+      "brief": "#include<CGAL/Weights/inverse_distance_weights.h>",
+      "detailed": "This weight is computed as $w = \\frac{1}{d}$ with notations shown in the figure below. Here, the distance is computed between the points p and q . Alternative formulations are explained in Implementation . fig__inverse_distance_weight Notation used for the inverse distance weight. Alternative Formulations This weight is a special case of the Shepard Weight . GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points d != 0",
+      "members": [
+        {
+          "kind": "function",
+          "name": "inverse_distance_weight",
+          "qualified_name": "CGAL::Weights::inverse_distance_weight",
+          "brief": "computes the inverse distance weight in 2D using the points p and q .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::inverse_distance_weight",
+          "argsstring": "(const typename GeomTraits::Point_2 &, const typename GeomTraits::Point_2 &p, const typename GeomTraits::Point_2 &, const typename GeomTraits::Point_2 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/inverse_distance_weights.h",
+          "line": "49"
+        },
+        {
+          "kind": "function",
+          "name": "inverse_distance_weight",
+          "qualified_name": "CGAL::Weights::inverse_distance_weight",
+          "brief": "computes the inverse distance weight in 2D using the points p and q .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::inverse_distance_weight",
+          "argsstring": "(const CGAL::Point_2< Kernel > &, const CGAL::Point_2< Kernel > &p, const CGAL::Point_2< Kernel > &, const CGAL::Point_2< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/inverse_distance_weights.h",
+          "line": "68"
+        },
+        {
+          "kind": "function",
+          "name": "inverse_distance_weight",
+          "qualified_name": "CGAL::Weights::inverse_distance_weight",
+          "brief": "computes the inverse distance weight in 2D using the points p and q .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::inverse_distance_weight",
+          "argsstring": "(const typename GeomTraits::Point_2 &p, const typename GeomTraits::Point_2 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/inverse_distance_weights.h",
+          "line": "89"
+        },
+        {
+          "kind": "function",
+          "name": "inverse_distance_weight",
+          "qualified_name": "CGAL::Weights::inverse_distance_weight",
+          "brief": "computes the inverse distance weight in 2D using the points p and q .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::inverse_distance_weight",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p, const CGAL::Point_2< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/inverse_distance_weights.h",
+          "line": "103"
+        },
+        {
+          "kind": "function",
+          "name": "inverse_distance_weight",
+          "qualified_name": "CGAL::Weights::inverse_distance_weight",
+          "brief": "computes the inverse distance weight in 3D using the points p and q .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_3",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::inverse_distance_weight",
+          "argsstring": "(const typename GeomTraits::Point_3 &, const typename GeomTraits::Point_3 &p, const typename GeomTraits::Point_3 &, const typename GeomTraits::Point_3 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/inverse_distance_weights.h",
+          "line": "118"
+        },
+        {
+          "kind": "function",
+          "name": "inverse_distance_weight",
+          "qualified_name": "CGAL::Weights::inverse_distance_weight",
+          "brief": "computes the inverse distance weight in 3D using the points p and q .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::inverse_distance_weight",
+          "argsstring": "(const CGAL::Point_3< Kernel > &, const CGAL::Point_3< Kernel > &p, const CGAL::Point_3< Kernel > &, const CGAL::Point_3< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/inverse_distance_weights.h",
+          "line": "137"
+        },
+        {
+          "kind": "function",
+          "name": "inverse_distance_weight",
+          "qualified_name": "CGAL::Weights::inverse_distance_weight",
+          "brief": "computes the inverse distance weight in 3D using the points p and q .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_3",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::inverse_distance_weight",
+          "argsstring": "(const typename GeomTraits::Point_3 &p, const typename GeomTraits::Point_3 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/inverse_distance_weights.h",
+          "line": "158"
+        },
+        {
+          "kind": "function",
+          "name": "inverse_distance_weight",
+          "qualified_name": "CGAL::Weights::inverse_distance_weight",
+          "brief": "computes the inverse distance weight in 3D using the points p and q .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::inverse_distance_weight",
+          "argsstring": "(const CGAL::Point_3< Kernel > &p, const CGAL::Point_3< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/inverse_distance_weights.h",
+          "line": "172"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_inverse_distance_weights.xml"
+    },
+    "PkgWeightsRefThreePointFamilyWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefThreePointFamilyWeights",
+      "brief": "#include<CGAL/Weights/three_point_family_weights.h>",
+      "detailed": "This weight is computed as $w = \\frac{d_2^a A_0 - d^a B + d_0^a A_2}{A_0 A_2}$ with notations shown in the figure below and $a$ any real number being the power parameter. Here, q is a query point and the points p0 , p1 , and p2 are its neighbors. This weight supports only planar configurations (see more in section about Coplanarity ) while alternative formulations are explained in Implementation . fig__three_point_family_weight Notation used for the three point family weight. Specializations For $a = 0$ , this weight is equal to the Wachspress Weight and Authalic Weight . For $a = 1$ , this weight is equal to the Mean Value Weight and Tangent Weight . For $a = 2$ , this weight is equal to the Discrete Harmonic Weight and Cotangent Weight . GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points A1 != 0 && A2 != 0",
+      "members": [
+        {
+          "kind": "function",
+          "name": "three_point_family_weight",
+          "qualified_name": "CGAL::Weights::three_point_family_weight",
+          "brief": "computes the three-point family weight in 2D at q using the points p0 , p1 and p2 , and the power parameter a .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::three_point_family_weight",
+          "argsstring": "(const typename GeomTraits::Point_2 &p0, const typename GeomTraits::Point_2 &p1, const typename GeomTraits::Point_2 &p2, const typename GeomTraits::Point_2 &q, const typename GeomTraits::FT a, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::FT",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/three_point_family_weights.h",
+          "line": "60"
+        },
+        {
+          "kind": "function",
+          "name": "three_point_family_weight",
+          "qualified_name": "CGAL::Weights::three_point_family_weight",
+          "brief": "computes the three-point family weight in 2D at q using the points p0 , p1 and p2 , and the power parameter a .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::three_point_family_weight",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p0, const CGAL::Point_2< Kernel > &p1, const CGAL::Point_2< Kernel > &p2, const CGAL::Point_2< Kernel > &q, const typename Kernel::FT a={1})",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::FT",
+              "name": "a",
+              "default": "{1}",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/three_point_family_weights.h",
+          "line": "89"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_three_point_family_weights.xml"
+    },
+    "PkgWeightsRefWachspressWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefWachspressWeights",
+      "brief": "#include<CGAL/Weights/wachspress_weights.h>",
+      "detailed": "This weight is computed as $w = \\frac{C}{A_0 A_2}$ with notations shown in the figure below. Here, q is a query point and the points p0 , p1 , and p2 are its neighbors. This weight supports only planar configurations (see more in section about Coplanarity ) while alternative formulations are explained in Implementation . fig__wachspress_weight Notation used for the Wachspress weight. Alternative Formulations This weight is equal to the Authalic Weight . This weight is a special case of the Three Point Family Weight . GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points A1 != 0 && A2 != 0",
+      "members": [
+        {
+          "kind": "function",
+          "name": "wachspress_weight",
+          "qualified_name": "CGAL::Weights::wachspress_weight",
+          "brief": "computes the Wachspress weight in 2D at q using the points p0 , p1 , and p2 .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::wachspress_weight",
+          "argsstring": "(const typename GeomTraits::Point_2 &p0, const typename GeomTraits::Point_2 &p1, const typename GeomTraits::Point_2 &p2, const typename GeomTraits::Point_2 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "57"
+        },
+        {
+          "kind": "function",
+          "name": "wachspress_weight",
+          "qualified_name": "CGAL::Weights::wachspress_weight",
+          "brief": "computes the Wachspress weight in 2D at q using the points p0 , p1 , and p2 .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::wachspress_weight",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p0, const CGAL::Point_2< Kernel > &p1, const CGAL::Point_2< Kernel > &p2, const CGAL::Point_2< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "80"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_wachspress_weights.xml"
+    },
+    "PkgWeightsRefAuthalicWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefAuthalicWeights",
+      "brief": "#include<CGAL/Weights/authalic_weights.h>",
+      "detailed": "This weight is computed as $w = 2 \\frac{\\cot\\beta + \\cot\\gamma}{d^2}$ with notations shown in the figure below. Here, q is a query point and the points p0 , p1 , and p2 are its neighbors. Alternative formulations are explained in Implementation . fig__authalic_weight Notation used for the authalic weight. Alternative Formulations This weight is equal to the Wachspress Weight . This weight is a special case of the Three Point Family Weight . GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points d != 0",
+      "members": [
+        {
+          "kind": "function",
+          "name": "half_authalic_weight",
+          "qualified_name": "CGAL::Weights::half_authalic_weight",
+          "brief": "computes the half value of the authalic weight.",
+          "detailed": "This function computes the half of the authalic weight using the precomputed cotangent and squared distance values. The returned value is $\\frac{2\\textbf{cot}}{\\textbf{sq\\_d}}$ . FT a model of FieldNumberType cot the cotangent value sq_d the squared distance value sq_d != 0 authalic_weight()",
+          "return_type": "FT",
+          "definition": "FT CGAL::Weights::half_authalic_weight",
+          "argsstring": "(const FT cot, const FT sq_d)",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "cot",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "sq_d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/authalic_weights.h",
+          "line": "74"
+        },
+        {
+          "kind": "function",
+          "name": "authalic_weight",
+          "qualified_name": "CGAL::Weights::authalic_weight",
+          "brief": "computes the authalic weight in 2D at q using the points p0 , p1 , and p2 .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::authalic_weight",
+          "argsstring": "(const typename GeomTraits::Point_2 &p0, const typename GeomTraits::Point_2 &p1, const typename GeomTraits::Point_2 &p2, const typename GeomTraits::Point_2 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/authalic_weights.h",
+          "line": "87"
+        },
+        {
+          "kind": "function",
+          "name": "authalic_weight",
+          "qualified_name": "CGAL::Weights::authalic_weight",
+          "brief": "computes the authalic weight in 2D at q using the points p0 , p1 , and p2 .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::authalic_weight",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p0, const CGAL::Point_2< Kernel > &p1, const CGAL::Point_2< Kernel > &p2, const CGAL::Point_2< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/authalic_weights.h",
+          "line": "110"
+        },
+        {
+          "kind": "function",
+          "name": "authalic_weight",
+          "qualified_name": "CGAL::Weights::authalic_weight",
+          "brief": "computes the authalic weight in 3D at q using the points p0 , p1 , and p2 .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_3",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::authalic_weight",
+          "argsstring": "(const typename GeomTraits::Point_3 &p0, const typename GeomTraits::Point_3 &p1, const typename GeomTraits::Point_3 &p2, const typename GeomTraits::Point_3 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/authalic_weights.h",
+          "line": "127"
+        },
+        {
+          "kind": "function",
+          "name": "authalic_weight",
+          "qualified_name": "CGAL::Weights::authalic_weight",
+          "brief": "computes the authalic weight in 3D at q using the points p0 , p1 , and p2 .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::authalic_weight",
+          "argsstring": "(const CGAL::Point_3< Kernel > &p0, const CGAL::Point_3< Kernel > &p1, const CGAL::Point_3< Kernel > &p2, const CGAL::Point_3< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/authalic_weights.h",
+          "line": "150"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_authalic_weights.xml"
+    },
+    "PkgWeightsRefMeanValueWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefMeanValueWeights",
+      "brief": "#include<CGAL/Weights/mean_value_weights.h>",
+      "detailed": "This weight is computed as $w = \\pm 2 \\sqrt{\\frac{2 (d_0 d_2 - D)}{(d d_0 + D_0)(d d_2 + D_2)}}$ with notations shown in the figure below and dot products $D_0 = (p_0 - q) \\cdot (p_1 - q)$ , $D_2 = (p_1 - q) \\cdot (p_2 - q)$ , and $D = (p_0 - q) \\cdot (p_2 - q)$ . The $\\pm$ sign is a sign of the weight that depends on the configuration. Here, q is a query point and the points p0 , p1 , and p2 are its neighbors. This weight supports only planar configurations (see more in section about Coplanarity ) while alternative formulations are explained in Implementation . fig__mean_value_weight Notation used for the mean value weight. Alternative Formulations This weight is equal to the Tangent Weight . This weight is a special case of the Three Point Family Weight . GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points (d * d1 + D1) != 0 && (d * d2 + D2) != 0",
+      "members": [
+        {
+          "kind": "function",
+          "name": "mean_value_weight",
+          "qualified_name": "CGAL::Weights::mean_value_weight",
+          "brief": "computes the mean value weight in 2D at q using the points p0 , p1 , and p2 .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::mean_value_weight",
+          "argsstring": "(const typename GeomTraits::Point_2 &p0, const typename GeomTraits::Point_2 &p1, const typename GeomTraits::Point_2 &p2, const typename GeomTraits::Point_2 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "96"
+        },
+        {
+          "kind": "function",
+          "name": "mean_value_weight",
+          "qualified_name": "CGAL::Weights::mean_value_weight",
+          "brief": "computes the mean value weight in 2D at q using the points p0 , p1 , and p2 .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::mean_value_weight",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p0, const CGAL::Point_2< Kernel > &p1, const CGAL::Point_2< Kernel > &p2, const CGAL::Point_2< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "135"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_mean_value_weights.xml"
+    },
+    "PkgWeightsRefTangentWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefTangentWeights",
+      "brief": "#include<CGAL/Weights/tangent_weights.h>",
+      "detailed": "This weight is computed as $w = 2 \\frac{t_1 + t_2}{d}$ , where $t_1 = \\frac{2 A_0}{d d_0 + D_0}$ and $t_2 = \\frac{2 A_2}{d d_2 + D_2}$ with notations shown in the figure below and dot products $D_0 = (p_0 - q) \\cdot (p_1 - q)$ and $D_2 = (p_1 - q) \\cdot (p_2 - q)$ . Here, q is a query point and the points p0 , p1 , and p2 are its neighbors. Alternative formulations are explained in Implementation . fig__tangent_weight Notation used for the tangent weight. Alternative Formulations This weight is equal to the Mean Value Weight . This weight is a special case of the Three Point Family Weight . GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points (d * d1 + D1) != 0 && (d * d2 + D2) != 0 && d != 0",
+      "members": [
+        {
+          "kind": "function",
+          "name": "half_tangent_weight",
+          "qualified_name": "CGAL::Weights::half_tangent_weight",
+          "brief": "computes the half value of the tangent weight.",
+          "detailed": "This function constructs the half of the tangent weight using the precomputed half angle tangent and distance values. The returned value is $\\frac{2\\textbf{tan05}}{\\textbf{d}}$ . FT a model of FieldNumberType tan05 the half angle tangent value d the distance value d != 0 tangent_half_angle() tangent_weight()",
+          "return_type": "FT",
+          "definition": "FT CGAL::Weights::half_tangent_weight",
+          "argsstring": "(const FT tan05, const FT d)",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "tan05",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/tangent_weights.h",
+          "line": "160"
+        },
+        {
+          "kind": "function",
+          "name": "tangent_half_angle",
+          "qualified_name": "CGAL::Weights::tangent_half_angle",
+          "brief": "computes the tangent of the half angle.",
+          "detailed": "This function computes the tangent of the half angle using the precomputed distance, area, and dot product values. The returned value is $\\frac{2\\textbf{A}}{\\textbf{d}\\textbf{l} + \\textbf{D}}$ . FT a model of FieldNumberType d the distance value l the distance value A the area value D the dot product value (d * l + D) != 0 half_tangent_weight()",
+          "return_type": "FT",
+          "definition": "FT CGAL::Weights::tangent_half_angle",
+          "argsstring": "(const FT d, const FT l, const FT A, const FT D)",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "l",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "A",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "D",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/tangent_weights.h",
+          "line": "186"
+        },
+        {
+          "kind": "function",
+          "name": "half_tangent_weight",
+          "qualified_name": "CGAL::Weights::half_tangent_weight",
+          "brief": "computes the half value of the tangent weight.",
+          "detailed": "This function constructs the half of the tangent weight using the precomputed distance, area, and dot product values. The returned value is $\\frac{2\\textbf{t}}{\\textbf{d}}$ where $\\textbf{t} = \\frac{2\\textbf{A}}{\\textbf{d}\\textbf{l} + \\textbf{D}}$ . FT a model of FieldNumberType d the distance value l the distance value A the area value D the dot product value (d * l + D) != 0 && d != 0 tangent_weight()",
+          "return_type": "FT",
+          "definition": "FT CGAL::Weights::half_tangent_weight",
+          "argsstring": "(const FT d, const FT l, const FT A, const FT D)",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "l",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "A",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "D",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/tangent_weights.h",
+          "line": "223"
+        },
+        {
+          "kind": "function",
+          "name": "tangent_weight",
+          "qualified_name": "CGAL::Weights::tangent_weight",
+          "brief": "computes the tangent weight in 2D at q using the points p0 , p1 , and p2",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::tangent_weight",
+          "argsstring": "(const typename GeomTraits::Point_2 &p0, const typename GeomTraits::Point_2 &p1, const typename GeomTraits::Point_2 &p2, const typename GeomTraits::Point_2 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/tangent_weights.h",
+          "line": "288"
+        },
+        {
+          "kind": "function",
+          "name": "tangent_weight",
+          "qualified_name": "CGAL::Weights::tangent_weight",
+          "brief": "computes the tangent weight in 2D at q using the points p0 , p1 , and p2",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::tangent_weight",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p0, const CGAL::Point_2< Kernel > &p1, const CGAL::Point_2< Kernel > &p2, const CGAL::Point_2< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/tangent_weights.h",
+          "line": "324"
+        },
+        {
+          "kind": "function",
+          "name": "tangent_weight",
+          "qualified_name": "CGAL::Weights::tangent_weight",
+          "brief": "computes the tangent weight in 3D at q using the points p0 , p1 , and p2",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_3",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::tangent_weight",
+          "argsstring": "(const typename GeomTraits::Point_3 &p0, const typename GeomTraits::Point_3 &p1, const typename GeomTraits::Point_3 &p2, const typename GeomTraits::Point_3 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/tangent_weights.h",
+          "line": "341"
+        },
+        {
+          "kind": "function",
+          "name": "tangent_weight",
+          "qualified_name": "CGAL::Weights::tangent_weight",
+          "brief": "computes the tangent weight in 3D at q using the points p0 , p1 , and p2",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::tangent_weight",
+          "argsstring": "(const CGAL::Point_3< Kernel > &p0, const CGAL::Point_3< Kernel > &p1, const CGAL::Point_3< Kernel > &p2, const CGAL::Point_3< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/tangent_weights.h",
+          "line": "357"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_tangent_weights.xml"
+    },
+    "PkgWeightsRefDiscreteHarmonicWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefDiscreteHarmonicWeights",
+      "brief": "#include<CGAL/Weights/discrete_harmonic_weights.h>",
+      "detailed": "This weight is computed as $w = \\frac{d_2^2 A_0 - d^2 B + d_0^2 A_2}{A_0 A_2}$ with notations shown in the figure below. Here, q is a query point and the points p0 , p1 , and p2 are its neighbors. This weight supports only planar configurations (see more in section about Coplanarity ) while alternative formulations are explained in Implementation . fig__discrete_harmonic_weight Notation used for the discrete harmonic weight. Alternative Formulations This weight is equal to the Cotangent Weight . This weight is a special case of the Three Point Family Weight . GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points A1 != 0 && A2 != 0",
+      "members": [
+        {
+          "kind": "function",
+          "name": "discrete_harmonic_weight",
+          "qualified_name": "CGAL::Weights::discrete_harmonic_weight",
+          "brief": "computes the discrete harmonic weight in 2D at q using the points p0 , p1 , and p2 .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::discrete_harmonic_weight",
+          "argsstring": "(const typename GeomTraits::Point_2 &p0, const typename GeomTraits::Point_2 &p1, const typename GeomTraits::Point_2 &p2, const typename GeomTraits::Point_2 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "58"
+        },
+        {
+          "kind": "function",
+          "name": "discrete_harmonic_weight",
+          "qualified_name": "CGAL::Weights::discrete_harmonic_weight",
+          "brief": "computes the discrete harmonic weight in 2D at q using the points p0 , p1 , and p2 .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::discrete_harmonic_weight",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p0, const CGAL::Point_2< Kernel > &p1, const CGAL::Point_2< Kernel > &p2, const CGAL::Point_2< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "86"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_discrete_harmonic_weights.xml"
+    },
+    "PkgWeightsRefCotangentWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefCotangentWeights",
+      "brief": "#include<CGAL/Weights/cotangent_weights.h>",
+      "detailed": "This weight is computed as $w = 2 (\\cot\\beta + \\cot\\gamma)$ with notations shown in the figure below. Here, q is a query point and the points p0 , p1 , and p2 are its neighbors. Alternative formulations are explained in Implementation . fig__cotangent_weight Notation used for the cotangent weight. Alternative Formulations This weight is equal to the Discrete Harmonic Weight . This weight is a special case of the Three Point Family Weight . GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points",
+      "members": [
+        {
+          "kind": "function",
+          "name": "half_cotangent_weight",
+          "qualified_name": "CGAL::Weights::half_cotangent_weight",
+          "brief": "computes the half value of the cotangent weight.",
+          "detailed": "This function constructs the half of the cotangent weight using the precomputed cotangent value. The returned value is $2\\textbf{cot}$ . FT a model of FieldNumberType cot the cotangent value cotangent_weight()",
+          "return_type": "FT",
+          "definition": "FT CGAL::Weights::half_cotangent_weight",
+          "argsstring": "(const FT cot)",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "cot",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/cotangent_weights.h",
+          "line": "64"
+        },
+        {
+          "kind": "function",
+          "name": "cotangent_weight",
+          "qualified_name": "CGAL::Weights::cotangent_weight",
+          "brief": "computes the cotangent weight in 2D at q using the points p0 , p1 , and p2 .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::cotangent_weight",
+          "argsstring": "(const typename GeomTraits::Point_2 &p0, const typename GeomTraits::Point_2 &p1, const typename GeomTraits::Point_2 &p2, const typename GeomTraits::Point_2 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/cotangent_weights.h",
+          "line": "75"
+        },
+        {
+          "kind": "function",
+          "name": "cotangent_weight",
+          "qualified_name": "CGAL::Weights::cotangent_weight",
+          "brief": "computes the cotangent weight in 2D at q using the points p0 , p1 , and p2 .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::cotangent_weight",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p0, const CGAL::Point_2< Kernel > &p1, const CGAL::Point_2< Kernel > &p2, const CGAL::Point_2< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/cotangent_weights.h",
+          "line": "95"
+        },
+        {
+          "kind": "function",
+          "name": "cotangent_weight",
+          "qualified_name": "CGAL::Weights::cotangent_weight",
+          "brief": "computes the cotangent weight in 3D at q using the points p0 , p1 , and p2 .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_3",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::cotangent_weight",
+          "argsstring": "(const typename GeomTraits::Point_3 &p0, const typename GeomTraits::Point_3 &p1, const typename GeomTraits::Point_3 &p2, const typename GeomTraits::Point_3 &q, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/cotangent_weights.h",
+          "line": "112"
+        },
+        {
+          "kind": "function",
+          "name": "cotangent_weight",
+          "qualified_name": "CGAL::Weights::cotangent_weight",
+          "brief": "computes the cotangent weight in 3D at q using the points p0 , p1 , and p2 .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::cotangent_weight",
+          "argsstring": "(const CGAL::Point_3< Kernel > &p0, const CGAL::Point_3< Kernel > &p1, const CGAL::Point_3< Kernel > &p2, const CGAL::Point_3< Kernel > &q)",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/cotangent_weights.h",
+          "line": "132"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_cotangent_weights.xml"
+    },
+    "PkgWeightsRefBarycentricWachspressWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefBarycentricWachspressWeights",
+      "brief": "#include<CGAL/Weights/wachspress_weights.h>",
+      "detailed": "Wachspress weights which can be computed for a query point with respect to the vertices of a strictly convex polygon.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "wachspress_weights_2",
+          "qualified_name": "CGAL::Weights::wachspress_weights_2",
+          "brief": "computes 2D Wachspress weights for polygons.",
+          "detailed": "This function computes 2D Wachspress weights at a given query point with respect to the vertices of a strictly convex polygon , that is one weight per vertex. The weights are stored in a destination range beginning at w_begin . Internally, the class Wachspress_weights_2 is used. If one wants to process multiple query points, it is better to use that class. When using the free function, internal memory is allocated for each query point, while when using the class, it is allocated only once which is much more efficient. However, for a few query points, it is easier to use this function. It can also be used when the processing time is not a concern. PointRange a model of ConstRange whose iterator type is RandomAccessIterator and value type is GeomTraits::Point_2 OutIterator a model of OutputIterator whose value type is GeomTraits::FT GeomTraits a model of AnalyticWeightTraits_2 polygon an instance of PointRange with 2D points which form a strictly convex polygon query a query point w_begin the beginning of the destination range with the computed weights traits a traits class with geometric objects, predicates, and constructions; this parameter can be omitted if the traits class can be deduced from the point type an output iterator to the element in the destination range, one past the last weight stored polygon.size() >= 3 polygon is simple polygon is strictly convex",
+          "return_type": "OutIterator",
+          "definition": "OutIterator CGAL::Weights::wachspress_weights_2",
+          "argsstring": "(const PointRange &polygon, const typename GeomTraits::Point_2 &query, OutIterator w_begin, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const PointRange &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutIterator",
+              "name": "w_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/wachspress_weights.h",
+          "line": "358"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_barycentric_wachspress_weights.xml"
+    },
+    "PkgWeightsRefBarycentricMeanValueWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefBarycentricMeanValueWeights",
+      "brief": "#include<CGAL/Weights/mean_value_weights.h>",
+      "detailed": "Mean value weights which can be computed for a query point with respect to the vertices of a simple polygon.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "mean_value_weights_2",
+          "qualified_name": "CGAL::Weights::mean_value_weights_2",
+          "brief": "computes 2D mean value weights for polygons.",
+          "detailed": "This function computes 2D mean value weights at a given query point with respect to the vertices of a simple polygon , that is one weight per vertex. The weights are stored in a destination range beginning at w_begin . Internally, the class Mean_value_weights_2 is used. If one wants to process multiple query points, it is better to use that class. When using the free function, internal memory is allocated for each query point, while when using the class, it is allocated only once which is much more efficient. However, for a few query points, it is easier to use this function. It can also be used when the processing time is not a concern. PointRange a model of ConstRange whose iterator type is RandomAccessIterator and value type is GeomTraits::Point_2 OutIterator a model of OutputIterator whose value type is GeomTraits::FT GeomTraits a model of AnalyticWeightTraits_2 polygon an instance of PointRange with 2D points which form a simple polygon query a query point w_begin the beginning of the destination range with the computed weights traits a traits class with geometric objects, predicates, and constructions; this parameter can be omitted if the traits class can be deduced from the point type an output iterator to the element in the destination range, one past the last weight stored polygon.size() >= 3 polygon is simple",
+          "return_type": "OutIterator",
+          "definition": "OutIterator CGAL::Weights::mean_value_weights_2",
+          "argsstring": "(const PointRange &polygon, const typename GeomTraits::Point_2 &query, OutIterator w_begin, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const PointRange &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutIterator",
+              "name": "w_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/mean_value_weights.h",
+          "line": "442"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_barycentric_mean_value_weights.xml"
+    },
+    "PkgWeightsRefBarycentricDiscreteHarmonicWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefBarycentricDiscreteHarmonicWeights",
+      "brief": "#include<CGAL/Weights/discrete_harmonic_weights.h>",
+      "detailed": "Discrete Harmonic weights which can be computed for a query point with respect to the vertices of a strictly convex polygon.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "discrete_harmonic_weights_2",
+          "qualified_name": "CGAL::Weights::discrete_harmonic_weights_2",
+          "brief": "computes 2D discrete harmonic weights for polygons.",
+          "detailed": "This function computes 2D discrete harmonic weights at a given query point with respect to the vertices of a strictly convex polygon , that is one weight per vertex. The weights are stored in a destination range beginning at w_begin . Internally, the class Discrete_harmonic_weights_2 is used. If one wants to process multiple query points, it is better to use that class. When using the free function, internal memory is allocated for each query point, while when using the class, it is allocated only once which is much more efficient. However, for a few query points, it is easier to use this function. It can also be used when the processing time is not a concern. PointRange a model of ConstRange whose iterator type is RandomAccessIterator and value type is GeomTraits::Point_2 OutIterator a model of OutputIterator whose value type is GeomTraits::FT GeomTraits a model of AnalyticWeightTraits_2 polygon an instance of PointRange with 2D points which form a strictly convex polygon query a query point w_begin the beginning of the destination range with the computed weights traits a traits class with geometric objects, predicates, and constructions; this parameter can be omitted if the traits class can be deduced from the point type an output iterator to the element in the destination range, one past the last weight stored polygon.size() >= 3 polygon is simple polygon is strictly convex",
+          "return_type": "OutIterator",
+          "definition": "OutIterator CGAL::Weights::discrete_harmonic_weights_2",
+          "argsstring": "(const PointRange &polygon, const typename GeomTraits::Point_2 &query, OutIterator w_begin, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const PointRange &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutIterator",
+              "name": "w_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/discrete_harmonic_weights.h",
+          "line": "366"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_barycentric_discrete_harmonic_weights.xml"
+    },
+    "PkgWeightsRefUniformRegionWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefUniformRegionWeights",
+      "brief": "#include<CGAL/Weights/uniform_region_weights.h>",
+      "detailed": "This weight is always equal to 1. GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points",
+      "members": [
+        {
+          "kind": "function",
+          "name": "uniform_area",
+          "qualified_name": "CGAL::Weights::uniform_area",
+          "brief": "this function always returns 1 , given three 2D points.",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::uniform_area",
+          "argsstring": "(const typename GeomTraits::Point_2 &, const typename GeomTraits::Point_2 &, const typename GeomTraits::Point_2 &, const GeomTraits &)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/uniform_region_weights.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "uniform_area",
+          "qualified_name": "CGAL::Weights::uniform_area",
+          "brief": "this function always returns 1 , given three 2D points in 2D.",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::uniform_area",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p, const CGAL::Point_2< Kernel > &q, const CGAL::Point_2< Kernel > &r)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/uniform_region_weights.h",
+          "line": "46"
+        },
+        {
+          "kind": "function",
+          "name": "uniform_area",
+          "qualified_name": "CGAL::Weights::uniform_area",
+          "brief": "this function always returns 1 , given three 3D points.",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_3",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::uniform_area",
+          "argsstring": "(const typename GeomTraits::Point_3 &, const typename GeomTraits::Point_3 &, const typename GeomTraits::Point_3 &, const GeomTraits &)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/uniform_region_weights.h",
+          "line": "62"
+        },
+        {
+          "kind": "function",
+          "name": "uniform_area",
+          "qualified_name": "CGAL::Weights::uniform_area",
+          "brief": "this function always returns 1 , given three 3D points.",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::uniform_area",
+          "argsstring": "(const CGAL::Point_3< Kernel > &p, const CGAL::Point_3< Kernel > &q, const CGAL::Point_3< Kernel > &r)",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/uniform_region_weights.h",
+          "line": "77"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_uniform_region_weights.xml"
+    },
+    "PkgWeightsRefTriangularRegionWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefTriangularRegionWeights",
+      "brief": "#include<CGAL/Weights/triangular_region_weights.h>",
+      "detailed": "This weight is the area of the shaded region in the figure below. The region is the triangle [p, q, r] . fig__triangular_area Notation used for the triangular cell. GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points",
+      "members": [
+        {
+          "kind": "function",
+          "name": "triangular_area",
+          "qualified_name": "CGAL::Weights::triangular_area",
+          "brief": "computes the area of the triangular cell in 2D using the points p , q , and r",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::triangular_area",
+          "argsstring": "(const typename GeomTraits::Point_2 &p, const typename GeomTraits::Point_2 &q, const typename GeomTraits::Point_2 &r, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/triangular_region_weights.h",
+          "line": "33"
+        },
+        {
+          "kind": "function",
+          "name": "triangular_area",
+          "qualified_name": "CGAL::Weights::triangular_area",
+          "brief": "computes the area of the triangular cell in 2D using the points p , q , and r .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::triangular_area",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p, const CGAL::Point_2< Kernel > &q, const CGAL::Point_2< Kernel > &r)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/triangular_region_weights.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "triangular_area",
+          "qualified_name": "CGAL::Weights::triangular_area",
+          "brief": "computes the area of the triangular cell in 3D using the points p , q , and r .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_3",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::triangular_area",
+          "argsstring": "(const typename GeomTraits::Point_3 &p, const typename GeomTraits::Point_3 &q, const typename GeomTraits::Point_3 &r, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/triangular_region_weights.h",
+          "line": "63"
+        },
+        {
+          "kind": "function",
+          "name": "triangular_area",
+          "qualified_name": "CGAL::Weights::triangular_area",
+          "brief": "computes the area of the triangular cell in 3D using the points p , q , and r .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::triangular_area",
+          "argsstring": "(const CGAL::Point_3< Kernel > &p, const CGAL::Point_3< Kernel > &q, const CGAL::Point_3< Kernel > &r)",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/triangular_region_weights.h",
+          "line": "77"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_triangular_region_weights.xml"
+    },
+    "PkgWeightsRefBarycentricRegionWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefBarycentricRegionWeights",
+      "brief": "#include<CGAL/Weights/barycentric_region_weights.h>",
+      "detailed": "This weight is the area of the shaded region in the figure below. The region is formed by the two midpoints of the edges incident to q and the barycenter of the triangle [p, q, r] . fig__barycentric_area Notation used for the barycentric cell. GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points",
+      "members": [
+        {
+          "kind": "function",
+          "name": "barycentric_area",
+          "qualified_name": "CGAL::Weights::barycentric_area",
+          "brief": "computes the area of the barycentric cell in 2D using the points p , q , and r .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::barycentric_area",
+          "argsstring": "(const typename GeomTraits::Point_2 &p, const typename GeomTraits::Point_2 &q, const typename GeomTraits::Point_2 &r, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/barycentric_region_weights.h",
+          "line": "33"
+        },
+        {
+          "kind": "function",
+          "name": "barycentric_area",
+          "qualified_name": "CGAL::Weights::barycentric_area",
+          "brief": "computes the area of the barycentric cell in 2D using the points p , q , and r .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::barycentric_area",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p, const CGAL::Point_2< Kernel > &q, const CGAL::Point_2< Kernel > &r)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/barycentric_region_weights.h",
+          "line": "59"
+        },
+        {
+          "kind": "function",
+          "name": "barycentric_area",
+          "qualified_name": "CGAL::Weights::barycentric_area",
+          "brief": "computes the area of the barycentric cell in 3D using the points p , q , and r .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_3",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::barycentric_area",
+          "argsstring": "(const typename GeomTraits::Point_3 &p, const typename GeomTraits::Point_3 &q, const typename GeomTraits::Point_3 &r, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/barycentric_region_weights.h",
+          "line": "75"
+        },
+        {
+          "kind": "function",
+          "name": "barycentric_area",
+          "qualified_name": "CGAL::Weights::barycentric_area",
+          "brief": "computes the area of the barycentric cell in 3D using the points p , q , and r .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::barycentric_area",
+          "argsstring": "(const CGAL::Point_3< Kernel > &p, const CGAL::Point_3< Kernel > &q, const CGAL::Point_3< Kernel > &r)",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/barycentric_region_weights.h",
+          "line": "101"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_barycentric_region_weights.xml"
+    },
+    "PkgWeightsRefVoronoiRegionWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefVoronoiRegionWeights",
+      "brief": "#include<CGAL/Weights/voronoi_region_weights.h>",
+      "detailed": "This weight is the area of the shaded region in the figure below. The region is formed by the two midpoints of the edges incident to q and the circumcenter of the triangle [p, q, r] . fig__voronoi_area Notation used for the Voronoi cell. GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points Mixed Voronoi Region Weight",
+      "members": [
+        {
+          "kind": "function",
+          "name": "voronoi_area",
+          "qualified_name": "CGAL::Weights::voronoi_area",
+          "brief": "computes the area of the Voronoi cell in 2D using the points p , q , and r .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::voronoi_area",
+          "argsstring": "(const typename GeomTraits::Point_2 &p, const typename GeomTraits::Point_2 &q, const typename GeomTraits::Point_2 &r, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/voronoi_region_weights.h",
+          "line": "33"
+        },
+        {
+          "kind": "function",
+          "name": "voronoi_area",
+          "qualified_name": "CGAL::Weights::voronoi_area",
+          "brief": "computes the area of the Voronoi cell in 2D using the points p , q , and r .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::voronoi_area",
+          "argsstring": "(const CGAL::Point_2< Kernel > &p, const CGAL::Point_2< Kernel > &q, const CGAL::Point_2< Kernel > &r)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< Kernel > &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/voronoi_region_weights.h",
+          "line": "60"
+        },
+        {
+          "kind": "function",
+          "name": "voronoi_area",
+          "qualified_name": "CGAL::Weights::voronoi_area",
+          "brief": "computes the area of the Voronoi cell in 3D using the points p , q , and r",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_3 .",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::voronoi_area",
+          "argsstring": "(const typename GeomTraits::Point_3 &p, const typename GeomTraits::Point_3 &q, const typename GeomTraits::Point_3 &r, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/voronoi_region_weights.h",
+          "line": "76"
+        },
+        {
+          "kind": "function",
+          "name": "voronoi_area",
+          "qualified_name": "CGAL::Weights::voronoi_area",
+          "brief": "computes the area of the Voronoi cell in 3D using the points p , q , and r .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::voronoi_area",
+          "argsstring": "(const CGAL::Point_3< Kernel > &p, const CGAL::Point_3< Kernel > &q, const CGAL::Point_3< Kernel > &r)",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/voronoi_region_weights.h",
+          "line": "103"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_voronoi_region_weights.xml"
+    },
+    "PkgWeightsRefMixedVoronoiRegionWeights": {
+      "kind": "group",
+      "name": "PkgWeightsRefMixedVoronoiRegionWeights",
+      "brief": "#include<CGAL/Weights/mixed_voronoi_region_weights.h>",
+      "detailed": "This weight is the area of the shaded region in the figure below. The region is formed by the two midpoints of the edges incident to q and the circumcenter of the triangle [p, q, r] . fig__mixed_voronoi_area Notation used for the mixed Voronoi cell. However, unlike the original Voronoi Region Weight , if one of the angles in the triangle [p, q, r] is obtuse and the circumcenter vertex of the region is outside this triangle, this vertex is moved to the midpoint of the edge [r, p] as shown in the figure below. fig__mixed_voronoi_area_obtuse The case with the obtuse angle. GeomTraits a model of AnalyticWeightTraits_2 for 2D points; a model of AnalyticWeightTraits_3 for 3D points Voronoi Region Weight",
+      "members": [
+        {
+          "kind": "function",
+          "name": "mixed_voronoi_area",
+          "qualified_name": "CGAL::Weights::mixed_voronoi_area",
+          "brief": "computes the area of the mixed Voronoi cell in 2D using the points p , q , and r .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_2",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::mixed_voronoi_area",
+          "argsstring": "(const typename GeomTraits::Point_2 &p, const typename GeomTraits::Point_2 &q, const typename GeomTraits::Point_2 &r, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_2 &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/mixed_voronoi_region_weights.h",
+          "line": "33"
+        },
+        {
+          "kind": "function",
+          "name": "mixed_voronoi_area",
+          "qualified_name": "CGAL::Weights::mixed_voronoi_area",
+          "brief": "computes the area of the mixed Voronoi cell in 2D using the points p , q , and r .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::mixed_voronoi_area",
+          "argsstring": "(const CGAL::Point_2< GeomTraits > &p, const CGAL::Point_2< GeomTraits > &q, const CGAL::Point_2< GeomTraits > &r)",
+          "params": [
+            {
+              "type": "const CGAL::Point_2< GeomTraits > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< GeomTraits > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_2< GeomTraits > &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/mixed_voronoi_region_weights.h",
+          "line": "68"
+        },
+        {
+          "kind": "function",
+          "name": "mixed_voronoi_area",
+          "qualified_name": "CGAL::Weights::mixed_voronoi_area",
+          "brief": "computes the area of the mixed Voronoi cell in 3D using the points p , q , and r .",
+          "detailed": "GeomTraits a model of AnalyticWeightTraits_3",
+          "return_type": "GeomTraits::FT",
+          "definition": "GeomTraits::FT CGAL::Weights::mixed_voronoi_area",
+          "argsstring": "(const typename GeomTraits::Point_3 &p, const typename GeomTraits::Point_3 &q, const typename GeomTraits::Point_3 &r, const GeomTraits &traits)",
+          "params": [
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename GeomTraits::Point_3 &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const GeomTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/mixed_voronoi_region_weights.h",
+          "line": "84"
+        },
+        {
+          "kind": "function",
+          "name": "mixed_voronoi_area",
+          "qualified_name": "CGAL::Weights::mixed_voronoi_area",
+          "brief": "computes the area of the mixed Voronoi cell in 3D using the points p , q , and r .",
+          "detailed": "Kernel a model of Kernel",
+          "return_type": "Kernel::FT",
+          "definition": "Kernel::FT CGAL::Weights::mixed_voronoi_area",
+          "argsstring": "(const CGAL::Point_3< Kernel > &p, const CGAL::Point_3< Kernel > &q, const CGAL::Point_3< Kernel > &r)",
+          "params": [
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CGAL::Point_3< Kernel > &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Weights/mixed_voronoi_region_weights.h",
+          "line": "119"
+        }
+      ],
+      "xml_file": "group___pkg_weights_ref_mixed_voronoi_region_weights.xml"
+    }
+  }
+}

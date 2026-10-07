@@ -1,0 +1,519 @@
+{
+  "schema_version": 1,
+  "package": "Set_movable_separability_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 10,
+  "skipped_count": 0,
+  "compounds": {
+    "CastingTraits_2": {
+      "kind": "class",
+      "name": "CastingTraits_2",
+      "brief": "This concept generalizes the concept of a 2D Kernel.",
+      "detailed": "Refines DefaultConstructible PolygonTraits_2 Has models Any CGAL kernel, e.g., CGAL::Exact_predicates_exact_constructions_kernel.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Direction_2",
+          "qualified_name": "CastingTraits_2::Direction_2",
+          "brief": "The direction type. Models the concept Kernel::Direction_2 .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CastingTraits_2::Direction_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/CastingTraits_2.h",
+          "line": "23"
+        },
+        {
+          "kind": "typedef",
+          "name": "Counterclockwise_in_between_2",
+          "qualified_name": "CastingTraits_2::Counterclockwise_in_between_2",
+          "brief": "Models the concept Kernel::Counterclockwise_in_between_2 .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CastingTraits_2::Counterclockwise_in_between_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functor Types",
+          "file": "Concepts/CastingTraits_2.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "Collinear_2",
+          "qualified_name": "CastingTraits_2::Collinear_2",
+          "brief": "Models the concept Kernel::Collinear_2 .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CastingTraits_2::Collinear_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functor Types",
+          "file": "Concepts/CastingTraits_2.h",
+          "line": "34"
+        },
+        {
+          "kind": "function",
+          "name": "counterclockwise_in_between_2_object",
+          "qualified_name": "CastingTraits_2::counterclockwise_in_between_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Counterclockwise_in_between_2",
+          "definition": "Counterclockwise_in_between_2 CastingTraits_2::counterclockwise_in_between_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Accessing Functor Objects",
+          "file": "Concepts/CastingTraits_2.h",
+          "line": "41"
+        },
+        {
+          "kind": "function",
+          "name": "collinear_2_object",
+          "qualified_name": "CastingTraits_2::collinear_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Collinear_2",
+          "definition": "Collinear_2 CastingTraits_2::collinear_2_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Accessing Functor Objects",
+          "file": "Concepts/CastingTraits_2.h",
+          "line": "42"
+        }
+      ],
+      "xml_file": "class_casting_traits__2.xml",
+      "file": "Concepts/CastingTraits_2.h",
+      "line": "16"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/Set_movable_separability_2/Single_mold_translational_casting/is_pullout_direction.h",
+      "line": "1"
+    },
+    "CGAL::Set_movable_separability_2": {
+      "kind": "namespace",
+      "name": "CGAL::Set_movable_separability_2",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_set__movable__separability__2.xml",
+      "file": "CGAL/Set_movable_separability_2/Single_mold_translational_casting/is_pullout_direction.h",
+      "line": "2"
+    },
+    "CGAL::Set_movable_separability_2::Single_mold_translational_casting": {
+      "kind": "namespace",
+      "name": "CGAL::Set_movable_separability_2::Single_mold_translational_casting",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_set__movable__separability__2_1_1_single__mold__translational__casting.xml",
+      "file": "CGAL/Set_movable_separability_2/Single_mold_translational_casting/is_pullout_direction.h",
+      "line": "3"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgSetMovableSeparability2Ref": {
+      "kind": "group",
+      "name": "PkgSetMovableSeparability2Ref",
+      "brief": "",
+      "detailed": "Shahar Shamai and Efi Fogel Movable Separability of Sets [2] is a class of problems that deal with moving sets of objects, such as polygons in the plane; the challenge is to avoid collisions between the objects while considering different kinds of motions and various definitions of separation. Introduced in: CGAL 4.12 Depends on: PkgPolygon2 BibTeX: cgal:sf-sms2-26a License: GPL At this point this package consists of the implementations of various predicates and constructions related to castings of polygonal objects. In particular, it can be used to determine whether a feasible mold for a polygonal object does exist. If a mold exists, the package can also be used to compute all possible orientations of the feasible molds and the corresponding motions needed to remove the casted object from the mold. Classified Reference Pages Casting Functions CGAL::Set_movable_separability_2::Single_mold_translational_casting::top_edges() CGAL::Set_movable_separability_2::Single_mold_translational_casting::pullout_directions() CGAL::Set_movable_separability_2::Single_mold_translational_casting::is_pullout_direction() Casting Concepts CastingTraits_2",
+      "members": [],
+      "xml_file": "group___pkg_set_movable_separability2_ref.xml"
+    },
+    "top_edges_grp": {
+      "kind": "group",
+      "name": "top_edges_grp",
+      "brief": "These function determine whether a cavity (of a mold in the plane) that has the shape of a given polygon could be casted in the mold and then pulled out of the mold without colliding into the mold (but possibly sliding along the mold boundary).",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "top_edges",
+          "qualified_name": "CGAL::Set_movable_separability_2::Single_mold_translational_casting::top_edges",
+          "brief": "Given a simple polygon, this function determines whether a cavity (of a mold in the plane) that has the shape of the polygon can be used so that the polygon could be casted in the mold and then pulled out of the mold without colliding into the mold (but possibly sliding along the mold surface).",
+          "detailed": "If the polygon is castable , the function computes the set of top edges of such cavities and the corresponding closed ranges of pullout directions. Let $n$ denote the normal to a top edge $e$ , and let $d$ denote a pullout direction of $e$ . Naturally, the angle between $n$ and $d$ must be in the open range (-90 , 90 ); that is, $n \\cdot d > 0$ . Each top edge and corresponding range is added to a container referred to by a given output iterator. The type that substitutes the template parameter CastingTraits_2 must be a model of the concept CastingTraits_2 . polygon the input polygon. oi the output iterator. Its dereference type is a pair, where (i) the first element in the pair is an iterator to a top edge, and (ii) the second element is a closed range of pullout directions represented as a pair of the extreme directions in the range of type CastingTraits_2::Direction_2 . traits the traits to use. the past-the-end iterator of the output container. polygon must be non-degenerate (has at least 3 vertices) and simple, and it does not have three consecutive collinear vertices.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Set_movable_separability_2::Single_mold_translational_casting::top_edges",
+          "argsstring": "(const CGAL::Polygon_2< CastingTraits > &polygon, OutputIterator oi, CastingTraits_2 &traits=CastingTraits_2())",
+          "params": [
+            {
+              "type": "const CGAL::Polygon_2< CastingTraits > &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "oi",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CastingTraits_2 &",
+              "name": "traits",
+              "default": "CastingTraits_2 ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Set_movable_separability_2/Single_mold_translational_casting/top_edges.h",
+          "line": "35"
+        },
+        {
+          "kind": "function",
+          "name": "top_edges",
+          "qualified_name": "CGAL::Set_movable_separability_2::Single_mold_translational_casting::top_edges",
+          "brief": "Same as above with the additional orientation argument.",
+          "detailed": "If the orientation of the polygon is known upon invocation, specify it. Otherwise, it has to be computed. Note that finding the orientation of a polygon requires time linear in the number of edges. polygon the input polygon. oi the output iterator. Its dereference type is a pair, where (i) the first element in the pair is an iterator to a top edge, and (ii) the second element is a closed range of pullout directions represented as a pair of the extreme directions in the range of type CastingTraits_2::Direction_2 . orientation the orientation of polygon . traits the traits to use. the past-the-end iterator of the output container. polygon must be non-degenerate (has at least 3 vertices) and simple, and it does not have three consecutive collinear vertices.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Set_movable_separability_2::Single_mold_translational_casting::top_edges",
+          "argsstring": "(const CGAL::Polygon_2< CastingTraits > &polygon, OutputIterator oi, CGAL::Orientation orientation, CastingTraits_2 &traits=CastingTraits_2())",
+          "params": [
+            {
+              "type": "const CGAL::Polygon_2< CastingTraits > &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "oi",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CGAL::Orientation",
+              "name": "orientation",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CastingTraits_2 &",
+              "name": "traits",
+              "default": "CastingTraits_2 ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Set_movable_separability_2/Single_mold_translational_casting/top_edges.h",
+          "line": "60"
+        }
+      ],
+      "xml_file": "group__top__edges__grp.xml"
+    },
+    "is_pullout_direction_grp": {
+      "kind": "group",
+      "name": "is_pullout_direction_grp",
+      "brief": "These functions determine whether a cavity (of a mold in the plane) that has the shape of a given polygon could be casted in the mold and then pulled out of the mold in a given direction without colliding into the mold (but possibly sliding along the mold boundary).",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "is_pullout_direction",
+          "qualified_name": "CGAL::Set_movable_separability_2::Single_mold_translational_casting::is_pullout_direction",
+          "brief": "Given a simple polygon and a direction, this function determines whether a cavity (of a mold in the plane) that has the shape of the polygon could be casted in the mold and then pulled out of the mold in the given direction without colliding into the mold (but possibly sliding along the mold surface).",
+          "detailed": "If the polygon is not castable at all, the function returns false whatsoever. The type that substitutes the template parameter CastingTraits_2 must be a model of the concept CastingTraits_2 . polygon the input polygon. d the inspected direction. traits the traits to use. if polygon can be pullout in the d direction the iterator of the corresponding top edge, otherwise, polygon.edges_end() . polygon must be non-degenerate (has at least 3 vertices) and simple, and it does not have three consecutive collinear vertices.",
+          "return_type": "CGAL::Polygon_2< CastingTraits_2 >::Edge_const_iterator",
+          "definition": "CGAL::Polygon_2< CastingTraits_2 >::Edge_const_iterator CGAL::Set_movable_separability_2::Single_mold_translational_casting::is_pullout_direction",
+          "argsstring": "(const CGAL::Polygon_2< CastingTraits_2 > &polygon, const typename CastingTraits_2::Direction_2 &d, const CastingTraits_2 &traits=CastingTraits_2())",
+          "params": [
+            {
+              "type": "const CGAL::Polygon_2< CastingTraits_2 > &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename CastingTraits_2::Direction_2 &",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CastingTraits_2 &",
+              "name": "traits",
+              "default": "CastingTraits_2 ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Set_movable_separability_2/Single_mold_translational_casting/is_pullout_direction.h",
+          "line": "27"
+        },
+        {
+          "kind": "function",
+          "name": "is_pullout_direction",
+          "qualified_name": "CGAL::Set_movable_separability_2::Single_mold_translational_casting::is_pullout_direction",
+          "brief": "Same as above with the additional orientation argument.",
+          "detailed": "If the orientation of the polygon is known upon invocation, specify it. Otherwise, it has to be computed. Note that finding the orientation of a polygon requires time linear in the number of edges. polygon the input polygon. d the inspected direction. orientation the orientation of polygon . traits the traits to use. if polygon can be pullout in the d direction the iterator of the corresponding top edge, otherwise, polygon.edges_end() . polygon must be non-degenerate (has at least 3 vertices) and simple, and it does not have three consecutive collinear vertices.",
+          "return_type": "CGAL::Polygon_2< CastingTraits_2 >::Edge_const_iterator",
+          "definition": "CGAL::Polygon_2< CastingTraits_2 >::Edge_const_iterator CGAL::Set_movable_separability_2::Single_mold_translational_casting::is_pullout_direction",
+          "argsstring": "(const CGAL::Polygon_2< CastingTraits_2 > &polygon, const typename CastingTraits_2::Direction_2 &d, CGAL::Orientation orientation, const CastingTraits_2 &traits=CastingTraits_2())",
+          "params": [
+            {
+              "type": "const CGAL::Polygon_2< CastingTraits_2 > &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename CastingTraits_2::Direction_2 &",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CGAL::Orientation",
+              "name": "orientation",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CastingTraits_2 &",
+              "name": "traits",
+              "default": "CastingTraits_2 ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Set_movable_separability_2/Single_mold_translational_casting/is_pullout_direction.h",
+          "line": "49"
+        },
+        {
+          "kind": "function",
+          "name": "is_pullout_direction",
+          "qualified_name": "CGAL::Set_movable_separability_2::Single_mold_translational_casting::is_pullout_direction",
+          "brief": "Given a simple polygon, an edge of the polygon, and a direction, this function determines whether a cavity (of a mold in the plane) that has the shape of the polygon can be used so that the polygon could be casted in the mold and then pulled out of the mold in the given direction such that the given edge is used as the top edge without colliding into the mold (but possibly sliding along the mold surface).",
+          "detailed": "Observe, that if polygon can be pulled out in the given direction, but with a top edge different than the given one, the function returns false . The type that substitutes the template parameter CastingTraits_2 must be a model of the concept CastingTraits_2 . polygon the input polygon. it an iterator to an edge in polygon. d the tested direction. traits the traits to use. true if polygon can be pulled out in the d direction with the edge identified by i being the top edge, and false otherwise. polygon must be non-degenerate (has at least 3 vertices) and simple, and it does not have three consecutive collinear vertices.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Set_movable_separability_2::Single_mold_translational_casting::is_pullout_direction",
+          "argsstring": "(const CGAL::Polygon_2< CastingTraits_2 > &polygon, const typename CGAL::Polygon_2< CastingTraits_2 >::Edge_const_iterator &it, const typename CastingTraits_2::Direction_2 &d, const CastingTraits_2 &traits=CastingTraits_2())",
+          "params": [
+            {
+              "type": "const CGAL::Polygon_2< CastingTraits_2 > &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename CGAL::Polygon_2< CastingTraits_2 >::Edge_const_iterator &",
+              "name": "it",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename CastingTraits_2::Direction_2 &",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CastingTraits_2 &",
+              "name": "traits",
+              "default": "CastingTraits_2 ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Set_movable_separability_2/Single_mold_translational_casting/is_pullout_direction.h",
+          "line": "78"
+        },
+        {
+          "kind": "function",
+          "name": "is_pullout_direction",
+          "qualified_name": "CGAL::Set_movable_separability_2::Single_mold_translational_casting::is_pullout_direction",
+          "brief": "Same as above with the additional orientation argument.",
+          "detailed": "If the orientation of the polygon is known upon invocation, specify it. Otherwise, it has to be computed. Note that finding the orientation of a polygon requires time linear in the number of edges. polygon the input polygon. it an iterator to an edge in polygon. d the tested direction. orientation the orientation of polygon . traits the traits to use. true if polygon can be pulled out in the d direction with the edge identified by i being the top edge, and false otherwise. polygon must be non-degenerate (has at least 3 vertices) and simple, and it does not have three consecutive collinear vertices.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Set_movable_separability_2::Single_mold_translational_casting::is_pullout_direction",
+          "argsstring": "(const CGAL::Polygon_2< CastingTraits_2 > &polygon, const typename CGAL::Polygon_2< CastingTraits_2 >::Edge_const_iterator &it, const typename CastingTraits_2::Direction_2 &d, CGAL::Orientation orientation, const CastingTraits_2 &traits=CastingTraits_2())",
+          "params": [
+            {
+              "type": "const CGAL::Polygon_2< CastingTraits_2 > &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename CGAL::Polygon_2< CastingTraits_2 >::Edge_const_iterator &",
+              "name": "it",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename CastingTraits_2::Direction_2 &",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CGAL::Orientation",
+              "name": "orientation",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const CastingTraits_2 &",
+              "name": "traits",
+              "default": "CastingTraits_2 ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Set_movable_separability_2/Single_mold_translational_casting/is_pullout_direction.h",
+          "line": "102"
+        }
+      ],
+      "xml_file": "group__is__pullout__direction__grp.xml"
+    },
+    "pullout_directions_grp": {
+      "kind": "group",
+      "name": "pullout_directions_grp",
+      "brief": "These functions determine whether a cavity (of a mold in the plane) that has the shape of a given polygon could be casted in the mold using a given edge as the top edge and then pulled out of the mold without colliding into the mold (but possibly sliding along the mold boundary).",
+      "detailed": "If the polygon is castable this way, the function computes the closed range of pullout directions.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "pullout_directions",
+          "qualified_name": "CGAL::Set_movable_separability_2::Single_mold_translational_casting::pullout_directions",
+          "brief": "Given a simple polygon and an edge of the polygon, this function determines whether a cavity (of a mold in the plane) that has the shape of the polygon can be used so that the polygon could be casted in the mold using the input edge as the top edge and then pulled out of the mold without colliding into the mold (but possibly sliding along the mold surface).",
+          "detailed": "If the polygon is castable this way, the function computes the closed range of pullout directions. The type that substitutes the template parameter CastingTraits_2 must be a model of the concept CastingTraits_2 . polygon the input polygon. it an iterator to an edge in polygon. traits the traits to use. a pair of elements, where the first is a Boolean that indicates whether the input edge is a valid top edge, and the second is a closed range of pullout directions represented as a pair of the extreme directions in the range. If the input edge is not a valid top edge, the range is nondeterministic. polygon must be non-degenerate (has at least 3 vertices) and simple, and it does not have three consecutive collinear vertices.",
+          "return_type": "std::pair< bool, std::pair< typename CastingTraits_2::Direction_2 , typename CastingTraits_2::Direction_2 > >",
+          "definition": "std::pair< bool, std::pair< typename CastingTraits_2::Direction_2, typename CastingTraits_2::Direction_2 > > CGAL::Set_movable_separability_2::Single_mold_translational_casting::pullout_directions",
+          "argsstring": "(const CGAL::Polygon_2< CastingTraits_2 > &polygon, const typename CGAL::Polygon_2< CastingTraits_2 >::Edge_const_iterator &it, CastingTraits_2 &traits=CastingTraits_2())",
+          "params": [
+            {
+              "type": "const CGAL::Polygon_2< CastingTraits_2 > &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename CGAL::Polygon_2< CastingTraits_2 >::Edge_const_iterator &",
+              "name": "it",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CastingTraits_2 &",
+              "name": "traits",
+              "default": "CastingTraits_2 ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Set_movable_separability_2/Single_mold_translational_casting/pullout_directions.h",
+          "line": "33"
+        },
+        {
+          "kind": "function",
+          "name": "pullout_directions",
+          "qualified_name": "CGAL::Set_movable_separability_2::Single_mold_translational_casting::pullout_directions",
+          "brief": "Same as above with the additional orientation argument.",
+          "detailed": "If the orientation of the polygon is known upon invocation, specify it. Otherwise, it has to be computed. Note that finding the orientation of a polygon requires time linear in the number of edges. polygon the input polygon. it an iterator to an edge in polygon. orientation the orientation of polygon . traits the traits to use. a pair of elements, where the first is a Boolean that indicates whether the input edge is a valid top edge, and the second is a closed range of pullout directions represented as a pair of the extreme directions in the range. If the input edge is not a valid top edge, the range is nondeterministic. polygon must be non-degenerate (has at least 3 vertices) and simple, and it does not have three consecutive collinear vertices.",
+          "return_type": "std::pair< bool, std::pair< typename CastingTraits_2::Direction_2 , typename CastingTraits_2::Direction_2 > >",
+          "definition": "std::pair< bool, std::pair< typename CastingTraits_2::Direction_2, typename CastingTraits_2::Direction_2 > > CGAL::Set_movable_separability_2::Single_mold_translational_casting::pullout_directions",
+          "argsstring": "(const CGAL::Polygon_2< CastingTraits_2 > &polygon, const typename CGAL::Polygon_2< CastingTraits_2 >::Edge_const_iterator &it, CGAL::Orientation orientation, CastingTraits_2 &traits=CastingTraits_2())",
+          "params": [
+            {
+              "type": "const CGAL::Polygon_2< CastingTraits_2 > &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename CGAL::Polygon_2< CastingTraits_2 >::Edge_const_iterator &",
+              "name": "it",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CGAL::Orientation",
+              "name": "orientation",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CastingTraits_2 &",
+              "name": "traits",
+              "default": "CastingTraits_2 ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Set_movable_separability_2/Single_mold_translational_casting/pullout_directions.h",
+          "line": "61"
+        }
+      ],
+      "xml_file": "group__pullout__directions__grp.xml"
+    },
+    "PkgSetMovableSeparability2Concepts": {
+      "kind": "group",
+      "name": "PkgSetMovableSeparability2Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_set_movable_separability2_concepts.xml"
+    }
+  }
+}

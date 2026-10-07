@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "epec",
+  "description": "EPEC kernel with intersection bindings",
+  "cmake_tests": [
+    "cmake/tests/epec.cmake"
+  ]
+}

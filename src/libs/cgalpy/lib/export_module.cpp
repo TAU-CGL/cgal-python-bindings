@@ -6,17 +6,18 @@
 //
 // Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
 //            Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria   <utkarshkhajuria55@gmail.com>
 
 #include <CGAL/config.h>
 
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/string.h>
 
-#include "CGALPY/arrangement_on_surface_2_values.hpp"
-#include "CGALPY/kernel_types.hpp"
-#include "CGALPY/triangulation_3_values.hpp"
-#include "CGALPY/triangulation_2_values.hpp"
-#include "CGALPY/config.hpp"
+#include "cgalpy/aos2/arrangement_on_surface_2_values.hpp"
+#include "cgalpy/kernel_types.hpp"
+#include "cgalpy/triangulation_3_values.hpp"
+#include "cgalpy/triangulation_2_values.hpp"
+#include "cgalpy/config.hpp"
 
 namespace py = nanobind;
 
@@ -73,28 +74,36 @@ void export_polygon_2(py::module_&);
 void export_polygon_partition_2(py::module_&);
 void export_polygon_set_2(py::module_&);
 void export_polygon_with_holes_2(py::module_&);
+#ifdef CGALPY_3D_POINT_SET_BINDINGS
 void export_region_growing(py::module_&);
+#endif
 void export_spatial_searching(py::module_&);
 void export_spatial_sorting(py::module_&);
 void export_straight_skeleton_2(py::module_&);
 void export_surface_mesh(py::module_&);
+void export_surface_mesh_approximation(py::module_&);
+void export_surface_mesh_decomposition(py::module_&);
+void export_surface_mesh_deformation(py::module_&);
+void export_surface_mesh_parameterization(py::module_&);
+void export_surface_mesh_shortest_path(py::module_&);
+void export_surface_mesh_topology(py::module_&);
 void export_surface_sweep_2(py::module_&);
 void export_tools(py::module_& m);
-void export_triangulated_surface_mesh_segmentation(py::module_&);
-void export_triangulated_surface_mesh_simplification(py::module_&);
-void export_triangulated_surface_mesh_skeletonization(py::module_&);
+void export_surface_mesh_segmentation(py::module_&);
+void export_surface_mesh_simplification(py::module_&);
+void export_surface_mesh_skeletonization(py::module_&);
 
+void export_triangulation_data_structure_2(py::module_&);
 void export_triangulation_2(py::module_&);
-void export_tri2_plain(py::module_&);
 void export_tri2_regular(py::module_&);
-void export_tri2_constrained(py::module_&);
+void export_constrained_triangulation_2(py::module_&);
 void export_tri2_constrained_delaunay(py::module_&);
-void export_tri2_delaunay(py::module_&);
+void export_delaunay_triangulation_2(py::module_&);
 
-void export_triangulation_3(py::module_&);
-void export_tri3_plain(py::module_& m);
+void export_triangulation_data_structure_3(py::module_&);
+void export_triangulation_3(py::module_& m);
 void export_tri3_regular(py::module_& m);
-void export_tri3_delaunay(py::module_& m);
+void export_delaunay_triangulation_3(py::module_& m);
 
 void export_triangulation_d(py::module_&);
 
@@ -157,15 +166,15 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
 #ifdef CGALPY_TRIANGULATION_2_BINDINGS
   auto tri2_m = m.def_submodule("Tri2");
+  export_triangulation_data_structure_2(tri2_m);
   export_triangulation_2(tri2_m);
-  export_tri2_plain(tri2_m);
 
 #if (CGALPY_TRI2 == CGALPY_TRI2_REGULAR)
   export_tri2_regular(tri2_m);
 #elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED)
-  export_tri2_constrained(tri2_m);
+  export_constrained_triangulation_2(tri2_m);
 #elif (CGALPY_TRI2 == CGALPY_TRI2_DELAUNAY)
-  export_tri2_delaunay(tri2_m);
+  export_delaunay_triangulation_2(tri2_m);
 #elif (CGALPY_TRI2 == CGALPY_TRI2_CONSTRAINED_DELAUNAY)
   export_tri2_constrained_delaunay(tri2_m);
 #endif
@@ -246,12 +255,12 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 
 #if defined(CGALPY_TRIANGULATION_3_BINDINGS)
   auto tri3_m = m.def_submodule("Tri3");
-  export_tri3_plain(tri3_m);
   export_triangulation_3(tri3_m);
+  export_triangulation_data_structure_3(tri3_m);
 #if (CGALPY_TRI3 == CGALPY_TRI3_REGULAR)
   export_tri3_regular(tri3_m);
 #elif (CGALPY_TRI3 == CGALPY_TRI3_DELAUNAY)
-  export_tri3_delaunay(tri3_m);
+  export_delaunay_triangulation_3(tri3_m);
 #endif
 #endif
 
@@ -338,27 +347,66 @@ MY_PYTHON_MODULE(CGALPY_MODULE_NAME, m) {
 #endif
 #endif
 
-#if defined(CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS)
-  export_triangulated_surface_mesh_segmentation(m);
+#if defined(CGALPY_SURFACE_MESH_APPROXIMATION_BINDINGS)
+  auto sma_m = m.def_submodule("Sma");
+  export_surface_mesh_approximation(sma_m);
 #endif
 
-#if defined(CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
-  auto tsms_m = m.def_submodule("Sms");
-  export_triangulated_surface_mesh_simplification(tsms_m);
+#if defined(CGALPY_SURFACE_MESH_DECOMPOSITION_BINDINGS)
+  auto smdec_m = m.def_submodule("Smdec");
+  export_surface_mesh_decomposition(smdec_m);
 #endif
 
-#if defined(CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS)
-  auto tsmsk_m = m.def_submodule("Smsk");
-  export_triangulated_surface_mesh_skeletonization(tsmsk_m);
+#if defined(CGALPY_SURFACE_MESH_DEFORMATION_BINDINGS)
+  auto smdef_m = m.def_submodule("Smdef");
+  export_surface_mesh_deformation(smdef_m);
+#endif
+
+#if defined(CGALPY_SURFACE_MESH_PARAMETERIZATION_BINDINGS)
+  auto smp_m = m.def_submodule("Smp");
+  export_surface_mesh_parameterization(smp_m);
+#endif
+
+#if defined(CGALPY_SURFACE_MESH_SHORTEST_PATH_BINDINGS)
+  auto smsh_m = m.def_submodule("Smsh");
+  export_surface_mesh_shortest_path(smsh_m);
+#endif
+
+#if defined(CGALPY_SURFACE_MESH_SEGMENTATION_BINDINGS)
+  auto smse_m = m.def_submodule("Smse");
+  export_surface_mesh_segmentation(smse_m);
+#endif
+
+#if defined(CGALPY_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
+  auto smsi_m = m.def_submodule("Smsi");
+  export_surface_mesh_simplification(smsi_m);
+#endif
+
+#if defined(CGALPY_SURFACE_MESH_SKELETONIZATION_BINDINGS)
+  auto smsk_m = m.def_submodule("Smsk");
+  export_surface_mesh_skeletonization(smsk_m);
+#endif
+
+#if defined(CGALPY_SURFACE_MESH_TOPOLOGY_BINDINGS)
+  auto smt_m = m.def_submodule("Smt");
+  export_surface_mesh_topology(smt_m);
 #endif
 
 #if defined(CGALPY_SHAPE_DETECTION_BINDINGS)
+#ifdef CGALPY_3D_POINT_SET_BINDINGS
   auto sd_m = m.def_submodule("Sd",
     "This CGAL component implements two algorithms for shape detection:\n\n"
     "• the Efficient RANSAC (RANdom SAmple Consensus) method, contributed by Schnabel et al. [2];\n"
     "• the Region Growing method, contributed by Lafarge and Mallet [1].");
+#else
+  auto sd_m = m.def_submodule("Sd",
+    "This CGAL component implements the Efficient RANSAC "
+    "(RANdom SAmple Consensus) method, contributed by Schnabel et al. [2].");
+#endif
   export_efficient_ransac(sd_m);
+#ifdef CGALPY_3D_POINT_SET_BINDINGS
   export_region_growing(sd_m);
+#endif
 #endif
 
 #if defined(CGALPY_VISIBILITY_2_BINDINGS)

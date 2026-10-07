@@ -5,14 +5,17 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <nanobind/nanobind.h>
 
 namespace py = nanobind;
 
+namespace cgalpy {
 namespace tri3 {
 
 }
+} // namespace cgalpy
 
 //!
 void export_tri3_regular(py::module_& m) {

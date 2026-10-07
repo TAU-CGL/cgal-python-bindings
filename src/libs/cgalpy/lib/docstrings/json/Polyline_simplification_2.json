@@ -1,0 +1,1837 @@
+{
+  "schema_version": 1,
+  "package": "Polyline_simplification_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 20,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Polyline_simplification_2::Hybrid_squared_distance_cost": {
+      "kind": "class",
+      "name": "CGAL::Polyline_simplification_2::Hybrid_squared_distance_cost",
+      "brief": "This class is a cost function which calculates the cost as the square of the distance between the original and simplified polylines, possibly scaled based on a factor.",
+      "detailed": "Is model of PolylineSimplificationCostFunction",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "mSquaredRatio",
+          "qualified_name": "CGAL::Polyline_simplification_2::Hybrid_squared_distance_cost::mSquaredRatio",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Polyline_simplification_2::Hybrid_squared_distance_cost< FT >::mSquaredRatio",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Hybrid_squared_distance_cost.h",
+          "line": "98"
+        },
+        {
+          "kind": "function",
+          "name": "Hybrid_squared_distance_cost",
+          "qualified_name": "CGAL::Polyline_simplification_2::Hybrid_squared_distance_cost::Hybrid_squared_distance_cost",
+          "brief": "Initializes the cost function with the specified ratio .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Polyline_simplification_2::Hybrid_squared_distance_cost< FT >::Hybrid_squared_distance_cost",
+          "argsstring": "(FT ratio)",
+          "params": [
+            {
+              "type": "FT",
+              "name": "ratio",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Hybrid_squared_distance_cost.h",
+          "line": "38"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Polyline_simplification_2::Hybrid_squared_distance_cost::operator()",
+          "brief": "Compute the hybrid squared distance cost.",
+          "detailed": "Given a vertex in constraint iterator vicq computes vicp=std::prev(vicq) and vicr=std::next(vicq) , returns the maximal square distance between each point along the original subpolyline, between vicp and vicr , and the straight line segment from *vicp->point() to *vicr->point() divided by the smallest of the square of the ratio given to the constructor of the cost function, and the shortest squared distance between that segment and each of the vertices adjacent to vicq . CDT must be CGAL::Constrained_Delaunay_triangulation_2 with a vertex type that is model of PolylineSimplificationVertexBase_2 .",
+          "return_type": "std::optional< typename CDT::Geom_traits::FT >",
+          "definition": "std::optional< typename CDT::Geom_traits::FT > CGAL::Polyline_simplification_2::Hybrid_squared_distance_cost< FT >::operator()",
+          "argsstring": "(const Constrained_triangulation_plus_2< CDT > &pct, typename Constrained_triangulation_plus_2< CDT >::Vertices_in_constraint_iterator vicq) const",
+          "params": [
+            {
+              "type": "const Constrained_triangulation_plus_2< CDT > &",
+              "name": "pct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Constrained_triangulation_plus_2< CDT >::Vertices_in_constraint_iterator",
+              "name": "vicq",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Hybrid_squared_distance_cost.h",
+          "line": "53"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_polyline__simplification__2_1_1_hybrid__squared__distance__cost.xml",
+      "file": "CGAL/Polyline_simplification_2/Hybrid_squared_distance_cost.h",
+      "line": "32"
+    },
+    "CGAL::Polyline_simplification_2::Polyline_simplification_2": {
+      "kind": "class",
+      "name": "CGAL::Polyline_simplification_2::Polyline_simplification_2",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Point",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PCT::Point",
+          "definition": "typedef PCT::Point CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "60"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PCT::Edge",
+          "definition": "typedef PCT::Edge CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Edge",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "61"
+        },
+        {
+          "kind": "typedef",
+          "name": "Constraint_id",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Constraint_id",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PCT::Constraint_id",
+          "definition": "typedef PCT::Constraint_id CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Constraint_id",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "62"
+        },
+        {
+          "kind": "typedef",
+          "name": "Constrained_edges_iterator",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Constrained_edges_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PCT::Constrained_edges_iterator",
+          "definition": "typedef PCT::Constrained_edges_iterator CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Constrained_edges_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "63"
+        },
+        {
+          "kind": "typedef",
+          "name": "Constraint_iterator",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Constraint_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PCT::Constraint_iterator",
+          "definition": "typedef PCT::Constraint_iterator CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Constraint_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "64"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertices_in_constraint_iterator",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Vertices_in_constraint_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PCT::Vertices_in_constraint_iterator",
+          "definition": "typedef PCT::Vertices_in_constraint_iterator CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Vertices_in_constraint_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "65"
+        },
+        {
+          "kind": "typedef",
+          "name": "Finite_vertices_iterator",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Finite_vertices_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PCT::Finite_vertices_iterator",
+          "definition": "typedef PCT::Finite_vertices_iterator CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Finite_vertices_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "66"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Vertex_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PCT::Vertex_handle",
+          "definition": "typedef PCT::Vertex_handle CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Vertex_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "68"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_handle",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Face_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PCT::Face_handle",
+          "definition": "typedef PCT::Face_handle CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Face_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "69"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_circulator",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Vertex_circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PCT::Vertex_circulator",
+          "definition": "typedef PCT::Vertex_circulator CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Vertex_circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "70"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PCT::Geom_traits::FT",
+          "definition": "typedef PCT::Geom_traits::FT CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "72"
+        },
+        {
+          "kind": "typedef",
+          "name": "MPQ",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::MPQ",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::Modifiable_priority_queue< Vertex_handle , Compare_cost , Id_map >",
+          "definition": "typedef CGAL::Modifiable_priority_queue<Vertex_handle,Compare_cost,Id_map> CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::MPQ",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "112"
+        },
+        {
+          "kind": "variable",
+          "name": "pct",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::pct",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PCT &",
+          "definition": "PCT& CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::pct",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "74"
+        },
+        {
+          "kind": "variable",
+          "name": "cost",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CostFunction",
+          "definition": "CostFunction CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::cost",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "75"
+        },
+        {
+          "kind": "variable",
+          "name": "stop",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::stop",
+          "brief": "",
+          "detailed": "",
+          "return_type": "StopFunction",
+          "definition": "StopFunction CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::stop",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "76"
+        },
+        {
+          "kind": "variable",
+          "name": "pct_initial_number_of_vertices",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::pct_initial_number_of_vertices",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::pct_initial_number_of_vertices",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "77"
+        },
+        {
+          "kind": "variable",
+          "name": "number_of_unremovable_vertices",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::number_of_unremovable_vertices",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::number_of_unremovable_vertices",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "77"
+        },
+        {
+          "kind": "variable",
+          "name": "vertex_to_iterator",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::vertex_to_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::unordered_map< Vertex_handle , std::list< Vertices_in_constraint_iterator > >",
+          "definition": "std::unordered_map<Vertex_handle, std::list<Vertices_in_constraint_iterator> > CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::vertex_to_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "79"
+        },
+        {
+          "kind": "variable",
+          "name": "mpq",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::mpq",
+          "brief": "",
+          "detailed": "",
+          "return_type": "MPQ *",
+          "definition": "MPQ* CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::mpq",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "114"
+        },
+        {
+          "kind": "function",
+          "name": "Polyline_simplification_2",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Polyline_simplification_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Polyline_simplification_2",
+          "argsstring": "(PCT &pct, CostFunction cost, StopFunction stop)",
+          "params": [
+            {
+              "type": "PCT &",
+              "name": "pct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CostFunction",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "StopFunction",
+              "name": "stop",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "116"
+        },
+        {
+          "kind": "function",
+          "name": "Polyline_simplification_2",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Polyline_simplification_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Polyline_simplification_2",
+          "argsstring": "(PCT &pct, Constraint_id cid, CostFunction cost, StopFunction stop)",
+          "params": [
+            {
+              "type": "PCT &",
+              "name": "pct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Constraint_id",
+              "name": "cid",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CostFunction",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "StopFunction",
+              "name": "stop",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "127"
+        },
+        {
+          "kind": "function",
+          "name": "~Polyline_simplification_2",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::~Polyline_simplification_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::~Polyline_simplification_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "140"
+        },
+        {
+          "kind": "function",
+          "name": "initialize_unremovable",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::initialize_unremovable",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::initialize_unremovable",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "147"
+        },
+        {
+          "kind": "function",
+          "name": "initialize_costs",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::initialize_costs",
+          "brief": "",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::initialize_costs",
+          "argsstring": "(Constraint_id cid)",
+          "params": [
+            {
+              "type": "Constraint_id",
+              "name": "cid",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "210"
+        },
+        {
+          "kind": "function",
+          "name": "initialize_costs",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::initialize_costs",
+          "brief": "",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::initialize_costs",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "233"
+        },
+        {
+          "kind": "function",
+          "name": "is_removable",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::is_removable",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::is_removable",
+          "argsstring": "(Vertices_in_constraint_iterator it)",
+          "params": [
+            {
+              "type": "Vertices_in_constraint_iterator",
+              "name": "it",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "244"
+        },
+        {
+          "kind": "function",
+          "name": "initialize_indices",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::initialize_indices",
+          "brief": "",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::initialize_indices",
+          "argsstring": "(Constraint_id cid, int id=0)",
+          "params": [
+            {
+              "type": "Constraint_id",
+              "name": "cid",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "id",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "292"
+        },
+        {
+          "kind": "function",
+          "name": "initialize_indices",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::initialize_indices",
+          "brief": "",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::initialize_indices",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "305"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::operator()",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::operator()",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "316"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_removed_vertices",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::number_of_removed_vertices",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::number_of_removed_vertices",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "375"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_polyline__simplification__2_1_1_polyline__simplification__2.xml",
+      "file": "CGAL/Polyline_simplification_2/simplify.h",
+      "line": "56"
+    },
+    "CGAL::Polyline_simplification_2::Polyline_simplification_2::Compare_cost": {
+      "kind": "struct",
+      "name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Compare_cost",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Compare_cost::operator()",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Compare_cost::operator()",
+          "argsstring": "(Vertices_in_constraint_iterator const &x, Vertices_in_constraint_iterator const &y) const",
+          "params": [
+            {
+              "type": "Vertices_in_constraint_iterator const &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertices_in_constraint_iterator const &",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "83"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Compare_cost::operator()",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Compare_cost::operator()",
+          "argsstring": "(const Vertex_handle &x, const Vertex_handle &y) const",
+          "params": [
+            {
+              "type": "const Vertex_handle &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Vertex_handle &",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "89"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_polyline__simplification__2_1_1_polyline__simplification__2_1_1_compare__cost.xml",
+      "file": "CGAL/Polyline_simplification_2/simplify.h",
+      "line": "81"
+    },
+    "CGAL::Polyline_simplification_2::Polyline_simplification_2::Id_map": {
+      "kind": "struct",
+      "name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Id_map",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "category",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Id_map::category",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::readable_property_map_tag",
+          "definition": "typedef boost::readable_property_map_tag CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Id_map::category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "98"
+        },
+        {
+          "kind": "typedef",
+          "name": "value_type",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Id_map::value_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "typedef std::size_t CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Id_map::value_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "99"
+        },
+        {
+          "kind": "typedef",
+          "name": "reference",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Id_map::reference",
+          "brief": "",
+          "detailed": "",
+          "return_type": "value_type",
+          "definition": "typedef value_type CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Id_map::reference",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "100"
+        },
+        {
+          "kind": "typedef",
+          "name": "key_type",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Id_map::key_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "typedef Vertex_handle CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Id_map::key_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "101"
+        },
+        {
+          "kind": "function",
+          "name": "operator[]",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Id_map::operator[]",
+          "brief": "",
+          "detailed": "",
+          "return_type": "value_type",
+          "definition": "value_type CGAL::Polyline_simplification_2::Polyline_simplification_2< PCT, CostFunction, StopFunction >::Id_map::operator[]",
+          "argsstring": "(const key_type &x) const",
+          "params": [
+            {
+              "type": "const key_type &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "104"
+        },
+        {
+          "kind": "friend",
+          "name": "get",
+          "qualified_name": "CGAL::Polyline_simplification_2::Polyline_simplification_2::Id_map::get",
+          "brief": "",
+          "detailed": "",
+          "return_type": "value_type",
+          "definition": "value_type get",
+          "argsstring": "(const Id_map &m, const key_type k)",
+          "params": [
+            {
+              "type": "const Id_map &",
+              "name": "m",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const key_type",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "friend",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "109"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_polyline__simplification__2_1_1_polyline__simplification__2_1_1_id__map.xml",
+      "file": "CGAL/Polyline_simplification_2/simplify.h",
+      "line": "96"
+    },
+    "CGAL::Polyline_simplification_2::Scaled_squared_distance_cost": {
+      "kind": "class",
+      "name": "CGAL::Polyline_simplification_2::Scaled_squared_distance_cost",
+      "brief": "This class is a cost function which calculates the cost as a scaled variant of the square of the distance between the original and simplified polylines.",
+      "detailed": "Is model of PolylineSimplificationCostFunction",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Scaled_squared_distance_cost",
+          "qualified_name": "CGAL::Polyline_simplification_2::Scaled_squared_distance_cost::Scaled_squared_distance_cost",
+          "brief": "Initializes the cost function.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Polyline_simplification_2::Scaled_squared_distance_cost::Scaled_squared_distance_cost",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Scaled_squared_distance_cost.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Polyline_simplification_2::Scaled_squared_distance_cost::operator()",
+          "brief": "Given a vertex in constraint iterator vicq computes vicp=std::prev(vicq) and vicr=std::next(vicq) , returns the maximum of the square distances between each point along the original subpolyline between vicp and vicr , and the straight line segment from *vicp->point() to *vicr->point() divided by the shortest squared distance between that segment and each of the vertices adjacent to vicq .",
+          "detailed": "CDT must be CGAL::Constrained_Delaunay_triangulation_2 with a vertex type that is model of PolylineSimplificationVertexBase_2 .",
+          "return_type": "std::optional< typename CDT::Geom_traits::FT >",
+          "definition": "std::optional< typename CDT::Geom_traits::FT > CGAL::Polyline_simplification_2::Scaled_squared_distance_cost::operator()",
+          "argsstring": "(const Constrained_triangulation_plus_2< CDT > &pct, typename Constrained_triangulation_plus_2< CDT >::Vertices_in_constraint_iterator vicq) const",
+          "params": [
+            {
+              "type": "const Constrained_triangulation_plus_2< CDT > &",
+              "name": "pct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Constrained_triangulation_plus_2< CDT >::Vertices_in_constraint_iterator",
+              "name": "vicq",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Scaled_squared_distance_cost.h",
+          "line": "48"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_polyline__simplification__2_1_1_scaled__squared__distance__cost.xml",
+      "file": "CGAL/Polyline_simplification_2/Scaled_squared_distance_cost.h",
+      "line": "31"
+    },
+    "CGAL::Polyline_simplification_2::Squared_distance_cost": {
+      "kind": "class",
+      "name": "CGAL::Polyline_simplification_2::Squared_distance_cost",
+      "brief": "This class is a cost function which calculates the cost as the square of the distance between the original and simplified polylines.",
+      "detailed": "Is model of PolylineSimplificationCostFunction",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Squared_distance_cost",
+          "qualified_name": "CGAL::Polyline_simplification_2::Squared_distance_cost::Squared_distance_cost",
+          "brief": "Initializes the cost function.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Polyline_simplification_2::Squared_distance_cost::Squared_distance_cost",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Squared_distance_cost.h",
+          "line": "44"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Polyline_simplification_2::Squared_distance_cost::operator()",
+          "brief": "Given a vertex in constraint iterator vicq computes vicp=std::prev(vicq) and vicr=std::next(vicq) ,.",
+          "detailed": "returns the maximum of the square distances between each point along the original subpolyline, between vicp and vicr , and the straight line segment from *vicp->point() to *vicr->point() . CDT must be CGAL::Constrained_Delaunay_triangulation_2 with a vertex type that is model of PolylineSimplificationVertexBase_2 .",
+          "return_type": "std::optional< typename CDT::Geom_traits::FT >",
+          "definition": "std::optional< typename CDT::Geom_traits::FT > CGAL::Polyline_simplification_2::Squared_distance_cost::operator()",
+          "argsstring": "(const Constrained_triangulation_plus_2< CDT > &pct, typename Constrained_triangulation_plus_2< CDT >::Vertices_in_constraint_iterator vicq) const",
+          "params": [
+            {
+              "type": "const Constrained_triangulation_plus_2< CDT > &",
+              "name": "pct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Constrained_triangulation_plus_2< CDT >::Vertices_in_constraint_iterator",
+              "name": "vicq",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Squared_distance_cost.h",
+          "line": "54"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_polyline__simplification__2_1_1_squared__distance__cost.xml",
+      "file": "CGAL/Polyline_simplification_2/Squared_distance_cost.h",
+      "line": "38"
+    },
+    "CGAL::Polyline_simplification_2::Stop_above_cost_threshold": {
+      "kind": "class",
+      "name": "CGAL::Polyline_simplification_2::Stop_above_cost_threshold",
+      "brief": "This class is a stop predicate returning true when the cost for simplifying a vertex is greater than a certain threshold.",
+      "detailed": "Is model of PolylineSimplificationStopPredicate",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "mThres",
+          "qualified_name": "CGAL::Polyline_simplification_2::Stop_above_cost_threshold::mThres",
+          "brief": "",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Polyline_simplification_2::Stop_above_cost_threshold::mThres",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Stop_above_cost_threshold.h",
+          "line": "56"
+        },
+        {
+          "kind": "function",
+          "name": "Stop_above_cost_threshold",
+          "qualified_name": "CGAL::Polyline_simplification_2::Stop_above_cost_threshold::Stop_above_cost_threshold",
+          "brief": "Initializes it with the given threshold value.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Polyline_simplification_2::Stop_above_cost_threshold::Stop_above_cost_threshold",
+          "argsstring": "(double threshold)",
+          "params": [
+            {
+              "type": "double",
+              "name": "threshold",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Stop_above_cost_threshold.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Polyline_simplification_2::Stop_above_cost_threshold::operator()",
+          "brief": "Returns true when cost is greater or equal than the threshold.",
+          "detailed": "CDT must be CGAL::Constrained_Delaunay_triangulation_2 with a vertex type that is model of PolylineSimplificationVertexBase_2 .",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polyline_simplification_2::Stop_above_cost_threshold::operator()",
+          "argsstring": "(const Constrained_triangulation_plus_2< CDT > &, typename Constrained_triangulation_plus_2< CDT >::Vertex_handle, typename CDT::Geom_traits::FT cost, std::size_t, std::size_t) const",
+          "params": [
+            {
+              "type": "const Constrained_triangulation_plus_2< CDT > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Constrained_triangulation_plus_2< CDT >::Vertex_handle",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename CDT::Geom_traits::FT",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Stop_above_cost_threshold.h",
+          "line": "44"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_polyline__simplification__2_1_1_stop__above__cost__threshold.xml",
+      "file": "CGAL/Polyline_simplification_2/Stop_above_cost_threshold.h",
+      "line": "32"
+    },
+    "CGAL::Polyline_simplification_2::Stop_below_count_ratio_threshold": {
+      "kind": "class",
+      "name": "CGAL::Polyline_simplification_2::Stop_below_count_ratio_threshold",
+      "brief": "This class is a stop predicate returning true when the percentage of remaining vertices is smaller than a certain threshold.",
+      "detailed": "Is model of PolylineSimplificationStopPredicate",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "mThres",
+          "qualified_name": "CGAL::Polyline_simplification_2::Stop_below_count_ratio_threshold::mThres",
+          "brief": "",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "double CGAL::Polyline_simplification_2::Stop_below_count_ratio_threshold::mThres",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Stop_below_count_ratio_threshold.h",
+          "line": "55"
+        },
+        {
+          "kind": "function",
+          "name": "Stop_below_count_ratio_threshold",
+          "qualified_name": "CGAL::Polyline_simplification_2::Stop_below_count_ratio_threshold::Stop_below_count_ratio_threshold",
+          "brief": "Initializes it with the given threshold value.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Polyline_simplification_2::Stop_below_count_ratio_threshold::Stop_below_count_ratio_threshold",
+          "argsstring": "(double threshold)",
+          "params": [
+            {
+              "type": "double",
+              "name": "threshold",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Stop_below_count_ratio_threshold.h",
+          "line": "36"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Polyline_simplification_2::Stop_below_count_ratio_threshold::operator()",
+          "brief": "Returns true when ( current_count / initial_count ) is smaller or equal than the threshold.",
+          "detailed": "CDT must be CGAL::Constrained_Delaunay_triangulation_2 with a vertex type that is model of PolylineSimplificationVertexBase_2 .",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polyline_simplification_2::Stop_below_count_ratio_threshold::operator()",
+          "argsstring": "(const Constrained_triangulation_plus_2< CDT > &, typename Constrained_triangulation_plus_2< CDT >::Vertex_handle, typename CDT::Geom_traits::FT, std::size_t initial_count, std::size_t current_count) const",
+          "params": [
+            {
+              "type": "const Constrained_triangulation_plus_2< CDT > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Constrained_triangulation_plus_2< CDT >::Vertex_handle",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename CDT::Geom_traits::FT",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "initial_count",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "current_count",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Stop_below_count_ratio_threshold.h",
+          "line": "43"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_polyline__simplification__2_1_1_stop__below__count__ratio__threshold.xml",
+      "file": "CGAL/Polyline_simplification_2/Stop_below_count_ratio_threshold.h",
+      "line": "31"
+    },
+    "CGAL::Polyline_simplification_2::Stop_below_count_threshold": {
+      "kind": "class",
+      "name": "CGAL::Polyline_simplification_2::Stop_below_count_threshold",
+      "brief": "This class is a stop predicate returning true when the number of vertices is smaller than a certain threshold.",
+      "detailed": "Is model of PolylineSimplificationStopPredicate",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "mThres",
+          "qualified_name": "CGAL::Polyline_simplification_2::Stop_below_count_threshold::mThres",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polyline_simplification_2::Stop_below_count_threshold::mThres",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Stop_below_count_threshold.h",
+          "line": "55"
+        },
+        {
+          "kind": "function",
+          "name": "Stop_below_count_threshold",
+          "qualified_name": "CGAL::Polyline_simplification_2::Stop_below_count_threshold::Stop_below_count_threshold",
+          "brief": "Initializes it with the given threshold value.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Polyline_simplification_2::Stop_below_count_threshold::Stop_below_count_threshold",
+          "argsstring": "(std::size_t threshold)",
+          "params": [
+            {
+              "type": "std::size_t",
+              "name": "threshold",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Stop_below_count_threshold.h",
+          "line": "36"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "CGAL::Polyline_simplification_2::Stop_below_count_threshold::operator()",
+          "brief": "Returns true when current_count is smaller or equal than the threshold.",
+          "detailed": "CDT must be CGAL::Constrained_Delaunay_triangulation_2 with a vertex type that is model of PolylineSimplificationVertexBase_2 .",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polyline_simplification_2::Stop_below_count_threshold::operator()",
+          "argsstring": "(const Constrained_triangulation_plus_2< CDT > &, typename Constrained_triangulation_plus_2< CDT >::Vertex_handle, typename CDT::Geom_traits::FT, std::size_t, std::size_t current_count) const",
+          "params": [
+            {
+              "type": "const Constrained_triangulation_plus_2< CDT > &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename Constrained_triangulation_plus_2< CDT >::Vertex_handle",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename CDT::Geom_traits::FT",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "current_count",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Stop_below_count_threshold.h",
+          "line": "43"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_polyline__simplification__2_1_1_stop__below__count__threshold.xml",
+      "file": "CGAL/Polyline_simplification_2/Stop_below_count_threshold.h",
+      "line": "31"
+    },
+    "CGAL::Polyline_simplification_2::Vertex_base_2": {
+      "kind": "class",
+      "name": "CGAL::Polyline_simplification_2::Vertex_base_2",
+      "brief": "A vertex base class with data members needed by the simplification algorithm.",
+      "detailed": "Vb must be a model of the concept TriangulationVertexBase_2 Is model of PolylineSimplificationVertexBase_2",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Polyline_simplification_2::Vertex_base_2::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "K::FT",
+          "definition": "typedef K::FT CGAL::Polyline_simplification_2::Vertex_base_2< K, Vb >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Vertex_base_2.h",
+          "line": "33"
+        },
+        {
+          "kind": "typedef",
+          "name": "Base",
+          "qualified_name": "CGAL::Polyline_simplification_2::Vertex_base_2::Base",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vb",
+          "definition": "typedef Vb CGAL::Polyline_simplification_2::Vertex_base_2< K, Vb >::Base",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Vertex_base_2.h",
+          "line": "34"
+        },
+        {
+          "kind": "typedef",
+          "name": "Tds",
+          "qualified_name": "CGAL::Polyline_simplification_2::Vertex_base_2::Tds",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Triangulation_data_structure",
+          "definition": "typedef Base::Triangulation_data_structure CGAL::Polyline_simplification_2::Vertex_base_2< K, Vb >::Tds",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Vertex_base_2.h",
+          "line": "35"
+        },
+        {
+          "kind": "variable",
+          "name": "m_removable",
+          "qualified_name": "CGAL::Polyline_simplification_2::Vertex_base_2::m_removable",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polyline_simplification_2::Vertex_base_2< K, Vb >::m_removable",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Vertex_base_2.h",
+          "line": "37"
+        },
+        {
+          "kind": "variable",
+          "name": "m_cost",
+          "qualified_name": "CGAL::Polyline_simplification_2::Vertex_base_2::m_cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Polyline_simplification_2::Vertex_base_2< K, Vb >::m_cost",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Vertex_base_2.h",
+          "line": "38"
+        },
+        {
+          "kind": "variable",
+          "name": "ID",
+          "qualified_name": "CGAL::Polyline_simplification_2::Vertex_base_2::ID",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polyline_simplification_2::Vertex_base_2< K, Vb >::ID",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/Vertex_base_2.h",
+          "line": "41"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_polyline__simplification__2_1_1_vertex__base__2.xml",
+      "file": "CGAL/Polyline_simplification_2/Vertex_base_2.h",
+      "line": "30"
+    },
+    "PolylineSimplificationCostFunction": {
+      "kind": "class",
+      "name": "PolylineSimplificationCostFunction",
+      "brief": "Models of this concept are passed to the polyline simplification algorithm to calculate the cost of removing a vertex. Such a cost represents some measure of the deviation error between the polyline sets before and after removal. The smaller the error the lower the cost. The algorithm processes vertices in increasing cost order to preserve the overall polyline set shape as much as possible.",
+      "detailed": "Refines CopyConstructible Assignable Has models CGAL::Polyline_simplification_2::Hybrid_squared_distance_cost CGAL::Polyline_simplification_2::Scaled_squared_distance_cost CGAL::Polyline_simplification_2::Squared_distance_cost",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "PolylineSimplificationCostFunction::operator()",
+          "brief": "Given a vertex in constraint iterator viq computes vip=std::prev(viq) and vir=std::next(vir) , and the cost of removing vertex *viq , replacing edges (*vip,*viq) and (*viq,*vir) with edge (*vip,*vir) .",
+          "detailed": "ct The underlying constrained Delaunay triangulation which embeds the polyline constraints viq The vertex in constraint iterator of the vertex to remove The cost for removing *viq . The value std::nullopt can be returned to indicate an infinite or uncomputable cost. CDT must be CGAL::Constrained_triangulation_plus_2 with a vertex type that is model of PolylineSimplificationVertexBase_2 . CDT::Geom_traits must be model of the concept ConstrainedDelaunayTriangulationTraits_2 .",
+          "return_type": "std::optional< CDT::Geom_traits::FT >",
+          "definition": "std::optional< CDT::Geom_traits::FT > PolylineSimplificationCostFunction::operator()",
+          "argsstring": "(CGAL::Constrained_triangulation_plus_2< CDT > const &ct, CGAL::Constrained_triangulation_plus_2< CDT >::Vertices_in_constraint_iterator viq) const",
+          "params": [
+            {
+              "type": "CGAL::Constrained_triangulation_plus_2< CDT > const &",
+              "name": "ct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CGAL::Constrained_triangulation_plus_2< CDT >::Vertices_in_constraint_iterator",
+              "name": "viq",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/PolylineSimplificationCostFunction.h",
+          "line": "41"
+        }
+      ],
+      "xml_file": "class_polyline_simplification_cost_function.xml",
+      "file": "Concepts/PolylineSimplificationCostFunction.h",
+      "line": "23"
+    },
+    "PolylineSimplificationStopPredicate": {
+      "kind": "class",
+      "name": "PolylineSimplificationStopPredicate",
+      "brief": "Models of this concept are passed to the polyline simplification algorithm to indicate when to stop the process.",
+      "detailed": "Has models CGAL::Polyline_simplification_2::Stop_below_count_ratio_threshold CGAL::Polyline_simplification_2::Stop_below_count_threshold CGAL::Polyline_simplification_2::Stop_above_cost_threshold",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "PolylineSimplificationStopPredicate::operator()",
+          "brief": "Indicates if the simplification must be stopped.",
+          "detailed": "This is called right before each vertex is about to be removed. ct The underlying constrained Delaunay triangulation which embeds the polyline constraints q The current vertex about to be removed cost The associated cost for removing the current vertex (as given by PolylineSimplificationCostFunction ) initial_count The initial number of vertices in the entire polyline set (including intersection vertices not in any source polyline) current_count The current number of vertices true if the algorithm should stop, false if it should continue. CDT must be CGAL::Constrained_triangulation_plus_2 with a vertex type that is model of PolylineSimplificationVertexBase_2 .",
+          "return_type": "bool",
+          "definition": "bool PolylineSimplificationStopPredicate::operator()",
+          "argsstring": "(const CGAL::Constrained_triangulation_plus_2< CDT > &ct, CGAL::Constrained_triangulation_plus_2< CDT >::Vertex_handle q, typename CDT::Geom_traits::FT cost, std::size_t initial_count, std::size_t current_count) const",
+          "params": [
+            {
+              "type": "const CGAL::Constrained_triangulation_plus_2< CDT > &",
+              "name": "ct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CGAL::Constrained_triangulation_plus_2< CDT >::Vertex_handle",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename CDT::Geom_traits::FT",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "initial_count",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "current_count",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/PolylineSimplificationStopPredicate.h",
+          "line": "31"
+        }
+      ],
+      "xml_file": "class_polyline_simplification_stop_predicate.xml",
+      "file": "Concepts/PolylineSimplificationStopPredicate.h",
+      "line": "15"
+    },
+    "PolylineSimplificationVertexBase_2": {
+      "kind": "class",
+      "name": "PolylineSimplificationVertexBase_2",
+      "brief": "The polyline simplification algorithm stores in the vertices whether a vertex can be removed, and the cost of the removal.",
+      "detailed": "Refines TriangulationVertexBase_2 Has models CGAL::Polyline_simplification_2::Vertex_base_2 <Vb> TriangulationFaceBase_2 CGAL::Constrained_triangulation_plus_2<Tr>",
+      "members": [
+        {
+          "kind": "function",
+          "name": "is_removable",
+          "qualified_name": "PolylineSimplificationVertexBase_2::is_removable",
+          "brief": "indicates whether the vertex can be removed.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool PolylineSimplificationVertexBase_2::is_removable",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/PolylineSimplificationVertexBase_2.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "set_removable",
+          "qualified_name": "PolylineSimplificationVertexBase_2::set_removable",
+          "brief": "allows to set whether the vertex can be removed.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void PolylineSimplificationVertexBase_2::set_removable",
+          "argsstring": "(bool b)",
+          "params": [
+            {
+              "type": "bool",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/PolylineSimplificationVertexBase_2.h",
+          "line": "34"
+        },
+        {
+          "kind": "function",
+          "name": "cost",
+          "qualified_name": "PolylineSimplificationVertexBase_2::cost",
+          "brief": "returns the cost of the vertex removal.",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT PolylineSimplificationVertexBase_2::cost",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/PolylineSimplificationVertexBase_2.h",
+          "line": "38"
+        },
+        {
+          "kind": "function",
+          "name": "set_cost",
+          "qualified_name": "PolylineSimplificationVertexBase_2::set_cost",
+          "brief": "allows to set the cost of the vertex removal.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void PolylineSimplificationVertexBase_2::set_cost",
+          "argsstring": "(const FT &ft)",
+          "params": [
+            {
+              "type": "const FT &",
+              "name": "ft",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/PolylineSimplificationVertexBase_2.h",
+          "line": "42"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "PolylineSimplificationVertexBase_2::FT",
+          "brief": "A number type which must be the same as the FT of the geometric traits class of the triangulation.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PolylineSimplificationVertexBase_2::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/PolylineSimplificationVertexBase_2.h",
+          "line": "23"
+        }
+      ],
+      "xml_file": "class_polyline_simplification_vertex_base__2.xml",
+      "file": "Concepts/PolylineSimplificationVertexBase_2.h",
+      "line": "20"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Polyline_simplification_2.txt",
+      "line": "1"
+    },
+    "CGAL::Polyline_simplification_2": {
+      "kind": "namespace",
+      "name": "CGAL::Polyline_simplification_2",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_polyline__simplification__2.xml",
+      "file": "CGAL/Polyline_simplification_2/Hybrid_squared_distance_cost.h",
+      "line": "23"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgPolylineSimplification2Ref": {
+      "kind": "group",
+      "name": "PkgPolylineSimplification2Ref",
+      "brief": "",
+      "detailed": "Andreas Fabri This package enables to simplify polylines with the guarantee that the topology of the polylines does not change. This can be done for a single polyline as well as for a set of polyline constraints in a constrained triangulation. The simplification can be controlled with cost and stop functions. Introduced in: CGAL 4.6 Depends on: PkgTriangulation2 BibTeX: cgal:f-ps2-26a License: GPL Windows Demo: Polyline Simplification Classified Reference Pages Concepts PolylineSimplificationCostFunction PolylineSimplificationStopPredicate PolylineSimplificationVertexBase_2 Classes CGAL::Polyline_simplification_2::Squared_distance_cost CGAL::Polyline_simplification_2::Scaled_squared_distance_cost CGAL::Polyline_simplification_2::Hybrid_squared_distance_cost CGAL::Polyline_simplification_2::Stop_above_cost_threshold CGAL::Polyline_simplification_2::Stop_below_count_threshold CGAL::Polyline_simplification_2::Stop_below_count_ratio_threshold CGAL::Polyline_simplification_2::Vertex_base_2 Global Functions CGAL::Polyline_simplification_2::simplify()",
+      "members": [],
+      "xml_file": "group___pkg_polyline_simplification2_ref.xml"
+    },
+    "PkgPolylineSimplification2Concepts": {
+      "kind": "group",
+      "name": "PkgPolylineSimplification2Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_polyline_simplification2_concepts.xml"
+    },
+    "PkgPolylineSimplification2Classes": {
+      "kind": "group",
+      "name": "PkgPolylineSimplification2Classes",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_polyline_simplification2_classes.xml"
+    },
+    "PkgPolylineSimplification2Functions": {
+      "kind": "group",
+      "name": "PkgPolylineSimplification2Functions",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "simplify",
+          "qualified_name": "CGAL::Polyline_simplification_2::simplify",
+          "brief": "Simplifies a single polygon.",
+          "detailed": "Traits must be a model of ConstrainedDelaunayTriangulationTraits_2 CostFunction must be a model of PolylineSimplificationCostFunction . StopFunction must be a model of PolylineSimplificationStopPredicate Any CGAL kernel can be used for Traits , but as the traits class is used for internally using a constrained Delaunay triangulation, it should be a kernel with at least exact predicates.",
+          "return_type": "CGAL::Polygon_2< Traits, Container >",
+          "definition": "CGAL::Polygon_2< Traits, Container > CGAL::Polyline_simplification_2::simplify",
+          "argsstring": "(const CGAL::Polygon_2< Traits, Container > &polygon, CostFunction cost, StopFunction stop)",
+          "params": [
+            {
+              "type": "const CGAL::Polygon_2< Traits, Container > &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CostFunction",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "StopFunction",
+              "name": "stop",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "397"
+        },
+        {
+          "kind": "function",
+          "name": "simplify",
+          "qualified_name": "CGAL::Polyline_simplification_2::simplify",
+          "brief": "Simplifies a single polygon with holes.",
+          "detailed": "Traits must be a model of ConstrainedDelaunayTriangulationTraits_2 CostFunction must be a model of PolylineSimplificationCostFunction . StopFunction must be a model of PolylineSimplificationStopPredicate Any CGAL kernel can be used for Traits , but as the traits class is used for internally using a constrained Delaunay triangulation, it should be a kernel with at least exact predicates.",
+          "return_type": "CGAL::Polygon_with_holes_2< Traits, Container >",
+          "definition": "CGAL::Polygon_with_holes_2< Traits, Container > CGAL::Polyline_simplification_2::simplify",
+          "argsstring": "(const CGAL::Polygon_with_holes_2< Traits, Container > &polygon, CostFunction cost, StopFunction stop)",
+          "params": [
+            {
+              "type": "const CGAL::Polygon_with_holes_2< Traits, Container > &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CostFunction",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "StopFunction",
+              "name": "stop",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "447"
+        },
+        {
+          "kind": "function",
+          "name": "simplify",
+          "qualified_name": "CGAL::Polyline_simplification_2::simplify",
+          "brief": "Simplifies an open or closed polyline given as an iterator range of 2D CGAL points.",
+          "detailed": "PointIterator must be an iterator with value type Kernel::Point_2 . CostFunction must be a model of PolylineSimplificationCostFunction StopFunction must be a model of PolylineSimplificationStopPredicate PointOutputIterator must be an output iterator to which Kernel::Point_2 can be assigned.",
+          "return_type": "PointOutputIterator",
+          "definition": "PointOutputIterator CGAL::Polyline_simplification_2::simplify",
+          "argsstring": "(PointIterator b, PointIterator e, CostFunction cost, StopFunction stop, PointOutputIterator out, bool close=false)",
+          "params": [
+            {
+              "type": "PointIterator",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PointIterator",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CostFunction",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "StopFunction",
+              "name": "stop",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PointOutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "close",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "514"
+        },
+        {
+          "kind": "function",
+          "name": "simplify",
+          "qualified_name": "CGAL::Polyline_simplification_2::simplify",
+          "brief": "Simplifies a single polyline in a triangulation with polylines as constraints.",
+          "detailed": "ct The underlying constrained Delaunay triangulation which embeds the polyline constraints cid The constraint identifier of the polyline constraint to simplify cost The cost function stop The stop function remove_points If true the function ct.remove_points_without_corresponding_vertex() is called. the number of removed vertices CDT must be CGAL::Constrained_triangulation_plus_2 with a vertex type that is model of PolylineSimplificationVertexBase_2 . CostFunction must be a model of PolylineSimplificationCostFunction StopFunction must be a model of PolylineSimplificationStopPredicate",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polyline_simplification_2::simplify",
+          "argsstring": "(CGAL::Constrained_triangulation_plus_2< CDT > &ct, typename CGAL::Constrained_triangulation_plus_2< CDT >::Constraint_id cid, CostFunction cost, StopFunction stop, bool remove_points=true)",
+          "params": [
+            {
+              "type": "CGAL::Constrained_triangulation_plus_2< CDT > &",
+              "name": "ct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename CGAL::Constrained_triangulation_plus_2< CDT >::Constraint_id",
+              "name": "cid",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CostFunction",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "StopFunction",
+              "name": "stop",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "remove_points",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "568"
+        },
+        {
+          "kind": "function",
+          "name": "simplify",
+          "qualified_name": "CGAL::Polyline_simplification_2::simplify",
+          "brief": "Simplifies all polylines in a triangulation with polylines as constraints.",
+          "detailed": "ct The underlying constrained Delaunay triangulation which embeds the polyline constraints cost The cost function stop The stop function remove_points If true the function ct.remove_points_without_corresponding_vertex() is called. the number of removed vertices CDT must be CGAL::Constrained_triangulation_plus_2 with a vertex type that is model of PolylineSimplificationVertexBase_2 . CostFunction must be a model of PolylineSimplificationCostFunction StopFunction must be a model of PolylineSimplificationStopPredicate",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Polyline_simplification_2::simplify",
+          "argsstring": "(CGAL::Constrained_triangulation_plus_2< CDT > &ct, CostFunction cost, StopFunction stop, bool remove_points=true)",
+          "params": [
+            {
+              "type": "CGAL::Constrained_triangulation_plus_2< CDT > &",
+              "name": "ct",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CostFunction",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "StopFunction",
+              "name": "stop",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "remove_points",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polyline_simplification_2/simplify.h",
+          "line": "600"
+        }
+      ],
+      "xml_file": "group___pkg_polyline_simplification2_functions.xml"
+    }
+  }
+}

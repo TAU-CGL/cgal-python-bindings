@@ -1,0 +1,360 @@
+{
+  "schema_version": 1,
+  "package": "Optimal_bounding_box",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 10,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Oriented_bounding_box_traits_3": {
+      "kind": "class",
+      "name": "CGAL::Oriented_bounding_box_traits_3",
+      "brief": "The class CGAL::Oriented_bounding_box_traits_3 is a traits type to be used with the overloads of the function CGAL::oriented_bounding_box() .",
+      "detailed": "This class requires the Eigen library. K must be a model of Kernel Is model of OrientedBoundingBoxTraits_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Oriented_bounding_box_traits_3::FT",
+          "brief": "The field number type.",
+          "detailed": "",
+          "return_type": "K::FT",
+          "definition": "typedef K::FT CGAL::Oriented_bounding_box_traits_3< K >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+          "line": "47"
+        },
+        {
+          "kind": "typedef",
+          "name": "Aff_transformation_3",
+          "qualified_name": "CGAL::Oriented_bounding_box_traits_3::Aff_transformation_3",
+          "brief": "The affine transformation type.",
+          "detailed": "",
+          "return_type": "CGAL::Aff_transformation_3< K >",
+          "definition": "typedef CGAL::Aff_transformation_3<K> CGAL::Oriented_bounding_box_traits_3< K >::Aff_transformation_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+          "line": "50"
+        },
+        {
+          "kind": "typedef",
+          "name": "Matrix",
+          "qualified_name": "CGAL::Oriented_bounding_box_traits_3::Matrix",
+          "brief": "The matrix type.",
+          "detailed": "",
+          "return_type": "CGAL::Eigen_matrix< FT , 3, 3 >",
+          "definition": "typedef CGAL::Eigen_matrix<FT, 3, 3> CGAL::Oriented_bounding_box_traits_3< K >::Matrix",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+          "line": "53"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector",
+          "qualified_name": "CGAL::Oriented_bounding_box_traits_3::Vector",
+          "brief": "The matrix type.",
+          "detailed": "",
+          "return_type": "CGAL::Eigen_vector< FT , 3 >",
+          "definition": "typedef CGAL::Eigen_vector<FT, 3> CGAL::Oriented_bounding_box_traits_3< K >::Vector",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+          "line": "56"
+        },
+        {
+          "kind": "typedef",
+          "name": "EigenType",
+          "qualified_name": "CGAL::Oriented_bounding_box_traits_3::EigenType",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Matrix::EigenType",
+          "definition": "typedef Matrix::EigenType CGAL::Oriented_bounding_box_traits_3< K >::EigenType",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-type",
+          "section": "",
+          "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+          "line": "59"
+        },
+        {
+          "kind": "function",
+          "name": "get_Q",
+          "qualified_name": "CGAL::Oriented_bounding_box_traits_3::get_Q",
+          "brief": "Performs the QR-decomposition of the matrix m to a unitary matrix and an upper triagonal and returns the unitary matrix.",
+          "detailed": "",
+          "return_type": "Matrix",
+          "definition": "static Matrix CGAL::Oriented_bounding_box_traits_3< K >::get_Q",
+          "argsstring": "(const Matrix &m)",
+          "params": [
+            {
+              "type": "const Matrix &",
+              "name": "m",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-static-func",
+          "section": "",
+          "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+          "line": "64"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_oriented__bounding__box__traits__3.xml",
+      "file": "CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h",
+      "line": "42"
+    },
+    "OrientedBoundingBoxTraits_3": {
+      "kind": "class",
+      "name": "OrientedBoundingBoxTraits_3",
+      "brief": "The concept OrientedBoundingBoxTraits_3 describes the requirements of the traits class used in the function CGAL::oriented_bounding_box() , and in particular the need for a 3x3 matrix type.",
+      "detailed": "Refines Kernel Has models CGAL::Oriented_bounding_box_traits_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "OrientedBoundingBoxTraits_3::FT",
+          "brief": "The field number type; must be a model of the concept FieldNumberType .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OrientedBoundingBoxTraits_3::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/OrientedBoundingBoxTraits.h",
+          "line": "20"
+        },
+        {
+          "kind": "typedef",
+          "name": "Aff_transformation_3",
+          "qualified_name": "OrientedBoundingBoxTraits_3::Aff_transformation_3",
+          "brief": "The 3D affine transformation type; the template parameter K must be a model of Kernel and be compatible with the type Point_3 .",
+          "detailed": "",
+          "return_type": "CGAL::Aff_transformation_3< K >",
+          "definition": "typedef CGAL::Aff_transformation_3<K> OrientedBoundingBoxTraits_3::Aff_transformation_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/OrientedBoundingBoxTraits.h",
+          "line": "24"
+        },
+        {
+          "kind": "typedef",
+          "name": "Matrix",
+          "qualified_name": "OrientedBoundingBoxTraits_3::Matrix",
+          "brief": "A 3x3 matrix type; model of the concept SvdTraits::Matrix and which supports matrix-matrix and scalar-matrix multiplication, as well as matrix-matrix addition.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OrientedBoundingBoxTraits_3::Matrix",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/OrientedBoundingBoxTraits.h",
+          "line": "28"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector",
+          "qualified_name": "OrientedBoundingBoxTraits_3::Vector",
+          "brief": "A 3 dimensional vector type; model of the concept SvdTraits::Vector and which supports matrix-vector and multiplication.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OrientedBoundingBoxTraits_3::Vector",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "Concepts/OrientedBoundingBoxTraits.h",
+          "line": "32"
+        },
+        {
+          "kind": "function",
+          "name": "get_Q",
+          "qualified_name": "OrientedBoundingBoxTraits_3::get_Q",
+          "brief": "Returns the unitary matrix Q obtained in the QR-decomposition of the matrix m .",
+          "detailed": "",
+          "return_type": "Matrix",
+          "definition": "Matrix OrientedBoundingBoxTraits_3::get_Q",
+          "argsstring": "(const Matrix &m) const",
+          "params": [
+            {
+              "type": "const Matrix &",
+              "name": "m",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "Concepts/OrientedBoundingBoxTraits.h",
+          "line": "35"
+        }
+      ],
+      "xml_file": "class_oriented_bounding_box_traits__3.xml",
+      "file": "Concepts/OrientedBoundingBoxTraits.h",
+      "line": "16"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Optimal_bounding_box.txt",
+      "line": "1"
+    },
+    "CGAL::Optimal_bounding_box": {
+      "kind": "namespace",
+      "name": "CGAL::Optimal_bounding_box",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_optimal__bounding__box.xml",
+      "file": "CGAL/Optimal_bounding_box/oriented_bounding_box.h",
+      "line": "50"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgOptimalBoundingBoxRef": {
+      "kind": "group",
+      "name": "PkgOptimalBoundingBoxRef",
+      "brief": "",
+      "detailed": "Konstantinos Katrioplas and Mael Rouxel-Labbé This package provides functions to compute tight oriented bounding boxes around a point set or a polygon mesh. Introduced in: CGAL 5.1 Depends on: PkgConvexHull3 BibTeX: cgal:obb-26a License: GPL Windows Demo: CGAL Lab Classified Reference Pages Parameters Optional parameters of the functions of this package are implemented as BGLNamedParameters. The page bgl_namedparameters describes their usage and provides a list of the parameters that are used in this package. Concepts OrientedBoundingBoxTraits_3 Classes CGAL::Oriented_bounding_box_traits_3 Methods CGAL::oriented_bounding_box()",
+      "members": [],
+      "xml_file": "group___pkg_optimal_bounding_box_ref.xml"
+    },
+    "PkgOptimalBoundingBoxConcepts": {
+      "kind": "group",
+      "name": "PkgOptimalBoundingBoxConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_optimal_bounding_box_concepts.xml"
+    },
+    "PkgOptimalBoundingBoxClasses": {
+      "kind": "group",
+      "name": "PkgOptimalBoundingBoxClasses",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_optimal_bounding_box_classes.xml"
+    },
+    "PkgOptimalBoundingBoxFunctions": {
+      "kind": "group",
+      "name": "PkgOptimalBoundingBoxFunctions",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_optimal_bounding_box_functions.xml"
+    },
+    "PkgOptimalBoundingBox_Oriented_bounding_box": {
+      "kind": "group",
+      "name": "PkgOptimalBoundingBox_Oriented_bounding_box",
+      "brief": "The function oriented_bounding_box() computes an approximation of the optimal bounding box , which is defined as the rectangular box with smallest volume of all the rectangular boxes containing the input points.",
+      "detailed": "Internally, the algorithm uses an optimization process to compute a transformation (rotation) $ {\\mathcal R}_b$ such that the axis-aligned box of the rotated input point set has a volume that is as small as possible given a fixed maximal number of optimization iterations. Input The input can be either a range of 3D points, or a polygon mesh. Output The result of the algorithm can be retrieved as either: the best affine transformation ${\\mathcal R}_b$ that the algorithm has found; an array of eight points, representing the best oriented bounding box ( ${\\mathcal B}_b$ ) that the algorithm has constructed, which is related to $ {\\mathcal R}_b$ as it is the inverse transformation of the axis-aligned bounding box of the transformed point set. The order of the points in the array is the same as in the function CGAL::make_hexahedron() , which can be used to construct a mesh from these points. a model of MutableFaceGraph Note that when returning an array of points, these points are constructed from the axis-aligned bounding box and some precision loss should therefore be expected if a kernel not providing exact constructions is used. The algorithm is based on a paper by Chang, Gorissen, and Melchior [1] .",
+      "members": [
+        {
+          "kind": "function",
+          "name": "oriented_bounding_box",
+          "qualified_name": "CGAL::oriented_bounding_box",
+          "brief": "The function oriented_bounding_box() computes an approximation of the optimal bounding box , which is defined as the rectangular box with smallest volume of all the rectangular boxes containing the input points.",
+          "detailed": "See Oriented Bounding Box Functions for more information. PointRange a model of Range . The value type may not be equal to the type Point_3 of the traits class if a point map is provided via named parameters (see below) to access points. Output either the type Aff_transformation_3 of the traits class, or std::array<Point, 8> with Point being equivalent to the type Point_3 of the traits class, or a model of MutableFaceGraph NamedParameters a sequence of Named Parameters points the input range out the resulting array of points or affine transformation np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> point_map </button> a property map associating points to the elements of the point range Type: a model of ReadablePropertyMap with value type geom_traits::Point_3 Default: CGAL::Identity_property_map<geom_traits::Point_3> <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a model of OrientedBoundingBoxTraits_3 Default: a default-constructed object of type CGAL::Oriented_bounding_box_traits_3 <K> , where K is a kernel type deduced from the point type. <button class=\"collapsible\"> use_convex_hull </button> Parameter used in the construction of oriented bounding box to indicate whether the algorithm should first extract the extreme points (points that are on the 3D convex hull) of the input data range to accelerate the computation of the bounding box. Type: Boolean Default: true",
+          "return_type": "void",
+          "definition": "void CGAL::oriented_bounding_box",
+          "argsstring": "(const PointRange &points, Output &out, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const PointRange &",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Output &",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Optimal_bounding_box/oriented_bounding_box.h",
+          "line": "318"
+        },
+        {
+          "kind": "function",
+          "name": "oriented_bounding_box",
+          "qualified_name": "CGAL::oriented_bounding_box",
+          "brief": "Extracts the vertices of the mesh as a point range and calls the overload using points as input.",
+          "detailed": "PolygonMesh a model of VertexListGraph Output either the type Aff_transformation_3 of the traits class, or std::array<Point, 8> with Point being equivalent to the type Point_3 of the traits class, or a model of MutableFaceGraph NamedParameters a sequence of Named Parameters pmesh the input mesh out the resulting array of points or affine transformation np an optional sequence of Named Parameters among the ones listed below Optional Named Parameters <button class=\"collapsible\"> vertex_point_map </button> a property map associating points to the vertices of pmesh Type: a class model of ReadablePropertyMap with boost::graph_traits<PolygonMesh>::vertex_descriptor as key type and Point_3 as value type Default: boost::get(CGAL::vertex_point, pmesh) Extra: If this parameter is omitted, an internal property map for CGAL::vertex_point_t should be available for the vertices of pmesh . <button class=\"collapsible\"> geom_traits </button> an instance of a geometric traits class Type: a model of OrientedBoundingBoxTraits_3 Default: a default-constructed object of type CGAL::Oriented_bounding_box_traits_3 <K> , where K is a kernel type deduced from the point type. <button class=\"collapsible\"> use_convex_hull </button> Parameter used in the construction of oriented bounding box to indicate whether the algorithm should first extract the extreme points (points that are on the 3D convex hull) of the input data range to accelerate the computation of the bounding box. Type: Boolean Default: true",
+          "return_type": "void",
+          "definition": "void CGAL::oriented_bounding_box",
+          "argsstring": "(const PolygonMesh &pmesh, Output &out, const NamedParameters &np=parameters::default_values())",
+          "params": [
+            {
+              "type": "const PolygonMesh &",
+              "name": "pmesh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Output &",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NamedParameters &",
+              "name": "np",
+              "default": "parameters::default_values()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Optimal_bounding_box/oriented_bounding_box.h",
+          "line": "421"
+        }
+      ],
+      "xml_file": "group___pkg_optimal_bounding_box___oriented__bounding__box.xml"
+    }
+  }
+}

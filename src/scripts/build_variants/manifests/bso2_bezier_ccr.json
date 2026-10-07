@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "bso2_bezier_ccr",
+  "description": "Build variant defined by cmake/tests/bso2_bezier_ccr.cmake",
+  "cmake_tests": [
+    "cmake/tests/bso2_bezier_ccr.cmake"
+  ]
+}

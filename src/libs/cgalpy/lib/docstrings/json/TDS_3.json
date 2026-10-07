@@ -1,0 +1,4715 @@
+{
+  "schema_version": 1,
+  "package": "TDS_3",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 16,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Triangulation_data_structure_3": {
+      "kind": "class",
+      "name": "CGAL::Triangulation_data_structure_3",
+      "brief": "The class Triangulation_data_structure_3 stores a 3D-triangulation data structure and provides the optional geometric functionalities to be used as a parameter for a 3D-geometric triangulation (see Chapter 3D Triangulations).",
+      "detailed": "The vertices and cells are stored in two nested containers, which are implemented using Compact_container (or Concurrent_compact_container , see below). The class may offer some flexibility for the choice of container in the future, in the form of additional template parameters. VertexBase must be a model of TriangulationDSVertexBase_3 . The default is Triangulation_ds_vertex_base_3 <TDS> . CellBase must be a model of TriangulationDSCellBase_3 . The default is Triangulation_ds_cell_base_3 <TDS> . ConcurrencyTag enables the use of a concurrent container to store vertices and cells. It can be Sequential_tag (use of a Compact_container to store vertices and cells) or Parallel_tag (use of a Concurrent_compact_container ). If it is Parallel_tag , the following functions can be called concurrently: create_vertex() , create_cell() , delete_vertex() , and delete_cell() . Sequential_tag is the default value. Is model of TriangulationDataStructure_3 The base class Triangulation_utils_3 defines basic computations on indices of vertices and neighbors of cells. CGAL::Triangulation_ds_vertex_base_3 CGAL::Triangulation_ds_cell_base_3",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Tds",
+          "qualified_name": "CGAL::Triangulation_data_structure_3::Tds",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation_data_structure_2< VertexBase, FaceBase >",
+          "definition": "typedef Triangulation_data_structure_2<VertexBase,FaceBase> CGAL::Triangulation_data_structure_3< VertexBase, CellBase, ConcurrencyTag >::Tds",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Triangulation_data_structure_3.h",
+          "line": "49"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex",
+          "qualified_name": "CGAL::Triangulation_data_structure_3::Vertex",
+          "brief": "The vertex type.",
+          "detailed": "Section Cyclic Dependency",
+          "return_type": "VertexBase::template Rebind_TDS< Tds >::Other",
+          "definition": "typedef VertexBase::template Rebind_TDS<Tds>::Other CGAL::Triangulation_data_structure_3< VertexBase, CellBase, ConcurrencyTag >::Vertex",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Triangulation_data_structure_3.h",
+          "line": "54"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell",
+          "qualified_name": "CGAL::Triangulation_data_structure_3::Cell",
+          "brief": "The face type.",
+          "detailed": "Section Cyclic Dependency",
+          "return_type": "CellBase::template Rebind_TDS< Tds >::Other",
+          "definition": "typedef CellBase::template Rebind_TDS<Tds>::Other CGAL::Triangulation_data_structure_3< VertexBase, CellBase, ConcurrencyTag >::Cell",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Triangulation_data_structure_3.h",
+          "line": "59"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_range",
+          "qualified_name": "CGAL::Triangulation_data_structure_3::Vertex_range",
+          "brief": "Vertex container type.",
+          "detailed": "If ConcurrencyTag is Parallel_tag , a Concurrent_compact_container is used instead of a Compact_container .",
+          "return_type": "Compact_container< Vertex , Default >",
+          "definition": "typedef Compact_container<Vertex, Default> CGAL::Triangulation_data_structure_3< VertexBase, CellBase, ConcurrencyTag >::Vertex_range",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Triangulation_data_structure_3.h",
+          "line": "65"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_range",
+          "qualified_name": "CGAL::Triangulation_data_structure_3::Cell_range",
+          "brief": "Cell container type.",
+          "detailed": "If ConcurrencyTag is Parallel_tag , a Concurrent_compact_container is used instead of a Compact_container .",
+          "return_type": "Compact_container< Cell , Default >",
+          "definition": "typedef Compact_container<Cell, Default> CGAL::Triangulation_data_structure_3< VertexBase, CellBase, ConcurrencyTag >::Cell_range",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Triangulation_data_structure_3.h",
+          "line": "71"
+        },
+        {
+          "kind": "function",
+          "name": "cells",
+          "qualified_name": "CGAL::Triangulation_data_structure_3::cells",
+          "brief": "Returns a reference to the container of cells.",
+          "detailed": "",
+          "return_type": "Cell_range &",
+          "definition": "Cell_range & CGAL::Triangulation_data_structure_3< VertexBase, CellBase, ConcurrencyTag >::cells",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Triangulation_data_structure_3.h",
+          "line": "84"
+        },
+        {
+          "kind": "function",
+          "name": "cells",
+          "qualified_name": "CGAL::Triangulation_data_structure_3::cells",
+          "brief": "Returns a reference to the container of cells.",
+          "detailed": "",
+          "return_type": "Cell_range &",
+          "definition": "Cell_range & CGAL::Triangulation_data_structure_3< VertexBase, CellBase, ConcurrencyTag >::cells",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Triangulation_data_structure_3.h",
+          "line": "89"
+        },
+        {
+          "kind": "function",
+          "name": "vertices",
+          "qualified_name": "CGAL::Triangulation_data_structure_3::vertices",
+          "brief": "Returns a reference to the container of vertices.",
+          "detailed": "",
+          "return_type": "Vertex_range &",
+          "definition": "Vertex_range & CGAL::Triangulation_data_structure_3< VertexBase, CellBase, ConcurrencyTag >::vertices",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Triangulation_data_structure_3.h",
+          "line": "94"
+        },
+        {
+          "kind": "function",
+          "name": "vertices",
+          "qualified_name": "CGAL::Triangulation_data_structure_3::vertices",
+          "brief": "Returns a reference to the container of vertices.",
+          "detailed": "",
+          "return_type": "Vertex_range &",
+          "definition": "Vertex_range & CGAL::Triangulation_data_structure_3< VertexBase, CellBase, ConcurrencyTag >::vertices",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Triangulation_data_structure_3.h",
+          "line": "99"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_triangulation__data__structure__3.xml",
+      "file": "CGAL/Triangulation_data_structure_3.h",
+      "line": "41"
+    },
+    "CGAL::Triangulation_ds_cell_base_3": {
+      "kind": "class",
+      "name": "CGAL::Triangulation_ds_cell_base_3",
+      "brief": "The class Triangulation_ds_cell_base_3 <> is a model for the concept TriangulationDSCellBase_3 to be used by Triangulation_data_structure_3 .",
+      "detailed": "Is model of TriangulationDSCellBase_3 TDS should not be specified (see Section Cyclic Dependency and examples) CGAL::Triangulation_cell_base_3 CGAL::Triangulation_ds_vertex_base_3",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_triangulation__ds__cell__base__3.xml",
+      "file": "CGAL/Triangulation_ds_cell_base_3.h",
+      "line": "20"
+    },
+    "CGAL::Triangulation_ds_vertex_base_3": {
+      "kind": "class",
+      "name": "CGAL::Triangulation_ds_vertex_base_3",
+      "brief": "The class Triangulation_ds_vertex_base_3 can be used as the base vertex for a 3D-triangulation data structure, it is a model of the concept TriangulationDSVertexBase_3 .",
+      "detailed": "Note that if the triangulation data structure is used as a parameter of a geometric triangulation (Section Software Design and Chapter 3D Triangulations), then the vertex base class has to fulfill additional geometric requirements, i.e. it has to be a model of the concept TriangulationVertexBase_3 . This base class can be used directly or can serve as a base to derive other base classes with some additional attributes (a color for example) tuned for a specific application. Is model of TriangulationDSVertexBase_3 TDS should not be specified (see Section Cyclic Dependency and examples) CGAL::Triangulation_vertex_base_3 CGAL::Triangulation_ds_cell_base_3",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_triangulation__ds__vertex__base__3.xml",
+      "file": "CGAL/Triangulation_ds_vertex_base_3.h",
+      "line": "30"
+    },
+    "CGAL::Triangulation_utils_3": {
+      "kind": "struct",
+      "name": "CGAL::Triangulation_utils_3",
+      "brief": "The class Triangulation_utils_3 defines operations on the indices of vertices and neighbors within a cell.",
+      "detailed": "fig__Triangulation3figutils Operations on indices.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "next_around_edge",
+          "qualified_name": "CGAL::Triangulation_utils_3::next_around_edge",
+          "brief": "In dimension 3, index of the neighbor n that is next to the current cell, when turning positively around an oriented edge whose endpoints are indexed i and j .",
+          "detailed": "According to the usual numbering of vertices and neighbors in a given cell, it is also the index of the vertex opposite to this neighbor n . (see fig__Triangulation3figutils ). ( i < 4 ) && ( j < 4 ) && ( i != j ) .",
+          "return_type": "unsigned int",
+          "definition": "static unsigned int CGAL::Triangulation_utils_3::next_around_edge",
+          "argsstring": "(unsigned int i, unsigned int j)",
+          "params": [
+            {
+              "type": "unsigned int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "unsigned int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Triangulation_utils_3.h",
+          "line": "43"
+        },
+        {
+          "kind": "function",
+          "name": "vertex_triple_index",
+          "qualified_name": "CGAL::Triangulation_utils_3::vertex_triple_index",
+          "brief": "In dimension 3, index of the j -th vertex in counterclockwise order on the face opposite to vertex with i of the cell.",
+          "detailed": "( i < 4 ) && ( j < 3 ) .",
+          "return_type": "int",
+          "definition": "static int CGAL::Triangulation_utils_3::vertex_triple_index",
+          "argsstring": "(const int i, const int j)",
+          "params": [
+            {
+              "type": "const int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Triangulation_utils_3.h",
+          "line": "49"
+        },
+        {
+          "kind": "function",
+          "name": "ccw",
+          "qualified_name": "CGAL::Triangulation_utils_3::ccw",
+          "brief": "Has a meaning only in dimension 2.",
+          "detailed": "Computes the index of the vertex that is next to the vertex numbered i in counterclockwise direction. (see fig__Triangulation3figutils ). i<3 .",
+          "return_type": "unsigned int",
+          "definition": "static unsigned int CGAL::Triangulation_utils_3::ccw",
+          "argsstring": "(unsigned int i)",
+          "params": [
+            {
+              "type": "unsigned int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Triangulation_utils_3.h",
+          "line": "59"
+        },
+        {
+          "kind": "function",
+          "name": "cw",
+          "qualified_name": "CGAL::Triangulation_utils_3::cw",
+          "brief": "Same for clockwise.",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "static unsigned int CGAL::Triangulation_utils_3::cw",
+          "argsstring": "(unsigned int i)",
+          "params": [
+            {
+              "type": "unsigned int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Triangulation_utils_3.h",
+          "line": "64"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_triangulation__utils__3.xml",
+      "file": "CGAL/Triangulation_utils_3.h",
+      "line": "30"
+    },
+    "TriangulationDataStructure_3": {
+      "kind": "class",
+      "name": "TriangulationDataStructure_3",
+      "brief": "3D-triangulation data structures are meant to maintain the combinatorial information for 3D-geometric triangulations.",
+      "detailed": "In CGAL, a triangulation data structure is a container of cells ( $ 3$ -faces) and vertices ( $ 0$ -faces). Following the standard vocabulary of simplicial complexes, an $ i$ -face $ f_i$ and a $ j$ -face $ f_j$ $ (0 \\leq j < i \\leq 3)$ are said to be incident in the triangulation if $ f_j$ is a (sub)face of $ f_i$ , and two $ i$ -faces $ (0 \\leq i \\leq 3)$ are said to be adjacent if they share a common incident (sub)face. Each cell gives access to its four incident vertices and to its four adjacent cells. Each vertex gives direct access to one of its incident cells, which is sufficient to retrieve all the incident cells when needed. The four vertices of a cell are indexed with 0, 1, 2 and 3. The neighbors of a cell are also indexed with 0, 1, 2, 3 in such a way that the neighbor indexed by $ i$ is opposite to the vertex with the same index (see fig__TDS3figrepres ). Edges ( $ 1$ -faces) and facets ( $ 2$ -faces) are not explicitly represented: a facet is given by a cell and an index (the facet i of a cell c is the facet of c that is opposite to the vertex of index i ) and an edge is given by a cell and two indices (the edge (i,j) of a cell c is the edge whose endpoints are the vertices of indices i and j of c ). As CGAL explicitly deals with all degenerate cases, a 3D-triangulation data structure in CGAL can handle the cases when the dimension of the triangulation is lower than 3 (see Section Representation ). Thus, a 3D-triangulation data structure can store a triangulation of a topological sphere $ S^d$ of $ \\mathbb{R}^{d+1}$ , for any $ d \\in \\{-1,0,1,2,3\\}$ . The second template parameter of the basic triangulation class (see Chapter 3D Triangulations) CGAL::Triangulation_3 is a triangulation data structure class. (See Chapter chapterTDS3 .) To ensure all the flexibility of the class CGAL::Triangulation_3 , a model of a triangulation data structure must be templated by the base vertex and the base cell classes (see Representation ): TriangulationDataStructure_3 <TriangulationVertexBase_3,TriangulationCellBase_3> . The optional functionalities related to geometry are compulsory for this use as a template parameter of CGAL::Triangulation_3 . A class that satisfies the requirements for a triangulation data structure class must provide the following types and operations. I/O The information stored in the iostream is: the dimension, the number of vertices, the number of cells, the indices of the vertices of each cell, then the indices of the neighbors of each cell, where the index corresponds to the preceding list of cells. When dimension < 3, the same information is stored for faces of maximal dimension instead of cells. Has models CGAL::Triangulation_data_structure_3 <Vb, Cb> TriangulationDataStructure_3::Vertex TriangulationDataStructure_3::Cell",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Vertex",
+          "qualified_name": "TriangulationDataStructure_3::Vertex",
+          "brief": "Vertex type, requirements are described in TriangulationDataStructure_3::Vertex .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Vertex",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "86"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell",
+          "qualified_name": "TriangulationDataStructure_3::Cell",
+          "brief": "Cell type, requirements are described in TriangulationDataStructure_3::Cell .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Cell",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "91"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_data",
+          "qualified_name": "TriangulationDataStructure_3::Cell_data",
+          "brief": "Cell data type, requirements are described in TriangulationDataStructure_3::Cell_data .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Cell_data",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "96"
+        },
+        {
+          "kind": "typedef",
+          "name": "size_type",
+          "qualified_name": "TriangulationDataStructure_3::size_type",
+          "brief": "Size type (unsigned integral type).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::size_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "101"
+        },
+        {
+          "kind": "typedef",
+          "name": "difference_type",
+          "qualified_name": "TriangulationDataStructure_3::difference_type",
+          "brief": "Difference type (signed integral type).",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::difference_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "106"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle",
+          "qualified_name": "TriangulationDataStructure_3::Vertex_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Vertex_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "111"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_handle",
+          "qualified_name": "TriangulationDataStructure_3::Cell_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Cell_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "116"
+        },
+        {
+          "kind": "typedef",
+          "name": "Concurrency_tag",
+          "qualified_name": "TriangulationDataStructure_3::Concurrency_tag",
+          "brief": "Can be CGAL::Sequential_tag , CGAL::Parallel_tag , or CGAL::Parallel_if_available_tag .",
+          "detailed": "If it is CGAL::Parallel_tag , the following functions can be called concurrently: create_vertex() , create_cell() , delete_vertex() , delete_cell() .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Concurrency_tag",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "123"
+        },
+        {
+          "kind": "typedef",
+          "name": "Rebind_vertex",
+          "qualified_name": "TriangulationDataStructure_3::Rebind_vertex",
+          "brief": "This is an advanced type.",
+          "detailed": "Advanced This template class allows to get the type of a triangulation data structure that only changes the vertex type. It has to define a type Rebind_vertex <Vb2>::Other which is a rebound triangulation data structure, that is, the one whose TriangulationDSVertexBase_3 will be Vb2 . It can be implemented using a nested template class.",
+          "return_type": "unspecified_type",
+          "definition": "using TriangulationDataStructure_3::Rebind_vertex = unspecified_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "137"
+        },
+        {
+          "kind": "typedef",
+          "name": "Rebind_cell",
+          "qualified_name": "TriangulationDataStructure_3::Rebind_cell",
+          "brief": "This is an advanced type.",
+          "detailed": "Advanced This template class allows to get the type of a triangulation data structure that only changes the cell type. It has to define a type Rebind_cell <Cb2>::Other which is a rebound triangulation data structure, that is, the one whose TriangulationDSCellBase_3 will be Cb2 . It can be implemented using a nested template class.",
+          "return_type": "unspecified_type",
+          "definition": "using TriangulationDataStructure_3::Rebind_cell = unspecified_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "151"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge",
+          "qualified_name": "TriangulationDataStructure_3::Edge",
+          "brief": "(c,i,j) is the edge of cell c whose vertices indices are i and j .",
+          "detailed": "(See Section Representation .)",
+          "return_type": "Triple< Cell_handle , int, int >",
+          "definition": "typedef Triple<Cell_handle, int, int> TriangulationDataStructure_3::Edge",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "158"
+        },
+        {
+          "kind": "typedef",
+          "name": "Facet",
+          "qualified_name": "TriangulationDataStructure_3::Facet",
+          "brief": "(c,i) is the facet of c opposite to the vertex of index i .",
+          "detailed": "(See Section Representation .)",
+          "return_type": "std::pair< Cell_handle , int >",
+          "definition": "typedef std::pair<Cell_handle, int> TriangulationDataStructure_3::Facet",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "165"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_iterator",
+          "qualified_name": "TriangulationDataStructure_3::Cell_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Cell_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Iterators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "180"
+        },
+        {
+          "kind": "typedef",
+          "name": "Facet_iterator",
+          "qualified_name": "TriangulationDataStructure_3::Facet_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Facet_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Iterators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "185"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge_iterator",
+          "qualified_name": "TriangulationDataStructure_3::Edge_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Edge_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Iterators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "190"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_iterator",
+          "qualified_name": "TriangulationDataStructure_3::Vertex_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Vertex_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Iterators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "195"
+        },
+        {
+          "kind": "typedef",
+          "name": "Facet_circulator",
+          "qualified_name": "TriangulationDataStructure_3::Facet_circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Facet_circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Circulators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "211"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_circulator",
+          "qualified_name": "TriangulationDataStructure_3::Cell_circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Cell_circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Circulators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "216"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDataStructure_3",
+          "qualified_name": "TriangulationDataStructure_3::TriangulationDataStructure_3",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "TriangulationDataStructure_3::TriangulationDataStructure_3",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "226"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDataStructure_3",
+          "qualified_name": "TriangulationDataStructure_3::TriangulationDataStructure_3",
+          "brief": "Copy constructor.",
+          "detailed": "All vertices and cells are duplicated.",
+          "return_type": "",
+          "definition": "TriangulationDataStructure_3::TriangulationDataStructure_3",
+          "argsstring": "(const TriangulationDataStructure_3 &tds1)",
+          "params": [
+            {
+              "type": "const TriangulationDataStructure_3 &",
+              "name": "tds1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "231"
+        },
+        {
+          "kind": "function",
+          "name": "operator=",
+          "qualified_name": "TriangulationDataStructure_3::operator=",
+          "brief": "Assignment operator.",
+          "detailed": "All vertices and cells are duplicated, and the former data structure is deleted.",
+          "return_type": "TriangulationDataStructure_3 &",
+          "definition": "TriangulationDataStructure_3 & TriangulationDataStructure_3::operator=",
+          "argsstring": "(const TriangulationDataStructure_3 &tds1)",
+          "params": [
+            {
+              "type": "const TriangulationDataStructure_3 &",
+              "name": "tds1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "237"
+        },
+        {
+          "kind": "function",
+          "name": "copy_tds",
+          "qualified_name": "TriangulationDataStructure_3::copy_tds",
+          "brief": "tds1 is copied into this .",
+          "detailed": "If v != Vertex_handle() , the vertex corresponding to v is returned, otherwise Vertex_handle() is returned. The optional argument v is a vertex of tds1 .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::copy_tds",
+          "argsstring": "(const TriangulationDataStructure_3 &tds1, Vertex_handle v=Vertex_handle())",
+          "params": [
+            {
+              "type": "const TriangulationDataStructure_3 &",
+              "name": "tds1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "Vertex_handle ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "246"
+        },
+        {
+          "kind": "function",
+          "name": "copy_tds",
+          "qualified_name": "TriangulationDataStructure_3::copy_tds",
+          "brief": "tds_src is copied into this .",
+          "detailed": "As the vertex and cell types might be different and incompatible, the creation of new cells and vertices is made thanks to the functors convert_vertex and convert_cell , that convert vertex and cell types. For each vertex v_src in tds_src , the corresponding vertex v_tgt in this is a copy of the vertex returned by convert_vertex(v_src) . The same operations are done for cells with the functor convert_cell. If v != TDS_src::Vertex_handle() , a handle to the vertex created in this that is the copy of v is returned, otherwise Vertex_handle() is returned. A model of ConvertVertex must provide two operator()'s that are responsible for converting the source vertex v_src into the target vertex: Vertex operator()(const TDS_src::Vertex& v_src) const; This operator is used to create the vertex from v_src . void operator()(const TDS_src::Vertex& v_src, Vertex & v_tgt) const; This operator is meant to be used in case heavy data should be transferred to v_tgt . A model of ConvertCell must provide two operator()'s that are responsible for converting the source cell c_src into the target cell: Cell operator()(const TDS_src::Cell& c_src) const; This operator is used to create the cell from c_src . void operator()(const TDS_src::Cell& c_src, Cell & c_tgt) const; This operator is meant to be used in case heavy data should be transferred to c_tgt . The optional argument v is a vertex of tds_src or is Vertex_handle() .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::copy_tds",
+          "argsstring": "(const TDS_src &tds_src, typename TDS_src::Vertex_handle v, const ConvertVertex &convert_vertex, const ConvertCell &convert_cell)",
+          "params": [
+            {
+              "type": "const TDS_src &",
+              "name": "tds_src",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "typename TDS_src::Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ConvertVertex &",
+              "name": "convert_vertex",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ConvertCell &",
+              "name": "convert_cell",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "269"
+        },
+        {
+          "kind": "function",
+          "name": "swap",
+          "qualified_name": "TriangulationDataStructure_3::swap",
+          "brief": "Swaps this and tds1 .",
+          "detailed": "There is no copy of cells and vertices, thus this method runs in constant time. This method should be preferred to copy assignment ( *this = tds1 ) or copy construction ( *this(tds1) ) if tds1 is deleted after the copy.",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::swap",
+          "argsstring": "(TriangulationDataStructure_3 &tds1)",
+          "params": [
+            {
+              "type": "TriangulationDataStructure_3 &",
+              "name": "tds1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "277"
+        },
+        {
+          "kind": "function",
+          "name": "clear",
+          "qualified_name": "TriangulationDataStructure_3::clear",
+          "brief": "Deletes all cells and vertices.",
+          "detailed": "The triangulation data structure is reset as if constructed by the default constructor.",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "283"
+        },
+        {
+          "kind": "function",
+          "name": "dimension",
+          "qualified_name": "TriangulationDataStructure_3::dimension",
+          "brief": "The dimension of the triangulated topological sphere.",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int TriangulationDataStructure_3::dimension",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "293"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_vertices",
+          "qualified_name": "TriangulationDataStructure_3::number_of_vertices",
+          "brief": "The number of vertices.",
+          "detailed": "Note that the triangulation data structure has one more vertex than an associated geometric triangulation, if there is one, since the infinite vertex is a standard vertex and is thus also counted.",
+          "return_type": "size_type",
+          "definition": "size_type TriangulationDataStructure_3::number_of_vertices",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "301"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_cells",
+          "qualified_name": "TriangulationDataStructure_3::number_of_cells",
+          "brief": "The number of cells.",
+          "detailed": "Returns 0 if dimension() $ <3$ .",
+          "return_type": "size_type",
+          "definition": "size_type TriangulationDataStructure_3::number_of_cells",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "306"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_facets",
+          "qualified_name": "TriangulationDataStructure_3::number_of_facets",
+          "brief": "The number of facets.",
+          "detailed": "Returns 0 if dimension() $ <2$ .",
+          "return_type": "size_type",
+          "definition": "size_type TriangulationDataStructure_3::number_of_facets",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Non constant-time access functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "316"
+        },
+        {
+          "kind": "function",
+          "name": "number_of_edges",
+          "qualified_name": "TriangulationDataStructure_3::number_of_edges",
+          "brief": "The number of edges.",
+          "detailed": "Returns 0 if dimension() $ <1$ .",
+          "return_type": "size_type",
+          "definition": "size_type TriangulationDataStructure_3::number_of_edges",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Non constant-time access functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "321"
+        },
+        {
+          "kind": "function",
+          "name": "set_dimension",
+          "qualified_name": "TriangulationDataStructure_3::set_dimension",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced Sets the dimension to n .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::set_dimension",
+          "argsstring": "(int n)",
+          "params": [
+            {
+              "type": "int",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "334"
+        },
+        {
+          "kind": "function",
+          "name": "is_vertex",
+          "qualified_name": "TriangulationDataStructure_3::is_vertex",
+          "brief": "Tests whether v is a vertex of the triangulation data structure.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::is_vertex",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "344"
+        },
+        {
+          "kind": "function",
+          "name": "is_edge",
+          "qualified_name": "TriangulationDataStructure_3::is_edge",
+          "brief": "Tests whether (c,i,j) is an edge of the triangulation data structure.",
+          "detailed": "Answers false when dimension() $ <1$ . $ i,j \\in\\{0,1,2,3\\}$",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::is_edge",
+          "argsstring": "(Cell_handle c, int i, int j) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "351"
+        },
+        {
+          "kind": "function",
+          "name": "is_edge",
+          "qualified_name": "TriangulationDataStructure_3::is_edge",
+          "brief": "Tests whether (u,v) is an edge of the triangulation data structure.",
+          "detailed": "If the edge is found, it computes a cell c having this edge and the indices i and j of the vertices u and v , in this order.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::is_edge",
+          "argsstring": "(Vertex_handle u, Vertex_handle v, Cell_handle &c, int &i, int &j) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "u",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "358"
+        },
+        {
+          "kind": "function",
+          "name": "is_edge",
+          "qualified_name": "TriangulationDataStructure_3::is_edge",
+          "brief": "Tests whether (u,v) is an edge of the triangulation data structure.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::is_edge",
+          "argsstring": "(Vertex_handle u, Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "u",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "364"
+        },
+        {
+          "kind": "function",
+          "name": "is_facet",
+          "qualified_name": "TriangulationDataStructure_3::is_facet",
+          "brief": "Tests whether (c,i) is a facet of the triangulation data structure.",
+          "detailed": "Answers false when dimension() $ <2$ . $ i \\in\\{0,1,2,3\\}$",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::is_facet",
+          "argsstring": "(Cell_handle c, int i) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "371"
+        },
+        {
+          "kind": "function",
+          "name": "is_facet",
+          "qualified_name": "TriangulationDataStructure_3::is_facet",
+          "brief": "Tests whether (u,v,w) is a facet of the triangulation data structure.",
+          "detailed": "If the facet is found, it computes a cell c having this facet and the indices i , j and k of the vertices u , v and w , in this order.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::is_facet",
+          "argsstring": "(Vertex_handle u, Vertex_handle v, Vertex_handle w, Cell_handle &c, int &i, int &j, int &k) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "u",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "379"
+        },
+        {
+          "kind": "function",
+          "name": "is_cell",
+          "qualified_name": "TriangulationDataStructure_3::is_cell",
+          "brief": "Tests whether c is a cell of the triangulation data structure.",
+          "detailed": "Answers false when dimension() $ <3$ .",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::is_cell",
+          "argsstring": "(Cell_handle c) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "386"
+        },
+        {
+          "kind": "function",
+          "name": "is_cell",
+          "qualified_name": "TriangulationDataStructure_3::is_cell",
+          "brief": "Tests whether (u,v,w,t) is a cell of the triangulation data structure.",
+          "detailed": "If the cell c is found, it computes the indices i , j , k and l of the vertices u , v , w and t in c , in this order.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::is_cell",
+          "argsstring": "(Vertex_handle u, Vertex_handle v, Vertex_handle w, Vertex_handle t, Cell_handle &c, int &i, int &j, int &k, int &l) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "u",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "w",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "l",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Queries",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "394"
+        },
+        {
+          "kind": "function",
+          "name": "has_vertex",
+          "qualified_name": "TriangulationDataStructure_3::has_vertex",
+          "brief": "If v is a vertex of f , then j is the index of v in the cell f.first , and the method returns true .",
+          "detailed": "dimension() == 3",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::has_vertex",
+          "argsstring": "(const Facet &f, Vertex_handle v, int &j) const",
+          "params": [
+            {
+              "type": "const Facet &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "has_vertex",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "406"
+        },
+        {
+          "kind": "function",
+          "name": "has_vertex",
+          "qualified_name": "TriangulationDataStructure_3::has_vertex",
+          "brief": "Same for facet (c,i) .",
+          "detailed": "Computes the index j of v in c .",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::has_vertex",
+          "argsstring": "(Cell_handle c, int i, Vertex_handle v, int &j) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "has_vertex",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "412"
+        },
+        {
+          "kind": "function",
+          "name": "has_vertex",
+          "qualified_name": "TriangulationDataStructure_3::has_vertex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::has_vertex",
+          "argsstring": "(const Facet &f, Vertex_handle v) const",
+          "params": [
+            {
+              "type": "const Facet &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "has_vertex",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "417"
+        },
+        {
+          "kind": "function",
+          "name": "has_vertex",
+          "qualified_name": "TriangulationDataStructure_3::has_vertex",
+          "brief": "Same as the first two methods, but these two methods do not return the index of the vertex.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::has_vertex",
+          "argsstring": "(Cell_handle c, int i, Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "has_vertex",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "423"
+        },
+        {
+          "kind": "function",
+          "name": "are_equal",
+          "qualified_name": "TriangulationDataStructure_3::are_equal",
+          "brief": "",
+          "detailed": "dimension() == 3",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::are_equal",
+          "argsstring": "(const Facet &f, const Facet &g) const",
+          "params": [
+            {
+              "type": "const Facet &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Facet &",
+              "name": "g",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Equality Tests",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "434"
+        },
+        {
+          "kind": "function",
+          "name": "are_equal",
+          "qualified_name": "TriangulationDataStructure_3::are_equal",
+          "brief": "",
+          "detailed": "dimension() == 3",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::are_equal",
+          "argsstring": "(Cell_handle c, int i, Cell_handle n, int j) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Equality Tests",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "439"
+        },
+        {
+          "kind": "function",
+          "name": "are_equal",
+          "qualified_name": "TriangulationDataStructure_3::are_equal",
+          "brief": "",
+          "detailed": "dimension() == 3",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::are_equal",
+          "argsstring": "(const Facet &f, Cell_handle n, int j) const",
+          "params": [
+            {
+              "type": "const Facet &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Equality Tests",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "444"
+        },
+        {
+          "kind": "function",
+          "name": "flip",
+          "qualified_name": "TriangulationDataStructure_3::flip",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::flip",
+          "argsstring": "(Edge e)",
+          "params": [
+            {
+              "type": "Edge",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Flips",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "476"
+        },
+        {
+          "kind": "function",
+          "name": "flip",
+          "qualified_name": "TriangulationDataStructure_3::flip",
+          "brief": "Before flipping, these methods check that edge e=(c,i,j) is flippable (which is quite expensive).",
+          "detailed": "They return false or true according to this test.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::flip",
+          "argsstring": "(Cell_handle c, int i, int j)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Flips",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "483"
+        },
+        {
+          "kind": "function",
+          "name": "flip_flippable",
+          "qualified_name": "TriangulationDataStructure_3::flip_flippable",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::flip_flippable",
+          "argsstring": "(Edge e)",
+          "params": [
+            {
+              "type": "Edge",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Flips",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "488"
+        },
+        {
+          "kind": "function",
+          "name": "flip_flippable",
+          "qualified_name": "TriangulationDataStructure_3::flip_flippable",
+          "brief": "Should be preferred to the previous methods when the edge is known to be flippable.",
+          "detailed": "The edge is flippable.",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::flip_flippable",
+          "argsstring": "(Cell_handle c, int i, int j)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Flips",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "495"
+        },
+        {
+          "kind": "function",
+          "name": "flip",
+          "qualified_name": "TriangulationDataStructure_3::flip",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::flip",
+          "argsstring": "(Facet f)",
+          "params": [
+            {
+              "type": "Facet",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Flips",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "500"
+        },
+        {
+          "kind": "function",
+          "name": "flip",
+          "qualified_name": "TriangulationDataStructure_3::flip",
+          "brief": "Before flipping, these methods check that facet f=(c,i) is flippable (which is quite expensive).",
+          "detailed": "They return false or true according to this test.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::flip",
+          "argsstring": "(Cell_handle c, int i)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Flips",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "507"
+        },
+        {
+          "kind": "function",
+          "name": "flip_flippable",
+          "qualified_name": "TriangulationDataStructure_3::flip_flippable",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::flip_flippable",
+          "argsstring": "(Facet f)",
+          "params": [
+            {
+              "type": "Facet",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Flips",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "512"
+        },
+        {
+          "kind": "function",
+          "name": "flip_flippable",
+          "qualified_name": "TriangulationDataStructure_3::flip_flippable",
+          "brief": "Should be preferred to the previous methods when the facet is known to be flippable.",
+          "detailed": "The facet is flippable.",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::flip_flippable",
+          "argsstring": "(Cell_handle c, int i)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Flips",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "519"
+        },
+        {
+          "kind": "function",
+          "name": "insert_in_cell",
+          "qualified_name": "TriangulationDataStructure_3::insert_in_cell",
+          "brief": "Creates a new vertex, inserts it in cell c and returns its handle.",
+          "detailed": "The cell c is split into four new cells, each of these cells being formed by the new vertex and a facet of c . dimension() $ = 3$ and is_cell(c) .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::insert_in_cell",
+          "argsstring": "(Cell_handle c)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Insertions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "533"
+        },
+        {
+          "kind": "function",
+          "name": "insert_in_facet",
+          "qualified_name": "TriangulationDataStructure_3::insert_in_facet",
+          "brief": "Creates a new vertex, inserts it in facet f and returns its handle.",
+          "detailed": "In dimension 3, the two incident cells are split into 3 new cells; in dimension 2, the facet is split into 3 facets. dimension() $ \\geq2$ and is_facet(f.first, f.second) .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::insert_in_facet",
+          "argsstring": "(const Facet &f)",
+          "params": [
+            {
+              "type": "const Facet &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Insertions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "541"
+        },
+        {
+          "kind": "function",
+          "name": "insert_in_facet",
+          "qualified_name": "TriangulationDataStructure_3::insert_in_facet",
+          "brief": "Creates a new vertex, inserts it in facet i of c and returns its handle.",
+          "detailed": "dimension() $ \\geq2$ , $ i \\in\\{0,1,2,3\\}$ in dimension 3, $ i=3$ in dimension 2 and is_facet(c, i) .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::insert_in_facet",
+          "argsstring": "(Cell_handle c, int i)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Insertions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "548"
+        },
+        {
+          "kind": "function",
+          "name": "insert_in_edge",
+          "qualified_name": "TriangulationDataStructure_3::insert_in_edge",
+          "brief": "Creates a new vertex, inserts it in edge e and returns its handle.",
+          "detailed": "In dimension 3, all the incident cells are split into 2 new cells; in dimension 2, the 2 incident facets are split into 2 new facets; in dimension 1, the edge is split into 2 new edges. dimension() $ \\geq1$ and is_edge(e.first, e.second, e.third) .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::insert_in_edge",
+          "argsstring": "(Edge e)",
+          "params": [
+            {
+              "type": "Edge",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Insertions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "558"
+        },
+        {
+          "kind": "function",
+          "name": "insert_in_edge",
+          "qualified_name": "TriangulationDataStructure_3::insert_in_edge",
+          "brief": "Creates a new vertex, inserts it in edge $ (i,j)$ of c and returns its handle.",
+          "detailed": "dimension() $ \\geq1$ . $ i\\neq j$ , $ i,j \\in\\{0,1,2,3\\}$ in dimension 3, $ i,j \\in\\{0,1,2\\}$ in dimension 2, $ i,j \\in\\{0,1\\}$ in dimension 1 and is_edge(c,i,j) .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::insert_in_edge",
+          "argsstring": "(Cell_handle c, int i, int j)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Insertions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "565"
+        },
+        {
+          "kind": "function",
+          "name": "insert_increase_dimension",
+          "qualified_name": "TriangulationDataStructure_3::insert_increase_dimension",
+          "brief": "Transforms a triangulation of the sphere $ S^d$ of $ \\mathbb{R}^{d+1}$ into the triangulation of the sphere $ S^{d+1}$ of $ \\mathbb{R}^{d+2}$ by adding a new vertex v : v is linked to all the vertices to triangulate one of the two half-spheres of dimension $ (d+1)$ .",
+          "detailed": "Vertex star is used to triangulate the second half-sphere (when there is an associated geometric triangulation, star is in fact the vertex associated with its infinite vertex). See Figure TDS3figtopoinsert_outside_affine_hull . The numbering of the cells is such that, if f was a face of maximal dimension in the initial triangulation, then (f,v) (in this order) is the corresponding face in the new triangulation. This method can be used to insert the first two vertices in an empty triangulation. A handle to v is returned. dimension() $ = d < 3$ . When number_of_vertices() $ >0$ , $ star \\neq$ Vertex_handle() and is_vertex(star) . insert_increase_dimension (1-dimensional case). insert_increase_dimension (1-dimensional case).",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::insert_increase_dimension",
+          "argsstring": "(Vertex_handle star=Vertex_handle())",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "star",
+              "default": "Vertex_handle ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Insertions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "593"
+        },
+        {
+          "kind": "function",
+          "name": "insert_in_hole",
+          "qualified_name": "TriangulationDataStructure_3::insert_in_hole",
+          "brief": "Creates a new vertex by starring a hole.",
+          "detailed": "It takes an iterator range [ cell_begin ; cell_end [ of Cell_handles which specifies a set of connected cells (resp. facets in dimension 2) describing a hole. ( begin , i ) is a facet (resp. an edge) on the boundary of the hole, that is, begin belongs to the set of cells (resp. facets) previously described, and begin->neighbor(i) does not. Then this function deletes all the cells (resp. facets) describing the hole, creates a new vertex v , and for each facet (resp. edge) on the boundary of the hole, creates a new cell (resp. facet) with v as vertex. v is returned. dimension() $ \\geq2$ , the set of cells (resp. facets) is connected, and its boundary is connected.",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::insert_in_hole",
+          "argsstring": "(CellIt cell_begin, CellIt cell_end, Cell_handle begin, int i)",
+          "params": [
+            {
+              "type": "CellIt",
+              "name": "cell_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CellIt",
+              "name": "cell_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Insertions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "608"
+        },
+        {
+          "kind": "function",
+          "name": "insert_in_hole",
+          "qualified_name": "TriangulationDataStructure_3::insert_in_hole",
+          "brief": "Same as above, except that newv will be used as the new vertex, which must have been allocated previously with, e.g., create_vertex() .",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::insert_in_hole",
+          "argsstring": "(CellIt cell_begin, CellIt cell_end, Cell_handle begin, int i, Vertex_handle newv)",
+          "params": [
+            {
+              "type": "CellIt",
+              "name": "cell_begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CellIt",
+              "name": "cell_end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "newv",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Insertions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "615"
+        },
+        {
+          "kind": "function",
+          "name": "remove_decrease_dimension",
+          "qualified_name": "TriangulationDataStructure_3::remove_decrease_dimension",
+          "brief": "This operation is the reciprocal of insert_increase_dimension() .",
+          "detailed": "It transforms a triangulation of the sphere $ S^d$ of $ \\mathbb{R}^{d+1}$ into the triangulation of the sphere $ S^{d-1}$ of $ \\mathbb{R}^{d}$ by removing the vertex v . Delete the cells incident to w , keep the others. dimension() $ = d \\geq-1$ . degree(v) $ =$ degree(w) $ =$ number_of_vertices() $ -1$ .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::remove_decrease_dimension",
+          "argsstring": "(Vertex_handle v, Vertex_handle w=v)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "w",
+              "default": "v",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Removal",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "632"
+        },
+        {
+          "kind": "function",
+          "name": "remove_from_maximal_dimension_simplex",
+          "qualified_name": "TriangulationDataStructure_3::remove_from_maximal_dimension_simplex",
+          "brief": "Removes v .",
+          "detailed": "The incident simplices of maximal dimension incident to v are replaced by a single simplex of the same dimension. This operation is exactly the reciprocal to insert_in_cell(v) in dimension 3, insert_in_facet(v) in dimension 2, and insert_in_edge(v) in dimension 1. degree(v) $ =$ dimension() +1 .",
+          "return_type": "Cell_handle",
+          "definition": "Cell_handle TriangulationDataStructure_3::remove_from_maximal_dimension_simplex",
+          "argsstring": "(Vertex_handle v)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Removal",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "643"
+        },
+        {
+          "kind": "function",
+          "name": "decrease_dimension",
+          "qualified_name": "TriangulationDataStructure_3::decrease_dimension",
+          "brief": "The link of a vertex $ v$ is formed by the facets disjoint from $ v$ that are included in the cells incident to $ v$ .",
+          "detailed": "When the link of v = c->vertex(i) contains all the other vertices, decrease_dimension crushes the triangulation of the sphere $ S^d$ of $ \\mathbb{R}^{d+1}$ onto the triangulation of the sphere $ S^{d-1}$ of $ \\mathbb{R}^{d}$ formed by the link of v augmented with the vertex v itself, for $ d$ ==2,3; this one is placed on the facet (c, i) (see Fig. TDS3dim_down ). The dimension must be 2 or 3. The degree of v must be equal to the total number of vertices of the triangulation data structure minus 1. From an $ S^d$ data structure to an $ S^{d-1}$ data structure (top: $ d==2$ , bottom: $ d==3$ ).",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::decrease_dimension",
+          "argsstring": "(Cell_handle c, int i)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Dimension Manipulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "670"
+        },
+        {
+          "kind": "function",
+          "name": "reorient",
+          "qualified_name": "TriangulationDataStructure_3::reorient",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced Changes the orientation of all cells of the triangulation data structure. dimension() $ \\geq1$ .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::reorient",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Other modifiers",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "685"
+        },
+        {
+          "kind": "function",
+          "name": "create_vertex",
+          "qualified_name": "TriangulationDataStructure_3::create_vertex",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced Adds a copy of the vertex v to the triangulation data structure.",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::create_vertex",
+          "argsstring": "(const Vertex &v=Vertex())",
+          "params": [
+            {
+              "type": "const Vertex &",
+              "name": "v",
+              "default": "Vertex ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Other modifiers",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "693"
+        },
+        {
+          "kind": "function",
+          "name": "create_vertex",
+          "qualified_name": "TriangulationDataStructure_3::create_vertex",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced Creates a vertex which is a copy of the one pointed to by v and adds it to the triangulation data structure.",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::create_vertex",
+          "argsstring": "(Vertex_handle v)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Other modifiers",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "702"
+        },
+        {
+          "kind": "function",
+          "name": "create_cell",
+          "qualified_name": "TriangulationDataStructure_3::create_cell",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced Adds a copy of the cell c to the triangulation data structure.",
+          "return_type": "Cell_handle",
+          "definition": "Cell_handle TriangulationDataStructure_3::create_cell",
+          "argsstring": "(const Cell &c=Cell())",
+          "params": [
+            {
+              "type": "const Cell &",
+              "name": "c",
+              "default": "Cell ()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Other modifiers",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "710"
+        },
+        {
+          "kind": "function",
+          "name": "create_cell",
+          "qualified_name": "TriangulationDataStructure_3::create_cell",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced Creates a cell which is a copy of the one pointed to by c and adds it to the triangulation data structure.",
+          "return_type": "Cell_handle",
+          "definition": "Cell_handle TriangulationDataStructure_3::create_cell",
+          "argsstring": "(Cell_handle c)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Other modifiers",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "719"
+        },
+        {
+          "kind": "function",
+          "name": "create_cell",
+          "qualified_name": "TriangulationDataStructure_3::create_cell",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced Creates a cell and adds it into the triangulation data structure. Initializes the vertices of the cell, its neighbor handles being initialized with the default constructed handle.",
+          "return_type": "Cell_handle",
+          "definition": "Cell_handle TriangulationDataStructure_3::create_cell",
+          "argsstring": "(Vertex_handle v0, Vertex_handle v1, Vertex_handle v2, Vertex_handle v3)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Other modifiers",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "729"
+        },
+        {
+          "kind": "function",
+          "name": "create_cell",
+          "qualified_name": "TriangulationDataStructure_3::create_cell",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced Creates a cell, initializes its vertices and neighbors, and adds it into the triangulation data structure.",
+          "return_type": "Cell_handle",
+          "definition": "Cell_handle TriangulationDataStructure_3::create_cell",
+          "argsstring": "(Vertex_handle v0, Vertex_handle v1, Vertex_handle v2, Vertex_handle v3, Cell_handle n0, Cell_handle n1, Cell_handle n2, Cell_handle n3)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Other modifiers",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "739"
+        },
+        {
+          "kind": "function",
+          "name": "delete_vertex",
+          "qualified_name": "TriangulationDataStructure_3::delete_vertex",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced Removes the vertex from the triangulation data structure. is_vertex(v) .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::delete_vertex",
+          "argsstring": "(Vertex_handle v)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Other modifiers",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "751"
+        },
+        {
+          "kind": "function",
+          "name": "delete_cell",
+          "qualified_name": "TriangulationDataStructure_3::delete_cell",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced Removes the cell from the triangulation data structure. is_cell(c) .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::delete_cell",
+          "argsstring": "(Cell_handle c)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Other modifiers",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "760"
+        },
+        {
+          "kind": "function",
+          "name": "delete_vertices",
+          "qualified_name": "TriangulationDataStructure_3::delete_vertices",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced Calls delete_vertex over an iterator range of value type Vertex_handle .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::delete_vertices",
+          "argsstring": "(VertexIt first, VertexIt last)",
+          "params": [
+            {
+              "type": "VertexIt",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "VertexIt",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Other modifiers",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "769"
+        },
+        {
+          "kind": "function",
+          "name": "delete_cells",
+          "qualified_name": "TriangulationDataStructure_3::delete_cells",
+          "brief": "This is an advanced function.",
+          "detailed": "Advanced Calls delete_cell over an iterator range of value type Cell_handle .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::delete_cells",
+          "argsstring": "(CellIt first, CellIt last)",
+          "params": [
+            {
+              "type": "CellIt",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "CellIt",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Other modifiers",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "778"
+        },
+        {
+          "kind": "function",
+          "name": "cells_begin",
+          "qualified_name": "TriangulationDataStructure_3::cells_begin",
+          "brief": "Returns cells_end() when dimension() $ <3$ .",
+          "detailed": "",
+          "return_type": "Cell_iterator",
+          "definition": "Cell_iterator TriangulationDataStructure_3::cells_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "788"
+        },
+        {
+          "kind": "function",
+          "name": "cells_end",
+          "qualified_name": "TriangulationDataStructure_3::cells_end",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Cell_iterator",
+          "definition": "Cell_iterator TriangulationDataStructure_3::cells_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "793"
+        },
+        {
+          "kind": "function",
+          "name": "raw_cells_begin",
+          "qualified_name": "TriangulationDataStructure_3::raw_cells_begin",
+          "brief": "Low-level access to the cells, does not return cells_end() when dimension() $ <3$ .",
+          "detailed": "",
+          "return_type": "Cell_iterator",
+          "definition": "Cell_iterator TriangulationDataStructure_3::raw_cells_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "799"
+        },
+        {
+          "kind": "function",
+          "name": "raw_cells_end",
+          "qualified_name": "TriangulationDataStructure_3::raw_cells_end",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Cell_iterator",
+          "definition": "Cell_iterator TriangulationDataStructure_3::raw_cells_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "804"
+        },
+        {
+          "kind": "function",
+          "name": "facets_begin",
+          "qualified_name": "TriangulationDataStructure_3::facets_begin",
+          "brief": "Returns facets_end() when dimension() $ <2$ .",
+          "detailed": "",
+          "return_type": "Facet_iterator",
+          "definition": "Facet_iterator TriangulationDataStructure_3::facets_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "809"
+        },
+        {
+          "kind": "function",
+          "name": "facets_end",
+          "qualified_name": "TriangulationDataStructure_3::facets_end",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Facet_iterator",
+          "definition": "Facet_iterator TriangulationDataStructure_3::facets_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "814"
+        },
+        {
+          "kind": "function",
+          "name": "edges_begin",
+          "qualified_name": "TriangulationDataStructure_3::edges_begin",
+          "brief": "Returns edges_end() when dimension() $ <1$ .",
+          "detailed": "",
+          "return_type": "Edge_iterator",
+          "definition": "Edge_iterator TriangulationDataStructure_3::edges_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "819"
+        },
+        {
+          "kind": "function",
+          "name": "edges_end",
+          "qualified_name": "TriangulationDataStructure_3::edges_end",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Edge_iterator",
+          "definition": "Edge_iterator TriangulationDataStructure_3::edges_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "824"
+        },
+        {
+          "kind": "function",
+          "name": "vertices_begin",
+          "qualified_name": "TriangulationDataStructure_3::vertices_begin",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vertex_iterator",
+          "definition": "Vertex_iterator TriangulationDataStructure_3::vertices_begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "829"
+        },
+        {
+          "kind": "function",
+          "name": "vertices_end",
+          "qualified_name": "TriangulationDataStructure_3::vertices_end",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vertex_iterator",
+          "definition": "Vertex_iterator TriangulationDataStructure_3::vertices_end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "834"
+        },
+        {
+          "kind": "function",
+          "name": "vertices",
+          "qualified_name": "TriangulationDataStructure_3::vertices",
+          "brief": "returns an array containing the vertices of e , in the order of their indices e.second and e.third in the cell e.first .",
+          "detailed": "",
+          "return_type": "std::array< Vertex_handle , 2 >",
+          "definition": "std::array< Vertex_handle, 2 > TriangulationDataStructure_3::vertices",
+          "argsstring": "(const Edge &e) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "841"
+        },
+        {
+          "kind": "function",
+          "name": "vertices",
+          "qualified_name": "TriangulationDataStructure_3::vertices",
+          "brief": "returns an array containing the vertices of f , in counterclockwise order on the face of f.first opposite to vertex f.first->vertex(f.second) .",
+          "detailed": "",
+          "return_type": "std::array< Vertex_handle , 3 >",
+          "definition": "std::array< Vertex_handle, 3 > TriangulationDataStructure_3::vertices",
+          "argsstring": "(const Facet &f) const",
+          "params": [
+            {
+              "type": "const Facet &",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "848"
+        },
+        {
+          "kind": "function",
+          "name": "vertices",
+          "qualified_name": "TriangulationDataStructure_3::vertices",
+          "brief": "returns an array containing the vertices of c , in the same order as the indices in c .",
+          "detailed": "",
+          "return_type": "std::array< Vertex_handle , 4 >",
+          "definition": "std::array< Vertex_handle, 4 > TriangulationDataStructure_3::vertices",
+          "argsstring": "(const Cell_handle c) const",
+          "params": [
+            {
+              "type": "const Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversing the triangulation",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "854"
+        },
+        {
+          "kind": "function",
+          "name": "incident_cells",
+          "qualified_name": "TriangulationDataStructure_3::incident_cells",
+          "brief": "Starts at an arbitrary cell incident to e .",
+          "detailed": "dimension() $ =3$",
+          "return_type": "Cell_circulator",
+          "definition": "Cell_circulator TriangulationDataStructure_3::incident_cells",
+          "argsstring": "(const Edge &e) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Cell and facet circulators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "865"
+        },
+        {
+          "kind": "function",
+          "name": "incident_cells",
+          "qualified_name": "TriangulationDataStructure_3::incident_cells",
+          "brief": "As above for edge (i,j) of c .",
+          "detailed": "",
+          "return_type": "Cell_circulator",
+          "definition": "Cell_circulator TriangulationDataStructure_3::incident_cells",
+          "argsstring": "(Cell_handle c, int i, int j) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Cell and facet circulators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "870"
+        },
+        {
+          "kind": "function",
+          "name": "incident_cells",
+          "qualified_name": "TriangulationDataStructure_3::incident_cells",
+          "brief": "Starts at cell start .",
+          "detailed": "dimension() $ =3$ and start is incident to e .",
+          "return_type": "Cell_circulator",
+          "definition": "Cell_circulator TriangulationDataStructure_3::incident_cells",
+          "argsstring": "(const Edge &e, Cell_handle start) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "start",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Cell and facet circulators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "876"
+        },
+        {
+          "kind": "function",
+          "name": "incident_cells",
+          "qualified_name": "TriangulationDataStructure_3::incident_cells",
+          "brief": "As above for edge (i,j) of c .",
+          "detailed": "",
+          "return_type": "Cell_circulator",
+          "definition": "Cell_circulator TriangulationDataStructure_3::incident_cells",
+          "argsstring": "(Cell_handle c, int i, int j, Cell_handle start) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "start",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Cell and facet circulators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "881"
+        },
+        {
+          "kind": "function",
+          "name": "incident_facets",
+          "qualified_name": "TriangulationDataStructure_3::incident_facets",
+          "brief": "Starts at an arbitrary facet incident to e .",
+          "detailed": "Only defined in dimension 3, though are defined also in dimension 2: there are only two facets sharing an edge in dimension 2. dimension() $ =3$",
+          "return_type": "Facet_circulator",
+          "definition": "Facet_circulator TriangulationDataStructure_3::incident_facets",
+          "argsstring": "(Edge e) const",
+          "params": [
+            {
+              "type": "Edge",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Cell and facet circulators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "892"
+        },
+        {
+          "kind": "function",
+          "name": "incident_facets",
+          "qualified_name": "TriangulationDataStructure_3::incident_facets",
+          "brief": "As above for edge (i,j) of c .",
+          "detailed": "Only defined in dimension 3, though are defined also in dimension 2: there are only two facets sharing an edge in dimension 2.",
+          "return_type": "Facet_circulator",
+          "definition": "Facet_circulator TriangulationDataStructure_3::incident_facets",
+          "argsstring": "(Cell_handle c, int i, int j) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Cell and facet circulators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "900"
+        },
+        {
+          "kind": "function",
+          "name": "incident_facets",
+          "qualified_name": "TriangulationDataStructure_3::incident_facets",
+          "brief": "Starts at facet start .",
+          "detailed": "Only defined in dimension 3, though are defined also in dimension 2: there are only two facets sharing an edge in dimension 2. start is incident to e .",
+          "return_type": "Facet_circulator",
+          "definition": "Facet_circulator TriangulationDataStructure_3::incident_facets",
+          "argsstring": "(Edge e, Facet start) const",
+          "params": [
+            {
+              "type": "Edge",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Facet",
+              "name": "start",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Cell and facet circulators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "910"
+        },
+        {
+          "kind": "function",
+          "name": "incident_facets",
+          "qualified_name": "TriangulationDataStructure_3::incident_facets",
+          "brief": "Starts at facet of index f in start .",
+          "detailed": "Only defined in dimension 3, though are defined also in dimension 2: there are only two facets sharing an edge in dimension 2.",
+          "return_type": "Facet_circulator",
+          "definition": "Facet_circulator TriangulationDataStructure_3::incident_facets",
+          "argsstring": "(Edge e, Cell_handle start, int f) const",
+          "params": [
+            {
+              "type": "Edge",
+              "name": "e",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "start",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Cell and facet circulators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "918"
+        },
+        {
+          "kind": "function",
+          "name": "incident_facets",
+          "qualified_name": "TriangulationDataStructure_3::incident_facets",
+          "brief": "As above for edge (i,j) of c .",
+          "detailed": "Only defined in dimension 3, though are defined also in dimension 2: there are only two facets sharing an edge in dimension 2.",
+          "return_type": "Facet_circulator",
+          "definition": "Facet_circulator TriangulationDataStructure_3::incident_facets",
+          "argsstring": "(Cell_handle c, int i, int j, Facet start) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Facet",
+              "name": "start",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Cell and facet circulators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "926"
+        },
+        {
+          "kind": "function",
+          "name": "incident_facets",
+          "qualified_name": "TriangulationDataStructure_3::incident_facets",
+          "brief": "As above for edge (i,j) of c and facet (start,f) .",
+          "detailed": "Only defined in dimension 3, though are defined also in dimension 2: there are only two facets sharing an edge in dimension 2.",
+          "return_type": "Facet_circulator",
+          "definition": "Facet_circulator TriangulationDataStructure_3::incident_facets",
+          "argsstring": "(Cell_handle c, int i, int j, Cell_handle start, int f) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "j",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "start",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Cell and facet circulators",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "935"
+        },
+        {
+          "kind": "function",
+          "name": "incident_cells",
+          "qualified_name": "TriangulationDataStructure_3::incident_cells",
+          "brief": "Copies the Cell_handle s of all cells incident to v to the output iterator cells .",
+          "detailed": "Returns the resulting output iterator. dimension() $ =3$ v $ \\neq$ Vertex_handle() and is_vertex(v)",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator TriangulationDataStructure_3::incident_cells",
+          "argsstring": "(Vertex_handle v, OutputIterator cells) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "cells",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal of the incident cells, facets and edges, and the adjacent vertices of a given vertex",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "952"
+        },
+        {
+          "kind": "function",
+          "name": "incident_facets",
+          "qualified_name": "TriangulationDataStructure_3::incident_facets",
+          "brief": "Copies the Facet s incident to v to the output iterator facets .",
+          "detailed": "Returns the resulting output iterator. dimension() $ >1$ v $ \\neq$ Vertex_handle() and is_vertex(v)",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator TriangulationDataStructure_3::incident_facets",
+          "argsstring": "(Vertex_handle v, OutputIterator facets) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "facets",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal of the incident cells, facets and edges, and the adjacent vertices of a given vertex",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "963"
+        },
+        {
+          "kind": "function",
+          "name": "incident_edges",
+          "qualified_name": "TriangulationDataStructure_3::incident_edges",
+          "brief": "Copies all Edge s incident to v to the output iterator edges .",
+          "detailed": "Returns the resulting output iterator. dimension() $ >0$ v $ \\neq$ Vertex_handle() and is_vertex(v)",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator TriangulationDataStructure_3::incident_edges",
+          "argsstring": "(Vertex_handle v, OutputIterator edges) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "edges",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal of the incident cells, facets and edges, and the adjacent vertices of a given vertex",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "973"
+        },
+        {
+          "kind": "function",
+          "name": "adjacent_vertices",
+          "qualified_name": "TriangulationDataStructure_3::adjacent_vertices",
+          "brief": "Copies the Vertex_handle s of all vertices adjacent to v to the output iterator vertices .",
+          "detailed": "If dimension() $ <0$ , then do nothing. Returns the resulting output iterator. v $ \\neq$ Vertex_handle() and is_vertex(v)",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator TriangulationDataStructure_3::adjacent_vertices",
+          "argsstring": "(Vertex_handle v, OutputIterator vertices) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "vertices",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal of the incident cells, facets and edges, and the adjacent vertices of a given vertex",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "983"
+        },
+        {
+          "kind": "function",
+          "name": "degree",
+          "qualified_name": "TriangulationDataStructure_3::degree",
+          "brief": "Returns the degree of v , that is, the number of incident vertices.",
+          "detailed": "v $ \\neq$ Vertex_handle() is_vertex(v)",
+          "return_type": "size_type",
+          "definition": "size_type TriangulationDataStructure_3::degree",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal of the incident cells, facets and edges, and the adjacent vertices of a given vertex",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "990"
+        },
+        {
+          "kind": "function",
+          "name": "mirror_index",
+          "qualified_name": "TriangulationDataStructure_3::mirror_index",
+          "brief": "Returns the index of c in its $ i^{th}$ neighbor.",
+          "detailed": "$ i \\in\\{0, 1, 2, 3\\}$ .",
+          "return_type": "int",
+          "definition": "int TriangulationDataStructure_3::mirror_index",
+          "argsstring": "(Cell_handle c, int i) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal between adjacent cells",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1001"
+        },
+        {
+          "kind": "function",
+          "name": "mirror_vertex",
+          "qualified_name": "TriangulationDataStructure_3::mirror_vertex",
+          "brief": "Returns the vertex of the $ i^{th}$ neighbor of c that is opposite to c .",
+          "detailed": "$ i \\in\\{0, 1, 2, 3\\}$ .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::mirror_vertex",
+          "argsstring": "(Cell_handle c, int i) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal between adjacent cells",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1008"
+        },
+        {
+          "kind": "function",
+          "name": "mirror_facet",
+          "qualified_name": "TriangulationDataStructure_3::mirror_facet",
+          "brief": "Returns the same facet seen from the other adjacent cell.",
+          "detailed": "",
+          "return_type": "Facet",
+          "definition": "Facet TriangulationDataStructure_3::mirror_facet",
+          "argsstring": "(Facet f) const",
+          "params": [
+            {
+              "type": "Facet",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Traversal between adjacent cells",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1013"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "TriangulationDataStructure_3::is_valid",
+          "brief": "This is a function for debugging purpose.",
+          "detailed": "Debugging Support Checks the combinatorial validity of the triangulation by checking the local validity of all its cells and vertices (see functions below). (See Section Representation .) Moreover, the Euler relation is tested. When verbose is set to true , messages are printed to give a precise indication on the kind of invalidity encountered.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::is_valid",
+          "argsstring": "(bool verbose=false) const",
+          "params": [
+            {
+              "type": "bool",
+              "name": "verbose",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1032"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "TriangulationDataStructure_3::is_valid",
+          "brief": "This is a function for debugging purpose.",
+          "detailed": "Debugging Support Checks the local validity of the adjacency relations of the triangulation. It also calls the is_valid member function of the vertex. When verbose is set to true , messages are printed to give a precise indication on the kind of invalidity encountered.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::is_valid",
+          "argsstring": "(Vertex_handle v, bool verbose=false) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "verbose",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1043"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "TriangulationDataStructure_3::is_valid",
+          "brief": "This is a function for debugging purpose.",
+          "detailed": "Debugging Support Checks the local validity of the adjacency relations of the triangulation. It also calls the is_valid member function of the cell. When verbose is set to true , messages are printed to give a precise indication on the kind of invalidity encountered.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::is_valid",
+          "argsstring": "(Cell_handle c, bool verbose=false) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "verbose",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1054"
+        }
+      ],
+      "xml_file": "class_triangulation_data_structure__3.xml",
+      "file": "Concepts/TriangulationDataStructure_3.h",
+      "line": "77"
+    },
+    "TriangulationDataStructure_3::Cell": {
+      "kind": "class",
+      "name": "TriangulationDataStructure_3::Cell",
+      "brief": "The concept TriangulationDataStructure_3::Cell stores four Vertex_handle s to its four vertices and four Cell_handle s to its four neighbors. The vertices are indexed 0, 1, 2, and 3 in consistent order. The neighbor indexed $ i$ lies opposite to vertex i .",
+      "detailed": "In degenerate dimensions, cells are used to store faces of maximal dimension: in dimension 2, each cell represents only one facet of index 3, and 3 edges $ (0,1)$ , $ (1,2)$ and $ (2,0)$ ; in dimension 1, each cell represents one edge $ (0,1)$ . (See also Section Representation .) Creation In order to obtain new cells or destruct unused cells, the user must call the create_cell() and delete_cell() methods of the triangulation data structure. TriangulationDataStructure_3::Vertex TriangulationDataStructure_3::Cell_data",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Triangulation_data_structure",
+          "qualified_name": "TriangulationDataStructure_3::Cell::Triangulation_data_structure",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3",
+          "definition": "typedef TriangulationDataStructure_3 TriangulationDataStructure_3::Cell::Triangulation_data_structure",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1243"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle",
+          "qualified_name": "TriangulationDataStructure_3::Cell::Vertex_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3::Vertex_handle",
+          "definition": "typedef TriangulationDataStructure_3::Vertex_handle TriangulationDataStructure_3::Cell::Vertex_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1248"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_handle",
+          "qualified_name": "TriangulationDataStructure_3::Cell::Cell_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3::Cell_handle",
+          "definition": "typedef TriangulationDataStructure_3::Cell_handle TriangulationDataStructure_3::Cell::Cell_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1253"
+        },
+        {
+          "kind": "typedef",
+          "name": "TDS_data",
+          "qualified_name": "TriangulationDataStructure_3::Cell::TDS_data",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3::Cell_data",
+          "definition": "typedef TriangulationDataStructure_3::Cell_data TriangulationDataStructure_3::Cell::TDS_data",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1258"
+        },
+        {
+          "kind": "function",
+          "name": "vertex",
+          "qualified_name": "TriangulationDataStructure_3::Cell::vertex",
+          "brief": "Returns the vertex i of c .",
+          "detailed": "$ i \\in\\{0, 1, 2, 3\\}$ .",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle TriangulationDataStructure_3::Cell::vertex",
+          "argsstring": "(int i) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1269"
+        },
+        {
+          "kind": "function",
+          "name": "index",
+          "qualified_name": "TriangulationDataStructure_3::Cell::index",
+          "brief": "Returns the index of vertex v in c .",
+          "detailed": "v is a vertex of c .",
+          "return_type": "int",
+          "definition": "int TriangulationDataStructure_3::Cell::index",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1275"
+        },
+        {
+          "kind": "function",
+          "name": "has_vertex",
+          "qualified_name": "TriangulationDataStructure_3::Cell::has_vertex",
+          "brief": "Returns true if v is a vertex of c .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::Cell::has_vertex",
+          "argsstring": "(Vertex_handle v) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1280"
+        },
+        {
+          "kind": "function",
+          "name": "has_vertex",
+          "qualified_name": "TriangulationDataStructure_3::Cell::has_vertex",
+          "brief": "Returns true if v is a vertex of c , and computes its index i in c .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::Cell::has_vertex",
+          "argsstring": "(Vertex_handle v, int &i) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1286"
+        },
+        {
+          "kind": "function",
+          "name": "neighbor",
+          "qualified_name": "TriangulationDataStructure_3::Cell::neighbor",
+          "brief": "Returns the neighbor i of c .",
+          "detailed": "$ i \\in\\{0, 1, 2, 3\\}$ .",
+          "return_type": "Cell_handle",
+          "definition": "Cell_handle TriangulationDataStructure_3::Cell::neighbor",
+          "argsstring": "(int i) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1292"
+        },
+        {
+          "kind": "function",
+          "name": "index",
+          "qualified_name": "TriangulationDataStructure_3::Cell::index",
+          "brief": "Returns the index corresponding to neighboring cell n .",
+          "detailed": "n is a neighbor of c .",
+          "return_type": "int",
+          "definition": "int TriangulationDataStructure_3::Cell::index",
+          "argsstring": "(Cell_handle n) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1298"
+        },
+        {
+          "kind": "function",
+          "name": "has_neighbor",
+          "qualified_name": "TriangulationDataStructure_3::Cell::has_neighbor",
+          "brief": "Returns true if n is a neighbor of c .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::Cell::has_neighbor",
+          "argsstring": "(Cell_handle n) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1303"
+        },
+        {
+          "kind": "function",
+          "name": "has_neighbor",
+          "qualified_name": "TriangulationDataStructure_3::Cell::has_neighbor",
+          "brief": "Returns true if n is a neighbor of c , and computes its index i in c .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::Cell::has_neighbor",
+          "argsstring": "(Cell_handle n, int &i) const",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1309"
+        },
+        {
+          "kind": "function",
+          "name": "set_vertex",
+          "qualified_name": "TriangulationDataStructure_3::Cell::set_vertex",
+          "brief": "Sets vertex i to v .",
+          "detailed": "$ i \\in\\{0, 1, 2, 3\\}$ .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::Cell::set_vertex",
+          "argsstring": "(int i, Vertex_handle v)",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1321"
+        },
+        {
+          "kind": "function",
+          "name": "set_vertices",
+          "qualified_name": "TriangulationDataStructure_3::Cell::set_vertices",
+          "brief": "Sets the vertex pointers.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::Cell::set_vertices",
+          "argsstring": "(Vertex_handle v0, Vertex_handle v1, Vertex_handle v2, Vertex_handle v3)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1326"
+        },
+        {
+          "kind": "function",
+          "name": "set_neighbor",
+          "qualified_name": "TriangulationDataStructure_3::Cell::set_neighbor",
+          "brief": "Sets neighbor i to n .",
+          "detailed": "$ i \\in\\{0, 1, 2, 3\\}$ .",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::Cell::set_neighbor",
+          "argsstring": "(int i, Cell_handle n)",
+          "params": [
+            {
+              "type": "int",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1335"
+        },
+        {
+          "kind": "function",
+          "name": "set_neighbors",
+          "qualified_name": "TriangulationDataStructure_3::Cell::set_neighbors",
+          "brief": "Sets the neighbors pointers.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::Cell::set_neighbors",
+          "argsstring": "(Cell_handle n0, Cell_handle n1, Cell_handle n2, Cell_handle n3)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "n0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1340"
+        },
+        {
+          "kind": "function",
+          "name": "tds_data",
+          "qualified_name": "TriangulationDataStructure_3::Cell::tds_data",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TDS_data &",
+          "definition": "TDS_data & TriangulationDataStructure_3::Cell::tds_data",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Internal",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1358"
+        },
+        {
+          "kind": "function",
+          "name": "tds_data",
+          "qualified_name": "TriangulationDataStructure_3::Cell::tds_data",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const TDS_data &",
+          "definition": "const TDS_data & TriangulationDataStructure_3::Cell::tds_data",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Internal",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1363"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "TriangulationDataStructure_3::Cell::is_valid",
+          "brief": "This is a function for debugging purpose.",
+          "detailed": "Debugging Support User defined local validity checking function.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::Cell::is_valid",
+          "argsstring": "(bool verbose=false, int level=0) const",
+          "params": [
+            {
+              "type": "bool",
+              "name": "verbose",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "level",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1376"
+        }
+      ],
+      "xml_file": "class_triangulation_data_structure__3_1_1_cell.xml",
+      "file": "Concepts/TriangulationDataStructure_3.h",
+      "line": "1234"
+    },
+    "TriangulationDataStructure_3::Cell_data": {
+      "kind": "class",
+      "name": "TriangulationDataStructure_3::Cell_data",
+      "brief": "Various algorithms using a triangulation data structure, such as Delaunay triangulations or Alpha Shapes, must be able to associate a state to a cell elemental. For efficiency, this information must be stored directly within the cell.",
+      "detailed": "This class is only meant to store a state (Boolean). Consequently, the state must be the default value (i.e. false ) unless a setting function ( mark_in_conflict() , etc.) has been called. The three states are \"in conflict\", \"on boundary\", and \"processed\". By default, a cell is not in conflict, not on boundary, and not processed. TriangulationDataStructure_3::Cell",
+      "members": [
+        {
+          "kind": "function",
+          "name": "clear",
+          "qualified_name": "TriangulationDataStructure_3::Cell_data::clear",
+          "brief": "Clears all flags: the cell is neither in conflict, nor on the boundary, nor processed.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::Cell_data::clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1408"
+        },
+        {
+          "kind": "function",
+          "name": "mark_in_conflict",
+          "qualified_name": "TriangulationDataStructure_3::Cell_data::mark_in_conflict",
+          "brief": "Sets the \"in conflict\" state to true .",
+          "detailed": "is_in_conflict() returns true",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::Cell_data::mark_in_conflict",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1413"
+        },
+        {
+          "kind": "function",
+          "name": "mark_on_boundary",
+          "qualified_name": "TriangulationDataStructure_3::Cell_data::mark_on_boundary",
+          "brief": "Sets the \"on boundary\" state to true .",
+          "detailed": "is_on_boundary() returns true",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::Cell_data::mark_on_boundary",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1418"
+        },
+        {
+          "kind": "function",
+          "name": "mark_processed",
+          "qualified_name": "TriangulationDataStructure_3::Cell_data::mark_processed",
+          "brief": "Sets the \"processed\" state to true .",
+          "detailed": "processed() returns true",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::Cell_data::mark_processed",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1423"
+        },
+        {
+          "kind": "function",
+          "name": "is_clear",
+          "qualified_name": "TriangulationDataStructure_3::Cell_data::is_clear",
+          "brief": "Checks whether the cell has default state (not in conflict, not on boundary, not processed).",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::Cell_data::is_clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1431"
+        },
+        {
+          "kind": "function",
+          "name": "is_in_conflict",
+          "qualified_name": "TriangulationDataStructure_3::Cell_data::is_in_conflict",
+          "brief": "Returns whether the cell has been marked as \"in conflict\".",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::Cell_data::is_in_conflict",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1434"
+        },
+        {
+          "kind": "function",
+          "name": "is_on_boundary",
+          "qualified_name": "TriangulationDataStructure_3::Cell_data::is_on_boundary",
+          "brief": "Returns whether the cell has been marked as \"on boundary\".",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::Cell_data::is_on_boundary",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1437"
+        },
+        {
+          "kind": "function",
+          "name": "processed",
+          "qualified_name": "TriangulationDataStructure_3::Cell_data::processed",
+          "brief": "Returns whether the cell has been marked as \"processed\".",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::Cell_data::processed",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1440"
+        }
+      ],
+      "xml_file": "class_triangulation_data_structure__3_1_1_cell__data.xml",
+      "file": "Concepts/TriangulationDataStructure_3.h",
+      "line": "1401"
+    },
+    "TriangulationDataStructure_3::Vertex": {
+      "kind": "class",
+      "name": "TriangulationDataStructure_3::Vertex",
+      "brief": "The concept TriangulationDataStructure_3::Vertex represents the vertex class of a 3D-triangulation data structure. It must define the types and operations listed in this section. Some of these requirements are of geometric nature, they are optional when using the triangulation data structure class alone. They become compulsory when the triangulation data structure is used as a layer for the geometric triangulation class. (See Section Software Design .).",
+      "detailed": "Creation In order to obtain new vertices or destruct unused vertices, the user must call the create_vertex() and delete_vertex() methods of the triangulation data structure. TriangulationDataStructure_3::Cell",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "TriangulationDataStructure_3::Vertex::Point",
+          "brief": "Optional for the triangulation data structure alone .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type TriangulationDataStructure_3::Vertex::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1138"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangulation_data_structure",
+          "qualified_name": "TriangulationDataStructure_3::Vertex::Triangulation_data_structure",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3",
+          "definition": "typedef TriangulationDataStructure_3 TriangulationDataStructure_3::Vertex::Triangulation_data_structure",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1143"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle",
+          "qualified_name": "TriangulationDataStructure_3::Vertex::Vertex_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3::Vertex_handle",
+          "definition": "typedef TriangulationDataStructure_3::Vertex_handle TriangulationDataStructure_3::Vertex::Vertex_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1148"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_handle",
+          "qualified_name": "TriangulationDataStructure_3::Vertex::Cell_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3::Cell_handle",
+          "definition": "typedef TriangulationDataStructure_3::Cell_handle TriangulationDataStructure_3::Vertex::Cell_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1153"
+        },
+        {
+          "kind": "function",
+          "name": "cell",
+          "qualified_name": "TriangulationDataStructure_3::Vertex::cell",
+          "brief": "Returns a cell of the triangulation having v as vertex.",
+          "detailed": "",
+          "return_type": "Cell_handle",
+          "definition": "Cell_handle TriangulationDataStructure_3::Vertex::cell",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1163"
+        },
+        {
+          "kind": "function",
+          "name": "point",
+          "qualified_name": "TriangulationDataStructure_3::Vertex::point",
+          "brief": "Returns the point stored in the vertex.",
+          "detailed": "Optional for the triangulation data structure alone.",
+          "return_type": "Point",
+          "definition": "Point TriangulationDataStructure_3::Vertex::point",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1169"
+        },
+        {
+          "kind": "function",
+          "name": "set_cell",
+          "qualified_name": "TriangulationDataStructure_3::Vertex::set_cell",
+          "brief": "Sets the incident cell to c .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::Vertex::set_cell",
+          "argsstring": "(Cell_handle c)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1179"
+        },
+        {
+          "kind": "function",
+          "name": "set_point",
+          "qualified_name": "TriangulationDataStructure_3::Vertex::set_point",
+          "brief": "Sets the point to p .",
+          "detailed": "Optional for the triangulation data structure alone.",
+          "return_type": "void",
+          "definition": "void TriangulationDataStructure_3::Vertex::set_point",
+          "argsstring": "(const Point &p)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1185"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "TriangulationDataStructure_3::Vertex::is_valid",
+          "brief": "This is a function for debugging purpose.",
+          "detailed": "Debugging Support Checks the validity of the vertex. Must check that its incident cell has this vertex. The validity of the base vertex is also checked. When verbose is set to true , messages are printed to give a precise indication on the kind of invalidity encountered.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDataStructure_3::Vertex::is_valid",
+          "argsstring": "(bool verbose=false) const",
+          "params": [
+            {
+              "type": "bool",
+              "name": "verbose",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1202"
+        }
+      ],
+      "xml_file": "class_triangulation_data_structure__3_1_1_vertex.xml",
+      "file": "Concepts/TriangulationDataStructure_3.h",
+      "line": "1126"
+    },
+    "TriangulationDSCellBase_3": {
+      "kind": "class",
+      "name": "TriangulationDSCellBase_3",
+      "brief": "",
+      "detailed": "Refines TriangulationDataStructure_3::Cell The concept TriangulationDSCellBase_3 describes the requirements for the cell base class of a CGAL::Triangulation_data_structure_3 <Vb,Cb> . Note that if the CGAL::Triangulation_data_structure_3 is plugged into a triangulation class, the face base class may have additional geometric requirements depending on the triangulation class. At the base level (see the Software Design sections of the Chapters Triangulation and Triangulation Datastructure ), a cell stores handles to its four vertices and to its four neighbor cells. The vertices and neighbors are indexed 0, 1, 2 and 3. Neighbor i lies opposite to vertex i . Since the Triangulation data structure is the class which defines the handle types, the cell base class has to be somehow parameterized by the Triangulation data structure. But since it is itself parameterized by the cell and vertex base classes, there is a cycle in the definition of these classes. In order to break the cycle, the base classes for vertex and cell which are given as arguments for the Triangulation data structure use void as Triangulation data structure parameter, and the Triangulation data structure then uses a rebind -like mechanism (similar to the one specified in std::allocator ) in order to put itself as parameter to the vertex and cell classes. The rebound base classes so obtained are the classes which are used as base classes for the final vertex and cell classes. More information can be found in Section Software Design . Has models CGAL::Triangulation_ds_cell_base_3 <TDS> TriangulationDSVertexBase_3 CGAL::Triangulation_data_structure_3 <Vb,Cb>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Rebind_TDS",
+          "qualified_name": "TriangulationDSCellBase_3::Rebind_TDS",
+          "brief": "This template class has to define a type Rebind_TDS <TDS3>::Other which is the rebound cell, that is, the one whose Triangulation_data_structure will be the actually used one.",
+          "detailed": "Rebind_TDS <TDS3>::Other will be the real base class of Triangulation_data_structure_3::Cell . It can be implemented using a nested template class. Section Cyclic Dependency",
+          "return_type": "unspecified_type",
+          "definition": "using TriangulationDSCellBase_3::Rebind_TDS = unspecified_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSCellBase_3.h",
+          "line": "62"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangulation_data_structure",
+          "qualified_name": "TriangulationDSCellBase_3::Triangulation_data_structure",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3",
+          "definition": "typedef TriangulationDataStructure_3 TriangulationDSCellBase_3::Triangulation_data_structure",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSCellBase_3.h",
+          "line": "67"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle",
+          "qualified_name": "TriangulationDSCellBase_3::Vertex_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3::Vertex_handle",
+          "definition": "typedef TriangulationDataStructure_3::Vertex_handle TriangulationDSCellBase_3::Vertex_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSCellBase_3.h",
+          "line": "72"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_handle",
+          "qualified_name": "TriangulationDSCellBase_3::Cell_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3::Cell_handle",
+          "definition": "typedef TriangulationDataStructure_3::Cell_handle TriangulationDSCellBase_3::Cell_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSCellBase_3.h",
+          "line": "77"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDSCellBase_3",
+          "qualified_name": "TriangulationDSCellBase_3::TriangulationDSCellBase_3",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "TriangulationDSCellBase_3::TriangulationDSCellBase_3",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDSCellBase_3.h",
+          "line": "87"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDSCellBase_3",
+          "qualified_name": "TriangulationDSCellBase_3::TriangulationDSCellBase_3",
+          "brief": "Initializes the vertices with v0, v1, v2, v3 .",
+          "detailed": "Neighbors are initialized to the default constructed handle.",
+          "return_type": "",
+          "definition": "TriangulationDSCellBase_3::TriangulationDSCellBase_3",
+          "argsstring": "(Vertex_handle v0, Vertex_handle v1, Vertex_handle v2, Vertex_handle v3)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDSCellBase_3.h",
+          "line": "93"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDSCellBase_3",
+          "qualified_name": "TriangulationDSCellBase_3::TriangulationDSCellBase_3",
+          "brief": "Initializes the vertices with v0, v1, v2, v3 and the neighbors with n0, n1, n2, n3 .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "TriangulationDSCellBase_3::TriangulationDSCellBase_3",
+          "argsstring": "(Vertex_handle v0, Vertex_handle v1, Vertex_handle v2, Vertex_handle v3, Cell_handle n0, Cell_handle n1, Cell_handle n2, Cell_handle n3)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "v3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n0",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Cell_handle",
+              "name": "n3",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDSCellBase_3.h",
+          "line": "100"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "TriangulationDSCellBase_3::is_valid",
+          "brief": "Performs any desired geometric test on a cell.",
+          "detailed": "This is a function for debugging purpose. Debugging Support When verbose is set to true , messages are printed to give a precise indication of the kind of invalidity encountered. level increases the level of testing.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDSCellBase_3::is_valid",
+          "argsstring": "(bool verbose=false, int level=0) const",
+          "params": [
+            {
+              "type": "bool",
+              "name": "verbose",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "level",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "Concepts/TriangulationDSCellBase_3.h",
+          "line": "120"
+        },
+        {
+          "kind": "function",
+          "name": "for_compact_container",
+          "qualified_name": "TriangulationDSCellBase_3::for_compact_container",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void *",
+          "definition": "void * TriangulationDSCellBase_3::for_compact_container",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Members for Compact_container",
+          "file": "Concepts/TriangulationDSCellBase_3.h",
+          "line": "136"
+        },
+        {
+          "kind": "function",
+          "name": "for_compact_container",
+          "qualified_name": "TriangulationDSCellBase_3::for_compact_container",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDSCellBase_3::for_compact_container",
+          "argsstring": "(void *p)",
+          "params": [
+            {
+              "type": "void *",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Members for Compact_container",
+          "file": "Concepts/TriangulationDSCellBase_3.h",
+          "line": "141"
+        },
+        {
+          "kind": "function",
+          "name": "operator>>",
+          "qualified_name": "TriangulationDSCellBase_3::operator>>",
+          "brief": "Inputs the possible non combinatorial information given by the cell.",
+          "detailed": "",
+          "return_type": "istream &",
+          "definition": "istream & TriangulationDSCellBase_3::operator>>",
+          "argsstring": "(istream &is, TriangulationDSCellBase_3 &c)",
+          "params": [
+            {
+              "type": "istream &",
+              "name": "is",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangulationDSCellBase_3 &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "I/O",
+          "file": "Concepts/TriangulationDSCellBase_3.h",
+          "line": "151"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "TriangulationDSCellBase_3::operator<<",
+          "brief": "Outputs the possible non combinatorial information given by the cell.",
+          "detailed": "",
+          "return_type": "ostream &",
+          "definition": "ostream & TriangulationDSCellBase_3::operator<<",
+          "argsstring": "(ostream &os, const TriangulationDSCellBase_3 &c)",
+          "params": [
+            {
+              "type": "ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const TriangulationDSCellBase_3 &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "I/O",
+          "file": "Concepts/TriangulationDSCellBase_3.h",
+          "line": "156"
+        }
+      ],
+      "xml_file": "class_triangulation_d_s_cell_base__3.xml",
+      "file": "Concepts/TriangulationDSCellBase_3.h",
+      "line": "45"
+    },
+    "TriangulationDSVertexBase_3": {
+      "kind": "class",
+      "name": "TriangulationDSVertexBase_3",
+      "brief": "",
+      "detailed": "Refines TriangulationDataStructure_3::Vertex The concept TriangulationDSVertexBase_3 describes the requirements for the vertex base class of a CGAL::Triangulation_data_structure_3<Vb,Cb> . Note that if the CGAL::Triangulation_data_structure_3 is plugged into a triangulation class, the vertex base class may have additional geometric requirements depending on the triangulation class. At the bottom level of 3D-triangulations (see Sections Triangulation3secdesign and Software Design ), a vertex provides access to one of its incident cells through a handle. Since the Triangulation data structure is the class which defines the handle types, the vertex base class has to be somehow parameterized by the Triangulation data structure. But since it is itself parameterized by the cell and vertex base classes, there is a cycle in the definition of these classes. In order to break the cycle, the base classes for vertex and cell which are given as arguments for the Triangulation data structure use void as Triangulation data structure parameter, and the Triangulation data structure then uses a rebind -like mechanism (similar to the one specified in std::allocator ) in order to put itself as parameter to the vertex and cell classes. The rebound base classes so obtained are the classes which are used as base classes for the final vertex and cell classes. More information can be found in Section Software Design . Has models CGAL::Triangulation_ds_vertex_base_3 <TDS> TriangulationDSCellBase_3 CGAL::Triangulation_data_structure_3 <Vb,Cb>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Rebind_TDS",
+          "qualified_name": "TriangulationDSVertexBase_3::Rebind_TDS",
+          "brief": "This template class has to define a type Rebind_TDS <TDS3>::Other which is the rebound vertex, that is, the one whose Triangulation_data_structure will be the actually used one.",
+          "detailed": "Rebind_TDS <TDS3>::Other will be the real base class of Triangulation_data_structure_3::Vertex . It can be implemented using a nested template class. Section Cyclic Dependency",
+          "return_type": "unspecified_type",
+          "definition": "using TriangulationDSVertexBase_3::Rebind_TDS = unspecified_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSVertexBase_3.h",
+          "line": "56"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangulation_data_structure",
+          "qualified_name": "TriangulationDSVertexBase_3::Triangulation_data_structure",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3",
+          "definition": "typedef TriangulationDataStructure_3 TriangulationDSVertexBase_3::Triangulation_data_structure",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSVertexBase_3.h",
+          "line": "61"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle",
+          "qualified_name": "TriangulationDSVertexBase_3::Vertex_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3::Vertex_handle",
+          "definition": "typedef TriangulationDataStructure_3::Vertex_handle TriangulationDSVertexBase_3::Vertex_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSVertexBase_3.h",
+          "line": "66"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cell_handle",
+          "qualified_name": "TriangulationDSVertexBase_3::Cell_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "TriangulationDataStructure_3::Cell_handle",
+          "definition": "typedef TriangulationDataStructure_3::Cell_handle TriangulationDSVertexBase_3::Cell_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/TriangulationDSVertexBase_3.h",
+          "line": "71"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDSVertexBase_3",
+          "qualified_name": "TriangulationDSVertexBase_3::TriangulationDSVertexBase_3",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "TriangulationDSVertexBase_3::TriangulationDSVertexBase_3",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDSVertexBase_3.h",
+          "line": "81"
+        },
+        {
+          "kind": "function",
+          "name": "TriangulationDSVertexBase_3",
+          "qualified_name": "TriangulationDSVertexBase_3::TriangulationDSVertexBase_3",
+          "brief": "Constructs a vertex pointing to cell c .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "TriangulationDSVertexBase_3::TriangulationDSVertexBase_3",
+          "argsstring": "(Cell_handle c)",
+          "params": [
+            {
+              "type": "Cell_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/TriangulationDSVertexBase_3.h",
+          "line": "86"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "TriangulationDSVertexBase_3::is_valid",
+          "brief": "This is a function for debugging purpose.",
+          "detailed": "Debugging Support Performs any desired test on a vertex. Checks that the pointer to an incident cell is not the default constructed handle.",
+          "return_type": "bool",
+          "definition": "bool TriangulationDSVertexBase_3::is_valid",
+          "argsstring": "(bool verbose=false, int level=0) const",
+          "params": [
+            {
+              "type": "bool",
+              "name": "verbose",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "level",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Checking",
+          "file": "Concepts/TriangulationDSVertexBase_3.h",
+          "line": "100"
+        },
+        {
+          "kind": "function",
+          "name": "for_compact_container",
+          "qualified_name": "TriangulationDSVertexBase_3::for_compact_container",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void *",
+          "definition": "void * TriangulationDSVertexBase_3::for_compact_container",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Members for Compact_container",
+          "file": "Concepts/TriangulationDSVertexBase_3.h",
+          "line": "116"
+        },
+        {
+          "kind": "function",
+          "name": "for_compact_container",
+          "qualified_name": "TriangulationDSVertexBase_3::for_compact_container",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void TriangulationDSVertexBase_3::for_compact_container",
+          "argsstring": "(void *)",
+          "params": [
+            {
+              "type": "void *",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Members for Compact_container",
+          "file": "Concepts/TriangulationDSVertexBase_3.h",
+          "line": "121"
+        },
+        {
+          "kind": "function",
+          "name": "operator>>",
+          "qualified_name": "TriangulationDSVertexBase_3::operator>>",
+          "brief": "Inputs the non-combinatorial information given by the vertex.",
+          "detailed": "",
+          "return_type": "istream &",
+          "definition": "istream & TriangulationDSVertexBase_3::operator>>",
+          "argsstring": "(istream &is, TriangulationDSVertexBase_3 &v)",
+          "params": [
+            {
+              "type": "istream &",
+              "name": "is",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangulationDSVertexBase_3 &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Members for Compact_container",
+          "file": "Concepts/TriangulationDSVertexBase_3.h",
+          "line": "126"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "TriangulationDSVertexBase_3::operator<<",
+          "brief": "Outputs the non-combinatorial information given by the vertex.",
+          "detailed": "",
+          "return_type": "ostream &",
+          "definition": "ostream & TriangulationDSVertexBase_3::operator<<",
+          "argsstring": "(ostream &os, const TriangulationDSVertexBase_3 &v)",
+          "params": [
+            {
+              "type": "ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const TriangulationDSVertexBase_3 &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Members for Compact_container",
+          "file": "Concepts/TriangulationDSVertexBase_3.h",
+          "line": "131"
+        }
+      ],
+      "xml_file": "class_triangulation_d_s_vertex_base__3.xml",
+      "file": "Concepts/TriangulationDSVertexBase_3.h",
+      "line": "40"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/Triangulation_data_structure_3.h",
+      "line": "2"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgTDS3Ref": {
+      "kind": "group",
+      "name": "PkgTDS3Ref",
+      "brief": "",
+      "detailed": "Clément Jamin, Sylvain Pion, and Monique Teillaud This package provides a data structure to store a three-dimensional triangulation that has the topology of a three-dimensional sphere. The package acts as a container for the vertices and cells of the triangulation and provides basic combinatorial operations on the triangulation. Introduced in: CGAL 2.1 BibTeX: cgal:pt-tds3-26a License: GPL The triangulation data structure is able to represent a triangulation of a topological sphere $ S^d$ of $ \\mathbb{R}^{d+1}$ , for $ d \\in \\{-1,0,1,2,3\\}$ . (See Representation .) The vertex class of a 3D-triangulation data structure must define a number of types and operations. The requirements that are of geometric nature are required only when the triangulation data structure is used as a layer for the geometric triangulation classes. (See Section Software Design .) The cell class of a triangulation data structure stores four handles to its four vertices and four handles to its four neighbors. The vertices are indexed 0, 1, 2, and 3 in a consistent order. The neighbor indexed $ i$ lies opposite to vertex i . In degenerate dimensions, cells are used to store faces of maximal dimension: in dimension 2, each cell represents only one facet of index 3, and 3 edges $ (0,1)$ , $ (1,2)$ and $ (2,0)$ ; in dimension 1, each cell represents one edge $ (0,1)$ . (See Section Representation .) Classified Reference Pages Concepts TriangulationDataStructure_3 TriangulationDataStructure_3::Cell TriangulationDataStructure_3::Cell_data TriangulationDataStructure_3::Vertex TriangulationDSCellBase_3 TriangulationDSVertexBase_3 Classes CGAL::Triangulation_data_structure_3 <Vb,Cb,CT> is a model for the concept of the 3D-triangulation data structure TriangulationDataStructure_3 . It is templated by base classes for vertices and cells. CGAL provides base vertex classes and base cell classes: CGAL::Triangulation_ds_cell_base_3 <TDS> CGAL::Triangulation_ds_vertex_base_3 <TDS> Helper Classes CGAL::Triangulation_utils_3 defines operations on the indices of vertices and neighbors within a cell of a triangulation.",
+      "members": [],
+      "xml_file": "group___pkg_t_d_s3_ref.xml"
+    },
+    "PkgTDS3Concepts": {
+      "kind": "group",
+      "name": "PkgTDS3Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_t_d_s3_concepts.xml"
+    },
+    "PkgTDS3Classes": {
+      "kind": "group",
+      "name": "PkgTDS3Classes",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_t_d_s3_classes.xml"
+    },
+    "PkgIOTDS3": {
+      "kind": "group",
+      "name": "PkgIOTDS3",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator>>",
+          "qualified_name": "TriangulationDataStructure_3::operator>>",
+          "brief": "Reads a combinatorial triangulation from is and assigns it to tds .",
+          "detailed": "",
+          "return_type": "istream &",
+          "definition": "istream & TriangulationDataStructure_3::operator>>",
+          "argsstring": "(istream &is, TriangulationDataStructure_3 &tds)",
+          "params": [
+            {
+              "type": "istream &",
+              "name": "is",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "TriangulationDataStructure_3 &",
+              "name": "tds",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "I/O",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1064"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "TriangulationDataStructure_3::operator<<",
+          "brief": "Writes tds into the stream os .",
+          "detailed": "",
+          "return_type": "ostream &",
+          "definition": "ostream & TriangulationDataStructure_3::operator<<",
+          "argsstring": "(ostream &os, const TriangulationDataStructure_3 &tds)",
+          "params": [
+            {
+              "type": "ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const TriangulationDataStructure_3 &",
+              "name": "tds",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "I/O",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1069"
+        },
+        {
+          "kind": "function",
+          "name": "file_input",
+          "qualified_name": "TriangulationDataStructure_3::file_input",
+          "brief": "The triangulation data structure streamed in is , of original type TDS_src , is written into the triangulation data structure.",
+          "detailed": "As the vertex and cell types might be different and incompatible, the creation of new cells and vertices is made thanks to the functors convert_vertex and convert_cell , that convert vertex and cell types. For each vertex v_src in is , the corresponding vertex v_tgt in the triangulation data structure is a copy of the vertex returned by convert_vertex(v_src) . The same operations are done for cells with the functor convert_cell, except cells in the triangulation data structure are created using the default constructor, and then filled with the data contained in the stream. A model of ConvertVertex must provide two operator() s that are responsible for converting the source vertex v_src into the target vertex: Vertex operator()(const TDS_src::Vertex& v_src) const; This operator is used to create the vertex from v_src . void operator()(const TDS_src::Vertex& v_src, Vertex & v_tgt) const; This operator is meant to be used in case heavy data should be transferred to v_tgt . A model of ConvertCell must provide an operator() that is responsible for converting the source cell c_src into the target cell: void operator()(const TDS_src::Cell& c_src, Cell & c_tgt) const; This operator is meant to be used in case heavy data should be transferred to c_tgt . The triangulation data structure contained in is can be obtained with the operator>> of a TriangulationDataStructure_3 .",
+          "return_type": "std::istream &",
+          "definition": "std::istream & TriangulationDataStructure_3::file_input",
+          "argsstring": "(std::istream &is, ConvertVertex convert_vertex, ConvertCell convert_cell)",
+          "params": [
+            {
+              "type": "std::istream &",
+              "name": "is",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ConvertVertex",
+              "name": "convert_vertex",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "ConvertCell",
+              "name": "convert_cell",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "I/O",
+          "file": "Concepts/TriangulationDataStructure_3.h",
+          "line": "1097"
+        }
+      ],
+      "xml_file": "group___pkg_i_o_t_d_s3.xml"
+    }
+  }
+}

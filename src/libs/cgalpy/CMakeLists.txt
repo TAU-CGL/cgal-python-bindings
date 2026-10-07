@@ -1,8 +1,121 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
 ######## Packages ###############################################################
 ################################################################################
 
 # Generate config.hpp
 configure_file(config.hpp.in include/config.hpp)
+
+set(component cgalpy)
+string(TOUPPER ${component} component_upper)
+
+######## Custom Source File Generation #########################################
+################################################################################
+
+#############
+# Directories
+#############
+
+set(${component}_BINARY_SRC_DIR "${CMAKE_BINARY_DIR}/src")
+set(${component}_BINARY_LIB_DIR "${${component}_BINARY_SRC_DIR}/libs/${component}")
+
+set(${component}_GENERATED_BASE_DIR "${${component}_BINARY_LIB_DIR}")
+set(${component}_GENERATED_DIR "${${component}_GENERATED_BASE_DIR}/generated")
+set(${component}_GENERATED_LIB_DIR "${${component}_GENERATED_BASE_DIR}/lib/generated")
+set(${component}_GENERATED_INC_DIR "${${component}_GENERATED_BASE_DIR}/include/generated")
+
+file(MAKE_DIRECTORY ${${component}_GENERATED_DIR})
+file(MAKE_DIRECTORY ${${component}_GENERATED_LIB_DIR})
+file(MAKE_DIRECTORY ${${component}_GENERATED_INC_DIR}/${component})
+
+# Generated headers are included as "cgalpy/<module>_docstrings.hpp".
+include_directories(${${component}_GENERATED_INC_DIR})
+
+##########
+# Commands
+##########
+
+set(${component}_GEN_DOCSTRINGS "${CMAKE_SOURCE_DIR}/src/scripts/cpp_docstrings_from_json.py")
+set(${component}_DOCSTRINGS_JSON_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/docstrings/json")
+
+# Short binding module names mapped to CGAL documentation package names.
+set(LONG_NAME_Ker "Kernel_23")
+set(LONG_NAME_Kerd "Kernel_d")
+set(LONG_NAME_As2 "Alpha_shapes_2")
+set(LONG_NAME_As3 "Alpha_shapes_3")
+set(LONG_NAME_Aos2 "Arrangement_on_surface_2")
+set(LONG_NAME_Bso2 "Boolean_set_operations_2")
+set(LONG_NAME_Bvr "Basic_viewer")
+set(LONG_NAME_Bgl "BGL")
+set(LONG_NAME_Bv "Bounding_volumes")
+set(LONG_NAME_Ch2 "Convex_hull_2")
+set(LONG_NAME_Ch3 "Convex_hull_3")
+set(LONG_NAME_Env2 "Envelope_2")
+set(LONG_NAME_Env3 "Envelope_3")
+set(LONG_NAME_Ms2 "Minkowski_sum_2")
+set(LONG_NAME_Nef3 "Nef_3")
+set(LONG_NAME_Pol3 "Polyhedron")
+set(LONG_NAME_Pol2 "Polygon")
+set(LONG_NAME_Pmp "Polygon_mesh_processing")
+set(LONG_NAME_Sma "Surface_mesh_approximation")
+set(LONG_NAME_Smdec "Convex_decomposition_3")
+set(LONG_NAME_Smdef "Surface_mesh_deformation")
+set(LONG_NAME_Smp "Surface_mesh_parameterization")
+set(LONG_NAME_Smsh "Surface_mesh_shortest_path")
+set(LONG_NAME_Smt "Surface_mesh_topology")
+set(LONG_NAME_Smse "Surface_mesh_segmentation")
+set(LONG_NAME_Smsi "Surface_mesh_simplification")
+set(LONG_NAME_Smsk "Surface_mesh_skeletonization")
+set(LONG_NAME_Sd "Shape_detection")
+set(LONG_NAME_Pp2 "Partition_2")
+set(LONG_NAME_Ss "Spatial_searching")
+set(LONG_NAME_St "Spatial_sorting")
+set(LONG_NAME_Sn2 "Straight_skeleton_2")
+set(LONG_NAME_Sm "Surface_mesh")
+set(LONG_NAME_Ss2 "Surface_sweep_2")
+set(LONG_NAME_Tri2 "Triangulation_2")
+set(LONG_NAME_Tri3 "Triangulation_3")
+set(LONG_NAME_Trid "Triangulation")
+set(LONG_NAME_Vis2 "Visibility_2")
+set(LONG_NAME_Gog "Generator")
+
+function(get_module_docstring_package module out_var)
+  set(long_name_var "LONG_NAME_${module}")
+  if (NOT DEFINED ${long_name_var})
+    message(FATAL_ERROR "No docstring package mapping for module '${module}'")
+  endif ()
+  set(${out_var} "${${long_name_var}}" PARENT_SCOPE)
+endfunction()
+
+function(add_module_docstring module)
+  get_module_docstring_package(${module} package)
+
+  set(docstring_header
+      ${${component}_GENERATED_INC_DIR}/${component}/${module}_docstrings.hpp)
+  set(docstring_source
+      ${${component}_GENERATED_LIB_DIR}/${module}_docstrings.cpp)
+
+  add_custom_command(
+    OUTPUT ${docstring_header} ${docstring_source}
+    COMMAND ${Python_EXECUTABLE} ${${component}_GEN_DOCSTRINGS}
+    ARGS
+      --library ${component}
+      --module ${module}
+      --package ${package}
+      --input-path ${${component}_DOCSTRINGS_JSON_DIR}
+      --output-inc-path ${${component}_GENERATED_INC_DIR}/${component}
+      --output-lib-path ${${component}_GENERATED_LIB_DIR}
+    DEPENDS
+      ${${component}_GEN_DOCSTRINGS}
+      ${${component}_DOCSTRINGS_JSON_DIR}/${package}.json
+    VERBATIM)
+
+  set_source_files_properties(${docstring_header} ${docstring_source}
+    PROPERTIES GENERATED TRUE)
+
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} ${docstring_source} PARENT_SCOPE)
+endfunction()
+
 
 # Add source files
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_module.cpp)
@@ -21,8 +134,8 @@ endif ()
 # Add modules
 #############
 
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/cgal_bindings.cpp)
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tools_bindings.cpp)
+set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_cgal.cpp)
+set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_tools.cpp)
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_bbox_2.cpp)
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_bbox_3.cpp)
 set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_approximate_kernel.cpp)
@@ -31,9 +144,9 @@ set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_approximate_kernel.cpp)
 if (CGALPY_KERNEL_BINDINGS)
     list(APPEND CGALPY_MODULES Ker)
     set(CGALPY_Ker_FILTERS [=[{}]=])
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_kernel_module.cpp)
     if (CGALPY_KERNEL_INTERSECTION_BINDINGS)
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/intersections_2_bindings.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_intersections.cpp)
     endif ()
 endif ()
 
@@ -41,7 +154,7 @@ endif ()
 if (CGALPY_KERNEL_D_BINDINGS)
     list(APPEND CGALPY_MODULES Kerd)
     set(CGALPY_Kerd_FILTERS [=[{}]=])
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kernel_d_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_kernel_d.cpp)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_point_d.cpp)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_linear_algebra_cd.cpp)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_segment_d.cpp)
@@ -52,14 +165,14 @@ endif ()
 if (CGALPY_ALPHA_SHAPE_2_BINDINGS)
     list(APPEND CGALPY_MODULES As2)
     set(CGALPY_As2_FILTERS [=[{}]=])
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/alpha_shape_2_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_alpha_shape_2.cpp)
 endif ()
 
 # 3D Alpha shape
 if (CGALPY_ALPHA_SHAPE_3_BINDINGS)
     list(APPEND CGALPY_MODULES As3)
     set(CGALPY_As3_FILTERS [=[{}]=])
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/alpha_shape_3_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_alpha_shape_3.cpp)
 endif ()
 
 # 2D Arrangement
@@ -71,36 +184,36 @@ if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
     # "Aos2.Arr_algebraic_segment_geometry_traits_2":
     if (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS})
         set(CGALPY_Aos2_FILTERS "Aos2.Arr_algebraic_segment_geometry_traits_2")
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_algebraic_segment_traits_2.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_algebraic_segment_traits_2.cpp)
     elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_BEZIER_GEOMETRY_TRAITS})
         set(CGALPY_Aos2_FILTERS "Aos2.Arr_Bezier_curve_geometry_traits_2")
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_bezier_curve_traits_2.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_bezier_traits_2.cpp)
     elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS})
         set(CGALPY_Aos2_FILTERS "Aos2.Arr_circle_segment_geometry_traits_2")
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_circle_segment_traits_2.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_circle_segment_traits_2.cpp)
     elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_CONIC_GEOMETRY_TRAITS})
         set(CGALPY_Aos2_FILTERS "Aos2.Arr_conic_geometry_traits_2")
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_conic_traits_2.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_conic_traits_2.cpp)
     elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_TRAITS})
         set(CGALPY_Aos2_FILTERS "Aos2.Arr_geodesic_arc_on_sphere_geometry_traits_2")
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_geodesic_arc_on_sphere_traits_2.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_geodesic_arc_on_sphere_traits_2.cpp)
     elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS})
         set(CGALPY_Aos2_FILTERS "Aos2.Arr_linear_geometry_traits_2")
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_linear_traits_2.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_linear_traits_2.cpp)
     elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS})
         set(CGALPY_Aos2_FILTERS "Aos2.Arr_non_caching_segment_geometry_traits_2")
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_non_caching_segment_traits_2.cpp)
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_non_caching_segment_basic_traits_2.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_non_caching_segment_traits_2.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_non_caching_segment_basic_traits_2.cpp)
     elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS})
         set(CGALPY_Aos2_FILTERS "Aos2.Arr_polyline_of_segments_geometry_traits_2")
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_segment_traits_2.cpp)
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_polyline_traits_2.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_segment_traits_2.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_polyline_traits_2.cpp)
     elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
         set(CGALPY_Aos2_FILTERS "Aos2.Arr_segment_geometry_traits_2")
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_segment_traits_2.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_segment_traits_2.cpp)
     elseif (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_RATIONAL_FUNCTION_GEOMETRY_TRAITS})
         set(CGALPY_Aos2_FILTERS "Aos2.Arr_rational_function_geometry_traits_2")
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_rational_function_traits_2.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_rational_function_traits_2.cpp)
         set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_kernel_algebraic.cpp)
     endif ()
 
@@ -120,32 +233,32 @@ if (CGALPY_ARRANGEMENT_ON_SURFACE_2_BINDINGS)
     endif()
 
     if (CGALPY_AOS2_CONSOLIDATED_CURVE_DATA)
-      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_consolidated_curve_data_traits_2.cpp)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_consolidated_curve_data_traits_2.cpp)
     endif ()
 
     if (CGALPY_AOS2_CURVE_DATA)
-      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_curve_data_traits_2.cpp)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_curve_data_traits_2.cpp)
     endif ()
 
     if (CGALPY_AOS2_COUNTING_TRAITS)
-      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_counting_traits_2.cpp)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_counting_traits_2.cpp)
     endif ()
     if (CGALPY_AOS2_TRACING_TRAITS)
-      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_arr_tracing_traits_2.cpp)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arr_tracing_traits_2.cpp)
     endif ()
 
     # Cells
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_vertex_bindings.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_halfedge_bindings.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_face_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_vertex.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_halfedge.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_face.cpp)
 
     # Point Location
     if (CGALPY_AOS2_POINT_LOCATION_BINDINGS)
-        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arr_point_location_bindings.cpp)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_point_location.cpp)
     endif ()
 
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arrangement_on_surface_2_bindings.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/arrangement_2_io_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arrangement_on_surface_2.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/aos2/export_arrangement_2_io.cpp)
 endif ()
 
 # 2D Regularized Boolean operations
@@ -157,10 +270,10 @@ if (CGALPY_BOOLEAN_SET_OPERATIONS_2_BINDINGS)
 
   list(APPEND CGALPY_MODULES Bso2)
   set(CGALPY_Bso2_FILTERS [=[{}]=])
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/boolean_set_operations_2_bindings.cpp)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/general_polygon_set_2_bindings.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_boolean_set_operations_2.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_general_polygon_set_2.cpp)
   if (${CGALPY_AOS2_GEOMETRY_TRAITS} EQUAL ${CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS})
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_set_2_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_polygon_set_2.cpp)
   endif ()
 
   # Geometry Traits
@@ -186,43 +299,43 @@ endif ()
 
 # Basic viewer
 if (CGALPY_BASIC_VIEWER_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/basic_viewer_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_basic_viewer.cpp)
     list(APPEND CGALPY_MODULES Bvr)
     set(CGALPY_Bvr_FILTERS [=[{}]=])
 endif ()
 # BGL
 if (CGALPY_BGL_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/bgl_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_bgl.cpp)
     list(APPEND CGALPY_MODULES Bgl)
     set(CGALPY_Bgl_FILTERS [=[{}]=])
 endif ()
 # Bounding volumes
 if (CGALPY_BOUNDING_VOLUMES_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/bounding_volumes_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_bounding_volumes.cpp)
     list(APPEND CGALPY_MODULES Bv)
     set(CGALPY_Bv_FILTERS [=[{}]=])
 endif ()
 # 2D convex hull
 if (CGALPY_CONVEX_HULL_2_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/convex_hull_2_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_convex_hull_2.cpp)
     list(APPEND CGALPY_MODULES Ch2)
     set(CGALPY_Ch2_FILTERS [=[{}]=])
 endif ()
 # 3D convex hull
 if (CGALPY_CONVEX_HULL_3_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/convex_hull_3_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_convex_hull_3.cpp)
     list(APPEND CGALPY_MODULES Ch3)
     set(CGALPY_Ch3_FILTERS [=[{}]=])
 endif ()
 # 2D envelopes
 if (CGALPY_ENVELOPE_2_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/envelope_2_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_envelope_2.cpp)
     list(APPEND CGALPY_MODULES Env2)
     set(CGALPY_Env2_FILTERS [=[{}]=])
 endif ()
 # 3D envelopes
 if (CGALPY_ENVELOPE_3_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/envelope_3_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_envelope_3.cpp)
     if (${CGALPY_ENV3_GEOMETRY_TRAITS} EQUAL ${CGALPY_ENV3_PLANE_GEOMETRY_TRAITS})
       set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_env_plane_traits_3.cpp)
     elseif (${CGALPY_ENV3_GEOMETRY_TRAITS} EQUAL ${CGALPY_ENV3_SPHERE_GEOMETRY_TRAITS})
@@ -238,54 +351,54 @@ if (CGALPY_ENVELOPE_3_BINDINGS)
 endif ()
 # 2D Minkowski sum
 if (CGALPY_MINKOWSKI_SUM_2_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/minkowski_sum_2_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_minkowski_sum_2.cpp)
     list(APPEND CGALPY_MODULES Ms2)
     set(CGALPY_Ms2_FILTERS [=[{}]=])
 endif ()
 # 3D Nef
 if (CGALPY_NEF_3_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/nef_3_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_nef_3.cpp)
     list(APPEND CGALPY_MODULES Nef3)
     set(CGALPY_Nef3_FILTERS [=[{}]=])
 endif ()
 # 3D Polyhedron
 if (CGALPY_POLYHEDRON_3_BINDINGS)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polyhedron_3_bindings.cpp)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_pol3_bgl.cpp)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_polyhedron_builder.cpp)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_polyhedron_halfedge_ds.cpp)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_polyhedron_incremental_builder_3.cpp)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_pol3_face.cpp)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_pol3_halfedge.cpp)
-  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_pol3_vertex.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/pol3/export_polyhedron_3.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/pol3/export_pol3_bgl.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/pol3/export_polyhedron_builder.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/pol3/export_polyhedron_halfedge_ds.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/pol3/export_polyhedron_incremental_builder_3.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/pol3/export_pol3_face.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/pol3/export_pol3_halfedge.cpp)
+  set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/pol3/export_pol3_vertex.cpp)
   if (${CGALPY_POL3_GEOMETRY_TRAITS} EQUAL ${CGALPY_POL3_WITH_NORMALS_GEOMETRY_TRAITS})
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_polyhedron_traits_with_normals_3.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/pol3/export_polyhedron_traits_with_normals_3.cpp)
   endif ()
   list(APPEND CGALPY_MODULES Pol3)
   set(CGALPY_Pol3_FILTERS [=[{}]=])
 endif ()
 # 2D Polygon
 if (CGALPY_POLYGON_2_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_2_bindings.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_with_holes_2_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_polygon_2.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_polygon_with_holes_2.cpp)
     list(APPEND CGALPY_MODULES Pol2)
     set(CGALPY_Pol2_FILTERS [=[{}]=])
 endif ()
 if (CGALPY_2D_RANGE_AND_NEIGHBOR_SEARCH_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/two_d_range_and_neighbor_search_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_2d_range_and_neighbor_search.cpp)
     set(CGALPY_Rns2_FILTERS [=[{}]=])
 endif ()
 if (CGALPY_KINETIC_SURFACE_RECONSTRUCTION_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/kinetic_surface_reconstruction_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_kinetic_surface_reconstruction.cpp)
     set(CGALPY_Ksr_BINDINGS_FILTERS [=[{}]=])
 endif ()
 if (CGALPY_3D_POINT_SET_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/three_d_point_set_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_3d_point_set.cpp)
     set(CGALPY_Pset3_FILTERS [=[{}]=])
 endif ()
 # Polygon mesh processing
 if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_mesh_processing_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_polygon_mesh_processing.cpp)
     if (CGALPY_PMP_COMBINATORIAL_REPAIR_BINDINGS)
         set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_pmp_combinatorial_repair.cpp)
     endif ()
@@ -334,83 +447,123 @@ if (CGALPY_POLYGON_MESH_PROCESSING_BINDINGS)
     list(APPEND CGALPY_MODULES Pmp)
     set(CGALPY_Pmp_FILTERS [=[{}]=])
 endif ()
-# Triangulated Surface Mesh Segmentation
-if (CGALPY_TRIANGULATED_SURFACE_MESH_SEGMENTATION_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulated_surface_mesh_segmentation_bindings.cpp)
+# Surface Mesh Approximation
+if (CGALPY_SURFACE_MESH_APPROXIMATION_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_surface_mesh_approximation.cpp)
+    list(APPEND CGALPY_MODULES Sma)
+    set(CGALPY_Sma_FILTERS [=[{}]=])
 endif ()
-# Triangulated Surface Mesh Simplification
-if (CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulated_surface_mesh_simplification_bindings.cpp)
-    list(APPEND CGALPY_MODULES Sms)
-    set(CGALPY_Sms_FILTERS [=[{}]=])
+# Surface Mesh Decomposition
+if (CGALPY_SURFACE_MESH_DECOMPOSITION_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_surface_mesh_decomposition.cpp)
+    list(APPEND CGALPY_MODULES Smdec)
+    set(CGALPY_Smdec_FILTERS [=[{}]=])
 endif ()
-# Triangulated Surface Mesh Skeletonization
-if (CGALPY_TRIANGULATED_SURFACE_MESH_SKELETONIZATION_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulated_surface_mesh_skeletonization_bindings.cpp)
+# Surface Mesh Deformation
+if (CGALPY_SURFACE_MESH_DEFORMATION_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_surface_mesh_deformation.cpp)
+    list(APPEND CGALPY_MODULES Smdef)
+    set(CGALPY_Smdef_FILTERS [=[{}]=])
+endif ()
+# Surface Mesh Parameterization
+if (CGALPY_SURFACE_MESH_PARAMETERIZATION_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_surface_mesh_parameterization.cpp)
+    list(APPEND CGALPY_MODULES Smp)
+    set(CGALPY_Smp_FILTERS [=[{}]=])
+endif ()
+# Surface Mesh Shortest Path
+if (CGALPY_SURFACE_MESH_SHORTEST_PATH_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_surface_mesh_shortest_path.cpp)
+    list(APPEND CGALPY_MODULES Smsh)
+    set(CGALPY_Smsh_FILTERS [=[{}]=])
+endif ()
+# Surface Mesh Topology
+if (CGALPY_SURFACE_MESH_TOPOLOGY_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_surface_mesh_topology.cpp)
+    list(APPEND CGALPY_MODULES Smt)
+    set(CGALPY_Smt_FILTERS [=[{}]=])
+endif ()
+# Surface Mesh Segmentation
+if (CGALPY_SURFACE_MESH_SEGMENTATION_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_surface_mesh_segmentation.cpp)
+    list(APPEND CGALPY_MODULES Smse)
+    set(CGALPY_Smse_FILTERS [=[{}]=])
+endif ()
+# Surface Mesh Simplification
+if (CGALPY_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_surface_mesh_simplification.cpp)
+    list(APPEND CGALPY_MODULES Smsi)
+    set(CGALPY_Smsi_FILTERS [=[{}]=])
+endif ()
+# Surface Mesh Skeletonization
+if (CGALPY_SURFACE_MESH_SKELETONIZATION_BINDINGS)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_surface_mesh_skeletonization.cpp)
     list(APPEND CGALPY_MODULES Smsk)
     set(CGALPY_Smsk_FILTERS [=[{}]=])
 endif ()
 # Shape Detection
 if (CGALPY_SHAPE_DETECTION_BINDINGS)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_efficient_ransac.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_region_growing.cpp)
+    if (CGALPY_3D_POINT_SET_BINDINGS)
+        set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_region_growing.cpp)
+    endif ()
     list(APPEND CGALPY_MODULES Sd)
     set(CGALPY_Sd_FILTERS [=[{}]=])
 endif ()
 # Point Set Processing
 if (CGALPY_POINT_SET_PROCESSING_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/point_set_processing_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_point_set_processing.cpp)
 endif ()
 # 2D polygon partitioning
 if (CGALPY_POLYGON_PARTITIONING_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/polygon_partitioning_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_polygon_partition_2.cpp)
     list(APPEND CGALPY_MODULES Pp2)
     set(CGALPY_Pp2_FILTERS [=[{}]=])
 endif ()
 # Spatial searching
 if (CGALPY_SPATIAL_SEARCHING_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/spatial_searching_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_spatial_searching.cpp)
     list(APPEND CGALPY_MODULES Ss)
     set(CGALPY_Ss_FILTERS [=[{}]=])
 endif ()
 # Spatial sorting
 if (CGALPY_SPATIAL_SORTING_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/spatial_sorting_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_spatial_sorting.cpp)
     list(APPEND CGALPY_MODULES St)
     set(CGALPY_St_FILTERS [=[{}]=])
 endif ()
 # 2D Straight Skeleton
 if (CGALPY_STRAIGHT_SKELETON_2_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/straight_skeleton_2_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_straight_skeleton_2.cpp)
     list(APPEND CGALPY_MODULES Sn2)
     set(CGALPY_Sn2_FILTERS [=[{}]=])
 endif ()
 # Surface mesh
 if (CGALPY_SURFACE_MESH_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/surface_mesh_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_surface_mesh.cpp)
     list(APPEND CGALPY_MODULES Sm)
     set(CGALPY_Sm_FILTERS [=[{}]=])
 endif ()
 # 2D Surface Sweep
 if (CGALPY_SURFACE_SWEEP_2_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/surface_sweep_2_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_surface_sweep_2.cpp)
     list(APPEND CGALPY_MODULES Ss2)
     set(CGALPY_Ss2_FILTERS [=[{}]=])
 endif ()
 # 2D triangulation
 if (CGALPY_TRIANGULATION_2_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_2_bindings.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_tri2_face.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_tri2_plain.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_tri2_vertex.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_triangulation_data_structure_2.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_triangulation_2_face.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_triangulation_2.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_triangulation_2_vertex.cpp)
     if (${CGALPY_TRI2} EQUAL ${CGALPY_TRI2_REGULAR})
       set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_tri2_regular.cpp)
     elseif (${CGALPY_TRI2} EQUAL ${CGALPY_TRI2_CONSTRAINED})
-      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_tri2_constrained.cpp)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_constrained_triangulation_2.cpp)
     elseif (${CGALPY_TRI2} EQUAL ${CGALPY_TRI2_DELAUNAY})
-      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_tri2_delaunay.cpp)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_delaunay_triangulation_2.cpp)
     elseif (${CGALPY_TRI2} EQUAL ${CGALPY_TRI2_CONSTRAINED_DELAUNAY})
-      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_tri2_constrained.cpp)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_constrained_triangulation_2.cpp)
       set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri2/export_tri2_constrained_delaunay.cpp)
     endif ()
     list(APPEND CGALPY_MODULES Tri2)
@@ -418,21 +571,21 @@ if (CGALPY_TRIANGULATION_2_BINDINGS)
 endif ()
 # 3D triangulation
 if (CGALPY_TRIANGULATION_3_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_3_bindings.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri3/export_tri3_plain.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri3/export_tri3_cell.cpp)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri3/export_tri3_vertex.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri3/export_triangulation_data_structure_3.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri3/export_triangulation_3.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri3/export_triangulation_3_cell.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri3/export_triangulation_3_vertex.cpp)
     if (${CGALPY_TRI3} EQUAL ${CGALPY_TRI3_REGULAR})
       set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri3/export_tri3_regular.cpp)
     elseif (${CGALPY_TRI3} EQUAL ${CGALPY_TRI3_DELAUNAY})
-      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri3/export_tri3_delaunay.cpp)
+      set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/tri3/export_delaunay_triangulation_3.cpp)
     endif ()
     list(APPEND CGALPY_MODULES Tri3)
     set(CGALPY_Tri3_FILTERS [=[{}]=])
 endif ()
 # dD triangulation
 if (CGALPY_TRIANGULATION_D_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/triangulation_d_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_triangulation_d.cpp)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_trid_full_cell.cpp)
     set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_trid_vertex.cpp)
     list(APPEND CGALPY_MODULES Trid)
@@ -440,13 +593,13 @@ if (CGALPY_TRIANGULATION_D_BINDINGS)
 endif ()
 # 2D Visibility
 if (CGALPY_VISIBILITY_2_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/visibility_2_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_visibility_2.cpp)
     list(APPEND CGALPY_MODULES Vis2)
     set(CGALPY_Vis2_FILTERS [=[{}]=])
 endif ()
 # Geometric object generators
 if (CGALPY_GEOMETRIC_OBJECT_GENERATORS_BINDINGS)
-    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/geometric_object_generators_bindings.cpp)
+    set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/export_geometric_object_generators.cpp)
     list(APPEND CGALPY_MODULES Gog)
     set(CGALPY_Gog_FILTERS [=[{}]=])
 endif ()
@@ -455,7 +608,6 @@ endif ()
 include_directories(include)
 
 # Internal dependencies
-set(CGALPY_SRC_FILES ${CGALPY_SRC_FILES} lib/parse_named_parameters.cpp)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_options(/wd4251)
@@ -605,9 +757,49 @@ if (NOT CGALPY_FIXED_LIBRARY_NAME)
         get_polygon_mesh_processing_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
-    # Triangulated Surface Mesh Simplification
-  if (CGALPY_TRIANGULATED_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
-        get_triangulated_surface_mesh_simplification_lib_name(ret)
+    # Surface Mesh Approximation
+    if (CGALPY_SURFACE_MESH_APPROXIMATION_BINDINGS)
+        get_surface_mesh_approximation_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Surface Mesh Decomposition
+    if (CGALPY_SURFACE_MESH_DECOMPOSITION_BINDINGS)
+        get_surface_mesh_decomposition_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Surface Mesh Deformation
+    if (CGALPY_SURFACE_MESH_DEFORMATION_BINDINGS)
+        get_surface_mesh_deformation_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Surface Mesh Parameterization
+    if (CGALPY_SURFACE_MESH_PARAMETERIZATION_BINDINGS)
+        get_surface_mesh_parameterization_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Surface Mesh Shortest Path
+    if (CGALPY_SURFACE_MESH_SHORTEST_PATH_BINDINGS)
+        get_surface_mesh_shortest_path_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Surface Mesh Topology
+    if (CGALPY_SURFACE_MESH_TOPOLOGY_BINDINGS)
+        get_surface_mesh_topology_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Surface Mesh Segmentation
+    if (CGALPY_SURFACE_MESH_SEGMENTATION_BINDINGS)
+        get_surface_mesh_segmentation_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Surface Mesh Simplification
+    if (CGALPY_SURFACE_MESH_SIMPLIFICATION_BINDINGS)
+        get_surface_mesh_simplification_lib_name(ret)
+        set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
+    endif ()
+    # Surface Mesh Skeletonization
+    if (CGALPY_SURFACE_MESH_SKELETONIZATION_BINDINGS)
+        get_surface_mesh_skeletonization_lib_name(ret)
         set(CGALPY_LIB_NAME "${CGALPY_LIB_NAME}_${ret}")
     endif ()
     # 2D Visibility
@@ -656,12 +848,19 @@ function(add_module name)
   #   DEPENDS ${CGALPY_STUBS_GENERATOR} ${MODULE_INPUT})
   # add_custom_target(CGALPY_${name}_STUBS ALL DEPENDS ${MODULE_OUTPUT})
 
+  set(MODULE_STUB_ARGS)
+  if ("${name}" STREQUAL "Tri2")
+    list(APPEND MODULE_STUB_ARGS
+      PATTERN_FILE "${CGALPY_SRC_STUBS_DIR}/patterns/Tri2.pattern")
+  endif ()
+
   nanobind_add_stub(
     CGALPY_${name}_STUBS
     MODULE cgalpy.${CGALPY_LIB_NAME}.${name}
     OUTPUT ${name}/__init__.pyi
     DEPENDS CGALPY CGALPY_INIT
     PYTHON_PATH ${CMAKE_BINARY_DIR}/src/libs
+    ${MODULE_STUB_ARGS}
   )
 
   set(STUBS_DEPENDS ${CGALPY_STUBS_DEPENDS})
@@ -669,9 +868,29 @@ function(add_module name)
   set(CGALPY_STUBS_DEPENDS "${STUBS_DEPENDS}" PARENT_SCOPE)
 endfunction()
 
+
+# export_approximate_kernel.cpp is always compiled and includes
+# cgalpy/Kernel/export_kernel.hpp, which depends on Ker_docstrings.hpp.
+# Generate Ker docstrings even in Kerd-only builds, but do not add Ker to
+# CGALPY_MODULES, because that list also controls module stubs/packages.
+set(CGALPY_DOCSTRING_MODULES ${CGALPY_MODULES})
+list(APPEND CGALPY_DOCSTRING_MODULES Ker)
+list(REMOVE_DUPLICATES CGALPY_DOCSTRING_MODULES)
+
+foreach(MODULE IN LISTS CGALPY_DOCSTRING_MODULES)
+  add_module_docstring(${MODULE})
+endforeach()
+
 add_compile_definitions(CGALPY_MODULE_NAME=${CGALPY_LIB_NAME})
 # Add the library target
 nanobind_add_module(CGALPY STABLE_ABI NB_STATIC ${CGALPY_SRC_FILES})
+if (MSVC)
+  target_compile_options(CGALPY PRIVATE /EHsc)
+endif()
+if (WIN32)
+  find_package(Boost CONFIG REQUIRED COMPONENTS throw_exception)
+  target_link_libraries(CGALPY PRIVATE Boost::throw_exception)
+endif()
 set(CGALPY_BUILD_DEPENDS CGALPY)
 
 set(CGALPY_PACKAGE_NAME ${CGALPY_LIB_NAME})
@@ -680,6 +899,13 @@ target_link_libraries(CGALPY PRIVATE
   CGAL::CGAL
   Boost::headers
   ${PYTHON_LIBRARIES})
+
+if (CGALPY_TRIANGULATION_3_BINDINGS AND
+    (${CGALPY_TRI3_CONCURRENCY} EQUAL
+     ${CGALPY_TRI3_CONCURRENCY_PARALLEL}) AND
+    TARGET CGAL::TBB_support)
+  target_link_libraries(CGALPY PRIVATE CGAL::TBB_support)
+endif()
 
 if (CGAL_Qt6_FOUND)
   target_link_libraries(CGALPY PRIVATE
@@ -882,6 +1108,9 @@ if (NOT SKBUILD)
     set(CGALPY_SETUP_DATA "'${CGALPY_TARGET_LINKER_FILE}'")
     list(APPEND CGALPY_SETUP_DATA "'__init__.py'")
     list(APPEND CGALPY_SETUP_DATA "'${CGALPY_LIB_NAME}.pyi'")
+    if (WIN32)
+      list(APPEND CGALPY_SETUP_DATA "'*.dll'")
+    endif ()
     foreach (MODULE IN LISTS CGALPY_MODULES)
       list(APPEND CGALPY_SETUP_DATA "'${MODULE}/__init__.pyi'")
     endforeach ()
@@ -926,31 +1155,51 @@ if (NOT SKBUILD)
     add_custom_target(CGALPY_README ALL DEPENDS ${CGALPY_OUT_README})
     list(APPEND CGALPY_BUILD_DEPENDS CGALPY_README)
 
-    # Setup application
+    # Build and validate the Python distribution artifacts.
+    #
+    # The wheel backend determines the final platform tag from the compiled
+    # extension and its linked libraries. Do not predict the wheel filename
+    # from Python's sysconfig platform value.
     set(CGALPY_BUILD_OUTPUT_DIR "${CGALPY_LIB_DIR}/dist")
-    string(TOLOWER "${CGALPY_PACKAGE_NAME}-${cgalpy_VERSION}" CGALPY_TAR_BASENAME)
-    set (CGALPY_TAR ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_TAR_BASENAME}.tar.gz)
+    set(CGALPY_BUILD_MANIFEST
+        "${CGALPY_BUILD_OUTPUT_DIR}/distribution-artifacts.json")
+    set(CGALPY_ARTIFACT_RECORDER
+        "${CMAKE_SOURCE_DIR}/src/scripts/record_distribution_artifacts.py")
+    set(CGALPY_PYTHON_BUILD_DIR "${CGALPY_LIB_DIR}/build")
+    set(CGALPY_EGG_INFO_DIR
+        "${CGALPY_LIB_DIR}/${CGALPY_PACKAGE_NAME}.egg-info")
 
-    set (CGALPY_PYTHON_TAG "cp${CGALPY_PY_MAJOR_MINOR_VERSION}")
-    # set (CGALPY_PYTHON_TAG "py3")
+    set(CGALPY_BUILD_CMD "${Python_EXECUTABLE}")
+    set(CGALPY_BUILD_ARGS -m build)
 
-    set (CGALPY_ABI_TAG "cp${CGALPY_PY_MAJOR_MINOR_VERSION}")
-    # set (CGALPY_ABI_TAG "none")
-    execute_process(COMMAND ${Python_EXECUTABLE} -c "import sysconfig; print(sysconfig.get_platform().replace('-','_').replace('.','_'),end='')" OUTPUT_VARIABLE CGALPY_PLATFORM_TAG)
-    # set (CGALPY_PLATFORM_TAG "any")
+    if (NOT "${CGALPY_PYTHOM_BUILD_CONFIG_SETTING}" STREQUAL "")
+        list(APPEND CGALPY_BUILD_ARGS
+                --config-setting
+                "${CGALPY_PYTHOM_BUILD_CONFIG_SETTING}")
+    endif ()
 
-    set (CGALPY_WHL ${CGALPY_BUILD_OUTPUT_DIR}/${CGALPY_PACKAGE_NAME}-${cgalpy_VERSION}-${CGALPY_PYTHON_TAG}-${CGALPY_ABI_TAG}-${CGALPY_PLATFORM_TAG}.whl)
-    string(TOLOWER ${CGALPY_WHL} CGALPY_WHL_LOWER)
-    set(CGALPY_BUILD_OUTPUT ${CGALPY_TAR} ${CGALPY_WHL_LOWER})
-    set(CGALPY_BUILD_CMD ${Python_EXECUTABLE})
-    set(CGALPY_BUILD_ARGS -m build --config-setting ${CGALPY_PYTHOM_BUILD_CONFIG_SETTING} ${CGALPY_LIB_DIR})
+    list(APPEND CGALPY_BUILD_ARGS "${CGALPY_LIB_DIR}")
+
     add_custom_command(
-            OUTPUT ${CGALPY_BUILD_OUTPUT}
-            COMMAND ${CGALPY_BUILD_CMD}
-            ARGS ${CGALPY_BUILD_ARGS}
-            DEPENDS ${CGALPY_BUILD_DEPENDS})
+            OUTPUT "${CGALPY_BUILD_MANIFEST}"
+            COMMAND "${CMAKE_COMMAND}" -E rm -rf
+                    "${CGALPY_BUILD_OUTPUT_DIR}"
+                    "${CGALPY_PYTHON_BUILD_DIR}"
+                    "${CGALPY_EGG_INFO_DIR}"
+            COMMAND "${CMAKE_COMMAND}" -E make_directory
+                    "${CGALPY_BUILD_OUTPUT_DIR}"
+            COMMAND "${CGALPY_BUILD_CMD}" ${CGALPY_BUILD_ARGS}
+            COMMAND "${Python_EXECUTABLE}"
+                    "${CGALPY_ARTIFACT_RECORDER}"
+                    --dist-dir "${CGALPY_BUILD_OUTPUT_DIR}"
+                    --distribution-name "${CGALPY_PACKAGE_NAME}"
+                    --version "${cgalpy_VERSION}"
+                    --manifest "${CGALPY_BUILD_MANIFEST}"
+            DEPENDS ${CGALPY_BUILD_DEPENDS}
+                    "${CGALPY_ARTIFACT_RECORDER}"
+            VERBATIM)
 
-    add_custom_target(BUILD ALL DEPENDS ${CGALPY_BUILD_OUTPUT})
+    add_custom_target(BUILD ALL DEPENDS "${CGALPY_BUILD_MANIFEST}")
 
     ################################################################################
     # Installation
@@ -991,17 +1240,49 @@ if (CGALPY_BUILD_DEV_DOC)
     set(CGALPY_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
     if (DOXYGEN_FOUND)
+        find_package(LATEX COMPONENTS PDFLATEX)
+
+        if (LATEX_PDFLATEX_FOUND)
+            set(CGALPY_DOXYGEN_GENERATE_LATEX YES)
+        else ()
+            set(CGALPY_DOXYGEN_GENERATE_LATEX NO)
+        endif ()
+
+        if (TARGET Doxygen::dot)
+            set(CGALPY_DOXYGEN_HAVE_DOT YES)
+            get_target_property(CGALPY_DOXYGEN_DOT_EXECUTABLE
+                    Doxygen::dot IMPORTED_LOCATION)
+            get_filename_component(CGALPY_DOXYGEN_DOT_PATH
+                    "${CGALPY_DOXYGEN_DOT_EXECUTABLE}" DIRECTORY)
+            if (WIN32)
+                file(TO_NATIVE_PATH "${CGALPY_DOXYGEN_DOT_PATH}"
+                        CGALPY_DOXYGEN_DOT_PATH)
+            endif ()
+        else ()
+            set(CGALPY_DOXYGEN_HAVE_DOT NO)
+            set(CGALPY_DOXYGEN_DOT_PATH "")
+        endif ()
+
         add_custom_command(
                 OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
                 COMMAND "${CMAKE_COMMAND}"
                 "-DFILE_IN=${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
                 "-DFILE_OUT=${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
                 "-DCGALPY_SOURCE_DIR=${CGALPY_SOURCE_DIR}"
+                "-DCGALPY_DOXYGEN_GENERATE_LATEX=${CGALPY_DOXYGEN_GENERATE_LATEX}"
+                "-DCGALPY_DOXYGEN_HAVE_DOT=${CGALPY_DOXYGEN_HAVE_DOT}"
+                "-DCGALPY_DOXYGEN_DOT_PATH=${CGALPY_DOXYGEN_DOT_PATH}"
                 -P "${CGALPY_MODULE_DIR}/BuildTimeFile.cmake"
                 DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in")
 
+        file(GLOB_RECURSE CGALPY_CPP_DOC_INPUT_FILES
+                CONFIGURE_DEPENDS
+                LIST_DIRECTORIES false
+                "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
+                "${CMAKE_CURRENT_SOURCE_DIR}/lib/*.cpp")
+
         set(CGALPY_CPP_DOC_DEPENDS
-                ${CGALPY_SRC_FILES}
+                ${CGALPY_CPP_DOC_INPUT_FILES}
                 ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
         add_custom_command(
@@ -1029,9 +1310,14 @@ if (CGALPY_BUILD_DOC)
     if (Sphinx_FOUND)
         add_sphinx_document(${CGALPY_LIB_NAME}
                 MODULES "${CGALPY_MODULES}"
+                STUB_TARGETS "${CGALPY_STUBS_DEPENDS}"
                 AUTHORS "${CGALPY_PROJECT_AUTHORS}"
                 CONF_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/conf.py"
-                INDEX_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst")
+                INDEX_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/index.rst"
+                ROOT_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/library.rst.in"
+                MODULE_FILE "${CMAKE_CURRENT_LIST_DIR}/doc/source/module.rst.in"
+                ROOT_STUB "${CGALPY_MODULE_OUTPUT}"
+                STUBS_DIR "${CGALPY_DST_STUBS_DIR}")
     else ()
         message(WARNING "No Sphinx found. Documentation target not available.")
     endif ()

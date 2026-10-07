@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "sn2_epic",
+  "description": "Build variant defined by cmake/tests/sn2_epic.cmake",
+  "cmake_tests": [
+    "cmake/tests/sn2_epic.cmake"
+  ]
+}

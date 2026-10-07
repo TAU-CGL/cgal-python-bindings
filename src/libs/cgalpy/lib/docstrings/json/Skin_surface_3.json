@@ -1,0 +1,469 @@
+{
+  "schema_version": 1,
+  "package": "Skin_surface_3",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 10,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Skin_surface_3": {
+      "kind": "class",
+      "name": "CGAL::Skin_surface_3",
+      "brief": "The Skin_surface_3 is the main class in this package.",
+      "detailed": "It is a model of the concept SkinSurface_3 . The template argument must be a model of the concept SkinSurfaceTraits_3 , which means that it provides predicates to construct a regular triangulation of the weighted points and for point location in the mixed complex. Is model of SkinSurface_3",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_skin__surface__3.xml",
+      "file": "CGAL/Skin_surface_3.h",
+      "line": "19"
+    },
+    "CGAL::Skin_surface_polyhedral_items_3": {
+      "kind": "struct",
+      "name": "CGAL::Skin_surface_polyhedral_items_3",
+      "brief": "An items class for the Polyhedron_3 that stores information in faces instead of an auxiliary data structure.",
+      "detailed": "Using it accelerates the subdivision function subdivide_skin_surface_mesh_3() .",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_skin__surface__polyhedral__items__3.xml",
+      "file": "CGAL/Skin_surface_polyhedral_items_3.h",
+      "line": "11"
+    },
+    "CGAL::Skin_surface_traits_3": {
+      "kind": "class",
+      "name": "CGAL::Skin_surface_traits_3",
+      "brief": "The class Skin_surface_traits_3 is designed as a default traits class for the class Skin_surface_3 < SkinSurfaceTraits_3 > .",
+      "detailed": "It is a model of the SkinSurfaceTraits_3 . K must be a model of the Kernel concept. Is model of SkinSurfaceTraits_3",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_skin__surface__traits__3.xml",
+      "file": "CGAL/Skin_surface_traits_3.h",
+      "line": "17"
+    },
+    "CGAL::Union_of_balls_3": {
+      "kind": "class",
+      "name": "CGAL::Union_of_balls_3",
+      "brief": "The Union_of_balls_3 is used to represent a skin surface with shrink factor equal to one, which is the boundary of the union of the input balls.",
+      "detailed": "This case is handled separately since the mixed complex is equal to the power diagram, which has a much simpler structure. The template argument must be a model of the concept SkinSurfaceTraits_3 , which means that it provides the predicates to construct a regular triangulation of the weighted points. Is model of SkinSurface_3",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_union__of__balls__3.xml",
+      "file": "CGAL/Union_of_balls_3.h",
+      "line": "21"
+    },
+    "SkinSurface_3": {
+      "kind": "class",
+      "name": "SkinSurface_3",
+      "brief": "The concept SkinSurface_3 defines a skin surface and provides an interface for the dedicated skin surface mesher. The concept requires a constructor from an iterator range of weighted points and a shrink factor. By default the input balls are grown in such that the skin surface wraps around the input balls.",
+      "detailed": "Has models CGAL::Skin_surface_3 < SkinSurfaceTraits_3 > CGAL::Union_of_balls_3 < SkinSurfaceTraits_3 >",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Geometric_traits",
+          "qualified_name": "SkinSurface_3::Geometric_traits",
+          "brief": "The geometric traits used for the construction of the regular triangulation.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SkinSurface_3::Geometric_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/SkinSurface_3.h",
+          "line": "29"
+        },
+        {
+          "kind": "typedef",
+          "name": "Weighted_point",
+          "qualified_name": "SkinSurface_3::Weighted_point",
+          "brief": "The Weighted_point type.",
+          "detailed": "",
+          "return_type": "Geometric_traits::Weighted_point_3",
+          "definition": "typedef Geometric_traits::Weighted_point_3 SkinSurface_3::Weighted_point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/SkinSurface_3.h",
+          "line": "34"
+        },
+        {
+          "kind": "typedef",
+          "name": "Bare_point",
+          "qualified_name": "SkinSurface_3::Bare_point",
+          "brief": "The Bare_point type.",
+          "detailed": "",
+          "return_type": "Geometric_traits::Point_3",
+          "definition": "typedef Geometric_traits::Point_3 SkinSurface_3::Bare_point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/SkinSurface_3.h",
+          "line": "39"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "SkinSurface_3::FT",
+          "brief": "The FT type defined by the Geometric_traits .",
+          "detailed": "This is the number type used by the weighted points.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SkinSurface_3::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/SkinSurface_3.h",
+          "line": "46"
+        },
+        {
+          "kind": "function",
+          "name": "Skin_surface_3",
+          "qualified_name": "SkinSurface_3::Skin_surface_3",
+          "brief": "The mandatory arguments to the constructor are an iterator range [begin,end) of weighted points and a shrink factor between 0 and 1.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "SkinSurface_3::Skin_surface_3",
+          "argsstring": "(WP_iterator begin, WP_iterator end, RT shrink_factor)",
+          "params": [
+            {
+              "type": "WP_iterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "WP_iterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "RT",
+              "name": "shrink_factor",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/SkinSurface_3.h",
+          "line": "59"
+        },
+        {
+          "kind": "function",
+          "name": "mesh_skin_surface_3",
+          "qualified_name": "SkinSurface_3::mesh_skin_surface_3",
+          "brief": "Constructs a coarse mesh in p .",
+          "detailed": "Polyhedron must be an instance of Polyhedron_3 . Polyhedron::HDS can be used as the template argument of the CGAL::Polyhedron_incremental_builder_3<HDS> .",
+          "return_type": "void",
+          "definition": "void SkinSurface_3::mesh_skin_surface_3",
+          "argsstring": "(Polyhedron &p)",
+          "params": [
+            {
+              "type": "Polyhedron &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/SkinSurface_3.h",
+          "line": "73"
+        },
+        {
+          "kind": "function",
+          "name": "subdivide_skin_surface_mesh_3",
+          "qualified_name": "SkinSurface_3::subdivide_skin_surface_mesh_3",
+          "brief": "Subdivides the skin surface using nSubdiv 1-4 split operations (each triangle is split into four sub-triangles) and the new vertices are moved towards the skin surface.",
+          "detailed": "Polyhedron must be an instance of Polyhedron_3 .",
+          "return_type": "void",
+          "definition": "void SkinSurface_3::subdivide_skin_surface_mesh_3",
+          "argsstring": "(Polyhedron &p, int nSubdiv=1)",
+          "params": [
+            {
+              "type": "Polyhedron &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "nSubdiv",
+              "default": "1",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/SkinSurface_3.h",
+          "line": "83"
+        }
+      ],
+      "xml_file": "class_skin_surface__3.xml",
+      "file": "Concepts/SkinSurface_3.h",
+      "line": "19"
+    },
+    "SkinSurfaceTraits_3": {
+      "kind": "class",
+      "name": "SkinSurfaceTraits_3",
+      "brief": "Required types and member functions for the SkinSurfaceTraits_3 concept. This geometric traits concept is used for the construction of a polyhedral mesh approximating a skin surface CGAL::Skin_surface_3 .",
+      "detailed": "Refines RegularTriangulationTraits_3 Has models CGAL::Skin_surface_traits_3 <K> CGAL::Skin_surface_3 < SkinSurfaceTraits_3 > CGAL::Skin_surface_traits_3 <K>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "RT",
+          "qualified_name": "SkinSurfaceTraits_3::RT",
+          "brief": "The number type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SkinSurfaceTraits_3::RT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/SkinSurfaceTraits_3.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_anchor_point_3",
+          "qualified_name": "SkinSurfaceTraits_3::Construct_anchor_point_3",
+          "brief": "A constructor object which provides the following function operator:",
+          "detailed": "Point operator()(const Point &center_del, const Point &center_vor); Constructs the anchor point in between the Delaunay and Voronoi centers, i.e., the point $ (1-s)\\cdot$ center_del + $ s\\cdot$ center_vor , where $ s$ is the shrink factor.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type SkinSurfaceTraits_3::Construct_anchor_point_3",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/SkinSurfaceTraits_3.h",
+          "line": "44"
+        },
+        {
+          "kind": "function",
+          "name": "SkinSurfaceTraits_3",
+          "qualified_name": "SkinSurfaceTraits_3::SkinSurfaceTraits_3",
+          "brief": "Constructor that takes the shrink factor as argument.",
+          "detailed": "For meshing the boundary of the union of a set of balls, the shrink factor is discarded.",
+          "return_type": "",
+          "definition": "SkinSurfaceTraits_3::SkinSurfaceTraits_3",
+          "argsstring": "(RT s=.5)",
+          "params": [
+            {
+              "type": "RT",
+              "name": "s",
+              "default": ".5",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/SkinSurfaceTraits_3.h",
+          "line": "56"
+        },
+        {
+          "kind": "function",
+          "name": "shrink_factor",
+          "qualified_name": "SkinSurfaceTraits_3::shrink_factor",
+          "brief": "Returns the shrink factor.",
+          "detailed": "",
+          "return_type": "Regular_RT",
+          "definition": "Regular_RT SkinSurfaceTraits_3::shrink_factor",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/SkinSurfaceTraits_3.h",
+          "line": "67"
+        },
+        {
+          "kind": "function",
+          "name": "construct_anchor_point_3_object",
+          "qualified_name": "SkinSurfaceTraits_3::construct_anchor_point_3_object",
+          "brief": "Returns a Construct_anchor_point_3 object.",
+          "detailed": "",
+          "return_type": "Construct_anchor_point_3",
+          "definition": "Construct_anchor_point_3 SkinSurfaceTraits_3::construct_anchor_point_3_object",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/SkinSurfaceTraits_3.h",
+          "line": "72"
+        }
+      ],
+      "xml_file": "class_skin_surface_traits__3.xml",
+      "file": "Concepts/SkinSurfaceTraits_3.h",
+      "line": "22"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/make_skin_surface_mesh_3.h",
+      "line": "1"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgSkinSurface3Ref": {
+      "kind": "group",
+      "name": "PkgSkinSurface3Ref",
+      "brief": "",
+      "detailed": "Nico Kruithof This package allows to build a triangular mesh of a skin surface. Skin surfaces are used for modeling large molecules in biological computing. The surface is defined by a set of balls, representing the atoms of the molecule, and a shrink factor that determines the size of the smooth patches gluing the balls together. The construction of a triangular mesh of a smooth skin surface is often necessary for further analysis and for fast visualization. This package provides functions to construct a triangular mesh approximating the skin surface from a set of balls and a shrink factor. It also contains code to subdivide the mesh efficiently. Introduced in: CGAL 3.3 Depends on: PkgTriangulation3 and PkgPolyhedron BibTeX: cgal:k-ssm3-26a License: GPL Classified Reference Pages Concepts SkinSurface_3 SkinSurfaceTraits_3 Classes CGAL::Skin_surface_3 < SkinSurfaceTraits_3 > CGAL::Union_of_balls_3 < SkinSurfaceTraits_3 > CGAL::Skin_surface_traits_3 <K> Functions CGAL::make_skin_surface_mesh_3 <Polyhedron_3>() CGAL::mesh_skin_surface_3 < SkinSurface_3 , Polyhedron_3>() CGAL::subdivide_skin_surface_mesh_3 < SkinSurface_3 , Polyhedron_3>()",
+      "members": [
+        {
+          "kind": "function",
+          "name": "make_skin_surface_mesh_3",
+          "qualified_name": "CGAL::make_skin_surface_mesh_3",
+          "brief": "constructs a mesh of the skin surface defined by the weighted points and the shrink factor.",
+          "detailed": "The function make_skin_surface_mesh_3() constructs a mesh isotopic to the skin surface based on the algorithm in [2] . It takes as input a range of weighted points and a shrink factor and outputs the mesh in a Polyhedron_3 object. A number of subdivision steps might be applied to refine the mesh. WP_iterator must be an input iterator with weighted points as value type. Polyhedron must be an instance of Polyhedron_3 . Polyhedron::HDS can be used as the template argument of the Polyhedron_incremental_builder_3<HDS> .",
+          "return_type": "void",
+          "definition": "void CGAL::make_skin_surface_mesh_3",
+          "argsstring": "(Polyhedron &p, WP_iterator begin, WP_iterator end, double shrink_factor=.5, int nSubdivisions=0, bool grow_balls=true)",
+          "params": [
+            {
+              "type": "Polyhedron &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "WP_iterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "WP_iterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "double",
+              "name": "shrink_factor",
+              "default": ".5",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "nSubdivisions",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "grow_balls",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/make_skin_surface_mesh_3.h",
+          "line": "24"
+        },
+        {
+          "kind": "function",
+          "name": "mesh_skin_surface_3",
+          "qualified_name": "CGAL::mesh_skin_surface_3",
+          "brief": "constructs a mesh of the skin_surface in p .",
+          "detailed": "The function mesh_skin_surface_3() constructs a mesh isotopic to the skin surface based on the algorithm in [2] . It takes as input a SkinSurface_3 object, which is a model of the SkinSurface_3 concept and outputs the mesh in a Polyhedron_3 object. SkinSurface_3 must be a model of the concept SkinSurface_3 . Polyhedron must be an instance of Polyhedron_3 . Polyhedron::HDS can be used as the template argument of the Polyhedron_incremental_builder_3<HDS> .",
+          "return_type": "void",
+          "definition": "void CGAL::mesh_skin_surface_3",
+          "argsstring": "(const SkinSurface_3 &skin_surface, Polyhedron &p)",
+          "params": [
+            {
+              "type": "const SkinSurface_3 &",
+              "name": "skin_surface",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Polyhedron &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/mesh_skin_surface_3.h",
+          "line": "23"
+        },
+        {
+          "kind": "function",
+          "name": "subdivide_skin_surface_mesh_3",
+          "qualified_name": "CGAL::subdivide_skin_surface_mesh_3",
+          "brief": "subdivides a skin surface mesh constructed by the function mesh_skin_surface_3() using nSubdiv 1-4 split operations (each triangle is split into four sub-triangles) and the new vertices are moved towards the skin surface.",
+          "detailed": "SkinSurface_3 must be a model of the concept SkinSurface_3 . Polyhedron must be an instance of Polyhedron_3 .",
+          "return_type": "void",
+          "definition": "void CGAL::subdivide_skin_surface_mesh_3",
+          "argsstring": "(const SkinSurface_3 &skin_surface, Polyhedron &p, int nSubdiv=1)",
+          "params": [
+            {
+              "type": "const SkinSurface_3 &",
+              "name": "skin_surface",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Polyhedron &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "nSubdiv",
+              "default": "1",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/subdivide_skin_surface_mesh_3.h",
+          "line": "19"
+        }
+      ],
+      "xml_file": "group___pkg_skin_surface3_ref.xml"
+    },
+    "PkgSkinSurface3Concepts": {
+      "kind": "group",
+      "name": "PkgSkinSurface3Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_skin_surface3_concepts.xml"
+    }
+  }
+}

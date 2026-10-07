@@ -1,0 +1,551 @@
+{
+  "schema_version": 1,
+  "package": "Polygon_repair",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 10,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Polygon_repair::Even_odd_rule": {
+      "kind": "struct",
+      "name": "CGAL::Polygon_repair::Even_odd_rule",
+      "brief": "Tag class to select the even odd rule when calling CGAL::Polygon_repair::repair() .",
+      "detailed": "The even-odd rule results in areas that are alternately assigned as polygon interiors and exterior/holes each time that an input edge is passed. It does not distinguish between edges that are part of outer boundaries from those of inner boundaries.",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_polygon__repair_1_1_even__odd__rule.xml",
+      "file": "CGAL/Polygon_repair/Even_odd_rule.h",
+      "line": "31"
+    },
+    "CGAL::Polygon_repair::Intersection_rule": {
+      "kind": "struct",
+      "name": "CGAL::Polygon_repair::Intersection_rule",
+      "brief": "Tag class to select the intersection rule when calling CGAL::Polygon_repair::repair() .",
+      "detailed": "The intersection rule are useful when given two or more similar valid polygons with holes. The intersection rule results in areas that are contained in all input polygons with holes.",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_polygon__repair_1_1_intersection__rule.xml",
+      "file": "CGAL/Polygon_repair/Intersection_rule.h",
+      "line": "30"
+    },
+    "CGAL::Polygon_repair::Non_zero_rule": {
+      "kind": "struct",
+      "name": "CGAL::Polygon_repair::Non_zero_rule",
+      "brief": "Tag class to select the non zero rule when calling CGAL::Polygon_repair::repair() .",
+      "detailed": "The non-zero rule results in areas with a non-zero winding number.",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_polygon__repair_1_1_non__zero__rule.xml",
+      "file": "CGAL/Polygon_repair/Non_zero_rule.h",
+      "line": "28"
+    },
+    "CGAL::Polygon_repair::Union_rule": {
+      "kind": "struct",
+      "name": "CGAL::Polygon_repair::Union_rule",
+      "brief": "Tag class to select the union rule when calling CGAL::Polygon_repair::repair() .",
+      "detailed": "The union rules are useful when given two or more similar valid polygons with holes. The union rule results in areas that are contained in at least one of the input polygons with holes.",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_polygon__repair_1_1_union__rule.xml",
+      "file": "CGAL/Polygon_repair/Union_rule.h",
+      "line": "29"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Polygon_repair.txt",
+      "line": "1"
+    },
+    "CGAL::Polygon_repair": {
+      "kind": "namespace",
+      "name": "CGAL::Polygon_repair",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "repair",
+          "qualified_name": "CGAL::Polygon_repair::repair",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Multipolygon_with_holes_2< Kernel, Container >",
+          "definition": "Multipolygon_with_holes_2< Kernel, Container > CGAL::Polygon_repair::repair",
+          "argsstring": "(const Polygon_2< Kernel, Container > &p, Non_zero_rule)",
+          "params": [
+            {
+              "type": "const Polygon_2< Kernel, Container > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Non_zero_rule",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "82"
+        },
+        {
+          "kind": "function",
+          "name": "repair",
+          "qualified_name": "CGAL::Polygon_repair::repair",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Multipolygon_with_holes_2< Kernel, Container >",
+          "definition": "Multipolygon_with_holes_2< Kernel, Container > CGAL::Polygon_repair::repair",
+          "argsstring": "(const Polygon_with_holes_2< Kernel, Container > &p, Non_zero_rule)",
+          "params": [
+            {
+              "type": "const Polygon_with_holes_2< Kernel, Container > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Non_zero_rule",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "93"
+        },
+        {
+          "kind": "function",
+          "name": "repair",
+          "qualified_name": "CGAL::Polygon_repair::repair",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Multipolygon_with_holes_2< Kernel, Container >",
+          "definition": "Multipolygon_with_holes_2< Kernel, Container > CGAL::Polygon_repair::repair",
+          "argsstring": "(const Multipolygon_with_holes_2< Kernel, Container > &p, Non_zero_rule)",
+          "params": [
+            {
+              "type": "const Multipolygon_with_holes_2< Kernel, Container > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Non_zero_rule",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "124"
+        },
+        {
+          "kind": "function",
+          "name": "repair",
+          "qualified_name": "CGAL::Polygon_repair::repair",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Multipolygon_with_holes_2< Kernel, Container >",
+          "definition": "Multipolygon_with_holes_2< Kernel, Container > CGAL::Polygon_repair::repair",
+          "argsstring": "(const Multipolygon_with_holes_2< Kernel, Container > &p, Union_rule)",
+          "params": [
+            {
+              "type": "const Multipolygon_with_holes_2< Kernel, Container > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Union_rule",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "135"
+        },
+        {
+          "kind": "function",
+          "name": "repair",
+          "qualified_name": "CGAL::Polygon_repair::repair",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Multipolygon_with_holes_2< Kernel, Container >",
+          "definition": "Multipolygon_with_holes_2< Kernel, Container > CGAL::Polygon_repair::repair",
+          "argsstring": "(const Multipolygon_with_holes_2< Kernel, Container > &p, Intersection_rule)",
+          "params": [
+            {
+              "type": "const Multipolygon_with_holes_2< Kernel, Container > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Intersection_rule",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "153"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "CGAL::Polygon_repair::is_valid",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_repair::is_valid",
+          "argsstring": "(const Polygon_2< Kernel, Container > &polygon)",
+          "params": [
+            {
+              "type": "const Polygon_2< Kernel, Container > &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "189"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "CGAL::Polygon_repair::is_valid",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_repair::is_valid",
+          "argsstring": "(const Polygon_with_holes_2< Kernel, Container > &polygon)",
+          "params": [
+            {
+              "type": "const Polygon_with_holes_2< Kernel, Container > &",
+              "name": "polygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "208"
+        },
+        {
+          "kind": "function",
+          "name": "is_valid",
+          "qualified_name": "CGAL::Polygon_repair::is_valid",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Polygon_repair::is_valid",
+          "argsstring": "(const Multipolygon_with_holes_2< Kernel, Container > &multipolygon)",
+          "params": [
+            {
+              "type": "const Multipolygon_with_holes_2< Kernel, Container > &",
+              "name": "multipolygon",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "405"
+        }
+      ],
+      "xml_file": "namespace_c_g_a_l_1_1_polygon__repair.xml",
+      "file": "CGAL/Polygon_repair/Even_odd_rule.h",
+      "line": "19"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgPolygonRepairRef": {
+      "kind": "group",
+      "name": "PkgPolygonRepairRef",
+      "brief": "",
+      "detailed": "Ken Arroyo Ohori This package provides algorithms to repair 2D polygons, polygons with holes, and multipolygons with holes, by selecting faces of the arrangement of the input based on a selection rule. The even-odd rule and the non-zero rule are provided for dealing with self intersections. The union and the intersection rule enable to combine similar polygons. Introduced in: CGAL 6.0 Depends on: PkgPolygon2, PkgTriangulation2 BibTeX: cgal:a-pr-26a License: GPL Classified Reference Pages Functions CGAL::Polygon_repair::repair() CGAL::Polygon_repair::join() CGAL::Polygon_repair::intersect() Repair Rules CGAL::Polygon_repair::Even_odd_rule CGAL::Polygon_repair::Non_zero_rule CGAL::Polygon_repair::Union_rule CGAL::Polygon_repair::Intersection_rule",
+      "members": [],
+      "xml_file": "group___pkg_polygon_repair_ref.xml"
+    },
+    "PkgPolygonRepairFunctions": {
+      "kind": "group",
+      "name": "PkgPolygonRepairFunctions",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "repair",
+          "qualified_name": "CGAL::Polygon_repair::repair",
+          "brief": "repairs polygon p using the given rule",
+          "detailed": "Kernel parameter of the input and output polygons. Must be model of ConstrainedDelaunayTriangulationTraits_2 Container parameter of the input and output polygons Rule must be Even_odd_rule or Non_zero_rule",
+          "return_type": "Multipolygon_with_holes_2< Kernel, Container >",
+          "definition": "Multipolygon_with_holes_2< Kernel, Container > CGAL::Polygon_repair::repair",
+          "argsstring": "(const Polygon_2< Kernel, Container > &p, Rule=Rule())",
+          "params": [
+            {
+              "type": "const Polygon_2< Kernel, Container > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Rule",
+              "name": "",
+              "default": "Rule()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "repair",
+          "qualified_name": "CGAL::Polygon_repair::repair",
+          "brief": "repairs polygon with holes p using the given rule",
+          "detailed": "Kernel parameter of the input and output polygons. Must be model of ConstrainedDelaunayTriangulationTraits_2 Container parameter of the input and output polygons Rule must be Even_odd_rule or Non_zero_rule",
+          "return_type": "Multipolygon_with_holes_2< Kernel, Container >",
+          "definition": "Multipolygon_with_holes_2< Kernel, Container > CGAL::Polygon_repair::repair",
+          "argsstring": "(const Polygon_with_holes_2< Kernel, Container > &p, Rule=Rule())",
+          "params": [
+            {
+              "type": "const Polygon_with_holes_2< Kernel, Container > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Rule",
+              "name": "",
+              "default": "Rule()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "69"
+        },
+        {
+          "kind": "function",
+          "name": "repair",
+          "qualified_name": "CGAL::Polygon_repair::repair",
+          "brief": "repairs multipolygon with holes p using the given rule",
+          "detailed": "Kernel parameter of the input and output polygons. Must be model of ConstrainedDelaunayTriangulationTraits_2 Container parameter of the input and output polygons Rule may be any Repair Rules If the rule is the Union_rule or Non_zero_rule , each polygon with hole must be free of self-intersections, the outer boundary of each polygon with holes must be counterclockwise and the holes clockwise oriented.",
+          "return_type": "Multipolygon_with_holes_2< Kernel, Container >",
+          "definition": "Multipolygon_with_holes_2< Kernel, Container > CGAL::Polygon_repair::repair",
+          "argsstring": "(const Multipolygon_with_holes_2< Kernel, Container > &p, Rule=Rule())",
+          "params": [
+            {
+              "type": "const Multipolygon_with_holes_2< Kernel, Container > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Rule",
+              "name": "",
+              "default": "Rule()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "111"
+        },
+        {
+          "kind": "function",
+          "name": "join",
+          "qualified_name": "CGAL::Polygon_repair::join",
+          "brief": "computes the union of all polygons with holes in p",
+          "detailed": "Kernel parameter of the input and output polygons. Must be model of ConstrainedDelaunayTriangulationTraits_2 Container parameter of the input and output polygons Each polygon with holes must be free of self-intersections, the outer boundaries must be counterclockwise and the holes clockwise oriented.",
+          "return_type": "Multipolygon_with_holes_2< Kernel, Container >",
+          "definition": "Multipolygon_with_holes_2< Kernel, Container > CGAL::Polygon_repair::join",
+          "argsstring": "(const Multipolygon_with_holes_2< Kernel, Container > &pa)",
+          "params": [
+            {
+              "type": "const Multipolygon_with_holes_2< Kernel, Container > &",
+              "name": "pa",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "981"
+        },
+        {
+          "kind": "function",
+          "name": "join",
+          "qualified_name": "CGAL::Polygon_repair::join",
+          "brief": "computes the union of two polygonal domains",
+          "detailed": "Kernel parameter of the output polygons. Must be model of ConstrainedDelaunayTriangulationTraits_2 Container parameter of the input and output polygons PA must be Polygon_2<Kernel, Container> , or Polygon_with_holes_2<Kernel, Container> , or Multipolygon_with_holes_2<Kernel, Container> PB must be Polygon_2<Kernel, Container> , or Polygon_with_holes_2<Kernel, Container> , or Multipolygon_with_holes_2<Kernel, Container> The polygons pa and pb must be free of self-intersections, the outer boundaries must be counterclockwise and the holes clockwise oriented.",
+          "return_type": "Multipolygon_with_holes_2< Kernel, Container >",
+          "definition": "Multipolygon_with_holes_2< Kernel, Container > CGAL::Polygon_repair::join",
+          "argsstring": "(const PA &pa, const PB &pb, const Kernel &=Default(), const Container &=Default())",
+          "params": [
+            {
+              "type": "const PA &",
+              "name": "pa",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PB &",
+              "name": "pb",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Kernel &",
+              "name": "",
+              "default": "Default()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Container &",
+              "name": "",
+              "default": "Default()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "1011"
+        },
+        {
+          "kind": "function",
+          "name": "intersect",
+          "qualified_name": "CGAL::Polygon_repair::intersect",
+          "brief": "computes the intersection of all polygons with holes in p",
+          "detailed": "Kernel parameter of the input and output polygons. Must be model of ConstrainedDelaunayTriangulationTraits_2 Container parameter of the input and output polygons Each polygon with holes must be free of self-intersections the outer boundaries must be counterclockwise and the holes clockwise oriented.",
+          "return_type": "Multipolygon_with_holes_2< Kernel, Container >",
+          "definition": "Multipolygon_with_holes_2< Kernel, Container > CGAL::Polygon_repair::intersect",
+          "argsstring": "(const Multipolygon_with_holes_2< Kernel, Container > &p)",
+          "params": [
+            {
+              "type": "const Multipolygon_with_holes_2< Kernel, Container > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "1040"
+        },
+        {
+          "kind": "function",
+          "name": "intersect",
+          "qualified_name": "CGAL::Polygon_repair::intersect",
+          "brief": "computes the intersection of two polygonal domains",
+          "detailed": "Kernel parameter of the output polygon. Must be model of ConstrainedDelaunayTriangulationTraits_2 Container parameter of the input and output polygons PA must be Polygon_2<Kernel, Container> , or Polygon_with_holes_2<Kernel, Container> , or Multipolygon_with_holes_2<Kernel, Container> PB must be Polygon_2<Kernel, Container> , or Polygon_with_holes_2<Kernel, Container> , or Multipolygon_with_holes_2<Kernel, Container> The polygons pa and pb must be free of self-intersections the outer boundaries must be counterclockwise and the holes clockwise oriented.",
+          "return_type": "Multipolygon_with_holes_2< Kernel, Container >",
+          "definition": "Multipolygon_with_holes_2< Kernel, Container > CGAL::Polygon_repair::intersect",
+          "argsstring": "(const PA &pa, const PB &pb, const Kernel &=Default(), const Container &=Default())",
+          "params": [
+            {
+              "type": "const PA &",
+              "name": "pa",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PB &",
+              "name": "pb",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Kernel &",
+              "name": "",
+              "default": "Default()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Container &",
+              "name": "",
+              "default": "Default()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Polygon_repair/repair.h",
+          "line": "1076"
+        }
+      ],
+      "xml_file": "group___pkg_polygon_repair_functions.xml"
+    },
+    "PkgPolygonRepairRules": {
+      "kind": "group",
+      "name": "PkgPolygonRepairRules",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_polygon_repair_rules.xml"
+    }
+  }
+}

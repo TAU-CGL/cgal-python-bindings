@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "ms2_conic_ccr",
+  "description": "Build variant defined by cmake/tests/ms2_conic_ccr.cmake",
+  "cmake_tests": [
+    "cmake/tests/ms2_conic_ccr.cmake"
+  ]
+}

@@ -1,0 +1,83 @@
+// Copyright (c) 2019 Israel.
+// All rights reserved to Tel Aviv University.
+//
+// SPDX-License-Identifier: LGPL-3.0-or-later.
+// Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
+//
+// Author(s): Nir Goren         <nirgoren@mail.tau.ac.il>
+//            Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
+
+#include <nanobind/nanobind.h>
+#include <nanobind/operators.h>
+
+#include "cgalpy/polygon_2_types.hpp"
+#include "cgalpy/add_insertion.hpp"
+#include "cgalpy/iterators/py_list_forward_iterator.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/export_general_polygon_with_holes_2.hpp"
+#include "cgalpy/add_extraction.hpp"
+
+#include "cgalpy/Pol2_docstrings.hpp"
+#ifdef CGALPY_HAS_VISUAL
+#define CGAL_USE_BASIC_VIEWER
+#include <CGAL/draw_polygon_with_holes_2.h>
+#endif
+
+namespace py = nanobind;
+namespace pol2_doc = cgalpy::pol2::docstrings;
+
+namespace cgalpy {
+namespace pol2 {
+
+// Initialize a polygon with holes from an outer boundary and a list of holes.
+void init_polygon_with_holes_2(Polygon_with_holes_2* pwh, Polygon_2& p,
+                               py::list& lst) {
+  auto begin = py_list_forward_iterator<Polygon_2>(lst);
+  auto end = py_list_forward_iterator<Polygon_2>(lst, false);
+  new (pwh) Polygon_with_holes_2(p, begin, end);        // placement new
+}
+
+}
+} // namespace cgalpy
+
+/*! Export `CGAL::Polygon_with_holes_2<>`, which derives from
+ * `CGAL::General_polygon_with_holes_2<>`
+ */
+void export_polygon_with_holes_2(py::module_& m) {
+  using Pgn = cgalpy::pol2::Polygon_2;
+  using Pwh = cgalpy::pol2::Polygon_with_holes_2;
+  using Gpwh = cgalpy::pol2::General_polygon_with_holes_2;
+
+  if (! add_attr<Gpwh>(m, "General_polygon_with_holes_2")) {
+    py::class_<Gpwh> gpwh_c(
+      m, "General_polygon_with_holes_2",
+      pol2_doc::General_polygon_with_holes_2_class);
+    export_general_polygon_with_holes_2(gpwh_c);
+  }
+
+  if (! add_attr<Pwh>(m, "Polygon_with_holes_2")) {
+    py::class_<Pwh, Gpwh> pwh_c(
+      m, "Polygon_with_holes_2",
+      pol2_doc::Polygon_with_holes_2_class);
+    pwh_c.def(py::init<>())
+      .def(py::init<Pgn&>(), py::arg("outer_boundary"))
+      .def("__init__", &cgalpy::pol2::init_polygon_with_holes_2,
+           py::arg("outer_boundary"), py::arg("holes"))
+
+      .def("bbox", &Pwh::bbox, pol2_doc::Polygon_with_holes_2_bbox)
+      .def(py::self == py::self)
+      .def(py::self != py::self)
+      ;
+
+    add_insertion(pwh_c, "__str__");
+    add_insertion(pwh_c, "__repr__");
+    add_extraction(pwh_c);
+  }
+
+#ifdef CGALPY_HAS_VISUAL
+  using Draw = void(*)(const Pwh&, const char*);
+  m.def("draw", static_cast<Draw>(CGAL::draw),
+        py::arg("pwh"), py::arg("title") = "");
+#endif
+}

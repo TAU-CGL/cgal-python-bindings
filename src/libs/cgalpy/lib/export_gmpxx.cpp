@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Efi Fogel         <efifogel@gmail.com>
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <string>
 
@@ -14,8 +15,8 @@
 #include <nanobind/operators.h>
 #include <nanobind/stl/string.h>
 
-#include "CGALPY/add_attr.hpp"
-#include "CGALPY/add_insertion.hpp"
+#include "cgalpy/add_attr.hpp"
+#include "cgalpy/add_insertion.hpp"
 
 namespace py = nanobind;
 

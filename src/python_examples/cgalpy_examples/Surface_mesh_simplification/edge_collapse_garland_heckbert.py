@@ -1,0 +1,71 @@
+# Author(s): Utkarsh Khajuria <utkarshkhajuria55@gmail.com>
+
+import time
+import os
+import sys
+import importlib
+lib = 'CGALPY'
+i = 1
+if len(sys.argv) > 1:
+  str = sys.argv[1]
+  if str.startswith('CGALPY'):
+    lib = str
+    i = 2
+
+CGALPY = importlib.import_module(lib)
+Ker = CGALPY.Ker
+Sm = CGALPY.Sm
+Smsi = CGALPY.Smsi
+
+def collapse_gh(gh_policy, mesh, ratio):
+    start_time = time.perf_counter_ns()
+
+    stop = Smsi.Edge_count_ratio_stop_predicate(ratio)
+    gh_cost = gh_policy.get_cost()
+    gh_placement = gh_policy.get_placement()
+    filter = Smsi.Bounded_normal_change_filter()
+
+    r = Smsi.edge_collapse(mesh, stop, {
+                          "get_cost": gh_cost,
+                          "filter": filter,
+                          "get_placement": gh_placement
+                          })
+
+    end_time = time.perf_counter_ns()
+
+    print(f"Time elapsed: {(end_time - start_time)/1e6}ms")
+    print(f"\nFinished!\n{r} edges removed.\n{Sm.num_edges(mesh)} final edges.\n")
+
+
+
+filename = sys.argv[i] if len(sys.argv) > i else CGALPY.data_file_path("meshes/cube-subdivided.off")
+i += 1
+
+try:
+    surface_mesh = Sm.read_polygon_mesh(filename)
+except:
+    print(f"Failed to read input mesh: {filename}")
+    exit(1)
+
+if not Sm.is_triangle_mesh(surface_mesh):
+    print("Input geometry is not triangulated.")
+    exit(1)
+
+print(f"Input mesh has {Sm.num_vertices(surface_mesh)} nv",
+      f"{Sm.num_edges(surface_mesh)} ne",
+      f"{Sm.num_faces(surface_mesh)} nf")
+
+ratio = float(sys.argv[i+1]) if len(sys.argv) > i else 0.2
+i += 1
+print(f"Collapsing edges of mesh: {filename}, aiming for {100*ratio}% of the input edges...")
+
+policy = sys.argv[i] if len(sys.argv) > i else "cp" # classic plane
+i += 1
+
+if (policy == "cp"):
+    collapse_gh(Smsi.GarlandHeckbert_plane_policies(surface_mesh), surface_mesh, ratio)
+elif (policy == "ct"):
+    collapse_gh(Smsi.GarlandHeckbert_triangle_policies(surface_mesh), surface_mesh, ratio)
+
+
+Sm.write_polygon_mesh(sys.argv[i] if len(sys.argv) > i else "out.off", surface_mesh)

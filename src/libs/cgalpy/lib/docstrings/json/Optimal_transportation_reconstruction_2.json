@@ -1,0 +1,4494 @@
+{
+  "schema_version": 1,
+  "package": "Optimal_transportation_reconstruction_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 11,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Optimal_transportation_reconstruction_2": {
+      "kind": "class",
+      "name": "CGAL::Optimal_transportation_reconstruction_2",
+      "brief": "This class provides a means to reconstruct a 1-dimensional shape from a set of 2D points with masses.",
+      "detailed": "The algorithm computes an initial 2D Delaunay triangulation from the input points, and performs a simplification of the triangulation by performing half edge collapses, edge flips and vertex relocations. The edges are either processed in the order imposed by an priority queue, or in an order based on random selection of edge collapse operators. As the exhaustive priority queue guarantees a higher quality it is the default. The user can switch to the other method, for example for an initial simplification round, by calling set_random_sample_size() . By default edge flip operators are applied to ensure that every edge of the triangulation are candidate to be collapsed, while preserving a valid embedding of the triangulation. This option can be disabled by calling set_use_flip(false) to reduce the running times. By default the vertices are not relocated after each half edge collapse. This option can be changed by setting the number of vertex relocation steps performed between two edge collapse operators. The simplification is performed by calling either run_until(n) or run(steps) . The former simplifies the triangulation until n points remain, while the latter stops after steps edge collapse operators have been performed. Furthermore, we can relocate the vertices by calling relocate_all_points() . Traits a model of the concept OptimalTransportationReconstructionTraits_2 . PointPMap a model of ReadablePropertyMap with value type Traits::Point_2 . Defaults to boost::typed_identity_property_map<Traits::Point_2> (for the case the input is points without mass). MassPMap a model of ReadablePropertyMap with value type Traits::FT Defaults to boost::static_property_map<Traits::FT> (for the case the input is points without mass).",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::FT",
+          "brief": "Number type.",
+          "detailed": "",
+          "return_type": "Traits::FT",
+          "definition": "typedef Traits::FT CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "93"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::Point",
+          "brief": "Point type.",
+          "detailed": "",
+          "return_type": "Traits::Point_2",
+          "definition": "typedef Traits::Point_2 CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "98"
+        },
+        {
+          "kind": "typedef",
+          "name": "Segment",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::Segment",
+          "brief": "Segment type.",
+          "detailed": "",
+          "return_type": "Traits::Segment_2",
+          "definition": "typedef Traits::Segment_2 CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::Segment",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "103"
+        },
+        {
+          "kind": "function",
+          "name": "Optimal_transportation_reconstruction_2",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::Optimal_transportation_reconstruction_2",
+          "brief": "Constructor of the optimal transportation reconstruction class.",
+          "detailed": "It builds an initial simplicial complex for a given range of point-mass pairs. InputRange is a model of Range with forward iterators, providing input points and point masses through the PointPMap and MassPMap property maps. input_range Range of input data. point_map A ReadablePropertyMap used to access the input points. mass_map A ReadablePropertyMap used to access the input points' masses. sample_size If sample_size != 0 , the size of the random sample which replaces the exhaustive priority queue. use_flip If true the edge flipping procedure is used to ensure that every edge can be made collapsible. relocation The number of point relocations that are performed between two edge collapses. verbose Controls how much console output is produced by the algorithm. The values are 0, 1, or > 1. traits The traits class.",
+          "return_type": "",
+          "definition": "CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::Optimal_transportation_reconstruction_2",
+          "argsstring": "(const InputRange &input_range, PointPMap point_map=PointPMap(), MassPMap mass_map=MassPMap(1), std::size_t sample_size=0, bool use_flip=true, unsigned int relocation=2, int verbose=0, Traits traits=Traits())",
+          "params": [
+            {
+              "type": "const InputRange &",
+              "name": "input_range",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "PointPMap",
+              "name": "point_map",
+              "default": "PointPMap()",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "MassPMap",
+              "name": "mass_map",
+              "default": "MassPMap(1)",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "std::size_t",
+              "name": "sample_size",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "use_flip",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "unsigned int",
+              "name": "relocation",
+              "default": "2",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "verbose",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Traits",
+              "name": "traits",
+              "default": "Traits()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Initialization",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "204"
+        },
+        {
+          "kind": "function",
+          "name": "set_random_sample_size",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::set_random_sample_size",
+          "brief": "If sample_size == 0 , the simplification is performed using an exhaustive priority queue.",
+          "detailed": "If sample_size is strictly positive the simplification is performed using a multiple choice approach, i.e., a best-choice selection in a random sample of edge collapse operators, of size sample_size . A typical value for the sample size is 15, but this value must be enlarged when targeting a very coarse simplification. sample_size If sample_size != 0 , the size of the random sample replaces the priority queue.",
+          "return_type": "void",
+          "definition": "void CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::set_random_sample_size",
+          "argsstring": "(std::size_t sample_size)",
+          "params": [
+            {
+              "type": "std::size_t",
+              "name": "sample_size",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting Parameters",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "242"
+        },
+        {
+          "kind": "function",
+          "name": "set_verbose",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::set_verbose",
+          "brief": "Determines how much console output the algorithm generates.",
+          "detailed": "If set to a value larger than 0 details about the reconstruction process are written to std::cerr . verbose The verbosity level.",
+          "return_type": "void",
+          "definition": "void CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::set_verbose",
+          "argsstring": "(int verbose)",
+          "params": [
+            {
+              "type": "int",
+              "name": "verbose",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting Parameters",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "253"
+        },
+        {
+          "kind": "function",
+          "name": "set_use_flip",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::set_use_flip",
+          "brief": "The use_flip parameter determines whether the edge flipping procedure is used for the halfedge collapse.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::set_use_flip",
+          "argsstring": "(const bool use_flip)",
+          "params": [
+            {
+              "type": "const bool",
+              "name": "use_flip",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting Parameters",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "264"
+        },
+        {
+          "kind": "function",
+          "name": "set_relocation",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::set_relocation",
+          "brief": "Sets the number of vertex relocations that are performed between two edge collapses.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::set_relocation",
+          "argsstring": "(unsigned int relocation)",
+          "params": [
+            {
+              "type": "unsigned int",
+              "name": "relocation",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting Parameters",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "273"
+        },
+        {
+          "kind": "function",
+          "name": "set_relevance",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::set_relevance",
+          "brief": "",
+          "detailed": "relevance The relevance threshold used for filtering the edges. An edge is relevant from the approximation point of view if it is long, covers a large mass (or equivalently the number of points when all masses are equal), and has a small transport cost. This notion is defined as $ m(e) * |e|^2 / cost(e) $ , where $ m(e) $ denotes the mass of the points approximated by the edge, $ |e| $ denotes the edge length and $ cost(e) $ its approximation error. As the cost is defined by mass time squared distance the relevance is unitless. The default value is 1, so that all edges receiving some mass are considered relevant. Setting a large relevance value is used to get robustness to a large amount of outliers.",
+          "return_type": "void",
+          "definition": "void CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::set_relevance",
+          "argsstring": "(const FT relevance)",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "relevance",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Setting Parameters",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "302"
+        },
+        {
+          "kind": "function",
+          "name": "run_until",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::run_until",
+          "brief": "Computes a shape consisting of np points, reconstructing the input points.",
+          "detailed": "np The number of points which will be present in the output. true if the number of points np was reached, false if the algorithm was prematurely ended because no more edge collapse was possible.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::run_until",
+          "argsstring": "(std::size_t np)",
+          "params": [
+            {
+              "type": "std::size_t",
+              "name": "np",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Simplification",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "1510"
+        },
+        {
+          "kind": "function",
+          "name": "run",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::run",
+          "brief": "Computes a shape, reconstructing the input, by performing steps edge collapse operators on the output simplex.",
+          "detailed": "steps The number of edge collapse operators to be performed. true if the required number of steps was performed, false if the algorithm was prematurely ended because no more edge collapse was possible.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::run",
+          "argsstring": "(const unsigned int steps)",
+          "params": [
+            {
+              "type": "const unsigned int",
+              "name": "steps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Simplification",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "1543"
+        },
+        {
+          "kind": "function",
+          "name": "run_under_wasserstein_tolerance",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::run_under_wasserstein_tolerance",
+          "brief": "Computes a shape, reconstructing the input, by performing edge collapse operators on the output simplex until the user-defined tolerance is reached.",
+          "detailed": "The tolerance is given in the sense of the Wasserstein distance. It is not a Hausdorff tolerance: it does not mean that the distance between the input samples and the output polyline is guaranteed to be less than tolerance . It means that the square root of transport cost per mass (homogeneous to a distance) is at most tolerance . tolerance Tolerance on the Wasserstein distance.",
+          "return_type": "void",
+          "definition": "void CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::run_under_wasserstein_tolerance",
+          "argsstring": "(const FT tolerance)",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "tolerance",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Simplification",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "1581"
+        },
+        {
+          "kind": "function",
+          "name": "relocate_all_points",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::relocate_all_points",
+          "brief": "Since noise and missing data may prevent the reconstructed shape to have sharp corners well located, the algorithm offers the possibility to automatically relocate points after each edge collapse.",
+          "detailed": "The new location of the points is chosen such that the fitting of the output segments to the input points is improved.",
+          "return_type": "void",
+          "definition": "void CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::relocate_all_points",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Simplification",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "1605"
+        },
+        {
+          "kind": "function",
+          "name": "indexed_output",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::indexed_output",
+          "brief": "Writes the points and segments of the output simplex in an indexed format into output iterators.",
+          "detailed": "PointOutputIterator An output iterator with value type Point . IndexOutputIterator An output iterator with value type std::size_t . IndexPairOutputIterator An output iterator with value type std::pair<std::size_t, std::size_t> . points The output iterator for all points. isolated_points The output iterator for the indices of isolated points. segments The output iterator for the pairs of segment indices.",
+          "return_type": "std::tuple< PointOutputIterator, IndexOutputIterator, IndexPairOutputIterator >",
+          "definition": "std::tuple< PointOutputIterator, IndexOutputIterator, IndexPairOutputIterator > CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::indexed_output",
+          "argsstring": "(PointOutputIterator points, IndexOutputIterator isolated_points, IndexPairOutputIterator segments) const",
+          "params": [
+            {
+              "type": "PointOutputIterator",
+              "name": "points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IndexOutputIterator",
+              "name": "isolated_points",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "IndexPairOutputIterator",
+              "name": "segments",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Output",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "1674"
+        },
+        {
+          "kind": "function",
+          "name": "list_output",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::list_output",
+          "brief": "Returns the solid edges and vertices present after the reconstruction process finished.",
+          "detailed": "It takes two output iterators, one for storing the isolated points and one for storing the edges of the reconstructed shape. PointOutputIterator An output iterator with value type Point . SegmentOutputIterator An output iterator with value type Segment .",
+          "return_type": "void",
+          "definition": "void CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::list_output",
+          "argsstring": "(PointOutputIterator v_it, SegmentOutputIterator e_it) const",
+          "params": [
+            {
+              "type": "PointOutputIterator",
+              "name": "v_it",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "SegmentOutputIterator",
+              "name": "e_it",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Output",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "1744"
+        },
+        {
+          "kind": "variable",
+          "name": "m_samples",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::m_samples",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< Sample_ >",
+          "definition": "std::vector<Sample_> CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::m_samples",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "160"
+        },
+        {
+          "kind": "variable",
+          "name": "m_dt",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::m_dt",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangulation",
+          "definition": "Triangulation CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::m_dt",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "161"
+        },
+        {
+          "kind": "variable",
+          "name": "m_traits",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::m_traits",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits const &",
+          "definition": "Traits const& CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::m_traits",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "162"
+        },
+        {
+          "kind": "variable",
+          "name": "m_mindex",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::m_mindex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "MultiIndex",
+          "definition": "MultiIndex CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::m_mindex",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "163"
+        },
+        {
+          "kind": "variable",
+          "name": "m_ignore",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::m_ignore",
+          "brief": "",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::m_ignore",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "164"
+        },
+        {
+          "kind": "variable",
+          "name": "m_verbose",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::m_verbose",
+          "brief": "",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::m_verbose",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "165"
+        },
+        {
+          "kind": "variable",
+          "name": "m_mchoice",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::m_mchoice",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::size_t",
+          "definition": "std::size_t CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::m_mchoice",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "166"
+        },
+        {
+          "kind": "variable",
+          "name": "m_use_flip",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::m_use_flip",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::m_use_flip",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "167"
+        },
+        {
+          "kind": "variable",
+          "name": "m_alpha",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::m_alpha",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::m_alpha",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "168"
+        },
+        {
+          "kind": "variable",
+          "name": "m_ghost",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::m_ghost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::m_ghost",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "169"
+        },
+        {
+          "kind": "variable",
+          "name": "m_relocation",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::m_relocation",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::m_relocation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "170"
+        },
+        {
+          "kind": "variable",
+          "name": "m_tolerance",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::m_tolerance",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::m_tolerance",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "171"
+        },
+        {
+          "kind": "variable",
+          "name": "point_pmap",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::point_pmap",
+          "brief": "",
+          "detailed": "",
+          "return_type": "PointPMap",
+          "definition": "PointPMap CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::point_pmap",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "173"
+        },
+        {
+          "kind": "variable",
+          "name": "mass_pmap",
+          "qualified_name": "CGAL::Optimal_transportation_reconstruction_2::mass_pmap",
+          "brief": "",
+          "detailed": "",
+          "return_type": "MassPMap",
+          "definition": "MassPMap CGAL::Optimal_transportation_reconstruction_2< Traits, PointPMap, MassPMap >::mass_pmap",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+          "line": "174"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_optimal__transportation__reconstruction__2.xml",
+      "file": "CGAL/Optimal_transportation_reconstruction_2.h",
+      "line": "84"
+    },
+    "CGAL::OTR_2::Cost": {
+      "kind": "class",
+      "name": "CGAL::OTR_2::Cost",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "m_norm",
+          "qualified_name": "CGAL::OTR_2::Cost::m_norm",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Cost< FT >::m_norm",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "27"
+        },
+        {
+          "kind": "variable",
+          "name": "m_tang",
+          "qualified_name": "CGAL::OTR_2::Cost::m_tang",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Cost< FT >::m_tang",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "28"
+        },
+        {
+          "kind": "variable",
+          "name": "m_max_norm",
+          "qualified_name": "CGAL::OTR_2::Cost::m_max_norm",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Cost< FT >::m_max_norm",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "29"
+        },
+        {
+          "kind": "variable",
+          "name": "m_max_tang",
+          "qualified_name": "CGAL::OTR_2::Cost::m_max_tang",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Cost< FT >::m_max_tang",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "30"
+        },
+        {
+          "kind": "variable",
+          "name": "m_total_weight",
+          "qualified_name": "CGAL::OTR_2::Cost::m_total_weight",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Cost< FT >::m_total_weight",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "private-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "Cost",
+          "qualified_name": "CGAL::OTR_2::Cost::Cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::OTR_2::Cost< FT >::Cost",
+          "argsstring": "(const FT norm=FT(0), const FT tang=FT(0))",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "norm",
+              "default": "FT(0)",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "tang",
+              "default": "FT(0)",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "35"
+        },
+        {
+          "kind": "function",
+          "name": "norm",
+          "qualified_name": "CGAL::OTR_2::Cost::norm",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const FT",
+          "definition": "const FT CGAL::OTR_2::Cost< FT >::norm",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "43"
+        },
+        {
+          "kind": "function",
+          "name": "tang",
+          "qualified_name": "CGAL::OTR_2::Cost::tang",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const FT",
+          "definition": "const FT CGAL::OTR_2::Cost< FT >::tang",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "max_norm",
+          "qualified_name": "CGAL::OTR_2::Cost::max_norm",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const FT",
+          "definition": "const FT CGAL::OTR_2::Cost< FT >::max_norm",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "max_tang",
+          "qualified_name": "CGAL::OTR_2::Cost::max_tang",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const FT",
+          "definition": "const FT CGAL::OTR_2::Cost< FT >::max_tang",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "49"
+        },
+        {
+          "kind": "function",
+          "name": "total_weight",
+          "qualified_name": "CGAL::OTR_2::Cost::total_weight",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const FT",
+          "definition": "const FT CGAL::OTR_2::Cost< FT >::total_weight",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "51"
+        },
+        {
+          "kind": "function",
+          "name": "set_total_weight",
+          "qualified_name": "CGAL::OTR_2::Cost::set_total_weight",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Cost< FT >::set_total_weight",
+          "argsstring": "(const Samples &m_samples, const SampleContainer &samples)",
+          "params": [
+            {
+              "type": "const Samples &",
+              "name": "m_samples",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const SampleContainer &",
+              "name": "samples",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "54"
+        },
+        {
+          "kind": "function",
+          "name": "finalize",
+          "qualified_name": "CGAL::OTR_2::Cost::finalize",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Cost< FT >::finalize",
+          "argsstring": "(const FT alpha=FT(0.5)) const",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "alpha",
+              "default": "FT(0.5)",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "62"
+        },
+        {
+          "kind": "function",
+          "name": "divide",
+          "qualified_name": "CGAL::OTR_2::Cost::divide",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Cost< FT >::divide",
+          "argsstring": "(const FT ratio)",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "ratio",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "67"
+        },
+        {
+          "kind": "function",
+          "name": "add",
+          "qualified_name": "CGAL::OTR_2::Cost::add",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Cost< FT >::add",
+          "argsstring": "(const Cost &cost, const FT mass=FT(1))",
+          "params": [
+            {
+              "type": "const Cost &",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "mass",
+              "default": "FT(1)",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "74"
+        },
+        {
+          "kind": "function",
+          "name": "reset_max",
+          "qualified_name": "CGAL::OTR_2::Cost::reset_max",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Cost< FT >::reset_max",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "80"
+        },
+        {
+          "kind": "function",
+          "name": "update_max",
+          "qualified_name": "CGAL::OTR_2::Cost::update_max",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Cost< FT >::update_max",
+          "argsstring": "(const Cost &cost)",
+          "params": [
+            {
+              "type": "const Cost &",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "86"
+        },
+        {
+          "kind": "function",
+          "name": "compute_max",
+          "qualified_name": "CGAL::OTR_2::Cost::compute_max",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Cost< FT >::compute_max",
+          "argsstring": "(const FT norm, const FT tang)",
+          "params": [
+            {
+              "type": "const FT",
+              "name": "norm",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "tang",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Cost.h",
+          "line": "92"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_o_t_r__2_1_1_cost.xml",
+      "file": "CGAL/OTR_2/Cost.h",
+      "line": "24"
+    },
+    "CGAL::OTR_2::Reconstruction_edge_2": {
+      "kind": "class",
+      "name": "CGAL::OTR_2::Reconstruction_edge_2",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "variable",
+          "name": "m_edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::m_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Edge",
+          "definition": "Edge CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::m_edge",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "24"
+        },
+        {
+          "kind": "variable",
+          "name": "m_source",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::m_source",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::m_source",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "25"
+        },
+        {
+          "kind": "variable",
+          "name": "m_target",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::m_target",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::m_target",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "26"
+        },
+        {
+          "kind": "variable",
+          "name": "m_before_cost",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::m_before_cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::m_before_cost",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "28"
+        },
+        {
+          "kind": "variable",
+          "name": "m_after_cost",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::m_after_cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::m_after_cost",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "29"
+        },
+        {
+          "kind": "variable",
+          "name": "m_total_weight",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::m_total_weight",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::m_total_weight",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "protected-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "Reconstruction_edge_2",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::Reconstruction_edge_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::Reconstruction_edge_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "33"
+        },
+        {
+          "kind": "function",
+          "name": "Reconstruction_edge_2",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::Reconstruction_edge_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::Reconstruction_edge_2",
+          "argsstring": "(const Reconstruction_edge_2 &pedge)",
+          "params": [
+            {
+              "type": "const Reconstruction_edge_2 &",
+              "name": "pedge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "40"
+        },
+        {
+          "kind": "function",
+          "name": "Reconstruction_edge_2",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::Reconstruction_edge_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::Reconstruction_edge_2",
+          "argsstring": "(const Edge &edge, const FT before, const FT after, const FT total_weight)",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "before",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "after",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "total_weight",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "49"
+        },
+        {
+          "kind": "function",
+          "name": "Reconstruction_edge_2",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::Reconstruction_edge_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::Reconstruction_edge_2",
+          "argsstring": "(const Edge &edge, const FT priority=FT(0))",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "priority",
+              "default": "FT(0)",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "58"
+        },
+        {
+          "kind": "function",
+          "name": "Reconstruction_edge_2",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::Reconstruction_edge_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::Reconstruction_edge_2",
+          "argsstring": "(Vertex_handle source, Vertex_handle target)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "source",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "target",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "67"
+        },
+        {
+          "kind": "function",
+          "name": "operator=",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::operator=",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Reconstruction_edge_2 &",
+          "definition": "Reconstruction_edge_2 & CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::operator=",
+          "argsstring": "(const Reconstruction_edge_2 &pedge)",
+          "params": [
+            {
+              "type": "const Reconstruction_edge_2 &",
+              "name": "pedge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "76"
+        },
+        {
+          "kind": "function",
+          "name": "operator==",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::operator==",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::operator==",
+          "argsstring": "(const Reconstruction_edge_2 &pedge) const",
+          "params": [
+            {
+              "type": "const Reconstruction_edge_2 &",
+              "name": "pedge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "88"
+        },
+        {
+          "kind": "function",
+          "name": "operator<",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::operator<",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::operator<",
+          "argsstring": "(const Reconstruction_edge_2 &pedge) const",
+          "params": [
+            {
+              "type": "const Reconstruction_edge_2 &",
+              "name": "pedge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "94"
+        },
+        {
+          "kind": "function",
+          "name": "edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Edge &",
+          "definition": "const Edge & CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::edge",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "105"
+        },
+        {
+          "kind": "function",
+          "name": "source",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::source",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Vertex_handle &",
+          "definition": "const Vertex_handle & CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::source",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "110"
+        },
+        {
+          "kind": "function",
+          "name": "target",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::target",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Vertex_handle &",
+          "definition": "const Vertex_handle & CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::target",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "115"
+        },
+        {
+          "kind": "function",
+          "name": "before",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::before",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const FT",
+          "definition": "const FT CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::before",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "120"
+        },
+        {
+          "kind": "function",
+          "name": "after",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::after",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const FT",
+          "definition": "const FT CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::after",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "125"
+        },
+        {
+          "kind": "function",
+          "name": "priority",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::priority",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const FT",
+          "definition": "const FT CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::priority",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "130"
+        },
+        {
+          "kind": "function",
+          "name": "total_weight",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::total_weight",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::total_weight",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "135"
+        },
+        {
+          "kind": "function",
+          "name": "get_vertices",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_edge_2::get_vertices",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >::get_vertices",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "protected-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+          "line": "141"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_o_t_r__2_1_1_reconstruction__edge__2.xml",
+      "file": "CGAL/OTR_2/Reconstruction_edge_2.h",
+      "line": "22"
+    },
+    "CGAL::OTR_2::Reconstruction_triangulation_2": {
+      "kind": "class",
+      "name": "CGAL::OTR_2::Reconstruction_triangulation_2",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Base",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Base",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Delaunay_triangulation_2< Traits_, Tds_ >",
+          "definition": "typedef Delaunay_triangulation_2<Traits_, Tds_> CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Base",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "77"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits_::FT",
+          "definition": "typedef Traits_::FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "79"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Point",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits_::Point_2",
+          "definition": "typedef Traits_::Point_2 CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "80"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Vector",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits_::Vector_2",
+          "definition": "typedef Traits_::Vector_2 CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Vector",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "81"
+        },
+        {
+          "kind": "typedef",
+          "name": "Line",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Line",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits_::Line_2",
+          "definition": "typedef Traits_::Line_2 CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Line",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "82"
+        },
+        {
+          "kind": "typedef",
+          "name": "Segment",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Segment",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits_::Segment_2",
+          "definition": "typedef Traits_::Segment_2 CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Segment",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "83"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangle",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Triangle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Traits_::Triangle_2",
+          "definition": "typedef Traits_::Triangle_2 CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Triangle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "84"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Vertex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Vertex",
+          "definition": "typedef Base::Vertex CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Vertex",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "86"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Vertex_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Vertex_handle",
+          "definition": "typedef Base::Vertex_handle CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Vertex_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "87"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_iterator",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Vertex_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Vertex_iterator",
+          "definition": "typedef Base::Vertex_iterator CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Vertex_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "88"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_circulator",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Vertex_circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Vertex_circulator",
+          "definition": "typedef Base::Vertex_circulator CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Vertex_circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "89"
+        },
+        {
+          "kind": "typedef",
+          "name": "Finite_vertices_iterator",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Finite_vertices_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Finite_vertices_iterator",
+          "definition": "typedef Base::Finite_vertices_iterator CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Finite_vertices_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "90"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Edge",
+          "definition": "typedef Base::Edge CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Edge",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "92"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge_circulator",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Edge_circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Edge_circulator",
+          "definition": "typedef Base::Edge_circulator CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Edge_circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "93"
+        },
+        {
+          "kind": "typedef",
+          "name": "Finite_edges_iterator",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Finite_edges_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Finite_edges_iterator",
+          "definition": "typedef Base::Finite_edges_iterator CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Finite_edges_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "94"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_handle",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Face_handle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Face_handle",
+          "definition": "typedef Base::Face_handle CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Face_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "96"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_circulator",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Face_circulator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Face_circulator",
+          "definition": "typedef Base::Face_circulator CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Face_circulator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "97"
+        },
+        {
+          "kind": "typedef",
+          "name": "Finite_faces_iterator",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Finite_faces_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Base::Finite_faces_iterator",
+          "definition": "typedef Base::Finite_faces_iterator CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Finite_faces_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "98"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle_map",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Vertex_handle_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::map< Vertex_handle, Vertex_handle, less_Vertex_handle< Vertex_handle > >",
+          "definition": "typedef std::map<Vertex_handle, Vertex_handle, less_Vertex_handle<Vertex_handle> > CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Vertex_handle_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "101"
+        },
+        {
+          "kind": "typedef",
+          "name": "Face_handle_map",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Face_handle_map",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::map< Face_handle, Face_handle, less_Face_handle< Face_handle > >",
+          "definition": "typedef std::map<Face_handle, Face_handle, less_Face_handle<Face_handle> > CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Face_handle_map",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "103"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle_set",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Vertex_handle_set",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::set< Vertex_handle, less_Vertex_handle< Vertex_handle > >",
+          "definition": "typedef std::set<Vertex_handle, less_Vertex_handle<Vertex_handle> > CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Vertex_handle_set",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "106"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge_set",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Edge_set",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::set< Edge, less_Edge< Edge > >",
+          "definition": "typedef std::set<Edge, less_Edge<Edge> > CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Edge_set",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "107"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge_vector",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Edge_vector",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< Edge >",
+          "definition": "typedef std::vector<Edge> CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Edge_vector",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "109"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cost_",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Cost_",
+          "brief": "",
+          "detailed": "",
+          "return_type": "OTR_2::Cost< FT >",
+          "definition": "typedef OTR_2::Cost<FT> CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Cost_",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "111"
+        },
+        {
+          "kind": "typedef",
+          "name": "Sample_",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Sample_",
+          "brief": "",
+          "detailed": "",
+          "return_type": "OTR_2::Sample< Traits_ >",
+          "definition": "typedef OTR_2::Sample<Traits_> CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Sample_",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "112"
+        },
+        {
+          "kind": "typedef",
+          "name": "Sample_vector",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Sample_vector",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< int >",
+          "definition": "typedef std::vector<int> CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Sample_vector",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "113"
+        },
+        {
+          "kind": "typedef",
+          "name": "Sample_vector_const_iterator",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Sample_vector_const_iterator",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Sample_vector::const_iterator",
+          "definition": "typedef Sample_vector::const_iterator CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Sample_vector_const_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "114"
+        },
+        {
+          "kind": "typedef",
+          "name": "PSample",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::PSample",
+          "brief": "",
+          "detailed": "",
+          "return_type": "OTR_2::Sample_with_priority< Sample_ >",
+          "definition": "typedef OTR_2::Sample_with_priority<Sample_> CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::PSample",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "116"
+        },
+        {
+          "kind": "typedef",
+          "name": "SQueue",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::SQueue",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::priority_queue< PSample, boost::container::deque< PSample >, OTR_2::greater_priority< PSample > >",
+          "definition": "typedef std::priority_queue<PSample, boost::container::deque<PSample>, OTR_2::greater_priority<PSample> > CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::SQueue",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "118"
+        },
+        {
+          "kind": "typedef",
+          "name": "Rec_edge_2",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Rec_edge_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Reconstruction_edge_2< FT, Edge, Vertex_handle, Face_handle >",
+          "definition": "typedef Reconstruction_edge_2<FT, Edge, Vertex_handle, Face_handle> CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Rec_edge_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "121"
+        },
+        {
+          "kind": "typedef",
+          "name": "MultiIndex",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::MultiIndex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "boost::multi_index_container< Rec_edge_2, boost::multi_index::indexed_by< boost::multi_index::ordered_unique< boost::multi_index::identity< Rec_edge_2 > >, boost::multi_index::ordered_non_unique< boost::multi_index::const_mem_fun< Rec_edge_2, const FT,&Rec_edge_2::priority > > > >",
+          "definition": "typedef boost::multi_index_container< Rec_edge_2, boost::multi_index::indexed_by< boost::multi_index::ordered_unique< boost::multi_index::identity< Rec_edge_2 > > , boost::multi_index::ordered_non_unique< boost::multi_index::const_mem_fun< Rec_edge_2,const FT,&Rec_edge_2::priority> > > > CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::MultiIndex",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "136"
+        },
+        {
+          "kind": "variable",
+          "name": "m_samples",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::m_samples",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::vector< Sample_ > &",
+          "definition": "std::vector<Sample_>& CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::m_samples",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "138"
+        },
+        {
+          "kind": "variable",
+          "name": "m_factor",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::m_factor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::m_factor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "139"
+        },
+        {
+          "kind": "variable",
+          "name": "rng",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::rng",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Random",
+          "definition": "Random CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::rng",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-attrib",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "140"
+        },
+        {
+          "kind": "function",
+          "name": "Reconstruction_triangulation_2",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::Reconstruction_triangulation_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::Reconstruction_triangulation_2",
+          "argsstring": "(std::vector< Sample_ > &samples, Traits_ traits=Traits_())",
+          "params": [
+            {
+              "type": "std::vector< Sample_ > &",
+              "name": "samples",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Traits_",
+              "name": "traits",
+              "default": "Traits_()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "143"
+        },
+        {
+          "kind": "function",
+          "name": "~Reconstruction_triangulation_2",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::~Reconstruction_triangulation_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::~Reconstruction_triangulation_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "148"
+        },
+        {
+          "kind": "function",
+          "name": "ghost_factor",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::ghost_factor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT &",
+          "definition": "FT & CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::ghost_factor",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "151"
+        },
+        {
+          "kind": "function",
+          "name": "ghost_factor",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::ghost_factor",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::ghost_factor",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "155"
+        },
+        {
+          "kind": "function",
+          "name": "random_finite_edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::random_finite_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Edge",
+          "definition": "Edge CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::random_finite_edge",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "159"
+        },
+        {
+          "kind": "function",
+          "name": "source_vertex",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::source_vertex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::source_vertex",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "172"
+        },
+        {
+          "kind": "function",
+          "name": "target_vertex",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::target_vertex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::target_vertex",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "176"
+        },
+        {
+          "kind": "function",
+          "name": "opposite_vertex",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::opposite_vertex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::opposite_vertex",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "180"
+        },
+        {
+          "kind": "function",
+          "name": "is_pinned",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::is_pinned",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::is_pinned",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "184"
+        },
+        {
+          "kind": "function",
+          "name": "twin_edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::twin_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Edge",
+          "definition": "Edge CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::twin_edge",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "191"
+        },
+        {
+          "kind": "function",
+          "name": "next_edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::next_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Edge",
+          "definition": "Edge CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::next_edge",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "198"
+        },
+        {
+          "kind": "function",
+          "name": "prev_edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::prev_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Edge",
+          "definition": "Edge CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::prev_edge",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "204"
+        },
+        {
+          "kind": "function",
+          "name": "get_length",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_length",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_length",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "210"
+        },
+        {
+          "kind": "function",
+          "name": "get_segment",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_segment",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Segment",
+          "definition": "Segment CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_segment",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "215"
+        },
+        {
+          "kind": "function",
+          "name": "get_triangle",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_triangle",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Triangle",
+          "definition": "Triangle CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_triangle",
+          "argsstring": "(Face_handle face) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "face",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "221"
+        },
+        {
+          "kind": "function",
+          "name": "get_vertices_from_edge_link",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_vertices_from_edge_link",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_vertices_from_edge_link",
+          "argsstring": "(const Edge &edge, Vertex_handle_set &vertices) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle_set &",
+              "name": "vertices",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "231"
+        },
+        {
+          "kind": "function",
+          "name": "get_vertices_from_vertex_link",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_vertices_from_vertex_link",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_vertices_from_vertex_link",
+          "argsstring": "(Vertex_handle vertex, Vertex_handle_set &vertices) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "vertex",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle_set &",
+              "name": "vertices",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "237"
+        },
+        {
+          "kind": "function",
+          "name": "get_edges_from_star_minus_link",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_edges_from_star_minus_link",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_edges_from_star_minus_link",
+          "argsstring": "(Vertex_handle vertex, Edge_vector &hull, bool outward=false) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "vertex",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Edge_vector &",
+              "name": "hull",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "outward",
+              "default": "false",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "250"
+        },
+        {
+          "kind": "function",
+          "name": "is_ghost",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::is_ghost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::is_ghost",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "267"
+        },
+        {
+          "kind": "function",
+          "name": "get_plan",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_plan",
+          "brief": "",
+          "detailed": "",
+          "return_type": "int",
+          "definition": "int CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_plan",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "271"
+        },
+        {
+          "kind": "function",
+          "name": "set_plan",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::set_plan",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::set_plan",
+          "argsstring": "(const Edge &edge, int simplex) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "simplex",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "275"
+        },
+        {
+          "kind": "function",
+          "name": "get_mass",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_mass",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_mass",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "279"
+        },
+        {
+          "kind": "function",
+          "name": "set_mass",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::set_mass",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::set_mass",
+          "argsstring": "(const Edge &edge, const FT mass) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "mass",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "283"
+        },
+        {
+          "kind": "function",
+          "name": "get_cost",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "const Cost_ &",
+          "definition": "const Cost_ & CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_cost",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "287"
+        },
+        {
+          "kind": "function",
+          "name": "set_vertex_cost",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::set_vertex_cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::set_vertex_cost",
+          "argsstring": "(const Edge &edge, const Cost_ &cost) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Cost_ &",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "291"
+        },
+        {
+          "kind": "function",
+          "name": "set_edge_cost",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::set_edge_cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::set_edge_cost",
+          "argsstring": "(const Edge &edge, const Cost_ &cost) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Cost_ &",
+              "name": "cost",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "295"
+        },
+        {
+          "kind": "function",
+          "name": "get_vertex_minus_edge_cost",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_vertex_minus_edge_cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_vertex_minus_edge_cost",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "299"
+        },
+        {
+          "kind": "function",
+          "name": "get_vertex_over_edge_cost",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_vertex_over_edge_cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_vertex_over_edge_cost",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "305"
+        },
+        {
+          "kind": "function",
+          "name": "get_edge_relevance",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_edge_relevance",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_edge_relevance",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "313"
+        },
+        {
+          "kind": "function",
+          "name": "get_density",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::get_density",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::get_density",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "323"
+        },
+        {
+          "kind": "function",
+          "name": "nb_samples",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::nb_samples",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unsigned int",
+          "definition": "unsigned int CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::nb_samples",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "329"
+        },
+        {
+          "kind": "function",
+          "name": "collect_samples_from_edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::collect_samples_from_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::collect_samples_from_edge",
+          "argsstring": "(const Edge &edge, Sample_vector &samples) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Sample_vector &",
+              "name": "samples",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "335"
+        },
+        {
+          "kind": "function",
+          "name": "collect_samples_from_vertex",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::collect_samples_from_vertex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::collect_samples_from_vertex",
+          "argsstring": "(Vertex_handle vertex, Sample_vector &samples, bool cleanup) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "vertex",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Sample_vector &",
+              "name": "samples",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "cleanup",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "342"
+        },
+        {
+          "kind": "function",
+          "name": "collect_all_samples",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::collect_all_samples",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::collect_all_samples",
+          "argsstring": "(Sample_vector &samples) const",
+          "params": [
+            {
+              "type": "Sample_vector &",
+              "name": "samples",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "371"
+        },
+        {
+          "kind": "function",
+          "name": "cleanup_assignments",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::cleanup_assignments",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::cleanup_assignments",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "388"
+        },
+        {
+          "kind": "function",
+          "name": "compute_total_cost",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::compute_total_cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Cost_",
+          "definition": "Cost_ CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::compute_total_cost",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "401"
+        },
+        {
+          "kind": "function",
+          "name": "compute_cost_around_vertex",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::compute_cost_around_vertex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Cost_",
+          "definition": "Cost_ CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::compute_cost_around_vertex",
+          "argsstring": "(Vertex_handle vertex) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "vertex",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "413"
+        },
+        {
+          "kind": "function",
+          "name": "reset_all_costs",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::reset_all_costs",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::reset_all_costs",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "448"
+        },
+        {
+          "kind": "function",
+          "name": "update_cost",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::update_cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::update_cost",
+          "argsstring": "(const Edge &edge)",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "456"
+        },
+        {
+          "kind": "function",
+          "name": "compute_mass",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::compute_mass",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::compute_mass",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "463"
+        },
+        {
+          "kind": "function",
+          "name": "select_plan",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::select_plan",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::select_plan",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "484"
+        },
+        {
+          "kind": "function",
+          "name": "compute_edge_cost",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::compute_edge_cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::compute_edge_cost",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "499"
+        },
+        {
+          "kind": "function",
+          "name": "sort_samples_from_edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::sort_samples_from_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::sort_samples_from_edge",
+          "argsstring": "(const Edge &edge, SQueue &squeue) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "SQueue &",
+              "name": "squeue",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "511"
+        },
+        {
+          "kind": "function",
+          "name": "compute_cost_from_squeue",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::compute_cost_from_squeue",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Cost_",
+          "definition": "Cost_ CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::compute_cost_from_squeue",
+          "argsstring": "(SQueue &squeue, const FT M, const FT L) const",
+          "params": [
+            {
+              "type": "SQueue &",
+              "name": "squeue",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "M",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const FT",
+              "name": "L",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "527"
+        },
+        {
+          "kind": "function",
+          "name": "compute_vertex_cost",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::compute_vertex_cost",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::compute_vertex_cost",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "558"
+        },
+        {
+          "kind": "function",
+          "name": "assign_samples",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::assign_samples",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::assign_samples",
+          "argsstring": "(Iterator begin, Iterator end)",
+          "params": [
+            {
+              "type": "Iterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Iterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "591"
+        },
+        {
+          "kind": "function",
+          "name": "assign_samples_brute_force",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::assign_samples_brute_force",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::assign_samples_brute_force",
+          "argsstring": "(Iterator begin, Iterator end)",
+          "params": [
+            {
+              "type": "Iterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Iterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "599"
+        },
+        {
+          "kind": "function",
+          "name": "assign_sample",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::assign_sample",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::assign_sample",
+          "argsstring": "(int sample)",
+          "params": [
+            {
+              "type": "int",
+              "name": "sample",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "606"
+        },
+        {
+          "kind": "function",
+          "name": "assign_sample_brute_force",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::assign_sample_brute_force",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::assign_sample_brute_force",
+          "argsstring": "(int sample_index)",
+          "params": [
+            {
+              "type": "int",
+              "name": "sample_index",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "626"
+        },
+        {
+          "kind": "function",
+          "name": "face_has_point",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::face_has_point",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::face_has_point",
+          "argsstring": "(Face_handle face, const Point &query) const",
+          "params": [
+            {
+              "type": "Face_handle",
+              "name": "face",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "655"
+        },
+        {
+          "kind": "function",
+          "name": "find_nearest_vertex",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::find_nearest_vertex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Vertex_handle",
+          "definition": "Vertex_handle CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::find_nearest_vertex",
+          "argsstring": "(const Point &point, Face_handle face) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "point",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "face",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "666"
+        },
+        {
+          "kind": "function",
+          "name": "find_nearest_edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::find_nearest_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Edge",
+          "definition": "Edge CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::find_nearest_edge",
+          "argsstring": "(const Point &point, Face_handle face) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "point",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Face_handle",
+              "name": "face",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "677"
+        },
+        {
+          "kind": "function",
+          "name": "assign_sample_to_vertex",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::assign_sample_to_vertex",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::assign_sample_to_vertex",
+          "argsstring": "(int sample_index, Vertex_handle vertex) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "sample_index",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "vertex",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "693"
+        },
+        {
+          "kind": "function",
+          "name": "assign_sample_to_edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::assign_sample_to_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::assign_sample_to_edge",
+          "argsstring": "(int sample_index, const Edge &edge) const",
+          "params": [
+            {
+              "type": "int",
+              "name": "sample_index",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "704"
+        },
+        {
+          "kind": "function",
+          "name": "compute_distance2",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::compute_distance2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::compute_distance2",
+          "argsstring": "(const Point &query, const Segment &segment) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Segment &",
+              "name": "segment",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "713"
+        },
+        {
+          "kind": "function",
+          "name": "compute_coordinate",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::compute_coordinate",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::compute_coordinate",
+          "argsstring": "(const Point &q, const Segment &segment) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Segment &",
+              "name": "segment",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "722"
+        },
+        {
+          "kind": "function",
+          "name": "signed_distance",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::signed_distance",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::signed_distance",
+          "argsstring": "(Vertex_handle a, Vertex_handle b, Vertex_handle t) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "736"
+        },
+        {
+          "kind": "function",
+          "name": "compute_signed_distance",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::compute_signed_distance",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "FT CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::compute_signed_distance",
+          "argsstring": "(const Point &pa, const Point &pb, const Point &pt) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "pa",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "pb",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "pt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "745"
+        },
+        {
+          "kind": "function",
+          "name": "signed_distance_from_intersection",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::signed_distance_from_intersection",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::pair< bool, std::optional< FT > >",
+          "definition": "std::pair< bool, std::optional< FT > > CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::signed_distance_from_intersection",
+          "argsstring": "(Vertex_handle a, Vertex_handle b, Vertex_handle t, Vertex_handle s) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "t",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "768"
+        },
+        {
+          "kind": "function",
+          "name": "compute_signed_distance_from_intersection",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::compute_signed_distance_from_intersection",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::pair< bool, std::optional< FT > >",
+          "definition": "std::pair< bool, std::optional< FT > > CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::compute_signed_distance_from_intersection",
+          "argsstring": "(const Point &pa, const Point &pb, const Point &pt, const Point &ps) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "pa",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "pb",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "pt",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "ps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "780"
+        },
+        {
+          "kind": "function",
+          "name": "is_triangle_ccw",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::is_triangle_ccw",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::is_triangle_ccw",
+          "argsstring": "(Vertex_handle a, Vertex_handle b, Vertex_handle c) const",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Vertex_handle",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "804"
+        },
+        {
+          "kind": "function",
+          "name": "compute_triangle_ccw",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::compute_triangle_ccw",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::compute_triangle_ccw",
+          "argsstring": "(const Point &pa, const Point &pb, const Point &pc) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "pa",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "pb",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "pc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "812"
+        },
+        {
+          "kind": "function",
+          "name": "is_edge_cyclic",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::is_edge_cyclic",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::is_edge_cyclic",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "821"
+        },
+        {
+          "kind": "function",
+          "name": "is_target_cyclic",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::is_target_cyclic",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::is_target_cyclic",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "828"
+        },
+        {
+          "kind": "function",
+          "name": "is_flippable",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::is_flippable",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::is_flippable",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "839"
+        },
+        {
+          "kind": "function",
+          "name": "is_collapsible",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::is_collapsible",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::is_collapsible",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "854"
+        },
+        {
+          "kind": "function",
+          "name": "check_link_test",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::check_link_test",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::check_link_test",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "858"
+        },
+        {
+          "kind": "function",
+          "name": "check_kernel_test",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::check_kernel_test",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::check_kernel_test",
+          "argsstring": "(const Edge &edge) const",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "895"
+        },
+        {
+          "kind": "function",
+          "name": "is_in_kernel",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::is_in_kernel",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::is_in_kernel",
+          "argsstring": "(const Point &query, Iterator begin, Iterator end) const",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "query",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Iterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Iterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "906"
+        },
+        {
+          "kind": "function",
+          "name": "check_validity_test",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::check_validity_test",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::check_validity_test",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "917"
+        },
+        {
+          "kind": "function",
+          "name": "flip",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::flip",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Edge",
+          "definition": "Edge CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::flip",
+          "argsstring": "(const Edge &sb, Edge &st, int=0)",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "sb",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Edge &",
+              "name": "st",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "938"
+        },
+        {
+          "kind": "function",
+          "name": "collapse",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::collapse",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::collapse",
+          "argsstring": "(const Edge &edge, int=0)",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "952"
+        },
+        {
+          "kind": "function",
+          "name": "collapse_cyclic_edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::collapse_cyclic_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::collapse_cyclic_edge",
+          "argsstring": "(const Edge &bc, int verbose=0)",
+          "params": [
+            {
+              "type": "const Edge &",
+              "name": "bc",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "verbose",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "964"
+        },
+        {
+          "kind": "function",
+          "name": "print_edge",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::print_edge",
+          "brief": "",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::print_edge",
+          "argsstring": "(Rec_edge_2 edge) const",
+          "params": [
+            {
+              "type": "Rec_edge_2",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "992"
+        },
+        {
+          "kind": "function",
+          "name": "is_p_infinity",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::is_p_infinity",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::is_p_infinity",
+          "argsstring": "(const std::pair< bool, std::optional< FT > > &p) const",
+          "params": [
+            {
+              "type": "const std::pair< bool, std::optional< FT > > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "999"
+        },
+        {
+          "kind": "function",
+          "name": "is_m_infinity",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::is_m_infinity",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::is_m_infinity",
+          "argsstring": "(const std::pair< bool, std::optional< FT > > &p) const",
+          "params": [
+            {
+              "type": "const std::pair< bool, std::optional< FT > > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "1004"
+        },
+        {
+          "kind": "function",
+          "name": "is_infinity",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::is_infinity",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::is_infinity",
+          "argsstring": "(const std::pair< bool, std::optional< FT > > &p) const",
+          "params": [
+            {
+              "type": "const std::pair< bool, std::optional< FT > > &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "1009"
+        },
+        {
+          "kind": "function",
+          "name": "m_infinity",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::m_infinity",
+          "brief": "",
+          "detailed": "",
+          "return_type": "std::pair< bool, std::optional< FT > >",
+          "definition": "std::pair< bool, std::optional< FT > > CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::m_infinity",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "1014"
+        },
+        {
+          "kind": "function",
+          "name": "make_collapsible",
+          "qualified_name": "CGAL::OTR_2::Reconstruction_triangulation_2::make_collapsible",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::OTR_2::Reconstruction_triangulation_2< Traits_, Tds_ >::make_collapsible",
+          "argsstring": "(Edge &edge, Iterator begin, Iterator end, int verbose=0)",
+          "params": [
+            {
+              "type": "Edge &",
+              "name": "edge",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Iterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Iterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "int",
+              "name": "verbose",
+              "default": "0",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "public-func",
+          "section": "",
+          "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+          "line": "1020"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_o_t_r__2_1_1_reconstruction__triangulation__2.xml",
+      "file": "CGAL/OTR_2/Reconstruction_triangulation_2.h",
+      "line": "72"
+    },
+    "OptimalTransportationReconstructionTraits_2": {
+      "kind": "class",
+      "name": "OptimalTransportationReconstructionTraits_2",
+      "brief": "The concept OptimalTransportationReconstructionTraits_2 describes the requirements for the traits class of CGAL::Optimal_transportation_reconstruction_2 .",
+      "detailed": "Refines DelaunayTriangulationTraits_2 Has models All models of the CGAL concept Kernel CGAL::Exact_predicates_inexact_constructions_kernel (recommended) CGAL::Optimal_transportation_reconstruction_2",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::FT",
+          "brief": "A coordinate type.",
+          "detailed": "The type must provide a copy constructor, assignment, comparison operators, negation, multiplication, division and allow the declaration and initialization with a small integer and double constant (cf. requirements for number types). An obvious choice would be coordinate type of the point class.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "34"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vector_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::Vector_2",
+          "brief": "The vector type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::Vector_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "39"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_point_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::Construct_point_2",
+          "brief": "A function object to construct a Point_2 .",
+          "detailed": "Must provides: Point_2 operator()(FT x, FT y) , which constructs a 2D point from its coordinates.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::Construct_point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "48"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_vector_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::Construct_vector_2",
+          "brief": "A function object to construct a Vector_2 .",
+          "detailed": "Must provides: Vector_2 operator()(FT x, FT y) , which constructs a 2D vector from its coordinates, and Vector_2 operator()(Point p0, Point p1) , which constructs a 2D vector from 2 points.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::Construct_vector_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "59"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_line_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::Construct_line_2",
+          "brief": "A function object to construct a Line_2 .",
+          "detailed": "Must provides: Line_2 operator()(Point p, Vector v) , which constructs a 2D line from a point and a vector.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::Construct_line_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "68"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_translated_point_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::Construct_translated_point_2",
+          "brief": "Must provides: Point_2 operator()(Point_2 p, Vector_2 v) that computes the point p + v .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::Construct_translated_point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "75"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_scaled_vector_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::Construct_scaled_vector_2",
+          "brief": "Must provides: Vector_2 operator()(Vector_2 v, FT c) that computes the vector c * v .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::Construct_scaled_vector_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "82"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_sum_of_vectors_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::Construct_sum_of_vectors_2",
+          "brief": "Must provides: Vector_2 operator()(Vector_2 v1, Vector_2 v2) that computes the vector v1 + v2 .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::Construct_sum_of_vectors_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "89"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_projected_point_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::Construct_projected_point_2",
+          "brief": "Must provides: Point_2 operator()(Line_2 l, Point_2 p) that computes the projection of the point p on the line l .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::Construct_projected_point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "96"
+        },
+        {
+          "kind": "typedef",
+          "name": "Has_on_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::Has_on_2",
+          "brief": "Must provides: bool operator()(Line_2 l, Point_2 p) that returns true iff p lies on l .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::Has_on_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "103"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_scalar_product_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::Compute_scalar_product_2",
+          "brief": "Must provides: FT operator()(Vector_2 v1, Vector_2 v2) that computes the scalar product between v1 and v2 .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::Compute_scalar_product_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "110"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_length_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::Compute_squared_length_2",
+          "brief": "Must provides: FT operator()(Vector_2 v) that computes the squared length of v .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::Compute_squared_length_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "117"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_distance_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::Compute_squared_distance_2",
+          "brief": "Must provides: FT operator()(Point p1, Point p2) that computes the squared distance between p1 and p2 .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type OptimalTransportationReconstructionTraits_2::Compute_squared_distance_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "124"
+        },
+        {
+          "kind": "function",
+          "name": "OptimalTransportationReconstructionTraits_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::OptimalTransportationReconstructionTraits_2",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "OptimalTransportationReconstructionTraits_2::OptimalTransportationReconstructionTraits_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "134"
+        },
+        {
+          "kind": "function",
+          "name": "OptimalTransportationReconstructionTraits_2",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::OptimalTransportationReconstructionTraits_2",
+          "brief": "Copy constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "OptimalTransportationReconstructionTraits_2::OptimalTransportationReconstructionTraits_2",
+          "argsstring": "(const OptimalTransportationReconstructionTraits_2 &)",
+          "params": [
+            {
+              "type": "const OptimalTransportationReconstructionTraits_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "139"
+        },
+        {
+          "kind": "function",
+          "name": "operator=",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::operator=",
+          "brief": "Assignment operator.",
+          "detailed": "",
+          "return_type": "OptimalTransportationReconstructionTraits_2 &",
+          "definition": "OptimalTransportationReconstructionTraits_2 & OptimalTransportationReconstructionTraits_2::operator=",
+          "argsstring": "(const OptimalTransportationReconstructionTraits_2 &)",
+          "params": [
+            {
+              "type": "const OptimalTransportationReconstructionTraits_2 &",
+              "name": "",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "145"
+        },
+        {
+          "kind": "function",
+          "name": "construct_point_2_object",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::construct_point_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_point_2",
+          "definition": "Construct_point_2 OptimalTransportationReconstructionTraits_2::construct_point_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to Predicate and Constructors Objects",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "152"
+        },
+        {
+          "kind": "function",
+          "name": "construct_vector_2_object",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::construct_vector_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_vector_2",
+          "definition": "Construct_vector_2 OptimalTransportationReconstructionTraits_2::construct_vector_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to Predicate and Constructors Objects",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "153"
+        },
+        {
+          "kind": "function",
+          "name": "construct_line_2_object",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::construct_line_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_line_2",
+          "definition": "Construct_line_2 OptimalTransportationReconstructionTraits_2::construct_line_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to Predicate and Constructors Objects",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "154"
+        },
+        {
+          "kind": "function",
+          "name": "construct_translated_point_2_object",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::construct_translated_point_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_translated_point_2",
+          "definition": "Construct_translated_point_2 OptimalTransportationReconstructionTraits_2::construct_translated_point_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to Predicate and Constructors Objects",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "155"
+        },
+        {
+          "kind": "function",
+          "name": "construct_scaled_vector_2_object",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::construct_scaled_vector_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_scaled_vector_2",
+          "definition": "Construct_scaled_vector_2 OptimalTransportationReconstructionTraits_2::construct_scaled_vector_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to Predicate and Constructors Objects",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "156"
+        },
+        {
+          "kind": "function",
+          "name": "construct_sum_of_vectors_2_object",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::construct_sum_of_vectors_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_sum_of_vectors_2",
+          "definition": "Construct_sum_of_vectors_2 OptimalTransportationReconstructionTraits_2::construct_sum_of_vectors_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to Predicate and Constructors Objects",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "157"
+        },
+        {
+          "kind": "function",
+          "name": "construct_projected_point_2_object",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::construct_projected_point_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Construct_projected_point_2",
+          "definition": "Construct_projected_point_2 OptimalTransportationReconstructionTraits_2::construct_projected_point_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to Predicate and Constructors Objects",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "158"
+        },
+        {
+          "kind": "function",
+          "name": "has_on_2_object",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::has_on_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Has_on_2",
+          "definition": "Has_on_2 OptimalTransportationReconstructionTraits_2::has_on_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to Predicate and Constructors Objects",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "159"
+        },
+        {
+          "kind": "function",
+          "name": "compute_scalar_product_2_object",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::compute_scalar_product_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_scalar_product_2",
+          "definition": "Compute_scalar_product_2 OptimalTransportationReconstructionTraits_2::compute_scalar_product_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to Predicate and Constructors Objects",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "160"
+        },
+        {
+          "kind": "function",
+          "name": "compute_squared_length_2_object",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::compute_squared_length_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_squared_length_2",
+          "definition": "Compute_squared_length_2 OptimalTransportationReconstructionTraits_2::compute_squared_length_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to Predicate and Constructors Objects",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "161"
+        },
+        {
+          "kind": "function",
+          "name": "compute_squared_distance_2_object",
+          "qualified_name": "OptimalTransportationReconstructionTraits_2::compute_squared_distance_2_object",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Compute_squared_distance_2",
+          "definition": "Compute_squared_distance_2 OptimalTransportationReconstructionTraits_2::compute_squared_distance_2_object",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access to Predicate and Constructors Objects",
+          "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+          "line": "162"
+        }
+      ],
+      "xml_file": "class_optimal_transportation_reconstruction_traits__2.xml",
+      "file": "Concepts/OptimalTransportationReconstructionTraits_2.h",
+      "line": "20"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Optimal_transportation_reconstruction_2.txt",
+      "line": "1"
+    },
+    "CGAL::OTR_2": {
+      "kind": "namespace",
+      "name": "CGAL::OTR_2",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l_1_1_o_t_r__2.xml",
+      "file": "CGAL/OTR_2/Cost.h",
+      "line": "21"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgOptimalTransportationReconstruction2Ref": {
+      "kind": "group",
+      "name": "PkgOptimalTransportationReconstruction2Ref",
+      "brief": "",
+      "detailed": "Pierre Alliez, David Cohen-Steiner, Fernando de Goes, Clément Jamin, and Ivo Vigan This package provides an algorithm to reconstruct and simplify a shape from a point set in the plane, possibly hampered with noise and outliers. It generates as output a set of line segments and isolated points, which approximate the input point set. Introduced in: CGAL 4.8 Depends on: PkgTriangulation2 BibTeX: cgal:gavj-rs-26a License: GPL Windows Demo: 2D Optimal Transportation Curve Reconstruction Classified Reference Pages Concepts OptimalTransportationReconstructionTraits_2 Classes CGAL::Optimal_transportation_reconstruction_2 <Traits, PointPMap, MassPMap>",
+      "members": [],
+      "xml_file": "group___pkg_optimal_transportation_reconstruction2_ref.xml"
+    },
+    "PkgOptimalTransportationReconstruction2Concepts": {
+      "kind": "group",
+      "name": "PkgOptimalTransportationReconstruction2Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_optimal_transportation_reconstruction2_concepts.xml"
+    },
+    "PkgOptimalTransportationReconstruction2Classes": {
+      "kind": "group",
+      "name": "PkgOptimalTransportationReconstruction2Classes",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_optimal_transportation_reconstruction2_classes.xml"
+    }
+  }
+}

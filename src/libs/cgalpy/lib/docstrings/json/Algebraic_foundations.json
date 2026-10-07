@@ -1,0 +1,4481 @@
+{
+  "schema_version": 1,
+  "package": "Algebraic_foundations",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 65,
+  "skipped_count": 0,
+  "compounds": {
+    "AlgebraicStructureTraits": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits",
+      "brief": "A model of AlgebraicStructureTraits reflects the algebraic structure of an associated type Type .",
+      "detailed": "Depending on the concepts that Type fulfills, it contains various functors and descriptive tags. Moreover it gives access to the several possible algebraic operations within that structure. IntegralDomainWithoutDivision IntegralDomain UniqueFactorizationDomain EuclideanRing Field FieldWithSqrt FieldWithKthRoot FieldWithRootOf CGAL::Integral_domain_without_division_tag CGAL::Integral_domain_tag CGAL::Unique_factorization_domain_tag CGAL::Euclidean_ring_tag CGAL::Field_tag CGAL::Field_with_sqrt_tag CGAL::Field_with_kth_root_tag CGAL::Field_with_root_of_tag Has models CGAL::Algebraic_structure_traits <T>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Type",
+          "qualified_name": "AlgebraicStructureTraits::Type",
+          "brief": "The associated type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "47"
+        },
+        {
+          "kind": "typedef",
+          "name": "Algebraic_category",
+          "qualified_name": "AlgebraicStructureTraits::Algebraic_category",
+          "brief": "Tag indicating the algebraic structure of the associated type.",
+          "detailed": "Tag is: Type is model of: CGAL::Null_tag no algebraic concept CGAL::Integral_domain_without_division_tag IntegralDomainWithoutDivision CGAL::Integral_domain_tag IntegralDomain CGAL::Unique_factorization_domain_tag UniqueFactorizationDomain CGAL::Euclidean_ring_tag EuclideanRing CGAL::Field_tag Field CGAL::Field_with_sqrt_tag FieldWithSqrt CGAL::Field_with_kth_root_tag FieldWithKthRoot CGAL::Field_with_root_of_tag FieldWithRootOf",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Algebraic_category",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "109"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_exact",
+          "qualified_name": "AlgebraicStructureTraits::Is_exact",
+          "brief": "Tag indicating whether Type is exact.",
+          "detailed": "This is either CGAL::Tag_true or CGAL::Tag_false . An algebraic structure is considered exact, if all operations required by its concept are computed such that a comparison of two algebraic expressions is always correct. The exactness covers only those operations that are required by the algebraic structure concept. e.g. an exact Field may have a Sqrt functor that is not exact.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Is_exact",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "126"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_numerical_sensitive",
+          "qualified_name": "AlgebraicStructureTraits::Is_numerical_sensitive",
+          "brief": "Tag indicating whether Type is numerical sensitive.",
+          "detailed": "This is either CGAL::Tag_true or CGAL::Tag_false . An algebraic structure is considered as numerically sensitive, if the performance of the type is sensitive to the condition number of an algorithm.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Is_numerical_sensitive",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "138"
+        },
+        {
+          "kind": "typedef",
+          "name": "Boolean",
+          "qualified_name": "AlgebraicStructureTraits::Boolean",
+          "brief": "This type specifies the return type of the predicates provided by this traits.",
+          "detailed": "The type must be convertible to bool and typically the type indeed maps to bool . However, there are also cases such as interval arithmetic, in which it is CGAL::Uncertain<bool> or some similar type.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Boolean",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "148"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_zero",
+          "qualified_name": "AlgebraicStructureTraits::Is_zero",
+          "brief": "A model of AlgebraicStructureTraits_::IsZero .",
+          "detailed": "Required by the concept IntegralDomainWithoutDivision . In case Type is also model of RealEmbeddable this is a model of RealEmbeddableTraits_::IsZero .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Is_zero",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "165"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_one",
+          "qualified_name": "AlgebraicStructureTraits::Is_one",
+          "brief": "A model of AlgebraicStructureTraits_::IsOne .",
+          "detailed": "Required by the concept IntegralDomainWithoutDivision .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Is_one",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "174"
+        },
+        {
+          "kind": "typedef",
+          "name": "Square",
+          "qualified_name": "AlgebraicStructureTraits::Square",
+          "brief": "A model of AlgebraicStructureTraits_::Square .",
+          "detailed": "Required by the concept IntegralDomainWithoutDivision .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Square",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "183"
+        },
+        {
+          "kind": "typedef",
+          "name": "Simplify",
+          "qualified_name": "AlgebraicStructureTraits::Simplify",
+          "brief": "A model of AlgebraicStructureTraits_::Simplify .",
+          "detailed": "Required by the concept IntegralDomainWithoutDivision .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Simplify",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "192"
+        },
+        {
+          "kind": "typedef",
+          "name": "Unit_part",
+          "qualified_name": "AlgebraicStructureTraits::Unit_part",
+          "brief": "A model of AlgebraicStructureTraits_::UnitPart .",
+          "detailed": "Required by the concept IntegralDomainWithoutDivision .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Unit_part",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "201"
+        },
+        {
+          "kind": "typedef",
+          "name": "Integral_division",
+          "qualified_name": "AlgebraicStructureTraits::Integral_division",
+          "brief": "A model of AlgebraicStructureTraits_::IntegralDivision .",
+          "detailed": "Required by the concept IntegralDomain .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Integral_division",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "210"
+        },
+        {
+          "kind": "typedef",
+          "name": "Divides",
+          "qualified_name": "AlgebraicStructureTraits::Divides",
+          "brief": "A model of AlgebraicStructureTraits_::Divides .",
+          "detailed": "Required by the concept IntegralDomain .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Divides",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "219"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_square",
+          "qualified_name": "AlgebraicStructureTraits::Is_square",
+          "brief": "A model of AlgebraicStructureTraits_::IsSquare .",
+          "detailed": "Required by the concept IntegralDomainWithoutDivision .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Is_square",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "228"
+        },
+        {
+          "kind": "typedef",
+          "name": "Gcd",
+          "qualified_name": "AlgebraicStructureTraits::Gcd",
+          "brief": "A model of AlgebraicStructureTraits_::Gcd .",
+          "detailed": "Required by the concept UniqueFactorizationDomain .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Gcd",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "237"
+        },
+        {
+          "kind": "typedef",
+          "name": "Mod",
+          "qualified_name": "AlgebraicStructureTraits::Mod",
+          "brief": "A model of AlgebraicStructureTraits_::Mod .",
+          "detailed": "Required by the concept EuclideanRing .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Mod",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "246"
+        },
+        {
+          "kind": "typedef",
+          "name": "Div",
+          "qualified_name": "AlgebraicStructureTraits::Div",
+          "brief": "A model of AlgebraicStructureTraits_::Div .",
+          "detailed": "Required by the concept EuclideanRing .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Div",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "255"
+        },
+        {
+          "kind": "typedef",
+          "name": "Div_mod",
+          "qualified_name": "AlgebraicStructureTraits::Div_mod",
+          "brief": "A model of AlgebraicStructureTraits_::DivMod .",
+          "detailed": "Required by the concept EuclideanRing .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Div_mod",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "264"
+        },
+        {
+          "kind": "typedef",
+          "name": "Inverse",
+          "qualified_name": "AlgebraicStructureTraits::Inverse",
+          "brief": "A model of AlgebraicStructureTraits_::Inverse .",
+          "detailed": "Required by the concept Field .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Inverse",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "273"
+        },
+        {
+          "kind": "typedef",
+          "name": "Sqrt",
+          "qualified_name": "AlgebraicStructureTraits::Sqrt",
+          "brief": "A model of AlgebraicStructureTraits_::Sqrt .",
+          "detailed": "Required by the concept FieldWithSqrt .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Sqrt",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "282"
+        },
+        {
+          "kind": "typedef",
+          "name": "Kth_root",
+          "qualified_name": "AlgebraicStructureTraits::Kth_root",
+          "brief": "A model of AlgebraicStructureTraits_::KthRoot .",
+          "detailed": "Required by the concept FieldWithKthRoot .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Kth_root",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "291"
+        },
+        {
+          "kind": "typedef",
+          "name": "Root_of",
+          "qualified_name": "AlgebraicStructureTraits::Root_of",
+          "brief": "A model of AlgebraicStructureTraits_::RootOf .",
+          "detailed": "Required by the concept FieldWithRootOf .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits::Root_of",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/AlgebraicStructureTraits.h",
+          "line": "300"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits.xml",
+      "file": "Concepts/AlgebraicStructureTraits.h",
+      "line": "37"
+    },
+    "AlgebraicStructureTraits_::Div": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::Div",
+      "brief": "AdaptableBinaryFunction computes the integral quotient of division with remainder.",
+      "detailed": "Refines AdaptableBinaryFunction AlgebraicStructureTraits AlgebraicStructureTraits_::Mod AlgebraicStructureTraits_::DivMod",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::Div::result_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Div::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Div.h",
+          "line": "28"
+        },
+        {
+          "kind": "typedef",
+          "name": "first_argument",
+          "qualified_name": "AlgebraicStructureTraits_::Div::first_argument",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Div::first_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Div.h",
+          "line": "33"
+        },
+        {
+          "kind": "typedef",
+          "name": "second_argument",
+          "qualified_name": "AlgebraicStructureTraits_::Div::second_argument",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Div::second_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Div.h",
+          "line": "38"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::Div::operator()",
+          "brief": "",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::Div::operator()",
+          "argsstring": "(first_argument_type x, second_argument_type y)",
+          "params": [
+            {
+              "type": "first_argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "second_argument_type",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--Div.h",
+          "line": "48"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::Div::operator()",
+          "brief": "This operator is defined if NT1 and NT2 are ExplicitInteroperable with coercion type AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::Div::operator()",
+          "argsstring": "(NT1 x, NT2 y)",
+          "params": [
+            {
+              "type": "NT1",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "NT2",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--Div.h",
+          "line": "55"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_div.xml",
+      "file": "Concepts/AlgebraicStructureTraits--Div.h",
+      "line": "19"
+    },
+    "AlgebraicStructureTraits_::Divides": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::Divides",
+      "brief": "AdaptableBinaryFunction , returns true if the first argument divides the second argument.",
+      "detailed": "Integral division (a.k.a. exact division or division without remainder) maps ring elements $ (n,d)$ to ring element $ c$ such that $ n = dc$ if such a $ c$ exists. In this case it is said that $ d$ divides $ n$ . This functor is required to provide two operators. The first operator takes two arguments and returns true if the first argument divides the second argument. The second operator returns $ c$ via the additional third argument. Refines AdaptableBinaryFunction AlgebraicStructureTraits AlgebraicStructureTraits_::IntegralDivision",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::Divides::result_type",
+          "brief": "Is AlgebraicStructureTraits::Boolean .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Divides::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Divides.h",
+          "line": "35"
+        },
+        {
+          "kind": "typedef",
+          "name": "first_argument",
+          "qualified_name": "AlgebraicStructureTraits_::Divides::first_argument",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Divides::first_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Divides.h",
+          "line": "40"
+        },
+        {
+          "kind": "typedef",
+          "name": "second_argument",
+          "qualified_name": "AlgebraicStructureTraits_::Divides::second_argument",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Divides::second_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Divides.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::Divides::operator()",
+          "brief": "Computes whether $ d$ divides $ n$ .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::Divides::operator()",
+          "argsstring": "(first_argument_type d, second_argument_type n)",
+          "params": [
+            {
+              "type": "first_argument_type",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "second_argument_type",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--Divides.h",
+          "line": "55"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::Divides::operator()",
+          "brief": "Computes whether $ d$ divides $ n$ .",
+          "detailed": "Moreover it computes $ c$ if $ d$ divides $ n$ , otherwise the value of $ c$ is undefined.",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::Divides::operator()",
+          "argsstring": "(first_argument_type d, second_argument_type n, AlgebraicStructureTraits::Type &c)",
+          "params": [
+            {
+              "type": "first_argument_type",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "second_argument_type",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "AlgebraicStructureTraits::Type &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--Divides.h",
+          "line": "65"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_divides.xml",
+      "file": "Concepts/AlgebraicStructureTraits--Divides.h",
+      "line": "26"
+    },
+    "AlgebraicStructureTraits_::DivMod": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::DivMod",
+      "brief": "AdaptableFunctor computes both integral quotient and remainder of division with remainder. The quotient $ q$ and remainder $ r$ are computed such that $ x = q*y + r$ and $ |r| < |y|$ with respect to the proper integer norm of the represented ring. For integers this norm is the absolute value. For univariate polynomials this norm is the degree. In particular, $ r$ is chosen to be $ 0$ if possible. Moreover, we require $ q$ to be minimized with respect to the proper integer norm.",
+      "detailed": "Note that the last condition is needed to ensure a unique computation of the pair $ (q,r)$ . However, an other option is to require minimality for $ |r|$ , with the advantage that a mod(x,y) operation would return the unique representative of the residue class of $ x$ with respect to $ y$ , e.g. $ mod(2,3)$ should return $ -1$ . But this conflicts with nearly all current implementation of integer types. From there, we decided to stay conform with common implementations and require $ q$ to be computed as $ x/y$ rounded towards zero. The following table illustrates the behavior for integers: x y q r 3 3 1 0 2 3 0 2 1 3 0 1 0 3 0 0 -1 3 0 -1 -2 3 0 -2 -3 3 -1 0 x y q r 3 -3 -1 0 2 -3 0 2 1 -3 0 1 0 -3 0 0 -1 -3 0 -1 -2 -3 0 -2 -3 -3 1 0 Refines AdaptableFunctor AlgebraicStructureTraits AlgebraicStructureTraits_::Mod AlgebraicStructureTraits_::Div",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::DivMod::result_type",
+          "brief": "Is void.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::DivMod::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--DivMod.h",
+          "line": "209"
+        },
+        {
+          "kind": "typedef",
+          "name": "first_argument_type",
+          "qualified_name": "AlgebraicStructureTraits_::DivMod::first_argument_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::DivMod::first_argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--DivMod.h",
+          "line": "214"
+        },
+        {
+          "kind": "typedef",
+          "name": "second_argument_type",
+          "qualified_name": "AlgebraicStructureTraits_::DivMod::second_argument_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::DivMod::second_argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--DivMod.h",
+          "line": "219"
+        },
+        {
+          "kind": "typedef",
+          "name": "third_argument_type",
+          "qualified_name": "AlgebraicStructureTraits_::DivMod::third_argument_type",
+          "brief": "Is AlgebraicStructureTraits::Type & .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::DivMod::third_argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--DivMod.h",
+          "line": "224"
+        },
+        {
+          "kind": "typedef",
+          "name": "fourth_argument_type",
+          "qualified_name": "AlgebraicStructureTraits_::DivMod::fourth_argument_type",
+          "brief": "Is AlgebraicStructureTraits::Type & .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::DivMod::fourth_argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--DivMod.h",
+          "line": "229"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::DivMod::operator()",
+          "brief": "computes the quotient $ q$ and remainder $ r$ , such that $ x = q*y + r$ and $ r$ minimal with respect to the Euclidean Norm on Type .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::DivMod::operator()",
+          "argsstring": "(first_argument_type x, second_argument_type y, third_argument_type q, fourth_argument_type r)",
+          "params": [
+            {
+              "type": "first_argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "second_argument_type",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "third_argument_type",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "fourth_argument_type",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--DivMod.h",
+          "line": "242"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::DivMod::operator()",
+          "brief": "This operator is defined if NT1 and NT2 are ExplicitInteroperable with coercion type AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::DivMod::operator()",
+          "argsstring": "(NT1 x, NT2 y, third_argument_type q, fourth_argument_type r)",
+          "params": [
+            {
+              "type": "NT1",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "NT2",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "third_argument_type",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "fourth_argument_type",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--DivMod.h",
+          "line": "252"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_div_mod.xml",
+      "file": "Concepts/AlgebraicStructureTraits--DivMod.h",
+      "line": "200"
+    },
+    "AlgebraicStructureTraits_::Gcd": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::Gcd",
+      "brief": "AdaptableBinaryFunction providing the gcd.",
+      "detailed": "The greatest common divisor ( $ gcd$ ) of ring elements $ x$ and $ y$ is the unique ring element $ d$ (up to a unit) with the property that any common divisor of $ x$ and $ y$ also divides $ d$ . (In other words: $ d$ is the greatest lower bound of $ x$ and $ y$ in the partial order of divisibility.) We demand the $ gcd$ to be unit-normal (i.e. have unit part 1). $ gcd(0,0)$ is defined as $ 0$ , since $ 0$ is the greatest element with respect to the partial order of divisibility. This is because an element $ a \\in R$ is said to divide $ b \\in R$ , iff $ \\exists r \\in R$ such that $ a \\cdot r = b$ . Thus, $ 0$ is divided by every element of the Ring, in particular by itself. Refines AdaptableBinaryFunction AlgebraicStructureTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::Gcd::result_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Gcd::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Gcd.h",
+          "line": "35"
+        },
+        {
+          "kind": "typedef",
+          "name": "first_argument",
+          "qualified_name": "AlgebraicStructureTraits_::Gcd::first_argument",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Gcd::first_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Gcd.h",
+          "line": "40"
+        },
+        {
+          "kind": "typedef",
+          "name": "second_argument",
+          "qualified_name": "AlgebraicStructureTraits_::Gcd::second_argument",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Gcd::second_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Gcd.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::Gcd::operator()",
+          "brief": "returns $ gcd(x,y)$ .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::Gcd::operator()",
+          "argsstring": "(first_argument_type x, second_argument_type y)",
+          "params": [
+            {
+              "type": "first_argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "second_argument_type",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--Gcd.h",
+          "line": "55"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::Gcd::operator()",
+          "brief": "This operator is defined if NT1 and NT2 are ExplicitInteroperable with coercion type AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::Gcd::operator()",
+          "argsstring": "(NT1 x, NT2 y)",
+          "params": [
+            {
+              "type": "NT1",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "NT2",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--Gcd.h",
+          "line": "62"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_gcd.xml",
+      "file": "Concepts/AlgebraicStructureTraits--Gcd.h",
+      "line": "26"
+    },
+    "AlgebraicStructureTraits_::IntegralDivision": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::IntegralDivision",
+      "brief": "AdaptableBinaryFunction providing an integral division.",
+      "detailed": "Integral division (a.k.a. exact division or division without remainder) maps ring elements $ (x,y)$ to ring element $ z$ such that $ x = yz$ if such a $ z$ exists (i.e. if $ x$ is divisible by $ y$ ). Otherwise the effect of invoking this operation is undefined. Since the ring represented is an integral domain, $ z$ is uniquely defined if it exists. Refines AdaptableBinaryFunction AlgebraicStructureTraits AlgebraicStructureTraits_::Divides",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::IntegralDivision::result_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::IntegralDivision::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--IntegralDivision.h",
+          "line": "32"
+        },
+        {
+          "kind": "typedef",
+          "name": "first_argument",
+          "qualified_name": "AlgebraicStructureTraits_::IntegralDivision::first_argument",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::IntegralDivision::first_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--IntegralDivision.h",
+          "line": "37"
+        },
+        {
+          "kind": "typedef",
+          "name": "second_argument",
+          "qualified_name": "AlgebraicStructureTraits_::IntegralDivision::second_argument",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::IntegralDivision::second_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--IntegralDivision.h",
+          "line": "42"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::IntegralDivision::operator()",
+          "brief": "returns $ x/y$ , this is an integral division.",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::IntegralDivision::operator()",
+          "argsstring": "(first_argument_type x, second_argument_type y)",
+          "params": [
+            {
+              "type": "first_argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "second_argument_type",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--IntegralDivision.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::IntegralDivision::operator()",
+          "brief": "This operator is defined if NT1 and NT2 are ExplicitInteroperable with coercion type AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::IntegralDivision::operator()",
+          "argsstring": "(NT1 x, NT2 y)",
+          "params": [
+            {
+              "type": "NT1",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "NT2",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--IntegralDivision.h",
+          "line": "59"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_integral_division.xml",
+      "file": "Concepts/AlgebraicStructureTraits--IntegralDivision.h",
+      "line": "23"
+    },
+    "AlgebraicStructureTraits_::Inverse": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::Inverse",
+      "brief": "AdaptableUnaryFunction providing the inverse element with respect to multiplication of a Field .",
+      "detailed": "Refines AdaptableUnaryFunction AlgebraicStructureTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::Inverse::result_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Inverse::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Inverse.h",
+          "line": "26"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "AlgebraicStructureTraits_::Inverse::argument_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Inverse::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Inverse.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::Inverse::operator()",
+          "brief": "returns the inverse element of $ x$ with respect to multiplication.",
+          "detailed": "$ x \\neq0$ .",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::Inverse::operator()",
+          "argsstring": "(argument_type x) const",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--Inverse.h",
+          "line": "43"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_inverse.xml",
+      "file": "Concepts/AlgebraicStructureTraits--Inverse.h",
+      "line": "17"
+    },
+    "AlgebraicStructureTraits_::IsOne": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::IsOne",
+      "brief": "AdaptableUnaryFunction , returns true in case the argument is the one of the ring.",
+      "detailed": "Refines AdaptableUnaryFunction AlgebraicStructureTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::IsOne::result_type",
+          "brief": "Is AlgebraicStructureTraits::Boolean .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::IsOne::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--IsOne.h",
+          "line": "26"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "AlgebraicStructureTraits_::IsOne::argument_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::IsOne::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--IsOne.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::IsOne::operator()",
+          "brief": "returns true in case $ x$ is the one of the ring.",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::IsOne::operator()",
+          "argsstring": "(argument_type x)",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--IsOne.h",
+          "line": "42"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_is_one.xml",
+      "file": "Concepts/AlgebraicStructureTraits--IsOne.h",
+      "line": "17"
+    },
+    "AlgebraicStructureTraits_::IsSquare": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::IsSquare",
+      "brief": "AdaptableBinaryFunction that computes whether the first argument is a square. If the first argument is a square the second argument, which is taken by reference, contains the square root. Otherwise, the content of the second argument is undefined.",
+      "detailed": "A ring element $ x$ is said to be a square iff there exists a ring element $ y$ such that $ x= y*y$ . In case the ring is a UniqueFactorizationDomain , $ y$ is uniquely defined up to multiplication by units. Refines AdaptableBinaryFunction AlgebraicStructureTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::IsSquare::result_type",
+          "brief": "Is AlgebraicStructureTraits::Boolean .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::IsSquare::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--IsSquare.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "first_argument",
+          "qualified_name": "AlgebraicStructureTraits_::IsSquare::first_argument",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::IsSquare::first_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--IsSquare.h",
+          "line": "36"
+        },
+        {
+          "kind": "typedef",
+          "name": "second_argument",
+          "qualified_name": "AlgebraicStructureTraits_::IsSquare::second_argument",
+          "brief": "Is AlgebraicStructureTraits::Type & .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::IsSquare::second_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--IsSquare.h",
+          "line": "41"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::IsSquare::operator()",
+          "brief": "returns true in case $ x$ is a square, i.e. $ x = y*y$ .",
+          "detailed": "$ unit\\_part(y) == 1$ .",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::IsSquare::operator()",
+          "argsstring": "(first_argument_type x, second_argument_type y)",
+          "params": [
+            {
+              "type": "first_argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "second_argument_type",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--IsSquare.h",
+          "line": "53"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::IsSquare::operator()",
+          "brief": "returns true in case $ x$ is a square.",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::IsSquare::operator()",
+          "argsstring": "(first_argument_type x)",
+          "params": [
+            {
+              "type": "first_argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--IsSquare.h",
+          "line": "60"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_is_square.xml",
+      "file": "Concepts/AlgebraicStructureTraits--IsSquare.h",
+      "line": "22"
+    },
+    "AlgebraicStructureTraits_::IsZero": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::IsZero",
+      "brief": "AdaptableUnaryFunction , returns true in case the argument is the zero element of the ring.",
+      "detailed": "Refines AdaptableUnaryFunction AlgebraicStructureTraits RealEmbeddableTraits_::IsZero",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::IsZero::result_type",
+          "brief": "Is AlgebraicStructureTraits::Boolean .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::IsZero::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--IsZero.h",
+          "line": "26"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "AlgebraicStructureTraits_::IsZero::argument_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::IsZero::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--IsZero.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::IsZero::operator()",
+          "brief": "returns true in case $ x$ is the zero element of the ring.",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::IsZero::operator()",
+          "argsstring": "(argument_type x) const",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--IsZero.h",
+          "line": "42"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_is_zero.xml",
+      "file": "Concepts/AlgebraicStructureTraits--IsZero.h",
+      "line": "17"
+    },
+    "AlgebraicStructureTraits_::KthRoot": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::KthRoot",
+      "brief": "AdaptableBinaryFunction providing the k-th root.",
+      "detailed": "Refines AdaptableBinaryFunction FieldWithRootOf AlgebraicStructureTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::KthRoot::result_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::KthRoot::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--KthRoot.h",
+          "line": "26"
+        },
+        {
+          "kind": "typedef",
+          "name": "first_argument",
+          "qualified_name": "AlgebraicStructureTraits_::KthRoot::first_argument",
+          "brief": "Is int.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::KthRoot::first_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--KthRoot.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "second_argument",
+          "qualified_name": "AlgebraicStructureTraits_::KthRoot::second_argument",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::KthRoot::second_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--KthRoot.h",
+          "line": "36"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::KthRoot::operator()",
+          "brief": "returns the $ k$ -th root of $ x$ .",
+          "detailed": "$ k \\geq1$",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::KthRoot::operator()",
+          "argsstring": "(int k, second_argument_type x)",
+          "params": [
+            {
+              "type": "int",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "second_argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--KthRoot.h",
+          "line": "48"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_kth_root.xml",
+      "file": "Concepts/AlgebraicStructureTraits--KthRoot.h",
+      "line": "17"
+    },
+    "AlgebraicStructureTraits_::Mod": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::Mod",
+      "brief": "AdaptableBinaryFunction computes the remainder of division with remainder.",
+      "detailed": "Refines AdaptableBinaryFunction AlgebraicStructureTraits AlgebraicStructureTraits_::Div AlgebraicStructureTraits_::DivMod",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::Mod::result_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Mod::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Mod.h",
+          "line": "27"
+        },
+        {
+          "kind": "typedef",
+          "name": "first_argument",
+          "qualified_name": "AlgebraicStructureTraits_::Mod::first_argument",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Mod::first_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Mod.h",
+          "line": "32"
+        },
+        {
+          "kind": "typedef",
+          "name": "second_argument",
+          "qualified_name": "AlgebraicStructureTraits_::Mod::second_argument",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Mod::second_argument",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Mod.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::Mod::operator()",
+          "brief": "",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::Mod::operator()",
+          "argsstring": "(first_argument_type x, second_argument_type y)",
+          "params": [
+            {
+              "type": "first_argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "second_argument_type",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--Mod.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::Mod::operator()",
+          "brief": "This operator is defined if NT1 and NT2 are ExplicitInteroperable with coercion type AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::Mod::operator()",
+          "argsstring": "(NT1 x, NT2 y)",
+          "params": [
+            {
+              "type": "NT1",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "NT2",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--Mod.h",
+          "line": "54"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_mod.xml",
+      "file": "Concepts/AlgebraicStructureTraits--Mod.h",
+      "line": "18"
+    },
+    "AlgebraicStructureTraits_::RootOf": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::RootOf",
+      "brief": "AdaptableFunctor computes a real root of a square-free univariate polynomial.",
+      "detailed": "Refines AdaptableFunctor FieldWithRootOf AlgebraicStructureTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::RootOf::result_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::RootOf::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--RootOf.h",
+          "line": "27"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::RootOf::operator()",
+          "brief": "returns the k-th real root of the univariate polynomial, which is defined by the iterator range, where begin refers to the constant term.",
+          "detailed": "The polynomial is square-free. The value type of the InputIterator is AlgebraicStructureTraits::Type .",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::RootOf::operator()",
+          "argsstring": "(int k, InputIterator begin, InputIterator end)",
+          "params": [
+            {
+              "type": "int",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--RootOf.h",
+          "line": "42"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_root_of.xml",
+      "file": "Concepts/AlgebraicStructureTraits--RootOf.h",
+      "line": "18"
+    },
+    "AlgebraicStructureTraits_::Simplify": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::Simplify",
+      "brief": "This AdaptableUnaryFunction may simplify a given object.",
+      "detailed": "Refines AdaptableUnaryFunction AlgebraicStructureTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::Simplify::result_type",
+          "brief": "Is void.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Simplify::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Simplify.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "AlgebraicStructureTraits_::Simplify::argument_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Simplify::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Simplify.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::Simplify::operator()",
+          "brief": "may simplify $ x$ .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::Simplify::operator()",
+          "argsstring": "(argument_type x)",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--Simplify.h",
+          "line": "40"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_simplify.xml",
+      "file": "Concepts/AlgebraicStructureTraits--Simplify.h",
+      "line": "16"
+    },
+    "AlgebraicStructureTraits_::Sqrt": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::Sqrt",
+      "brief": "AdaptableUnaryFunction providing the square root.",
+      "detailed": "Refines AdaptableUnaryFunction AlgebraicStructureTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::Sqrt::result_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Sqrt::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Sqrt.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "AlgebraicStructureTraits_::Sqrt::argument_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Sqrt::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Sqrt.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::Sqrt::operator()",
+          "brief": "returns $ \\sqrt{x}$ .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::Sqrt::operator()",
+          "argsstring": "(argument_type x) const",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--Sqrt.h",
+          "line": "40"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_sqrt.xml",
+      "file": "Concepts/AlgebraicStructureTraits--Sqrt.h",
+      "line": "16"
+    },
+    "AlgebraicStructureTraits_::Square": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::Square",
+      "brief": "AdaptableUnaryFunction , computing the square of the argument.",
+      "detailed": "Refines AdaptableUnaryFunction AlgebraicStructureTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::Square::result_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Square::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Square.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "AlgebraicStructureTraits_::Square::argument_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::Square::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--Square.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::Square::operator()",
+          "brief": "returns the square of $ x$ .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::Square::operator()",
+          "argsstring": "(argument_type x)",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--Square.h",
+          "line": "40"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_square.xml",
+      "file": "Concepts/AlgebraicStructureTraits--Square.h",
+      "line": "16"
+    },
+    "AlgebraicStructureTraits_::UnitPart": {
+      "kind": "class",
+      "name": "AlgebraicStructureTraits_::UnitPart",
+      "brief": "This AdaptableUnaryFunction computes the unit part of a given ring element.",
+      "detailed": "The mathematical definition of unit part is as follows: Two ring elements $ a$ and $ b$ are said to be associate if there exists an invertible ring element (i.e. a unit) $ u$ such that $ a = ub$ . This defines an equivalence relation. We can distinguish exactly one element of every equivalence class as being unit normal. Then each element of a ring possesses a factorization into a unit (called its unit part) and a unit-normal ring element (called its unit normal associate). For the integers, the non-negative numbers are by convention unit normal, hence the unit-part of a non-zero integer is its sign. For a Field , every non-zero element is a unit and is its own unit part, its unit normal associate being one. The unit part of zero is, by convention, one. Refines AdaptableUnaryFunction AlgebraicStructureTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "AlgebraicStructureTraits_::UnitPart::result_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::UnitPart::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--UnitPart.h",
+          "line": "40"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "AlgebraicStructureTraits_::UnitPart::argument_type",
+          "brief": "Is AlgebraicStructureTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type AlgebraicStructureTraits_::UnitPart::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/AlgebraicStructureTraits--UnitPart.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "AlgebraicStructureTraits_::UnitPart::operator()",
+          "brief": "returns the unit part of $ x$ .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type AlgebraicStructureTraits_::UnitPart::operator()",
+          "argsstring": "(argument_type x)",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/AlgebraicStructureTraits--UnitPart.h",
+          "line": "55"
+        }
+      ],
+      "xml_file": "class_algebraic_structure_traits___1_1_unit_part.xml",
+      "file": "Concepts/AlgebraicStructureTraits--UnitPart.h",
+      "line": "31"
+    },
+    "CGAL::Algebraic_structure_traits": {
+      "kind": "class",
+      "name": "CGAL::Algebraic_structure_traits",
+      "brief": "An instance of Algebraic_structure_traits is a model of AlgebraicStructureTraits , where T is the associated type.",
+      "detailed": "Is model of AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_algebraic__structure__traits.xml",
+      "file": "CGAL/Algebraic_structure_traits.h",
+      "line": "12"
+    },
+    "CGAL::Coercion_traits": {
+      "kind": "struct",
+      "name": "CGAL::Coercion_traits",
+      "brief": "An instance of Coercion_traits reflects the type coercion of the types A and B, it is symmetric in the two template arguments.",
+      "detailed": "ExplicitInteroperable ImplicitInteroperable",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Are_explicit_interoperable",
+          "qualified_name": "CGAL::Coercion_traits::Are_explicit_interoperable",
+          "brief": "Tag indicating whether the two types A and B are a model of ExplicitInteroperable .",
+          "detailed": "This is either CGAL::Tag_true or CGAL::Tag_false .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Coercion_traits< A, B >::Are_explicit_interoperable",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Coercion_traits.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "Are_implicit_interoperable",
+          "qualified_name": "CGAL::Coercion_traits::Are_implicit_interoperable",
+          "brief": "Tag indicating whether the two types A and B are a model of ImplicitInteroperable .",
+          "detailed": "This is either CGAL::Tag_true or CGAL::Tag_false .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Coercion_traits< A, B >::Are_implicit_interoperable",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Coercion_traits.h",
+          "line": "32"
+        },
+        {
+          "kind": "typedef",
+          "name": "Type",
+          "qualified_name": "CGAL::Coercion_traits::Type",
+          "brief": "The coercion type of A and B .",
+          "detailed": "In case A and B are not ExplicitInteroperable this is undefined.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Coercion_traits< A, B >::Type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Coercion_traits.h",
+          "line": "39"
+        },
+        {
+          "kind": "typedef",
+          "name": "Cast",
+          "qualified_name": "CGAL::Coercion_traits::Cast",
+          "brief": "A model of the AdaptableFunctor concept, providing the conversion of A or B to Type .",
+          "detailed": "In case A and B are not ExplicitInteroperable this is undefined.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Coercion_traits< A, B >::Cast",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Coercion_traits.h",
+          "line": "46"
+        }
+      ],
+      "xml_file": "struct_c_g_a_l_1_1_coercion__traits.xml",
+      "file": "CGAL/Coercion_traits.h",
+      "line": "15"
+    },
+    "CGAL::Euclidean_ring_tag": {
+      "kind": "struct",
+      "name": "CGAL::Euclidean_ring_tag",
+      "brief": "Tag indicating that a type is a model of the EuclideanRing concept.",
+      "detailed": "Is model of DefaultConstructible EuclideanRing AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_euclidean__ring__tag.xml",
+      "file": "CGAL/Algebraic_structure_traits.h",
+      "line": "32"
+    },
+    "CGAL::Field_tag": {
+      "kind": "struct",
+      "name": "CGAL::Field_tag",
+      "brief": "Tag indicating that a type is a model of the Field concept.",
+      "detailed": "Is model of DefaultConstructible Field AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_field__tag.xml",
+      "file": "CGAL/Algebraic_structure_traits.h",
+      "line": "48"
+    },
+    "CGAL::Field_with_kth_root_tag": {
+      "kind": "struct",
+      "name": "CGAL::Field_with_kth_root_tag",
+      "brief": "Tag indicating that a type is a model of the FieldWithKthRoot concept.",
+      "detailed": "Is model of DefaultConstructible FieldWithKthRoot AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_field__with__kth__root__tag.xml",
+      "file": "CGAL/Algebraic_structure_traits.h",
+      "line": "64"
+    },
+    "CGAL::Field_with_root_of_tag": {
+      "kind": "struct",
+      "name": "CGAL::Field_with_root_of_tag",
+      "brief": "Tag indicating that a type is a model of the FieldWithRootOf concept.",
+      "detailed": "Is model of DefaultConstructible FieldWithRootOf AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_field__with__root__of__tag.xml",
+      "file": "CGAL/Algebraic_structure_traits.h",
+      "line": "80"
+    },
+    "CGAL::Field_with_sqrt_tag": {
+      "kind": "struct",
+      "name": "CGAL::Field_with_sqrt_tag",
+      "brief": "Tag indicating that a type is a model of the FieldWithSqrt concept.",
+      "detailed": "Is model of DefaultConstructible FieldWithSqrt AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_field__with__sqrt__tag.xml",
+      "file": "CGAL/Algebraic_structure_traits.h",
+      "line": "96"
+    },
+    "CGAL::Fraction_traits": {
+      "kind": "class",
+      "name": "CGAL::Fraction_traits",
+      "brief": "An instance of Fraction_traits is a model of FractionTraits , where T is the associated type.",
+      "detailed": "Is model of FractionTraits",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_fraction__traits.xml",
+      "file": "CGAL/Fraction_traits.h",
+      "line": "13"
+    },
+    "CGAL::Integral_domain_tag": {
+      "kind": "struct",
+      "name": "CGAL::Integral_domain_tag",
+      "brief": "Tag indicating that a type is a model of the IntegralDomain concept.",
+      "detailed": "Is model of DefaultConstructible IntegralDomain AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_integral__domain__tag.xml",
+      "file": "CGAL/Algebraic_structure_traits.h",
+      "line": "112"
+    },
+    "CGAL::Integral_domain_without_division_tag": {
+      "kind": "struct",
+      "name": "CGAL::Integral_domain_without_division_tag",
+      "brief": "Tag indicating that a type is a model of the IntegralDomainWithoutDivision concept.",
+      "detailed": "Is model of DefaultConstructible IntegralDomainWithoutDivision",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_integral__domain__without__division__tag.xml",
+      "file": "CGAL/Algebraic_structure_traits.h",
+      "line": "127"
+    },
+    "CGAL::Real_embeddable_traits": {
+      "kind": "class",
+      "name": "CGAL::Real_embeddable_traits",
+      "brief": "An instance of Real_embeddable_traits is a model of RealEmbeddableTraits , where T is the associated type.",
+      "detailed": "Is model of RealEmbeddableTraits",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_real__embeddable__traits.xml",
+      "file": "CGAL/Real_embeddable_traits.h",
+      "line": "13"
+    },
+    "CGAL::Unique_factorization_domain_tag": {
+      "kind": "struct",
+      "name": "CGAL::Unique_factorization_domain_tag",
+      "brief": "Tag indicating that a type is a model of the UniqueFactorizationDomain concept.",
+      "detailed": "Is model of DefaultConstructible UniqueFactorizationDomain AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "struct_c_g_a_l_1_1_unique__factorization__domain__tag.xml",
+      "file": "CGAL/Algebraic_structure_traits.h",
+      "line": "143"
+    },
+    "EuclideanRing": {
+      "kind": "class",
+      "name": "EuclideanRing",
+      "brief": "A model of EuclideanRing represents a Euclidean ring (or Euclidean domain). It is an UniqueFactorizationDomain that affords a suitable notion of minimality of remainders such that given $ x$ and $ y \\neq 0$ we obtain an (almost) unique solution to $ x = qy + r $ by demanding that a solution $ (q,r)$ is chosen to minimize $ r$ . In particular, $ r$ is chosen to be $ 0$ if possible.",
+      "detailed": "Moreover, CGAL::Algebraic_structure_traits < EuclideanRing > is a model of AlgebraicStructureTraits providing: CGAL::Algebraic_structure_traits< EuclideanRing >::Algebraic_category derived from CGAL::Unique_factorization_domain_tag CGAL::Algebraic_structure_traits< EuclideanRing >::Mod which is a model of AlgebraicStructureTraits_::Mod CGAL::Algebraic_structure_traits< EuclideanRing >::Div which is a model of AlgebraicStructureTraits_::Div CGAL::Algebraic_structure_traits< EuclideanRing >::Div_mod which is a model of AlgebraicStructureTraits_::DivMod Remarks The most prominent example of a Euclidean ring are the integers. Whenever both $ x$ and $ y$ are positive, then it is conventional to choose the smallest positive remainder $ r$ . Refines UniqueFactorizationDomain IntegralDomainWithoutDivision IntegralDomain UniqueFactorizationDomain EuclideanRing Field FieldWithSqrt FieldWithKthRoot FieldWithRootOf AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "class_euclidean_ring.xml",
+      "file": "Concepts/EuclideanRing.h",
+      "line": "42"
+    },
+    "ExplicitInteroperable": {
+      "kind": "class",
+      "name": "ExplicitInteroperable",
+      "brief": "Two types A and B are a model of the ExplicitInteroperable concept, if it is possible to derive a superior type for A and B , such that both types are embeddable into this type. This type is CGAL::Coercion_traits<A,B>::Type .",
+      "detailed": "In this case CGAL::Coercion_traits<A,B>::Are_explicit_interoperable is Tag_true . A and B are valid argument types for all binary functors in CGAL::Algebraic_structure_traits <Type> and CGAL::Real_embeddable_traits <Type> . This is also the case for the respective global functions. CGAL::Coercion_traits <A,B> ImplicitInteroperable AlgebraicStructureTraits RealEmbeddableTraits",
+      "members": [],
+      "xml_file": "class_explicit_interoperable.xml",
+      "file": "Concepts/ExplicitInteroperable.h",
+      "line": "26"
+    },
+    "Field": {
+      "kind": "class",
+      "name": "Field",
+      "brief": "A model of Field is an IntegralDomain in which every non-zero element has a multiplicative inverse. Thus, one can divide by any non-zero element. Hence division is defined for any divisor != 0. For a Field , we require this division operation to be available through operators / and /=.",
+      "detailed": "Moreover, CGAL::Algebraic_structure_traits < Field > is a model of AlgebraicStructureTraits providing: CGAL::Algebraic_structure_traits< Field >::Algebraic_category derived from CGAL::Field_tag CGAL::Algebraic_structure_traits< FieldWithSqrt >::Inverse which is a model of AlgebraicStructureTraits_::Inverse Refines IntegralDomain IntegralDomainWithoutDivision IntegralDomain UniqueFactorizationDomain EuclideanRing Field FieldWithSqrt FieldWithKthRoot FieldWithRootOf AlgebraicStructureTraits",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator/",
+          "qualified_name": "Field::operator/",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Field",
+          "definition": "Field Field::operator/",
+          "argsstring": "(const Field &a, const Field &b)",
+          "params": [
+            {
+              "type": "const Field &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Field &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/Field.h",
+          "line": "42"
+        },
+        {
+          "kind": "function",
+          "name": "operator/=",
+          "qualified_name": "Field::operator/=",
+          "brief": "",
+          "detailed": "",
+          "return_type": "Field",
+          "definition": "Field Field::operator/=",
+          "argsstring": "(const Field &b)",
+          "params": [
+            {
+              "type": "const Field &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/Field.h",
+          "line": "48"
+        }
+      ],
+      "xml_file": "class_field.xml",
+      "file": "Concepts/Field.h",
+      "line": "33"
+    },
+    "FieldNumberType": {
+      "kind": "class",
+      "name": "FieldNumberType",
+      "brief": "The concept FieldNumberType combines the requirements of the concepts Field and RealEmbeddable . A model of FieldNumberType can be used as a template parameter for Cartesian kernels.",
+      "detailed": "Refines Field RealEmbeddable Has models float double CGAL::Gmpq CGAL::Interval_nt CGAL::Interval_nt_advanced CGAL::Lazy_exact_nt< FieldNumberType > CGAL::Quotient< RingNumberType > leda_rational leda_bigfloat leda_real RingNumberType Kernel",
+      "members": [],
+      "xml_file": "class_field_number_type.xml",
+      "file": "Concepts/FieldNumberType.h",
+      "line": "30"
+    },
+    "FieldWithKthRoot": {
+      "kind": "class",
+      "name": "FieldWithKthRoot",
+      "brief": "A model of FieldWithKthRoot is a FieldWithSqrt that has operations to take k-th roots.",
+      "detailed": "Moreover, CGAL::Algebraic_structure_traits < FieldWithKthRoot > is a model of AlgebraicStructureTraits providing: CGAL::Algebraic_structure_traits< FieldWithKthRoot >::Algebraic_category derived from CGAL::Field_with_kth_root_tag CGAL::Algebraic_structure_traits< FieldWithKthRoot >::Kth_root which is a model of AlgebraicStructureTraits_::KthRoot Refines FieldWithSqrt IntegralDomainWithoutDivision IntegralDomain UniqueFactorizationDomain EuclideanRing Field FieldWithSqrt FieldWithKthRoot FieldWithRootOf AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "class_field_with_kth_root.xml",
+      "file": "Concepts/FieldWithKthRoot.h",
+      "line": "27"
+    },
+    "FieldWithRootOf": {
+      "kind": "class",
+      "name": "FieldWithRootOf",
+      "brief": "A model of FieldWithRootOf is a FieldWithKthRoot with the possibility to construct it as the root of a univariate polynomial.",
+      "detailed": "Moreover, CGAL::Algebraic_structure_traits < FieldWithRootOf > is a model of AlgebraicStructureTraits providing: CGAL::Algebraic_structure_traits< FieldWithRootOf >::Algebraic_category derived from CGAL::Field_with_kth_root_tag CGAL::Algebraic_structure_traits< FieldWithRootOf >::Root_of which is a model of AlgebraicStructureTraits_::RootOf Refines FieldWithKthRoot IntegralDomainWithoutDivision IntegralDomain UniqueFactorizationDomain EuclideanRing Field FieldWithSqrt FieldWithKthRoot FieldWithRootOf AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "class_field_with_root_of.xml",
+      "file": "Concepts/FieldWithRootOf.h",
+      "line": "28"
+    },
+    "FieldWithSqrt": {
+      "kind": "class",
+      "name": "FieldWithSqrt",
+      "brief": "A model of FieldWithSqrt is a Field that has operations to take square roots.",
+      "detailed": "Moreover, CGAL::Algebraic_structure_traits < FieldWithSqrt > is a model of AlgebraicStructureTraits providing: CGAL::Algebraic_structure_traits< FieldWithSqrt >::Algebraic_category derived from CGAL::Field_with_sqrt_tag CGAL::Algebraic_structure_traits< FieldWithSqrt >::Sqrt which is a model of AlgebraicStructureTraits_::Sqrt Refines Field IntegralDomainWithoutDivision IntegralDomain UniqueFactorizationDomain EuclideanRing Field FieldWithSqrt FieldWithKthRoot FieldWithRootOf AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "class_field_with_sqrt.xml",
+      "file": "Concepts/FieldWithSqrt.h",
+      "line": "27"
+    },
+    "Fraction": {
+      "kind": "class",
+      "name": "Fraction",
+      "brief": "A type is considered as a Fraction , if there is a reasonable way to decompose it into a numerator and denominator. In this case the relevant functionality for decomposing and re-composing as well as the numerator and denominator type are provided by CGAL::Fraction_traits .",
+      "detailed": "FractionTraits CGAL::Fraction_traits <T>",
+      "members": [],
+      "xml_file": "class_fraction.xml",
+      "file": "Concepts/Fraction.h",
+      "line": "16"
+    },
+    "FractionTraits": {
+      "kind": "class",
+      "name": "FractionTraits",
+      "brief": "A model of FractionTraits is associated with a type Type .",
+      "detailed": "In case the associated type is a Fraction , a model of FractionTraits provides the relevant functionality for decomposing and re-composing as well as the numerator and denominator type. Has models CGAL::Fraction_traits <T> FractionTraits_::Decompose FractionTraits_::Compose FractionTraits_::CommonFactor",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Type",
+          "qualified_name": "FractionTraits::Type",
+          "brief": "The associated type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type FractionTraits::Type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/FractionTraits.h",
+          "line": "29"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_fraction",
+          "qualified_name": "FractionTraits::Is_fraction",
+          "brief": "Tag indicating whether the associated type is a fraction and can be decomposed into a numerator and denominator.",
+          "detailed": "This is either CGAL::Tag_true or CGAL::Tag_false .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type FractionTraits::Is_fraction",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/FractionTraits.h",
+          "line": "38"
+        },
+        {
+          "kind": "typedef",
+          "name": "Numerator_type",
+          "qualified_name": "FractionTraits::Numerator_type",
+          "brief": "The type to represent the numerator.",
+          "detailed": "This is undefined in case the associated type is not a fraction.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type FractionTraits::Numerator_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/FractionTraits.h",
+          "line": "44"
+        },
+        {
+          "kind": "typedef",
+          "name": "Denominator_type",
+          "qualified_name": "FractionTraits::Denominator_type",
+          "brief": "The (simpler) type to represent the denominator.",
+          "detailed": "This is undefined in case the associated type is not a fraction.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type FractionTraits::Denominator_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/FractionTraits.h",
+          "line": "50"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compose",
+          "qualified_name": "FractionTraits::Compose",
+          "brief": "A model of FractionTraits_::Compose .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type FractionTraits::Compose",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/FractionTraits.h",
+          "line": "61"
+        },
+        {
+          "kind": "typedef",
+          "name": "Decompose",
+          "qualified_name": "FractionTraits::Decompose",
+          "brief": "A model of FractionTraits_::Decompose .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type FractionTraits::Decompose",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/FractionTraits.h",
+          "line": "67"
+        },
+        {
+          "kind": "typedef",
+          "name": "Common_factor",
+          "qualified_name": "FractionTraits::Common_factor",
+          "brief": "A model of FractionTraits_::CommonFactor .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type FractionTraits::Common_factor",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/FractionTraits.h",
+          "line": "73"
+        }
+      ],
+      "xml_file": "class_fraction_traits.xml",
+      "file": "Concepts/FractionTraits.h",
+      "line": "20"
+    },
+    "FractionTraits_::CommonFactor": {
+      "kind": "class",
+      "name": "FractionTraits_::CommonFactor",
+      "brief": "AdaptableBinaryFunction , finds great common factor of denominators.",
+      "detailed": "This can be considered as a relaxed version of AlgebraicStructureTraits_::Gcd , this is needed because it is not guaranteed that FractionTraits::Denominator_type is a model of UniqueFactorizationDomain . Refines AdaptableBinaryFunction Fraction FractionTraits FractionTraits_::Decompose FractionTraits_::Compose AlgebraicStructureTraits_::Gcd",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "FractionTraits_::CommonFactor::result_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FractionTraits::Denominator_type",
+          "definition": "typedef FractionTraits::Denominator_type FractionTraits_::CommonFactor::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/FractionTraits.h",
+          "line": "192"
+        },
+        {
+          "kind": "typedef",
+          "name": "first_argument_type",
+          "qualified_name": "FractionTraits_::CommonFactor::first_argument_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FractionTraits::Denominator_type",
+          "definition": "typedef FractionTraits::Denominator_type FractionTraits_::CommonFactor::first_argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/FractionTraits.h",
+          "line": "197"
+        },
+        {
+          "kind": "typedef",
+          "name": "second_argument_type",
+          "qualified_name": "FractionTraits_::CommonFactor::second_argument_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FractionTraits::Denominator_type",
+          "definition": "typedef FractionTraits::Denominator_type FractionTraits_::CommonFactor::second_argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/FractionTraits.h",
+          "line": "202"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "FractionTraits_::CommonFactor::operator()",
+          "brief": "return a great common factor of $ d1$ and $ d2$ .",
+          "detailed": "Note: operator()(0,0) = 0",
+          "return_type": "result_type",
+          "definition": "result_type FractionTraits_::CommonFactor::operator()",
+          "argsstring": "(first_argument_type d1, second_argument_type d2)",
+          "params": [
+            {
+              "type": "first_argument_type",
+              "name": "d1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "second_argument_type",
+              "name": "d2",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/FractionTraits.h",
+          "line": "214"
+        }
+      ],
+      "xml_file": "class_fraction_traits___1_1_common_factor.xml",
+      "file": "Concepts/FractionTraits.h",
+      "line": "183"
+    },
+    "FractionTraits_::Compose": {
+      "kind": "class",
+      "name": "FractionTraits_::Compose",
+      "brief": "AdaptableBinaryFunction , returns the fraction of its arguments.",
+      "detailed": "Refines AdaptableBinaryFunction Fraction FractionTraits FractionTraits_::Decompose FractionTraits_::CommonFactor",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "FractionTraits_::Compose::result_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FractionTraits::Type",
+          "definition": "typedef FractionTraits::Type FractionTraits_::Compose::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/FractionTraits.h",
+          "line": "136"
+        },
+        {
+          "kind": "typedef",
+          "name": "first_argument_type",
+          "qualified_name": "FractionTraits_::Compose::first_argument_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FractionTraits::Numerator_type",
+          "definition": "typedef FractionTraits::Numerator_type FractionTraits_::Compose::first_argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/FractionTraits.h",
+          "line": "141"
+        },
+        {
+          "kind": "typedef",
+          "name": "second_argument_type",
+          "qualified_name": "FractionTraits_::Compose::second_argument_type",
+          "brief": "",
+          "detailed": "",
+          "return_type": "FractionTraits::Denominator_type",
+          "definition": "typedef FractionTraits::Denominator_type FractionTraits_::Compose::second_argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/FractionTraits.h",
+          "line": "146"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "FractionTraits_::Compose::operator()",
+          "brief": "return the fraction $ n/d$ .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type FractionTraits_::Compose::operator()",
+          "argsstring": "(first_argument_type n, second_argument_type d)",
+          "params": [
+            {
+              "type": "first_argument_type",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "second_argument_type",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/FractionTraits.h",
+          "line": "156"
+        }
+      ],
+      "xml_file": "class_fraction_traits___1_1_compose.xml",
+      "file": "Concepts/FractionTraits.h",
+      "line": "127"
+    },
+    "FractionTraits_::Decompose": {
+      "kind": "class",
+      "name": "FractionTraits_::Decompose",
+      "brief": "Functor decomposing a Fraction into its numerator and denominator.",
+      "detailed": "Fraction FractionTraits FractionTraits_::Compose FractionTraits_::CommonFactor",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "FractionTraits_::Decompose::operator()",
+          "brief": "decompose $ f$ into numerator $ n$ and denominator $ d$ .",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void FractionTraits_::Decompose::operator()",
+          "argsstring": "(FractionTraits::Type f, FractionTraits::Numerator_type &n, FractionTraits::Denominator_type &d)",
+          "params": [
+            {
+              "type": "FractionTraits::Type",
+              "name": "f",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FractionTraits::Numerator_type &",
+              "name": "n",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "FractionTraits::Denominator_type &",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/FractionTraits.h",
+          "line": "104"
+        }
+      ],
+      "xml_file": "class_fraction_traits___1_1_decompose.xml",
+      "file": "Concepts/FractionTraits.h",
+      "line": "95"
+    },
+    "FromDoubleConstructible": {
+      "kind": "class",
+      "name": "FromDoubleConstructible",
+      "brief": "A model of the concept FromDoubleConstructible is required to be constructible from the type double .",
+      "detailed": "In case the type is a model of RealEmbeddable too, for any double d the identity: d == CGAL::to_double(T(d)) , is guaranteed.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "FromDoubleConstructible",
+          "qualified_name": "FromDoubleConstructible::FromDoubleConstructible",
+          "brief": "conversion constructor from double.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "FromDoubleConstructible::FromDoubleConstructible",
+          "argsstring": "(const double &d)",
+          "params": [
+            {
+              "type": "const double &",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/FromDoubleConstructible.h",
+          "line": "25"
+        }
+      ],
+      "xml_file": "class_from_double_constructible.xml",
+      "file": "Concepts/FromDoubleConstructible.h",
+      "line": "14"
+    },
+    "FromIntConstructible": {
+      "kind": "class",
+      "name": "FromIntConstructible",
+      "brief": "A model of the concept FromIntConstructible is required to be constructible from int.",
+      "detailed": "Has models int long double",
+      "members": [
+        {
+          "kind": "function",
+          "name": "FromIntConstructible",
+          "qualified_name": "FromIntConstructible::FromIntConstructible",
+          "brief": "",
+          "detailed": "",
+          "return_type": "",
+          "definition": "FromIntConstructible::FromIntConstructible",
+          "argsstring": "(int &i)",
+          "params": [
+            {
+              "type": "int &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/FromIntConstructible.h",
+          "line": "26"
+        }
+      ],
+      "xml_file": "class_from_int_constructible.xml",
+      "file": "Concepts/FromIntConstructible.h",
+      "line": "17"
+    },
+    "ImplicitInteroperable": {
+      "kind": "class",
+      "name": "ImplicitInteroperable",
+      "brief": "Two types A and B are a model of the concept ImplicitInteroperable , if there is a superior type, such that binary arithmetic operations involving A and B result in this type. This type is CGAL::Coercion_traits<A,B>::Type . In case types are RealEmbeddable this also implies that mixed compare operators are available.",
+      "detailed": "The type CGAL::Coercion_traits<A,B>::Type is required to be implicit constructible from A and B . In this case CGAL::Coercion_traits<A,B>::Are_implicit_interoperable is CGAL::Tag_true . Refines ExplicitInteroperable CGAL::Coercion_traits <A,B> ExplicitInteroperable AlgebraicStructureTraits RealEmbeddableTraits",
+      "members": [],
+      "xml_file": "class_implicit_interoperable.xml",
+      "file": "Concepts/ImplicitInteroperable.h",
+      "line": "28"
+    },
+    "IntegralDomain": {
+      "kind": "class",
+      "name": "IntegralDomain",
+      "brief": "IntegralDomain refines IntegralDomainWithoutDivision by providing an integral division.",
+      "detailed": "Note: The concept does not require the operator / for this operation. We intend to reserve the operator syntax for use with a Field . Moreover, CGAL::Algebraic_structure_traits < IntegralDomain > is a model of AlgebraicStructureTraits providing: CGAL::Algebraic_structure_traits< IntegralDomain >::Algebraic_category derived from CGAL::Integral_domain_tag CGAL::Algebraic_structure_traits< IntegralDomain >::Integral_division which is a model of AlgebraicStructureTraits_::IntegralDivision CGAL::Algebraic_structure_traits< IntegralDomain >::Divides which is a model of AlgebraicStructureTraits_::Divides Refines IntegralDomainWithoutDivision IntegralDomainWithoutDivision IntegralDomain UniqueFactorizationDomain EuclideanRing Field FieldWithSqrt FieldWithKthRoot FieldWithRootOf AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "class_integral_domain.xml",
+      "file": "Concepts/IntegralDomain.h",
+      "line": "33"
+    },
+    "IntegralDomainWithoutDivision": {
+      "kind": "class",
+      "name": "IntegralDomainWithoutDivision",
+      "brief": "This is the most basic concept for algebraic structures considered within CGAL.",
+      "detailed": "A model IntegralDomainWithoutDivision represents an integral domain, i.e. commutative ring with 0, 1, +, * and unity free of zero divisors. Note: A model is not required to offer the always well defined integral division. It refines Assignable , CopyConstructible , DefaultConstructible and FromIntConstructible . It refines EqualityComparable , where equality is defined w.r.t. the ring element being represented. The operators unary and binary plus +, unary and binary minus -, multiplication * and their compound forms +=, -=, *= are required and implement the respective ring operations. Moreover, CGAL::Algebraic_structure_traits < IntegralDomainWithoutDivision > is a model of AlgebraicStructureTraits providing: CGAL::Algebraic_structure_traits< IntegralDomainWithoutDivision >::Algebraic_category derived from CGAL::Integral_domain_without_division_tag CGAL::Algebraic_structure_traits< IntegralDomainWithoutDivision >::Is_zero which is a model of AlgebraicStructureTraits_::IsZero CGAL::Algebraic_structure_traits< IntegralDomainWithoutDivision >::Is_one which is a model of AlgebraicStructureTraits_::IsOne CGAL::Algebraic_structure_traits< IntegralDomainWithoutDivision >::Square which is a model of AlgebraicStructureTraits_::Square CGAL::Algebraic_structure_traits< IntegralDomainWithoutDivision >::Simplify which is a model of AlgebraicStructureTraits_::Simplify CGAL::Algebraic_structure_traits< IntegralDomainWithoutDivision >::Unit_part which is a model of AlgebraicStructureTraits_::UnitPart Refines Assignable CopyConstructible DefaultConstructible EqualityComparable FromIntConstructible IntegralDomainWithoutDivision IntegralDomain UniqueFactorizationDomain EuclideanRing Field FieldWithSqrt FieldWithKthRoot FieldWithRootOf AlgebraicStructureTraits",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator+",
+          "qualified_name": "IntegralDomainWithoutDivision::operator+",
+          "brief": "unary plus",
+          "detailed": "",
+          "return_type": "IntegralDomainWithoutDivision",
+          "definition": "IntegralDomainWithoutDivision IntegralDomainWithoutDivision::operator+",
+          "argsstring": "(const IntegralDomainWithoutDivision &a)",
+          "params": [
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IntegralDomainWithoutDivision.h",
+          "line": "56"
+        },
+        {
+          "kind": "function",
+          "name": "operator-",
+          "qualified_name": "IntegralDomainWithoutDivision::operator-",
+          "brief": "unary minus",
+          "detailed": "",
+          "return_type": "IntegralDomainWithoutDivision",
+          "definition": "IntegralDomainWithoutDivision IntegralDomainWithoutDivision::operator-",
+          "argsstring": "(const IntegralDomainWithoutDivision &a)",
+          "params": [
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IntegralDomainWithoutDivision.h",
+          "line": "62"
+        },
+        {
+          "kind": "function",
+          "name": "operator+",
+          "qualified_name": "IntegralDomainWithoutDivision::operator+",
+          "brief": "",
+          "detailed": "",
+          "return_type": "IntegralDomainWithoutDivision",
+          "definition": "IntegralDomainWithoutDivision IntegralDomainWithoutDivision::operator+",
+          "argsstring": "(const IntegralDomainWithoutDivision &a, const IntegralDomainWithoutDivision &b)",
+          "params": [
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IntegralDomainWithoutDivision.h",
+          "line": "68"
+        },
+        {
+          "kind": "function",
+          "name": "operator-",
+          "qualified_name": "IntegralDomainWithoutDivision::operator-",
+          "brief": "",
+          "detailed": "",
+          "return_type": "IntegralDomainWithoutDivision",
+          "definition": "IntegralDomainWithoutDivision IntegralDomainWithoutDivision::operator-",
+          "argsstring": "(const IntegralDomainWithoutDivision &a, const IntegralDomainWithoutDivision &b)",
+          "params": [
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IntegralDomainWithoutDivision.h",
+          "line": "75"
+        },
+        {
+          "kind": "function",
+          "name": "operator*",
+          "qualified_name": "IntegralDomainWithoutDivision::operator*",
+          "brief": "",
+          "detailed": "",
+          "return_type": "IntegralDomainWithoutDivision",
+          "definition": "IntegralDomainWithoutDivision IntegralDomainWithoutDivision::operator*",
+          "argsstring": "(const IntegralDomainWithoutDivision &a, const IntegralDomainWithoutDivision &b)",
+          "params": [
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IntegralDomainWithoutDivision.h",
+          "line": "82"
+        },
+        {
+          "kind": "function",
+          "name": "operator+=",
+          "qualified_name": "IntegralDomainWithoutDivision::operator+=",
+          "brief": "",
+          "detailed": "",
+          "return_type": "IntegralDomainWithoutDivision",
+          "definition": "IntegralDomainWithoutDivision IntegralDomainWithoutDivision::operator+=",
+          "argsstring": "(const IntegralDomainWithoutDivision &b)",
+          "params": [
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IntegralDomainWithoutDivision.h",
+          "line": "90"
+        },
+        {
+          "kind": "function",
+          "name": "operator-=",
+          "qualified_name": "IntegralDomainWithoutDivision::operator-=",
+          "brief": "",
+          "detailed": "",
+          "return_type": "IntegralDomainWithoutDivision",
+          "definition": "IntegralDomainWithoutDivision IntegralDomainWithoutDivision::operator-=",
+          "argsstring": "(const IntegralDomainWithoutDivision &b)",
+          "params": [
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IntegralDomainWithoutDivision.h",
+          "line": "96"
+        },
+        {
+          "kind": "function",
+          "name": "operator*=",
+          "qualified_name": "IntegralDomainWithoutDivision::operator*=",
+          "brief": "",
+          "detailed": "",
+          "return_type": "IntegralDomainWithoutDivision",
+          "definition": "IntegralDomainWithoutDivision IntegralDomainWithoutDivision::operator*=",
+          "argsstring": "(const IntegralDomainWithoutDivision &b)",
+          "params": [
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IntegralDomainWithoutDivision.h",
+          "line": "102"
+        },
+        {
+          "kind": "function",
+          "name": "operator==",
+          "qualified_name": "IntegralDomainWithoutDivision::operator==",
+          "brief": "The result_type is convertible to bool .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type IntegralDomainWithoutDivision::operator==",
+          "argsstring": "(const IntegralDomainWithoutDivision &a, const IntegralDomainWithoutDivision &b)",
+          "params": [
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IntegralDomainWithoutDivision.h",
+          "line": "108"
+        },
+        {
+          "kind": "function",
+          "name": "operator!=",
+          "qualified_name": "IntegralDomainWithoutDivision::operator!=",
+          "brief": "The result_type is convertible to bool .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type IntegralDomainWithoutDivision::operator!=",
+          "argsstring": "(const IntegralDomainWithoutDivision &a, const IntegralDomainWithoutDivision &b)",
+          "params": [
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const IntegralDomainWithoutDivision &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/IntegralDomainWithoutDivision.h",
+          "line": "114"
+        }
+      ],
+      "xml_file": "class_integral_domain_without_division.xml",
+      "file": "Concepts/IntegralDomainWithoutDivision.h",
+      "line": "46"
+    },
+    "RealEmbeddable": {
+      "kind": "class",
+      "name": "RealEmbeddable",
+      "brief": "A model of this concepts represents numbers that are embeddable on the real axis. The type obeys the algebraic structure and compares two values according to the total order of the real numbers.",
+      "detailed": "Moreover, CGAL::Real_embeddable_traits < RealEmbeddable > is a model of RealEmbeddableTraits with: CGAL::Real_embeddable_traits< RealEmbeddable >::Is_real_embeddable set to Tag_true and functors : CGAL::Real_embeddable_traits< RealEmbeddable >::Is_zero which is a model of RealEmbeddableTraits_::IsZero CGAL::Real_embeddable_traits< RealEmbeddable >::Abs which is a model of RealEmbeddableTraits_::Abs CGAL::Real_embeddable_traits< RealEmbeddable >::Sgn which is a model of RealEmbeddableTraits_::Sgn CGAL::Real_embeddable_traits< RealEmbeddable >::Is_positive which is a model of RealEmbeddableTraits_::IsPositive CGAL::Real_embeddable_traits< RealEmbeddable >::Is_negative which is a model of RealEmbeddableTraits_::IsNegative CGAL::Real_embeddable_traits< RealEmbeddable >::Compare which is a model of RealEmbeddableTraits_::Compare CGAL::Real_embeddable_traits< RealEmbeddable >::To_double which is a model of RealEmbeddableTraits_::ToDouble CGAL::Real_embeddable_traits< RealEmbeddable >::To_interval which is a model of RealEmbeddableTraits_::ToInterval Remark: If a number type is a model of both IntegralDomainWithoutDivision and RealEmbeddable , it follows that the ring represented by such a number type is a sub-ring of the real numbers and hence has characteristic zero. Refines EqualityComparable LessThanComparable RealEmbeddableTraits",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator==",
+          "qualified_name": "RealEmbeddable::operator==",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool RealEmbeddable::operator==",
+          "argsstring": "(const RealEmbeddable &a, const RealEmbeddable &b)",
+          "params": [
+            {
+              "type": "const RealEmbeddable &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const RealEmbeddable &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddable.h",
+          "line": "56"
+        },
+        {
+          "kind": "function",
+          "name": "operator!=",
+          "qualified_name": "RealEmbeddable::operator!=",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool RealEmbeddable::operator!=",
+          "argsstring": "(const RealEmbeddable &a, const RealEmbeddable &b)",
+          "params": [
+            {
+              "type": "const RealEmbeddable &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const RealEmbeddable &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddable.h",
+          "line": "63"
+        },
+        {
+          "kind": "function",
+          "name": "operator<",
+          "qualified_name": "RealEmbeddable::operator<",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool RealEmbeddable::operator<",
+          "argsstring": "(const RealEmbeddable &a, const RealEmbeddable &b)",
+          "params": [
+            {
+              "type": "const RealEmbeddable &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const RealEmbeddable &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddable.h",
+          "line": "69"
+        },
+        {
+          "kind": "function",
+          "name": "operator<=",
+          "qualified_name": "RealEmbeddable::operator<=",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool RealEmbeddable::operator<=",
+          "argsstring": "(const RealEmbeddable &a, const RealEmbeddable &b)",
+          "params": [
+            {
+              "type": "const RealEmbeddable &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const RealEmbeddable &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddable.h",
+          "line": "75"
+        },
+        {
+          "kind": "function",
+          "name": "operator>",
+          "qualified_name": "RealEmbeddable::operator>",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool RealEmbeddable::operator>",
+          "argsstring": "(const RealEmbeddable &a, const RealEmbeddable &b)",
+          "params": [
+            {
+              "type": "const RealEmbeddable &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const RealEmbeddable &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddable.h",
+          "line": "82"
+        },
+        {
+          "kind": "function",
+          "name": "operator>=",
+          "qualified_name": "RealEmbeddable::operator>=",
+          "brief": "",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool operator>=",
+          "argsstring": "(const RealEmbeddable &a, const RealEmbeddable &b)",
+          "params": [
+            {
+              "type": "const RealEmbeddable &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const RealEmbeddable &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddable.h",
+          "line": "89"
+        }
+      ],
+      "xml_file": "class_real_embeddable.xml",
+      "file": "Concepts/RealEmbeddable.h",
+      "line": "47"
+    },
+    "RealEmbeddableTraits": {
+      "kind": "class",
+      "name": "RealEmbeddableTraits",
+      "brief": "A model of RealEmbeddableTraits is associated to a number type Type and reflects the properties of this type with respect to the concept RealEmbeddable .",
+      "detailed": "Has models CGAL::Real_embeddable_traits <T>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Type",
+          "qualified_name": "RealEmbeddableTraits::Type",
+          "brief": "The associated number type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::Type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_real_embeddable",
+          "qualified_name": "RealEmbeddableTraits::Is_real_embeddable",
+          "brief": "Tag indicating whether the associated type is real embeddable.",
+          "detailed": "This is either Tag_true or Tag_false .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::Is_real_embeddable",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "32"
+        },
+        {
+          "kind": "typedef",
+          "name": "Boolean",
+          "qualified_name": "RealEmbeddableTraits::Boolean",
+          "brief": "This type specifies the return type of the predicates provided by this traits.",
+          "detailed": "The type must be convertible to bool and typically the type indeed maps to bool . However, there are also cases such as interval arithmetic, in which it is Uncertain<bool> or some similar type.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::Boolean",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "42"
+        },
+        {
+          "kind": "typedef",
+          "name": "Sign",
+          "qualified_name": "RealEmbeddableTraits::Sign",
+          "brief": "This type specifies the return type of the Sgn functor.",
+          "detailed": "The type must be convertible to CGAL::Sign and typically the type indeed maps to CGAL::Sign . However, there are also cases such as interval arithmetic, in which it is Uncertain<CGAL::Sign> or some similar type.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::Sign",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "52"
+        },
+        {
+          "kind": "typedef",
+          "name": "Comparison_result",
+          "qualified_name": "RealEmbeddableTraits::Comparison_result",
+          "brief": "This type specifies the return type of the Compare functor.",
+          "detailed": "The type must be convertible to CGAL::Comparison_result and typically the type indeed maps to CGAL::Comparison_result . However, there are also cases such as interval arithmetic, in which it is Uncertain<CGAL::Comparison_result> or some similar type.",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::Comparison_result",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "62"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_zero",
+          "qualified_name": "RealEmbeddableTraits::Is_zero",
+          "brief": "A model of RealEmbeddableTraits_::IsZero In case Type is also model of IntegralDomainWithoutDivision this is a model of AlgebraicStructureTraits_::IsZero .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::Is_zero",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "78"
+        },
+        {
+          "kind": "typedef",
+          "name": "Abs",
+          "qualified_name": "RealEmbeddableTraits::Abs",
+          "brief": "A model of RealEmbeddableTraits_::Abs .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::Abs",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "83"
+        },
+        {
+          "kind": "typedef",
+          "name": "Sgn",
+          "qualified_name": "RealEmbeddableTraits::Sgn",
+          "brief": "A model of RealEmbeddableTraits_::Sgn .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::Sgn",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "88"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_positive",
+          "qualified_name": "RealEmbeddableTraits::Is_positive",
+          "brief": "A model of RealEmbeddableTraits_::IsPositive .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::Is_positive",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "93"
+        },
+        {
+          "kind": "typedef",
+          "name": "Is_negative",
+          "qualified_name": "RealEmbeddableTraits::Is_negative",
+          "brief": "A model of RealEmbeddableTraits_::IsNegative .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::Is_negative",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "98"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare",
+          "qualified_name": "RealEmbeddableTraits::Compare",
+          "brief": "A model of RealEmbeddableTraits_::Compare .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::Compare",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "103"
+        },
+        {
+          "kind": "typedef",
+          "name": "To_double",
+          "qualified_name": "RealEmbeddableTraits::To_double",
+          "brief": "A model of RealEmbeddableTraits_::ToDouble .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::To_double",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "108"
+        },
+        {
+          "kind": "typedef",
+          "name": "To_interval",
+          "qualified_name": "RealEmbeddableTraits::To_interval",
+          "brief": "A model of RealEmbeddableTraits_::ToInterval .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits::To_interval",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Functors",
+          "file": "Concepts/RealEmbeddableTraits.h",
+          "line": "113"
+        }
+      ],
+      "xml_file": "class_real_embeddable_traits.xml",
+      "file": "Concepts/RealEmbeddableTraits.h",
+      "line": "15"
+    },
+    "RealEmbeddableTraits_::Abs": {
+      "kind": "class",
+      "name": "RealEmbeddableTraits_::Abs",
+      "brief": "AdaptableUnaryFunction computes the absolute value of a number.",
+      "detailed": "Refines AdaptableUnaryFunction RealEmbeddableTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "RealEmbeddableTraits_::Abs::result_type",
+          "brief": "Is RealEmbeddableTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::Abs::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--Abs.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "RealEmbeddableTraits_::Abs::argument_type",
+          "brief": "Is RealEmbeddableTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::Abs::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--Abs.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "RealEmbeddableTraits_::Abs::operator()",
+          "brief": "computes the absolute value of $ x$ .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type RealEmbeddableTraits_::Abs::operator()",
+          "argsstring": "(argument_type x)",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddableTraits--Abs.h",
+          "line": "40"
+        }
+      ],
+      "xml_file": "class_real_embeddable_traits___1_1_abs.xml",
+      "file": "Concepts/RealEmbeddableTraits--Abs.h",
+      "line": "16"
+    },
+    "RealEmbeddableTraits_::Compare": {
+      "kind": "class",
+      "name": "RealEmbeddableTraits_::Compare",
+      "brief": "AdaptableBinaryFunction compares two real embeddable numbers.",
+      "detailed": "Refines AdaptableBinaryFunction RealEmbeddableTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "RealEmbeddableTraits_::Compare::result_type",
+          "brief": "Type convertible to CGAL::Comparison_result .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::Compare::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--Compare.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "first_argument_type",
+          "qualified_name": "RealEmbeddableTraits_::Compare::first_argument_type",
+          "brief": "Is RealEmbeddableTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::Compare::first_argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--Compare.h",
+          "line": "30"
+        },
+        {
+          "kind": "typedef",
+          "name": "second_argument_type",
+          "qualified_name": "RealEmbeddableTraits_::Compare::second_argument_type",
+          "brief": "Is RealEmbeddableTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::Compare::second_argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--Compare.h",
+          "line": "35"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "RealEmbeddableTraits_::Compare::operator()",
+          "brief": "compares $ x$ with respect to $ y$ .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type RealEmbeddableTraits_::Compare::operator()",
+          "argsstring": "(first_argument_type x, second_argument_type y)",
+          "params": [
+            {
+              "type": "first_argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "second_argument_type",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddableTraits--Compare.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "RealEmbeddableTraits_::Compare::operator()",
+          "brief": "This operator is defined if NT1 and NT2 are ExplicitInteroperable with coercion type RealEmbeddableTraits::Type .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type RealEmbeddableTraits_::Compare::operator()",
+          "argsstring": "(NT1 x, NT2 y)",
+          "params": [
+            {
+              "type": "NT1",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "NT2",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddableTraits--Compare.h",
+          "line": "55"
+        }
+      ],
+      "xml_file": "class_real_embeddable_traits___1_1_compare.xml",
+      "file": "Concepts/RealEmbeddableTraits--Compare.h",
+      "line": "16"
+    },
+    "RealEmbeddableTraits_::IsNegative": {
+      "kind": "class",
+      "name": "RealEmbeddableTraits_::IsNegative",
+      "brief": "AdaptableUnaryFunction , returns true in case the argument is negative.",
+      "detailed": "Refines AdaptableUnaryFunction RealEmbeddableTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "RealEmbeddableTraits_::IsNegative::result_type",
+          "brief": "Type convertible to bool .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::IsNegative::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--IsNegative.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "RealEmbeddableTraits_::IsNegative::argument_type",
+          "brief": "Is RealEmbeddableTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::IsNegative::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--IsNegative.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "RealEmbeddableTraits_::IsNegative::operator()",
+          "brief": "returns true in case $ x$ is negative.",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type RealEmbeddableTraits_::IsNegative::operator()",
+          "argsstring": "(argument_type x)",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddableTraits--IsNegative.h",
+          "line": "40"
+        }
+      ],
+      "xml_file": "class_real_embeddable_traits___1_1_is_negative.xml",
+      "file": "Concepts/RealEmbeddableTraits--IsNegative.h",
+      "line": "16"
+    },
+    "RealEmbeddableTraits_::IsPositive": {
+      "kind": "class",
+      "name": "RealEmbeddableTraits_::IsPositive",
+      "brief": "AdaptableUnaryFunction , returns true in case the argument is positive.",
+      "detailed": "Refines AdaptableUnaryFunction RealEmbeddableTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "RealEmbeddableTraits_::IsPositive::result_type",
+          "brief": "Type convertible to bool .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::IsPositive::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--IsPositive.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "RealEmbeddableTraits_::IsPositive::argument_type",
+          "brief": "Is RealEmbeddableTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::IsPositive::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--IsPositive.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "RealEmbeddableTraits_::IsPositive::operator()",
+          "brief": "returns true in case $ x$ is positive.",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type RealEmbeddableTraits_::IsPositive::operator()",
+          "argsstring": "(argument_type x)",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddableTraits--IsPositive.h",
+          "line": "40"
+        }
+      ],
+      "xml_file": "class_real_embeddable_traits___1_1_is_positive.xml",
+      "file": "Concepts/RealEmbeddableTraits--IsPositive.h",
+      "line": "16"
+    },
+    "RealEmbeddableTraits_::IsZero": {
+      "kind": "class",
+      "name": "RealEmbeddableTraits_::IsZero",
+      "brief": "AdaptableUnaryFunction , returns true in case the argument is 0.",
+      "detailed": "Refines AdaptableUnaryFunction RealEmbeddableTraits AlgebraicStructureTraits_::IsZero",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "RealEmbeddableTraits_::IsZero::result_type",
+          "brief": "Type convertible to bool .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::IsZero::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--IsZero.h",
+          "line": "26"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "RealEmbeddableTraits_::IsZero::argument_type",
+          "brief": "Is RealEmbeddableTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::IsZero::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--IsZero.h",
+          "line": "31"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "RealEmbeddableTraits_::IsZero::operator()",
+          "brief": "returns true in case $ x$ is the zero element of the ring.",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type RealEmbeddableTraits_::IsZero::operator()",
+          "argsstring": "(argument_type x)",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddableTraits--IsZero.h",
+          "line": "42"
+        }
+      ],
+      "xml_file": "class_real_embeddable_traits___1_1_is_zero.xml",
+      "file": "Concepts/RealEmbeddableTraits--IsZero.h",
+      "line": "17"
+    },
+    "RealEmbeddableTraits_::Sgn": {
+      "kind": "class",
+      "name": "RealEmbeddableTraits_::Sgn",
+      "brief": "This AdaptableUnaryFunction computes the sign of a real embeddable number.",
+      "detailed": "Refines AdaptableUnaryFunction RealEmbeddableTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "RealEmbeddableTraits_::Sgn::result_type",
+          "brief": "Type convertible to CGAL::Sign .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::Sgn::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--Sgn.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "RealEmbeddableTraits_::Sgn::argument_type",
+          "brief": "Is RealEmbeddableTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::Sgn::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--Sgn.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "RealEmbeddableTraits_::Sgn::operator()",
+          "brief": "Computes the sign of $ x$ .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type RealEmbeddableTraits_::Sgn::operator()",
+          "argsstring": "(argument_type x)",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddableTraits--Sgn.h",
+          "line": "40"
+        }
+      ],
+      "xml_file": "class_real_embeddable_traits___1_1_sgn.xml",
+      "file": "Concepts/RealEmbeddableTraits--Sgn.h",
+      "line": "16"
+    },
+    "RealEmbeddableTraits_::ToDouble": {
+      "kind": "class",
+      "name": "RealEmbeddableTraits_::ToDouble",
+      "brief": "AdaptableUnaryFunction computes a double approximation of a real embeddable number.",
+      "detailed": "Remark: In order to control the quality of approximation one has to resort to methods that are specific to NT. There are no general guarantees whatsoever. Refines AdaptableUnaryFunction RealEmbeddableTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "RealEmbeddableTraits_::ToDouble::result_type",
+          "brief": "The result type.",
+          "detailed": "",
+          "return_type": "double",
+          "definition": "typedef double RealEmbeddableTraits_::ToDouble::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--ToDouble.h",
+          "line": "29"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "RealEmbeddableTraits_::ToDouble::argument_type",
+          "brief": "Is RealEmbeddableTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::ToDouble::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--ToDouble.h",
+          "line": "34"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "RealEmbeddableTraits_::ToDouble::operator()",
+          "brief": "computes a double approximation of a real embeddable number.",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type RealEmbeddableTraits_::ToDouble::operator()",
+          "argsstring": "(argument_type x)",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddableTraits--ToDouble.h",
+          "line": "44"
+        }
+      ],
+      "xml_file": "class_real_embeddable_traits___1_1_to_double.xml",
+      "file": "Concepts/RealEmbeddableTraits--ToDouble.h",
+      "line": "20"
+    },
+    "RealEmbeddableTraits_::ToInterval": {
+      "kind": "class",
+      "name": "RealEmbeddableTraits_::ToInterval",
+      "brief": "AdaptableUnaryFunction computes for a given real embeddable number $ x$ a double interval containing $ x$ . This interval is represented by std::pair<double,double> .",
+      "detailed": "Refines AdaptableUnaryFunction RealEmbeddableTraits",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "result_type",
+          "qualified_name": "RealEmbeddableTraits_::ToInterval::result_type",
+          "brief": "The result type.",
+          "detailed": "",
+          "return_type": "std::pair< double, double >",
+          "definition": "typedef std::pair<double,double> RealEmbeddableTraits_::ToInterval::result_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--ToInterval.h",
+          "line": "27"
+        },
+        {
+          "kind": "typedef",
+          "name": "argument_type",
+          "qualified_name": "RealEmbeddableTraits_::ToInterval::argument_type",
+          "brief": "Is RealEmbeddableTraits::Type .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type RealEmbeddableTraits_::ToInterval::argument_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/RealEmbeddableTraits--ToInterval.h",
+          "line": "32"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "RealEmbeddableTraits_::ToInterval::operator()",
+          "brief": "computes a double interval containing $ x$ .",
+          "detailed": "",
+          "return_type": "result_type",
+          "definition": "result_type RealEmbeddableTraits_::ToInterval::operator()",
+          "argsstring": "(argument_type x)",
+          "params": [
+            {
+              "type": "argument_type",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/RealEmbeddableTraits--ToInterval.h",
+          "line": "42"
+        }
+      ],
+      "xml_file": "class_real_embeddable_traits___1_1_to_interval.xml",
+      "file": "Concepts/RealEmbeddableTraits--ToInterval.h",
+      "line": "18"
+    },
+    "RingNumberType": {
+      "kind": "class",
+      "name": "RingNumberType",
+      "brief": "The concept RingNumberType combines the requirements of the concepts IntegralDomainWithoutDivision and RealEmbeddable . A model of RingNumberType can be used as a template parameter for homogeneous kernels.",
+      "detailed": "Refines IntegralDomainWithoutDivision RealEmbeddable Has models C++ built-in number types CGAL::Gmpq CGAL::Gmpz CGAL::Interval_nt CGAL::Interval_nt_advanced CGAL::Lazy_exact_nt< RingNumberType > CGAL::MP_Float CGAL::Gmpzf CGAL::Quotient< RingNumberType > leda_integer leda_rational leda_bigfloat leda_real FieldNumberType",
+      "members": [],
+      "xml_file": "class_ring_number_type.xml",
+      "file": "Concepts/RingNumberType.h",
+      "line": "33"
+    },
+    "UniqueFactorizationDomain": {
+      "kind": "class",
+      "name": "UniqueFactorizationDomain",
+      "brief": "A model of UniqueFactorizationDomain is an IntegralDomain with the additional property that the ring it represents is a unique factorization domain (a.k.a. UFD or factorial ring), meaning that every non-zero non-unit element has a factorization into irreducible elements that is unique up to order and up to multiplication by invertible elements (units). (An irreducible element is a non-unit ring element that cannot be factored further into two non-unit elements. In a UFD, the irreducible elements are precisely the prime elements.).",
+      "detailed": "In a UFD, any two elements, not both zero, possess a greatest common divisor (gcd). Moreover, CGAL::Algebraic_structure_traits < UniqueFactorizationDomain > is a model of AlgebraicStructureTraits providing: CGAL::Algebraic_structure_traits< UniqueFactorizationDomain >::Algebraic_category derived from CGAL::Unique_factorization_domain_tag CGAL::Algebraic_structure_traits< UniqueFactorizationDomain >::Gcd which is a model of AlgebraicStructureTraits_::Gcd Refines IntegralDomain IntegralDomainWithoutDivision IntegralDomain UniqueFactorizationDomain EuclideanRing Field FieldWithSqrt FieldWithKthRoot FieldWithRootOf AlgebraicStructureTraits",
+      "members": [],
+      "xml_file": "class_unique_factorization_domain.xml",
+      "file": "Concepts/UniqueFactorizationDomain.h",
+      "line": "40"
+    },
+    "AlgebraicStructureTraits_": {
+      "kind": "namespace",
+      "name": "AlgebraicStructureTraits_",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_algebraic_structure_traits__.xml",
+      "file": "Concepts/AlgebraicStructureTraits--Div.h",
+      "line": "2"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "Algebraic_foundations.txt",
+      "line": "1"
+    },
+    "FractionTraits_": {
+      "kind": "namespace",
+      "name": "FractionTraits_",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_fraction_traits__.xml",
+      "file": "Concepts/FractionTraits.h",
+      "line": "80"
+    },
+    "RealEmbeddableTraits_": {
+      "kind": "namespace",
+      "name": "RealEmbeddableTraits_",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_real_embeddable_traits__.xml",
+      "file": "Concepts/RealEmbeddableTraits--Abs.h",
+      "line": "2"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgAlgebraicFoundationsRef": {
+      "kind": "group",
+      "name": "PkgAlgebraicFoundationsRef",
+      "brief": "",
+      "detailed": "Michael Hemmer This package defines what algebra means for CGAL, in terms of concepts, classes and functions. The main features are: (i) explicit concepts for interoperability of types (ii) separation between algebraic types (not necessarily embeddable into the reals), and number types (embeddable into the reals). Introduced in: CGAL 3.3 BibTeX: cgal:h-af-26a License: LGPL Classified Reference Pages Algebraic Structures Concepts IntegralDomainWithoutDivision IntegralDomain UniqueFactorizationDomain EuclideanRing Field FieldWithSqrt FieldWithKthRoot FieldWithRootOf AlgebraicStructureTraits AlgebraicStructureTraits_::IsZero AlgebraicStructureTraits_::IsOne AlgebraicStructureTraits_::Square AlgebraicStructureTraits_::Simplify AlgebraicStructureTraits_::UnitPart AlgebraicStructureTraits_::IntegralDivision AlgebraicStructureTraits_::Divides AlgebraicStructureTraits_::Gcd AlgebraicStructureTraits_::DivMod AlgebraicStructureTraits_::Div AlgebraicStructureTraits_::Mod AlgebraicStructureTraits_::Inverse AlgebraicStructureTraits_::Sqrt AlgebraicStructureTraits_::IsSquare AlgebraicStructureTraits_::KthRoot AlgebraicStructureTraits_::RootOf Classes CGAL::Algebraic_structure_traits <T> CGAL::Integral_domain_without_division_tag CGAL::Integral_domain_tag CGAL::Field_tag CGAL::Field_with_sqrt_tag CGAL::Unique_factorization_domain_tag CGAL::Euclidean_ring_tag Global Functions CGAL::is_zero() CGAL::is_one() CGAL::square() CGAL::simplify() CGAL::unit_part() CGAL::integral_division() CGAL::is_square() CGAL::gcd() CGAL::div_mod() CGAL::div() CGAL::mod() CGAL::inverse() CGAL::sqrt() CGAL::kth_root() CGAL::root_of() Real Embeddable Concepts RealEmbeddable RealEmbeddableTraits RealEmbeddableTraits_::IsZero RealEmbeddableTraits_::Abs RealEmbeddableTraits_::Sgn RealEmbeddableTraits_::IsPositive RealEmbeddableTraits_::IsNegative RealEmbeddableTraits_::Compare RealEmbeddableTraits_::ToDouble RealEmbeddableTraits_::ToInterval Classes CGAL::Real_embeddable_traits <T> Global Functions CGAL::is_zero() CGAL::abs() CGAL::sign() CGAL::is_positive() CGAL::is_negative() CGAL::compare() CGAL::to_double() CGAL::to_interval() Real Number Types Concepts RingNumberType FieldNumberType Interoperability Concepts ExplicitInteroperable ImplicitInteroperable Classes CGAL::Coercion_traits <A,B> Fractions Concepts Fraction FractionTraits FractionTraits_::Decompose FractionTraits_::Compose FractionTraits_::CommonFactor Classes CGAL::Fraction_traits <T> Miscellaneous Concepts FromIntConstructible FromDoubleConstructible",
+      "members": [
+        {
+          "kind": "function",
+          "name": "abs",
+          "qualified_name": "CGAL::abs",
+          "brief": "The template function abs() returns the absolute value of a number.",
+          "detailed": "The function is defined if the argument type is a model of the RealEmbeddable concept. RealEmbeddable RealEmbeddableTraits_::Abs",
+          "return_type": "NT",
+          "definition": "NT CGAL::abs",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "15"
+        },
+        {
+          "kind": "function",
+          "name": "compare",
+          "qualified_name": "CGAL::compare",
+          "brief": "The template function compare() compares the first argument with respect to the second, i.e. it returns CGAL::LARGER if $ x$ is larger than $ y$ .",
+          "detailed": "In case the argument types NT1 and NT2 differ, compare is performed with the semantic of the type determined via Coercion_traits . The function is defined if this type is a model of the RealEmbeddable concept. The result_type is convertible to CGAL::Comparison_result . RealEmbeddable RealEmbeddableTraits_::Compare",
+          "return_type": "result_type",
+          "definition": "result_type CGAL::compare",
+          "argsstring": "(const NT &x, const NT &y)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NT &",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "39"
+        },
+        {
+          "kind": "function",
+          "name": "div",
+          "qualified_name": "CGAL::div",
+          "brief": "The function div() computes the integral quotient of division with remainder.",
+          "detailed": "In case the argument types NT1 and NT2 differ, the result_type is determined via Coercion_traits . Thus, the result_type is well defined if NT1 and NT2 are a model of ExplicitInteroperable . The actual div is performed with the semantic of that type. The function is defined if result_type is a model of the EuclideanRing concept. EuclideanRing AlgebraicStructureTraits_::Div CGAL::mod() CGAL::div_mod()",
+          "return_type": "result_type",
+          "definition": "result_type CGAL::div",
+          "argsstring": "(const NT1 &x, const NT2 &y)",
+          "params": [
+            {
+              "type": "const NT1 &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NT2 &",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "70"
+        },
+        {
+          "kind": "function",
+          "name": "div_mod",
+          "qualified_name": "CGAL::div_mod",
+          "brief": "computes the quotient $ q$ and remainder $ r$ , such that $ x = q*y + r$ and $ r$ minimal with respect to the Euclidean Norm of the result_type .",
+          "detailed": "The function div_mod() computes the integral quotient and remainder of division with remainder. In case the argument types NT1 and NT2 differ, the result_type is determined via Coercion_traits . Thus, the result_type is well defined if NT1 and NT2 are a model of ExplicitInteroperable . The actual div_mod is performed with the semantic of that type. The function is defined if result_type is a model of the EuclideanRing concept. EuclideanRing AlgebraicStructureTraits_::DivMod CGAL::mod() CGAL::div()",
+          "return_type": "void",
+          "definition": "void CGAL::div_mod",
+          "argsstring": "(const NT1 &x, const NT2 &y, result_type &q, result_type &r)",
+          "params": [
+            {
+              "type": "const NT1 &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NT2 &",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "result_type &",
+              "name": "q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "result_type &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "105"
+        },
+        {
+          "kind": "function",
+          "name": "gcd",
+          "qualified_name": "CGAL::gcd",
+          "brief": "The function gcd() computes the greatest common divisor of two values.",
+          "detailed": "In case the argument types NT1 and NT2 differ, the result_type is determined via Coercion_traits . Thus, the result_type is well defined if NT1 and NT2 are a model of ExplicitInteroperable . The actual gcd is performed with the semantic of that type. The function is defined if result_type is a model of the UniqueFactorizationDomain concept. UniqueFactorizationDomain AlgebraicStructureTraits_::Gcd",
+          "return_type": "result_type",
+          "definition": "result_type CGAL::gcd",
+          "argsstring": "(const NT1 &x, const NT2 &y)",
+          "params": [
+            {
+              "type": "const NT1 &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NT2 &",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "132"
+        },
+        {
+          "kind": "function",
+          "name": "integral_division",
+          "qualified_name": "CGAL::integral_division",
+          "brief": "The function integral_division() (a.k.a. exact division or division without remainder) maps ring elements $ (x,y)$ to ring element $ z$ such that $ x = yz$ if such a $ z$ exists (i.e. if $ x$ is divisible by $ y$ ).",
+          "detailed": "Otherwise the effect of invoking this operation is undefined. Since the ring represented is an integral domain, $ z$ is uniquely defined if it exists. In case the argument types NT1 and NT2 differ, the result_type is determined via Coercion_traits . Thus, the result_type is well defined if NT1 and NT2 are a model of ExplicitInteroperable . The actual integral_division is performed with the semantic of that type. The function is defined if result_type is a model of the IntegralDomain concept. IntegralDomain AlgebraicStructureTraits_::IntegralDivision",
+          "return_type": "result_type",
+          "definition": "result_type CGAL::integral_division",
+          "argsstring": "(const NT1 &x, const NT2 &y)",
+          "params": [
+            {
+              "type": "const NT1 &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NT2 &",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "163"
+        },
+        {
+          "kind": "function",
+          "name": "inverse",
+          "qualified_name": "CGAL::inverse",
+          "brief": "The function inverse() returns the inverse element with respect to multiplication.",
+          "detailed": "The function is defined if the argument type is a model of the Field concept. $ x \\neq0$ . Field AlgebraicStructureTraits_::Inverse",
+          "return_type": "NT",
+          "definition": "NT CGAL::inverse",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "183"
+        },
+        {
+          "kind": "function",
+          "name": "is_negative",
+          "qualified_name": "CGAL::is_negative",
+          "brief": "The template function is_negative() determines if a value is negative or not.",
+          "detailed": "The function is defined if the argument type is a model of the RealEmbeddable concept. The result_type is convertible to bool . RealEmbeddable RealEmbeddableTraits_::IsNegative",
+          "return_type": "result_type",
+          "definition": "result_type CGAL::is_negative",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "202"
+        },
+        {
+          "kind": "function",
+          "name": "is_one",
+          "qualified_name": "CGAL::is_one",
+          "brief": "The function is_one() determines if a value is equal to 1 or not.",
+          "detailed": "The function is defined if the argument type is a model of the IntegralDomainWithoutDivision concept. The result_type is convertible to bool . IntegralDomainWithoutDivision AlgebraicStructureTraits_::IsOne",
+          "return_type": "result_type",
+          "definition": "result_type CGAL::is_one",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "222"
+        },
+        {
+          "kind": "function",
+          "name": "is_positive",
+          "qualified_name": "CGAL::is_positive",
+          "brief": "The template function is_positive() determines if a value is positive or not.",
+          "detailed": "The function is defined if the argument type is a model of the RealEmbeddable concept. The result_type is convertible to bool . RealEmbeddable RealEmbeddableTraits_::IsPositive",
+          "return_type": "result_type",
+          "definition": "result_type CGAL::is_positive",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "241"
+        },
+        {
+          "kind": "function",
+          "name": "is_square",
+          "qualified_name": "CGAL::is_square",
+          "brief": "An ring element $ x$ is said to be a square iff there exists a ring element $ y$ such that $ x= y*y$ .",
+          "detailed": "In case the ring is a UniqueFactorizationDomain , $ y$ is uniquely defined up to multiplication by units. The function is_square() is available if Algebraic_structure_traits::Is_square is not the CGAL::Null_functor . The result_type is convertible to bool . UniqueFactorizationDomain AlgebraicStructureTraits_::IsSquare",
+          "return_type": "result_type",
+          "definition": "result_type CGAL::is_square",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "264"
+        },
+        {
+          "kind": "function",
+          "name": "is_square",
+          "qualified_name": "CGAL::is_square",
+          "brief": "An ring element $ x$ is said to be a square iff there exists a ring element $ y$ such that $ x= y*y$ .",
+          "detailed": "In case the ring is a UniqueFactorizationDomain , $ y$ is uniquely defined up to multiplication by units. The function is_square() is available if Algebraic_structure_traits::Is_square is not the CGAL::Null_functor . The result_type is convertible to bool . UniqueFactorizationDomain AlgebraicStructureTraits_::IsSquare",
+          "return_type": "result_type",
+          "definition": "result_type CGAL::is_square",
+          "argsstring": "(const NT &x, NT &y)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "NT &",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "283"
+        },
+        {
+          "kind": "function",
+          "name": "is_zero",
+          "qualified_name": "CGAL::is_zero",
+          "brief": "The function is_zero() determines if a value is equal to 0 or not.",
+          "detailed": "The function is defined if the argument type is a model of the RealEmbeddable or of the IntegralDomainWithoutDivision concept. The result_type is convertible to bool . RealEmbeddable RealEmbeddableTraits_::IsZero IntegralDomainWithoutDivision AlgebraicStructureTraits_::IsZero",
+          "return_type": "result_type",
+          "definition": "result_type CGAL::is_zero",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "305"
+        },
+        {
+          "kind": "function",
+          "name": "kth_root",
+          "qualified_name": "CGAL::kth_root",
+          "brief": "The function kth_root() returns the k-th root of a value.",
+          "detailed": "The function is defined if the second argument type is a model of the FieldWithKthRoot concept. FieldWithKthRoot AlgebraicStructureTraits_::KthRoot",
+          "return_type": "NT",
+          "definition": "NT CGAL::kth_root",
+          "argsstring": "(int k, const NT &x)",
+          "params": [
+            {
+              "type": "int",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "323"
+        },
+        {
+          "kind": "function",
+          "name": "mod",
+          "qualified_name": "CGAL::mod",
+          "brief": "The function mod() computes the remainder of division with remainder.",
+          "detailed": "In case the argument types NT1 and NT2 differ, the result_type is determined via Coercion_traits . Thus, the result_type is well defined if NT1 and NT2 are a model of ExplicitInteroperable . The actual mod is performed with the semantic of that type. The function is defined if result_type is a model of the EuclideanRing concept. EuclideanRing AlgebraicStructureTraits_::DivMod CGAL::div_mod() CGAL::div()",
+          "return_type": "result_type",
+          "definition": "result_type CGAL::mod",
+          "argsstring": "(const NT1 &x, const NT2 &y)",
+          "params": [
+            {
+              "type": "const NT1 &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const NT2 &",
+              "name": "y",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "353"
+        },
+        {
+          "kind": "function",
+          "name": "root_of",
+          "qualified_name": "CGAL::root_of",
+          "brief": "returns the k-th real root of the univariate polynomial, which is defined by the iterator range, where begin refers to the constant term.",
+          "detailed": "The function root_of() computes a real root of a square-free univariate polynomial. The function is defined if the value type, NT , of the iterator range is a model of the FieldWithRootOf concept. The polynomial is square-free. FieldWithRootOf AlgebraicStructureTraits_::RootOf",
+          "return_type": "NT",
+          "definition": "NT CGAL::root_of",
+          "argsstring": "(int k, InputIterator begin, InputIterator end)",
+          "params": [
+            {
+              "type": "int",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "begin",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "end",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "379"
+        },
+        {
+          "kind": "function",
+          "name": "sign",
+          "qualified_name": "CGAL::sign",
+          "brief": "The template function sign() returns the sign of its argument.",
+          "detailed": "The function is defined if the argument type is a model of the RealEmbeddable concept. The result_type is convertible to CGAL::Sign . RealEmbeddable RealEmbeddableTraits_::Sgn",
+          "return_type": "result_type",
+          "definition": "result_type CGAL::sign",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "399"
+        },
+        {
+          "kind": "function",
+          "name": "simplify",
+          "qualified_name": "CGAL::simplify",
+          "brief": "The function simplify() may simplify a given object.",
+          "detailed": "The function is defined if the argument type is a model of the IntegralDomainWithoutDivision concept. IntegralDomainWithoutDivision AlgebraicStructureTraits_::Simplify",
+          "return_type": "void",
+          "definition": "void CGAL::simplify",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "417"
+        },
+        {
+          "kind": "function",
+          "name": "sqrt",
+          "qualified_name": "CGAL::sqrt",
+          "brief": "The function sqrt() returns the square root of a value.",
+          "detailed": "The function is defined if the argument type is a model of the FieldWithSqrt concept. FieldWithSqrt AlgebraicStructureTraits_::Sqrt",
+          "return_type": "NT",
+          "definition": "NT CGAL::sqrt",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "435"
+        },
+        {
+          "kind": "function",
+          "name": "square",
+          "qualified_name": "CGAL::square",
+          "brief": "The function square() returns the square of a number.",
+          "detailed": "The function is defined if the argument type is a model of the IntegralDomainWithoutDivision concept. IntegralDomainWithoutDivision AlgebraicStructureTraits_::Square",
+          "return_type": "NT",
+          "definition": "NT CGAL::square",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "453"
+        },
+        {
+          "kind": "function",
+          "name": "to_double",
+          "qualified_name": "CGAL::to_double",
+          "brief": "The template function to_double() returns a double approximation of a number.",
+          "detailed": "Note that in general, the value returned is not guaranteed to be the same when called several times on the same number. For example, if NT is a lazy number type (such as an instance of CGAL::Lazy_exact_nt ), the double approximation returned might be affected by an exact computation internally triggered (that might have improved the double approximation). The function is defined if the argument type is a model of the RealEmbeddable concept. Remark: In order to control the quality of approximation one has to resort to methods that are specific to NT. There are no general guarantees whatsoever. RealEmbeddable RealEmbeddableTraits_::ToDouble",
+          "return_type": "double",
+          "definition": "double CGAL::to_double",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "478"
+        },
+        {
+          "kind": "function",
+          "name": "to_interval",
+          "qualified_name": "CGAL::to_interval",
+          "brief": "The template function to_interval() computes for a given real embeddable number $ x$ a double interval containing $ x$ .",
+          "detailed": "This interval is represented by a std::pair<double,double> . The function is defined if the argument type is a model of the RealEmbeddable concept. RealEmbeddable RealEmbeddableTraits_::ToInterval",
+          "return_type": "std::pair< double, double >",
+          "definition": "std::pair< double, double > CGAL::to_interval",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "498"
+        },
+        {
+          "kind": "function",
+          "name": "unit_part",
+          "qualified_name": "CGAL::unit_part",
+          "brief": "The function unit_part() computes the unit part of a given ring element.",
+          "detailed": "The function is defined if the argument type is a model of the IntegralDomainWithoutDivision concept. IntegralDomainWithoutDivision AlgebraicStructureTraits_::UnitPart",
+          "return_type": "NT",
+          "definition": "NT CGAL::unit_part",
+          "argsstring": "(const NT &x)",
+          "params": [
+            {
+              "type": "const NT &",
+              "name": "x",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/number_utils.h",
+          "line": "517"
+        }
+      ],
+      "xml_file": "group___pkg_algebraic_foundations_ref.xml"
+    },
+    "PkgAlgebraicFoundationsAlgebraicStructuresConcepts": {
+      "kind": "group",
+      "name": "PkgAlgebraicFoundationsAlgebraicStructuresConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_algebraic_foundations_algebraic_structures_concepts.xml"
+    }
+  }
+}

@@ -1,0 +1,838 @@
+{
+  "schema_version": 1,
+  "package": "Interval_skip_list",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 8,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Interval_skip_list": {
+      "kind": "class",
+      "name": "CGAL::Interval_skip_list",
+      "brief": "The class Interval_skip_list is a dynamic data structure that allows to find all members of a set of intervals that overlap a point.",
+      "detailed": "Implementation The insertion and deletion of a segment in the interval skip list takes expected time $O(\\log^2 n)$ , if the segment endpoints are chosen from a continuous distribution. A stabbing query takes expected time $O(\\log n)$ , and finding all intervals that contain a point takes expected time $O(\\log n + k)$ , where $ k$ is the number of intervals. The implementation is based on the code developed by Eric N. Hansen.",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Value",
+          "qualified_name": "CGAL::Interval_skip_list::Value",
+          "brief": "the type of inf and sup of the interval.",
+          "detailed": "",
+          "return_type": "Interval::Value",
+          "definition": "typedef Interval::Value CGAL::Interval_skip_list< Interval >::Value",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "const_iterator",
+          "qualified_name": "CGAL::Interval_skip_list::const_iterator",
+          "brief": "An iterator over all intervals.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Interval_skip_list< Interval >::const_iterator",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "36"
+        },
+        {
+          "kind": "function",
+          "name": "Interval_skip_list",
+          "qualified_name": "CGAL::Interval_skip_list::Interval_skip_list",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Interval_skip_list< Interval >::Interval_skip_list",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "46"
+        },
+        {
+          "kind": "function",
+          "name": "Interval_skip_list",
+          "qualified_name": "CGAL::Interval_skip_list::Interval_skip_list",
+          "brief": "Constructor that inserts the iterator range [first, last) in the interval skip list.",
+          "detailed": "InputIterator must be an input iterator with value type Interval .",
+          "return_type": "",
+          "definition": "CGAL::Interval_skip_list< Interval >::Interval_skip_list",
+          "argsstring": "(InputIterator first, InputIterator last)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "53"
+        },
+        {
+          "kind": "function",
+          "name": "insert",
+          "qualified_name": "CGAL::Interval_skip_list::insert",
+          "brief": "Inserts the iterator range [first, last) in the interval skip list, and returns the number of inserted intervals.",
+          "detailed": "InputIterator must be an input iterator with value type Interval .",
+          "return_type": "int",
+          "definition": "int CGAL::Interval_skip_list< Interval >::insert",
+          "argsstring": "(InputIterator first, InputIterator last)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "68"
+        },
+        {
+          "kind": "function",
+          "name": "insert",
+          "qualified_name": "CGAL::Interval_skip_list::insert",
+          "brief": "Inserts interval i in the interval skip list.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Interval_skip_list< Interval >::insert",
+          "argsstring": "(const Interval &i)",
+          "params": [
+            {
+              "type": "const Interval &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "75"
+        },
+        {
+          "kind": "function",
+          "name": "remove",
+          "qualified_name": "CGAL::Interval_skip_list::remove",
+          "brief": "Removes interval i from the interval skip list.",
+          "detailed": "Returns true iff removal was successful.",
+          "return_type": "bool",
+          "definition": "bool CGAL::Interval_skip_list< Interval >::remove",
+          "argsstring": "(const Interval &i)",
+          "params": [
+            {
+              "type": "const Interval &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "80"
+        },
+        {
+          "kind": "function",
+          "name": "is_contained",
+          "qualified_name": "CGAL::Interval_skip_list::is_contained",
+          "brief": "Returns true iff there is an interval that contains v .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Interval_skip_list< Interval >::is_contained",
+          "argsstring": "(const Value &v)",
+          "params": [
+            {
+              "type": "const Value &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "85"
+        },
+        {
+          "kind": "function",
+          "name": "find_intervals",
+          "qualified_name": "CGAL::Interval_skip_list::find_intervals",
+          "brief": "Writes the intervals i with i.inf() $ \\leq$ v $ \\leq$ i.sup to the output iterator out .",
+          "detailed": "OutputIterator must be an output iterator with value type Interval .",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Interval_skip_list< Interval >::find_intervals",
+          "argsstring": "(const Value &v, OutputIterator out)",
+          "params": [
+            {
+              "type": "const Value &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "out",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "93"
+        },
+        {
+          "kind": "function",
+          "name": "clear",
+          "qualified_name": "CGAL::Interval_skip_list::clear",
+          "brief": "Removes all intervals from the interval skip list.",
+          "detailed": "",
+          "return_type": "void",
+          "definition": "void CGAL::Interval_skip_list< Interval >::clear",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "101"
+        },
+        {
+          "kind": "function",
+          "name": "begin",
+          "qualified_name": "CGAL::Interval_skip_list::begin",
+          "brief": "Returns an iterator over all intervals.",
+          "detailed": "",
+          "return_type": "const_iterator",
+          "definition": "const_iterator CGAL::Interval_skip_list< Interval >::begin",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "106"
+        },
+        {
+          "kind": "function",
+          "name": "end",
+          "qualified_name": "CGAL::Interval_skip_list::end",
+          "brief": "Returns the past the end iterator.",
+          "detailed": "",
+          "return_type": "const_iterator",
+          "definition": "const_iterator CGAL::Interval_skip_list< Interval >::end",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "111"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Interval_skip_list::operator<<",
+          "brief": "Inserts the interval skip list isl into the stream os .",
+          "detailed": "The output operator must be defined for Interval .",
+          "return_type": "ostream &",
+          "definition": "ostream & operator<<",
+          "argsstring": "(ostream &os, const Interval_skip_list< Interval > &isl)",
+          "params": [
+            {
+              "type": "ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Interval_skip_list < Interval > &",
+              "name": "isl",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "related",
+          "section": "",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "123"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_interval__skip__list.xml",
+      "file": "CGAL/Interval_skip_list.h",
+      "line": "22"
+    },
+    "CGAL::Interval_skip_list_interval": {
+      "kind": "class",
+      "name": "CGAL::Interval_skip_list_interval",
+      "brief": "The class Interval_skip_list_interval represents intervals with lower and upper bound of type Value .",
+      "detailed": "These intervals can be open or closed at each endpoint. I/O The output operator is defined for std::ostream . Is model of Interval",
+      "members": [
+        {
+          "kind": "function",
+          "name": "Interval_skip_list_interval",
+          "qualified_name": "CGAL::Interval_skip_list_interval::Interval_skip_list_interval",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Interval_skip_list_interval< Value >::Interval_skip_list_interval",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Interval_skip_list_interval.h",
+          "line": "27"
+        },
+        {
+          "kind": "function",
+          "name": "Interval_skip_list_interval",
+          "qualified_name": "CGAL::Interval_skip_list_interval::Interval_skip_list_interval",
+          "brief": "Constructs the interval with infimum i and supremum s .",
+          "detailed": "The arguments ic and uc have value true , iff the interval is closed at the lower and upper bound, respectively.",
+          "return_type": "",
+          "definition": "CGAL::Interval_skip_list_interval< Value >::Interval_skip_list_interval",
+          "argsstring": "(const Value &i, const Value &s, bool ic=true, bool uc=true)",
+          "params": [
+            {
+              "type": "const Value &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Value &",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "ic",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "uc",
+              "default": "true",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Interval_skip_list_interval.h",
+          "line": "34"
+        },
+        {
+          "kind": "function",
+          "name": "inf_closed",
+          "qualified_name": "CGAL::Interval_skip_list_interval::inf_closed",
+          "brief": "Returns true , iff the interval is closed at the lower bound.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Interval_skip_list_interval< Value >::inf_closed",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interval_skip_list_interval.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "sup_closed",
+          "qualified_name": "CGAL::Interval_skip_list_interval::sup_closed",
+          "brief": "Returns true , iff the interval is closed at the upper bound.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool CGAL::Interval_skip_list_interval< Value >::sup_closed",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Interval_skip_list_interval.h",
+          "line": "52"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Interval_skip_list_interval::operator<<",
+          "brief": "Inserts the interval i into the stream os .",
+          "detailed": "The output operator for Value is defined.",
+          "return_type": "ostream &",
+          "definition": "ostream & operator<<",
+          "argsstring": "(ostream &os, const Interval_skip_list_interval< V > &i)",
+          "params": [
+            {
+              "type": "ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Interval_skip_list_interval < V > &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "related",
+          "section": "",
+          "file": "CGAL/Interval_skip_list_interval.h",
+          "line": "65"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_interval__skip__list__interval.xml",
+      "file": "CGAL/Interval_skip_list_interval.h",
+      "line": "18"
+    },
+    "CGAL::Level_interval": {
+      "kind": "class",
+      "name": "CGAL::Level_interval",
+      "brief": "The class Level_interval represents intervals for the minimum and maximum value of the z -coordinate of a face of a triangulation.",
+      "detailed": "FaceHandle must be a handle with the value type Face , which must have a nested type Vertex , which must have a nested type Point , whose Kernel_traits<Point>::Kernel must have a nested type FT . These requirements are fulfilled, if one uses a CGAL triangulation and a CGAL Kernel . Is model of Interval",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Value",
+          "qualified_name": "CGAL::Level_interval::Value",
+          "brief": "The type of the $ z$ -coordinate of points stored in vertices of faces.",
+          "detailed": "",
+          "return_type": "FT",
+          "definition": "typedef FT CGAL::Level_interval< FaceHandle >::Value",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Level_interval.h",
+          "line": "29"
+        },
+        {
+          "kind": "function",
+          "name": "Level_interval",
+          "qualified_name": "CGAL::Level_interval::Level_interval",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Level_interval< FaceHandle >::Level_interval",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Level_interval.h",
+          "line": "39"
+        },
+        {
+          "kind": "function",
+          "name": "Level_interval",
+          "qualified_name": "CGAL::Level_interval::Level_interval",
+          "brief": "Constructs the interval with smallest and largest z coordinate of the points stored in the vertices of the face fh points to.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Level_interval< FaceHandle >::Level_interval",
+          "argsstring": "(FaceHandle fh)",
+          "params": [
+            {
+              "type": "FaceHandle",
+              "name": "fh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Level_interval.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "face_handle",
+          "qualified_name": "CGAL::Level_interval::face_handle",
+          "brief": "Returns the face handle.",
+          "detailed": "",
+          "return_type": "FaceHandle",
+          "definition": "FaceHandle CGAL::Level_interval< FaceHandle >::face_handle",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Level_interval.h",
+          "line": "55"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Level_interval::operator<<",
+          "brief": "Inserts the interval i into the stream os .",
+          "detailed": "The output operator for *Face_handle is defined.",
+          "return_type": "ostream &",
+          "definition": "ostream & operator<<",
+          "argsstring": "(ostream &os, const Level_interval< FaceHandle > &i)",
+          "params": [
+            {
+              "type": "ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Level_interval < FaceHandle > &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "related",
+          "section": "",
+          "file": "CGAL/Level_interval.h",
+          "line": "67"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_level__interval.xml",
+      "file": "CGAL/Level_interval.h",
+      "line": "20"
+    },
+    "Interval": {
+      "kind": "class",
+      "name": "Interval",
+      "brief": "The concept Interval describes the requirements for the template argument Interval of a Interval_skip_list< Interval > .",
+      "detailed": "The concept does not specify, whether the interval is open or closed. It is up to the implementer of a model for this concept to define that. Has models CGAL::Interval_skip_list_interval < Value > CGAL::Level_interval Interval_skip_list",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Value",
+          "qualified_name": "Interval::Value",
+          "brief": "The type of the lower and upper bound of the interval.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type Interval::Value",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/Interval.h",
+          "line": "40"
+        },
+        {
+          "kind": "function",
+          "name": "Interval",
+          "qualified_name": "Interval::Interval",
+          "brief": "Default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "Interval::Interval",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/Interval.h",
+          "line": "30"
+        },
+        {
+          "kind": "function",
+          "name": "inf",
+          "qualified_name": "Interval::inf",
+          "brief": "Returns the lower bound.",
+          "detailed": "",
+          "return_type": "Value",
+          "definition": "Value Interval::inf",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/Interval.h",
+          "line": "50"
+        },
+        {
+          "kind": "function",
+          "name": "sup",
+          "qualified_name": "Interval::sup",
+          "brief": "Returns the upper bound.",
+          "detailed": "",
+          "return_type": "Value",
+          "definition": "Value Interval::sup",
+          "argsstring": "() const",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/Interval.h",
+          "line": "55"
+        },
+        {
+          "kind": "function",
+          "name": "contains",
+          "qualified_name": "Interval::contains",
+          "brief": "Returns true , iff the interval contains v .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool Interval::contains",
+          "argsstring": "(const Value &v) const",
+          "params": [
+            {
+              "type": "const Value &",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/Interval.h",
+          "line": "60"
+        },
+        {
+          "kind": "function",
+          "name": "contains_interval",
+          "qualified_name": "Interval::contains_interval",
+          "brief": "Returns true , iff the interval contains (i,s) .",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool Interval::contains_interval",
+          "argsstring": "(const Value &i, const Value &s) const",
+          "params": [
+            {
+              "type": "const Value &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Value &",
+              "name": "s",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/Interval.h",
+          "line": "65"
+        },
+        {
+          "kind": "function",
+          "name": "operator==",
+          "qualified_name": "Interval::operator==",
+          "brief": "Equality test.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool Interval::operator==",
+          "argsstring": "(const Interval &I) const",
+          "params": [
+            {
+              "type": "const Interval &",
+              "name": "I",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/Interval.h",
+          "line": "70"
+        },
+        {
+          "kind": "function",
+          "name": "operator!=",
+          "qualified_name": "Interval::operator!=",
+          "brief": "Inequality test.",
+          "detailed": "",
+          "return_type": "bool",
+          "definition": "bool Interval::operator!=",
+          "argsstring": "(const Interval &I) const",
+          "params": [
+            {
+              "type": "const Interval &",
+              "name": "I",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Access Functions",
+          "file": "Concepts/Interval.h",
+          "line": "75"
+        }
+      ],
+      "xml_file": "class_interval.xml",
+      "file": "Concepts/Interval.h",
+      "line": "21"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Interval_skip_list::operator<<",
+          "brief": "Inserts the interval skip list isl into the stream os .",
+          "detailed": "The output operator must be defined for Interval .",
+          "return_type": "ostream &",
+          "definition": "ostream & operator<<",
+          "argsstring": "(ostream &os, const Interval_skip_list< Interval > &isl)",
+          "params": [
+            {
+              "type": "ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Interval_skip_list < Interval > &",
+              "name": "isl",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Interval_skip_list.h",
+          "line": "123"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Interval_skip_list_interval::operator<<",
+          "brief": "Inserts the interval i into the stream os .",
+          "detailed": "The output operator for Value is defined.",
+          "return_type": "ostream &",
+          "definition": "ostream & operator<<",
+          "argsstring": "(ostream &os, const Interval_skip_list_interval< V > &i)",
+          "params": [
+            {
+              "type": "ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Interval_skip_list_interval < V > &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Interval_skip_list_interval.h",
+          "line": "65"
+        },
+        {
+          "kind": "function",
+          "name": "operator<<",
+          "qualified_name": "CGAL::Level_interval::operator<<",
+          "brief": "Inserts the interval i into the stream os .",
+          "detailed": "The output operator for *Face_handle is defined.",
+          "return_type": "ostream &",
+          "definition": "ostream & operator<<",
+          "argsstring": "(ostream &os, const Level_interval< FaceHandle > &i)",
+          "params": [
+            {
+              "type": "ostream &",
+              "name": "os",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Level_interval < FaceHandle > &",
+              "name": "i",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/Level_interval.h",
+          "line": "67"
+        }
+      ],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/Interval_skip_list.h",
+      "line": "1"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgIntervalSkipListRef": {
+      "kind": "group",
+      "name": "PkgIntervalSkipListRef",
+      "brief": "",
+      "detailed": "Andreas Fabri An interval skip list is a data structure for finding all intervals that contain a point, and for stabbing queries, that is for answering the question whether a given point is contained in an interval or not. For a triangulated terrain, this allows to quickly identify the triangles which intersect an iso line. Introduced in: CGAL 3.0 BibTeX: cgal:f-isl-26a License: GPL This chapter presents the interval skip list introduced by Hanson [1] , and derived from the skip list data structure [2] . The data structure stores intervals and allows to perform stabbing queries, that is to test whether a point is covered by any of the intervals. It further allows to find all intervals that contain a point. The interval skip list is, as far as its functionality is concerned, related to the Segment_tree_d . Both allow to do stabbing queries and both allow to find all intervals that contain a given point. The implementation of segment trees in CGAL works in higher dimensions, whereas the interval skip list is limited to the 1D case. However, this interval skip list implementation is fully dynamic, whereas the segment tree implementation in CGAL is static, that is all intervals must be known in advance. This package has one concept, namely for the interval with which the interval skip list class is parameterized. Classified Reference Pages Concepts Interval Classes CGAL::Interval_skip_list < Interval > CGAL::Interval_skip_list_interval <Value> CGAL::Level_interval <FaceHandle>",
+      "members": [],
+      "xml_file": "group___pkg_interval_skip_list_ref.xml"
+    },
+    "PkgIntervalSkipListConcepts": {
+      "kind": "group",
+      "name": "PkgIntervalSkipListConcepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_interval_skip_list_concepts.xml"
+    }
+  }
+}

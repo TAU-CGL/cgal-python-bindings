@@ -1,0 +1,1153 @@
+{
+  "schema_version": 1,
+  "package": "Point_set_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 8,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Point_set_2": {
+      "kind": "class",
+      "name": "CGAL::Point_set_2",
+      "brief": "An instance PS of the data type Point_set_2 is a Delaunay Triangulation of its vertex set.",
+      "detailed": "The class Point_set_2 is inherited from the CGAL Delaunay triangulation, and provides additional nearest neighbor query operations and range searching operations. The Point_set_2 class of CGAL depends on template parameters standing for the geometric traits classes used by the point set and by the Delaunay triangulation (Gt) and for the triangulation data structure (Tds).",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point",
+          "qualified_name": "CGAL::Point_set_2::Point",
+          "brief": "the point type",
+          "detailed": "",
+          "return_type": "Gt::Point_2",
+          "definition": "typedef Gt::Point_2 CGAL::Point_set_2< Gt, Tds >::Point",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Point_set_2.h",
+          "line": "28"
+        },
+        {
+          "kind": "typedef",
+          "name": "Segment",
+          "qualified_name": "CGAL::Point_set_2::Segment",
+          "brief": "the segment type",
+          "detailed": "",
+          "return_type": "Gt::Segment_2",
+          "definition": "typedef Gt::Segment_2 CGAL::Point_set_2< Gt, Tds >::Segment",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Point_set_2.h",
+          "line": "33"
+        },
+        {
+          "kind": "typedef",
+          "name": "Circle",
+          "qualified_name": "CGAL::Point_set_2::Circle",
+          "brief": "the circle type",
+          "detailed": "",
+          "return_type": "Gt::Circle_2",
+          "definition": "typedef Gt::Circle_2 CGAL::Point_set_2< Gt, Tds >::Circle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Point_set_2.h",
+          "line": "38"
+        },
+        {
+          "kind": "typedef",
+          "name": "Numb_type",
+          "qualified_name": "CGAL::Point_set_2::Numb_type",
+          "brief": "the representation field number type.",
+          "detailed": "",
+          "return_type": "Gt::FT",
+          "definition": "typedef Gt::FT CGAL::Point_set_2< Gt, Tds >::Numb_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Point_set_2.h",
+          "line": "43"
+        },
+        {
+          "kind": "typedef",
+          "name": "Triangulation",
+          "qualified_name": "CGAL::Point_set_2::Triangulation",
+          "brief": "the underlying triangulation type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type CGAL::Point_set_2< Gt, Tds >::Triangulation",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Point_set_2.h",
+          "line": "48"
+        },
+        {
+          "kind": "typedef",
+          "name": "size_type",
+          "qualified_name": "CGAL::Point_set_2::size_type",
+          "brief": "the size type of the underlying triangulation.",
+          "detailed": "",
+          "return_type": "Triangulation::size_type",
+          "definition": "typedef Triangulation::size_type CGAL::Point_set_2< Gt, Tds >::size_type",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Point_set_2.h",
+          "line": "53"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex",
+          "qualified_name": "CGAL::Point_set_2::Vertex",
+          "brief": "the vertex type of the underlying triangulation.",
+          "detailed": "",
+          "return_type": "Triangulation::Vertex",
+          "definition": "typedef Triangulation::Vertex CGAL::Point_set_2< Gt, Tds >::Vertex",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Point_set_2.h",
+          "line": "58"
+        },
+        {
+          "kind": "typedef",
+          "name": "Edge",
+          "qualified_name": "CGAL::Point_set_2::Edge",
+          "brief": "the edge type of the underlying triangulation.",
+          "detailed": "",
+          "return_type": "Triangulation::Edge",
+          "definition": "typedef Triangulation::Edge CGAL::Point_set_2< Gt, Tds >::Edge",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Point_set_2.h",
+          "line": "63"
+        },
+        {
+          "kind": "typedef",
+          "name": "Vertex_handle",
+          "qualified_name": "CGAL::Point_set_2::Vertex_handle",
+          "brief": "handles to vertices.",
+          "detailed": "",
+          "return_type": "Triangulation::Vertex_handle",
+          "definition": "typedef Triangulation::Vertex_handle CGAL::Point_set_2< Gt, Tds >::Vertex_handle",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "CGAL/Point_set_2.h",
+          "line": "68"
+        },
+        {
+          "kind": "function",
+          "name": "Point_set_2",
+          "qualified_name": "CGAL::Point_set_2::Point_set_2",
+          "brief": "creates an empty Point_set_2 .",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Point_set_2< Gt, Tds >::Point_set_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Point_set_2.h",
+          "line": "78"
+        },
+        {
+          "kind": "function",
+          "name": "Point_set_2",
+          "qualified_name": "CGAL::Point_set_2::Point_set_2",
+          "brief": "creates a Point_set_2 PS of the points in the range [ first , last ).",
+          "detailed": "",
+          "return_type": "",
+          "definition": "CGAL::Point_set_2< Gt, Tds >::Point_set_2",
+          "argsstring": "(InputIterator first, InputIterator last)",
+          "params": [
+            {
+              "type": "InputIterator",
+              "name": "first",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "InputIterator",
+              "name": "last",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "CGAL/Point_set_2.h",
+          "line": "85"
+        },
+        {
+          "kind": "function",
+          "name": "lookup",
+          "qualified_name": "CGAL::Point_set_2::lookup",
+          "brief": "if PS contains a vertex v with v.point() == p the result is a handle to v otherwise the result is NULL .",
+          "detailed": "",
+          "return_type": "Vertex _handle",
+          "definition": "Vertex _handle CGAL::Point_set_2< Gt, Tds >::lookup",
+          "argsstring": "(Point p)",
+          "params": [
+            {
+              "type": "Point",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Point_set_2.h",
+          "line": "96"
+        },
+        {
+          "kind": "function",
+          "name": "nearest_neighbor",
+          "qualified_name": "CGAL::Point_set_2::nearest_neighbor",
+          "brief": "computes a handle to a vertex v of PS that is closest to p .",
+          "detailed": "If PS is empty, NULL is returned.",
+          "return_type": "Vertex _handle",
+          "definition": "Vertex _handle CGAL::Point_set_2< Gt, Tds >::nearest_neighbor",
+          "argsstring": "(Point p)",
+          "params": [
+            {
+              "type": "Point",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Point_set_2.h",
+          "line": "103"
+        },
+        {
+          "kind": "function",
+          "name": "nearest_neighbor",
+          "qualified_name": "CGAL::Point_set_2::nearest_neighbor",
+          "brief": "computes a handle to a vertex w of PS that is closest to v .",
+          "detailed": "If v is the only vertex in PS , NULL is returned.",
+          "return_type": "Vertex _handle",
+          "definition": "Vertex _handle CGAL::Point_set_2< Gt, Tds >::nearest_neighbor",
+          "argsstring": "(Vertex_handle v)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Point_set_2.h",
+          "line": "110"
+        },
+        {
+          "kind": "function",
+          "name": "nearest_neighbors",
+          "qualified_name": "CGAL::Point_set_2::nearest_neighbors",
+          "brief": "computes the k nearest neighbors of p in PS , and places the handles to the corresponding vertices as a sequence of objects of type Vertex_handle in a container of value type of res which points to the first object in the sequence.",
+          "detailed": "The function returns an output iterator pointing to the position beyond the end of the sequence.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Point_set_2< Gt, Tds >::nearest_neighbors",
+          "argsstring": "(Point p, size_type k, OutputIterator res)",
+          "params": [
+            {
+              "type": "Point",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "size_type",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Point_set_2.h",
+          "line": "121"
+        },
+        {
+          "kind": "function",
+          "name": "nearest_neighbors",
+          "qualified_name": "CGAL::Point_set_2::nearest_neighbors",
+          "brief": "computes the k nearest neighbors of v , and places them as a sequence of objects of type Vertex_handle in a container of value type of res which points to the first object in the sequence.",
+          "detailed": "The function returns an output iterator pointing to the position beyond the end of the sequence.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Point_set_2< Gt, Tds >::nearest_neighbors",
+          "argsstring": "(Vertex_handle v, size_type k, OutputIterator res)",
+          "params": [
+            {
+              "type": "Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "size_type",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Point_set_2.h",
+          "line": "131"
+        },
+        {
+          "kind": "function",
+          "name": "range_search",
+          "qualified_name": "CGAL::Point_set_2::range_search",
+          "brief": "computes handles to all vertices contained in the closure of disk C .",
+          "detailed": "The computed vertex handles will be placed as a sequence of objects in a container of value type of res which points to the first object in the sequence. The function returns an output iterator pointing to the position beyond the end of the sequence.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Point_set_2< Gt, Tds >::range_search",
+          "argsstring": "(const Circle &C, OutputIterator res)",
+          "params": [
+            {
+              "type": "const Circle &",
+              "name": "C",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Point_set_2.h",
+          "line": "143"
+        },
+        {
+          "kind": "function",
+          "name": "range_search",
+          "qualified_name": "CGAL::Point_set_2::range_search",
+          "brief": "computes handles to all vertices contained in the closure of the triangle (a,b,c) .",
+          "detailed": "a , b , and c must not be collinear. The computed vertex handles will be placed as a sequence of objects in a container of value type of res which points to the first object in the sequence. The function returns an output iterator pointing to the position beyond the end of the sequence.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Point_set_2< Gt, Tds >::range_search",
+          "argsstring": "(const Point &a, const Point &b, const Point &c, OutputIterator res)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Point_set_2.h",
+          "line": "157"
+        },
+        {
+          "kind": "function",
+          "name": "range_search",
+          "qualified_name": "CGAL::Point_set_2::range_search",
+          "brief": "computes handles to all vertices contained in the closure of the iso-rectangle (a1,b1,c1,d1) .",
+          "detailed": "a1 is the upper left point, b1 the lower left, c1 the lower right and d1 the upper right point of the iso rectangle. The computed vertex handles will be placed as a sequence of objects in a container of value type of res which points to the first object in the sequence. The function returns an output iterator pointing to the position beyond the end of the sequence.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::Point_set_2< Gt, Tds >::range_search",
+          "argsstring": "(const Point &a1, const Point &b1, const Point &c1, const Point &d1, OutputIterator res)",
+          "params": [
+            {
+              "type": "const Point &",
+              "name": "a1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "b1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "c1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Point &",
+              "name": "d1",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "CGAL/Point_set_2.h",
+          "line": "171"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_point__set__2.xml",
+      "file": "CGAL/Point_set_2.h",
+      "line": "19"
+    },
+    "PointSetTraits": {
+      "kind": "class",
+      "name": "PointSetTraits",
+      "brief": "A point set traits class has to provide some primitives that are used by the point set class. The following catalog lists the involved primitives. For details about these types see the Kernel traits documentation.",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "PointSetTraits::Point_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PointSetTraits::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PointSetTraits.h",
+          "line": "20"
+        },
+        {
+          "kind": "typedef",
+          "name": "Circle_2",
+          "qualified_name": "PointSetTraits::Circle_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PointSetTraits::Circle_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PointSetTraits.h",
+          "line": "25"
+        },
+        {
+          "kind": "typedef",
+          "name": "Segment_2",
+          "qualified_name": "PointSetTraits::Segment_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PointSetTraits::Segment_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PointSetTraits.h",
+          "line": "30"
+        },
+        {
+          "kind": "typedef",
+          "name": "FT",
+          "qualified_name": "PointSetTraits::FT",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PointSetTraits::FT",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PointSetTraits.h",
+          "line": "35"
+        },
+        {
+          "kind": "typedef",
+          "name": "Orientation_2",
+          "qualified_name": "PointSetTraits::Orientation_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PointSetTraits::Orientation_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PointSetTraits.h",
+          "line": "40"
+        },
+        {
+          "kind": "typedef",
+          "name": "Side_of_oriented_circle_2",
+          "qualified_name": "PointSetTraits::Side_of_oriented_circle_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PointSetTraits::Side_of_oriented_circle_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PointSetTraits.h",
+          "line": "45"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_circle_2",
+          "qualified_name": "PointSetTraits::Construct_circle_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PointSetTraits::Construct_circle_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PointSetTraits.h",
+          "line": "50"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compute_squared_distance_2",
+          "qualified_name": "PointSetTraits::Compute_squared_distance_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PointSetTraits::Compute_squared_distance_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PointSetTraits.h",
+          "line": "55"
+        },
+        {
+          "kind": "typedef",
+          "name": "Bounded_side_2",
+          "qualified_name": "PointSetTraits::Bounded_side_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PointSetTraits::Bounded_side_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PointSetTraits.h",
+          "line": "60"
+        },
+        {
+          "kind": "typedef",
+          "name": "Compare_distance_2",
+          "qualified_name": "PointSetTraits::Compare_distance_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PointSetTraits::Compare_distance_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PointSetTraits.h",
+          "line": "65"
+        },
+        {
+          "kind": "typedef",
+          "name": "Construct_center_2",
+          "qualified_name": "PointSetTraits::Construct_center_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PointSetTraits::Construct_center_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PointSetTraits.h",
+          "line": "70"
+        }
+      ],
+      "xml_file": "class_point_set_traits.xml",
+      "file": "Concepts/PointSetTraits.h",
+      "line": "11"
+    },
+    "CGAL": {
+      "kind": "namespace",
+      "name": "CGAL",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespace_c_g_a_l.xml",
+      "file": "CGAL/nearest_neighbor_delaunay_2.h",
+      "line": "1"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgPointSet2Ref": {
+      "kind": "group",
+      "name": "PkgPointSet2Ref",
+      "brief": "",
+      "detailed": "Matthias Bäsken This package supports circular, triangular, and isorectangular range search queries as well as (k) nearest neighbor search queries on 2D point sets. In contrast to the spatial searching package, this package uses a Delaunay triangulation as underlying data structure. Introduced in: CGAL 2.1 Depends on: PkgTriangulation2 BibTeX: cgal:b-ss2-26a License: GPL The two dimensional point set is a class for geometric queries. It supports circular, triangular and iso rectangular range searches and nearest neighbor searches. The point set is inherited from the CGAL Delaunay triangulation data type. That means that it is a dynamic data structure supporting the insertion and deletion of points. This package also provides function template versions of the range search and nearest neighbor query operations. They all have to be templated by the type of a CGAL Delaunay triangulation and provide functionality similar to the corresponding member functions of the point set class. Classified Reference Pages Concepts PointSetTraits Classes CGAL::Point_set_2 Functions CGAL::nearest_neighbor() CGAL::nearest_neighbors() CGAL::range_search()",
+      "members": [],
+      "xml_file": "group___pkg_point_set2_ref.xml"
+    },
+    "PkgPointSet2Concepts": {
+      "kind": "group",
+      "name": "PkgPointSet2Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_point_set2_concepts.xml"
+    },
+    "PkgPointSet2RangeSearch": {
+      "kind": "group",
+      "name": "PkgPointSet2RangeSearch",
+      "brief": "There are six versions of the function template range_search() that perform range searches on Delaunay triangulations.",
+      "detailed": "The first performs circular range searches, the second triangular range searches and the third performs iso-rectangular range searches. The other three range search function templates perform enhanced variants of the three aforementioned operations. They get a user-defined object that has to control the range search operation. This way one can for instance stop the search, when n points were found.",
+      "members": [
+        {
+          "kind": "function",
+          "name": "range_search",
+          "qualified_name": "CGAL::range_search",
+          "brief": "computes handles to all vertices contained in the closure of disk C .",
+          "detailed": "The computed vertex handles will be placed as a sequence of objects in a container of value type of res which points to the first object in the sequence. The function returns an output iterator pointing to the position beyond the end of the sequence. delau $ is the CGAL Delaunay triangulation on which we perform the range search operation. Requirements Dt is a CGAL Delaunay triangulation and contains the following subset of types from the concept PointSetTraits and from the Delaunay triangulation data type: Dt::Geom_traits Dt::Vertex_handle Dt::Vertex Dt::Vertex_circulator Dt::Vertex_iterator Dt::Point Dt::Geom_traits::Bounded_side_2 Dt::Geom_traits::Construct_center_2 the template parameter Circle corresponds to Dt::Geom_traits::Cricle_2",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::range_search",
+          "argsstring": "(Dt &delau, const Circle &C, OutputIterator res)",
+          "params": [
+            {
+              "type": "Dt &",
+              "name": "delau",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Circle &",
+              "name": "C",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/range_search_delaunay_2.h",
+          "line": "49"
+        },
+        {
+          "kind": "function",
+          "name": "range_search",
+          "qualified_name": "CGAL::range_search",
+          "brief": "computes handles to all vertices contained in the closure of the triangle (a,b,c) .",
+          "detailed": "a , b , and c must not be collinear. The computed vertex handles will be placed as a sequence of objects in a container of value type of res which points to the first object in the sequence. The function returns an output iterator pointing to the position beyond the end of the sequence. delau is the CGAL Delaunay triangulation on which we perform the range search operation. Requirements Dt is a CGAL Delaunay triangulation and contains the following subset of types from the concept PointSetTraits and from the Delaunay triangulation data type: Dt::Geom_traits Dt::Vertex_handle Dt::Vertex Dt::Vertex_circulator Dt::Vertex_iterator Dt::Point Dt::Geom_traits::Circle_2 Dt::Geom_traits::Bounded_side_2 Dt::Geom_traits::Construct_center_2 Dt::Geom_traits::Orientation_2 Dt::Geom_traits::Construct_circle_2",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::range_search",
+          "argsstring": "(Dt &delau, const Dt::Point &a, const Dt::Point &b, const Dt::Point &c, OutputIterator res)",
+          "params": [
+            {
+              "type": "Dt &",
+              "name": "delau",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/range_search_delaunay_2.h",
+          "line": "84"
+        },
+        {
+          "kind": "function",
+          "name": "range_search",
+          "qualified_name": "CGAL::range_search",
+          "brief": "computes handles to all vertices contained in the closure of the iso-rectangle (a,b,c,d) .",
+          "detailed": "a is the upper left point, b the lower left, c the lower right and d the upper right point of the iso rectangle. The computed vertex handles will be placed as a sequence of objects in a container of value type of res which points to the first object in the sequence. The function returns an output iterator pointing to the position beyond the end of the sequence. delau is the CGAL Delaunay triangulation on which we perform the range search operation. Requirements Dt is a CGAL Delaunay triangulation and contains the following subset of types from the concept PointSetTraits and from the Delaunay triangulation data type: Dt::Geom_traits Dt::Vertex_handle Dt::Vertex Dt::Vertex_circulator Dt::Vertex_iterator Dt::Point Dt::Geom_traits::Circle_2 Dt::Geom_traits::Bounded_side_2 Dt::Geom_traits::Construct_center_2 Dt::Geom_traits::Orientation_2 Dt::Geom_traits::Construct_circle_2",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::range_search",
+          "argsstring": "(Dt &delau, const Dt::Point &a, const Dt::Point &b, const Dt::Point &c, const Dt::Point &d, OutputIterator res)",
+          "params": [
+            {
+              "type": "Dt &",
+              "name": "delau",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/range_search_delaunay_2.h",
+          "line": "119"
+        },
+        {
+          "kind": "function",
+          "name": "range_search",
+          "qualified_name": "CGAL::range_search",
+          "brief": "computes handles to all vertices contained in the closure of disk C .",
+          "detailed": "The computed vertex handles will be placed as a sequence of objects in a container of value type of res which points to the first object in the sequence. The function returns an output iterator pointing to the position beyond the end of the sequence. delau is the CGAL Delaunay triangulation on that we perform the range search operation. pred controls the search operation. If return_if_succeded is true , we will end the search after the first success of the predicate, otherwise we will continue till the search is finished. Requirements For the requirements of Dt see the description for the non-predicate version. Requirements of Pred : void set_result(bool); bool operator()(const Point&); The operator() is used for testing the current point in the search operation. If this operator returns true and return_if_succeded is true , the range search will stop. Otherwise the range search operation will continue. Member function set_result() can be used to store the result of the range search in the function object. The result will be true if the last call to the operator() of the predicate returned true , false otherwise.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::range_search",
+          "argsstring": "(Dt &delau, const Circle &C, OutputIterator res, Pred &pred, bool return_if_succeded)",
+          "params": [
+            {
+              "type": "Dt &",
+              "name": "delau",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Circle &",
+              "name": "C",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Pred &",
+              "name": "pred",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "return_if_succeded",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/range_search_delaunay_2.h",
+          "line": "151"
+        },
+        {
+          "kind": "function",
+          "name": "range_search",
+          "qualified_name": "CGAL::range_search",
+          "brief": "computes handles to all vertices contained in the closure of the triangle (a,b,c) .",
+          "detailed": "a , b , and c must not be collinear. The computed vertex handles will be placed as a sequence of objects in a container of value type of res which points to the first object in the sequence. The function returns an output iterator pointing to the position beyond the end of the sequence. delau is the CGAL Delaunay triangulation on which we perform the range search operation. pred controls the search operation. If return_if_succeded is true , we will end the search after the first success of the predicate, otherwise we will continue till the search is finished. Requirements For the requirements of Dt see the description for the non-predicate version. For the requirements of Pred see the description above.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::range_search",
+          "argsstring": "(Dt &delau, const Dt::Point &a, const Dt::Point &b, const Dt::Point &c, OutputIterator res, Pred &pred, bool return_if_succeded)",
+          "params": [
+            {
+              "type": "Dt &",
+              "name": "delau",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Pred &",
+              "name": "pred",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "return_if_succeded",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/range_search_delaunay_2.h",
+          "line": "177"
+        },
+        {
+          "kind": "function",
+          "name": "range_search",
+          "qualified_name": "CGAL::range_search",
+          "brief": "computes handles to all vertices contained in the closure of the iso-rectangle (a,b,c,d) .",
+          "detailed": "a is the upper left point, b the lower left, c the lower right and d the upper right point of the iso rectangle. The computed vertex handles will be placed as a sequence of objects in a container of value type of res which points to the first object in the sequence. The function returns an output iterator pointing to the position beyond the end of the sequence. delau is the CGAL Delaunay triangulation on which we perform the range search operation. pred controls the search operation. If return_if_succeded is true , we will end the search after the first success of the predicate, otherwise we will continue till the search is finished. Requirements For the requirements of Dt see the description for the non-predicate version. For the requirements of Pred see the description above.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::range_search",
+          "argsstring": "(Dt &delau, const Dt::Point &a, const Dt::Point &b, const Dt::Point &c, const Dt::Point &d, OutputIterator res, Pred &pred, bool return_if_succeded)",
+          "params": [
+            {
+              "type": "Dt &",
+              "name": "delau",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "a",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "b",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "c",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "d",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Pred &",
+              "name": "pred",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "bool",
+              "name": "return_if_succeded",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/range_search_delaunay_2.h",
+          "line": "202"
+        }
+      ],
+      "xml_file": "group___pkg_point_set2_range_search.xml"
+    },
+    "PkgPointSet2NeighborSearch": {
+      "kind": "group",
+      "name": "PkgPointSet2NeighborSearch",
+      "brief": "",
+      "detailed": "",
+      "members": [
+        {
+          "kind": "function",
+          "name": "nearest_neighbor",
+          "qualified_name": "CGAL::nearest_neighbor",
+          "brief": "computes a handle to a vertex w of delau that is closest to v .",
+          "detailed": "If v is the only vertex in delau , NULL is returned. Requirements Dt is a CGAL Delaunay triangulation and contains the following subset of types from the concept PointSetTraits and from the Delaunay triangulation data type: Dt::Geom_traits Dt::Point Dt::Vertex_circulator Dt::Vertex_handle Dt::Geom_traits::Compare_distance_2",
+          "return_type": "Dt::Vertex_handle",
+          "definition": "Dt::Vertex_handle CGAL::nearest_neighbor",
+          "argsstring": "(const Dt &delau, Dt::Vertex_handle v)",
+          "params": [
+            {
+              "type": "const Dt &",
+              "name": "delau",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Dt::Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/nearest_neighbor_delaunay_2.h",
+          "line": "23"
+        },
+        {
+          "kind": "function",
+          "name": "nearest_neighbors",
+          "qualified_name": "CGAL::nearest_neighbors",
+          "brief": "computes the k nearest neighbors of p in delau , and places the handles to the corresponding vertices as a sequence of objects of type Vertex_handle in a container of value type of res which points to the first object in the sequence.",
+          "detailed": "The function returns an output iterator pointing to the position beyond the end of the sequence. The function nearest_neighbors() is the function template version of the k nearest neighbors search on Delaunay triangulations. There are two versions of this function, one taking a point of the Delaunay triangulation and the other taking a vertex handle. Requirements Dt is a CGAL Delaunay triangulation and contains the following subset of types from the concept PointSetTraits and from the Delaunay triangulation data type: Dt::Geom_traits Dt::Vertex_handle Dt::Vertex_iterator Dt::Vertex_circulator Dt::Vertex Dt::Face Dt::Face_handle Dt::Locate_type Dt::Point Dt::Geom_traits::FT Dt::Geom_traits::Compute_squared_distance_2",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::nearest_neighbors",
+          "argsstring": "(Dt &delau, const Dt::Point &p, Dt::size_type k, OutputIterator res)",
+          "params": [
+            {
+              "type": "Dt &",
+              "name": "delau",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Dt::Point &",
+              "name": "p",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Dt::size_type",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/nearest_neighbor_delaunay_2.h",
+          "line": "64"
+        },
+        {
+          "kind": "function",
+          "name": "nearest_neighbors",
+          "qualified_name": "CGAL::nearest_neighbors",
+          "brief": "computes the k nearest neighbors of v (including v ) in delau , and places them as a sequence of objects of type Vertex_handle in a container of value type of res which points to the first object in the sequence.",
+          "detailed": "The function returns an output iterator pointing to the position beyond the end of the sequence. The function nearest_neighbors() is the function template version of the k nearest neighbors search on Delaunay triangulations. There are two versions of this function, one taking a point of the Delaunay triangulation and the other taking a vertex handle. Requirements Dt is a CGAL Delaunay triangulation and contains the following subset of types from the concept PointSetTraits and from the Delaunay triangulation data type: Dt::Geom_traits Dt::Vertex_handle Dt::Vertex_iterator Dt::Vertex_circulator Dt::Vertex Dt::Point Dt::Geom_traits::FT Dt::Geom_traits::Compute_squared_distance_2",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::nearest_neighbors",
+          "argsstring": "(Dt &delau, Dt::Vertex_handle v, Dt::size_type k, OutputIterator res)",
+          "params": [
+            {
+              "type": "Dt &",
+              "name": "delau",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Dt::Vertex_handle",
+              "name": "v",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "Dt::size_type",
+              "name": "k",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "res",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/nearest_neighbor_delaunay_2.h",
+          "line": "97"
+        }
+      ],
+      "xml_file": "group___pkg_point_set2_neighbor_search.xml"
+    }
+  }
+}

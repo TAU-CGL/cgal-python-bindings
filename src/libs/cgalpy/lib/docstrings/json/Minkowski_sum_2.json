@@ -1,0 +1,904 @@
+{
+  "schema_version": 1,
+  "package": "Minkowski_sum_2",
+  "source": {
+    "kind": "CGAL Doxygen XML",
+    "generated_with": "CGAL_GENERATE_XML=ON"
+  },
+  "compound_count": 12,
+  "skipped_count": 0,
+  "compounds": {
+    "CGAL::Greene_convex_decomposition_2": {
+      "kind": "class",
+      "name": "CGAL::Greene_convex_decomposition_2",
+      "brief": "The Greene_convex_decomposition_2 class implements the approximation algorithm of Greene for the decomposition of an input polygon into convex sub-polygons [6] .",
+      "detailed": "This algorithm takes $O(n \\log n)$ time and $O(n)$ space, where $ n$ is the size of the input polygon, and outputs a decomposition whose size is guaranteed to be no more than four times the size of the optimal decomposition. Kernel must be a geometric kernel that can be used for the polygon. Container must be a container that can be used for the polygon. It is by default std::vector<typename Kernel::Point_2> . Is model of PolygonConvexDecomposition_2 CGAL::greene_approx_convex_partition_2()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Polygon_2",
+          "qualified_name": "CGAL::Greene_convex_decomposition_2::Polygon_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::Polygon_2< Kernel, Container >",
+          "definition": "typedef CGAL::Polygon_2<Kernel,Container> CGAL::Greene_convex_decomposition_2< Kernel, Container >::Polygon_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polygon_convex_decomposition_2.h",
+          "line": "26"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_greene__convex__decomposition__2.xml",
+      "file": "CGAL/Polygon_convex_decomposition_2.h",
+      "line": "23"
+    },
+    "CGAL::Hertel_Mehlhorn_convex_decomposition_2": {
+      "kind": "class",
+      "name": "CGAL::Hertel_Mehlhorn_convex_decomposition_2",
+      "brief": "The Hertel_Mehlhorn_convex_decomposition_2 class implements the approximation algorithm of Hertel and Mehlhorn for decomposing a polygon into convex sub-polygons [8] .",
+      "detailed": "This algorithm constructs a triangulation of the input polygon and proceeds by removing unnecessary triangulation edges. Given the triangulation, the algorithm requires $O(n)$ time and space to construct a convex decomposition (where $ n$ is the size of the input polygon), whose size is guaranteed to be no more than four times the size of the optimal decomposition. Kernel must be a geometric kernel that can be used for the polygon. Container must be a container that can be used for the polygon. It is by default std::vector<typename Kernel::Point_2> . Is model of PolygonConvexDecomposition_2 CGAL::approx_convex_partition_2()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Polygon_2",
+          "qualified_name": "CGAL::Hertel_Mehlhorn_convex_decomposition_2::Polygon_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::Polygon_2< Kernel, Container >",
+          "definition": "typedef CGAL::Polygon_2<Kernel,Container> CGAL::Hertel_Mehlhorn_convex_decomposition_2< Kernel, Container >::Polygon_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polygon_convex_decomposition_2.h",
+          "line": "59"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_hertel___mehlhorn__convex__decomposition__2.xml",
+      "file": "CGAL/Polygon_convex_decomposition_2.h",
+      "line": "56"
+    },
+    "CGAL::Optimal_convex_decomposition_2": {
+      "kind": "class",
+      "name": "CGAL::Optimal_convex_decomposition_2",
+      "brief": "The Optimal_convex_decomposition_2 class provides an implementation of Greene's dynamic programming algorithm for optimal decomposition of a polygon into convex sub-polygons [6] .",
+      "detailed": "Note that this algorithm requires $O(n^4)$ time and $O(n^3)$ space in the worst case, where $ n$ is the size of the input polygon. Kernel must be a geometric kernel that can be used for the polygon. Container must be a container that can be used for the polygon. It is by default std::vector<typename Kernel::Point_2> . Is model of PolygonConvexDecomposition_2 CGAL::optimal_convex_partition_2()",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Polygon_2",
+          "qualified_name": "CGAL::Optimal_convex_decomposition_2::Polygon_2",
+          "brief": "",
+          "detailed": "",
+          "return_type": "CGAL::Polygon_2< Kernel, Container >",
+          "definition": "typedef CGAL::Polygon_2<Kernel,Container> CGAL::Optimal_convex_decomposition_2< Kernel, Container >::Polygon_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "public-type",
+          "section": "",
+          "file": "CGAL/Polygon_convex_decomposition_2.h",
+          "line": "89"
+        }
+      ],
+      "xml_file": "class_c_g_a_l_1_1_optimal__convex__decomposition__2.xml",
+      "file": "CGAL/Polygon_convex_decomposition_2.h",
+      "line": "86"
+    },
+    "CGAL::Polygon_nop_decomposition_2": {
+      "kind": "class",
+      "name": "CGAL::Polygon_nop_decomposition_2",
+      "brief": "The Polygon_nop_decomposition_2 class implements a convex decomposition of a polygon, which merely passes the input polygon to the list of output convex polygons.",
+      "detailed": "It should be used when it is known that the input polygon is convex to start with. Is model of PolygonConvexDecomposition_2",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_polygon__nop__decomposition__2.xml",
+      "file": "CGAL/Polygon_nop_decomposition_2.h",
+      "line": "15"
+    },
+    "CGAL::Polygon_triangulation_decomposition_2": {
+      "kind": "class",
+      "name": "CGAL::Polygon_triangulation_decomposition_2",
+      "brief": "The Polygon_triangulation_decomposition_2 class implements a convex decomposition of a polygon or a polygon with holes into triangles using the Delaunay constrained triangulation functionality of the 2D Triangulation package.",
+      "detailed": "Is model of PolygonWithHolesConvexDecomposition_2",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_polygon__triangulation__decomposition__2.xml",
+      "file": "CGAL/Polygon_triangulation_decomposition_2.h",
+      "line": "15"
+    },
+    "CGAL::Polygon_vertical_decomposition_2": {
+      "kind": "class",
+      "name": "CGAL::Polygon_vertical_decomposition_2",
+      "brief": "The Polygon_vertical_decomposition_2 class implements a convex decomposition of a polygon or a polygon with holes into pseudo trapezoids utilizing the CGAL::decompose() free function of the 2D Arrangements package.",
+      "detailed": "The algorithm operates in $O(n \\log n)$ time and takes $O(n)$ space at the worst case, where $ n$ is the size of the input polygon. Is model of PolygonWithHolesConvexDecomposition_2",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_polygon__vertical__decomposition__2.xml",
+      "file": "CGAL/Polygon_vertical_decomposition_2.h",
+      "line": "19"
+    },
+    "CGAL::Small_side_angle_bisector_decomposition_2": {
+      "kind": "class",
+      "name": "CGAL::Small_side_angle_bisector_decomposition_2",
+      "brief": "The Small_side_angle_bisector_decomposition_2 class implements a simple yet efficient heuristic for decomposing an input polygon into convex sub-polygons.",
+      "detailed": "It is based on the algorithm suggested by Flato and Halperin [5] , but without introducing Steiner points. The algorithm operates in two major steps. In the first step, it tries to subdivide the polygon by connect two reflex vertices with an edge. When this is not possible any more, it eliminates the reflex vertices one by one by connecting them to other convex vertices, such that the new edge best approximates the angle bisector of the reflex vertex. The algorithm operates in $O(n^2)$ time and takes $O(n)$ space at the worst case, where $ n$ is the size of the input polygon. Is model of PolygonConvexDecomposition_2",
+      "members": [],
+      "xml_file": "class_c_g_a_l_1_1_small__side__angle__bisector__decomposition__2.xml",
+      "file": "CGAL/Small_side_angle_bisector_decomposition_2.h",
+      "line": "22"
+    },
+    "PolygonConvexDecomposition_2": {
+      "kind": "class",
+      "name": "PolygonConvexDecomposition_2",
+      "brief": "A model of the PolygonConvexDecomposition_2 concept is capable of decomposing an input polygon $ P$ into a set of convex sub-polygons $ P_1, \\ldots, P_k$ , such that $ \\cup_{i=1}^{k}{P_k} = P$ .",
+      "detailed": "Has models CGAL::Small_side_angle_bisector_decomposition_2 < Kernel , Container > CGAL::Optimal_convex_decomposition_2 < Kernel , Container > CGAL::Hertel_Mehlhorn_convex_decomposition_2 < Kernel , Container > CGAL::Greene_convex_decomposition_2 < Kernel , Container > CGAL::Polygon_nop_decomposition_2 < Kernel , Container >",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Kernel",
+          "qualified_name": "PolygonConvexDecomposition_2::Kernel",
+          "brief": "the geometric kernel type.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PolygonConvexDecomposition_2::Kernel",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PolygonConvexDecomposition_2.h",
+          "line": "26"
+        },
+        {
+          "kind": "typedef",
+          "name": "Container",
+          "qualified_name": "PolygonConvexDecomposition_2::Container",
+          "brief": "the container of points type.",
+          "detailed": "By default it is std::vector<typename Kernel::Point_2> .",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PolygonConvexDecomposition_2::Container",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PolygonConvexDecomposition_2.h",
+          "line": "31"
+        },
+        {
+          "kind": "typedef",
+          "name": "Point_2",
+          "qualified_name": "PolygonConvexDecomposition_2::Point_2",
+          "brief": "the point type, used to represent polygon vertices.",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PolygonConvexDecomposition_2::Point_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PolygonConvexDecomposition_2.h",
+          "line": "34"
+        },
+        {
+          "kind": "typedef",
+          "name": "Polygon_2",
+          "qualified_name": "PolygonConvexDecomposition_2::Polygon_2",
+          "brief": "the polygon type, defined as Polygon_2 < Kernel , Container > .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PolygonConvexDecomposition_2::Polygon_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PolygonConvexDecomposition_2.h",
+          "line": "37"
+        },
+        {
+          "kind": "function",
+          "name": "PolygonConvexDecomposition_2",
+          "qualified_name": "PolygonConvexDecomposition_2::PolygonConvexDecomposition_2",
+          "brief": "default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "PolygonConvexDecomposition_2::PolygonConvexDecomposition_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/PolygonConvexDecomposition_2.h",
+          "line": "45"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "PolygonConvexDecomposition_2::operator()",
+          "brief": "decomposes the input polygon P into convex sub-polygons, and writes them to the output iterator oi .",
+          "detailed": "The value-type of the output iterator must be Polygon_2 . The function returns a past-the-end iterator for the convex sub-polygons.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator PolygonConvexDecomposition_2::operator()",
+          "argsstring": "(const Polygon_2 &P, OutputIterator oi) const",
+          "params": [
+            {
+              "type": "const Polygon_2 &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "oi",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PolygonConvexDecomposition_2.h",
+          "line": "58"
+        }
+      ],
+      "xml_file": "class_polygon_convex_decomposition__2.xml",
+      "file": "Concepts/PolygonConvexDecomposition_2.h",
+      "line": "19"
+    },
+    "PolygonWithHolesConvexDecomposition_2": {
+      "kind": "class",
+      "name": "PolygonWithHolesConvexDecomposition_2",
+      "brief": "A model of the PolygonWithHolesConvexDecomposition_2 concept is capable of decomposing an input polygon $ P$ , which may have holes, into a set of convex sub-polygons $ P_1, \\ldots, P_k$ , such that $ \\cup_{i=1}^{k}{P_k} = P$ .",
+      "detailed": "Refines PolygonConvexDecomposition_2 Has models CGAL::Polygon_vertical_decomposition_2 <Kernel,Container> CGAL::Polygon_triangulation_decomposition_2 <Kernel,Container>",
+      "members": [
+        {
+          "kind": "typedef",
+          "name": "Polygon_with_holes_2",
+          "qualified_name": "PolygonWithHolesConvexDecomposition_2::Polygon_with_holes_2",
+          "brief": "the polygon with holes type, defined as Polygon_with_holes_2 <Kernel,Container> .",
+          "detailed": "",
+          "return_type": "unspecified_type",
+          "definition": "typedef unspecified_type PolygonWithHolesConvexDecomposition_2::Polygon_with_holes_2",
+          "argsstring": "",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Types",
+          "file": "Concepts/PolygonWithHolesConvexDecomposition_2.h",
+          "line": "28"
+        },
+        {
+          "kind": "function",
+          "name": "PolygonWithHolesConvexDecomposition_2",
+          "qualified_name": "PolygonWithHolesConvexDecomposition_2::PolygonWithHolesConvexDecomposition_2",
+          "brief": "default constructor.",
+          "detailed": "",
+          "return_type": "",
+          "definition": "PolygonWithHolesConvexDecomposition_2::PolygonWithHolesConvexDecomposition_2",
+          "argsstring": "()",
+          "params": [],
+          "section_kind": "user-defined",
+          "section": "Creation",
+          "file": "Concepts/PolygonWithHolesConvexDecomposition_2.h",
+          "line": "36"
+        },
+        {
+          "kind": "function",
+          "name": "operator()",
+          "qualified_name": "PolygonWithHolesConvexDecomposition_2::operator()",
+          "brief": "decomposes the input polygon with holes P into convex sub-polygons, and writes them to the output iterator oi .",
+          "detailed": "The value-type of the output iterator must be Polygon_2 . The function returns a past-the-end iterator for the convex sub-polygons.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator PolygonWithHolesConvexDecomposition_2::operator()",
+          "argsstring": "(const Polygon_with_holes_2 &P, OutputIterator oi) const",
+          "params": [
+            {
+              "type": "const Polygon_with_holes_2 &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "oi",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "user-defined",
+          "section": "Operations",
+          "file": "Concepts/PolygonWithHolesConvexDecomposition_2.h",
+          "line": "49"
+        }
+      ],
+      "xml_file": "class_polygon_with_holes_convex_decomposition__2.xml",
+      "file": "Concepts/PolygonWithHolesConvexDecomposition_2.h",
+      "line": "19"
+    },
+    "std": {
+      "kind": "namespace",
+      "name": "std",
+      "brief": "STL namespace.",
+      "detailed": "",
+      "members": [],
+      "xml_file": "namespacestd.xml",
+      "file": "[STL]",
+      "line": "1"
+    },
+    "PkgMinkowskiSum2Ref": {
+      "kind": "group",
+      "name": "PkgMinkowskiSum2Ref",
+      "brief": "",
+      "detailed": "Ron Wein, Alon Baram, Eyal Flato, Efi Fogel, Michael Hemmer, and Sebastian Morr This package consists of functions that compute the Minkowski sum of two simple straight-edge polygons in the plane. It also contains functions for computing the Minkowski sum of a polygon and a disc, an operation known as offsetting or dilating a polygon. The package can compute the exact representation of the offset polygon, or provide a guaranteed approximation of the offset. Introduced in: CGAL 3.3 Depends on: PkgArrangementOnSurface2, PkgAABBTree, PkgTriangulation2 BibTeX: cgal:w-rms2-26a License: GPL This package consist of functions for computing the Minkowksi sum of two polygons in the plane. Namely, given two polygons $ P,Q \\in \\mathbb{R}^2$ it computes $ P \\oplus Q = \\left\\{ p + q ~|~ p \\in P, q \\in Q \\right\\}$ . In addition, the package also includes functions for offsetting a polygon, namely computing its Minkowski sum with a disc of a given radius, and for insetting a polygon (namely computing its inner offset). It is possible to compute the exact representation of the offset (or the inset), or to approximate it with guaranteed error bounds, in order to speed up the computation time. Classified Reference Pages Functions CGAL::minkowski_sum_2() CGAL::minkowski_sum_by_decomposition_2() CGAL::minkowski_sum_by_full_convolution_2() CGAL::minkowski_sum_by_reduced_convolution_2() CGAL::approximated_offset_2() CGAL::approximated_inset_2() CGAL::offset_polygon_2() CGAL::inset_polygon_2() Concepts PolygonConvexDecomposition_2 PolygonWithHolesConvexDecomposition_2 Classes CGAL::Small_side_angle_bisector_decomposition_2 <Kernel,Container> CGAL::Optimal_convex_decomposition_2 <Kernel,Container> CGAL::Hertel_Mehlhorn_convex_decomposition_2 <Kernel,Container> CGAL::Greene_convex_decomposition_2 <Kernel,Container> CGAL::Polygon_vertical_decomposition_2 <Kernel,Container> CGAL::Polygon_triangulation_decomposition_2 <Kernel,Container> CGAL::Polygon_nop_decomposition_2 <Kernel,Container>",
+      "members": [
+        {
+          "kind": "function",
+          "name": "approximated_inset_2",
+          "qualified_name": "CGAL::approximated_inset_2",
+          "brief": "Provides a guaranteed approximation of the inset, or inner offset, of the given polygon P by a given radius r .",
+          "detailed": "Namely, the function computes the set of points inside the polygon whose distance from $ P$ 's boundary is at least $ r$ : $ \\{ p \\in P \\;|\\; {\\rm dist}(p, \\partial P) \\geq r \\}$ , with the approximation error bounded by eps . Note that as the input polygon may not be convex, its inset may comprise several disconnected components. The result is therefore represented as a sequence of generalized polygons, whose edges are either line segments or circular arcs. The output sequence is returned via the output iterator oi , whose value-type must be Gps_circle_segment_traits_2<Kernel>::Polygon_2 . P is a simple polygon.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::approximated_inset_2",
+          "argsstring": "(const Polygon_2< Kernel, Container > &pgn, const typename Kernel::FT &r, const double &eps, OutputIterator oi)",
+          "params": [
+            {
+              "type": "const Polygon_2< Kernel, Container > &",
+              "name": "pgn",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::FT &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const double &",
+              "name": "eps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "oi",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/approximated_offset_2.h",
+          "line": "22"
+        },
+        {
+          "kind": "function",
+          "name": "approximated_offset_2",
+          "qualified_name": "CGAL::approximated_offset_2",
+          "brief": "Provides a guaranteed approximation of the offset of the given polygon P by a given radius r - namely, the function computes the Minkowski sum $ P \\oplus B_r$ , where $ B_r$ is a disc of radius r centered at the origin.",
+          "detailed": "The function actually outputs a set $ S$ that contains the Minkowski sum, such that the approximation error is bounded by eps . Note that as the input polygon may not be convex, its offset may not be a simple polygon. The result is therefore represented as a polygon with holes, whose edges are either line segments or circular arcs. P is a simple polygon.",
+          "return_type": "Gps_circle_segment_traits_2< Kernel >::Polygon_with_holes_2",
+          "definition": "Gps_circle_segment_traits_2< Kernel >::Polygon_with_holes_2 CGAL::approximated_offset_2",
+          "argsstring": "(const Polygon_2< Kernel, Container > &P, const typename Kernel::FT &r, const double &eps)",
+          "params": [
+            {
+              "type": "const Polygon_2< Kernel, Container > &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::FT &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const double &",
+              "name": "eps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/approximated_offset_2.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "approximated_offset_2",
+          "qualified_name": "CGAL::approximated_offset_2",
+          "brief": "Provides a guaranteed approximation of offset the given polygon with holes pwh by a given radius r , such that the approximation error is bounded by eps .",
+          "detailed": "It does so by offsetting outer boundary of pwh and insetting its holes. The result is represented as a generalized polygon with holes, such that the edges of the polygon correspond to line segment and circular arcs. pwh is not unbounded (it has a valid outer boundary).",
+          "return_type": "Gps_circle_segment_traits_2< Kernel >::Polygon_with_holes_2",
+          "definition": "Gps_circle_segment_traits_2< Kernel >::Polygon_with_holes_2 CGAL::approximated_offset_2",
+          "argsstring": "(const Polygon_with_holes_2< Kernel, Container > &wh, const typename Kernel::FT &r, const double &eps)",
+          "params": [
+            {
+              "type": "const Polygon_with_holes_2< Kernel, Container > &",
+              "name": "wh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::FT &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const double &",
+              "name": "eps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/approximated_offset_2.h",
+          "line": "64"
+        },
+        {
+          "kind": "function",
+          "name": "approximated_offset_2",
+          "qualified_name": "CGAL::approximated_offset_2",
+          "brief": "Provides a guaranteed approximation of the offset of the given polygon P by a radius r , as described above.",
+          "detailed": "If the input polygon P is not convex, the function decomposes it into convex sub-polygons $ P_1, \\ldots, P_k$ and computes the union of the sub-offsets (namely $ \\bigcup_{i}{(P_i \\oplus B_r)}$ ). The decomposition is performed using the given decomposition strategy decomp , which must be an instance of a class that models the concept PolygonConvexDecomposition . P is a simple polygon.",
+          "return_type": "Gps_circle_segment_traits_2< Kernel >::Polygon_with_holes_2",
+          "definition": "Gps_circle_segment_traits_2< Kernel >::Polygon_with_holes_2 CGAL::approximated_offset_2",
+          "argsstring": "(const Polygon_2< Kernel, Container > &P, const typename Kernel::FT &r, const double &eps, const DecompositionStrategy &decomp)",
+          "params": [
+            {
+              "type": "const Polygon_2< Kernel, Container > &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename Kernel::FT &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const double &",
+              "name": "eps",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const DecompositionStrategy &",
+              "name": "decomp",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/approximated_offset_2.h",
+          "line": "84"
+        },
+        {
+          "kind": "function",
+          "name": "minkowski_sum_2",
+          "qualified_name": "CGAL::minkowski_sum_2",
+          "brief": "Computes the Minkowski sum $ P \\oplus Q$ of two given polygons (which may have holes).",
+          "detailed": "PolygonType1 and PolygonType2 can be any combination of: Polygon_2 Polygon_with_holes_2 This method defaults to the reduced convolution method, see below. CGAL::minkowski_sum_by_reduced_convolution_2() CGAL::minkowski_sum_by_full_convolution_2()",
+          "return_type": "Polygon_with_holes_2< Kernel, Container >",
+          "definition": "Polygon_with_holes_2< Kernel, Container > CGAL::minkowski_sum_2",
+          "argsstring": "(const PolygonType1< Kernel, Container > &P, const PolygonType2< Kernel, Container > &Q)",
+          "params": [
+            {
+              "type": "const PolygonType1< Kernel, Container > &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PolygonType2< Kernel, Container > &",
+              "name": "Q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/minkowski_sum_2.h",
+          "line": "19"
+        },
+        {
+          "kind": "function",
+          "name": "minkowski_sum_by_reduced_convolution_2",
+          "qualified_name": "CGAL::minkowski_sum_by_reduced_convolution_2",
+          "brief": "Computes the Minkowski sum $ P \\oplus Q$ of the two given polygons.",
+          "detailed": "The function computes the reduced convolution [3] of the two polygons and extracts those loops of the convolution that are part of the Minkowsi sum. This method works very efficiently, regardless of whether P and Q are convex or non-convex. In general, it is more efficient than the full convolution method, except for degenerate cases where the output polygon has many holes. PolygonType1 and PolygonType2 can be any combination of: Polygon_2 Polygon_with_holes_2",
+          "return_type": "Polygon_with_holes_2< Kernel, Container >",
+          "definition": "Polygon_with_holes_2< Kernel, Container > CGAL::minkowski_sum_by_reduced_convolution_2",
+          "argsstring": "(const PolygonType1< Kernel, Container > &P, const PolygonType2< Kernel, Container > &Q)",
+          "params": [
+            {
+              "type": "const PolygonType1< Kernel, Container > &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PolygonType2< Kernel, Container > &",
+              "name": "Q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/minkowski_sum_2.h",
+          "line": "41"
+        },
+        {
+          "kind": "function",
+          "name": "minkowski_sum_by_full_convolution_2",
+          "qualified_name": "CGAL::minkowski_sum_by_full_convolution_2",
+          "brief": "Computes the Minkowski sum $ P \\oplus Q$ of the two given polygons.",
+          "detailed": "The function computes the (full) convolution cycles of the two polygons and extract the regions having positive winding number with respect to these cycles. This method work very efficiently, regardless of whether P and Q are convex or non-convex. PolygonType1 and PolygonType2 can be any combination of: Polygon_2 Polygon_with_holes_2",
+          "return_type": "Polygon_with_holes_2< Kernel, Container >",
+          "definition": "Polygon_with_holes_2< Kernel, Container > CGAL::minkowski_sum_by_full_convolution_2",
+          "argsstring": "(const Polygon_2< Kernel, Container > &P, const Polygon_2< Kernel, Container > &Q)",
+          "params": [
+            {
+              "type": "const Polygon_2< Kernel, Container > &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Polygon_2< Kernel, Container > &",
+              "name": "Q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/minkowski_sum_2.h",
+          "line": "60"
+        },
+        {
+          "kind": "function",
+          "name": "minkowski_sum_2",
+          "qualified_name": "CGAL::minkowski_sum_2",
+          "brief": "Computes the Minkowski sum $ P \\oplus Q$ of the two given polygons.",
+          "detailed": "The function decomposes the summand P into convex sub-polygons $ P_1, \\ldots, P_k$ using the given decomposition method decomp_P . If the summand P is of type Polygon_2 , then decomp_P must be an instance of a class template that models the concept PolygonConvexDecomposition_2 . If P is of type Polygon_with_holes_2 , then decomp_P must be an instance of a class template that models the concept PolygonWithHolesConvexDecomposition_2 . Similarly, the function decomposes the summand Q into convex sub-polygons $ Q_1, \\ldots, Q_k$ using the given decomposition method decomp_Q . If the summand Q is of type Polygon_2 , then decomp_Q must be an instance of a class template that models the concept PolygonConvexDecomposition_2 . If Q is of type Polygon_with_holes_2 , then decomp_Q must be an instance of a class template that models the concept PolygonWithHolesConvexDecomposition_2 . Then, the function computes the union of pairwise sub-sums (namely $ \\bigcup_{i,j}{(P_i \\oplus Q_j)}$ ).",
+          "return_type": "Polygon_with_holes_2< Kernel, Container >",
+          "definition": "Polygon_with_holes_2< Kernel, Container > CGAL::minkowski_sum_2",
+          "argsstring": "(const PolygonType1< Kernel, Container > &P, const PolygonType2< Kernel, Container > &Q, const PolygonConvexDecompositionP_2_ &decomp_P, const PolygonConvexDecompositionQ_2_ &decomp_Q, const Gps_segment_traits_2 &traits=Gps_segment_traits_2< Kernel, Container, Arr_segment_traits >())",
+          "params": [
+            {
+              "type": "const PolygonType1< Kernel, Container > &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PolygonType2< Kernel, Container > &",
+              "name": "Q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PolygonConvexDecompositionP_2_ &",
+              "name": "decomp_P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PolygonConvexDecompositionQ_2_ &",
+              "name": "decomp_Q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Gps_segment_traits_2 &",
+              "name": "traits",
+              "default": "Gps_segment_traits_2< Kernel, Container, Arr_segment_traits >()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/minkowski_sum_2.h",
+          "line": "88"
+        },
+        {
+          "kind": "function",
+          "name": "minkowski_sum_2",
+          "qualified_name": "CGAL::minkowski_sum_2",
+          "brief": "Computes the Minkowski sum $ P \\oplus Q$ of the two given polygons.",
+          "detailed": "The function decomposes the summands P and Q into convex sub-polygons $ P_1, \\ldots, P_k$ and $ Q_1, \\ldots, Q_{\\ell}$ , respectively. Then, it computes the union of pairwise sub-sums (namely $ \\bigcup_{i,j}{(P_i \\oplus Q_j)}$ ). The decomposition is performed using the given decomposition method decomp . If both summands $ P \\oplus Q$ are of type Polygon_2 , then decomp must be instance of a class template that models the concept PolygonConvexDecomposition_2 . If both summands are of type Polygon_with_holes_2 , then decomp must be a model of the concept PolygonWithHolesConvexDecomposition_2 .",
+          "return_type": "Polygon_with_holes_2< Kernel, Container >",
+          "definition": "Polygon_with_holes_2< Kernel, Container > CGAL::minkowski_sum_2",
+          "argsstring": "(const PolygonType1< Kernel, Container > &P, const PolygonType2< Kernel, Container > &Q, const PolygonConvexDecomposition_2_ &decomp, const Gps_segment_traits_2 &traits=Gps_segment_traits_2< Kernel, Container, Arr_segment_traits >())",
+          "params": [
+            {
+              "type": "const PolygonType1< Kernel, Container > &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PolygonType2< Kernel, Container > &",
+              "name": "Q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PolygonConvexDecomposition_2_ &",
+              "name": "decomp",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Gps_segment_traits_2 &",
+              "name": "traits",
+              "default": "Gps_segment_traits_2< Kernel, Container, Arr_segment_traits >()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/minkowski_sum_2.h",
+          "line": "111"
+        },
+        {
+          "kind": "function",
+          "name": "minkowski_sum_by_decomposition_2",
+          "qualified_name": "CGAL::minkowski_sum_by_decomposition_2",
+          "brief": "Computes the Minkowski sum $ P \\oplus Q$ of the two given polygons using the decomposition strategy.",
+          "detailed": "It decomposes the summands P and Q into convex sub-polygons $ P_1, \\ldots, P_k$ and $ Q_1, \\ldots, Q_{\\ell}$ , respectively. Then, it computes the union of pairwise sub-sums (namely $ \\bigcup_{i,j}{(P_i \\oplus Q_j)}$ ). If the summand P is of type Polygon_with_holes_2 , then the function first applies the hole filteration on P . If the summand P remains a polygon with holes, then the function decomposes the summand P using the given decomposition method with_holes_decomp . If, however, P turns into a polygon without holes, then the function decomposes the summand P using the given decomposition method no_holes_decomp , unless the result is a convex polygon, in which case the nop strategy is applied; namely, an instance of the class template Polygon_nop_decomposition_2 is used. If P is a polygon without holes to start with, then only convexity is checked (checking whether the result is convex inccurs a small overhead though). Then depending on the result either no_holes_decomp or the nop strategy is applied. Similarly, if the summand Q is of type Polygon_with_holes_2 , then the function first applies the hole filteration on Q . If the summand Q remains a polygon with holes, then the function decomposes the summand Q using the given decomposition method with_holes_decomp . If, however, Q turns into a polygon without holes, then the function decomposes the summand Q using the given decomposition method no_holes_decomp , unless the result is a convex polygon, in which case the nop strategy is applied. If Q is a polygon without holes to start with, then only convexity is checked and the decomposition strategy is chosen accordingly. PolygonNoHolesConvexDecomposition_2_ a model of the concept PolygonConvexDecomposition_2 . PolygonWithHolesConvexDecomposition_2_ a model of the concept PolygonWithHolesConvexDecomposition_2 .",
+          "return_type": "Polygon_with_holes_2< Kernel, Container >",
+          "definition": "Polygon_with_holes_2< Kernel, Container > CGAL::minkowski_sum_by_decomposition_2",
+          "argsstring": "(const PolygonType1< Kernel, Container > &P, const PolygonType2< Kernel, Container > &Q, const PolygonNoHolesConvexDecomposition_2_ &no_holes_decomp, const PolygonWithHolesConvexDecomposition_2_ &with_holes_decomp, const Gps_segment_traits_2 &traits=Gps_segment_traits_2< Kernel, Container, Arr_segment_traits >())",
+          "params": [
+            {
+              "type": "const PolygonType1< Kernel, Container > &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PolygonType2< Kernel, Container > &",
+              "name": "Q",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PolygonNoHolesConvexDecomposition_2_ &",
+              "name": "no_holes_decomp",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const PolygonWithHolesConvexDecomposition_2_ &",
+              "name": "with_holes_decomp",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const Gps_segment_traits_2 &",
+              "name": "traits",
+              "default": "Gps_segment_traits_2< Kernel, Container, Arr_segment_traits >()",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/minkowski_sum_2.h",
+          "line": "155"
+        },
+        {
+          "kind": "function",
+          "name": "inset_polygon_2",
+          "qualified_name": "CGAL::inset_polygon_2",
+          "brief": "Computes the inset, or inner offset, of the given polygon P by a given radius r - namely, the function computes the set of points inside the polygon whose distance from $ P$ 's boundary is at least $ r$ : $ \\{ p \\in P \\;|\\; {\\rm dist}(p, \\partial P) \\geq r \\}$ .",
+          "detailed": "Note that as the input polygon may not be convex, its inset may comprise several disconnected components. The result is therefore represented as a sequence of generalized polygons, such that the edges of each polygon correspond to line segments and circular arcs, both are special types of conic arcs, as represented by the traits class. The output sequence is returned via the output iterator oi , whose value-type must be Gps_traits_2::Polygon_2 . P is a simple polygon.",
+          "return_type": "OutputIterator",
+          "definition": "OutputIterator CGAL::inset_polygon_2",
+          "argsstring": "(const Polygon_2< typename ConicTraits::Rat_kernel, Container > &P, const typename ConicTraits::Rat_kernel::FT &r, const ConicTraits &traits, OutputIterator oi)",
+          "params": [
+            {
+              "type": "const Polygon_2< typename ConicTraits::Rat_kernel, Container > &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ConicTraits::Rat_kernel::FT &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ConicTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "OutputIterator",
+              "name": "oi",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/offset_polygon_2.h",
+          "line": "20"
+        },
+        {
+          "kind": "function",
+          "name": "offset_polygon_2",
+          "qualified_name": "CGAL::offset_polygon_2",
+          "brief": "Computes the offset of the given polygon P by a given radius r - namely, the function computes the Minkowski sum $ P \\oplus B_r$ , where $ B_r$ is a disc of radius r centered at the origin.",
+          "detailed": "Note that as the input polygon may not be convex, its offset may not be a simple polygon. The result is therefore represented as a generalized polygon with holes, such that the edges of the polygon correspond to line segments and circular arcs, both are special types of conic arcs, as represented by the traits class. P is a simple polygon.",
+          "return_type": "Gps_traits_2< ConicTraits >::Polygon_with_holes_2",
+          "definition": "Gps_traits_2< ConicTraits >::Polygon_with_holes_2 CGAL::offset_polygon_2",
+          "argsstring": "(const Polygon_2< typename ConicTraits::Rat_kernel, Container > &P, const typename ConicTraits::Rat_kernel::FT &r, const ConicTraits &traits)",
+          "params": [
+            {
+              "type": "const Polygon_2< typename ConicTraits::Rat_kernel, Container > &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ConicTraits::Rat_kernel::FT &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ConicTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/offset_polygon_2.h",
+          "line": "47"
+        },
+        {
+          "kind": "function",
+          "name": "offset_polygon_2",
+          "qualified_name": "CGAL::offset_polygon_2",
+          "brief": "Computes the offset of the given polygon with holes pwh by a given radius r .",
+          "detailed": "It does so by offsetting outer boundary of pwh and insetting its holes. The result is represented as a generalized polygon with holes, such that the edges of the polygon correspond to line segments and circular arcs, both are special types of conic arcs, as represented by the traits class. pwh is not unbounded (it has a valid outer boundary).",
+          "return_type": "Gps_traits_2< ConicTraits >::Polygon_with_holes_2",
+          "definition": "Gps_traits_2< ConicTraits >::Polygon_with_holes_2 CGAL::offset_polygon_2",
+          "argsstring": "(const Polygon_with_holes_2< typename ConicTraits::Rat_kernel, Container > &pwh, const typename ConicTraits::Rat_kernel::FT &r, const ConicTraits &traits)",
+          "params": [
+            {
+              "type": "const Polygon_with_holes_2< typename ConicTraits::Rat_kernel, Container > &",
+              "name": "pwh",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ConicTraits::Rat_kernel::FT &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ConicTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/offset_polygon_2.h",
+          "line": "66"
+        },
+        {
+          "kind": "function",
+          "name": "offset_polygon_2",
+          "qualified_name": "CGAL::offset_polygon_2",
+          "brief": "Computes the exact representation of the offset of the given polygon P by a radius r , as described above.",
+          "detailed": "If P is not convex, the function decomposes it into convex sub-polygons $ P_1, \\ldots, P_k$ and computes the union of sub-offsets (namely $ \\bigcup_{i}{(P_i \\oplus B_r)}$ ). The decomposition is performed using the given decomposition strategy decomp , which must be an instance of a class that models the concept PolygonConvexDecomposition . P is a simple polygon.",
+          "return_type": "Gps_traits_2< ConicTraits >::Polygon_with_holes_2",
+          "definition": "Gps_traits_2< ConicTraits >::Polygon_with_holes_2 CGAL::offset_polygon_2",
+          "argsstring": "(const Polygon_2< typename ConicTraits::Rat_kernel, Container > &P, const typename ConicTraits::Rat_kernel::FT &r, const DecompositionStrategy &decomp, const ConicTraits &traits)",
+          "params": [
+            {
+              "type": "const Polygon_2< typename ConicTraits::Rat_kernel, Container > &",
+              "name": "P",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const typename ConicTraits::Rat_kernel::FT &",
+              "name": "r",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const DecompositionStrategy &",
+              "name": "decomp",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            },
+            {
+              "type": "const ConicTraits &",
+              "name": "traits",
+              "default": "",
+              "brief": "",
+              "detailed": ""
+            }
+          ],
+          "section_kind": "func",
+          "section": "",
+          "file": "CGAL/offset_polygon_2.h",
+          "line": "88"
+        }
+      ],
+      "xml_file": "group___pkg_minkowski_sum2_ref.xml"
+    },
+    "PkgMinkowskiSum2Concepts": {
+      "kind": "group",
+      "name": "PkgMinkowskiSum2Concepts",
+      "brief": "",
+      "detailed": "",
+      "members": [],
+      "xml_file": "group___pkg_minkowski_sum2_concepts.xml"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "trid_epicd",
+  "description": "Build variant defined by cmake/tests/trid_epicd.cmake",
+  "cmake_tests": [
+    "cmake/tests/trid_epicd.cmake"
+  ]
+}

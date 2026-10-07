@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "name": "env3_sphere_epec",
+  "description": "Build variant defined by cmake/tests/env3_sphere_epec.cmake",
+  "cmake_tests": [
+    "cmake/tests/env3_sphere_epec.cmake"
+  ]
+}

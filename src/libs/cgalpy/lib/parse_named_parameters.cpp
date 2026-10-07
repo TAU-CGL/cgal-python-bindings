@@ -5,14 +5,15 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Radoslaw Dabkowski <radekaadek@gmail.com
+//            Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
 
 #include <stdexcept>
 
 #include <CGAL/Mesh_facet_topology.h>
 
-#include "CGALPY/helpers.hpp"
-#include "CGALPY/kernel_type.hpp"
-#include "CGALPY/parse_named_parameters.hpp"
+#include "cgalpy/helpers.hpp"
+#include "cgalpy/kernel_type.hpp"
+#include "cgalpy/parse_named_parameters.hpp"
 
 namespace py = nanobind;
 
@@ -299,7 +300,7 @@ Named_params parse_named_parameters(const py::dict& params, Named_params np) {
       //   np = np.mesh_facet_distance(py::cast<Ft>(item.second));
       //   break;
        case Hash("polyline_constraints"):
-        np = np.polyline_constraints(pmp::list2vec<Kernel::Point_3>(py::cast<py::list>(item.second)));
+        np = np.polyline_constraints(cgalpy::pmp::list2vec<Kernel::Point_3>(py::cast<py::list>(item.second)));
         break;
        case Hash("mesh_facet_topology"):
         np = np.mesh_facet_topology(py::cast<CGAL::Mesh_facet_topology>(item.second));
