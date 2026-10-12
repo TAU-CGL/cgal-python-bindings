@@ -18,6 +18,7 @@
 #include <boost/range/iterator_range.hpp>
 
 #include <nanobind/nanobind.h>
+#include <nanobind/stl/string.h>
 #include <nanobind/stl/function.h>
 #include <nanobind/stl/vector.h>
 #include <nanobind/stl/pair.h>
@@ -442,13 +443,18 @@ void export_polygon_mesh_processing(py::module_& m) {
   }
 #endif
 
-  m.def("degenerate_edges", &cgalpy::pmp::degenerate_edges_r<Pm>, py::arg("edges"), py::arg("tm"), py::arg("np") = py::dict());
-  m.def("degenerate_edges", &cgalpy::pmp::degenerate_edges<Pm>, py::arg("tm"), py::arg("np") = py::dict());
-  m.def("degenerate_faces", &cgalpy::pmp::degenerate_faces_r<Pm>, py::arg("faces"), py::arg("tm"), py::arg("np") = py::dict());
-  m.def("degenerate_faces", &cgalpy::pmp::degenerate_faces<Pm>, py::arg("tm"), py::arg("np") = py::dict());
+  m.def("degenerate_edges", &cgalpy::pmp::degenerate_edges_r<Pm>,
+        py::arg("edges"), py::arg("tm"), py::arg("np") = py::dict());
+  m.def("degenerate_edges", &cgalpy::pmp::degenerate_edges<Pm>,
+        py::arg("tm"), py::arg("np") = py::dict());
+  m.def("degenerate_faces", &cgalpy::pmp::degenerate_faces_r<Pm>,
+        py::arg("faces"), py::arg("tm"), py::arg("np") = py::dict());
+  m.def("degenerate_faces", &cgalpy::pmp::degenerate_faces<Pm>,
+        py::arg("tm"), py::arg("np") = py::dict());
   m.def("is_cap_triangle_face", &cgalpy::pmp::is_cap_triangle_face<Pm>,
         py::arg("f"), py::arg("tm"), py::arg("threshold"), py::arg("np") = py::dict());
-  m.def("is_degenerate_edge", &cgalpy::pmp::is_degenerate_edge<Pm>, py::arg("e"), py::arg("pm"), py::arg("np") = py::dict());
+  m.def("is_degenerate_edge", &cgalpy::pmp::is_degenerate_edge<Pm>,
+        py::arg("e"), py::arg("pm"), py::arg("np") = py::dict());
   m.def("is_degenerate_triangle_face", &cgalpy::pmp::is_degenerate_triangle_face<Pm>,
         py::arg("f"), py::arg("tm"), py::arg("np") = py::dict());
   m.def("is_needle_triangle_face", &cgalpy::pmp::is_needle_triangle_face<Pm>,
@@ -486,8 +492,9 @@ void export_polygon_mesh_processing(py::module_& m) {
 
   // region growing only for sm
 
-  m.def("transform", &cgalpy::pmp::transform<Pm>, py::arg("transformation"), py::arg("pmesh"), py::arg("np") = py::dict()
-      CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument));
+  m.def("transform", &cgalpy::pmp::transform<Pm>,
+        py::arg("transformation"), py::arg("pmesh"), py::arg("np") = py::dict()
+        CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Guard_no_active_leases_any_owner_argument));
   m.def("triangle", &cgalpy::pmp::triangle<Pm>, py::arg("f"), py::arg("tmesh"), py::arg("np") = py::dict());
   m.def("vertex_bbox", &cgalpy::pmp::vertex_bbox<Pm>, py::arg("vd"), py::arg("pmesh"), py::arg("np") = py::dict());
 
@@ -504,7 +511,8 @@ void export_polygon_mesh_processing(py::module_& m) {
          py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict())
     .def(py::init<const std::vector<Fd>&, Pm&, double, const py::dict&>(),
          py::arg("face_range"), py::arg("tmesh"), py::arg("epsilon"), py::arg("np") = py::dict())
-    .def(py::init<const cgalpy::pmp::Point_3_vec&, const std::vector<cgalpy::pmp::Size_t_vec>&, double, const py::dict&>(),
+    .def(py::init<const cgalpy::pmp::Point_3_vec&,
+         const std::vector<cgalpy::pmp::Size_t_vec>&, double, const py::dict&>(),
          py::arg("points"), py::arg("polygons"), py::arg("epsilon"),
          py::arg("np") = py::dict()) // TODO: handle face_epsilon_map
     .def(py::init<const py::ndarray<>&, const std::vector<cgalpy::pmp::Size_t_vec>&, double, const py::dict&>(),
@@ -516,8 +524,7 @@ void export_polygon_mesh_processing(py::module_& m) {
          py::arg("source"), py::arg("target"))
     .def("inside", [](const Pe& i, const Point_3& t0, const Point_3& t1, const Point_3& t2) { return i(t0, t1, t2); },
          py::arg("t0"), py::arg("t1"), py::arg("t2"))
-    .def("inside",
-         [](const Pe& i, const Pm& tmesh, const py::dict& np) { return i(tmesh); },
+    .def("inside", [](const Pe& i, const Pm& tmesh, const py::dict& np) { return i(tmesh); },
          py::arg("tmesh"), py::arg("np") = py::dict())
     // TODO: inside triangle range
     ;

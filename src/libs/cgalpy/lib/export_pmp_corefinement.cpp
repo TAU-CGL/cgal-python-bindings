@@ -11,6 +11,7 @@
 #include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <array>
 #include <functional>
+#include <string>
 #include <tuple>
 #include <vector>
 
@@ -62,43 +63,42 @@ namespace py = nanobind;
 namespace cgalpy {
 namespace pmp {
 
+// The visitor is already attached to the CGAL named-parameter chain.
+// Do not revalidate it as an ordinary named parameter.
+py::dict clip_params_without_visitor(const py::dict& params) {
+  py::dict filtered;
+  for (const auto& item : params) {
+    const std::string key = py::str(item.first).c_str();
+    if (key != "visitor") filtered[item.first] = item.second;
+  }
+  return filtered;
+}
+
 //! Apply autorefine named parameters.
-template <typename PolygonMesh, template <typename...> class Wrapper,
-          typename... Args>
-auto apply_autorefine_named_parameters(const py::dict& params,
-                                       Args&&... args)
-{
+template <typename PolygonMesh, template <typename...> class Wrapper, typename... Args>
+auto apply_autorefine_named_parameters(const py::dict& params, Args&&... args) {
   auto np = CGAL::parameters::default_values();
   cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
   cgalpy::Named_parameter_geom_traits geom_traits_op;
 
   cgalpy::Named_parameter_wrapper<Wrapper, Args...>
     wrapper(std::forward<Args>(args)...);
-  return cgalpy::named_parameter_applicator(wrapper, np, params,
-                                            vertex_point_map_op,
-                                            geom_traits_op);
+  return cgalpy::named_parameter_applicator(wrapper, np, params, vertex_point_map_op, geom_traits_op);
 }
 
 //! Apply clip named parameters for plane clipping.
-template <typename PolygonMesh, template <typename...> class Wrapper,
-          typename... Args>
-auto apply_clip_plane_named_parameters(const py::dict& params,
-                                       Args&&... args)
-{
+template <typename PolygonMesh, template <typename...> class Wrapper, typename... Args>
+auto apply_clip_plane_named_parameters(const py::dict& params, Args&&... args) {
   auto np = CGAL::parameters::default_values();
   cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
   cgalpy::Named_parameter_geom_traits geom_traits_op;
   cgalpy::Named_parameter_clip_volume clip_volume_op;
   cgalpy::Named_parameter_use_compact_clipper use_compact_clipper_op;
-  cgalpy::Named_parameter_throw_on_self_intersection
-    throw_on_self_intersection_op;
-  cgalpy::Named_parameter_allow_self_intersections
-    allow_self_intersections_op;
-  cgalpy::Named_parameter_do_not_triangulate_faces
-    do_not_triangulate_faces_op;
+  cgalpy::Named_parameter_throw_on_self_intersection throw_on_self_intersection_op;
+  cgalpy::Named_parameter_allow_self_intersections allow_self_intersections_op;
+  cgalpy::Named_parameter_do_not_triangulate_faces do_not_triangulate_faces_op;
 
-  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
-    wrapper(std::forward<Args>(args)...);
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...> wrapper(std::forward<Args>(args)...);
   return cgalpy::named_parameter_applicator(wrapper, np, params,
                                             vertex_point_map_op,
                                             geom_traits_op,
@@ -110,23 +110,17 @@ auto apply_clip_plane_named_parameters(const py::dict& params,
 }
 
 //! Apply clip named parameters for cuboid clipping.
-template <typename PolygonMesh, template <typename...> class Wrapper,
-          typename... Args>
-auto apply_clip_cuboid_named_parameters(const py::dict& params,
-                                        Args&&... args)
-{
+template <typename PolygonMesh, template <typename...> class Wrapper, typename... Args>
+auto apply_clip_cuboid_named_parameters(const py::dict& params, Args&&... args) {
   auto np = CGAL::parameters::default_values();
   cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
   cgalpy::Named_parameter_geom_traits geom_traits_op;
   cgalpy::Named_parameter_clip_volume clip_volume_op;
   cgalpy::Named_parameter_use_compact_clipper use_compact_clipper_op;
-  cgalpy::Named_parameter_throw_on_self_intersection
-    throw_on_self_intersection_op;
-  cgalpy::Named_parameter_allow_self_intersections
-    allow_self_intersections_op;
+  cgalpy::Named_parameter_throw_on_self_intersection throw_on_self_intersection_op;
+  cgalpy::Named_parameter_allow_self_intersections allow_self_intersections_op;
 
-  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
-    wrapper(std::forward<Args>(args)...);
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...> wrapper(std::forward<Args>(args)...);
   return cgalpy::named_parameter_applicator(wrapper, np, params,
                                             vertex_point_map_op,
                                             geom_traits_op,
@@ -137,27 +131,20 @@ auto apply_clip_cuboid_named_parameters(const py::dict& params,
 }
 
 //! Apply clip named parameters for plane clipping, starting with a visitor.
-template <typename PolygonMesh, template <typename...> class Wrapper,
-          typename Visitor, typename... Args>
-auto apply_clip_plane_named_parameters_with_visitor(const py::dict& params,
-                                                    Visitor& visitor,
-                                                    Args&&... args)
-{
+template <typename PolygonMesh, template <typename...> class Wrapper, typename Visitor, typename... Args>
+auto apply_clip_plane_named_parameters_with_visitor(const py::dict& params, Visitor& visitor, Args&&... args) {
   auto np = CGAL::parameters::default_values().visitor(visitor);
   cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
   cgalpy::Named_parameter_geom_traits geom_traits_op;
   cgalpy::Named_parameter_clip_volume clip_volume_op;
   cgalpy::Named_parameter_use_compact_clipper use_compact_clipper_op;
-  cgalpy::Named_parameter_throw_on_self_intersection
-    throw_on_self_intersection_op;
-  cgalpy::Named_parameter_allow_self_intersections
-    allow_self_intersections_op;
-  cgalpy::Named_parameter_do_not_triangulate_faces
-    do_not_triangulate_faces_op;
+  cgalpy::Named_parameter_throw_on_self_intersection throw_on_self_intersection_op;
+  cgalpy::Named_parameter_allow_self_intersections allow_self_intersections_op;
+  cgalpy::Named_parameter_do_not_triangulate_faces do_not_triangulate_faces_op;
 
-  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
-    wrapper(std::forward<Args>(args)...);
-  return cgalpy::named_parameter_applicator(wrapper, np, params,
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...> wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np,
+                                            clip_params_without_visitor(params),
                                             vertex_point_map_op,
                                             geom_traits_op,
                                             clip_volume_op,
@@ -170,23 +157,18 @@ auto apply_clip_plane_named_parameters_with_visitor(const py::dict& params,
 //! Apply clip named parameters for cuboid clipping, starting with a visitor.
 template <typename PolygonMesh, template <typename...> class Wrapper,
           typename Visitor, typename... Args>
-auto apply_clip_cuboid_named_parameters_with_visitor(const py::dict& params,
-                                                     Visitor& visitor,
-                                                     Args&&... args)
-{
+auto apply_clip_cuboid_named_parameters_with_visitor(const py::dict& params, Visitor& visitor, Args&&... args) {
   auto np = CGAL::parameters::default_values().visitor(visitor);
   cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
   cgalpy::Named_parameter_geom_traits geom_traits_op;
   cgalpy::Named_parameter_clip_volume clip_volume_op;
   cgalpy::Named_parameter_use_compact_clipper use_compact_clipper_op;
-  cgalpy::Named_parameter_throw_on_self_intersection
-    throw_on_self_intersection_op;
-  cgalpy::Named_parameter_allow_self_intersections
-    allow_self_intersections_op;
+  cgalpy::Named_parameter_throw_on_self_intersection throw_on_self_intersection_op;
+  cgalpy::Named_parameter_allow_self_intersections allow_self_intersections_op;
 
-  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
-    wrapper(std::forward<Args>(args)...);
-  return cgalpy::named_parameter_applicator(wrapper, np, params,
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...> wrapper(std::forward<Args>(args)...);
+  return cgalpy::named_parameter_applicator(wrapper, np,
+                                            clip_params_without_visitor(params),
                                             vertex_point_map_op,
                                             geom_traits_op,
                                             clip_volume_op,
@@ -196,21 +178,15 @@ auto apply_clip_cuboid_named_parameters_with_visitor(const py::dict& params,
 }
 
 //! Apply split named parameters for plane splitting.
-template <typename PolygonMesh, template <typename...> class Wrapper,
-          typename... Args>
-auto apply_split_plane_named_parameters(const py::dict& params,
-                                        Args&&... args)
-{
+template <typename PolygonMesh, template <typename...> class Wrapper, typename... Args>
+auto apply_split_plane_named_parameters(const py::dict& params, Args&&... args) {
   auto np = CGAL::parameters::default_values();
   cgalpy::Named_parameter_vertex_point_map<PolygonMesh> vertex_point_map_op;
   cgalpy::Named_parameter_geom_traits geom_traits_op;
-  cgalpy::Named_parameter_throw_on_self_intersection
-    throw_on_self_intersection_op;
-  cgalpy::Named_parameter_do_not_triangulate_faces
-    do_not_triangulate_faces_op;
+  cgalpy::Named_parameter_throw_on_self_intersection throw_on_self_intersection_op;
+  cgalpy::Named_parameter_do_not_triangulate_faces do_not_triangulate_faces_op;
 
-  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
-    wrapper(std::forward<Args>(args)...);
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...> wrapper(std::forward<Args>(args)...);
   return cgalpy::named_parameter_applicator(wrapper, np, params,
                                             vertex_point_map_op,
                                             geom_traits_op,
@@ -219,8 +195,7 @@ auto apply_split_plane_named_parameters(const py::dict& params,
 }
 
 //! Apply split named parameters for cuboid splitting.
-template <typename PolygonMesh, template <typename...> class Wrapper,
-          typename... Args>
+template <typename PolygonMesh, template <typename...> class Wrapper, typename... Args>
 auto apply_split_cuboid_named_parameters(const py::dict& params,
                                          Args&&... args)
 {
@@ -229,13 +204,10 @@ auto apply_split_cuboid_named_parameters(const py::dict& params,
   cgalpy::Named_parameter_geom_traits geom_traits_op;
   cgalpy::Named_parameter_clip_volume clip_volume_op;
   cgalpy::Named_parameter_use_compact_clipper use_compact_clipper_op;
-  cgalpy::Named_parameter_throw_on_self_intersection
-    throw_on_self_intersection_op;
-  cgalpy::Named_parameter_allow_self_intersections
-    allow_self_intersections_op;
+  cgalpy::Named_parameter_throw_on_self_intersection throw_on_self_intersection_op;
+  cgalpy::Named_parameter_allow_self_intersections allow_self_intersections_op;
 
-  cgalpy::Named_parameter_wrapper<Wrapper, Args...>
-    wrapper(std::forward<Args>(args)...);
+  cgalpy::Named_parameter_wrapper<Wrapper, Args...> wrapper(std::forward<Args>(args)...);
   return cgalpy::named_parameter_applicator(wrapper, np, params,
                                             vertex_point_map_op,
                                             geom_traits_op,
@@ -261,13 +233,8 @@ struct Clip_cuboid_wrapper;
 
 template <typename NamedParameter, typename TriangleMesh, typename IsoCuboid>
 struct Clip_cuboid_wrapper<NamedParameter, TriangleMesh, IsoCuboid> {
-  static auto call(NamedParameter& np, TriangleMesh&& tm,
-                   IsoCuboid&& box)
-  {
-    return PMP::clip(std::forward<TriangleMesh>(tm),
-                     std::forward<IsoCuboid>(box),
-                     np);
-  }
+  static auto call(NamedParameter& np, TriangleMesh&& tm, IsoCuboid&& box)
+  { return PMP::clip(std::forward<TriangleMesh>(tm), std::forward<IsoCuboid>(box), np); }
 };
 
 //! Wrap CGAL::Polygon_mesh_processing::clip(tm, plane, np).
@@ -276,13 +243,8 @@ struct Clip_plane_wrapper;
 
 template <typename NamedParameter, typename TriangleMesh, typename Plane>
 struct Clip_plane_wrapper<NamedParameter, TriangleMesh, Plane> {
-  static auto call(NamedParameter& np, TriangleMesh&& tm,
-                   Plane&& plane)
-  {
-    return PMP::clip(std::forward<TriangleMesh>(tm),
-                     std::forward<Plane>(plane),
-                     np);
-  }
+  static auto call(NamedParameter& np, TriangleMesh&& tm, Plane&& plane)
+  { return PMP::clip(std::forward<TriangleMesh>(tm), std::forward<Plane>(plane), np); }
 };
 
 //! Wrap CGAL::Polygon_mesh_processing::split(tm, iso_cuboid, np).
@@ -291,13 +253,8 @@ struct Split_cuboid_wrapper;
 
 template <typename NamedParameter, typename TriangleMesh, typename IsoCuboid>
 struct Split_cuboid_wrapper<NamedParameter, TriangleMesh, IsoCuboid> {
-  static auto call(NamedParameter& np, TriangleMesh&& tm,
-                   IsoCuboid&& box)
-  {
-    return PMP::split(std::forward<TriangleMesh>(tm),
-                      std::forward<IsoCuboid>(box),
-                      np);
-  }
+  static auto call(NamedParameter& np, TriangleMesh&& tm, IsoCuboid&& box)
+  { return PMP::split(std::forward<TriangleMesh>(tm), std::forward<IsoCuboid>(box), np); }
 };
 
 //! Wrap CGAL::Polygon_mesh_processing::split(tm, plane, np).
@@ -306,21 +263,14 @@ struct Split_plane_wrapper;
 
 template <typename NamedParameter, typename TriangleMesh, typename Plane>
 struct Split_plane_wrapper<NamedParameter, TriangleMesh, Plane> {
-  static auto call(NamedParameter& np, TriangleMesh&& tm,
-                   Plane&& plane)
-  {
-    return PMP::split(std::forward<TriangleMesh>(tm),
-                      std::forward<Plane>(plane),
-                      np);
-  }
+  static auto call(NamedParameter& np, TriangleMesh&& tm, Plane&& plane)
+  { return PMP::split(std::forward<TriangleMesh>(tm), std::forward<Plane>(plane), np); }
 };
 
 //!
 template <typename PolygonMesh>
 auto autorefine(PolygonMesh& tm, const py::dict& np = py::dict())
-{
-  apply_autorefine_named_parameters<PolygonMesh, Autorefine_wrapper>(np, tm);
-}
+{ apply_autorefine_named_parameters<PolygonMesh, Autorefine_wrapper>(np, tm); }
 
 //!
 auto autorefine_triangle_soup(std::vector<Point_3>& points, std::vector<std::vector<std::size_t>>& polygons,
@@ -328,12 +278,9 @@ auto autorefine_triangle_soup(std::vector<Point_3>& points, std::vector<std::vec
   if (np.contains("visitor")) {
     try {
       auto v = py::cast<pmp::Autorefinement_visitor>(np["visitor"]);
-      PMP::autorefine_triangle_soup(points, polygons,
-                                    CGAL::parameters::default_values().visitor(v));
+      PMP::autorefine_triangle_soup(points, polygons, CGAL::parameters::default_values().visitor(v));
     }
-    catch (const py::cast_error&) {
-      throw std::runtime_error("Visitor type not recognized");
-    }
+    catch (const py::cast_error&) { throw std::runtime_error("Visitor type not recognized"); }
   }
   else {
     PMP::autorefine_triangle_soup(points, polygons);
@@ -344,8 +291,7 @@ auto autorefine_triangle_soup(std::vector<Point_3>& points, std::vector<std::vec
 
 
 //!
-auto autorefine_triangle_soup_np(const py::ndarray<>& points_array,
-                                 std::vector<std::vector<std::size_t>>& polygons,
+auto autorefine_triangle_soup_np(const py::ndarray<>& points_array, std::vector<std::vector<std::size_t>>& polygons,
                                  const py::dict& np = py::dict()) {
   auto points = cgalpy::ndarray_to_point_3_vector<Point_3>(points_array, "soup_points");
   return autorefine_triangle_soup(points, polygons, np);
@@ -363,8 +309,7 @@ bool clip(PolygonMesh& tm, PolygonMesh& clipper, const py::dict& np_tm = py::dic
                                              np_tm.contains("edge_is_constrained_map") ?
                                              np_tm["edge_is_constrained_map"] : py::none());
 
-  auto np_clip_tm = CGAL::parameters::vertex_point_map(vpm_tm)
-                                     .edge_is_constrained_map(eicm_tm);
+  auto np_clip_tm = CGAL::parameters::vertex_point_map(vpm_tm).edge_is_constrained_map(eicm_tm);
   auto np_clip_c = CGAL::parameters::vertex_point_map(vpm_c);
 
   bool visitor1 = np_tm.contains("visitor");
@@ -471,15 +416,13 @@ auto clip_c(TriangleMesh& tm, const Iso_cuboid_3& box, const py::dict& np = py::
   if (np.contains("visitor")) {
     try {
       auto v = py::cast<pmp::Corefine_visitor<Pm>>(np["visitor"]);
-      return apply_clip_cuboid_named_parameters_with_visitor
-        <Pm, Clip_cuboid_wrapper>(np, v, tm, box);
+      return apply_clip_cuboid_named_parameters_with_visitor<Pm, Clip_cuboid_wrapper>(np, v, tm, box);
     }
     catch (const py::cast_error&) {
     }
     try {
       auto v = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np["visitor"]);
-      return apply_clip_cuboid_named_parameters_with_visitor
-        <Pm, Clip_cuboid_wrapper>(np, v, tm, box);
+      return apply_clip_cuboid_named_parameters_with_visitor<Pm, Clip_cuboid_wrapper>(np, v, tm, box);
     }
     catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
@@ -496,15 +439,13 @@ auto clip_p(TriangleMesh& tm, const Plane_3& plane, const py::dict& np = py::dic
   if (np.contains("visitor")) {
     try {
       auto v = py::cast<pmp::Corefine_visitor<Pm>>(np["visitor"]);
-      return apply_clip_plane_named_parameters_with_visitor
-        <Pm, Clip_plane_wrapper>(np, v, tm, plane);
+      return apply_clip_plane_named_parameters_with_visitor<Pm, Clip_plane_wrapper>(np, v, tm, plane);
     }
     catch (const py::cast_error&) {
     }
     try {
       auto v = py::cast<pmp::Non_manifold_output_visitor<Pm>>(np["visitor"]);
-      return apply_clip_plane_named_parameters_with_visitor
-        <Pm, Clip_plane_wrapper>(np, v, tm, plane);
+      return apply_clip_plane_named_parameters_with_visitor<Pm, Clip_plane_wrapper>(np, v, tm, plane);
     }
     catch (const py::cast_error&) {
       throw std::runtime_error("Visitor type not recognized");
@@ -575,8 +516,7 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
 
   Pm out_union, out_intersection, tm1_minus_tm2, tm2_minus_tm1;
 
-  std::array<std::optional<Pm*>, 4> outputs = {&out_union, &out_intersection,
-                                               &tm1_minus_tm2, &tm2_minus_tm1};
+  std::array<std::optional<Pm*>, 4> outputs = {&out_union, &out_intersection, &tm1_minus_tm2, &tm2_minus_tm1};
 
   auto vpm1 = get_vertex_point_map(pm1, np1);
   auto vpm2 = get_vertex_point_map(pm2, np2);
@@ -604,12 +544,9 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
                                                             np_out[3].contains("edge_is_constrained_map") ?
                                                             np_out[3]["edge_is_constrained_map"] : py::none());
 
-  auto np_bool1 = CGAL::parameters::vertex_point_map(vpm1)
-                                   .edge_is_constrained_map(eicm1);
-  auto np_bool2 = CGAL::parameters::vertex_point_map(vpm2)
-                                   .edge_is_constrained_map(eicm2);
-  auto np_out_union = CGAL::parameters::vertex_point_map(vpm_out_union)
-                                       .edge_is_constrained_map(eicm_out_union);
+  auto np_bool1 = CGAL::parameters::vertex_point_map(vpm1).edge_is_constrained_map(eicm1);
+  auto np_bool2 = CGAL::parameters::vertex_point_map(vpm2).edge_is_constrained_map(eicm2);
+  auto np_out_union = CGAL::parameters::vertex_point_map(vpm_out_union).edge_is_constrained_map(eicm_out_union);
   auto np_out_intersection = CGAL::parameters::vertex_point_map(vpm_out_intersection)
                                               .edge_is_constrained_map(eicm_out_intersection);
   auto np_out_tm1_minus_tm2 = CGAL::parameters::vertex_point_map(vpm_out_tm1_minus_tm2)
@@ -623,34 +560,23 @@ auto corefine_and_compute_boolean_operations(PolygonMesh& pm1, PolygonMesh& pm2,
 
   auto call_boolean_operations = [&](auto np_first, auto np_second) {
     if (np1.contains("face_index_map") && np2.contains("face_index_map")) {
-      auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6",
-                                                     np1["face_index_map"]);
-      auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP7",
-                                                     np2["face_index_map"]);
-      return PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs,
-                                                          np_first.face_index_map(fim1),
-                                                          np_second.face_index_map(fim2),
-                                                          nps_out);
+      auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6", np1["face_index_map"]);
+      auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP7", np2["face_index_map"]);
+      return PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs, np_first.face_index_map(fim1),
+                                                          np_second.face_index_map(fim2), nps_out);
     }
     if (np1.contains("face_index_map")) {
-      auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6",
-                                                     np1["face_index_map"]);
-      return PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs,
-                                                          np_first.face_index_map(fim1),
-                                                          np_second,
-                                                          nps_out);
+      auto fim1 = get_face_prop_map<Pm, std::size_t>(pm1, "INTERNAL_MAP6", np1["face_index_map"]);
+      return PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs, np_first.face_index_map(fim1),
+                                                          np_second, nps_out);
     }
     if (np2.contains("face_index_map")) {
       auto fim2 = get_face_prop_map<Pm, std::size_t>(pm2, "INTERNAL_MAP7",
                                                      np2["face_index_map"]);
-      return PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs,
-                                                          np_first,
-                                                          np_second.face_index_map(fim2),
-                                                          nps_out);
+      return PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs, np_first,
+                                                          np_second.face_index_map(fim2), nps_out);
     }
-    return PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs,
-                                                        np_first, np_second,
-                                                        nps_out);
+    return PMP::corefine_and_compute_boolean_operations(pm1, pm2, outputs, np_first, np_second, nps_out);
   };
 
   bool handled = false;
@@ -818,43 +744,28 @@ TriangleMesh corefine_and_compute_intersection(TriangleMesh& pm1, TriangleMesh& 
                                               np_out.contains("edge_is_constrained_map") ?
                                               np_out["edge_is_constrained_map"] : py::none());
 
-  auto np_intersection1 = CGAL::parameters::vertex_point_map(vpm1)
-                                           .edge_is_constrained_map(eicm1);
-  auto np_intersection2 = CGAL::parameters::vertex_point_map(vpm2)
-                                           .edge_is_constrained_map(eicm2);
-  auto np_intersection_out = CGAL::parameters::vertex_point_map(vpm_out)
-                                              .edge_is_constrained_map(eicm_out);
+  auto np_intersection1 = CGAL::parameters::vertex_point_map(vpm1).edge_is_constrained_map(eicm1);
+  auto np_intersection2 = CGAL::parameters::vertex_point_map(vpm2).edge_is_constrained_map(eicm2);
+  auto np_intersection_out = CGAL::parameters::vertex_point_map(vpm_out).edge_is_constrained_map(eicm_out);
 
   auto call_intersection = [&](auto np_first, auto np_second) {
     if (np1.contains("face_index_map") && np2.contains("face_index_map")) {
-      auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
-                                                     np1["face_index_map"]);
-      auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
-                                                     np2["face_index_map"]);
-      return PMP::corefine_and_compute_intersection(pm1, pm2, out,
-                                                    np_first.face_index_map(fim1),
-                                                    np_second.face_index_map(fim2),
-                                                    np_intersection_out);
+      auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3", np1["face_index_map"]);
+      auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4", np2["face_index_map"]);
+      return PMP::corefine_and_compute_intersection(pm1, pm2, out, np_first.face_index_map(fim1),
+                                                    np_second.face_index_map(fim2), np_intersection_out);
     }
     if (np1.contains("face_index_map")) {
-      auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
-                                                     np1["face_index_map"]);
-      return PMP::corefine_and_compute_intersection(pm1, pm2, out,
-                                                    np_first.face_index_map(fim1),
-                                                    np_second,
-                                                    np_intersection_out);
+      auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3", np1["face_index_map"]);
+      return PMP::corefine_and_compute_intersection(pm1, pm2, out, np_first.face_index_map(fim1),
+                                                    np_second, np_intersection_out);
     }
     if (np2.contains("face_index_map")) {
-      auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
-                                                     np2["face_index_map"]);
-      return PMP::corefine_and_compute_intersection(pm1, pm2, out,
-                                                    np_first,
-                                                    np_second.face_index_map(fim2),
+      auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4", np2["face_index_map"]);
+      return PMP::corefine_and_compute_intersection(pm1, pm2, out, np_first, np_second.face_index_map(fim2),
                                                     np_intersection_out);
     }
-    return PMP::corefine_and_compute_intersection(pm1, pm2, out,
-                                                  np_first, np_second,
-                                                  np_intersection_out);
+    return PMP::corefine_and_compute_intersection(pm1, pm2, out, np_first, np_second, np_intersection_out);
   };
 
   bool valid = false;
@@ -918,42 +829,28 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
                                               np_out.contains("edge_is_constrained_map") ?
                                               np_out["edge_is_constrained_map"] : py::none());
 
-  auto np_union1 = CGAL::parameters::vertex_point_map(vpm1)
-                                    .edge_is_constrained_map(eicm1);
-  auto np_union2 = CGAL::parameters::vertex_point_map(vpm2)
-                                    .edge_is_constrained_map(eicm2);
-  auto np_union_out = CGAL::parameters::vertex_point_map(vpm_out)
-                                       .edge_is_constrained_map(eicm_out);
+  auto np_union1 = CGAL::parameters::vertex_point_map(vpm1).edge_is_constrained_map(eicm1);
+  auto np_union2 = CGAL::parameters::vertex_point_map(vpm2).edge_is_constrained_map(eicm2);
+  auto np_union_out = CGAL::parameters::vertex_point_map(vpm_out).edge_is_constrained_map(eicm_out);
 
   auto call_union = [&](auto np_first, auto np_second) {
     if (np1.contains("face_index_map") && np2.contains("face_index_map")) {
-      auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
-                                                     np1["face_index_map"]);
-      auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
-                                                     np2["face_index_map"]);
-      return PMP::corefine_and_compute_union(pm1, pm2, out,
-                                             np_first.face_index_map(fim1),
-                                             np_second.face_index_map(fim2),
-                                             np_union_out);
+      auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3", np1["face_index_map"]);
+      auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4", np2["face_index_map"]);
+      return PMP::corefine_and_compute_union(pm1, pm2, out, np_first.face_index_map(fim1),
+                                             np_second.face_index_map(fim2), np_union_out);
     }
     if (np1.contains("face_index_map")) {
-      auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3",
-                                                     np1["face_index_map"]);
-      return PMP::corefine_and_compute_union(pm1, pm2, out,
-                                             np_first.face_index_map(fim1),
-                                             np_second,
-                                             np_union_out);
+      auto fim1 = get_face_prop_map<Tm, std::size_t>(pm1, "INTERNAL_MAP3", np1["face_index_map"]);
+      return PMP::corefine_and_compute_union(pm1, pm2, out, np_first.face_index_map(fim1),
+                                             np_second, np_union_out);
     }
     if (np2.contains("face_index_map")) {
-      auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4",
-                                                     np2["face_index_map"]);
-      return PMP::corefine_and_compute_union(pm1, pm2, out,
-                                             np_first,
-                                             np_second.face_index_map(fim2),
-                                             np_union_out);
+      auto fim2 = get_face_prop_map<Tm, std::size_t>(pm2, "INTERNAL_MAP4", np2["face_index_map"]);
+      return PMP::corefine_and_compute_union(pm1, pm2, out, np_first,
+                                             np_second.face_index_map(fim2), np_union_out);
     }
-    return PMP::corefine_and_compute_union(pm1, pm2, out,
-                                           np_first, np_second, np_union_out);
+    return PMP::corefine_and_compute_union(pm1, pm2, out, np_first, np_second, np_union_out);
   };
 
   bool valid = false;
@@ -994,10 +891,8 @@ TriangleMesh corefine_and_compute_union(TriangleMesh& pm1, TriangleMesh& pm2,
 }
 
 template <typename PolygonMesh>
-void split(PolygonMesh& pm,
-           PolygonMesh& splitter,
-           const py::dict& np_tm = py::dict(),
-           const py::dict& np_s = py::dict()) {
+void split(PolygonMesh& pm, PolygonMesh& splitter,
+           const py::dict& np_tm = py::dict(), const py::dict& np_s = py::dict()) {
   auto vpm_tm = get_vertex_point_map(pm, np_tm);
   auto vpm_s = get_vertex_point_map(splitter, np_s);
   bool do_not_modify_splitter = false;
@@ -1171,40 +1066,31 @@ void set_before_edge_duplicated_fn(Cv& v, const py::object& f) { v.set_before_ed
 void set_after_edge_duplicated_fn(Cv& v, const py::object& f) { v.set_after_edge_duplicated(f); }
 
 //!
-void set_intersection_edge_copy_fn(Cv& v, const py::object& f)
-{ v.set_intersection_edge_copy(f); }
+void set_intersection_edge_copy_fn(Cv& v, const py::object& f) { v.set_intersection_edge_copy(f); }
 
 //!
-void set_new_vertex_added_fn(Cv& v, const py::object& f)
-{ v.set_new_vertex_added(f); }
+void set_new_vertex_added_fn(Cv& v, const py::object& f) { v.set_new_vertex_added(f); }
 
 //!
-void set_intersection_point_detected_fn(Cv& v,
-                                        const py::object& f)
-{ v.set_intersection_point_detected(f); }
+void set_intersection_point_detected_fn(Cv& v, const py::object& f) { v.set_intersection_point_detected(f); }
 
 //!
 void set_before_vertex_copy_fn(Cv& v, const py::object& f) { v.set_before_vertex_copy(f); }
 
 //!
-void set_after_vertex_copy_fn(Cv& v, const py::object& f)
-{ v.set_after_vertex_copy(f); }
+void set_after_vertex_copy_fn(Cv& v, const py::object& f) { v.set_after_vertex_copy(f); }
 
 //!
-void set_start_filtering_intersections_fn(Cv& v, const py::object& f)
-{ v.set_start_filtering_intersections(f); }
+void set_start_filtering_intersections_fn(Cv& v, const py::object& f) { v.set_start_filtering_intersections(f); }
 
 //!
-void set_progress_filtering_intersections_fn(Cv& v, const py::object& f)
-{ v.set_progress_filtering_intersections(f); }
+void set_progress_filtering_intersections_fn(Cv& v, const py::object& f) { v.set_progress_filtering_intersections(f); }
 
 //!
-void set_end_filtering_intersections_fn(Cv& v, const py::object& f)
-{ v.set_end_filtering_intersections(f); }
+void set_end_filtering_intersections_fn(Cv& v, const py::object& f) { v.set_end_filtering_intersections(f); }
 
 //!
-void set_start_triangulating_faces_fn(Cv& v, const py::object& f)
-{ v.set_start_triangulating_faces(f); }
+void set_start_triangulating_faces_fn(Cv& v, const py::object& f) { v.set_start_triangulating_faces(f); }
 
 //!
 void set_triangulating_faces_step_fn(Cv& v, const py::object& f) { v.set_triangulating_faces_step(f); }
@@ -1256,16 +1142,13 @@ void set_classify_intersection_free_patches_fn(Cv& v, const py::object& f)
 { v.set_classify_intersection_free_patches(f); }
 
 //!
-void set_out_of_place_operation_fn(Cv& v, const py::object& f)
-{ v.set_out_of_place_operation(f); }
+void set_out_of_place_operation_fn(Cv& v, const py::object& f) { v.set_out_of_place_operation(f); }
 
 //!
-void set_in_place_operation_fn(Cv& v, const py::object& f)
-{ v.set_in_place_operation(f); }
+void set_in_place_operation_fn(Cv& v, const py::object& f) { v.set_in_place_operation(f); }
 
 //!
-void set_in_place_operations_fn(Cv& v, const py::object& f)
-{ v.set_in_place_operations(f); }
+void set_in_place_operations_fn(Cv& v, const py::object& f) { v.set_in_place_operations(f); }
 
 }
 } // namespace cgalpy // namespace pmp

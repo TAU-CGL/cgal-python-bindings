@@ -77,167 +77,146 @@ public:
     in_place_operations_fn_object = py::none();
   }
 
-  void before_subface_creations(Fd f_old, Pm& tm) const {
-    if (! before_subface_creations_fn_object.is_none()) before_subface_creations_fn_object(f_old, tm);
-  }
+  void before_subface_creations(Fd f_old, Pm& tm) const
+  { if (! before_subface_creations_fn_object.is_none()) before_subface_creations_fn_object(f_old, tm); }
 
-  void after_subface_creations(Pm& tm) const {
-      if (! after_subface_creations_fn_object.is_none()) after_subface_creations_fn_object(tm);
-  }
+  void before_subface_creations(Fd f_old, const Pm& tm) const
+  { if (! before_subface_creations_fn_object.is_none()) before_subface_creations_fn_object(f_old, tm); }
 
-  void before_subface_created(Pm& tm) const {
-      if (! before_subface_created_fn_object.is_none()) before_subface_created_fn_object(tm);
-  }
+  void after_subface_creations(Pm& tm) const
+  { if (! after_subface_creations_fn_object.is_none()) after_subface_creations_fn_object(tm); }
 
-  void after_subface_created(Fd f_new, Pm& tm) const {
-      if (! after_subface_created_fn_object.is_none()) after_subface_created_fn_object(f_new, tm);
-  }
+  void after_subface_creations(const Pm& tm) const
+  { if (! after_subface_creations_fn_object.is_none()) after_subface_creations_fn_object(tm); }
 
-  void before_face_copy(Fd f_old, const Pm& tm_old, Pm& tm_new) const {
-      if (! before_face_copy_fn_object.is_none()) before_face_copy_fn_object(f_old, tm_old, tm_new);
-  }
+  void before_subface_created(Pm& tm) const
+  { if (! before_subface_created_fn_object.is_none()) before_subface_created_fn_object(tm); }
 
-  void after_face_copy(Fd f_old, const Pm& tm_old, Fd f_new, Pm& tm_new) const {
-      if (! after_face_copy_fn_object.is_none()) after_face_copy_fn_object(f_old, tm_old, f_new, tm_new);
-  }
+  void after_subface_created(Fd f_new, Pm& tm) const
+  { if (! after_subface_created_fn_object.is_none()) after_subface_created_fn_object(f_new, tm); }
 
-  void before_edge_split(Hd h, Pm& tm) const {
-      if (! before_edge_split_fn_object.is_none()) before_edge_split_fn_object(h, tm);
-  }
+  void after_subface_created(Fd f_new, const Pm& tm) const
+  { if (! after_subface_created_fn_object.is_none()) after_subface_created_fn_object(f_new, tm); }
 
-  void edge_split(Hd hnew, Pm& tm) const {
-      if (! edge_split_fn_object.is_none()) edge_split_fn_object(hnew, tm);
-  }
+  void before_face_copy(Fd f_old, const Pm& tm_old, Pm& tm_new) const
+  { if (! before_face_copy_fn_object.is_none()) before_face_copy_fn_object(f_old, tm_old, tm_new); }
 
-  void after_edge_split() const {
-      if (! after_edge_split_fn_object.is_none()) after_edge_split_fn_object();
-  }
+  void after_face_copy(Fd f_old, const Pm& tm_old, Fd f_new, Pm& tm_new) const
+  { if (! after_face_copy_fn_object.is_none()) after_face_copy_fn_object(f_old, tm_old, f_new, tm_new); }
 
-  void add_retriangulation_edge(Hd h, Pm& tm) const {
-      if (! add_retriangulation_edge_fn_object.is_none()) add_retriangulation_edge_fn_object(h, tm);
-  }
+  void before_edge_split(Hd h, Pm& tm) const
+  { if (! before_edge_split_fn_object.is_none()) before_edge_split_fn_object(h, tm); }
 
-  void before_edge_copy(Hd h_old, const Pm& tm_old, Pm& tm_new) const {
-      if (! before_edge_copy_fn_object.is_none()) before_edge_copy_fn_object(h_old, tm_old, tm_new);
-  }
+  void edge_split(Hd hnew, Pm& tm) const
+  { if (! edge_split_fn_object.is_none()) edge_split_fn_object(hnew, tm); }
 
-  void after_edge_copy(Hd h_old, const Pm& tm_old, Hd h_new, Pm& tm_new) const {
-      if (! after_edge_copy_fn_object.is_none()) after_edge_copy_fn_object(h_old, tm_old, h_new, tm_new);
-  }
+  void after_edge_split() const
+  { if (! after_edge_split_fn_object.is_none()) after_edge_split_fn_object(); }
 
-  void before_edge_duplicated(Hd h_old, Pm& tm) const {
-      if (! before_edge_duplicated_fn_object.is_none()) before_edge_duplicated_fn_object(h_old, tm);
-  }
+  void add_retriangulation_edge(Hd h, Pm& tm) const
+  { if (! add_retriangulation_edge_fn_object.is_none()) add_retriangulation_edge_fn_object(h, tm); }
 
-  void after_edge_duplicated(Hd h_old, Hd h_new, Pm& tm) const {
-      if (! after_edge_duplicated_fn_object.is_none()) after_edge_duplicated_fn_object(h_old, h_new, tm);
-  }
+  void before_edge_copy(Hd h_old, const Pm& tm_old, Pm& tm_new) const
+  { if (! before_edge_copy_fn_object.is_none()) before_edge_copy_fn_object(h_old, tm_old, tm_new); }
+
+  void after_edge_copy(Hd h_old, const Pm& tm_old, Hd h_new, Pm& tm_new) const
+  { if (! after_edge_copy_fn_object.is_none()) after_edge_copy_fn_object(h_old, tm_old, h_new, tm_new); }
+
+  void before_edge_duplicated(Hd h_old, Pm& tm) const
+  { if (! before_edge_duplicated_fn_object.is_none()) before_edge_duplicated_fn_object(h_old, tm); }
+
+  void after_edge_duplicated(Hd h_old, Hd h_new, Pm& tm) const
+  { if (! after_edge_duplicated_fn_object.is_none()) after_edge_duplicated_fn_object(h_old, h_new, tm); }
 
   void intersection_edge_copy(Hd h_old1, const Pm& tm1, Hd h_old2, const Pm& tm2, Hd h_new, Pm& tm_new) const {
-      if (! intersection_edge_copy_fn_object.is_none()) intersection_edge_copy_fn_object(h_old1, tm1, h_old2, tm2, h_new, tm_new);
+    if (! intersection_edge_copy_fn_object.is_none())
+      intersection_edge_copy_fn_object(h_old1, tm1, h_old2, tm2, h_new, tm_new);
   }
 
-  void new_vertex_added(std::size_t node_id, Vd vh, const Pm& tm) const {
-      if (! new_vertex_added_fn_object.is_none()) new_vertex_added_fn_object(node_id, vh, tm);
+  void new_vertex_added(std::size_t node_id, Vd vh, const Pm& tm) const
+  { if (! new_vertex_added_fn_object.is_none()) new_vertex_added_fn_object(node_id, vh, tm); }
+
+  void intersection_point_detected(std::size_t node_id, int sdim, Hd principal_edge, Hd additional_edge, const Pm& tm1,
+                                   const Pm& tm2, bool is_target_coplanar, bool is_source_coplanar) const {
+      if (! intersection_point_detected_fn_object.is_none())
+        intersection_point_detected_fn_object(node_id, sdim, principal_edge, additional_edge, tm1, tm2,
+                                              is_target_coplanar, is_source_coplanar);
   }
 
-  void intersection_point_detected(std::size_t node_id, int sdim, Hd principal_edge, Hd additional_edge, const Pm& tm1, const Pm& tm2, bool is_target_coplanar, bool is_source_coplanar) const {
-      if (! intersection_point_detected_fn_object.is_none()) intersection_point_detected_fn_object(node_id, sdim, principal_edge, additional_edge, tm1, tm2, is_target_coplanar, is_source_coplanar);
-  }
+  void before_vertex_copy(Vd v_src, const Pm& tm_src, Pm& tm_tgt) const
+  { if (! before_vertex_copy_fn_object.is_none()) before_vertex_copy_fn_object(v_src, tm_src, tm_tgt); }
 
-  void before_vertex_copy(Vd v_src, const Pm& tm_src, Pm& tm_tgt) const {
-      if (! before_vertex_copy_fn_object.is_none()) before_vertex_copy_fn_object(v_src, tm_src, tm_tgt);
-  }
+  void after_vertex_copy(Vd v_src, const Pm& tm_src, Vd v_tgt, Pm& tm_tgt) const
+  { if (! after_vertex_copy_fn_object.is_none()) after_vertex_copy_fn_object(v_src, tm_src, v_tgt, tm_tgt); }
 
-  void after_vertex_copy(Vd v_src, const Pm& tm_src, Vd v_tgt, Pm& tm_tgt) const {
-      if (! after_vertex_copy_fn_object.is_none()) after_vertex_copy_fn_object(v_src, tm_src, v_tgt, tm_tgt);
-  }
+  void start_filtering_intersections() const
+  { if (! start_filtering_intersections_fn_object.is_none()) start_filtering_intersections_fn_object(); }
 
-  void start_filtering_intersections() const {
-      if (! start_filtering_intersections_fn_object.is_none()) start_filtering_intersections_fn_object();
-  }
+  void progress_filtering_intersections(double d) const
+  { if (! progress_filtering_intersections_fn_object.is_none()) progress_filtering_intersections_fn_object(d); }
 
-  void progress_filtering_intersections(double d) const {
-      if (! progress_filtering_intersections_fn_object.is_none()) progress_filtering_intersections_fn_object(d);
-  }
+  void end_filtering_intersections() const
+  { if (! end_filtering_intersections_fn_object.is_none()) end_filtering_intersections_fn_object(); }
 
-  void end_filtering_intersections() const {
-      if (! end_filtering_intersections_fn_object.is_none()) end_filtering_intersections_fn_object();
-  }
+  void start_triangulating_faces(std::size_t n) const
+  { if (! start_triangulating_faces_fn_object.is_none()) start_triangulating_faces_fn_object(n); }
 
-  void start_triangulating_faces(std::size_t n) const {
-      if (! start_triangulating_faces_fn_object.is_none()) start_triangulating_faces_fn_object(n);
-  }
+  void triangulating_faces_step() const
+  { if (! triangulating_faces_step_fn_object.is_none()) triangulating_faces_step_fn_object(); }
 
-  void triangulating_faces_step() const {
-      if (! triangulating_faces_step_fn_object.is_none()) triangulating_faces_step_fn_object();
-  }
-
-  void end_triangulating_faces() const {
-      if (! end_triangulating_faces_fn_object.is_none()) end_triangulating_faces_fn_object();
-  }
+  void end_triangulating_faces() const
+  { if (! end_triangulating_faces_fn_object.is_none()) end_triangulating_faces_fn_object(); }
 
   void start_handling_intersection_of_coplanar_faces(std::size_t n) const {
-      if (! start_handling_intersection_of_coplanar_faces_fn_object.is_none()) start_handling_intersection_of_coplanar_faces_fn_object(n);
+    if (! start_handling_intersection_of_coplanar_faces_fn_object.is_none())
+      start_handling_intersection_of_coplanar_faces_fn_object(n);
   }
 
-  void intersection_of_coplanar_faces_step() const {
-      if (! intersection_of_coplanar_faces_step_fn_object.is_none()) intersection_of_coplanar_faces_step_fn_object();
-  }
+  void intersection_of_coplanar_faces_step() const
+  { if (! intersection_of_coplanar_faces_step_fn_object.is_none()) intersection_of_coplanar_faces_step_fn_object(); }
 
   void end_handling_intersection_of_coplanar_faces() const {
-      if (! end_handling_intersection_of_coplanar_faces_fn_object.is_none()) end_handling_intersection_of_coplanar_faces_fn_object();
+    if (! end_handling_intersection_of_coplanar_faces_fn_object.is_none())
+      end_handling_intersection_of_coplanar_faces_fn_object();
   }
 
   void start_handling_edge_face_intersections(std::size_t n) const {
-      if (! start_handling_edge_face_intersections_fn_object.is_none()) start_handling_edge_face_intersections_fn_object(n);
+    if (! start_handling_edge_face_intersections_fn_object.is_none())
+      start_handling_edge_face_intersections_fn_object(n);
   }
 
-  void edge_face_intersections_step() const {
-      if (! edge_face_intersections_step_fn_object.is_none()) edge_face_intersections_step_fn_object();
-  }
+  void edge_face_intersections_step() const
+  { if (! edge_face_intersections_step_fn_object.is_none()) edge_face_intersections_step_fn_object(); }
 
-  void end_handling_edge_face_intersections() const {
-      if (! end_handling_edge_face_intersections_fn_object.is_none()) end_handling_edge_face_intersections_fn_object();
-  }
+  void end_handling_edge_face_intersections() const
+  { if (! end_handling_edge_face_intersections_fn_object.is_none()) end_handling_edge_face_intersections_fn_object(); }
 
-  void start_building_output() const {
-      if (! start_building_output_fn_object.is_none()) start_building_output_fn_object();
-  }
+  void start_building_output() const
+  { if (! start_building_output_fn_object.is_none()) start_building_output_fn_object(); }
 
-  void end_building_output() const {
-      if (! end_building_output_fn_object.is_none()) end_building_output_fn_object();
-  }
+  void end_building_output() const
+  { if (! end_building_output_fn_object.is_none()) end_building_output_fn_object(); }
 
-  void filter_coplanar_edges() const {
-      if (! filter_coplanar_edges_fn_object.is_none()) filter_coplanar_edges_fn_object();
-  }
+  void filter_coplanar_edges() const
+  { if (! filter_coplanar_edges_fn_object.is_none()) filter_coplanar_edges_fn_object(); }
 
-  void detect_patches() const {
-      if (! detect_patches_fn_object.is_none()) detect_patches_fn_object();
-  }
+  void detect_patches() const
+  { if (! detect_patches_fn_object.is_none()) detect_patches_fn_object(); }
 
-  void classify_patches() const {
-      if (! classify_patches_fn_object.is_none()) classify_patches_fn_object();
-  }
+  void classify_patches() const
+  { if (! classify_patches_fn_object.is_none()) classify_patches_fn_object(); }
 
-  void classify_intersection_free_patches(const Pm& tm) const {
-      if (! classify_intersection_free_patches_fn_object.is_none()) classify_intersection_free_patches_fn_object(tm);
-  }
+  void classify_intersection_free_patches(const Pm& tm) const
+  { if (! classify_intersection_free_patches_fn_object.is_none()) classify_intersection_free_patches_fn_object(tm); }
 
-  void out_of_place_operation(Boolean_operation_type t) const {
-      if (! out_of_place_operation_fn_object.is_none()) out_of_place_operation_fn_object(t);
-  }
+  void out_of_place_operation(Boolean_operation_type t) const
+  { if (! out_of_place_operation_fn_object.is_none()) out_of_place_operation_fn_object(t); }
 
-  void in_place_operation(Boolean_operation_type t) const {
-      if (! in_place_operation_fn_object.is_none()) in_place_operation_fn_object(t);
-  }
+  void in_place_operation(Boolean_operation_type t) const
+  { if (! in_place_operation_fn_object.is_none()) in_place_operation_fn_object(t); }
 
-  void in_place_operations(Boolean_operation_type t1, Boolean_operation_type t2) const {
-      if (! in_place_operations_fn_object.is_none()) in_place_operations_fn_object(t1, t2);
-  }
-
-
+  void in_place_operations(Boolean_operation_type t1, Boolean_operation_type t2) const
+  { if (! in_place_operations_fn_object.is_none()) in_place_operations_fn_object(t1, t2); }
 
   void set_before_subface_creations(const py::object& fn) { before_subface_creations_fn_object = fn; }
   void set_after_subface_creations(const py::object& fn) { after_subface_creations_fn_object = fn; }
@@ -264,26 +243,30 @@ public:
   void set_start_triangulating_faces(const py::object& fn) { start_triangulating_faces_fn_object = fn; }
   void set_triangulating_faces_step(const py::object& fn) { triangulating_faces_step_fn_object = fn; }
   void set_end_triangulating_faces(const py::object& fn) { end_triangulating_faces_fn_object = fn; }
-  void set_start_handling_intersection_of_coplanar_faces(const py::object& fn) { start_handling_intersection_of_coplanar_faces_fn_object = fn; }
-  void set_intersection_of_coplanar_faces_step(const py::object& fn) { intersection_of_coplanar_faces_step_fn_object = fn; }
-  void set_end_handling_intersection_of_coplanar_faces(const py::object& fn) { end_handling_intersection_of_coplanar_faces_fn_object = fn; }
-  void set_start_handling_edge_face_intersections(const py::object& fn) { start_handling_edge_face_intersections_fn_object = fn; }
+  void set_start_handling_intersection_of_coplanar_faces(const py::object& fn)
+  { start_handling_intersection_of_coplanar_faces_fn_object = fn; }
+  void set_intersection_of_coplanar_faces_step(const py::object& fn)
+  { intersection_of_coplanar_faces_step_fn_object = fn; }
+  void set_end_handling_intersection_of_coplanar_faces(const py::object& fn)
+  { end_handling_intersection_of_coplanar_faces_fn_object = fn; }
+  void set_start_handling_edge_face_intersections(const py::object& fn)
+  { start_handling_edge_face_intersections_fn_object = fn; }
   void set_edge_face_intersections_step(const py::object& fn) { edge_face_intersections_step_fn_object = fn; }
-  void set_end_handling_edge_face_intersections(const py::object& fn) { end_handling_edge_face_intersections_fn_object = fn; }
+  void set_end_handling_edge_face_intersections(const py::object& fn)
+  { end_handling_edge_face_intersections_fn_object = fn; }
   void set_start_building_output(const py::object& fn) { start_building_output_fn_object = fn; }
   void set_end_building_output(const py::object& fn) { end_building_output_fn_object = fn; }
   void set_filter_coplanar_edges(const py::object& fn) { filter_coplanar_edges_fn_object = fn; }
   void set_detect_patches(const py::object& fn) { detect_patches_fn_object = fn; }
   void set_classify_patches(const py::object& fn) { classify_patches_fn_object = fn; }
-  void set_classify_intersection_free_patches(const py::object& fn) { classify_intersection_free_patches_fn_object = fn; }
+  void set_classify_intersection_free_patches(const py::object& fn)
+  { classify_intersection_free_patches_fn_object = fn; }
   void set_out_of_place_operation(const py::object& fn) { out_of_place_operation_fn_object = fn; }
   void set_in_place_operation(const py::object& fn) { in_place_operation_fn_object = fn; }
   void set_in_place_operations(const py::object& fn) { in_place_operations_fn_object = fn; }
 
-
   static int tp_traverse(PyObject* self, visitproc visit, void* arg) {
-    Corefine_visitor<PolygonalMesh>* w =
-      py::inst_ptr<Corefine_visitor<PolygonalMesh>>(self);
+    Corefine_visitor<PolygonalMesh>* w = py::inst_ptr<Corefine_visitor<PolygonalMesh>>(self);
 
     py::handle value_before_subface_creations_fn = py::find(w->before_subface_creations_fn_object);
     py::handle value_after_subface_creations_fn = py::find(w->after_subface_creations_fn_object);
@@ -310,12 +293,16 @@ public:
     py::handle value_start_triangulating_faces_fn = py::find(w->start_triangulating_faces_fn_object);
     py::handle value_triangulating_faces_step_fn = py::find(w->triangulating_faces_step_fn_object);
     py::handle value_end_triangulating_faces_fn = py::find(w->end_triangulating_faces_fn_object);
-    py::handle value_start_handling_intersection_of_coplanar_faces_fn = py::find(w->start_handling_intersection_of_coplanar_faces_fn_object);
+    py::handle value_start_handling_intersection_of_coplanar_faces_fn =
+      py::find(w->start_handling_intersection_of_coplanar_faces_fn_object);
     py::handle value_intersection_of_coplanar_faces_step_fn = py::find(w->intersection_of_coplanar_faces_step_fn_object);
-    py::handle value_end_handling_intersection_of_coplanar_faces_fn = py::find(w->end_handling_intersection_of_coplanar_faces_fn_object);
-    py::handle value_start_handling_edge_face_intersections_fn = py::find(w->start_handling_edge_face_intersections_fn_object);
+    py::handle value_end_handling_intersection_of_coplanar_faces_fn =
+      py::find(w->end_handling_intersection_of_coplanar_faces_fn_object);
+    py::handle value_start_handling_edge_face_intersections_fn =
+      py::find(w->start_handling_edge_face_intersections_fn_object);
     py::handle value_edge_face_intersections_step_fn = py::find(w->edge_face_intersections_step_fn_object);
-    py::handle value_end_handling_edge_face_intersections_fn = py::find(w->end_handling_edge_face_intersections_fn_object);
+    py::handle value_end_handling_edge_face_intersections_fn =
+      py::find(w->end_handling_edge_face_intersections_fn_object);
     py::handle value_start_building_output_fn = py::find(w->start_building_output_fn_object);
     py::handle value_end_building_output_fn = py::find(w->end_building_output_fn_object);
     py::handle value_filter_coplanar_edges_fn = py::find(w->filter_coplanar_edges_fn_object);
@@ -375,8 +362,7 @@ public:
   }
 
   static int tp_clear(PyObject* self) {
-    Corefine_visitor<PolygonalMesh>* w =
-      py::inst_ptr<Corefine_visitor<PolygonalMesh>>(self);
+    Corefine_visitor<PolygonalMesh>* w = py::inst_ptr<Corefine_visitor<PolygonalMesh>>(self);
 
     w->before_subface_creations_fn_object = {};
     w->after_subface_creations_fn_object = {};
@@ -419,12 +405,10 @@ public:
     w->in_place_operation_fn_object = {};
     w->in_place_operations_fn_object = {};
 
-
     return 0;
   }
 
 private:
-
   py::object before_subface_creations_fn_object;
   py::object after_subface_creations_fn_object;
   py::object before_subface_created_fn_object;

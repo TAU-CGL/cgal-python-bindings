@@ -29,6 +29,7 @@
 
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/aos2/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos2/Point_location_with_owner.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 #include "cgalpy/Arr_observer.hpp"
 #include "cgalpy/Arr_overlay_traits.hpp"
@@ -123,8 +124,7 @@ using Arr_observer = Arr_observer<Arrangement_on_surface_2, py::object>;
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_ALGEBRAIC_SEGMENT_GEOMETRY_TRAITS
 template <typename T>
 struct Object_input_iterator :
-  boost::iterator_facade<Object_input_iterator<T>, CGAL::Object, std::input_iterator_tag, CGAL::Object>
-{
+  boost::iterator_facade<Object_input_iterator<T>, CGAL::Object, std::input_iterator_tag, CGAL::Object> {
 
   // Default constructor.
   // Workaround the lack of default constructor for py::detail::fast_iterator.
@@ -181,8 +181,7 @@ void insert_curves(Arrangement_on_surface_2& arr, py::list& lst) {
 }
 
 //! Overlay two arrangements
-Arrangement_on_surface_2 overlay(Arrangement_on_surface_2& arr1,
-                                 Arrangement_on_surface_2& arr2) {
+Arrangement_on_surface_2 overlay(Arrangement_on_surface_2& arr1, Arrangement_on_surface_2& arr2) {
   Arrangement_on_surface_2 arr_res;
   CGAL::overlay(arr1, arr2, arr_res);
   return arr_res;
@@ -209,9 +208,7 @@ bool remove_vertex_free(Arrangement_on_surface_2& aos, Vertex& v)
 { return CGAL::remove_vertex(aos, Vertex_handle(&v)); }
 
 //!
-void decompose_helper2(const Vertex& vertex,
-                       const py::object& below, const py::object& above,
-                       py::list& lst) {
+void decompose_helper2(const Vertex& vertex, const py::object& below, const py::object& above, py::list& lst) {
   py::tuple inner = py::make_tuple(below, above);
   py::tuple outer = py::make_tuple(vertex, inner);
   lst.append(outer);
@@ -723,8 +720,7 @@ template <typename Observer>
 void observer_tp_finalize(PyObject* self) {
   if (! py::inst_ready(self)) return;
 
-  auto* observer =
-    py::inst_ptr<Observer>(self);
+  auto* observer = py::inst_ptr<Observer>(self);
 
   if (observer->arrangement() != nullptr)
     observer->detach();
@@ -732,42 +728,24 @@ void observer_tp_finalize(PyObject* self) {
 
 template <typename Observer>
 struct observer_clear_arrangement_owner {
-  static void precall(
-    PyObject**,
-    size_t,
-    py::detail::cleanup_list*)
-  {}
+  static void precall(PyObject**, size_t, py::detail::cleanup_list*) {}
 
   template <size_t N>
-  static void postcall(
-    PyObject** args,
-    std::integral_constant<size_t, N>,
-    py::handle)
-  {
-    static_assert(
-      N >= 1,
-      "observer clear-owner policy needs self");
+  static void postcall(PyObject** args, std::integral_constant<size_t, N>, py::handle) {
+    static_assert(N >= 1, "observer clear-owner policy needs self");
 
-    auto* observer =
-      py::inst_ptr<Observer>(args[0]);
+    auto* observer = py::inst_ptr<Observer>(args[0]);
 
     if (observer->arrangement() != nullptr)
-      throw std::runtime_error(
-        "CGAL observer remained attached after detach()");
+      throw std::runtime_error("CGAL observer remained attached after detach()");
 
-    py::setattr(
-      py::handle(args[0]),
-      observer_arrangement_owner_attr,
-      py::none());
+    py::setattr(py::handle(args[0]), observer_arrangement_owner_attr, py::none());
   }
 };
 
 //!
 static PyType_Slot aos_observer_slots[] = {
-  {
-    Py_tp_finalize,
-    (void*) Arr_observer::tp_finalize
-  },
+  { Py_tp_finalize, (void*) Arr_observer::tp_finalize },
   {Py_tp_traverse, (void*) Arr_observer::tp_traverse},
   {Py_tp_clear, (void*) Arr_observer::tp_clear},
   {0, nullptr}
@@ -1155,14 +1133,18 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Pnt = Gt::Point_2;
   using Cv = Gt::Curve_2;
   using Xcv = Gt::X_monotone_curve_2;
-  using Naive_pl = CGAL::Arr_naive_point_location<Aos>;
+  using Naive_base = CGAL::Arr_naive_point_location<Aos>;
+  using Naive_pl = cgalpy::aos2::Point_location_with_owner<Naive_base, Aos>;
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-  using Wal_pl = CGAL::Arr_walk_along_line_point_location<Aos>;
+  using Walk_base = CGAL::Arr_walk_along_line_point_location<Aos>;
+  using Wal_pl = cgalpy::aos2::Point_location_with_owner<Walk_base, Aos>;
 #endif
 
-  using Landmarks_pl = CGAL::Arr_landmarks_point_location<Aos>;
-  using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Aos>;
+  using Landmarks_base = CGAL::Arr_landmarks_point_location<Aos>;
+  using Landmarks_pl = cgalpy::aos2::Point_location_with_owner<Landmarks_base, Aos>;
+  using Trapezoid_base = CGAL::Arr_trapezoid_ric_point_location<Aos>;
+  using Trapezoid_pl = cgalpy::aos2::Point_location_with_owner<Trapezoid_base, Aos>;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   using Arr_halfedge_direction = CGAL::Arr_halfedge_direction;
@@ -1496,40 +1478,26 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Aob = CGAL::Arr_observer<Aos>;
   if (! add_attr<Aob>(m, "Arr_observer_base")) {
     static PyType_Slot aob_owner_slots[] = {
-      {
-        Py_tp_finalize,
-        (void*) cgalpy::aos2::observer_tp_finalize<Aob>
-      },
+      { Py_tp_finalize, (void*) cgalpy::aos2::observer_tp_finalize<Aob> },
       {0, nullptr}
     };
 
-    py::class_<Aob>(
-      m,
-      "Arr_observer_base",
+    py::class_<Aob>(m, "Arr_observer_base",
       py::dynamic_attr(),
       py::type_slots(aob_owner_slots),
       "Base observer for arrangement notifications.")
-      .def(
-        py::init<>(),
+      .def(py::init<>(),
         "Construct a detached observer.")
-      .def(
-        py::init<Aos&>(),
+      .def(py::init<Aos&>(),
         py::arg("arr"),
-        py::call_policy<
-          cgalpy::aos2::observer_sync_arrangement_owner<Aob, Aos>>(),
+        py::call_policy<cgalpy::aos2::observer_sync_arrangement_owner<Aob, Aos>>(),
         "Construct and attach an observer to an arrangement.")
-      .def(
-        "attach",
-        &Aob::attach,
+      .def("attach", &Aob::attach,
         py::arg("arr"),
-        py::call_policy<
-          cgalpy::aos2::observer_sync_arrangement_owner<Aob, Aos>>(),
+        py::call_policy<cgalpy::aos2::observer_sync_arrangement_owner<Aob, Aos>>(),
         "Attach the observer to an arrangement.")
-      .def(
-        "detach",
-        &Aob::detach,
-        py::call_policy<
-          cgalpy::aos2::observer_clear_arrangement_owner<Aob>>(),
+      .def("detach", &Aob::detach,
+        py::call_policy<cgalpy::aos2::observer_clear_arrangement_owner<Aob>>(),
         "Detach the observer from its arrangement.")
       ;
   }
@@ -1537,14 +1505,11 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Ao = cgalpy::aos2::Arr_observer;
   if (! add_attr<Ao>(m, "Arr_observer")) {
     py::class_<Ao, Aob>(m, "Arr_observer",
-                        py::type_slots(cgalpy::aos2::aos_observer_slots),
-                        aos2_doc::Arr_observer)
+                        py::type_slots(cgalpy::aos2::aos_observer_slots), aos2_doc::Arr_observer)
       .def(py::init<>(), "Construct a detached Python callback observer.")
-      .def(
-        py::init<Aos&>(),
+      .def(py::init<Aos&>(),
         py::arg("arr"),
-        py::call_policy<
-          cgalpy::aos2::observer_sync_arrangement_owner<Ao, Aos>>(),
+        py::call_policy<cgalpy::aos2::observer_sync_arrangement_owner<Ao, Aos>>(),
         "Construct and attach a Python callback observer to an arrangement.")
       //
       .def("set_after_split_face", &Ao::set_after_split_face, py::arg("fnc"),

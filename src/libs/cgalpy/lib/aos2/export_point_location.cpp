@@ -21,6 +21,7 @@
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/aos2/arr_point_location_config.hpp"
 #include "cgalpy/aos2/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos2/Point_location_with_owner.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 #include "cgalpy/iterators/py_list_forward_iterator.hpp"
 
@@ -42,17 +43,14 @@ using Pl_result =
 class Point_location_result_visitor {
 public:
   template<typename T>
-  py::object operator()(T& operand) const
-  { return py::cast(&(*operand)); }
+  py::object operator()(T& operand) const { return py::cast(&(*operand)); }
 };
 
 //
-py::list locate_batch(const Arrangement_on_surface_2& arr, const py::list& lst)
-{
+py::list locate_batch(const Arrangement_on_surface_2& arr, const py::list& lst) {
   py::list res;
   auto op = [&] (const Pl_query_result& p) mutable {
-      const auto& result =
-        std::visit(Point_location_result_visitor(), p.second);
+      const auto& result = std::visit(Point_location_result_visitor(), p.second);
       res.append(py::make_tuple(p.first, result));
     };
   // The argument type of boost::function_output_iterator (UnaryFunction) must
@@ -85,174 +83,6 @@ py::object ray_shoot_down(PL& pl, const Point_2& p) {
   return std::visit(Point_location_result_visitor(), result);
 }
 
-template <typename Base, typename Aos>
-class Point_location_with_owner : public Base {
-public:
-  Point_location_with_owner() :
-    Base(),
-    m_arrangement_owner(py::none()),
-    m_attached(false)
-  {}
-
-  explicit Point_location_with_owner(Aos& arr) :
-    Base(arr),
-    m_arrangement_owner(
-      py::cast(&arr, py::rv_policy::reference)),
-    m_attached(true)
-  {}
-
-  explicit Point_location_with_owner(bool with_guarantees) :
-    Base(with_guarantees),
-    m_arrangement_owner(py::none()),
-    m_attached(false)
-  {}
-
-  Point_location_with_owner(Aos& arr, bool with_guarantees) :
-    Base(arr, with_guarantees),
-    m_arrangement_owner(
-      py::cast(&arr, py::rv_policy::reference)),
-    m_attached(true)
-  {}
-
-  ~Point_location_with_owner() {
-    if (m_attached) Base::detach();
-  }
-
-  void attach(Aos& arr) {
-    // Preserve the previous Python owner while CGAL changes the
-    // native attachment, then replace it with the new arrangement.
-    Base::attach(arr);
-    m_arrangement_owner =
-      py::cast(&arr, py::rv_policy::reference);
-    m_attached = true;
-  }
-
-  void detach() {
-    if (! m_attached) return;
-
-    // Remove the native relationship before releasing its Python owner.
-    Base::detach();
-    m_attached = false;
-    m_arrangement_owner = py::none();
-  }
-
-  static int tp_traverse(PyObject* self, visitproc visit, void* arg) {
-    bool traversed_base = false;
-
-    py::handle bound_type =
-      py::type<Point_location_with_owner>();
-
-    auto* py_type =
-      reinterpret_cast<PyTypeObject*>(
-        bound_type.ptr());
-
-    if (py_type->tp_base != nullptr) {
-      py::handle base_type(
-        reinterpret_cast<PyObject*>(
-          py_type->tp_base));
-
-      auto base_traverse =
-        reinterpret_cast<traverseproc>(
-          py::type_get_slot(
-            base_type,
-            Py_tp_traverse));
-
-      if (base_traverse != nullptr) {
-        const int result =
-          base_traverse(
-            self,
-            visit,
-            arg);
-
-        if (result != 0)
-          return result;
-
-        traversed_base = true;
-      }
-    }
-
-    if (! traversed_base)
-      Py_VISIT(Py_TYPE(self));
-
-    if (! py::inst_ready(self))
-      return 0;
-
-    auto* w =
-      py::inst_ptr<Point_location_with_owner>(self);
-
-    Py_VISIT(w->m_arrangement_owner.ptr());
-
-    return 0;
-  }
-
-  static int tp_clear(PyObject* self) {
-    inquiry base_clear = nullptr;
-
-    py::handle bound_type =
-      py::type<Point_location_with_owner>();
-
-    auto* py_type =
-      reinterpret_cast<PyTypeObject*>(
-        bound_type.ptr());
-
-    if (py_type->tp_base != nullptr) {
-      py::handle base_type(
-        reinterpret_cast<PyObject*>(
-          py_type->tp_base));
-
-      base_clear =
-        reinterpret_cast<inquiry>(
-          py::type_get_slot(
-            base_type,
-            Py_tp_clear));
-    }
-
-    if (! py::inst_ready(self))
-      return (base_clear != nullptr) ?
-        base_clear(self) : 0;
-
-    auto* w =
-      py::inst_ptr<Point_location_with_owner>(self);
-
-    if (w->m_attached) {
-      static_cast<Base&>(*w).detach();
-      w->m_attached = false;
-    }
-
-    w->m_arrangement_owner = {};
-
-    if (base_clear != nullptr) {
-      const int result =
-        base_clear(self);
-
-      if (result != 0)
-        return result;
-    }
-
-    return 0;
-  }
-
-private:
-  py::object m_arrangement_owner;
-  bool m_attached;
-};
-
-template <typename PointLocation>
-PyType_Slot* point_location_owner_slots() {
-  static PyType_Slot slots[] = {
-    {
-      Py_tp_traverse,
-      (void*) PointLocation::tp_traverse
-    },
-    {
-      Py_tp_clear,
-      (void*) PointLocation::tp_clear
-    },
-    {0, nullptr}
-  };
-
-  return slots;
-}
 
 // #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS || \
 //   CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS || \
@@ -274,18 +104,11 @@ void export_point_location(py::module_& m) {
 #if CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_LINEAR_GEOMETRY_TRAITS || \
   CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS || \
   CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS
-  using Landmarks_base =
-    CGAL::Arr_landmarks_point_location<Aos>;
-  using Landmarks_pl =
-    cgalpy::aos2::Point_location_with_owner<
-      Landmarks_base, Aos>;
+  using Landmarks_base = CGAL::Arr_landmarks_point_location<Aos>;
+  using Landmarks_pl = cgalpy::aos2::Point_location_with_owner<Landmarks_base, Aos>;
   if (! add_attr<Landmarks_pl>(m, "Arr_landmarks_point_location")) {
-    py::class_<Landmarks_pl>(
-      m,
-      "Arr_landmarks_point_location",
-      py::type_slots(
-        cgalpy::aos2::point_location_owner_slots<
-          Landmarks_pl>()),
+    py::class_<Landmarks_pl>(m, "Arr_landmarks_point_location",
+      py::type_slots(cgalpy::aos2::point_location_owner_slots<Landmarks_pl>()),
       aos2_doc::Arr_landmarks_point_location_class)
       .def(py::init<>(),
            "Construct a detached landmarks point-location object.")
@@ -307,18 +130,11 @@ void export_point_location(py::module_& m) {
 
   // Compile in only if we use CGAL version >= 5.6.0; see PR #6810
 #if CGAL_VERSION_NR >= 1050600900
-  using Trapezoid_base =
-    CGAL::Arr_trapezoid_ric_point_location<Aos>;
-  using Trapezoid_pl =
-    cgalpy::aos2::Point_location_with_owner<
-      Trapezoid_base, Aos>;
+  using Trapezoid_base = CGAL::Arr_trapezoid_ric_point_location<Aos>;
+  using Trapezoid_pl = cgalpy::aos2::Point_location_with_owner<Trapezoid_base, Aos>;
   if (! add_attr<Trapezoid_pl>(m, "Arr_trapezoid_ric_point_location")) {
-    py::class_<Trapezoid_pl, Aob>(
-      m,
-      "Arr_trapezoid_ric_point_location",
-      py::type_slots(
-        cgalpy::aos2::point_location_owner_slots<
-          Trapezoid_pl>()),
+    py::class_<Trapezoid_pl, Aob>(m, "Arr_trapezoid_ric_point_location",
+      py::type_slots(cgalpy::aos2::point_location_owner_slots<Trapezoid_pl>()),
       aos2_doc::Arr_trapezoid_ric_point_location_class)
       .def(py::init<bool>(), py::arg("with_guarantees") = true,
            aos2_doc::Arr_trapezoid_ric_point_location_Arr_trapezoid_ric_point_location)
@@ -348,18 +164,11 @@ void export_point_location(py::module_& m) {
 #endif
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-  using Walk_base =
-    CGAL::Arr_walk_along_line_point_location<Aos>;
-  using Walk_pl =
-    cgalpy::aos2::Point_location_with_owner<
-      Walk_base, Aos>;
+  using Walk_base = CGAL::Arr_walk_along_line_point_location<Aos>;
+  using Walk_pl = cgalpy::aos2::Point_location_with_owner<Walk_base, Aos>;
   if (! add_attr<Walk_pl>(m, "Arr_walk_along_line_point_location")) {
-    py::class_<Walk_pl>(
-      m,
-      "Arr_walk_along_line_point_location",
-      py::type_slots(
-        cgalpy::aos2::point_location_owner_slots<
-          Walk_pl>()),
+    py::class_<Walk_pl>(m, "Arr_walk_along_line_point_location",
+      py::type_slots(cgalpy::aos2::point_location_owner_slots<Walk_pl>()),
       aos2_doc::Arr_walk_along_line_point_location_class)
       .def(py::init<>(),
            "Construct a detached walk-along-line point-location object.")
@@ -382,19 +191,11 @@ void export_point_location(py::module_& m) {
   }
 #endif
 
-  using Naive_base =
-    CGAL::Arr_naive_point_location<Aos>;
-  using Naive_pl =
-    cgalpy::aos2::Point_location_with_owner<
-      Naive_base, Aos>;
+  using Naive_base = CGAL::Arr_naive_point_location<Aos>;
+  using Naive_pl = cgalpy::aos2::Point_location_with_owner<Naive_base, Aos>;
   if (! add_attr<Naive_pl>(m, "Arr_naive_point_location")) {
-    py::class_<Naive_pl>(
-      m,
-      "Arr_naive_point_location",
-      py::type_slots(
-        cgalpy::aos2::point_location_owner_slots<
-          Naive_pl>()),
-      aos2_doc::Arr_naive_point_location_class)
+    py::class_<Naive_pl>(m, "Arr_naive_point_location",
+      py::type_slots(cgalpy::aos2::point_location_owner_slots<Naive_pl>()), aos2_doc::Arr_naive_point_location_class)
       .def(py::init<>(),
            "Construct a detached naive point-location object.")
       .def(py::init<Aos&>(), py::arg("arr"),
@@ -412,6 +213,5 @@ void export_point_location(py::module_& m) {
   }
 
   m.def("locate", &cgalpy::aos2::locate_batch, ri, py::keep_alive<1, 0>(),
-        py::arg("arr"), py::arg("points"),
-        aos2_doc::locate);
+        py::arg("arr"), py::arg("points"), aos2_doc::locate);
 }
