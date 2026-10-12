@@ -36,13 +36,14 @@
 #include "cgalpy/make_iterator.hpp"
 #include "cgalpy/iterators/py_list_forward_iterator.hpp"
 
+// Exclude the combination of geodesic traits and either counting or tracing traits for now (until fixed in CGAL)
 #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS) || \
      ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS) && \
-      (CGAL_VERSION_NR >= 106030090)))
+      (CGAL_VERSION_NR >= 106030090) && ! defined(CGALPY_AOS2_TRACING_TRAITS) && ! defined(CGALPY_AOS2_COUNTING_TRAITS)))
 #ifdef CGALPY_HAS_VISUAL
 #define CGAL_USE_BASIC_VIEWER
 #include <CGAL/draw_arrangement_2.h>
@@ -792,13 +793,15 @@ static PyType_Slot aos_overlay_traits_slots[] = {
 //! Export draw
 template <typename Aos>
 void export_draw(py::module_& m) {
+
+// Exclude the combination of geodesic traits and either counting or tracing traits for now (until fixed in CGAL)
 #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS) || \
      ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS) && \
-      (CGAL_VERSION_NR >= 106030090)))
+      (CGAL_VERSION_NR >= 106030090) && ! defined(CGALPY_AOS2_TRACING_TRAITS) && ! defined(CGALPY_AOS2_COUNTING_TRAITS)))
 #ifdef CGALPY_HAS_VISUAL
   m.def("draw",
         [](const Aos& aos, const char* title)
@@ -813,7 +816,6 @@ void export_draw(py::module_& m) {
         py::arg("aos"), py::arg("graphics_scene_options"), py::arg("title"),
         aos2_doc::draw_2);
 #endif
-
 #endif
 #endif
 }
@@ -945,17 +947,6 @@ void export_aos(py::module_& m) {
   add_attr<Gt::Curve_2>(aos_c, "Curve_2");
   add_attr<Gt::X_monotone_curve_2>(aos_c, "X_monotone_curve_2");
 
-// #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
-//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
-//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
-//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS) || \
-//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS) || \
-//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS))
-// #ifdef CGALPY_HAS_VISUAL
-//   using Draw_aos = void(*)(const Aos&, const char*);
-//   m.def("draw", static_cast<Draw_aos>(CGAL::draw));
-// #endif
-// #endif
   export_draw<Aos>(m);
 }
 
@@ -1123,25 +1114,6 @@ void export_arr(py::module_& m) {
     export_arrangement_2_io(arr_c);
   }
 
-// #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
-//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
-//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
-//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CONIC_GEOMETRY_TRAITS) || \
-//      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_POLYLINE_OF_SEGMENTS_GEOMETRY_TRAITS))
-// #ifdef CGALPY_HAS_VISUAL
-//   //! \todo The draw function should be applied only to arrangement on surface
-//   m.def("draw",
-//         [](const Arr& arr, const char* title)
-//         { CGAL::draw(arr, title); });
-
-// #if defined(CGALPY_BASIC_VIEWER_BINDINGS)
-//   m.def("draw",
-//         [](const Arr& arr, const cgalpy::bvr::Graphics_scene_options& gso,
-//            const char* title)
-//         { CGAL::draw(arr, gso, title); });
-// #endif
-// #endif
-// #endif
   export_draw<Arr>(m);
 }
 #endif
