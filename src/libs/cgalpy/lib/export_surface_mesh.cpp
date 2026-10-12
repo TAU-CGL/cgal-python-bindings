@@ -1039,9 +1039,13 @@ void export_surface_mesh_impl(py::module_& m, const char* name) {
   }
 
 #ifdef CGALPY_HAS_VISUAL
+  m.def("draw", &cgalpy::sm::draw<Sm>,
+        py::arg("surface_mesh"), py::arg("title"),
+        "Opens a viewer window to display the surface mesh with the "
+        "specified title. Blocks until the window is closed.");
+
   m.def("faces", &boost_utils::my_faces<Sm>,
         py::arg("graph"), bgl_doc::FaceListGraph_faces);
-
 #endif
 }
 
