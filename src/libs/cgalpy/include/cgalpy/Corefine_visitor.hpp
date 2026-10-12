@@ -81,7 +81,15 @@ public:
     if (! before_subface_creations_fn_object.is_none()) before_subface_creations_fn_object(f_old, tm);
   }
 
+  void before_subface_creations(Fd f_old, const Pm& tm) const {
+    if (! before_subface_creations_fn_object.is_none()) before_subface_creations_fn_object(f_old, tm);
+  }
+
   void after_subface_creations(Pm& tm) const {
+      if (! after_subface_creations_fn_object.is_none()) after_subface_creations_fn_object(tm);
+  }
+
+  void after_subface_creations(const Pm& tm) const {
       if (! after_subface_creations_fn_object.is_none()) after_subface_creations_fn_object(tm);
   }
 
@@ -90,6 +98,10 @@ public:
   }
 
   void after_subface_created(Fd f_new, Pm& tm) const {
+      if (! after_subface_created_fn_object.is_none()) after_subface_created_fn_object(f_new, tm);
+  }
+
+  void after_subface_created(Fd f_new, const Pm& tm) const {
       if (! after_subface_created_fn_object.is_none()) after_subface_created_fn_object(f_new, tm);
   }
 

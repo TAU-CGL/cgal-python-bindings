@@ -29,6 +29,7 @@
 
 #include "cgalpy/add_attr.hpp"
 #include "cgalpy/aos2/arrangement_on_surface_2_types.hpp"
+#include "cgalpy/aos2/point_location_with_owner.hpp"
 #include "cgalpy/Aos2_docstrings.hpp"
 #include "cgalpy/Arr_observer.hpp"
 #include "cgalpy/Arr_overlay_traits.hpp"
@@ -790,6 +791,11 @@ static PyType_Slot aos_overlay_traits_slots[] = {
 //! Export draw
 template <typename Aos>
 void export_draw(py::module_& m) {
+// The CGAL viewer expects Cartesian Approx_point values. With
+// geodesic counting/tracing wrappers, Approx_point can instead be
+// Arr_extended_direction_3, which the viewer cannot render.
+#if !((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS) && \
+      (defined(CGALPY_AOS2_COUNTING_TRAITS) || defined(CGALPY_AOS2_TRACING_TRAITS)))
 #if ((CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_NON_CACHING_SEGMENT_GEOMETRY_TRAITS) || \
      (CGALPY_AOS2_GEOMETRY_TRAITS == CGALPY_AOS2_CIRCLE_SEGMENT_GEOMETRY_TRAITS) || \
@@ -813,6 +819,7 @@ void export_draw(py::module_& m) {
 
 #endif
 #endif
+#endif // unsupported geodesic counting/tracing draw
 }
 
 //! Export common members of Aos types
@@ -1180,14 +1187,14 @@ void export_arrangement_on_surface_2(py::module_& m) {
   using Pnt = Gt::Point_2;
   using Cv = Gt::Curve_2;
   using Xcv = Gt::X_monotone_curve_2;
-  using Naive_pl = CGAL::Arr_naive_point_location<Aos>;
+  using Naive_pl = cgalpy::aos2::Point_location_with_owner<CGAL::Arr_naive_point_location<Aos>, Aos>;
 
 #if CGALPY_AOS2_GEOMETRY_TRAITS != CGALPY_AOS2_GEODESIC_ARC_ON_SPHERE_GEOMETRY_TRAITS
-  using Wal_pl = CGAL::Arr_walk_along_line_point_location<Aos>;
+  using Wal_pl = cgalpy::aos2::Point_location_with_owner<CGAL::Arr_walk_along_line_point_location<Aos>, Aos>;
 #endif
 
-  using Landmarks_pl = CGAL::Arr_landmarks_point_location<Aos>;
-  using Trapezoid_pl = CGAL::Arr_trapezoid_ric_point_location<Aos>;
+  using Landmarks_pl = cgalpy::aos2::Point_location_with_owner<CGAL::Arr_landmarks_point_location<Aos>, Aos>;
+  using Trapezoid_pl = cgalpy::aos2::Point_location_with_owner<CGAL::Arr_trapezoid_ric_point_location<Aos>, Aos>;
   constexpr auto ri(py::rv_policy::reference_internal);
 
   using Arr_halfedge_direction = CGAL::Arr_halfedge_direction;

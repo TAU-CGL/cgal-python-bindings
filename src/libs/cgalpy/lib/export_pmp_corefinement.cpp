@@ -11,6 +11,7 @@
 #include "cgalpy/pol3/Polyhedron_lifetime.hpp"
 #include <array>
 #include <functional>
+#include <string>
 #include <tuple>
 #include <vector>
 
@@ -61,6 +62,17 @@ namespace py = nanobind;
 
 namespace cgalpy {
 namespace pmp {
+
+// The visitor is already attached to the CGAL named-parameter chain.
+// Do not revalidate it as an ordinary named parameter.
+py::dict clip_params_without_visitor(const py::dict& params) {
+  py::dict filtered;
+  for (const auto& item : params) {
+    const std::string key = py::str(item.first).c_str();
+    if (key != "visitor") filtered[item.first] = item.second;
+  }
+  return filtered;
+}
 
 //! Apply autorefine named parameters.
 template <typename PolygonMesh, template <typename...> class Wrapper,
@@ -157,7 +169,8 @@ auto apply_clip_plane_named_parameters_with_visitor(const py::dict& params,
 
   cgalpy::Named_parameter_wrapper<Wrapper, Args...>
     wrapper(std::forward<Args>(args)...);
-  return cgalpy::named_parameter_applicator(wrapper, np, params,
+  return cgalpy::named_parameter_applicator(wrapper, np,
+                                            clip_params_without_visitor(params),
                                             vertex_point_map_op,
                                             geom_traits_op,
                                             clip_volume_op,
@@ -186,7 +199,8 @@ auto apply_clip_cuboid_named_parameters_with_visitor(const py::dict& params,
 
   cgalpy::Named_parameter_wrapper<Wrapper, Args...>
     wrapper(std::forward<Args>(args)...);
-  return cgalpy::named_parameter_applicator(wrapper, np, params,
+  return cgalpy::named_parameter_applicator(wrapper, np,
+                                            clip_params_without_visitor(params),
                                             vertex_point_map_op,
                                             geom_traits_op,
                                             clip_volume_op,
