@@ -626,8 +626,12 @@ void export_polyhedron_3(py::module_& m) {
     add_iterator<Hci, Hci>("Halfedge_iterator", prn_c);
     add_iterator<Eci, Eci>("Edge_iterator", prn_c);
     add_iterator<Fci, Fci>("Face_iterator", prn_c);
-    add_iterator<Pnt_ci, Pnt_ci>("Point_iterator", prn_c);
-    add_iterator<Pln_ci, Pln_ci>("Plane_iterator", prn_c);
+    add_iterator<Pnt_ci, Pnt_ci,
+                 decltype(*std::declval<Pnt_ci>()),
+                 py::rv_policy::copy>("Point_iterator", prn_c);
+    add_iterator<Pln_ci, Pln_ci,
+                 decltype(*std::declval<Pln_ci>()),
+                 py::rv_policy::copy>("Plane_iterator", prn_c);
 
     prn_c.def("vertices", &cgalpy::pol3::polyhedron_vertices, py::keep_alive<0, 1>(), pol3_doc::Polyhedron_3_vertices_begin
       CGALPY_POL3_LIFETIME_POLICY(cgalpy::pol3::lifetime::Register_result_lease_from<1>))
