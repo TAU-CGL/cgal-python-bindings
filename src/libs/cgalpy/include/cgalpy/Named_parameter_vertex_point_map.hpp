@@ -5,6 +5,7 @@
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
 // Author(s): Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
+//            Efi Fogel         <efifogel@gmail.com>
 
 #ifndef CGALPY_NAMED_PARAMETER_VERTEX_POINT_MAP_HPP
 #define CGALPY_NAMED_PARAMETER_VERTEX_POINT_MAP_HPP
@@ -12,12 +13,14 @@
 #include <stdexcept>
 #include <string>
 
+#include <nanobind/nanobind.h>
+
 #include <boost/graph/graph_traits.hpp>
 
 #include <CGAL/boost/graph/properties.h>
 
-#include <nanobind/nanobind.h>
-
+#include "cgalpy/is_surface_mesh.hpp"
+#include "cgalpy/is_polyhedron_3.hpp"
 #include "cgalpy/kernel_types.hpp"
 #include "cgalpy/polygon_mesh_processing_config.hpp"
 
@@ -25,28 +28,37 @@ namespace py = nanobind;
 
 namespace cgalpy {
 
+//! Always false, but dependent on `T`, so it fires only when instantiated.
+template <typename T>
+inline constexpr bool dependent_false_v = false;
+
+//!
 template <typename PolygonMesh>
 struct Named_parameter_vertex_point_map {
+  using Pm = PolygonMesh;
+
   static constexpr const char* m_name = "vertex_point_map";
 
   template <typename NamedParameters, typename Value>
   auto operator()(NamedParameters& np, Value& value) const {
-    using Vd = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
+    using Vd = typename boost::graph_traits<Pm>::vertex_descriptor;
 
-#if ((defined(CGALPY_CONVEX_HULL_3_BINDINGS) && \
-      (CGALPY_CH3_POLYGONAL_MESH == CGALPY_CH3_SURFACE_MESH_POLYGONAL_MESH)) || \
-     (defined(CGALPY_POLYGON_MESH_PROCESSING_BINDINGS) &&               \
-      (CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH)))
-    using Vertex_point_map = typename PolygonMesh::template Property_map<Vd, Point_3>;
-#elif ((defined(CGALPY_CONVEX_HULL_3_BINDINGS) && \
-      (CGALPY_CH3_POLYGONAL_MESH == CGALPY_CH3_POLYHEDRON_3_POLYGONAL_MESH)) || \
-     (defined(CGALPY_POLYGON_MESH_PROCESSING_BINDINGS) &&               \
-      (CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH)))
-    using Vertex_point_map = typename boost::property_map<PolygonMesh, CGAL::vertex_point_t>::type;
-#else
-#  error Unsupported PMP polygonal mesh type
-#endif
+    if constexpr (is_surface_mesh_v<Pm>) {
+      using Vertex_point_map = typename PolygonMesh::template Property_map<Vd, Point_3>;
+      return apply<Vertex_point_map>(np, value);
+    }
+    else if constexpr (is_polyhedron_3_v<Pm>) {
+      using Vertex_point_map = typename boost::property_map<Pm, CGAL::vertex_point_t>::type;
+      return apply<Vertex_point_map>(np, value);
+    }
+    else {
+      static_assert(dependent_false_v<Pm>, "Named_parameter_vertex_point_map: unsupported polygonal mesh type");
+    }
+  }
 
+private:
+  template <typename Vertex_point_map, typename NamedParameters, typename Value>
+  static auto apply(NamedParameters& np, Value& value) {
     try {
       return np.vertex_point_map(py::cast<Vertex_point_map>(value));
     }

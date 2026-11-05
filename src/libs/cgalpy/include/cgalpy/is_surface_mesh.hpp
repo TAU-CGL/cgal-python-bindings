@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later.
 // Commercial use is authorized only through a concession contract to purchase a commercial license for CGAL.
 //
-// Author(s): Utkarsh Khajuria  <utkarshkhajuria55@gmail.com>
+// Author(s): Efi Fogel         <efifogel@gmail.com>
 
 #ifndef CGALPY_IS_SURFACE_MESH_MAP_HPP
 #define CGALPY_IS_SURFACE_MESH_MAP_HPP
