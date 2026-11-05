@@ -29,8 +29,7 @@ struct Polyhedron_items : public CGAL::Polyhedron_items_3 {
   struct Vertex_wrapper {
     using Pnt = typename Traits::Point_3;
     using Vb = CGAL::HalfedgeDS_vertex_base<Refs, CGAL::Tag_true, Pnt>;
-    using Vertex =
-      typename Vertex_extended<is_vertex_extended(), Vb, py::object>::type;
+    using Vertex = typename Vertex_extended<is_vertex_extended(), Vb, py::object>::type;
 
   };
 
@@ -38,16 +37,14 @@ struct Polyhedron_items : public CGAL::Polyhedron_items_3 {
   struct Halfedge_wrapper {
     using True = CGAL::Tag_true;
     using Hb = CGAL::HalfedgeDS_halfedge_base<Refs, True, True, True>;
-    using Halfedge =
-      typename Halfedge_extended<is_halfedge_extended(), Hb, py::object>::type;
+    using Halfedge = typename Halfedge_extended<is_halfedge_extended(), Hb, py::object>::type;
   };
 
   template <typename Refs, typename Traits>
   struct Face_wrapper {
     using Pln = typename Traits::Plane_3;
     using Fb = CGAL::HalfedgeDS_face_base<Refs, CGAL::Tag_true, Pln>;
-    using Face =
-      typename Face_extended<is_face_extended(), Fb, py::object>::type;
+    using Face = typename Face_extended<is_face_extended(), Fb, py::object>::type;
   };
 };
 
@@ -78,7 +75,7 @@ using Halfedge_around_facet_const_circulator = Polyhedron_3::Halfedge_around_fac
 
 using Halfedge_ds = Polyhedron_3::HalfedgeDS;
 
-}
+} // namespace pol3
 } // namespace cgalpy
 
 #endif
