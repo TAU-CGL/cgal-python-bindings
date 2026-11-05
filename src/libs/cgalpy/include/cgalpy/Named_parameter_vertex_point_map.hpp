@@ -33,9 +33,15 @@ struct Named_parameter_vertex_point_map {
   auto operator()(NamedParameters& np, Value& value) const {
     using Vd = typename boost::graph_traits<PolygonMesh>::vertex_descriptor;
 
-#if CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH
+#if ((defined(CGALPY_CONVEX_HULL_3_BINDINGS) && \
+      (CGALPY_CH3_POLYGONAL_MESH == CGALPY_PMP_SURFACE_MESH_POLYGONAL_MESH)) || \
+     (defined(CGALPY_POLYGON_MESH_PROCESSING_BINDINGS) &&               \
+      (CGALPY_PMP_POLYGONAL_MESH == CGALPY_CH3_SURFACE_MESH_POLYGONAL_MESH)))
     using Vertex_point_map = typename PolygonMesh::template Property_map<Vd, Point_3>;
-#elif CGALPY_PMP_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH
+#elif ((defined(CGALPY_CONVEX_HULL_3_BINDINGS) && \
+      (CGALPY_CH3_POLYGONAL_MESH == CGALPY_PMP_POLYHEDRON_3_POLYGONAL_MESH)) || \
+     (defined(CGALPY_POLYGON_MESH_PROCESSING_BINDINGS) &&               \
+      (CGALPY_PMP_POLYGONAL_MESH == CGALPY_CH3_POLYHEDRON_3_POLYGONAL_MESH)))
     using Vertex_point_map = typename boost::property_map<PolygonMesh, CGAL::vertex_point_t>::type;
 #else
 #  error Unsupported PMP polygonal mesh type
