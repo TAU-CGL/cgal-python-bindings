@@ -2,12 +2,24 @@
 
 # cgalpy: CGAL Python Bindings
 
+<p align="center">
+  <a href="https://github.com/TAU-CGL/cgal-python-bindings/blob/main/src/libs/cgalpy/doc/source/index.rst"><img alt="Documentation source" src="https://img.shields.io/badge/docs-source-blue"></a>
+  <a href="https://github.com/TAU-CGL/cgal-python-bindings/actions/workflows/cgalpy-smoke.yml"><img alt="Test workflow" src="https://img.shields.io/badge/tests-workflow-555555"></a>
+  <a href="https://github.com/TAU-CGL/cgal-python-bindings/tree/main/src/python_examples/cgalpy_examples"><img alt="Python examples" src="https://img.shields.io/badge/examples-browse-brightgreen"></a>
+</p>
+
+<p align="center">
+  <img src="assets/cgalpy-logo-light.png"
+       alt="CGALpy — CGAL Python Bindings"
+       width="920">
+</p>
+
 We introduce bindings that enable the convenient, efficient, and
-reliable use of software modules of [https://www.cgal.org/](CGAL)
+reliable use of software modules of [CGAL](https://www.cgal.org/)
 (Computational Geometry Algorithms Library), which are written in C++,
 from within code written in Python.
 
-The bindings exploits [nanobind](https://github.com/wjakob/nanobind),
+The bindings use [nanobind](https://github.com/wjakob/nanobind),
 a lightweight header-only binding generation tool.
 
 ## Python Bindings
